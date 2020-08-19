@@ -1,0 +1,49 @@
+<tr class="record">
+    <?php if( $can_delete != '0'): ?>
+        <td class="hidden-xs"><input type="checkbox" value="<?php echo $record_id; ?>" class="record-checker checkboxes"></td>
+    <?php else: ?>
+        <td class="hidden-xs"></td>
+    <?php endif; ?>
+    <!-- <td>
+        <?php $avatar = base_url('assets/img/avatar.png');?>
+        <?php if( !empty($users_profile_photo) ): ?>
+            <?php
+                $filename = basename($users_profile_photo);
+                $path = str_replace($filename, '', $users_profile_photo);
+                $ftpath = FCPATH . $path .'thumbnail/' . $filename;
+                $fpath = FCPATH . $path . $filename;
+                if( file_exists( $ftpath ) ){
+                    $avatar = base_url( $path .'thumbnail/' . $filename ) ;
+                }
+                else if( file_exists( $fpath ) ){
+                    $avatar = base_url( $path . $filename );
+                }
+            ?>
+        <?php endif; ?>
+        <a href="#"><img src="<?php echo $avatar; ?>" width="45px"></a>
+    </td> -->
+    <td>
+        <a href="<?php echo $detail_url; ?>" id="date_name"><?php echo $users_profile_firstname; ?> <?php echo $users_profile_lastname; ?> <?php echo isset($users_profile_suffix) ? $users_profile_suffix : ''; ?></a>
+        <br>
+        <span class="small" id="date_set"><?php echo $users_role_id; ?></span>
+    </td>
+    <td class="hidden-xs"><?php echo $users_email; ?></td>
+    <td>
+        <?php if( $users_active == 'Yes' ): ?>
+            <span class="badge badge-success"><?php echo lang('users.active'); ?></span>
+        <?php else: ?>
+            <span class="badge badge-error"><?php echo lang('users.inactive'); ?></span>
+        <?php endif; ?>
+    </td>
+    <td>
+        <div class="btn-group">
+            <a class="btn btn-xs text-muted" href="<?php echo $edit_url; ?>"><i class="fa fa-pencil"></i> <?php echo lang('users.edit'); ?></a>
+        </div>
+        <div class="btn-group">
+            <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> <?php echo lang('users.options'); ?></a>
+            <ul class="dropdown-menu pull-right">
+                <?php echo $options; ?>
+            </ul>
+        </div>
+    </td>
+</tr>

@@ -1,0 +1,5 @@
+2020-06-29 10:09:56 --> signatories --> insert --> alias -->  --> Monis, Marybeth 
+2020-06-29 10:09:56 --> signatories --> insert --> employee -->  --> 57
+2020-06-29 10:10:04 --> authentication --> logout --> logout -->  --> 
+2020-06-29 14:22:05 --> authentication --> login --> login -->  --> 
+2020-06-29 14:27:51 --> authentication --> logout --> logout -->  --> 

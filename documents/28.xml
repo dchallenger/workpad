@@ -1,0 +1,636 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <LastAuthor>rowell</LastAuthor>
+  <LastSaved>2017-09-01T13:15:24Z</LastSaved>
+  <Version>12.00</Version>
+ </DocumentProperties>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>10005</WindowHeight>
+  <WindowWidth>10005</WindowWidth>
+  <WindowTopX>120</WindowTopX>
+  <WindowTopY>135</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Arial"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s62">
+   <Font ss:FontName="Arial" x:Family="Swiss" ss:Color="#0000FF" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s63">
+   <NumberFormat ss:Format="yyyy\-mm\-dd"/>
+  </Style>
+  <Style ss:ID="s64">
+   <NumberFormat ss:Format="yyyy\-mm\-dd\ hh:mm:ss"/>
+  </Style>
+  <Style ss:ID="s65">
+   <Interior ss:Color="#FFFF00" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s66">
+   <Interior ss:Color="#FFFF00" ss:Pattern="Solid"/>
+   <NumberFormat ss:Format="yyyy\-mm\-dd"/>
+  </Style>
+  <Style ss:ID="s67">
+   <Interior ss:Color="#FFFF00" ss:Pattern="Solid"/>
+   <NumberFormat ss:Format="yyyy\-mm\-dd\ hh:mm:ss"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Sheet1">
+  <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="56" x:FullColumns="1"
+   x:FullRows="1">
+   <Column ss:Width="50.25"/>
+   <Column ss:Width="39.75"/>
+   <Column ss:Width="108"/>
+   <Column ss:Width="73.5"/>
+   <Column ss:Width="192.75"/>
+   <Column ss:Width="53.25"/>
+   <Column ss:Width="40.5"/>
+   <Column ss:Width="95.25"/>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">record_id</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">user_id</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">firstname</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">lastname</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">department</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">date</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">time_in</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">time_out</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">244990</Data></Cell>
+    <Cell><Data ss:Type="Number">21</Data></Cell>
+    <Cell><Data ss:Type="String">JOCELYN</Data></Cell>
+    <Cell><Data ss:Type="String">DIVINA</Data></Cell>
+    <Cell><Data ss:Type="String">Financial Control Analysis</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:58:42.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">244993</Data></Cell>
+    <Cell><Data ss:Type="Number">24</Data></Cell>
+    <Cell><Data ss:Type="String">JOHNY</Data></Cell>
+    <Cell><Data ss:Type="String">TUPAZ</Data></Cell>
+    <Cell><Data ss:Type="String">Project Management &amp; Engineering Group</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:53:39.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">244994</Data></Cell>
+    <Cell><Data ss:Type="Number">25</Data></Cell>
+    <Cell><Data ss:Type="String">DARRELL</Data></Cell>
+    <Cell><Data ss:Type="String">MARAVILLAS</Data></Cell>
+    <Cell><Data ss:Type="String">Product Management</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:54:37.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">244995</Data></Cell>
+    <Cell><Data ss:Type="Number">26</Data></Cell>
+    <Cell><Data ss:Type="String">MARIA  BELLA</Data></Cell>
+    <Cell><Data ss:Type="String">EVANGELISTA</Data></Cell>
+    <Cell><Data ss:Type="String">Executive Office</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:58:25.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">244999</Data></Cell>
+    <Cell><Data ss:Type="Number">30</Data></Cell>
+    <Cell><Data ss:Type="String">PAOLO</Data></Cell>
+    <Cell><Data ss:Type="String">LOPEZ</Data></Cell>
+    <Cell><Data ss:Type="String">Information &amp; Communication Technology</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:48:06.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">245000</Data></Cell>
+    <Cell><Data ss:Type="Number">31</Data></Cell>
+    <Cell><Data ss:Type="String">EDWIN</Data></Cell>
+    <Cell><Data ss:Type="String">MADELO</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="DateTime">2017-08-29T00:19:41.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">245006</Data></Cell>
+    <Cell><Data ss:Type="Number">37</Data></Cell>
+    <Cell><Data ss:Type="String">JORGE DAINE</Data></Cell>
+    <Cell><Data ss:Type="String">QUIAMBAO</Data></Cell>
+    <Cell><Data ss:Type="String">Information &amp; Communication Technology</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="DateTime">2017-08-29T00:00:00.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245009</Data></Cell>
+    <Cell><Data ss:Type="Number">40</Data></Cell>
+    <Cell><Data ss:Type="String">NORBERTO</Data></Cell>
+    <Cell><Data ss:Type="String">SEDAVA</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:59:16.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245012</Data></Cell>
+    <Cell><Data ss:Type="Number">43</Data></Cell>
+    <Cell><Data ss:Type="String">MICHELLE</Data></Cell>
+    <Cell><Data ss:Type="String">PRESTOZA</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:59:06.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245013</Data></Cell>
+    <Cell><Data ss:Type="Number">44</Data></Cell>
+    <Cell><Data ss:Type="String">MICHELLE</Data></Cell>
+    <Cell><Data ss:Type="String">RODRIGUEZ</Data></Cell>
+    <Cell><Data ss:Type="String">Financial Control Analysis</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:53:28.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">245017</Data></Cell>
+    <Cell><Data ss:Type="Number">48</Data></Cell>
+    <Cell><Data ss:Type="String">ALEXIS</Data></Cell>
+    <Cell><Data ss:Type="String">MENDOZA</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="DateTime">2017-08-29T00:49:16.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245018</Data></Cell>
+    <Cell><Data ss:Type="Number">49</Data></Cell>
+    <Cell><Data ss:Type="String">ROWENIE</Data></Cell>
+    <Cell><Data ss:Type="String">RECTO</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:51:23.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">245019</Data></Cell>
+    <Cell><Data ss:Type="Number">50</Data></Cell>
+    <Cell><Data ss:Type="String">LOUELLA FLORENCIA</Data></Cell>
+    <Cell><Data ss:Type="String">DUMLAO</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="DateTime">2017-08-29T01:56:06.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">245020</Data></Cell>
+    <Cell><Data ss:Type="Number">51</Data></Cell>
+    <Cell><Data ss:Type="String">MARK RIGOR</Data></Cell>
+    <Cell><Data ss:Type="String">AQUINO</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="DateTime">2017-08-29T04:39:28.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245021</Data></Cell>
+    <Cell><Data ss:Type="Number">52</Data></Cell>
+    <Cell><Data ss:Type="String">SINAMAR</Data></Cell>
+    <Cell><Data ss:Type="String">SANCHEZ</Data></Cell>
+    <Cell><Data ss:Type="String">Landbanking</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:48:28.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">245023</Data></Cell>
+    <Cell><Data ss:Type="Number">54</Data></Cell>
+    <Cell><Data ss:Type="String">FELIPE</Data></Cell>
+    <Cell><Data ss:Type="String">FADEROGAO</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="DateTime">2017-08-29T04:00:23.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245024</Data></Cell>
+    <Cell><Data ss:Type="Number">55</Data></Cell>
+    <Cell><Data ss:Type="String">JERIC</Data></Cell>
+    <Cell><Data ss:Type="String">OCAMPO</Data></Cell>
+    <Cell><Data ss:Type="String">Product Management</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:57:41.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245027</Data></Cell>
+    <Cell><Data ss:Type="Number">58</Data></Cell>
+    <Cell><Data ss:Type="String">JOHN ANGIELO</Data></Cell>
+    <Cell><Data ss:Type="String">MAGYAWE</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:50:58.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245029</Data></Cell>
+    <Cell><Data ss:Type="Number">60</Data></Cell>
+    <Cell><Data ss:Type="String">WILLIAM</Data></Cell>
+    <Cell><Data ss:Type="String">LIGOT JR.</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:56:21.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245030</Data></Cell>
+    <Cell><Data ss:Type="Number">61</Data></Cell>
+    <Cell><Data ss:Type="String">GLENN</Data></Cell>
+    <Cell><Data ss:Type="String">SIOQUIM</Data></Cell>
+    <Cell><Data ss:Type="String">Central Treasury</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:52:20.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245032</Data></Cell>
+    <Cell><Data ss:Type="Number">63</Data></Cell>
+    <Cell><Data ss:Type="String">MARY JANE ROXAN</Data></Cell>
+    <Cell><Data ss:Type="String">DIEGO</Data></Cell>
+    <Cell><Data ss:Type="String">Financial Control Analysis</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:56:32.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245033</Data></Cell>
+    <Cell><Data ss:Type="Number">64</Data></Cell>
+    <Cell><Data ss:Type="String">JIMELYN</Data></Cell>
+    <Cell><Data ss:Type="String">JAMORA</Data></Cell>
+    <Cell><Data ss:Type="String">Human Resources</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:57:31.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245034</Data></Cell>
+    <Cell><Data ss:Type="Number">65</Data></Cell>
+    <Cell><Data ss:Type="String">FEBYKATE</Data></Cell>
+    <Cell><Data ss:Type="String">SEVERINO</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:52:29.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245035</Data></Cell>
+    <Cell><Data ss:Type="Number">66</Data></Cell>
+    <Cell><Data ss:Type="String">JERAVY</Data></Cell>
+    <Cell><Data ss:Type="String">GARINGARAO</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:57:00.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245036</Data></Cell>
+    <Cell><Data ss:Type="Number">67</Data></Cell>
+    <Cell><Data ss:Type="String">GABRIEL</Data></Cell>
+    <Cell><Data ss:Type="String">MELLEJOR</Data></Cell>
+    <Cell><Data ss:Type="String">Information &amp; Communication Technology</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:56:52.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">245039</Data></Cell>
+    <Cell><Data ss:Type="Number">70</Data></Cell>
+    <Cell><Data ss:Type="String">ERICSON</Data></Cell>
+    <Cell><Data ss:Type="String">BISA</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="DateTime">2017-08-29T00:43:21.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245040</Data></Cell>
+    <Cell><Data ss:Type="Number">71</Data></Cell>
+    <Cell><Data ss:Type="String">FELIX</Data></Cell>
+    <Cell><Data ss:Type="String">GEMILLAN</Data></Cell>
+    <Cell><Data ss:Type="String">Project Management &amp; Engineering Group</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:57:08.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245041</Data></Cell>
+    <Cell><Data ss:Type="Number">72</Data></Cell>
+    <Cell><Data ss:Type="String">CHRISTIAN</Data></Cell>
+    <Cell><Data ss:Type="String">GONZALES</Data></Cell>
+    <Cell><Data ss:Type="String">Project Management &amp; Engineering Group</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:55:04.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245044</Data></Cell>
+    <Cell><Data ss:Type="Number">75</Data></Cell>
+    <Cell><Data ss:Type="String">SERGIO</Data></Cell>
+    <Cell><Data ss:Type="String">ESTRELLA</Data></Cell>
+    <Cell><Data ss:Type="String">Product Management</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:54:54.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245045</Data></Cell>
+    <Cell><Data ss:Type="Number">76</Data></Cell>
+    <Cell><Data ss:Type="String">MELVIN</Data></Cell>
+    <Cell><Data ss:Type="String">RIBOT</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:56:42.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245051</Data></Cell>
+    <Cell><Data ss:Type="Number">82</Data></Cell>
+    <Cell><Data ss:Type="String">RANDOLPH</Data></Cell>
+    <Cell><Data ss:Type="String">ESPINA</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:58:33.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245052</Data></Cell>
+    <Cell><Data ss:Type="Number">83</Data></Cell>
+    <Cell><Data ss:Type="String">MERCY</Data></Cell>
+    <Cell><Data ss:Type="String">SUNGCANG</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:54:18.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245056</Data></Cell>
+    <Cell><Data ss:Type="Number">87</Data></Cell>
+    <Cell><Data ss:Type="String">VERGEL</Data></Cell>
+    <Cell><Data ss:Type="String">BRIONES</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:55:13.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245062</Data></Cell>
+    <Cell><Data ss:Type="Number">93</Data></Cell>
+    <Cell><Data ss:Type="String">JAN RANDOLPH</Data></Cell>
+    <Cell><Data ss:Type="String">DECANO</Data></Cell>
+    <Cell><Data ss:Type="String">Information &amp; Communication Technology</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:53:49.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245068</Data></Cell>
+    <Cell><Data ss:Type="Number">99</Data></Cell>
+    <Cell><Data ss:Type="String">LUZVIMINDA</Data></Cell>
+    <Cell><Data ss:Type="String">IMBANG</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:45:44.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">245069</Data></Cell>
+    <Cell><Data ss:Type="Number">100</Data></Cell>
+    <Cell><Data ss:Type="String">RUZEL</Data></Cell>
+    <Cell><Data ss:Type="String">GALIT</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="DateTime">2017-08-29T00:07:42.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245077</Data></Cell>
+    <Cell><Data ss:Type="Number">108</Data></Cell>
+    <Cell><Data ss:Type="String">VINCENT</Data></Cell>
+    <Cell><Data ss:Type="String">ORTIZ</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:46:40.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245078</Data></Cell>
+    <Cell><Data ss:Type="Number">109</Data></Cell>
+    <Cell><Data ss:Type="String">DAVE</Data></Cell>
+    <Cell><Data ss:Type="String">CATAN</Data></Cell>
+    <Cell><Data ss:Type="String">Project Management &amp; Engineering Group</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:50:50.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245082</Data></Cell>
+    <Cell><Data ss:Type="Number">113</Data></Cell>
+    <Cell><Data ss:Type="String">MYLA</Data></Cell>
+    <Cell><Data ss:Type="String">BAYUG</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:57:19.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">245083</Data></Cell>
+    <Cell><Data ss:Type="Number">114</Data></Cell>
+    <Cell><Data ss:Type="String">REMEDIOS</Data></Cell>
+    <Cell><Data ss:Type="String">SAMBAJON</Data></Cell>
+    <Cell><Data ss:Type="String">Project Management &amp; Engineering Group</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="DateTime">2017-08-29T01:00:21.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">245084</Data></Cell>
+    <Cell><Data ss:Type="Number">115</Data></Cell>
+    <Cell><Data ss:Type="String">ELIZABETH</Data></Cell>
+    <Cell><Data ss:Type="String">MERCADO</Data></Cell>
+    <Cell><Data ss:Type="String">Central Treasury</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="DateTime">2017-08-29T00:49:03.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">245159</Data></Cell>
+    <Cell><Data ss:Type="Number">190</Data></Cell>
+    <Cell><Data ss:Type="String">ALEX</Data></Cell>
+    <Cell><Data ss:Type="String">MALCO</Data></Cell>
+    <Cell><Data ss:Type="String">Engineering</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="DateTime">2017-08-29T06:23:20.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245375</Data></Cell>
+    <Cell><Data ss:Type="Number">406</Data></Cell>
+    <Cell><Data ss:Type="String">KARREN LORRES</Data></Cell>
+    <Cell><Data ss:Type="String">GARCIA</Data></Cell>
+    <Cell><Data ss:Type="String">Administration</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:22:31.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245404</Data></Cell>
+    <Cell><Data ss:Type="Number">435</Data></Cell>
+    <Cell><Data ss:Type="String">JESSAMINE</Data></Cell>
+    <Cell><Data ss:Type="String">CATACUTAN</Data></Cell>
+    <Cell><Data ss:Type="String">Sales</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:49:18.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">245442</Data></Cell>
+    <Cell><Data ss:Type="Number">473</Data></Cell>
+    <Cell><Data ss:Type="String">SHERWIN</Data></Cell>
+    <Cell><Data ss:Type="String">OCANA</Data></Cell>
+    <Cell><Data ss:Type="String">Administration</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="DateTime">2017-08-29T05:37:11.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245575</Data></Cell>
+    <Cell><Data ss:Type="Number">606</Data></Cell>
+    <Cell><Data ss:Type="String">DARWINN</Data></Cell>
+    <Cell><Data ss:Type="String">KWONG</Data></Cell>
+    <Cell><Data ss:Type="String">Executive Office</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:53:20.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">245598</Data></Cell>
+    <Cell><Data ss:Type="Number">629</Data></Cell>
+    <Cell><Data ss:Type="String">STANLEY</Data></Cell>
+    <Cell><Data ss:Type="String">VERGARA</Data></Cell>
+    <Cell><Data ss:Type="String">General &amp; Administrative</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:54:45.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">245613</Data></Cell>
+    <Cell><Data ss:Type="Number">644</Data></Cell>
+    <Cell><Data ss:Type="String">JENNIFER</Data></Cell>
+    <Cell><Data ss:Type="String">CABUS</Data></Cell>
+    <Cell><Data ss:Type="String">ComTrans</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="DateTime">2017-08-29T04:24:49.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">245624</Data></Cell>
+    <Cell><Data ss:Type="Number">655</Data></Cell>
+    <Cell><Data ss:Type="String">GYPSY ANNE</Data></Cell>
+    <Cell><Data ss:Type="String">PALILEO</Data></Cell>
+    <Cell><Data ss:Type="String">Administration</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="DateTime">2017-08-29T05:51:57.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">425147</Data></Cell>
+    <Cell><Data ss:Type="Number">707</Data></Cell>
+    <Cell><Data ss:Type="String">HAZEL JOY</Data></Cell>
+    <Cell><Data ss:Type="String">CASTILLON</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="DateTime">2017-08-29T03:44:20.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">440458</Data></Cell>
+    <Cell><Data ss:Type="Number">713</Data></Cell>
+    <Cell><Data ss:Type="String">ELY</Data></Cell>
+    <Cell><Data ss:Type="String">GETUBIG</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="DateTime">2017-08-29T00:07:09.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">455234</Data></Cell>
+    <Cell><Data ss:Type="Number">745</Data></Cell>
+    <Cell><Data ss:Type="String">JOY</Data></Cell>
+    <Cell><Data ss:Type="String">BELTRAN</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:45:09.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">496511</Data></Cell>
+    <Cell><Data ss:Type="Number">760</Data></Cell>
+    <Cell><Data ss:Type="String">JUVIE-LYN</Data></Cell>
+    <Cell><Data ss:Type="String">SUPLITO</Data></Cell>
+    <Cell><Data ss:Type="String">Grade School</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="DateTime">2017-08-29T06:17:19.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">496549</Data></Cell>
+    <Cell><Data ss:Type="Number">827</Data></Cell>
+    <Cell><Data ss:Type="String">EVA MAE</Data></Cell>
+    <Cell><Data ss:Type="String">REOMA</Data></Cell>
+    <Cell><Data ss:Type="String">Accounting</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T23:44:59.000</Data></Cell>
+   </Row>
+   <Row ss:StyleID="s65">
+    <Cell><Data ss:Type="Number">496553</Data></Cell>
+    <Cell><Data ss:Type="Number">832</Data></Cell>
+    <Cell><Data ss:Type="String">YZAC KRISTOPHER</Data></Cell>
+    <Cell><Data ss:Type="String">FERRER</Data></Cell>
+    <Cell><Data ss:Type="String">LINEN CARE SECTION</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="DateTime">2017-08-28T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="DateTime">2017-08-28T16:23:31.000</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>48</ActiveRow>
+     <ActiveCol>8</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

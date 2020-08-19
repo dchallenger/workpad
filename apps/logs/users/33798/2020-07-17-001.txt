@@ -1,0 +1,47 @@
+2020-07-17 09:38:18 --> authentication --> login --> login -->  --> 
+2020-07-17 14:07:43 --> appraisal_template --> insert --> template_section_id -->  --> 7
+2020-07-17 14:07:43 --> appraisal_template --> insert --> title -->  --> Self Rating
+2020-07-17 14:07:43 --> appraisal_template --> insert --> sequence -->  --> 1
+2020-07-17 14:07:43 --> appraisal_template --> insert --> width -->  --> 15
+2020-07-17 14:07:43 --> appraisal_template --> insert --> uitype_id -->  --> 9
+2020-07-17 14:08:41 --> appraisal_template --> insert --> template_section_id -->  --> 7
+2020-07-17 14:08:41 --> appraisal_template --> insert --> title -->  --> Self Comment
+2020-07-17 14:08:41 --> appraisal_template --> insert --> sequence -->  --> 2
+2020-07-17 14:08:41 --> appraisal_template --> insert --> width -->  --> 15
+2020-07-17 14:08:41 --> appraisal_template --> insert --> uitype_id -->  --> 3
+2020-07-17 14:19:06 --> appraisal_template --> delete --> performance_template_section_column - section_column_id --> 29 --> 
+2020-07-17 14:20:26 --> appraisal_template --> insert --> template_section_id -->  --> 7
+2020-07-17 14:20:26 --> appraisal_template --> insert --> title -->  --> Coach Rating
+2020-07-17 14:20:26 --> appraisal_template --> insert --> sequence -->  --> 3
+2020-07-17 14:20:26 --> appraisal_template --> insert --> width -->  --> 15
+2020-07-17 14:20:27 --> appraisal_template --> insert --> uitype_id -->  --> 9
+2020-07-17 14:20:37 --> appraisal_template --> update --> sequence --> 3 --> 4
+2020-07-17 14:20:50 --> appraisal_template --> update --> sequence --> 1 --> 2
+2020-07-17 14:20:56 --> appraisal_template --> update --> sequence --> 2 --> 3
+2020-07-17 14:21:22 --> appraisal_template --> insert --> template_section_id -->  --> 7
+2020-07-17 14:21:23 --> appraisal_template --> insert --> title -->  --> Coach Comment
+2020-07-17 14:21:23 --> appraisal_template --> insert --> sequence -->  --> 5
+2020-07-17 14:21:23 --> appraisal_template --> insert --> width -->  --> 15
+2020-07-17 14:21:23 --> appraisal_template --> insert --> uitype_id -->  --> 3
+2020-07-17 14:27:47 --> appraisal_template --> delete --> performance_template_section_column - section_column_id --> 30 --> 
+2020-07-17 14:27:51 --> appraisal_template --> delete --> performance_template_section_column - section_column_id --> 31 --> 
+2020-07-17 15:08:55 --> appraisal_template --> insert --> template_section_id -->  --> 8
+2020-07-17 15:08:55 --> appraisal_template --> insert --> title -->  --> Self Rating
+2020-07-17 15:08:55 --> appraisal_template --> insert --> sequence -->  --> 2
+2020-07-17 15:08:55 --> appraisal_template --> insert --> width -->  --> 15
+2020-07-17 15:08:55 --> appraisal_template --> insert --> uitype_id -->  --> 9
+2020-07-17 15:09:19 --> appraisal_template --> insert --> template_section_id -->  --> 8
+2020-07-17 15:09:19 --> appraisal_template --> insert --> title -->  --> Self Comment
+2020-07-17 15:09:19 --> appraisal_template --> insert --> sequence -->  --> 3
+2020-07-17 15:09:19 --> appraisal_template --> insert --> width -->  --> 15
+2020-07-17 15:09:19 --> appraisal_template --> insert --> uitype_id -->  --> 3
+2020-07-17 15:09:43 --> appraisal_template --> insert --> template_section_id -->  --> 9
+2020-07-17 15:09:43 --> appraisal_template --> insert --> title -->  --> Self Rating
+2020-07-17 15:09:43 --> appraisal_template --> insert --> sequence -->  --> 2
+2020-07-17 15:09:43 --> appraisal_template --> insert --> width -->  --> 15
+2020-07-17 15:09:43 --> appraisal_template --> insert --> uitype_id -->  --> 9
+2020-07-17 15:10:02 --> appraisal_template --> insert --> template_section_id -->  --> 9
+2020-07-17 15:10:02 --> appraisal_template --> insert --> title -->  --> Self Comment
+2020-07-17 15:10:02 --> appraisal_template --> insert --> sequence -->  --> 3
+2020-07-17 15:10:02 --> appraisal_template --> insert --> width -->  --> 15
+2020-07-17 15:10:02 --> appraisal_template --> insert --> uitype_id -->  --> 3

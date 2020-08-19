@@ -1,0 +1,40 @@
+00   1144101         20180207201802Restored Energy Development Corporation 0392278249   C
+20   BAUTISTA            EDGAR               E331574336301760.0000030.00        N
+20   OPOSA               LOPER               L331984594001595.0000010.00        N
+20   MUNOZ               RICHARD             D333831223401760.0000030.00        N
+20   RECOSOSA            JOEL                B035659484601760.0000030.00        N
+20   VALERIO             DAN                 C333481826601760.0000030.00        N
+20   TAN                 LEYNARD             A337892397101760.0000030.00        N
+20   SAYO                RAYMOND ANTHONY     A341661435901760.0000030.00        N
+20   SALAZAR             SHIELA              C041868970901760.0000030.00        N
+20   RICAFRANCA          RANDOLFO            R040878383501760.0000030.00        N
+20   PALILEO             GYPSY ANNE          N336161715501760.0000030.00        N
+20   AMAN                GLEN                E336500766401760.0000030.00        N
+20   GIGANTO             LEONARDO            B332881800701760.0000030.00        N
+20   ALBINO              ANGELITO            G039746073501210.0000010.00        N
+20   TUYAY JR.           REY                 R342591712801760.0000030.00        N
+20   PAPA                OFELYN              S042210868701760.0000030.00        N
+20   COLO                JESSIE              E339457063801760.0000030.00        N
+20   MAMORNO             LEANNA              B343507638901760.0000030.00        N
+20   VILLA               VIRGILIO THOMAS      343176648601485.0000010.00        N
+20   OCHADA              ROMEO               R082251637401650.0000030.00        N
+20   MARBELLA            TEODY               H345929149601595.0000010.00        N
+20   MATEO               AUREO               A335043910801485.0000010.00        N
+20   NAVARRO             DANIEL              V341135820901100.0000010.00        N
+20   ATIENZA             ROMEO               D038778025001595.0000010.00        N
+20   BUENAVISTA          LAURENCE CHRISTOPHERJ331499067001760.0000030.00        N
+20   ARELLA              NOEL                P036878800601760.0000030.00        N
+20   DALDE               JOSELITO            P041881114001485.0000010.00        N
+20   ESPIRITU            ROGELIO             B041240149101595.0000010.00        N
+20   PALMA               RONELO              D342321328001430.0000010.00        N
+20   MALIGO              RAMIRO              M043038657201595.0000010.00        N
+20   SEBASTIAN           LORETO, JR.         V339370150501375.0000010.00        N
+20   ESPADA              JOHN PAUL           E340465783601485.0000010.00        N
+20   AMAN                NIÑO                 E346255161501100.0000010.00        N
+20   ANG                 ANTHONY             D344646392301485.0000010.00        N
+20   AMBAYEC             JEREMAIAH           C043533220401210.0000010.00        N
+20   CALVARIO            ARIES               C336286997301540.0000010.00        N
+20   TUMOLING            MICHAEL             B041325202101540.0000010.00        N
+20   GONZALVO            WILSON              A041731562101760.0000030.00        N
+20   FUNDAL              BONIFACUI           F336345441301650.0000030.00        N
+99   000060885.00000000780.0000144101

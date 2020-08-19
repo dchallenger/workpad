@@ -1,0 +1,24 @@
+2020-08-05 00:00:53 --> signatories --> insert --> approver -->  --> 1
+2020-08-05 00:00:53 --> signatories --> insert --> email -->  --> 1
+2020-08-05 00:00:53 --> signatories --> insert --> approver_id -->  --> 56
+2020-08-05 00:00:53 --> signatories --> insert --> condition -->  --> All
+2020-08-05 00:00:53 --> signatories --> insert --> class_id -->  --> 40
+2020-08-05 00:00:53 --> signatories --> insert --> sequence -->  --> 2
+2020-08-05 00:00:53 --> signatories --> insert --> company_id -->  --> 2
+2020-08-05 00:00:53 --> signatories --> insert --> department_id -->  --> 1
+2020-08-05 00:00:53 --> signatories --> insert --> position_id -->  --> 68
+2020-08-05 00:00:53 --> signatories --> insert --> user_id -->  --> 55
+2020-08-05 00:00:54 --> signatories --> insert --> alias -->  --> Reyes, Naisa 
+2020-08-05 00:00:54 --> signatories --> insert --> employee -->  --> 55
+2020-08-05 02:58:29 --> partners --> insert --> partner_id -->  --> 4
+2020-08-05 02:58:29 --> partners --> insert --> key_id -->  --> 89
+2020-08-05 02:58:29 --> partners --> insert --> key -->  --> attachment-name
+2020-08-05 02:58:29 --> partners --> insert --> sequence -->  --> 1
+2020-08-05 02:58:29 --> partners --> insert --> key_name -->  --> File Name
+2020-08-05 02:58:29 --> partners --> insert --> key_value -->  --> test
+2020-08-05 02:58:29 --> partners --> insert --> partner_id -->  --> 4
+2020-08-05 02:58:29 --> partners --> insert --> key_id -->  --> 91
+2020-08-05 02:58:29 --> partners --> insert --> key -->  --> attachment-file
+2020-08-05 02:58:29 --> partners --> insert --> sequence -->  --> 1
+2020-08-05 02:58:29 --> partners --> insert --> key_name -->  --> File
+2020-08-05 02:58:29 --> partners --> insert --> key_value -->  --> uploads/users/GENESIS%20%281%29.doc

@@ -1,0 +1,63 @@
+Reyes, Naisa (33798) --> 2020-08-10 00:50:27 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-08-10 01:12:07 --> authentication --> login --> login -->  --> 
+Marjorie, Nailog (33799) --> 2020-08-10 02:29:52 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-08-10 02:30:06 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-10 02:37:35 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-08-10 02:38:06 --> authentication --> login --> login -->  --> 
+Marjorie, Nailog (33799) --> 2020-08-10 02:38:36 --> my201 --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-08-10 02:38:36 --> my201 --> insert --> key_id -->  --> 25
+Marjorie, Nailog (33799) --> 2020-08-10 02:38:36 --> my201 --> insert --> sequence -->  --> 1
+Marjorie, Nailog (33799) --> 2020-08-10 02:38:36 --> my201 --> insert --> key_value -->  --> Catholic
+Marjorie, Nailog (33799) --> 2020-08-10 02:38:36 --> my201 --> insert --> status -->  --> 2
+Marjorie, Nailog (33799) --> 2020-08-10 02:40:05 --> my201 --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-08-10 02:40:05 --> my201 --> insert --> key_id -->  --> 25
+Marjorie, Nailog (33799) --> 2020-08-10 02:40:05 --> my201 --> insert --> sequence -->  --> 1
+Marjorie, Nailog (33799) --> 2020-08-10 02:40:05 --> my201 --> insert --> key_value -->  --> Catholic
+Marjorie, Nailog (33799) --> 2020-08-10 02:40:05 --> my201 --> insert --> status -->  --> 2
+Marjorie, Nailog (33799) --> 2020-08-10 02:41:23 --> my201 --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-08-10 02:41:23 --> my201 --> insert --> key_id -->  --> 25
+Marjorie, Nailog (33799) --> 2020-08-10 02:41:23 --> my201 --> insert --> sequence -->  --> 1
+Marjorie, Nailog (33799) --> 2020-08-10 02:41:23 --> my201 --> insert --> key_value -->  --> Catholic
+Marjorie, Nailog (33799) --> 2020-08-10 02:41:23 --> my201 --> insert --> status -->  --> 2
+Marjorie, Nailog (33799) --> 2020-08-10 02:42:05 --> my201 --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-08-10 02:42:05 --> my201 --> insert --> key_id -->  --> 26
+Marjorie, Nailog (33799) --> 2020-08-10 02:42:05 --> my201 --> insert --> sequence -->  --> 1
+Marjorie, Nailog (33799) --> 2020-08-10 02:42:05 --> my201 --> insert --> key_value -->  --> American
+Marjorie, Nailog (33799) --> 2020-08-10 02:42:05 --> my201 --> insert --> status -->  --> 2
+Marjorie, Nailog (33799) --> 2020-08-10 02:42:12 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-08-10 02:42:29 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-10 02:52:21 --> my_change_request --> insert --> user_id -->  --> 56
+Reyes, Naisa (33798) --> 2020-08-10 02:52:21 --> my_change_request --> insert --> key_id -->  --> 25
+Reyes, Naisa (33798) --> 2020-08-10 02:52:21 --> my_change_request --> insert --> sequence -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-10 02:52:21 --> my_change_request --> insert --> key_value -->  --> Budhist
+Reyes, Naisa (33798) --> 2020-08-10 02:52:21 --> my_change_request --> insert --> status -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-10 02:52:22 --> my_change_request --> insert --> personal_id -->  --> 3
+Reyes, Naisa (33798) --> 2020-08-10 02:54:03 --> my_change_request --> insert --> user_id -->  --> 56
+Reyes, Naisa (33798) --> 2020-08-10 02:54:03 --> my_change_request --> insert --> key_id -->  --> 8
+Reyes, Naisa (33798) --> 2020-08-10 02:54:03 --> my_change_request --> insert --> sequence -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-10 02:54:03 --> my_change_request --> insert --> key_value -->  --> Widowed
+Reyes, Naisa (33798) --> 2020-08-10 02:54:03 --> my_change_request --> insert --> status -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-10 02:54:03 --> my_change_request --> insert --> personal_id -->  --> 4
+Reyes, Naisa (33798) --> 2020-08-10 03:06:21 --> change_request --> update --> status -->  --> 3
+Reyes, Naisa (33798) --> 2020-08-10 03:10:24 --> change_request --> update --> status -->  --> 3
+Reyes, Naisa (33798) --> 2020-08-10 03:13:14 --> change_request --> update --> status -->  --> 3
+Reyes, Naisa (33798) --> 2020-08-10 03:13:33 --> change_request --> update --> status -->  --> 3
+Reyes, Naisa (33798) --> 2020-08-10 03:17:11 --> change_request --> update --> status -->  --> 3
+Reyes, Naisa (33798) --> 2020-08-10 03:21:58 --> my_change_request --> insert --> user_id -->  --> 56
+Reyes, Naisa (33798) --> 2020-08-10 03:21:58 --> my_change_request --> insert --> key_id -->  --> 5
+Reyes, Naisa (33798) --> 2020-08-10 03:21:58 --> my_change_request --> insert --> sequence -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-10 03:21:58 --> my_change_request --> insert --> key_value -->  --> 333333
+Reyes, Naisa (33798) --> 2020-08-10 03:21:58 --> my_change_request --> insert --> status -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-10 03:21:58 --> my_change_request --> insert --> personal_id -->  --> 5
+Reyes, Naisa (33798) --> 2020-08-10 03:28:37 --> change_request --> insert --> user_id -->  --> 57
+Reyes, Naisa (33798) --> 2020-08-10 03:28:37 --> change_request --> insert --> key_id -->  --> 26
+Reyes, Naisa (33798) --> 2020-08-10 03:28:37 --> change_request --> insert --> sequence -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-10 03:28:37 --> change_request --> insert --> key_value -->  --> Vietnam
+Reyes, Naisa (33798) --> 2020-08-10 03:28:37 --> change_request --> insert --> status -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-10 03:29:07 --> change_request --> update --> status -->  --> 3
+Reyes, Naisa (33798) --> 2020-08-10 04:22:44 --> my_change_request --> insert --> user_id -->  --> 56
+Reyes, Naisa (33798) --> 2020-08-10 04:22:44 --> my_change_request --> insert --> key_id -->  --> 8
+Reyes, Naisa (33798) --> 2020-08-10 04:22:45 --> my_change_request --> insert --> sequence -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-10 04:22:45 --> my_change_request --> insert --> key_value -->  --> Married
+Reyes, Naisa (33798) --> 2020-08-10 04:22:45 --> my_change_request --> insert --> status -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-10 04:22:45 --> my_change_request --> insert --> personal_id -->  --> 7

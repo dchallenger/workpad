@@ -1,0 +1,96 @@
+Reyes, Naisa (33798) --> 2020-08-07 02:49:37 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-07 07:48:12 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-07 08:07:48 --> partners --> update --> employment_end_date --> 1970-01-01 --> 2020-03-05
+Reyes, Naisa (33798) --> 2020-08-07 08:07:48 --> partners --> update --> original_hired_date --> 1970-01-01 --> 2020-06-25
+Reyes, Naisa (33798) --> 2020-08-07 08:13:47 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-08-07 08:13:52 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-08-07 08:14:54 --> memo --> insert --> memo_type_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-07 08:14:54 --> memo --> insert --> apply_to_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-08-07 08:14:54 --> memo --> insert --> memo_title -->  --> Testing
+Admin, Emplopad (admin) --> 2020-08-07 08:14:54 --> memo --> insert --> publish_from -->  --> 2020-08-07
+Admin, Emplopad (admin) --> 2020-08-07 08:14:54 --> memo --> insert --> publish_to -->  --> 2020-08-31
+Admin, Emplopad (admin) --> 2020-08-07 08:14:54 --> memo --> insert --> publish -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-07 08:14:54 --> memo --> insert --> memo_body -->  --> <p>test</p>
+Admin, Emplopad (admin) --> 2020-08-07 09:13:44 --> incident_report --> insert --> involved_partners -->  --> 57
+Admin, Emplopad (admin) --> 2020-08-07 09:13:44 --> incident_report --> insert --> offense_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-07 09:13:44 --> incident_report --> insert --> complainants -->  --> 55
+Admin, Emplopad (admin) --> 2020-08-07 09:13:44 --> incident_report --> insert --> date_time_of_offense -->  --> 2020-08-07 15:13:00
+Admin, Emplopad (admin) --> 2020-08-07 09:13:44 --> incident_report --> insert --> witnesses -->  --> 54
+Admin, Emplopad (admin) --> 2020-08-07 09:13:44 --> incident_report --> insert --> location -->  --> pantry
+Admin, Emplopad (admin) --> 2020-08-07 09:13:44 --> incident_report --> insert --> violation_details -->  --> dasd
+Admin, Emplopad (admin) --> 2020-08-07 09:13:44 --> incident_report --> insert --> damages -->  --> asd
+Admin, Emplopad (admin) --> 2020-08-07 09:13:44 --> incident_report --> insert --> incident_status_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-08-07 09:13:44 --> incident_report --> insert --> date_sent -->  --> 2020-08-07 09:13:44
+Admin, Emplopad (admin) --> 2020-08-07 09:44:47 --> batch_transaction --> update --> unit_rate_main --> æ® (g$o¼v ; --> w
+6ú…îj×Ş^{Ò0g
+Admin, Emplopad (admin) --> 2020-08-07 09:44:47 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+Admin, Emplopad (admin) --> 2020-08-07 09:48:03 --> batch_transaction --> update --> unit_rate_main --> æ® (g$o¼v ; --> w
+6ú…îj×Ş^{Ò0g
+Admin, Emplopad (admin) --> 2020-08-07 09:48:03 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+Admin, Emplopad (admin) --> 2020-08-07 09:48:16 --> batch_transaction --> update --> unit_rate_main --> æ® (g$o¼v ; --> w
+6ú…îj×Ş^{Ò0g
+Admin, Emplopad (admin) --> 2020-08-07 09:48:16 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+Admin, Emplopad (admin) --> 2020-08-07 09:48:41 --> batch_transaction --> update --> unit_rate_main --> æ® (g$o¼v ; --> w
+6ú…îj×Ş^{Ò0g
+Admin, Emplopad (admin) --> 2020-08-07 09:48:41 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+Admin, Emplopad (admin) --> 2020-08-07 09:55:15 --> batch_transaction --> update --> unit_rate_main --> æ® (g$o¼v ; --> w
+6ú…îj×Ş^{Ò0g
+Admin, Emplopad (admin) --> 2020-08-07 09:55:15 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+Admin, Emplopad (admin) --> 2020-08-07 09:55:15 --> batch_transaction --> insert --> batch_entry_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-08-07 09:55:15 --> batch_transaction --> insert --> id_number -->  --> 1101025
+Admin, Emplopad (admin) --> 2020-08-07 09:55:15 --> batch_transaction --> insert --> employee_id -->  --> 55
+Admin, Emplopad (admin) --> 2020-08-07 09:55:15 --> batch_transaction --> insert --> unit_rate -->  --> š
+6ò…ìj‹Û]}ß0b
+Admin, Emplopad (admin) --> 2020-08-07 09:55:15 --> batch_transaction --> insert --> quantity -->  --> Õ1S€æikŞ]}ÂÕ6b
+Admin, Emplopad (admin) --> 2020-08-07 09:55:15 --> batch_transaction --> insert --> amount -->  --> ç
+4ÕìmõŞYy­Ó0a
+Admin, Emplopad (admin) --> 2020-08-07 10:13:27 --> batch_transaction --> update --> unit_rate_main --> w
+6ú…îj×Ş^{Ò0g --> È	5›†èc•Ü]~Kß0b
+Admin, Emplopad (admin) --> 2020-08-07 10:13:27 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+Admin, Emplopad (admin) --> 2020-08-07 10:13:27 --> batch_transaction --> insert --> batch_entry_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-08-07 10:13:27 --> batch_transaction --> insert --> id_number -->  --> 1101025
+Admin, Emplopad (admin) --> 2020-08-07 10:13:27 --> batch_transaction --> insert --> employee_id -->  --> 55
+Admin, Emplopad (admin) --> 2020-08-07 10:13:27 --> batch_transaction --> insert --> unit_rate -->  --> È	5›†èc•Ü]~Kß0b
+Admin, Emplopad (admin) --> 2020-08-07 10:13:27 --> batch_transaction --> insert --> quantity -->  --> w
+6ú…îj×Ş^{Ò0g
+Admin, Emplopad (admin) --> 2020-08-07 10:13:27 --> batch_transaction --> insert --> amount -->  --> 
+2¼…înoİ]}Ö0a
+Admin, Emplopad (admin) --> 2020-08-07 10:18:39 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+Admin, Emplopad (admin) --> 2020-08-07 10:18:39 --> batch_transaction --> insert --> batch_entry_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-08-07 10:18:39 --> batch_transaction --> insert --> id_number -->  --> 1101025
+Admin, Emplopad (admin) --> 2020-08-07 10:18:40 --> batch_transaction --> insert --> employee_id -->  --> 55
+Admin, Emplopad (admin) --> 2020-08-07 10:18:40 --> batch_transaction --> insert --> unit_rate -->  --> È	5›†èc•Ü]~Kß0b
+Admin, Emplopad (admin) --> 2020-08-07 10:18:40 --> batch_transaction --> insert --> quantity -->  --> ]	0À†éi-Ş]~.Õ0e
+Admin, Emplopad (admin) --> 2020-08-07 10:18:40 --> batch_transaction --> insert --> amount -->  --> ”5…ëjjÙ]} Ö0c
+Admin, Emplopad (admin) --> 2020-08-07 10:19:39 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+Admin, Emplopad (admin) --> 2020-08-07 10:31:36 --> batch_transaction --> update --> unit_rate_main --> È	5›†èc•Ü]~Kß0b --> 6000
+Admin, Emplopad (admin) --> 2020-08-07 10:33:14 --> batch_transaction --> update --> unit_rate_main --> 6000 --> Ó	6]†íc Ú]}ÛŞ0b
+Admin, Emplopad (admin) --> 2020-08-07 10:34:39 --> batch_transaction --> insert --> document_no -->  --> 23423423
+Admin, Emplopad (admin) --> 2020-08-07 10:34:39 --> batch_transaction --> insert --> transaction_id -->  --> 96
+Admin, Emplopad (admin) --> 2020-08-07 10:34:39 --> batch_transaction --> insert --> payroll_date -->  --> 2020-08-21
+Admin, Emplopad (admin) --> 2020-08-07 10:34:39 --> batch_transaction --> insert --> unit_rate_main -->  --> 
+4å…îj2Ş^~åÕ3b
+Admin, Emplopad (admin) --> 2020-08-07 10:34:39 --> batch_transaction --> insert --> remarks -->  --> tre
+Admin, Emplopad (admin) --> 2020-08-07 10:34:40 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 3 --> 
+Admin, Emplopad (admin) --> 2020-08-07 10:34:40 --> batch_transaction --> insert --> batch_entry_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-08-07 10:34:40 --> batch_transaction --> insert --> id_number -->  --> 1101025
+Admin, Emplopad (admin) --> 2020-08-07 10:34:40 --> batch_transaction --> insert --> employee_id -->  --> 55
+Admin, Emplopad (admin) --> 2020-08-07 10:34:40 --> batch_transaction --> insert --> unit_rate -->  --> £	2ş…îjõÚ]}IŞ9g
+Admin, Emplopad (admin) --> 2020-08-07 10:34:40 --> batch_transaction --> insert --> quantity -->  --> ]	0À†éi-Ş]~.Õ0e
+Admin, Emplopad (admin) --> 2020-08-07 10:34:40 --> batch_transaction --> insert --> amount -->  --> £	2ş…îjõÚ]}IŞ9g
+Admin, Emplopad (admin) --> 2020-08-07 10:34:40 --> batch_transaction --> insert --> batch_entry_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-08-07 10:34:40 --> batch_transaction --> insert --> id_number -->  --> 33799
+Admin, Emplopad (admin) --> 2020-08-07 10:34:40 --> batch_transaction --> insert --> employee_id -->  --> 57
+Admin, Emplopad (admin) --> 2020-08-07 10:34:40 --> batch_transaction --> insert --> unit_rate -->  --> £	2ş…îjõÚ]}IŞ9g
+Admin, Emplopad (admin) --> 2020-08-07 10:34:40 --> batch_transaction --> insert --> quantity -->  --> ]	0À†éi-Ş]~.Õ0e
+Admin, Emplopad (admin) --> 2020-08-07 10:34:40 --> batch_transaction --> insert --> amount -->  --> £	2ş…îjõÚ]}IŞ9g
+Admin, Emplopad (admin) --> 2020-08-07 10:35:46 --> recurring_transaction --> update --> amount --> Q]\À25æí9>™ib} --> D	6¼†èj.ŞZ~ŸÖ3a
+Admin, Emplopad (admin) --> 2020-08-07 10:36:46 --> batch_transaction --> update --> unit_rate_main --> Ó	6]†íc Ú]}ÛŞ0b --> È	5›†èc•Ü]~Kß0b
+Admin, Emplopad (admin) --> 2020-08-07 10:36:55 --> batch_transaction --> update --> unit_rate_main --> È	5›†èc•Ü]~Kß0b --> ½
+6…îjàØY}âÖ3c
+Admin, Emplopad (admin) --> 2020-08-07 11:12:57 --> batch_transaction --> update --> unit_rate_main --> Ù‹¶M›/,¹?şÕú‹_ --> BmgIawM2VmA=
+Admin, Emplopad (admin) --> 2020-08-07 11:13:11 --> batch_transaction --> update --> unit_rate_main --> 
+4å…îj2Ş^~åÕ3b --> Uz1VMlRkADNYMA==
+Admin, Emplopad (admin) --> 2020-08-07 11:13:11 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 3 --> 
+Admin, Emplopad (admin) --> 2020-08-07 11:13:11 --> batch_transaction --> insert --> batch_entry_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-08-07 11:13:11 --> batch_transaction --> insert --> id_number -->  --> 1101025

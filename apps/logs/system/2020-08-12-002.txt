@@ -1,0 +1,89 @@
+Reyes, Naisa (33798) --> 2020-08-12 06:14:47 --> batch_transaction --> insert --> document_no -->  --> 123456
+Reyes, Naisa (33798) --> 2020-08-12 06:14:47 --> batch_transaction --> insert --> transaction_id -->  --> 93
+Reyes, Naisa (33798) --> 2020-08-12 06:14:47 --> batch_transaction --> insert --> payroll_date -->  --> 2020-08-31
+Reyes, Naisa (33798) --> 2020-08-12 06:14:47 --> batch_transaction --> insert --> unit_rate_main -->  --> €¹ÚþäÅ©¬íOÁ½?Ä­D
+Reyes, Naisa (33798) --> 2020-08-12 06:14:47 --> batch_transaction --> insert --> remarks -->  --> test
+Reyes, Naisa (33798) --> 2020-08-12 06:14:47 --> batch_transaction --> insert --> batch_entry_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-12 06:14:47 --> batch_transaction --> insert --> id_number -->  --> 1101025
+Reyes, Naisa (33798) --> 2020-08-12 06:14:47 --> batch_transaction --> insert --> employee_id -->  --> 55
+Reyes, Naisa (33798) --> 2020-08-12 06:14:47 --> batch_transaction --> insert --> unit_rate -->  --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:14:47 --> batch_transaction --> insert --> quantity -->  --> 1.00
+Reyes, Naisa (33798) --> 2020-08-12 06:14:47 --> batch_transaction --> insert --> amount -->  --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:14:47 --> batch_transaction --> insert --> batch_entry_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-12 06:14:47 --> batch_transaction --> insert --> id_number -->  --> 33799
+Reyes, Naisa (33798) --> 2020-08-12 06:14:47 --> batch_transaction --> insert --> employee_id -->  --> 57
+Reyes, Naisa (33798) --> 2020-08-12 06:14:47 --> batch_transaction --> insert --> unit_rate -->  --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:14:47 --> batch_transaction --> insert --> quantity -->  --> 1.00
+Reyes, Naisa (33798) --> 2020-08-12 06:14:47 --> batch_transaction --> insert --> amount -->  --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:15:29 --> batch_transaction --> update --> unit_rate -->  --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:15:29 --> batch_transaction --> update --> quantity -->  --> 1.00
+Reyes, Naisa (33798) --> 2020-08-12 06:15:29 --> batch_transaction --> update --> amount -->  --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:15:29 --> batch_transaction --> update --> unit_rate -->  --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:15:29 --> batch_transaction --> update --> quantity -->  --> 1.00
+Reyes, Naisa (33798) --> 2020-08-12 06:15:29 --> batch_transaction --> update --> amount -->  --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:17:56 --> batch_transaction --> update --> unit_rate --> 4000.00 --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:17:56 --> batch_transaction --> update --> amount --> 4000.00 --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:17:56 --> batch_transaction --> update --> unit_rate --> 4000.00 --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:17:56 --> batch_transaction --> update --> amount --> 4000.00 --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:18:59 --> batch_transaction --> update --> unit_rate --> 4000.00 --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:18:59 --> batch_transaction --> update --> amount --> 4000.00 --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:18:59 --> batch_transaction --> update --> unit_rate --> 4000.00 --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:18:59 --> batch_transaction --> update --> amount --> 4000.00 --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:22:19 --> batch_transaction --> update --> unit_rate --> 4000.00 --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:22:19 --> batch_transaction --> update --> amount --> 4000.00 --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:22:19 --> batch_transaction --> update --> unit_rate --> 4000.00 --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:22:19 --> batch_transaction --> update --> amount --> 4000.00 --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:24:40 --> batch_transaction --> update --> unit_rate --> 4000.00 --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:24:40 --> batch_transaction --> update --> amount --> 4000.00 --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:24:40 --> batch_transaction --> update --> unit_rate --> 4000.00 --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:24:40 --> batch_transaction --> update --> amount --> 4000.00 --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:30:35 --> batch_transaction --> update --> unit_rate --> 4000.00 --> 4,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:31:45 --> batch_transaction --> insert --> document_no -->  --> 123456
+Reyes, Naisa (33798) --> 2020-08-12 06:31:45 --> batch_transaction --> insert --> transaction_id -->  --> 90
+Reyes, Naisa (33798) --> 2020-08-12 06:31:45 --> batch_transaction --> insert --> payroll_date -->  --> 2020-08-31
+Reyes, Naisa (33798) --> 2020-08-12 06:31:45 --> batch_transaction --> insert --> unit_rate_main -->  --> Ù‹¶M›/,¹?þÕú‹_
+Reyes, Naisa (33798) --> 2020-08-12 06:31:45 --> batch_transaction --> insert --> batch_entry_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-12 06:31:45 --> batch_transaction --> insert --> id_number -->  --> 1101025
+Reyes, Naisa (33798) --> 2020-08-12 06:31:45 --> batch_transaction --> insert --> employee_id -->  --> 55
+Reyes, Naisa (33798) --> 2020-08-12 06:31:46 --> batch_transaction --> insert --> unit_rate -->  --> 5,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:31:46 --> batch_transaction --> insert --> quantity -->  --> 1.00
+Reyes, Naisa (33798) --> 2020-08-12 06:31:46 --> batch_transaction --> insert --> amount -->  --> 5,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:32:32 --> batch_transaction --> update --> unit_rate --> 5000.00 --> 5,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:32:32 --> batch_transaction --> update --> amount --> 5000.00 --> 5,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:33:01 --> batch_transaction --> update --> unit_rate --> 5000.00 --> 5,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:33:01 --> batch_transaction --> update --> quantity --> 1.00 --> 2
+Reyes, Naisa (33798) --> 2020-08-12 06:33:02 --> batch_transaction --> update --> amount --> 5000.00 --> 10,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:35:19 --> batch_transaction --> update --> unit_rate --> 5000.00 --> 5,000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:35:19 --> batch_transaction --> update --> quantity --> 2 --> 3
+Reyes, Naisa (33798) --> 2020-08-12 06:35:19 --> batch_transaction --> update --> amount --> 10000.00 --> 15000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:45:29 --> recurring_transaction --> insert --> document_no -->  --> 123456
+Reyes, Naisa (33798) --> 2020-08-12 06:45:29 --> recurring_transaction --> insert --> transaction_id -->  --> 232
+Reyes, Naisa (33798) --> 2020-08-12 06:45:29 --> recurring_transaction --> insert --> date_from -->  --> 2020-08-01
+Reyes, Naisa (33798) --> 2020-08-12 06:45:29 --> recurring_transaction --> insert --> date_to -->  --> 2020-08-31
+Reyes, Naisa (33798) --> 2020-08-12 06:45:29 --> recurring_transaction --> insert --> transaction_method_id -->  --> 3
+Reyes, Naisa (33798) --> 2020-08-12 06:45:29 --> recurring_transaction --> insert --> account_id -->  --> 8
+Reyes, Naisa (33798) --> 2020-08-12 06:45:29 --> recurring_transaction --> insert --> week -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-12 06:45:29 --> recurring_transaction --> insert --> amount -->  --> Ù‹¶M›/,¹?þÕú‹_
+Reyes, Naisa (33798) --> 2020-08-12 06:45:29 --> recurring_transaction --> insert --> remarks -->  --> test
+Reyes, Naisa (33798) --> 2020-08-12 06:45:29 --> recurring_transaction --> insert --> recurring_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-12 06:45:29 --> recurring_transaction --> insert --> employee_id -->  --> 55
+Reyes, Naisa (33798) --> 2020-08-12 06:45:29 --> recurring_transaction --> insert --> amount -->  --> 5000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:45:29 --> recurring_transaction --> insert --> quantity -->  --> 1.00
+Reyes, Naisa (33798) --> 2020-08-12 06:49:16 --> recurring_transaction --> insert --> recurring_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-12 06:49:16 --> recurring_transaction --> insert --> employee_id -->  --> 55
+Reyes, Naisa (33798) --> 2020-08-12 06:49:16 --> recurring_transaction --> insert --> amount -->  --> 5000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:49:16 --> recurring_transaction --> insert --> quantity -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-12 06:54:48 --> recurring_transaction --> insert --> recurring_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-12 06:54:48 --> recurring_transaction --> insert --> employee_id -->  --> 55
+Reyes, Naisa (33798) --> 2020-08-12 06:54:48 --> recurring_transaction --> insert --> amount -->  --> 10000.00
+Reyes, Naisa (33798) --> 2020-08-12 06:54:48 --> recurring_transaction --> insert --> quantity -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-12 07:01:01 --> recurring_transaction --> insert --> document_no -->  --> 12345
+Reyes, Naisa (33798) --> 2020-08-12 07:01:01 --> recurring_transaction --> insert --> transaction_id -->  --> 209
+Reyes, Naisa (33798) --> 2020-08-12 07:01:02 --> recurring_transaction --> insert --> date_from -->  --> 2020-07-31
+Reyes, Naisa (33798) --> 2020-08-12 07:01:02 --> recurring_transaction --> insert --> date_to -->  --> 2020-09-01
+Reyes, Naisa (33798) --> 2020-08-12 07:01:02 --> recurring_transaction --> insert --> transaction_method_id -->  --> 3
+Reyes, Naisa (33798) --> 2020-08-12 07:01:02 --> recurring_transaction --> insert --> account_id -->  --> 7
+Reyes, Naisa (33798) --> 2020-08-12 07:01:02 --> recurring_transaction --> insert --> week -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-12 07:01:02 --> recurring_transaction --> insert --> amount -->  --> Ù‹¶M›/,¹?þÕú‹_
+Reyes, Naisa (33798) --> 2020-08-12 07:01:02 --> recurring_transaction --> insert --> recurring_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-12 07:01:02 --> recurring_transaction --> insert --> employee_id -->  --> 55

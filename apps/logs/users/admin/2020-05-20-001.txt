@@ -1,0 +1,14 @@
+2020-05-20 09:39:41 --> authentication --> login --> login -->  --> 
+2020-05-20 09:48:29 --> authentication --> logout --> logout -->  --> 
+2020-05-20 10:05:24 --> authentication --> login --> login -->  --> 
+2020-05-20 10:06:41 --> partners --> update --> start_date --> 0000-00-00 --> 2010-07-10
+2020-05-20 10:06:41 --> partners --> update --> coordinator_id --> 56,55 --> 55,56
+2020-05-20 10:06:42 --> partners --> update --> regularization_date --> 0000-00-00 --> 2010-12-10
+2020-05-20 10:06:42 --> partners --> update --> original_hired_date --> 1970-01-01 --> 2010-07-14
+2020-05-20 10:09:50 --> authentication --> logout --> logout -->  --> 
+2020-05-20 10:10:48 --> authentication --> login --> login -->  --> 
+2020-05-20 10:11:12 --> partners --> update --> calendar_id --> 39 --> 31
+2020-05-20 10:13:39 --> partners --> update --> status_id --> 2 --> 1
+2020-05-20 10:14:11 --> authentication --> logout --> logout -->  --> 
+2020-05-20 11:20:04 --> authentication --> login --> login -->  --> 
+2020-05-20 03:23:26 --> report_generator --> delete --> report_id --> 17 --> 

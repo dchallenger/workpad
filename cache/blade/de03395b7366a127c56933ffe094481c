@@ -1,0 +1,145 @@
+<div class="portlet">
+	<div class="portlet-title">
+		<div class="caption"><?php echo lang('applicants.other_info'); ?></div>
+		<div class="tools">
+			<a class="collapse" href="javascript:;"></a>
+		</div>
+	</div>
+	<div class="portlet-body form">
+		<!-- START FORM -->
+        <div class="form-horizontal">
+            <div class="form-body">
+            	<div class="form-group">
+                    <label class="control-label col-md-4"><?php echo lang('applicants.height'); ?></label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="recruitment_personal[height]" id="recruitment_personal-height" value="<?php echo $record['height']; ?>" placeholder="Enter Height"/>
+                    </div>
+                </div>
+                
+                <div class="form-group hidden-sm hidden-xs">
+                    <label class="control-label col-md-4"><?php echo lang('applicants.weight'); ?></label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="recruitment_personal[weight]" id="recruitment_personal-weight" value="<?php echo $record['weight']; ?>" placeholder="Enter Weight"/>
+                    </div>
+                </div>
+                <div class="form-group hidden-sm hidden-xs">
+                    <label class="control-label col-md-4"><?php echo lang('applicants.hobby'); ?></label>
+                    <div class="col-md-5">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-star"></i></span>
+                        <input type="text" class="form-control" name="recruitment_personal[interests_hobbies]" id="recruitment_personal-interests_hobbies" value="<?php echo $record['interests_hobbies']; ?>" placeholder="Enter Interest and Hobbies"/>
+                         </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4"><?php echo lang('applicants.languages'); ?></label>
+                    <div class="col-md-5">                                   
+                        <input type="text" class="form-control" name="recruitment_personal[language]" id="recruitment_personal-language" value="<?php echo $record['language']; ?>" placeholder="Enter Languange Known"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4"><?php echo lang('applicants.dialects'); ?></label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="recruitment_personal[dialect]" id="recruitment_personal-dialect" value="<?php echo $record['dialect']; ?>" placeholder="Enter Dialects"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4"><?php echo lang('applicants.no_dependents'); ?></label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="recruitment_personal[dependents_count]" id="recruitment_personal-dependents_count" value="<?php echo $record['dependents_count']; ?>" placeholder="Enter No. of Dependents"/>
+                    </div>
+                </div>
+<!--                 <div class="form-group">
+                    <label class="control-label col-md-4"><?php echo lang('applicants.license_certified'); ?></label>
+                    <div class="col-md-5">
+                        <div class="make-switch" data-on-label="&nbsp;<?php echo lang('applicants.yes'); ?>&nbsp;" data-off-label="&nbsp;<?php echo lang('applicants.no'); ?>&nbsp;">
+                            <input type="checkbox" value="1" <?php if( $record['cert_member_to_trade'] ): ?> checked="checked" <?php endif; ?> name="recruitment_personal[cert_member_to_trade][temp]" id="recruitment_personal-cert_member_to_trade-temp" class="dontserializeme toggle"/>
+                            <input type="hidden" name="recruitment_personal[cert_member_to_trade]" id="recruitment_personal-cert_member_to_trade" value="<?php if( $record['cert_member_to_trade'] ): ?> 1 <?php else: ?> 0 <?php endif; ?>"/>
+                        </div> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4"><?php echo lang('applicants.prev_employed'); ?></label>
+                    <div class="col-md-5">
+                        <div class="make-switch" data-on-label="&nbsp;<?php echo lang('applicants.yes'); ?>&nbsp;" data-off-label="&nbsp;<?php echo lang('applicants.no'); ?>&nbsp;">
+                            <input type="checkbox" value="1" <?php if( $record['previously_employed_at_hdi'] ): ?> checked="checked" <?php endif; ?> name="recruitment_personal[previously_employed_at_hdi][temp]" id="recruitment_personal-previously_employed_at_hdi-temp" class="dontserializeme toggle"/>
+                            <input type="hidden" name="recruitment_personal[previously_employed_at_hdi]" id="recruitment_personal-previously_employed_at_hdi" value="<?php if( $record['previously_employed_at_hdi'] ): ?> 1 <?php else: ?> 0 <?php endif; ?>"/>
+                        </div> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4"><?php echo lang('applicants.list_known_person'); ?></label>
+                    <div class="col-md-5">
+                        <textarea rows="3" class="form-control"name="recruitment_personal[known_people_at_hdi]" id="recruitment_personal-known_people_at_hdi" ><?php echo $record['known_people_at_hdi']; ?></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4"><?php echo lang('applicants.physical_disabilites'); ?></label>
+                    <div class="col-md-5">
+                        <div class="make-switch" data-on-label="&nbsp;<?php echo lang('applicants.yes'); ?>&nbsp;" data-off-label="&nbsp;<?php echo lang('applicants.no'); ?>&nbsp;">
+                            <input type="checkbox" value="1" <?php if( $record['physical_disabilities'] ): ?> checked="checked" <?php endif; ?> name="recruitment_personal[physical_disabilities][temp]" id="recruitment_personal-physical_disabilities-temp" class="dontserializeme toggle"/>
+                            <input type="hidden" name="recruitment_personal[physical_disabilities]" id="recruitment_personal-physical_disabilities" value="<?php if( $record['physical_disabilities'] ): ?> 1 <?php else: ?> 0 <?php endif; ?>"/>
+                        </div> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4"><?php echo lang('applicants.work_limit'); ?></label>
+                    <div class="col-md-5">
+                        <textarea rows="3" class="form-control"name="recruitment_personal[work_limitations]" id="recruitment_personal-work_limitations" ><?php echo $record['work_limitations']; ?></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4"><?php echo lang('applicants.major_illness'); ?></label>
+                    <div class="col-md-5">
+                        <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
+                            <input type="checkbox" value="1" <?php if( $record['illness_injuries'] ): ?> checked="checked" <?php endif; ?> name="recruitment_personal[illness_injuries][temp]" id="recruitment_personal-illness_injuries-temp" class="dontserializeme toggle"/>
+                            <input type="hidden" name="recruitment_personal[illness_injuries]" id="recruitment_personal-illness_injuries" value="<?php if( $record['illness_injuries'] ): ?> 1 <?php else: ?> 0 <?php endif; ?>"/>
+                        </div> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4"><?php echo lang('applicants.ill_desc'); ?></label>
+                    <div class="col-md-5">
+                        <textarea rows="3" class="form-control"name="recruitment_personal[illness_injuries_desc]" id="recruitment_personal-illness_injuries_desc" ><?php echo $record['illness_injuries_desc']; ?></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4"><?php echo lang('applicants.ill_compensation'); ?></label>
+                    <div class="col-md-5">
+                        <div class="make-switch" data-on-label="&nbsp;<?php echo lang('applicants.yes'); ?>&nbsp;" data-off-label="&nbsp;<?php echo lang('applicants.no'); ?>&nbsp;">
+                            <input type="checkbox" value="1" <?php if( $record['illness_compensated'] ): ?> checked="checked" <?php endif; ?> name="recruitment_personal[illness_compensated][temp]" id="recruitment_personal-illness_compensated-temp" class="dontserializeme toggle"/>
+                            <input type="hidden" name="recruitment_personal[illness_compensated]" id="recruitment_personal-illness_compensated" value="<?php if( $record['illness_compensated'] ): ?> 1 <?php else: ?> 0 <?php endif; ?>"/>
+                        </div> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4"><?php echo lang('applicants.relocate'); ?></label>
+                    <div class="col-md-5">
+                        <div class="make-switch" data-on-label="&nbsp;<?php echo lang('applicants.yes'); ?>&nbsp;" data-off-label="&nbsp;<?php echo lang('applicants.no'); ?>&nbsp;">
+                            <input type="checkbox" value="1" <?php if( $record['willing_to_relocate'] ): ?> checked="checked" <?php endif; ?> name="recruitment_personal[willing_to_relocate][temp]" id="recruitment_personal-willing_to_relocate-temp" class="dontserializeme toggle"/>
+                            <input type="hidden" name="recruitment_personal[willing_to_relocate]" id="recruitment_personal-willing_to_relocate" value="<?php if( $record['willing_to_relocate'] ): ?> 1 <?php else: ?> 0 <?php endif; ?>"/>
+                        </div> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4"><?php echo lang('applicants.work_notice'); ?></label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="recruitment_personal[days_notice_to_work]" id="recruitment_personal-days_notice_to_work" value="<?php echo $record['days_notice_to_work']; ?>" placeholder="Days Notice"/>
+                    </div>
+                </div> -->
+                
+            </div>
+<!--             <div class="form-actions fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-offset-4 col-md-8">
+                            <button class="btn green btn-sm" type="button" onclick="save_partner( $(this).parents('form') )"><i class="fa fa-check"></i> <?php echo lang('common.save'); ?> <?php if (empty($record['record_id'])): ?> and <?php echo lang('common.next'); ?> <?php endif; ?></button>
+                            <button class="btn blue btn-sm" type="submit"><i class="fa fa-undo"></i> <?php echo lang('common.reset'); ?></button>
+                            <a class="btn default btn-sm" href="<?php echo $mod->url; ?>" type="button" ><?php echo lang('common.back_to_list'); ?></a>                               
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+	</div>
+</div>

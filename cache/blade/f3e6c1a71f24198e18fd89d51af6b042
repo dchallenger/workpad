@@ -1,0 +1,83 @@
+<tr class="record">
+
+    <td class="hidden-xs">
+	   <input type="checkbox" value="<?php echo $record_id; ?>" class="record-checker checkboxes">
+    </td>
+
+    <td>
+        <?php echo $class_code; ?>
+		<br>
+		<span class="help-block small"><?php echo $form; ?></span>
+		<span class="help-block small"><?php echo $description; ?></span>
+    </td>
+
+    <!-- td>
+        <?php echo $form; ?>
+    </td -->
+
+    <!-- td>
+        <?php echo $severity; ?>
+    </td -->
+
+    <td>
+        <?php echo $class_value; ?>
+		<br>
+		<span class="help-block small"><?php echo $severity; ?></span>
+    </td>
+
+    <!-- td>
+        <?php echo $description; ?>
+    </td -->
+    
+
+    <td>
+        <?php if( isset($permission['edit']) AND $permission['edit'] == 1 ): ?>
+
+            <div class="btn-group">
+                <a class="btn btn-xs text-muted" href="<?php echo $edit_url; ?>"><i class="fa fa-pencil"></i> Edit</a>
+            </div>
+
+            <?php if( isset($permission['detail']) AND isset($permission['delete']) AND ( $permission['detail'] == 1 AND $permission['delete'] == 1 ) ): ?>
+
+                <div class="btn-group">
+                    <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> Options</a>
+                    <ul class="dropdown-menu pull-right">
+                        <?php echo $options; ?>
+                    </ul>
+                </div> 
+
+            <?php elseif( isset($permission['detail']) AND $permission['detail'] == 1 ): ?>
+
+                <div class="btn-group">
+                    <a class="btn btn-xs text-muted" href="<?php echo $detail_url; ?>"><i class="fa fa-search"></i> View</a>
+                </div>
+
+            <?php elseif( isset($permission['delete']) AND $permission['delete'] == 1 ): ?>
+
+                <div class="btn-group">
+                    <a class="btn btn-xs text-muted" href="<?php echo $delete_url_javascript; ?>"><i class="fa fa-trash-o"></i> Delete</a>
+                </div>
+
+            <?php endif; ?>
+
+        <?php elseif( isset($permission['detail']) AND $permission['detail'] == 1 ): ?>
+
+            <div class="btn-group">
+                <a class="btn btn-xs text-muted" href="<?php echo $detail_url; ?>"><i class="fa fa-search"></i> View</a>
+            </div>
+
+            <?php if( isset($permission['delete']) AND $permission['delete'] == 1 ): ?>
+                <div class="btn-group">
+                    <a class="btn btn-xs text-muted" href="<?php echo $delete_url_javascript; ?>"><i class="fa fa-trash-o"></i> Delete</a>
+                </div>
+            <?php endif; ?>
+
+        <?php elseif( isset($permission['delete']) AND $permission['delete'] == 1 ): ?>
+
+            <div class="btn-group">
+                <a class="btn btn-xs text-muted" href="<?php echo $delete_url_javascript; ?>"><i class="fa fa-trash-o"></i> Delete</a>
+            </div>
+
+        <?php endif; ?>
+    </td>
+</tr>

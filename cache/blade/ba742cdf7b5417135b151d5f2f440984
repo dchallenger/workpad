@@ -1,0 +1,4 @@
+<th width="25%"><?php echo lang('my_change_request.employee'); ?></th>
+<th width="20%"><?php echo lang('common.date_created'); ?></th>
+<th width="19%"><?php echo lang('my_change_request.no_changes'); ?></th>
+<th width="20%"><?php echo lang('common.status'); ?></th>

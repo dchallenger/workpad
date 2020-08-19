@@ -1,0 +1,23 @@
+EH10201802200276307395   PMCKing's Development, Inc.                                                                               2129 Chino Roces, Makati City                                                                       1231          
+DT10100040979901208          CASTILLO                      ERWIN                         TORRE                         310.00       100.00       225231592      19750802
+DT10100036854701640          CHUA                          RUBILIE AIDA                  SAAVEDRA                      2243.76      100.00       123178909      00000000
+DT10100037508701641          TOLEDO                        DANTE                         AVANCENA                      724.28       100.00       168649755      19690307
+DT10100037878501642          VELOSO                        ROBERTO RAFAEL                JAVIER                        507.62       100.00       204270489      19680705
+DT10100036858201648          RUBIO                         EFREN                         BINAY                         345.84       100.00       181031968      19670122
+DT10100036853601652          ASUIT                         ESTRELLA                      DOMINDIN                      613.99       100.00       101915483      19700101
+DT10100038299401657          VIRAY                         MERLINESSA                    MAGNO                         312.74       100.00       232129006      19830402
+DT10100040732301659          CASONGGAY                     STEPHANIE                     PACANOT                       281.72       100.00       945573089      19850613
+DT0385790831  01661          NAVARRO                       ARNOLD                        SAMAR                         1334.34      100.00       123179055      19640803
+DT12108669271532232          TERUEL                        RONAN JONATHAN                SEVILLA                       100.00       100.00       410001256      19871231
+DT12111672958132555          ARBAN                         ERLYN                         MARATAS                       100.00       100.00       308951122      19881019
+DT91531014756832557          UDTOHAN                       MICHELLE                      S                             100.00       100.00       309127675      19880325
+DT91531015413932558          LECTONIN                      DANIEL                        HAYAG                         100.00       100.00       130966079      19580514
+DT10600046369532702          CUIZON                        MICHAEL                       GARBO                         100.00       100.00       282638542      19870207
+DT11011205000032876          ARBAN                         RODJASON                      GASCON                        100.00       100.00       412518939      00000000
+DT10100121740232904          CASTRO                        RANDY                         T                             100.00       100.00       228208485      19700101
+DT02103664720832941          FATALLA                       RODERICK                      ROBEL                         100.00       100.00       229380331      19700823
+DT12104021072833041          NACURAY                       DANTE                         INGUIN                        100.00       100.00       196845458      19690919
+DT10100441409733049          DEL ROSARIO                   LENNON                        NAVARRO                       100.00       100.00       240568672      19821009
+DT12115136001133068          SY                            GILFORD                       CADULDULAN                    100.00       100.00       323460181000   19811113
+DT10100036857131230          ROSARIO                       JONATHAN                                                    100.00       100.00       418677226100   19740912
+DT10800124507733088          PATINO JR.                    RICARDO                       DE LEON                       100.00       100.00       304172194000   19770910

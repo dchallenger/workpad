@@ -1,0 +1,10 @@
+Reyes, Naisa (33798) --> 2020-06-27 09:05:32 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-06-27 09:06:13 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-06-27 15:15:44 --> authentication --> logout --> logout -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-06-27 15:16:56 --> authentication --> login --> login -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-06-27 15:20:23 --> authentication --> logout --> logout -->  --> 
+Monis, Marybeth (1101060) --> 2020-06-27 15:20:32 --> authentication --> login --> login -->  --> 
+Monis, Marybeth (1101060) --> 2020-06-27 15:38:59 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-06-27 15:39:10 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-06-27 15:46:39 --> authentication --> logout --> logout -->  --> 
+Monis, Marybeth (1101060) --> 2020-06-27 15:46:53 --> authentication --> login --> login -->  --> 

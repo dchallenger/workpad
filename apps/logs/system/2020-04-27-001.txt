@@ -1,0 +1,71 @@
+Admin, Teemworx (admin) --> 2020-04-27 05:20:29 --> partners --> insert --> partner_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-27 05:20:29 --> partners --> insert --> key_id -->  --> 33
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key -->  --> education-type
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key_name -->  --> Type
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key_value -->  --> Primary
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> partner_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key_id -->  --> 33
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key -->  --> education-type
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> sequence -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key_name -->  --> Type
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key_value -->  --> Vocational
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> partner_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key_id -->  --> 34
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key -->  --> education-school
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key_name -->  --> School
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key_value -->  --> tagbac elem school
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> partner_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key_id -->  --> 34
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key -->  --> education-school
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> sequence -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key_name -->  --> School
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key_value -->  --> AMA
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> partner_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key_id -->  --> 35
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key -->  --> education-year-from
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key_name -->  --> Year From
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key_value -->  --> 1986
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> partner_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-27 05:20:30 --> partners --> insert --> key_id -->  --> 35
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key -->  --> education-year-from
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> sequence -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_name -->  --> Year From
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_value -->  --> 2000
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> partner_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_id -->  --> 36
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key -->  --> education-year-to
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_name -->  --> Year To
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_value -->  --> 1990
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> partner_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_id -->  --> 36
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key -->  --> education-year-to
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> sequence -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_name -->  --> Year To
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_value -->  --> 2004
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> partner_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_id -->  --> 37
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key -->  --> education-degree
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_name -->  --> Degree
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> partner_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_id -->  --> 37
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key -->  --> education-degree
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> sequence -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_name -->  --> Degree
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_value -->  --> Computer Science
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> partner_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_id -->  --> 38
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key -->  --> education-status
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_name -->  --> Status
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_value -->  --> Graduated
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> partner_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_id -->  --> 38
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key -->  --> education-status
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> sequence -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_name -->  --> Status
+Admin, Teemworx (admin) --> 2020-04-27 05:20:31 --> partners --> insert --> key_value -->  --> Undergrad

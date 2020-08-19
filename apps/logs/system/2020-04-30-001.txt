@@ -1,0 +1,17 @@
+Admin, Teemworx (admin) --> 2020-04-30 10:58:38 --> section --> insert --> section -->  --> User Support
+Admin, Teemworx (admin) --> 2020-04-30 10:58:39 --> section --> insert --> section_code -->  --> UST
+Admin, Teemworx (admin) --> 2020-04-30 10:58:39 --> section --> insert --> status_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-04-30 14:30:57 --> signatories --> insert --> approver -->  --> 1
+Admin, Teemworx (admin) --> 2020-04-30 14:30:57 --> signatories --> insert --> email -->  --> 1
+Admin, Teemworx (admin) --> 2020-04-30 14:30:57 --> signatories --> insert --> approver_id -->  --> 54
+Admin, Teemworx (admin) --> 2020-04-30 14:30:57 --> signatories --> insert --> condition -->  --> All
+Admin, Teemworx (admin) --> 2020-04-30 14:30:57 --> signatories --> insert --> class_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-30 14:30:57 --> signatories --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-04-30 14:30:57 --> signatories --> insert --> company_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-04-30 14:34:34 --> partners --> update --> role_id --> 25 --> 11
+Admin, Teemworx (admin) --> 2020-04-30 14:34:34 --> partners --> update --> start_date --> 0000-00-00 --> 1970-01-01
+Admin, Teemworx (admin) --> 2020-04-30 14:34:35 --> partners --> update --> end_date --> 0000-00-00 --> 1970-01-01
+Admin, Teemworx (admin) --> 2020-04-30 14:34:59 --> authentication --> logout --> logout -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-04-30 14:35:07 --> authentication --> login --> login -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-04-30 14:36:46 --> authentication --> logout --> logout -->  --> 
+Admin, Teemworx (admin) --> 2020-04-30 14:36:53 --> authentication --> login --> login -->  --> 

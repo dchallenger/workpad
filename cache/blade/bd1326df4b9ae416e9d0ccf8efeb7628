@@ -1,0 +1,4 @@
+<!-- <th width="8%" class="hidden-xs"></th> -->
+<th width="30%"><?php echo lang('department.department'); ?></th>
+<th width="30%"><?php echo lang('department.immediate'); ?></th>
+<th width="20%"><?php echo lang('department.status'); ?></th>

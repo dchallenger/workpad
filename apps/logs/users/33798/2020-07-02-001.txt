@@ -1,0 +1,10 @@
+2020-07-02 10:41:28 --> authentication --> logout --> logout -->  --> 
+2020-07-02 10:42:54 --> authentication --> login --> login -->  --> 
+2020-07-02 14:31:01 --> appraisal_template --> insert --> template -->  --> Officer Level 5
+2020-07-02 14:31:01 --> appraisal_template --> insert --> template_code -->  --> officer_lv5
+2020-07-02 14:31:01 --> appraisal_template --> insert --> company_id -->  --> 2
+2020-07-02 14:31:01 --> appraisal_template --> insert --> position_classification_id -->  --> 9
+2020-07-02 14:31:01 --> appraisal_template --> insert --> employment_status_id -->  --> 1
+2020-07-02 14:31:01 --> appraisal_template --> insert --> description -->  --> test
+2020-07-02 14:39:16 --> appraisal_template --> update --> position_classification_id --> 9 --> 3
+2020-07-02 14:45:34 --> appraisal_template --> update --> employment_status_id --> 1 --> 13,1

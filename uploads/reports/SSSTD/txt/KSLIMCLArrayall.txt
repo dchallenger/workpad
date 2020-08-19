@@ -1,0 +1,55 @@
+00   1124553         20180207201802Kalinisan Steam Laundry Incorporated    0387488811   C
+20   CRUZ                LUIS                T333020071301760.0000030.00        N
+20   VIRTUDES            NORMAN JANE         S010782922301760.0000030.00        N
+20   SIMON               NANCY               G337536141301760.0000030.00        N
+20   ROLDAN              NOLY                D038292087901540.0000010.00        N
+20   ROMASANTA           RONELO              R330036996901760.0000030.00        N
+20   SOLLANO             ALBERTO             S331824437701760.0000030.00        N
+20   BILOG               ORLANDO             B035905027701760.0000030.00        N
+20   LINGO               LORILYN             D331086542401760.0000030.00        N
+20   AQUINO              NOEL                Q331988698301760.0000030.00        N
+20   RAMOS               MARIA LOURDES       B330399110101760.0000030.00        N
+20   MALCO               ALEX                L330376819801760.0000030.00        N
+20   MARISCOTES          MICHELLE            R339120497801760.0000030.00        N
+20   QUIMORA             WENINA              G331118897701760.0000030.00        N
+20   EBITA               SOFIO               D040689292201760.0000030.00        N
+20   OLIQUINO            ALAN                O330821967101760.0000030.00        N
+20   AMISCUA             JOHN                D071466121401760.0000030.00        N
+20   CERALBO             FABIAN              R336022080201760.0000030.00        N
+20   DIONISIO            REMOND              A061381027601760.0000030.00        N
+20   MOYA                ARIEL               F330449162601760.0000030.00        N
+20   ABELIS              RIA                 J336047297701760.0000030.00        N
+20   JIMENEZ             GERALDO             R039940292401760.0000030.00        N
+20   CATALAN             JOHANNA LIZA        B333370405401760.0000030.00        N
+20   MANDIA              ISIDRO              B040742466101760.0000030.00        N
+20   BINAYUG             ROWEL               J341516543001760.0000030.00        N
+20   GALIN               ARTYLOU             D334792774601760.0000030.00        N
+20   ANGELES             WILMAR              C342136652401760.0000030.00        N
+20   ESTRADA             RONALD              M338940543301760.0000030.00        N
+20   BRINGINO            ALBERT              T342253288101650.0000030.00        N
+20   TAPAWAN             ELSIE               M037789191301760.0000030.00        N
+20   AVENIDO             MA. FE              C342724364101760.0000030.00        N
+20   ORINES              DOMINADOR           M340108822001760.0000030.00        N
+20   MILA                ROMMEL              F332278064901760.0000030.00        N
+20   PANTILLA            JAN                 T072349913401760.0000030.00        N
+20   SANTOS              MELINDA CHRISTINA   S330016503701760.0000030.00        N
+20   ASUNCION            MARY JEAN           L338895206801760.0000030.00        N
+20   ESPANOLA            LOILA               R041848656201760.0000030.00        N
+20   MANCAO              DEXTER              S338159470801760.0000030.00        N
+20   PAPA                RONELL              A343375423401760.0000030.00        N
+20   AQUINO              MA. ALMA            R336819251801760.0000030.00        N
+20   SANTOS              MA. JOANNE RACHEL   C344169470001760.0000030.00        N
+20   SUMAYANG            EMMA                A342917165601760.0000030.00        N
+20   CONDINO             ANGELIQUE            341425067601760.0000030.00        N
+20   DE GUZMAN           MARK ANTHONY         342643528501760.0000030.00        N
+20   MOCAM               RONALD               012063743401760.0000030.00        N
+20   GRIO                JONATHAN            P336507567001760.0000030.00        N
+20   LEPALAM             ROSEMARIE           S344205396801705.0000030.00        N
+20   BADARAN             LENCY               B346914546401595.0000010.00        N
+20   YEBES               ELVIE               G341107307601760.0000030.00        N
+20   CUSTODIO            APRIL SHEA          A343377412001320.0000010.00        N
+20   CHAN                JUSTIN NICOLEI      B341540650001760.0000030.00        N
+20   TORING              MARIA THERESA       D345508710901430.0000010.00        N
+20   MAIGTING            JEROME              E042546048701705.0000030.00        N
+20   TUPAS               JAYCEN              P345727860201760.0000030.00        N
+99   000091905.00000001510.0000124553

@@ -1,0 +1,83 @@
+<div class="tab-content col-md-12">
+	<div class="row">
+		<div class="col-md-12 margin-bottom-10">
+			<button class="btn btn-md label-success" onclick="assign_all('user', <?php echo $record['users_profile.company_id']; ?>, <?php echo $record['users_profile.department_id']; ?>, <?php echo $record['users_profile.position_id']; ?>, <?php echo $record['record_id']; ?>)">Assign All</button>
+		</div>
+	</div>
+	<?php foreach($signatory['class'] as $category => $categories): ?>
+		<div class="row">
+			<div class="col-md-12 margin-bottom-10">
+				<strong><?php echo $category; ?></strong>
+			</div>
+			<?php foreach($categories as $class_id => $class): ?>
+			<div class="row">
+				<div class="col-md-3 margin-left-20 margin-bottom-50" >
+					<h5><?php echo $class; ?></h5>
+				</div>
+				<div class="col-md-2 margin-bottom-50">
+					<h5>(1) User <i class="fa fa-arrow-right"></i></h5>
+					
+					<?php $user_signatories = $signatory_model->get_user_signatories( $class_id, $record['record_id'], $record['users_profile.position_id'], $record['users_profile.department_id'], $record['users_profile.company_id']); 
+					?>
+					<?php if($user_signatories): ?>
+						<?php foreach($user_signatories as $user_signatory): ?>
+							<div class="small">
+								<p><?php echo $user_signatory->alias; ?> <br><span class="italic text-success">(<?php echo $user_signatory->sequence; ?>-<?php echo $user_signatory->condition; ?>)</span></a>
+							</div>
+						<?php endforeach; ?>
+					<?php else: ?>
+						<div class="small"> - </div>
+					<?php endif; ?>
+					<br/>
+					<div class="">
+						<button class="btn btn-sm label-success" onclick="edit_signatory(<?php echo $class_id; ?>, 'user', <?php echo $record['users_profile.company_id']; ?>, <?php echo $record['users_profile.department_id']; ?>, <?php echo $record['users_profile.position_id']; ?>, <?php echo $record['record_id']; ?>)">Assign</button>
+					</div>
+				</div>
+				<div class="col-md-2 margin-bottom-50">
+					<h5>(2) Position <i class="fa fa-arrow-right"></i></h5>
+					<?php $position_signatories = $signatory_model->get_position_signatories( $class_id, $record['users_profile.position_id'], $record['users_profile.department_id'], $record['users_profile.company_id']); 
+					?>
+					<?php if($position_signatories): ?>
+						<?php foreach($position_signatories as $position_signatory): ?>
+							<div class="small">
+								<?php echo $position_signatory->alias; ?> <br><span class="italic text-success">(<?php echo $position_signatory->sequence; ?>-<?php echo $position_signatory->condition; ?>)</span>
+							</div>
+						<?php endforeach; ?>
+					<?php else: ?>
+						<div class="small"> - </div>
+					<?php endif; ?>
+				</div>
+				<div class="col-md-2 margin-bottom-50">
+					<h5>(3) Department <i class="fa fa-arrow-right"></i></h5>
+					<?php $department_signatories = $signatory_model->get_department_signatories( $class_id,  $record['users_profile.department_id'], $record['users_profile.company_id']); 
+					?>
+					<?php if($department_signatories): ?>
+						<?php foreach($department_signatories as $department_signatory): ?>
+							<div class="small">
+								<?php echo $department_signatory->alias; ?> <br><span class="italic text-success">(<?php echo $department_signatory->sequence; ?>-<?php echo $department_signatory->condition; ?>)</span>
+							</div>
+						<?php endforeach; ?>
+					<?php else: ?>
+						<div class="small"> - </div>
+					<?php endif; ?>
+
+				</div>
+				<div class="col-md-2 margin-bottom-50">
+					<h5>(4) Company</h5>
+					<?php $company_signatories = $signatory_model->get_company_signatories( $class_id,  $record['users_profile.company_id']); 
+					?>
+					<?php if($company_signatories): ?>
+						<?php foreach($company_signatories as $company_signatory): ?>
+							<div class="small">
+								<?php echo $company_signatory->alias; ?> <br><span class="italic text-success">(<?php echo $company_signatory->sequence; ?>-<?php echo $company_signatory->condition; ?>)</span>
+							</div>
+						<?php endforeach; ?>
+					<?php else: ?>
+						<div class="small"> - </div>
+					<?php endif; ?>
+				</div>
+			</div>
+			<?php endforeach; ?>
+		</div>
+	<?php endforeach; ?>
+</div>

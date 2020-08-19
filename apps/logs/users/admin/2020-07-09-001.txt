@@ -1,0 +1,26 @@
+2020-07-09 13:05:25 --> authentication --> login --> login -->  --> 
+2020-07-09 13:08:08 --> signatories --> insert --> approver -->  --> 1
+2020-07-09 13:08:08 --> signatories --> insert --> email -->  --> 1
+2020-07-09 13:08:08 --> signatories --> insert --> approver_id -->  --> 56
+2020-07-09 13:08:08 --> signatories --> insert --> condition -->  --> By Level
+2020-07-09 13:08:08 --> signatories --> insert --> class_id -->  --> 19
+2020-07-09 13:08:08 --> signatories --> insert --> sequence -->  --> 1
+2020-07-09 13:08:08 --> signatories --> insert --> company_id -->  --> 2
+2020-07-09 13:08:09 --> signatories --> insert --> department_id -->  --> 1
+2020-07-09 13:08:09 --> signatories --> insert --> position_id -->  --> 86
+2020-07-09 13:08:09 --> signatories --> insert --> user_id -->  --> 57
+2020-07-09 13:08:09 --> signatories --> insert --> alias -->  --> Reyes, Naisa 
+2020-07-09 13:08:09 --> signatories --> insert --> employee -->  --> 57
+2020-07-09 13:08:24 --> signatories --> insert --> approver -->  --> 1
+2020-07-09 13:08:24 --> signatories --> insert --> email -->  --> 1
+2020-07-09 13:08:24 --> signatories --> insert --> approver_id -->  --> 54
+2020-07-09 13:08:24 --> signatories --> insert --> condition -->  --> By Level
+2020-07-09 13:08:24 --> signatories --> insert --> class_id -->  --> 19
+2020-07-09 13:08:24 --> signatories --> insert --> sequence -->  --> 2
+2020-07-09 13:08:24 --> signatories --> insert --> company_id -->  --> 2
+2020-07-09 13:08:24 --> signatories --> insert --> department_id -->  --> 1
+2020-07-09 13:08:24 --> signatories --> insert --> position_id -->  --> 86
+2020-07-09 13:08:24 --> signatories --> insert --> user_id -->  --> 57
+2020-07-09 13:08:24 --> signatories --> insert --> alias -->  --> Monis, Marybeth 
+2020-07-09 13:08:24 --> signatories --> insert --> employee -->  --> 57
+2020-07-09 13:08:36 --> authentication --> logout --> logout -->  --> 

@@ -1,0 +1,91 @@
+Admin, Emplopad (admin) --> 2020-06-29 10:06:33 --> signatories --> insert --> email -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-29 10:06:33 --> signatories --> insert --> approver_id -->  --> 54
+Admin, Emplopad (admin) --> 2020-06-29 10:06:33 --> signatories --> insert --> condition -->  --> All
+Admin, Emplopad (admin) --> 2020-06-29 10:06:33 --> signatories --> insert --> class_id -->  --> 8
+Admin, Emplopad (admin) --> 2020-06-29 10:06:34 --> signatories --> insert --> sequence -->  --> 3
+Admin, Emplopad (admin) --> 2020-06-29 10:06:34 --> signatories --> insert --> company_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-29 10:06:34 --> signatories --> insert --> department_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-29 10:06:34 --> signatories --> insert --> position_id -->  --> 86
+Admin, Emplopad (admin) --> 2020-06-29 10:06:34 --> signatories --> insert --> user_id -->  --> 57
+Admin, Emplopad (admin) --> 2020-06-29 10:06:34 --> signatories --> insert --> alias -->  --> Monis, Marybeth 
+Admin, Emplopad (admin) --> 2020-06-29 10:06:34 --> signatories --> insert --> employee -->  --> 57
+Admin, Emplopad (admin) --> 2020-06-29 10:06:40 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-06-29 10:06:49 --> authentication --> login --> login -->  --> 
+Marjorie, Nailog (33799) --> 2020-06-29 10:08:02 --> authentication --> logout --> logout -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-06-29 10:08:14 --> authentication --> login --> login -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-06-29 10:08:49 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-06-29 10:08:55 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-06-29 10:09:42 --> signatories --> insert --> approver -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-29 10:09:42 --> signatories --> insert --> email -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-29 10:09:42 --> signatories --> insert --> approver_id -->  --> 56
+Admin, Emplopad (admin) --> 2020-06-29 10:09:42 --> signatories --> insert --> condition -->  --> By Level
+Admin, Emplopad (admin) --> 2020-06-29 10:09:42 --> signatories --> insert --> class_id -->  --> 43
+Admin, Emplopad (admin) --> 2020-06-29 10:09:42 --> signatories --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-29 10:09:42 --> signatories --> insert --> company_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-29 10:09:42 --> signatories --> insert --> department_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-29 10:09:42 --> signatories --> insert --> position_id -->  --> 86
+Admin, Emplopad (admin) --> 2020-06-29 10:09:42 --> signatories --> insert --> user_id -->  --> 57
+Admin, Emplopad (admin) --> 2020-06-29 10:09:42 --> signatories --> insert --> alias -->  --> Reyes, Naisa 
+Admin, Emplopad (admin) --> 2020-06-29 10:09:42 --> signatories --> insert --> employee -->  --> 57
+Admin, Emplopad (admin) --> 2020-06-29 10:09:49 --> signatories --> insert --> approver -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-29 10:09:49 --> signatories --> insert --> email -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-29 10:09:49 --> signatories --> insert --> approver_id -->  --> 55
+Admin, Emplopad (admin) --> 2020-06-29 10:09:49 --> signatories --> insert --> condition -->  --> By Level
+Admin, Emplopad (admin) --> 2020-06-29 10:09:50 --> signatories --> insert --> class_id -->  --> 43
+Admin, Emplopad (admin) --> 2020-06-29 10:09:50 --> signatories --> insert --> sequence -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-29 10:09:50 --> signatories --> insert --> company_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-29 10:09:50 --> signatories --> insert --> department_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-29 10:09:50 --> signatories --> insert --> position_id -->  --> 86
+Admin, Emplopad (admin) --> 2020-06-29 10:09:50 --> signatories --> insert --> user_id -->  --> 57
+Admin, Emplopad (admin) --> 2020-06-29 10:09:50 --> signatories --> insert --> alias -->  --> Caparas, Ma. Karen 
+Admin, Emplopad (admin) --> 2020-06-29 10:09:50 --> signatories --> insert --> employee -->  --> 57
+Admin, Emplopad (admin) --> 2020-06-29 10:09:56 --> signatories --> insert --> approver -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-29 10:09:56 --> signatories --> insert --> email -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-29 10:09:56 --> signatories --> insert --> approver_id -->  --> 54
+Admin, Emplopad (admin) --> 2020-06-29 10:09:56 --> signatories --> insert --> condition -->  --> By Level
+Admin, Emplopad (admin) --> 2020-06-29 10:09:56 --> signatories --> insert --> class_id -->  --> 43
+Admin, Emplopad (admin) --> 2020-06-29 10:09:56 --> signatories --> insert --> sequence -->  --> 3
+Admin, Emplopad (admin) --> 2020-06-29 10:09:56 --> signatories --> insert --> company_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-29 10:09:56 --> signatories --> insert --> department_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-29 10:09:56 --> signatories --> insert --> position_id -->  --> 86
+Admin, Emplopad (admin) --> 2020-06-29 10:09:56 --> signatories --> insert --> user_id -->  --> 57
+Admin, Emplopad (admin) --> 2020-06-29 10:09:56 --> signatories --> insert --> alias -->  --> Monis, Marybeth 
+Admin, Emplopad (admin) --> 2020-06-29 10:09:56 --> signatories --> insert --> employee -->  --> 57
+Admin, Emplopad (admin) --> 2020-06-29 10:10:04 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-06-29 10:11:02 --> authentication --> login --> login -->  --> 
+Marjorie, Nailog (33799) --> 2020-06-29 10:12:23 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-06-29 10:12:38 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-06-29 10:12:59 --> authentication --> logout --> logout -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-06-29 10:13:35 --> authentication --> login --> login -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-06-29 10:21:35 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-06-29 10:21:47 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-06-29 10:22:18 --> authentication --> logout --> logout -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-06-29 10:22:26 --> authentication --> login --> login -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-06-29 10:22:43 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-06-29 10:22:51 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-06-29 11:12:29 --> authentication --> logout --> logout -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-06-29 11:12:48 --> authentication --> login --> login -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-06-29 11:13:07 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-06-29 11:13:14 --> authentication --> login --> login -->  --> 
+Marjorie, Nailog (33799) --> 2020-06-29 11:29:55 --> authentication --> logout --> logout -->  --> 
+Monis, Marybeth (1101060) --> 2020-06-29 11:30:06 --> authentication --> login --> login -->  --> 
+Monis, Marybeth (1101060) --> 2020-06-29 11:31:11 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-06-29 11:31:22 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-06-29 11:34:03 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-06-29 11:34:18 --> authentication --> login --> login -->  --> 
+Marjorie, Nailog (33799) --> 2020-06-29 11:36:01 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-06-29 11:36:10 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-06-29 13:26:42 --> authentication --> logout --> logout -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-06-29 13:28:03 --> authentication --> login --> login -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-06-29 13:28:39 --> authentication --> logout --> logout -->  --> 
+Monis, Marybeth (1101060) --> 2020-06-29 13:28:48 --> authentication --> login --> login -->  --> 
+Monis, Marybeth (1101060) --> 2020-06-29 13:38:14 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-06-29 13:38:32 --> authentication --> login --> login -->  --> 
+Marjorie, Nailog (33799) --> 2020-06-29 13:38:46 --> authentication --> logout --> logout -->  --> 
+Monis, Marybeth (1101060) --> 2020-06-29 13:38:59 --> authentication --> login --> login -->  --> 
+Monis, Marybeth (1101060) --> 2020-06-29 14:20:08 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-06-29 14:21:35 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-06-29 14:21:54 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-06-29 14:22:05 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-06-29 14:27:51 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-06-29 14:28:06 --> authentication --> login --> login -->  --> 

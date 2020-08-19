@@ -1,0 +1,53 @@
+<tr class="record">
+    <td><input type="checkbox" value="<?php echo $record_id; ?>" class="record-checker checkboxes"></td>
+
+    <td>
+        <span class="text-success"> <?php echo $full_name; ?></span><br>
+        <span class="text-muted small"><?php echo $id_number; ?></span><br>
+        <span class="text-info small"><?php echo $payroll_partners_loan_loan_id; ?></span>
+    </td>
+    <!-- td>
+        <span><?php echo $payroll_partners_loan_loan_id; ?></span>
+    </td -->
+    <td class="hidden-xs">
+        <span><?php echo number_format(trim($payroll_partners_loan_amount), 2, '.', ','); ?></span>
+    </td>
+    <td class="hidden-xs">
+        <?php if(!empty($payroll_partners_loan_running_balance)): ?>
+            <span><?php echo number_format(trim($payroll_partners_loan_running_balance), 2, '.', ','); ?></span>
+        <?php else: ?>
+            <span><?php echo number_format(0, 2, '.', ','); ?></span>
+        <?php endif; ?>
+    </td>
+    <td class="hidden-xs">
+        <?php
+            switch( $payroll_partners_loan_loan_status_id )
+            {
+                case "Entered":
+                    $class="label-primary";
+                    break;
+                case "Active":
+                    $class="label-info";
+                    break;
+                case "On-Hold":
+                    $class="label-warning";
+                    break;
+                case "Fully Paid":
+                    $class="label-success";
+                    break;
+            }
+        ?>
+        <span class="label <?php echo $class; ?>"><?php echo $payroll_partners_loan_loan_status_id; ?></span><br>
+    </td>
+    <td>
+        <div class="btn-group">
+            <a class="btn btn-xs text-muted" href="<?php echo $edit_url; ?>"><i class="fa fa-pencil"></i> Edit</a>
+        </div>
+        <div class="btn-group">
+            <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> Options</a>
+            <ul class="dropdown-menu pull-right">
+                <?php echo $options; ?>
+            </ul>
+        </div>
+    </td>
+</tr>

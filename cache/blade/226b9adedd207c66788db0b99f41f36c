@@ -1,0 +1,54 @@
+<tr class="record">
+    <td>
+        <a class="text-success" href="<?php echo $edit_url; ?>"><?php echo $partners_personal_request_employee_id; ?></a>
+        <br>
+        <span class="text-muted small"><?php echo $partners_personal_request_id_number; ?></span>
+    </td>
+    <td>
+        <?php echo date( 'M-d', strtotime( $partners_personal_request_created_on ) ); ?>
+        <span class="text-muted small">
+            <?php echo date( 'D', strtotime( $partners_personal_request_created_on ) ); ?>
+        </span>
+        <br>
+        <span class="text-muted small"><?php echo date( 'Y', strtotime( $partners_personal_request_created_on ) ); ?></span>
+    </td>
+    <td>
+        <span class="label label-info"><?php echo $partners_personal_request_changes; ?></span>
+    </td>
+    <td>
+        <?php
+            switch( $partners_personal_request_status )
+            {
+                
+                case "For Approval":
+                    $badge = 'badge-warning';
+                    break;
+                case "Approved":
+                    $badge = 'badge-success';
+                    break;
+            	case "Declined":
+            		$badge = 'badge-danger';
+                    break;
+            	case "Draft":
+            	default:
+                    $badge = 'badge-default';
+                    break;
+                   
+            }
+        ?>
+        <span class="badge <?php echo $badge; ?>"><?php echo $partners_personal_request_status; ?></span>
+    </td>
+    <td>
+        <div class="btn-group">
+            <?php echo $view_url; ?>
+        </div>
+        <?php if( !empty($options) ): ?>
+            <div class="btn-group">
+                <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> <?php echo lang('common.options'); ?></a>
+                <ul class="dropdown-menu pull-right">
+                    <?php echo $options; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+    </td>
+</tr>

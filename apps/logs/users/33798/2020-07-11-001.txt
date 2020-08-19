@@ -1,0 +1,12 @@
+2020-07-11 10:35:49 --> authentication --> logout --> logout -->  --> 
+2020-07-11 14:33:27 --> authentication --> login --> login -->  --> 
+2020-07-11 14:56:27 --> division --> update --> division --> Construction Business Group  --> Construction Business Group
+2020-07-11 14:56:27 --> division --> update --> immediate_id --> 10 --> 54
+2020-07-11 14:56:27 --> division --> update --> position --> ACCOUNT EXECUTIVE --> Senior Executive Associate
+2020-07-11 14:56:27 --> division --> update --> status_id --> 1 --> 1 else 0
+2020-07-11 16:41:14 --> appraisal_template --> insert --> template_id -->  --> 2
+2020-07-11 16:41:14 --> appraisal_template --> insert --> template_section -->  --> test
+2020-07-11 16:41:14 --> appraisal_template --> insert --> parent_id -->  --> 5
+2020-07-11 16:41:14 --> appraisal_template --> insert --> sequence -->  --> 8
+2020-07-11 16:41:14 --> appraisal_template --> insert --> weight -->  --> 6
+2020-07-11 16:41:14 --> appraisal_template --> insert --> section_type_id -->  --> 2

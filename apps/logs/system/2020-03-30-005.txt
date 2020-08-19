@@ -1,0 +1,98 @@
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> key -->  --> solo_parent
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> key_name -->  --> Is Solo Parent
+Admin, Teemworx (admin) --> 2020-03-30 13:35:35 --> signatories --> insert --> approver_class_user --> Array --> 
+Admin, Teemworx (admin) --> 2020-03-30 13:36:02 --> signatories --> insert --> approver -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:36:02 --> signatories --> insert --> email -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:36:02 --> signatories --> insert --> approver_id -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 13:36:02 --> signatories --> insert --> condition -->  --> All
+Admin, Teemworx (admin) --> 2020-03-30 13:36:02 --> signatories --> insert --> class_id -->  --> 20
+Admin, Teemworx (admin) --> 2020-03-30 13:36:02 --> signatories --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:36:02 --> signatories --> insert --> company_id -->  --> 5
+Admin, Teemworx (admin) --> 2020-03-30 13:36:02 --> signatories --> insert --> department_id -->  --> 246
+Admin, Teemworx (admin) --> 2020-03-30 13:36:03 --> signatories --> insert --> position_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:36:03 --> signatories --> insert --> user_id -->  --> 10
+Admin, Teemworx (admin) --> 2020-03-30 13:36:03 --> signatories --> insert --> alias -->  --> Garcia, Lexine 
+Admin, Teemworx (admin) --> 2020-03-30 14:18:27 --> signatories --> insert --> approver -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:18:27 --> signatories --> insert --> email -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:18:27 --> signatories --> insert --> approver_id -->  --> 12
+Admin, Teemworx (admin) --> 2020-03-30 14:18:27 --> signatories --> insert --> condition -->  --> All
+Admin, Teemworx (admin) --> 2020-03-30 14:18:27 --> signatories --> insert --> class_id -->  --> 11
+Admin, Teemworx (admin) --> 2020-03-30 14:18:27 --> signatories --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:18:27 --> signatories --> insert --> company_id -->  --> 5
+Admin, Teemworx (admin) --> 2020-03-30 14:18:27 --> signatories --> insert --> department_id -->  --> 246
+Admin, Teemworx (admin) --> 2020-03-30 14:18:27 --> signatories --> insert --> position_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:18:27 --> signatories --> insert --> user_id -->  --> 10
+Admin, Teemworx (admin) --> 2020-03-30 14:18:27 --> signatories --> insert --> alias -->  --> Garcia, Elaine 
+Admin, Teemworx (admin) --> 2020-03-30 14:20:59 --> signatories --> insert --> approver -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:20:59 --> signatories --> insert --> email -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:20:59 --> signatories --> insert --> approver_id -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 14:20:59 --> signatories --> insert --> condition -->  --> All
+Admin, Teemworx (admin) --> 2020-03-30 14:20:59 --> signatories --> insert --> class_id -->  --> 20
+Admin, Teemworx (admin) --> 2020-03-30 14:20:59 --> signatories --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:20:59 --> signatories --> insert --> company_id -->  --> 6
+Admin, Teemworx (admin) --> 2020-03-30 14:20:59 --> signatories --> insert --> department_id -->  --> 3
+Admin, Teemworx (admin) --> 2020-03-30 14:20:59 --> signatories --> insert --> position_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:20:59 --> signatories --> insert --> user_id -->  --> 12
+Admin, Teemworx (admin) --> 2020-03-30 14:20:59 --> signatories --> insert --> alias -->  --> Garcia, Lexine 
+Admin, Teemworx (admin) --> 2020-03-30 14:22:16 --> signatories --> insert --> approver -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:22:16 --> signatories --> insert --> email -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:22:16 --> signatories --> insert --> approver_id -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 14:22:17 --> signatories --> insert --> condition -->  --> All
+Admin, Teemworx (admin) --> 2020-03-30 14:22:17 --> signatories --> insert --> class_id -->  --> 20
+Admin, Teemworx (admin) --> 2020-03-30 14:22:17 --> signatories --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:22:17 --> signatories --> insert --> company_id -->  --> 6
+Admin, Teemworx (admin) --> 2020-03-30 14:22:17 --> signatories --> insert --> department_id -->  --> 3
+Admin, Teemworx (admin) --> 2020-03-30 14:22:17 --> signatories --> insert --> position_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:22:17 --> signatories --> insert --> user_id -->  --> 12
+Admin, Teemworx (admin) --> 2020-03-30 14:22:17 --> signatories --> insert --> alias -->  --> Garcia, Lexine 
+Admin, Teemworx (admin) --> 2020-03-30 14:22:25 --> signatories --> insert --> approver -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:22:25 --> signatories --> insert --> email -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:22:25 --> signatories --> insert --> approver_id -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 14:22:25 --> signatories --> insert --> condition -->  --> All
+Admin, Teemworx (admin) --> 2020-03-30 14:22:25 --> signatories --> insert --> class_id -->  --> 20
+Admin, Teemworx (admin) --> 2020-03-30 14:22:25 --> signatories --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:22:25 --> signatories --> insert --> company_id -->  --> 6
+Admin, Teemworx (admin) --> 2020-03-30 14:22:25 --> signatories --> insert --> department_id -->  --> 3
+Admin, Teemworx (admin) --> 2020-03-30 14:22:25 --> signatories --> insert --> position_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:22:25 --> signatories --> insert --> user_id -->  --> 12
+Admin, Teemworx (admin) --> 2020-03-30 14:22:25 --> signatories --> insert --> alias -->  --> Garcia, Lexine 
+Admin, Teemworx (admin) --> 2020-03-30 14:23:03 --> signatories --> insert --> approver -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:23:03 --> signatories --> insert --> email -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:23:03 --> signatories --> insert --> approver_id -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 14:23:03 --> signatories --> insert --> condition -->  --> All
+Admin, Teemworx (admin) --> 2020-03-30 14:23:03 --> signatories --> insert --> class_id -->  --> 20
+Admin, Teemworx (admin) --> 2020-03-30 14:23:04 --> signatories --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:23:04 --> signatories --> insert --> company_id -->  --> 6
+Admin, Teemworx (admin) --> 2020-03-30 14:23:04 --> signatories --> insert --> department_id -->  --> 3
+Admin, Teemworx (admin) --> 2020-03-30 14:23:04 --> signatories --> insert --> position_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:23:04 --> signatories --> insert --> user_id -->  --> 12
+Admin, Teemworx (admin) --> 2020-03-30 14:23:04 --> signatories --> insert --> alias -->  --> Garcia, Lexine 
+Admin, Teemworx (admin) --> 2020-03-30 14:24:12 --> signatories --> insert --> approver -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:24:12 --> signatories --> insert --> email -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:24:12 --> signatories --> insert --> approver_id -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 14:24:12 --> signatories --> insert --> condition -->  --> All
+Admin, Teemworx (admin) --> 2020-03-30 14:24:12 --> signatories --> insert --> class_id -->  --> 20
+Admin, Teemworx (admin) --> 2020-03-30 14:24:12 --> signatories --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:24:12 --> signatories --> insert --> company_id -->  --> 6
+Admin, Teemworx (admin) --> 2020-03-30 14:24:12 --> signatories --> insert --> department_id -->  --> 3
+Admin, Teemworx (admin) --> 2020-03-30 14:24:12 --> signatories --> insert --> position_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:24:12 --> signatories --> insert --> user_id -->  --> 12
+Admin, Teemworx (admin) --> 2020-03-30 14:24:12 --> signatories --> insert --> alias -->  --> Garcia, Lexine 
+Admin, Teemworx (admin) --> 2020-03-30 14:28:59 --> signatories --> insert --> approver -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:28:59 --> signatories --> insert --> email -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:28:59 --> signatories --> insert --> approver_id -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 14:28:59 --> signatories --> insert --> condition -->  --> All
+Admin, Teemworx (admin) --> 2020-03-30 14:28:59 --> signatories --> insert --> class_id -->  --> 20
+Admin, Teemworx (admin) --> 2020-03-30 14:28:59 --> signatories --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:28:59 --> signatories --> insert --> company_id -->  --> 6
+Admin, Teemworx (admin) --> 2020-03-30 14:28:59 --> signatories --> insert --> department_id -->  --> 3
+Admin, Teemworx (admin) --> 2020-03-30 14:28:59 --> signatories --> insert --> position_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:28:59 --> signatories --> insert --> user_id -->  --> 12
+Admin, Teemworx (admin) --> 2020-03-30 14:28:59 --> signatories --> insert --> alias -->  --> Garcia, Lexine 
+Admin, Teemworx (admin) --> 2020-03-30 14:32:21 --> signatories --> insert --> approver -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:32:21 --> signatories --> insert --> email -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:32:21 --> signatories --> insert --> approver_id -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 14:32:21 --> signatories --> insert --> condition -->  --> All
+Admin, Teemworx (admin) --> 2020-03-30 14:32:21 --> signatories --> insert --> class_id -->  --> 20
+Admin, Teemworx (admin) --> 2020-03-30 14:32:21 --> signatories --> insert --> sequence -->  --> 1

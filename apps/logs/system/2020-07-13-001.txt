@@ -1,0 +1,4 @@
+Reyes, Naisa (33798) --> 2020-07-13 12:37:34 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-07-13 12:37:45 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-07-13 13:21:42 --> library --> update --> library --> External Training --> Core Competencies
+Reyes, Naisa (33798) --> 2020-07-13 13:21:42 --> library --> update --> status_id --> 1 --> 1 else 0

@@ -1,0 +1,18 @@
+<?php foreach ($menu as $item): ?>
+	<li>
+		<a href="<?php echo $item->uri; ?>" menu_id="<?php echo $item->menu_item_id; ?>" parent="0">
+			<i class="fa <?php echo $item->icon; ?>"></i> 
+			<span class="title"><?php echo $item->label; ?></span>
+			<?php if( !empty( $item->submenu ) ): ?>
+				<span class="arrow"></span>
+			<?php endif; ?>
+		</a>
+		<?php if( !empty( $item->submenu ) ): ?>
+			<ul class="sub-menu">
+				<?php foreach( $item->submenu as $subitem ): ?> 
+					<li ><a rel="<?php echo $subitem->uri; ?>" href="<?php echo $subitem->uri; ?>" menu_id="<?php echo $subitem->menu_item_id; ?>" parent="<?php echo $subitem->parent_menu_item_id; ?>"><?php echo $subitem->label; ?></a></li>
+				<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
+	</li>
+<?php endforeach; ?>

@@ -1,0 +1,161 @@
+
+<?php $__env->startSection('page_content'); ?>
+@parent
+
+<!-- BEGIN EXAMPLE TABLE PORTLET-->
+<div class="row">
+	<div class="col-md-11">
+		<!-- BEGIN FORM-->
+		<div class="row">
+			<!-- FORM -->
+			<div class="col-md-12">
+
+				<div class="portlet">
+					<div class="portlet-body form">
+                        <form action="#" class="form-horizontal">
+                            <div class="form-body" style="padding-bottom:0px;">
+
+                            	<div class="note note-default">
+
+				                    <h3 class="page-title">
+				                    <?php echo lang('training.resources'); ?> <small>  <?php echo lang('training.resources_sub'); ?></small>
+				                    </h3>
+				                    <p class="small"><?php echo lang('training.resources_desc'); ?></p>
+
+				                    <hr />
+
+									<div>
+										<div class="col-md-9 margin-bottom-10">
+											<h4><?php echo lang('training.training_eval_master'); ?></h4>
+											<div class="text-muted small"></div>
+										</div>
+										<div class="col-md-3 margin-bottom-25">
+											<a class="btn btn-default" type="button" rel="<?php echo get_mod_route('evaluation_template'); ?>" href="<?php echo get_mod_route('evaluation_template'); ?>"><?php echo lang('common.view_list_button'); ?></a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+
+									<div>
+										<div class="col-md-9 margin-bottom-10">
+											<h4><?php echo lang('training.training_bond_sched'); ?></h4>
+											<div class="text-muted small"></div>
+										</div>
+										<div class="col-md-3 margin-bottom-25">
+											<a class="btn btn-default" type="button" rel="<?php echo get_mod_route('training_bond'); ?>" href="<?php echo get_mod_route('training_bond'); ?>"><?php echo lang('common.view_list_button'); ?></a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+
+									<div>
+										<div class="col-md-9 margin-bottom-10">
+											<h4><?php echo lang('training.level_2_3_tem'); ?></h4>
+											<div class="text-muted small"></div>
+										</div>
+										<div class="col-md-3 margin-bottom-25">
+											<a class="btn btn-default" type="button" rel="<?php echo get_mod_route('training_revalida_master'); ?>" href="<?php echo get_mod_route('training_revalida_master'); ?>"><?php echo lang('common.view_list_button'); ?></a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+
+									<div>
+										<div class="col-md-9 margin-bottom-10">
+											<h4><?php echo lang('training.training_type'); ?></h4>
+											<div class="text-muted small"></div>
+										</div>
+										<div class="col-md-3 margin-bottom-25">
+											<a class="btn btn-default" type="button" rel="<?php echo get_mod_route('training_type'); ?>" href="<?php echo get_mod_route('training_type'); ?>"><?php echo lang('common.view_list_button'); ?></a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+
+									<div>
+										<div class="col-md-9 margin-bottom-10">
+											<h4><?php echo lang('training.training_cat'); ?></h4>
+											<div class="text-muted small"></div>
+										</div>
+										<div class="col-md-3 margin-bottom-25">
+											<a class="btn btn-default" type="button" rel="<?php echo get_mod_route('training_category'); ?>" href="<?php echo get_mod_route('training_category'); ?>"><?php echo lang('common.view_list_button'); ?></a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+
+									<div>
+										<div class="col-md-9 margin-bottom-10">
+											<h4><?php echo lang('training.training_prov'); ?></h4>
+											<div class="text-muted small"></div>
+										</div>
+										<div class="col-md-3 margin-bottom-25">
+											<a class="btn btn-default" type="button" rel="<?php echo get_mod_route('training_provider'); ?>" href="<?php echo get_mod_route('training_provider'); ?>"><?php echo lang('common.view_list_button'); ?></a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+
+									<div>
+										<div class="col-md-9 margin-bottom-10">
+											<h4><?php echo lang('training.training_lib'); ?></h4>
+											<div class="text-muted small"></div>
+										</div>
+										<div class="col-md-3 margin-bottom-25">
+											<a class="btn btn-default" type="button" rel="<?php echo get_mod_route('training_library'); ?>" href="<?php echo get_mod_route('training_library'); ?>"><?php echo lang('common.view_list_button'); ?></a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+
+									<div>
+										<div class="col-md-9 margin-bottom-10">
+											<h4><?php echo lang('training.training_course'); ?></h4>
+											<div class="text-muted small"></div>
+										</div>
+										<div class="col-md-3 margin-bottom-25">
+											<a class="btn btn-default" type="button" rel="<?php echo get_mod_route('training_course'); ?>" href="<?php echo get_mod_route('training_course'); ?>"><?php echo lang('common.view_list_button'); ?></a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+
+									<div>
+										<div class="col-md-9 margin-bottom-10">
+											<h4><?php echo lang('training.training_fac'); ?></h4>
+											<div class="text-muted small"></div>
+										</div>
+										<div class="col-md-3 margin-bottom-25">
+											<a class="btn btn-default" type="button" rel="<?php echo get_mod_route('training_facilitator'); ?>" href="<?php echo get_mod_route('training_facilitator'); ?>"><?php echo lang('common.view_list_button'); ?></a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+
+									<div>
+										<div class="col-md-9 margin-bottom-10">
+											<h4><?php echo lang('training.training_cost'); ?></h4>
+											<div class="text-muted small"></div>
+										</div>
+										<div class="col-md-3 margin-bottom-25">
+											<a class="btn btn-default" type="button" rel="<?php echo get_mod_route('training_cost'); ?>" href="<?php echo get_mod_route('training_cost'); ?>"><?php echo lang('common.view_list_button'); ?></a>
+										</div>
+										<div class="clearfix"></div>
+									</div>								
+								</div>
+							</div>
+                        </form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+        <!-- END FORM-->
+	</div>
+</div>
+<!-- END EXAMPLE TABLE PORTLET-->
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page_plugins'); ?>
+@parent
+<script type="text/javascript" src="<?php echo theme_path(); ?>plugins/jquery.infiniteScroll.js"></script>
+<script type="text/javascript" src="<?php echo theme_path(); ?>modules/common/lists.js"></script>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('view_js'); ?>
+@parent
+<?php echo get_list_js( $mod ); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,22 @@
+<?php $__env->startSection('page_styles'); ?>
+	@parent
+	<link href="<?php echo theme_path(); ?>plugins/bootstrap-switch/static/stylesheets/bootstrap-switch-metro.css" rel="stylesheet" type="text/css"/>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('page_content'); ?>
+	@parent
+
+	<div class="row">
+        <div class="col-md-11">
+			<?php echo $__env->make('detail/fgs', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+			<?php echo $__env->make('buttons/detail', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+       	</div>  		
+	</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page_scripts'); ?>
+	@parent
+	<script src="<?php echo theme_path(); ?>plugins/bootstrap-switch/static/js/bootstrap-switch.min.js" type="text/javascript" ></script>
+	<?php echo $__env->make('edit/page_scripts', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts/master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,39 @@
+<tr class="record">
+	<td>
+		<?php echo $performance_appraisal_year; ?>
+	</td>
+	<td>
+		<?php if( in_array($applicable_status_id, array(8,9,10) ) ): ?>
+			<a class="text-success" href="<?php echo $mod->url; ?>/crowdsource/<?php echo $record_id; ?>/<?php echo $user_id; ?>"><?php echo $performance_type; ?></a>
+        <?php elseif( $applicable_status_id > 1 ): ?>
+        	<a class="text-success" href="<?php echo $mod->url; ?>/review/<?php echo $record_id; ?>/<?php echo $user_id; ?>"><?php echo $performance_type; ?></a>
+        <?php else: ?>
+        	<a class="text-success" href="<?php echo $edit_url; ?>/<?php echo $user_id; ?>"><?php echo $performance_type; ?></a>
+    	<?php endif; ?>
+		<br>
+		<span class="small" id="date_set"><?php echo date('M d, Y', strtotime( $performance_appraisal_date_from ) ); ?> to <?php echo date('M d, Y', strtotime( $performance_appraisal_date_to ) ); ?></span>
+	</td>
+    <td class="hidden-xs text-muted">
+    <?php echo $performance_appraisal_notes; ?>
+    </td>
+	<td>
+		<?php if($status_id == 1): ?>
+			<span class="badge badge-info">Open</span>
+		<?php else: ?>
+			<span class="badge badge-success">Closed</span>
+		<?php endif; ?>
+		<br/>
+		<span class="small"><?php echo $applicable_status; ?></span>
+	</td>
+	<td>
+        <div class="btn-group">
+            <?php if( in_array($applicable_status_id, array(8,9,10) ) ): ?>
+            	<a class="small text-muted" href="<?php echo $mod->url; ?>/crowdsource/<?php echo $record_id; ?>/<?php echo $user_id; ?>"><i class="fa fa-search"></i> View</a>
+            <?php elseif( $applicable_status_id > 1 ): ?>
+            	<a class="small text-muted" href="<?php echo $mod->url; ?>/review/<?php echo $record_id; ?>/<?php echo $user_id; ?>"><i class="fa fa-search"></i> View</a>
+            <?php else: ?>
+            	<a class="small text-muted" href="<?php echo $edit_url; ?>/<?php echo $user_id; ?>"><i class="fa fa-search"></i> View</a>
+        	<?php endif; ?>
+        </div>
+    </td>
+</tr>

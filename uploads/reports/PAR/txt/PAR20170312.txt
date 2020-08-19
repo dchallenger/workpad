@@ -1,0 +1,6 @@
+Employee Number,Last Name,First Name,Year,Month,Company,Department
+"1002","Padilla","Elizabeth","2017","January","Company ABC","Human Resources"
+"1003","Manzano","Mariane","2017","January","Company ABC","Human Resources"
+"1001","Diaz","Eduardo","2017","January","Company ABC","Administration"
+"1004","Alfonso","Rome","2017","January","Company ABC","Accounting"
+"1005","Acosta","Cathy","2017","January","Company ABC","Accounting"

@@ -1,0 +1,93 @@
+<tr class="record">
+    <td>
+        <a href="<?php echo $detail_url; ?>" id="date_name" class="text-success"><?php echo $recruitment_firstname; ?> <?php echo $recruitment_lastname; ?></a>
+        <br>
+        <span class="small text-muted" id="date_set"><?php echo $applicant_type; ?></span>
+    </td>
+    <td class="hidden-xs" >
+        <span class="text-success">
+            <?php echo $recruitment_position_sought; ?>
+        </span>
+     <br>
+        <span class="small" ><?php echo $document_no; ?></span>
+    </td>
+    <td class="hidden-xs">
+        <span class="text-success">
+            <?php echo $degree; ?>
+        </span>
+        <br />
+        <span class="small"><?php echo $school; ?></span>
+    </td>
+    <td class="hidden-xs">
+        <?php 
+            switch($recruitment_status_id){
+                case 11:
+                case 1:
+                    ?><span class="badge badge-warning"><?php echo $recruit_status; ?></span><?php
+                break;
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                    ?><span class="badge badge-info"><?php echo $recruit_status; ?></span><?php
+                break;
+                case 7:
+                    ?><span class="badge badge-success"><?php echo $recruit_status; ?></span><?php
+                break;
+                case 8:
+                case 9:
+                case 10:
+                    ?><span class="badge badge-danger"><?php echo $recruit_status; ?></span><?php
+                break;
+         } ?>
+         <?php if(strtotime($recruitment_modified_on)): ?>
+             <br>
+            <span class="small text-muted" id="date_set"><?php echo date('F d, Y', strtotime($recruitment_modified_on)); ?></span>
+        <?php endif; ?>    
+     </td>
+    <td>
+        <?php if( $permission['edit'] == 1 ): ?>
+            <div class="btn-group">
+                <a class="btn btn-xs text-muted" href="<?php echo $edit_url; ?>"><i class="fa fa-pencil"></i> <?php echo lang('common.edit'); ?></a>
+            </div>
+            <?php if( $permission['detail'] == 1 AND $permission['delete'] == 1 ): ?>
+                <div class="btn-group">
+                    <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> <?php echo lang('common.options'); ?></a>
+                    <ul class="dropdown-menu pull-right">
+                        <?php if($recruitment_status_id == 7): ?>
+                            <li><a href="javascript: history(<?php echo $process_id; ?>, <?php echo $record_id; ?>)"><i class="fa fa-file"></i> History</a></li>
+                        <?php endif; ?>
+                        <?php echo $options; ?>
+                    </ul>
+                </div> 
+            <?php elseif( $permission['detail'] == 1 ): ?>
+                <div class="btn-group">
+                    <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> <?php echo lang('common.options'); ?></a>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a class="" href="<?php echo $detail_url; ?>"><i class="fa fa-search"></i> <?php echo lang('common.view'); ?></a></li>
+                        <li><a href="javascript: ajax_export(<?php echo $record_id; ?>)"><i class="fa fa-print"></i> Print</a></li>                        
+                    </ul>
+                </div>
+            <?php elseif( $permission['delete'] == 1 ): ?>
+                <div class="btn-group">
+                    <a class="btn btn-xs text-muted" href="<?php echo $delete_url_javascript; ?>"><i class="fa fa-trash-o"></i> <?php echo lang('common.delete'); ?></a>
+                </div>
+            <?php endif; ?>
+        <?php elseif( $permission['detail'] == 1 ): ?>
+            <div class="btn-group">
+                <a class="btn btn-xs text-muted" href="<?php echo $detail_url; ?>"><i class="fa fa-search"></i> <?php echo lang('common.view'); ?></a>
+            </div>
+            <?php if( $permission['delete'] == 1 ): ?>
+                <div class="btn-group">
+                    <a class="btn btn-xs text-muted" href="<?php echo $delete_url_javascript; ?>"><i class="fa fa-trash-o"></i> <?php echo lang('common.delete'); ?></a>
+                </div>
+            <?php endif; ?>
+        <?php elseif( $permission['delete'] == 1 ): ?>
+            <div class="btn-group">
+                <a class="btn btn-xs text-muted" href="<?php echo $delete_url_javascript; ?>"><i class="fa fa-trash-o"></i> <?php echo lang('common.delete'); ?></a>
+            </div>
+        <?php endif; ?>
+
+    </td>
+</tr>

@@ -1,0 +1,30 @@
+2020-07-14 09:42:10 --> authentication --> logout --> logout -->  --> 
+2020-07-14 09:43:14 --> authentication --> login --> login -->  --> 
+2020-07-14 10:02:03 --> library --> update --> status_id --> 1 --> 1 else 0
+2020-07-14 10:02:30 --> library --> update --> status_id --> 1 --> 1 else 0
+2020-07-14 10:03:00 --> library --> update --> status_id --> 1 --> 1 else 0
+2020-07-14 10:17:32 --> library --> update --> status_id --> 1 --> 1 else 0
+2020-07-14 10:17:56 --> library --> update --> status_id --> 1 --> 1 else 0
+2020-07-14 10:25:53 --> library --> update --> description -->  --> Core Competencies and Values
+2020-07-14 10:25:53 --> library --> update --> status_id --> 1 --> 1 else 0
+2020-07-14 10:28:14 --> library --> update --> library --> In-House Training --> Leadership Competencies
+2020-07-14 10:28:14 --> library --> update --> description -->  --> Leadership
+2020-07-14 10:28:14 --> library --> update --> status_id --> 1 --> 1 else 0
+2020-07-14 10:29:58 --> library --> update --> library --> Coaching --> Corporate Values
+2020-07-14 10:29:58 --> library --> update --> description -->  --> Corporate Values
+2020-07-14 10:29:58 --> library --> update --> status_id --> 1 --> 1 else 0
+2020-07-14 10:31:20 --> library --> update --> library --> Mentoring --> Professional Competencies
+2020-07-14 10:31:20 --> library --> update --> description -->  --> Professional Competencies
+2020-07-14 10:31:20 --> library --> update --> status_id --> 1 --> 1 else 0
+2020-07-14 10:32:47 --> library --> update --> library --> Immersion Program --> Middle Management Competencies
+2020-07-14 10:32:47 --> library --> update --> description -->  --> Middle Management Competencies
+2020-07-14 10:32:47 --> library --> update --> status_id --> 1 --> 1 else 0
+2020-07-14 10:33:51 --> library --> update --> library --> Continuing Education --> Supervisory Competencies
+2020-07-14 10:33:51 --> library --> update --> description -->  --> Supervisory Competencies
+2020-07-14 10:33:51 --> library --> update --> status_id --> 1 --> 1 else 0
+2020-07-14 12:51:49 --> appraisal_template --> update --> is_core --> 0 --> 1
+2020-07-14 12:51:49 --> appraisal_template --> update --> header -->  --> <p><br />
+&nbsp;</p>
+2020-07-14 12:52:36 --> appraisal_template --> update --> is_core --> 0 --> 1
+2020-07-14 12:53:17 --> appraisal_template --> update --> is_core --> 0 --> 1
+2020-07-14 12:56:03 --> appraisal_template --> update --> is_core --> 0 --> 1

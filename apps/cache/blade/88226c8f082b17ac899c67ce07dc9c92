@@ -1,0 +1,4 @@
+<!-- <th width="8%" class="hidden-xs"></th> -->
+<th width="35%"><?php echo lang('division.division'); ?></th>
+<th width="35%"><?php echo lang('division.immediate'); ?></th>
+<th width="25%"><?php echo lang('division.status'); ?></th>

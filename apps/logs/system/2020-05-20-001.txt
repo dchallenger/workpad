@@ -1,0 +1,46 @@
+Reyes, Naisa (33798) --> 2020-05-20 09:02:39 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-05-20 09:37:21 --> authentication --> login --> login -->  --> 
+Marjorie, Nailog (33799) --> 2020-05-20 09:37:43 --> authentication --> logout --> logout -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-05-20 09:37:48 --> authentication --> login --> login -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-05-20 09:38:17 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-05-20 09:38:21 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-05-20 09:38:35 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-05-20 09:38:46 --> authentication --> login --> login -->  --> 
+Marjorie, Nailog (33799) --> 2020-05-20 09:38:55 --> authentication --> logout --> logout -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-05-20 09:39:03 --> authentication --> login --> login -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-05-20 09:39:35 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-05-20 09:39:41 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-05-20 09:48:29 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-05-20 09:48:39 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-05-20 09:49:50 --> coordinator --> insert --> company_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-05-20 09:49:50 --> coordinator --> insert --> branch_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-05-20 09:49:50 --> coordinator --> insert --> coordinator_user_id -->  --> 55
+Reyes, Naisa (33798) --> 2020-05-20 09:55:31 --> authentication --> logout --> logout -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-05-20 09:55:44 --> authentication --> login --> login -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-05-20 09:58:25 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-05-20 09:58:43 --> authentication --> login --> login -->  --> 
+Marjorie, Nailog (33799) --> 2020-05-20 09:59:40 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-05-20 09:59:51 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-05-20 10:04:15 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-05-20 10:04:25 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-05-20 10:04:43 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-05-20 10:04:53 --> authentication --> login --> login -->  --> 
+Marjorie, Nailog (33799) --> 2020-05-20 10:05:18 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-05-20 10:05:24 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-05-20 10:06:41 --> partners --> update --> start_date --> 0000-00-00 --> 2010-07-10
+Admin, Emplopad (admin) --> 2020-05-20 10:06:41 --> partners --> update --> coordinator_id --> 56,55 --> 55,56
+Admin, Emplopad (admin) --> 2020-05-20 10:06:42 --> partners --> update --> regularization_date --> 0000-00-00 --> 2010-12-10
+Admin, Emplopad (admin) --> 2020-05-20 10:06:42 --> partners --> update --> original_hired_date --> 1970-01-01 --> 2010-07-14
+Admin, Emplopad (admin) --> 2020-05-20 10:09:50 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-05-20 10:10:04 --> authentication --> login --> login -->  --> 
+Marjorie, Nailog (33799) --> 2020-05-20 10:10:41 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-05-20 10:10:48 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-05-20 10:11:12 --> partners --> update --> calendar_id --> 39 --> 31
+Admin, Emplopad (admin) --> 2020-05-20 10:13:39 --> partners --> update --> status_id --> 2 --> 1
+Admin, Emplopad (admin) --> 2020-05-20 10:14:11 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-05-20 10:14:22 --> authentication --> login --> login -->  --> 
+Marjorie, Nailog (33799) --> 2020-05-20 10:15:55 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-05-20 10:16:13 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-05-20 11:19:49 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-05-20 11:20:04 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-05-20 03:23:26 --> report_generator --> delete --> report_id --> 17 --> 

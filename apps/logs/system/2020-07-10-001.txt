@@ -1,0 +1,23 @@
+Reyes, Naisa (33798) --> 2020-07-10 09:23:12 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-07-10 09:24:43 --> authentication --> login --> login -->  --> 
+Marjorie, Nailog (33799) --> 2020-07-10 09:24:55 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-07-10 09:25:00 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-07-10 09:32:54 --> appraisal_template --> update --> template_section --> Leadership --> Section 2 - Leadership
+Reyes, Naisa (33798) --> 2020-07-10 09:33:09 --> appraisal_template --> update --> template_section --> Corporate Values --> Section 3 - Corporate Values
+Reyes, Naisa (33798) --> 2020-07-10 09:33:30 --> appraisal_template --> update --> template_section --> Core Competencies --> Section 2 - Core Competencies
+Reyes, Naisa (33798) --> 2020-07-10 09:33:42 --> appraisal_template --> update --> template_section --> Section 2 - Core Competencies --> Section 4 - Core Competencies
+Reyes, Naisa (33798) --> 2020-07-10 10:02:47 --> scorecard --> insert --> scorecard -->  --> Increase Profitabilty
+Reyes, Naisa (33798) --> 2020-07-10 10:02:47 --> scorecard --> insert --> status_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-10 10:03:11 --> scorecard --> insert --> scorecard -->  --> Manage Capital Efficiently
+Reyes, Naisa (33798) --> 2020-07-10 10:03:11 --> scorecard --> insert --> status_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-10 10:03:34 --> scorecard --> insert --> scorecard -->  --> Execute with a Purpose
+Reyes, Naisa (33798) --> 2020-07-10 10:33:01 --> appraisal_template --> insert --> template_section_id -->  --> 6
+Reyes, Naisa (33798) --> 2020-07-10 10:33:01 --> appraisal_template --> insert --> title -->  --> Target
+Reyes, Naisa (33798) --> 2020-07-10 10:33:01 --> appraisal_template --> insert --> sequence -->  --> 5
+Reyes, Naisa (33798) --> 2020-07-10 10:33:01 --> appraisal_template --> insert --> width -->  --> 10
+Reyes, Naisa (33798) --> 2020-07-10 10:33:01 --> appraisal_template --> insert --> uitype_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-10 10:33:28 --> appraisal_template --> insert --> template_section_id -->  --> 6
+Reyes, Naisa (33798) --> 2020-07-10 10:33:28 --> appraisal_template --> insert --> title -->  --> Remarks / Status
+Reyes, Naisa (33798) --> 2020-07-10 10:33:28 --> appraisal_template --> insert --> sequence -->  --> 6
+Reyes, Naisa (33798) --> 2020-07-10 10:33:29 --> appraisal_template --> insert --> width -->  --> 15
+Reyes, Naisa (33798) --> 2020-07-10 10:33:29 --> appraisal_template --> insert --> uitype_id -->  --> 3

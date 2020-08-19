@@ -1,0 +1,72 @@
+Admin, Emplopad (admin) --> 2020-08-04 10:05:59 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-04 10:06:16 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-04 10:09:09 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-04 10:11:41 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-08-04 10:12:48 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-04 23:11:35 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> partner_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key_id -->  --> 79
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key -->  --> accountabilities-name
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> sequence -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key_name -->  --> Name
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key_value -->  --> dd
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> partner_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key_id -->  --> 80
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key -->  --> accountabilities-code
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> sequence -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key_name -->  --> Code
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key_value -->  --> ss
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> partner_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key_id -->  --> 81
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key -->  --> accountabilities-quantity
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> sequence -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key_name -->  --> Quantity
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key_value -->  --> aa
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> partner_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key_id -->  --> 82
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key -->  --> accountabilities-date-issued
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> sequence -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key_name -->  --> Date Issued
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key_value -->  --> August 19, 2020
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> partner_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key_id -->  --> 85
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key -->  --> accountabilities-date-returned
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> sequence -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key_name -->  --> Date Returned
+Reyes, Naisa (33798) --> 2020-08-04 23:47:39 --> partners --> insert --> key_value -->  --> August 20, 2020
+Reyes, Naisa (33798) --> 2020-08-04 23:47:40 --> partners --> insert --> partner_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-04 23:47:40 --> partners --> insert --> key_id -->  --> 88
+Reyes, Naisa (33798) --> 2020-08-04 23:47:40 --> partners --> insert --> key -->  --> accountabilities-remarks
+Reyes, Naisa (33798) --> 2020-08-04 23:47:40 --> partners --> insert --> sequence -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-04 23:47:40 --> partners --> insert --> key_name -->  --> Remarks
+Reyes, Naisa (33798) --> 2020-08-04 23:47:40 --> partners --> insert --> key_value -->  --> asd
+Reyes, Naisa (33798) --> 2020-08-04 23:47:40 --> partners --> insert --> partner_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-04 23:47:40 --> partners --> insert --> key_id -->  --> 193
+Reyes, Naisa (33798) --> 2020-08-04 23:47:40 --> partners --> insert --> key -->  --> accountabilities-attachment
+Reyes, Naisa (33798) --> 2020-08-04 23:47:40 --> partners --> insert --> sequence -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-04 23:47:40 --> partners --> insert --> key_name -->  --> Attachment
+Reyes, Naisa (33798) --> 2020-08-04 23:47:40 --> partners --> insert --> key_value -->  --> uploads/users/1%20%284%29.JPG
+Reyes, Naisa (33798) --> 2020-08-04 23:49:52 --> partners --> insert --> partner_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-04 23:49:52 --> partners --> insert --> key_id -->  --> 89
+Reyes, Naisa (33798) --> 2020-08-04 23:49:52 --> partners --> insert --> key -->  --> attachment-name
+Reyes, Naisa (33798) --> 2020-08-04 23:49:52 --> partners --> insert --> sequence -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-04 23:49:52 --> partners --> insert --> key_name -->  --> File Name
+Reyes, Naisa (33798) --> 2020-08-04 23:49:52 --> partners --> insert --> key_value -->  --> test
+Reyes, Naisa (33798) --> 2020-08-04 23:49:52 --> partners --> insert --> partner_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-04 23:49:52 --> partners --> insert --> key_id -->  --> 91
+Reyes, Naisa (33798) --> 2020-08-04 23:49:52 --> partners --> insert --> key -->  --> attachment-file
+Reyes, Naisa (33798) --> 2020-08-04 23:49:52 --> partners --> insert --> sequence -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-04 23:49:52 --> partners --> insert --> key_name -->  --> File
+Reyes, Naisa (33798) --> 2020-08-04 23:49:52 --> partners --> insert --> key_value -->  --> uploads/users/GENESIS.doc
+Reyes, Naisa (33798) --> 2020-08-04 23:51:40 --> signatories --> insert --> approver -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-04 23:51:40 --> signatories --> insert --> email -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-04 23:51:40 --> signatories --> insert --> approver_id -->  --> 54
+Reyes, Naisa (33798) --> 2020-08-04 23:51:40 --> signatories --> insert --> condition -->  --> By Level
+Reyes, Naisa (33798) --> 2020-08-04 23:51:40 --> signatories --> insert --> class_id -->  --> 40
+Reyes, Naisa (33798) --> 2020-08-04 23:51:40 --> signatories --> insert --> sequence -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-04 23:51:40 --> signatories --> insert --> company_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-04 23:51:40 --> signatories --> insert --> department_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-04 23:51:40 --> signatories --> insert --> position_id -->  --> 68
+Reyes, Naisa (33798) --> 2020-08-04 23:51:40 --> signatories --> insert --> user_id -->  --> 55
+Reyes, Naisa (33798) --> 2020-08-04 23:51:40 --> signatories --> insert --> alias -->  --> Monis, Marybeth 
+Reyes, Naisa (33798) --> 2020-08-04 23:51:40 --> signatories --> insert --> employee -->  --> 55

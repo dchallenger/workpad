@@ -1,0 +1,2 @@
+<th width="25%"><?php echo lang('transaction_method.method_name'); ?></th>
+<th width="30%"><?php echo lang('transaction_method.description'); ?></th>

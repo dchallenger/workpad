@@ -1,0 +1,59 @@
+<div class="portlet">
+	<div class="portlet-title">
+		<div class="caption"><?php echo lang('weeklyshift.title'); ?></div>
+		<div class="tools"><a class="collapse" href="javascript:;"></a></div>
+	</div>
+	<div class="portlet-body form">			
+		<div class="form-group">
+			<label class="control-label col-md-3"><?php echo lang('weeklyshift.mon'); ?></label>
+			<div class="col-md-7">							
+				<input type="text" disabled="disabled" class="form-control" name="" id="" value="<?php echo $monday_shift; ?>" placeholder="<?php echo lang('weeklyshift.mon'); ?>" /> 				
+			</div>	
+		</div>			
+		<div class="form-group">
+			<label class="control-label col-md-3"><?php echo lang('weeklyshift.tue'); ?></label>
+			<div class="col-md-7">							
+				<input type="text" disabled="disabled" class="form-control" name="" id="" value="<?php echo $tuesday_shift; ?>" placeholder="<?php echo lang('weeklyshift.tue'); ?>" /> 				
+			</div>	
+		</div>			
+		<div class="form-group">
+			<label class="control-label col-md-3"><?php echo lang('weeklyshift.wed'); ?></label>
+			<div class="col-md-7">							
+				<input type="text" disabled="disabled" class="form-control" name="" id="" value="<?php echo $wednesday_shift; ?>" placeholder="<?php echo lang('weeklyshift.wed'); ?>" /> 				
+			</div>	
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3"><?php echo lang('weeklyshift.thu'); ?></label>
+			<div class="col-md-7">							
+				<input type="text" disabled="disabled" class="form-control" name="" id="" value="<?php echo $thursday_shift; ?>" placeholder="<?php echo lang('weeklyshift.thu'); ?>" /> 				
+			</div>	
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3"><?php echo lang('weeklyshift.fri'); ?></label>
+			<div class="col-md-7">							
+				<input type="text" disabled="disabled" class="form-control" name="" id="" value="<?php echo $friday_shift; ?>" placeholder="<?php echo lang('weeklyshift.fri'); ?>" /> 				
+			</div>	
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3"><?php echo lang('weeklyshift.sat'); ?></label>
+			<div class="col-md-7">							
+				<input type="text" disabled="disabled" class="form-control" name="" id="" value="<?php echo $saturday_shift; ?>" placeholder="<?php echo lang('weeklyshift.sat'); ?>" /> 				
+			</div>	
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3"><?php echo lang('weeklyshift.sun'); ?></label>
+			<div class="col-md-7">							
+				<input type="text" disabled="disabled" class="form-control" name="" id="" value="<?php echo $sunday_shift; ?>" placeholder="<?php echo lang('weeklyshift.sun'); ?>" /> 				
+			</div>	
+		</div>
+		<div class="form-group" hidden>
+			<label class="control-label col-md-3">Deault</label>
+			<div class="col-md-7">							
+				<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
+					<input type="checkbox" disabled="disabled" value="1" <?php if( $record['ww_time_shift_weekly_default'] ): ?> checked="checked" <?php endif; ?> name="shift_weekly[time_shift_weekly.default]" id="shift_weekly-default-temp" class="dontserializeme toggle"/>
+					<input type="hidden" disabled="disabled" name="time_shift_weekly[default]" id="shift_weekly-default" value="<?php echo $record['ww_time_shift_weekly_default'] ? 1 : 0 ?>"/>
+				</div> 				
+			</div>	
+		</div>									
+	</div>
+</div>

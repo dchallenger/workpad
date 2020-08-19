@@ -1,0 +1,4 @@
+Marjorie, Nailog (33799) --> 2020-07-20 14:13:13 --> appraisal_individual_rate --> update --> status_id -->  --> 1
+Marjorie, Nailog (33799) --> 2020-07-20 14:13:14 --> appraisal_individual_rate --> update --> selfrate_date -->  --> 2020-07-20
+Marjorie, Nailog (33799) --> 2020-07-20 14:42:56 --> appraisal_individual_rate --> update --> status_id -->  --> 1
+Marjorie, Nailog (33799) --> 2020-07-20 14:42:56 --> appraisal_individual_rate --> update --> selfrate_date -->  --> 2020-07-20

@@ -1,0 +1,26 @@
+<tr class="record">my
+	<td class="hidden-xs">
+        &nbsp;
+	</td>
+    <td>
+    	<span class="text-success"> 
+    		<?php echo date('F d, Y', strtotime($payroll_date)); ?>
+    	</span>
+    	<br>
+    	<span class="text-muted small">
+    		<?php echo date('l', strtotime($payroll_date)); ?> 
+    	<span>
+    </td>
+    <td>
+    	<span class="text-muted"> 
+    		<?php echo date('F j', strtotime($date_from)); ?> to <?php echo date('F j, Y', strtotime($date_to)); ?>
+    	</span>
+    </td>
+
+	<td>
+		<div class="btn-group">
+			<a id="my_payslip" class="btn btn-xs text-muted" href="javascript:check_passwords( <?php echo $record_id; ?>, '<?php echo date('Y-m-d', strtotime($payroll_date)); ?>'  )"><i class="fa fa-file-text-o"></i> Payslip</a>
+            <a id="my_payslip" class="btn btn-xs text-muted" href="javascript:check_details( <?php echo $record_id; ?>, '<?php echo date('Y-m-d', strtotime($payroll_date)); ?>'  )"><i class="fa fa-list-ul"></i> Details</a>
+	    </div>
+    </td>
+</tr>

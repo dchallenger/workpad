@@ -1,0 +1,94 @@
+Admin, Emplopad (admin) --> 2020-07-09 13:05:25 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-07-09 13:08:08 --> signatories --> insert --> approver -->  --> 1
+Admin, Emplopad (admin) --> 2020-07-09 13:08:08 --> signatories --> insert --> email -->  --> 1
+Admin, Emplopad (admin) --> 2020-07-09 13:08:08 --> signatories --> insert --> approver_id -->  --> 56
+Admin, Emplopad (admin) --> 2020-07-09 13:08:08 --> signatories --> insert --> condition -->  --> By Level
+Admin, Emplopad (admin) --> 2020-07-09 13:08:08 --> signatories --> insert --> class_id -->  --> 19
+Admin, Emplopad (admin) --> 2020-07-09 13:08:08 --> signatories --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-07-09 13:08:08 --> signatories --> insert --> company_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-07-09 13:08:09 --> signatories --> insert --> department_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-07-09 13:08:09 --> signatories --> insert --> position_id -->  --> 86
+Admin, Emplopad (admin) --> 2020-07-09 13:08:09 --> signatories --> insert --> user_id -->  --> 57
+Admin, Emplopad (admin) --> 2020-07-09 13:08:09 --> signatories --> insert --> alias -->  --> Reyes, Naisa 
+Admin, Emplopad (admin) --> 2020-07-09 13:08:09 --> signatories --> insert --> employee -->  --> 57
+Admin, Emplopad (admin) --> 2020-07-09 13:08:24 --> signatories --> insert --> approver -->  --> 1
+Admin, Emplopad (admin) --> 2020-07-09 13:08:24 --> signatories --> insert --> email -->  --> 1
+Admin, Emplopad (admin) --> 2020-07-09 13:08:24 --> signatories --> insert --> approver_id -->  --> 54
+Admin, Emplopad (admin) --> 2020-07-09 13:08:24 --> signatories --> insert --> condition -->  --> By Level
+Admin, Emplopad (admin) --> 2020-07-09 13:08:24 --> signatories --> insert --> class_id -->  --> 19
+Admin, Emplopad (admin) --> 2020-07-09 13:08:24 --> signatories --> insert --> sequence -->  --> 2
+Admin, Emplopad (admin) --> 2020-07-09 13:08:24 --> signatories --> insert --> company_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-07-09 13:08:24 --> signatories --> insert --> department_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-07-09 13:08:24 --> signatories --> insert --> position_id -->  --> 86
+Admin, Emplopad (admin) --> 2020-07-09 13:08:24 --> signatories --> insert --> user_id -->  --> 57
+Admin, Emplopad (admin) --> 2020-07-09 13:08:24 --> signatories --> insert --> alias -->  --> Monis, Marybeth 
+Admin, Emplopad (admin) --> 2020-07-09 13:08:24 --> signatories --> insert --> employee -->  --> 57
+Admin, Emplopad (admin) --> 2020-07-09 13:08:36 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-07-09 13:08:59 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-07-09 13:43:46 --> performance_planning --> insert --> year -->  --> 2020
+Reyes, Naisa (33798) --> 2020-07-09 13:43:46 --> performance_planning --> insert --> performance_type_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 13:43:46 --> performance_planning --> insert --> date_from -->  --> 2020-07-09
+Reyes, Naisa (33798) --> 2020-07-09 13:43:46 --> performance_planning --> insert --> date_to -->  --> 2020-07-31
+Reyes, Naisa (33798) --> 2020-07-09 13:43:46 --> performance_planning --> insert --> status_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 13:43:46 --> performance_planning --> insert --> notes -->  --> test
+Reyes, Naisa (33798) --> 2020-07-09 13:43:46 --> performance_planning --> insert --> template_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-09 13:43:46 --> performance_planning --> insert --> filter_by -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 13:43:46 --> performance_planning --> insert --> filter_id -->  --> 1,2
+Reyes, Naisa (33798) --> 2020-07-09 13:43:46 --> performance_planning --> insert --> user_id -->  --> 57
+Reyes, Naisa (33798) --> 2020-07-09 13:43:46 --> performance_planning --> insert --> planning_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 13:45:53 --> performance_planning --> insert --> year -->  --> 2020
+Reyes, Naisa (33798) --> 2020-07-09 13:45:53 --> performance_planning --> insert --> performance_type_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 13:45:53 --> performance_planning --> insert --> date_from -->  --> 2020-07-09
+Reyes, Naisa (33798) --> 2020-07-09 13:45:53 --> performance_planning --> insert --> date_to -->  --> 2020-07-31
+Reyes, Naisa (33798) --> 2020-07-09 13:45:53 --> performance_planning --> insert --> status_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 13:45:53 --> performance_planning --> insert --> notes -->  --> test
+Reyes, Naisa (33798) --> 2020-07-09 13:45:53 --> performance_planning --> insert --> template_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-09 13:45:53 --> performance_planning --> insert --> filter_by -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 13:45:53 --> performance_planning --> insert --> filter_id -->  --> 1,2
+Reyes, Naisa (33798) --> 2020-07-09 13:45:53 --> performance_planning --> insert --> user_id -->  --> 57
+Reyes, Naisa (33798) --> 2020-07-09 13:45:53 --> performance_planning --> insert --> planning_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 13:50:10 --> performance_planning --> insert --> year -->  --> 2020
+Reyes, Naisa (33798) --> 2020-07-09 13:50:10 --> performance_planning --> insert --> performance_type_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 13:50:10 --> performance_planning --> insert --> date_from -->  --> 2020-07-01
+Reyes, Naisa (33798) --> 2020-07-09 13:50:10 --> performance_planning --> insert --> date_to -->  --> 2020-07-31
+Reyes, Naisa (33798) --> 2020-07-09 13:50:10 --> performance_planning --> insert --> status_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 13:50:10 --> performance_planning --> insert --> notes -->  --> test
+Reyes, Naisa (33798) --> 2020-07-09 13:50:10 --> performance_planning --> insert --> template_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-09 13:50:10 --> performance_planning --> insert --> filter_by -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 13:50:10 --> performance_planning --> insert --> filter_id -->  --> 1,2
+Reyes, Naisa (33798) --> 2020-07-09 13:50:10 --> performance_planning --> insert --> user_id -->  --> 57
+Reyes, Naisa (33798) --> 2020-07-09 13:50:10 --> performance_planning --> insert --> planning_id -->  --> 1
+Caparas, Ma. Karen (1101025) --> 2020-07-09 13:56:29 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-07-09 14:22:01 --> authentication --> login --> login -->  --> 
+Marjorie, Nailog (33799) --> 2020-07-09 15:10:21 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-07-09 17:34:12 --> performance_planning_manage --> update --> filter_id --> 1,2 --> 2,1
+Reyes, Naisa (33798) --> 2020-07-09 17:48:06 --> scorecard --> insert --> scorecard -->  --> Grow The Business
+Reyes, Naisa (33798) --> 2020-07-09 17:48:06 --> scorecard --> insert --> status_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 17:52:48 --> performance_planning --> insert --> year -->  --> 2020
+Reyes, Naisa (33798) --> 2020-07-09 17:52:48 --> performance_planning --> insert --> performance_type_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 17:52:48 --> performance_planning --> insert --> date_from -->  --> 2020-07-01
+Reyes, Naisa (33798) --> 2020-07-09 17:52:48 --> performance_planning --> insert --> date_to -->  --> 2020-07-31
+Reyes, Naisa (33798) --> 2020-07-09 17:52:49 --> performance_planning --> insert --> status_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 17:52:49 --> performance_planning --> insert --> notes -->  --> test
+Reyes, Naisa (33798) --> 2020-07-09 17:52:49 --> performance_planning --> insert --> template_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-09 17:52:49 --> performance_planning --> insert --> filter_by -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 17:52:49 --> performance_planning --> insert --> filter_id -->  --> 1,2
+Reyes, Naisa (33798) --> 2020-07-09 17:52:49 --> performance_planning --> insert --> user_id -->  --> 57
+Reyes, Naisa (33798) --> 2020-07-09 17:52:49 --> performance_planning --> insert --> planning_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 17:52:57 --> performance_planning --> insert --> year -->  --> 2020
+Reyes, Naisa (33798) --> 2020-07-09 17:52:57 --> performance_planning --> insert --> performance_type_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 17:52:57 --> performance_planning --> insert --> date_from -->  --> 2020-07-01
+Reyes, Naisa (33798) --> 2020-07-09 17:52:57 --> performance_planning --> insert --> date_to -->  --> 2020-07-31
+Reyes, Naisa (33798) --> 2020-07-09 17:52:57 --> performance_planning --> insert --> status_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 17:52:57 --> performance_planning --> insert --> notes -->  --> test
+Reyes, Naisa (33798) --> 2020-07-09 17:52:57 --> performance_planning --> insert --> template_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-09 17:52:57 --> performance_planning --> insert --> filter_by -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 17:52:57 --> performance_planning --> insert --> filter_id -->  --> 1,2
+Reyes, Naisa (33798) --> 2020-07-09 17:52:57 --> performance_planning --> insert --> user_id -->  --> 57
+Reyes, Naisa (33798) --> 2020-07-09 17:52:58 --> performance_planning --> insert --> planning_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-09 17:54:22 --> performance_planning --> insert --> year -->  --> 2020
+Reyes, Naisa (33798) --> 2020-07-09 17:54:22 --> performance_planning --> insert --> performance_type_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 17:54:22 --> performance_planning --> insert --> date_from -->  --> 2020-07-01
+Reyes, Naisa (33798) --> 2020-07-09 17:54:22 --> performance_planning --> insert --> date_to -->  --> 2020-07-31
+Reyes, Naisa (33798) --> 2020-07-09 17:54:22 --> performance_planning --> insert --> status_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 17:54:22 --> performance_planning --> insert --> notes -->  --> test

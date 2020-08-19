@@ -1,0 +1,52 @@
+<tr rel="1">
+    <td>
+        <span class="text-info"><?php echo $full_name; ?></span><br>
+    </td>    
+    <td>
+        <span class="text-info"><?php echo $partners_loan_type; ?></span><br>
+    </td>
+    <td class="hidden-xs">
+        <span class="text-muted small"><?php echo date("F d, Y",strtotime($partners_loan_application_created_on)); ?></span>
+    </td>
+    <td class="hidden-xs">
+        <?php 
+        if($loan_application_status_id != 8){ //not cancelled
+            switch($approver_status_id){ 
+                case 1: ?><span class="badge badge-info"><?php echo $approver_status; ?></span><?php break;
+                case 2: ?><span class="badge badge-warning"><?php echo $approver_status; ?></span><?php break;
+                case 3: ?><span class="badge badge-warning"><?php echo $approver_status; ?></span><?php break;
+                case 4: ?><span class="badge badge-info"><?php echo $approver_status; ?></span><?php break;
+                case 5: ?><span class="badge badge-info"><?php echo $approver_status; ?></span><?php break;
+                case 6: ?><span class="badge badge-success"><?php echo $approver_status; ?></span><?php break;
+                case 7: ?><span class="badge badge-danger"><?php echo $approver_status; ?></span><?php break;
+                case 8:
+                default: ?><span class="badge badge-default"><?php echo $approver_status; ?></span><?php break;
+            }
+        } else { //cancelled
+            ?>
+            <?php if($loan_application_status_id == 6): ?>
+                <span class="badge badge-success"><?php echo $loan_application_status; ?></span>
+            <?php else: ?>
+                <span class="badge badge-default"><?php echo $loan_application_status; ?></span>
+            <?php endif; ?>
+        <?php
+        } ?>
+
+    </td>
+    <td>
+        <div class="btn-group">
+            <a href="<?php echo $detail_url; ?>" class="btn btn-xs text-muted"><i class="fa fa-search"></i> <?php echo lang('loan_application.view'); ?></a>
+        </div>
+
+        <?php if($loan_application_status_id != 8 ): ?>
+            <?php if( $approver_status_id == 2 ): ?>
+                <div class="btn-group">
+                    <span onclick="get_loan_application_details('<?php echo $partners_loan_type_code; ?>',<?php echo $loan_application_id; ?>)";data-loan-application-id="<?php echo $loan_application_id; ?>" data-loan-type-id="<?php echo $partners_loan_type_id; ?>" id="manage_dialog-<?php echo $loan_application_id; ?>" 
+                    class="btn btn-sm custom_popover text-muted"  data-close-others="true" data-content="" data-placement="left" data-original-title="<?php echo $partners_loan_type; ?>">
+                    <i class="fa fa-gear"></i> <?php echo lang('loan_application.options'); ?>
+                    </span>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+    </td>
+</tr>

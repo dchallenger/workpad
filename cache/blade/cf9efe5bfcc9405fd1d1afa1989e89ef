@@ -1,0 +1,105 @@
+
+<?php $__env->startSection('page_styles'); ?>
+	@parent
+	
+	<style>
+		.popover {min-width: 400px !important;}
+    </style>    
+    
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('theme_styles'); ?>
+	@parent
+	<!-- <link href="< ?php echo theme_path(); ?>plugins/select2/select2.css" rel="stylesheet" type="text/css"/> -->
+	<link href="<?php echo theme_path(); ?>plugins/select2/select2_metro.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo theme_path(); ?>plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo theme_path(); ?>plugins/bootstrap-datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css"/>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page_content'); ?>
+	@parent
+
+	<div class="row">
+
+	    <div class="col-md-9" id="override_expand">
+
+	        <!-- Listing -->
+	        <div class="portlet" >
+
+	            <div class="breadcrumb hidden-lg hidden-md hidden-sm hidden-xs">
+	                <div class="block input-icon right">
+	                    <i class="fa fa-search"></i>
+	                    <input type="text" placeholder="Search..." class="form-control">
+	                </div>
+	            </div>
+				<div class="portlet-body">
+					<ul class="nav nav-tabs ">
+						<li class="active">
+						<a data-toggle="tab" href="#review_tab" id="tab_for_review">
+						Review
+						</a></li>
+						<li class="">
+						<a data-toggle="tab" href="#override_tab" id="tab_for_override">
+						Override</a></li>
+						<li class="">
+						<a data-toggle="tab" href="#period_override_tab" id="tab_for_period_override">
+						Period Override</a></li>
+					</ul>
+
+					<div class="tab-content">
+						<div id="review_tab" class="tab-pane active">
+							<?php echo $__env->make('tabs/tab_review', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+						</div>
+						<!-- HISTORY -->
+						<div id="override_tab" class="tab-pane">
+							<div class="margin-bottom-15">
+								<span class="small text-muted">Select specific date to override if necessary.</span>
+							</div>
+							<?php echo $__env->make('tabs/tab_override', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+						</div>
+						<div id="period_override_tab" class="tab-pane">
+							<div class="margin-bottom-15">
+								<span class="small text-muted">Select specific period to override if necessary.</span>
+							</div>
+							<?php echo $__env->make('tabs/tab_period_override', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+						</div>
+					</div>
+				</div>
+				
+	        </div>
+
+
+	    </div>
+
+	    <div class="col-md-3 by_date_filter hidden">
+	        <div class="portlet">
+				<div class="portlet-title margin-top-20" style="margin-bottom:3px;">
+				    <div class="caption"><?php echo lang('admin_timerecord.link'); ?></div>
+				</div>
+				<div class="portlet-body">			    
+				    <div class="margin-top-10">
+				        <a href="<?php echo get_mod_route('my_calendar'); ?>" class="label label-success"><?php echo lang('admin_timerecord.my_calendar'); ?></a>
+				    </div>
+				</div>
+			</div>
+		</div>
+	    
+	    <div class="col-md-3 visible-lg visible-md by_employee_filter">
+	        <div class="portlet">
+	        	<?php echo $__env->make('list_filter', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	        </div>
+	    </div>
+
+	</div>
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('view_js'); ?>
+	@parent
+	<?php echo get_list_js( $mod ); ?>
+	<script src="<?php echo theme_path(); ?>plugins/select2/select2.min.js" type="text/javascript" ></script>
+	<script src="<?php echo theme_path(); ?>plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" type="text/javascript" ></script>
+	<script src="<?php echo theme_path(); ?>plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript" ></script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,9 @@
+<tr class="record">
+	<td><?php echo date('F d, Y H:i:s', strtotime($date_time)); ?></td>
+	<td><?php echo $modules; ?></td>
+	<td><?php echo $item_name; ?></td>
+	<td><?php echo $original_value; ?></td>
+	<td><?php echo $new_value; ?></td>
+	<td><?php echo $transaction; ?></td>
+	<td><?php echo $user_encoded; ?></td>
+</tr>

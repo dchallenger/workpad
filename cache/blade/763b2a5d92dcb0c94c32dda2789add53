@@ -1,0 +1,4 @@
+<th width="20%"><?php echo lang('disciplinary.employee_name'); ?></th>
+<th width="22%" class="hidden-xs"><?php echo lang('disciplinary.offense'); ?></th>
+<th width="26%" class="hidden-xs"><?php echo lang('disciplinary.sanctions'); ?></th>
+<th width="20%" class="hidden-xs"><?php echo lang('common.status'); ?></th>

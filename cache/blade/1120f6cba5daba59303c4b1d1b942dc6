@@ -1,0 +1,2 @@
+<th width="25%"><?php echo lang('rate_type.rate_type'); ?></th>
+<th width="30%"><?php echo lang('rate_type.description'); ?></th>

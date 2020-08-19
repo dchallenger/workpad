@@ -1,0 +1,38 @@
+<tr class="record">
+	<td>
+		<a class="text-success" data-toggle="modal" href="#process" id="period_year"><?php echo $period_year; ?></a>
+		<br>
+		<span class="small text-muted" id="period_month"><?php echo $period_month; ?></span>
+	</td>
+	<td>
+		<span class="small text-muted" id="count"><?php echo $proces_status; ?></span>
+	</td>
+	<td>
+		<a class="text-success" data-toggle="modal" href="#process" id="period_from"><?php echo $payroll_date; ?></a>
+		<br>
+		<span class="small text-muted" id="company_name"><?php echo $company; ?></span>
+	</td>
+	<td class="hidden-xs">
+		<span id="period_from"><?php echo $date_from; ?> <span class="small text-muted" id="period_from_dayname"><?php echo $date_from_day; ?></span></span>
+		<br>
+		<span class="small text-muted" id="period_month"><?php echo $date_from_year; ?></span>
+	</td>
+	<td class="hidden-xs">
+		<span id="period_to"><?php echo $date_to; ?> <span class="small text-muted" id="period_to_dayname"><?php echo $date_to_day; ?></span></span>
+		<br>
+		<span class="small text-muted" id="period_month"><?php echo $date_to_year; ?></span>
+	</td>
+	<td>
+        <?php if( $options != "" ): ?>
+			<div class="btn-group">
+	            <a class="btn btn-xs text-muted" href="<?php echo $quickedit_url; ?>"><i class="fa fa-pencil"></i> Edit</a>
+	        </div>
+	        <div class="btn-group">
+	            <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> Options</a>
+	            <ul class="dropdown-menu pull-right">
+	                <?php echo $options; ?>
+	            </ul>
+	        </div>
+        <?php endif; ?>
+	    </td>
+</tr>

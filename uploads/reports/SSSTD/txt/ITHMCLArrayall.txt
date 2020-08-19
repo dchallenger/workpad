@@ -1,0 +1,35 @@
+00   1122514         20180207201802Ithiel Corporation                      0390756446   C
+20   HULLEZA             CESAR               L035480437601760.0000030.00        N
+20   MARQUEZ             JOSE                C033420355701760.0000030.00        N
+20   VILLANUEVA          FERNANDO            A037441056201760.0000030.00        N
+20   CARMEN              BERNARDO            M036653206301760.0000030.00        N
+20   SENODO              MELVIN              F332446794401760.0000030.00        N
+20   ABO                 MADONNA             C043173942901760.0000030.00        N
+20   BARTOLOME           SARAH JANE          M041106143401760.0000030.00        N
+20   BARTOLOME           ROMEL               A043229349801760.0000030.00        N
+20   ROA                 RAMIL               R331619623601650.0000030.00        N
+20   UADAN               CRISTOPHER          N338468076101760.0000030.00        N
+20   BALLESTEROS         MONICA              C021586536001760.0000030.00        N
+20   SANTOS              MELANIE             U022202180901760.0000030.00        N
+20   FRANCISCO           WILFREDO            R021593259401760.0000030.00        N
+20   DEITA               AIREEN              D041678279201760.0000030.00        N
+20   BASILIO             MARYBETH            T039947513901760.0000030.00        N
+20   JANDOC              RANDY               V021682822501760.0000030.00        N
+20   PEREA               JEFFREY             D041240503101760.0000030.00        N
+20   SERIO               PELMAR              L335931779701760.0000030.00        N
+20   DEPIEDRA            RENANTE             C334707028201760.0000030.00        N
+20   ENCABO              SHERVI              M043292491601760.0000030.00        N
+20   LOMOTOS             GONIEL              M336018979401650.0000030.00        N
+20   ROSAL               JERSON              I335617129501210.0000010.00        N
+20   PINEDA              JAYSON              A336045101101430.0000010.00        N
+20   MENDEZ              MOISES              M022815301401210.0000010.00        N
+20   DACDAC              PATRICK JOHN        R023670630101265.0000010.00        N
+20   RACRAQUIN           JOANNA MARI         B022607577001375.0000010.00        N
+20   CORPUZ              ROMULO              G042222855401760.0000030.00        N
+20   COMODA              RENATO              E039727582301760.0000030.00        N
+20   GAYO                MAURITO             A033929423101760.0000030.00        N
+20   MIRANDA             MAY ANN             Q012711592001760.0000030.00        N
+20   CARINO              CITADEL             D342418465101705.0000030.00        N
+20   DE GUZMAN           RONALD              L023559215001045.0000010.00        N
+20   RABOT               EDUARDO             A334881518701045.0000010.00        N
+99   000054065.00000000850.0000122514

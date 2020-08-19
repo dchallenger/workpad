@@ -1,0 +1,5 @@
+2020-04-29 07:30:02 --> authentication --> login --> login -->  --> 
+2020-04-29 15:42:30 --> branch --> update --> status_id --> 0 --> 1
+2020-04-29 15:42:58 --> branch --> insert --> branch -->  --> Greenhills
+2020-04-29 15:42:58 --> branch --> insert --> branch_code -->  --> GH
+2020-04-29 15:42:58 --> branch --> insert --> status_id -->  --> 1

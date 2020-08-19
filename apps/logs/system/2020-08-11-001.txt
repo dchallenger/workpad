@@ -1,0 +1,19 @@
+Reyes, Naisa (33798) --> 2020-08-11 03:09:18 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-11 03:19:12 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-08-11 03:19:26 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-08-11 03:21:37 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-08-11 03:21:52 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-11 04:37:21 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-11 06:31:46 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-08-11 06:49:28 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-11 08:49:29 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-11 09:23:47 --> leave_balance_admin --> insert --> year -->  --> 2020
+Reyes, Naisa (33798) --> 2020-08-11 09:23:47 --> leave_balance_admin --> insert --> user_id -->  --> 56
+Reyes, Naisa (33798) --> 2020-08-11 09:23:47 --> leave_balance_admin --> insert --> form_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-11 09:23:47 --> leave_balance_admin --> insert --> previous -->  --> 0
+Reyes, Naisa (33798) --> 2020-08-11 09:23:47 --> leave_balance_admin --> insert --> period_from -->  --> 2020-08-01
+Reyes, Naisa (33798) --> 2020-08-11 09:23:47 --> leave_balance_admin --> insert --> period_to -->  --> 2020-08-31
+Reyes, Naisa (33798) --> 2020-08-11 09:24:49 --> leave_balance_admin --> update --> previous --> 0.0000 --> 0
+Reyes, Naisa (33798) --> 2020-08-11 09:24:49 --> leave_balance_admin --> update --> period_from --> 2020-08-01 --> 2020-01-01
+Reyes, Naisa (33798) --> 2020-08-11 09:24:49 --> leave_balance_admin --> update --> period_to --> 2020-08-31 --> 2020-12-31
+Reyes, Naisa (33798) --> 2020-08-11 09:24:49 --> leave_balance_admin --> update --> period_extension --> 2020-08-31 --> 2021-04-30

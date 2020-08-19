@@ -1,0 +1,28 @@
+<?php $__env->startSection('page_styles'); ?>
+	<?php echo $__env->make('edit/page_styles', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->yieldSection(); ?>
+
+<?php $__env->startSection('page_content'); ?>
+	<form class="form-horizontal">
+		<input type="hidden" id="record_id" name="record_id" value="<?php echo $record_id; ?>">
+		<div class="modal-body padding-bottom-0">
+			<?php echo $__env->make('detail/fgs', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		</div>
+		<div class="modal-footer margin-top-0">
+			<button class="btn btn-default btn-sm" type="button" data-dismiss="modal"> <?php echo lang('common.close'); ?></button>
+		</div>
+	</form>
+<?php echo $__env->yieldSection(); ?>
+
+<?php $__env->startSection('page_plugins'); ?>
+	<?php echo $__env->make('edit/page_plugins', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->yieldSection(); ?>
+
+<?php $__env->startSection('page_scripts'); ?>
+	<?php echo $__env->make('edit/page_scripts', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<script type="text/javascript" src="<?php echo theme_path(); ?>modules/common/edit.js"></script> 
+<?php echo $__env->yieldSection(); ?>
+
+<?php $__env->startSection('view_js'); ?>
+	<?php echo get_edit_js( $mod ); ?>
+<?php echo $__env->yieldSection(); ?>

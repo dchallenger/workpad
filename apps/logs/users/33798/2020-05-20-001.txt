@@ -1,0 +1,14 @@
+2020-05-20 09:02:39 --> authentication --> logout --> logout -->  --> 
+2020-05-20 09:38:21 --> authentication --> login --> login -->  --> 
+2020-05-20 09:38:35 --> authentication --> logout --> logout -->  --> 
+2020-05-20 09:48:39 --> authentication --> login --> login -->  --> 
+2020-05-20 09:49:50 --> coordinator --> insert --> company_id -->  --> 1
+2020-05-20 09:49:50 --> coordinator --> insert --> branch_id -->  --> 1
+2020-05-20 09:49:50 --> coordinator --> insert --> coordinator_user_id -->  --> 55
+2020-05-20 09:55:31 --> authentication --> logout --> logout -->  --> 
+2020-05-20 09:59:51 --> authentication --> login --> login -->  --> 
+2020-05-20 10:04:15 --> authentication --> logout --> logout -->  --> 
+2020-05-20 10:04:25 --> authentication --> login --> login -->  --> 
+2020-05-20 10:04:44 --> authentication --> logout --> logout -->  --> 
+2020-05-20 10:16:13 --> authentication --> login --> login -->  --> 
+2020-05-20 11:19:49 --> authentication --> logout --> logout -->  --> 

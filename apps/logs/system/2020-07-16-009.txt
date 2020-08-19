@@ -1,0 +1,67 @@
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 170
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 180
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 190
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Monis, Marybeth (1101060) --> 2020-07-16 14:39:51 --> appraisal_individual_planning --> update --> performance_status_id --> 2 --> 4
+Monis, Marybeth (1101060) --> 2020-07-16 14:39:51 --> appraisal_individual_planning --> update --> approved_date --> 2020-07-16 14:36:40 --> 2020-07-16 14:39:51
+Monis, Marybeth (1101060) --> 2020-07-16 14:42:06 --> appraisal_individual_planning --> update --> performance_status_id --> 2 --> 4
+Monis, Marybeth (1101060) --> 2020-07-16 14:42:06 --> appraisal_individual_planning --> update --> approved_date --> 2020-07-16 14:36:40 --> 2020-07-16 14:42:06
+Monis, Marybeth (1101060) --> 2020-07-16 14:42:06 --> appraisal_individual_planning --> update --> status_id --> 2 --> 4
+Marjorie, Nailog (33799) --> 2020-07-16 14:51:56 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-07-16 14:52:07 --> authentication --> login --> login -->  --> 
+Monis, Marybeth (1101060) --> 2020-07-16 15:01:21 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-07-16 15:01:32 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-07-16 15:03:38 --> performance_planning --> update --> status_id --> 1 --> 0
+Reyes, Naisa (33798) --> 2020-07-16 15:05:38 --> performance_planning --> update --> status_id --> 0 --> 1
+Reyes, Naisa (33798) --> 2020-07-16 15:06:33 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-07-16 15:40:10 --> performance_planning --> update --> status_id --> 1 --> 0
+Reyes, Naisa (33798) --> 2020-07-16 15:44:28 --> performance_appraisal --> insert --> planning_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 15:44:28 --> performance_appraisal --> insert --> date_from -->  --> 2020-07-01
+Reyes, Naisa (33798) --> 2020-07-16 15:44:28 --> performance_appraisal --> insert --> date_to -->  --> 2020-07-31
+Reyes, Naisa (33798) --> 2020-07-16 15:44:28 --> performance_appraisal --> insert --> year -->  --> 2020
+Reyes, Naisa (33798) --> 2020-07-16 15:44:28 --> performance_appraisal --> insert --> performance_type_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 15:44:28 --> performance_appraisal --> insert --> template_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-16 15:44:28 --> performance_appraisal --> insert --> filter_by -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 15:44:28 --> performance_appraisal --> insert --> filter_id -->  --> 2,1
+Reyes, Naisa (33798) --> 2020-07-16 15:44:28 --> performance_appraisal --> insert --> notes -->  --> appraisal testing
+Reyes, Naisa (33798) --> 2020-07-16 15:44:28 --> performance_appraisal --> insert --> status_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 15:44:36 --> performance_appraisal --> insert --> planning_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 15:44:36 --> performance_appraisal --> insert --> date_from -->  --> 2020-07-01
+Reyes, Naisa (33798) --> 2020-07-16 15:44:36 --> performance_appraisal --> insert --> date_to -->  --> 2020-07-31
+Reyes, Naisa (33798) --> 2020-07-16 15:44:36 --> performance_appraisal --> insert --> year -->  --> 2020
+Reyes, Naisa (33798) --> 2020-07-16 15:44:36 --> performance_appraisal --> insert --> performance_type_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 15:44:36 --> performance_appraisal --> insert --> template_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-16 15:44:36 --> performance_appraisal --> insert --> filter_by -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 15:44:36 --> performance_appraisal --> insert --> filter_id -->  --> 2,1
+Reyes, Naisa (33798) --> 2020-07-16 15:44:36 --> performance_appraisal --> insert --> notes -->  --> appraisal testing
+Reyes, Naisa (33798) --> 2020-07-16 15:44:36 --> performance_appraisal --> insert --> status_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 15:45:54 --> performance_appraisal --> insert --> planning_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 15:45:54 --> performance_appraisal --> insert --> date_from -->  --> 2020-07-01
+Reyes, Naisa (33798) --> 2020-07-16 15:45:54 --> performance_appraisal --> insert --> date_to -->  --> 2020-07-31
+Reyes, Naisa (33798) --> 2020-07-16 15:45:54 --> performance_appraisal --> insert --> year -->  --> 2020
+Reyes, Naisa (33798) --> 2020-07-16 15:45:54 --> performance_appraisal --> insert --> performance_type_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 15:45:54 --> performance_appraisal --> insert --> template_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-16 15:45:54 --> performance_appraisal --> insert --> filter_by -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 15:45:54 --> performance_appraisal --> insert --> filter_id -->  --> 2,1
+Reyes, Naisa (33798) --> 2020-07-16 15:45:54 --> performance_appraisal --> insert --> notes -->  --> appraisal testing
+Reyes, Naisa (33798) --> 2020-07-16 15:45:54 --> performance_appraisal --> insert --> status_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 16:41:03 --> performance_appraisal --> insert --> planning_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 16:41:03 --> performance_appraisal --> insert --> date_from -->  --> 2020-07-01
+Reyes, Naisa (33798) --> 2020-07-16 16:41:03 --> performance_appraisal --> insert --> date_to -->  --> 2020-07-31
+Reyes, Naisa (33798) --> 2020-07-16 16:41:03 --> performance_appraisal --> insert --> year -->  --> 2020
+Reyes, Naisa (33798) --> 2020-07-16 16:41:03 --> performance_appraisal --> insert --> performance_type_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 16:41:03 --> performance_appraisal --> insert --> template_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-16 16:41:03 --> performance_appraisal --> insert --> filter_by -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 16:41:03 --> performance_appraisal --> insert --> filter_id -->  --> 2,1
+Reyes, Naisa (33798) --> 2020-07-16 16:41:03 --> performance_appraisal --> insert --> notes -->  --> test
+Reyes, Naisa (33798) --> 2020-07-16 16:41:03 --> performance_appraisal --> insert --> status_id -->  --> 1

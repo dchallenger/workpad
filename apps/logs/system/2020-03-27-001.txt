@@ -1,0 +1,21 @@
+Admin, Teemworx (admin) --> 2020-03-27 15:43:56 --> users --> insert --> login -->  --> tirso
+Admin, Teemworx (admin) --> 2020-03-27 15:43:56 --> users --> insert --> hash -->  --> $2a$08$yKEc9Ke1R8WZviQh.AwrQe6utiV2ID/6EoxcKW1YpcT9W8ZCWCVci
+Admin, Teemworx (admin) --> 2020-03-27 15:43:56 --> users --> insert --> role_id -->  --> 12
+Admin, Teemworx (admin) --> 2020-03-27 15:43:56 --> users --> insert --> active -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-27 15:43:56 --> users --> insert --> email -->  --> tjkgarcia@yahoo.com
+Admin, Teemworx (admin) --> 2020-03-27 15:43:56 --> users --> insert --> company_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-03-27 15:43:56 --> users --> insert --> business_level_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-27 15:43:56 --> users --> insert --> firstname -->  --> Tirso
+Admin, Teemworx (admin) --> 2020-03-27 15:43:56 --> users --> insert --> lastname -->  --> Garcia
+Admin, Teemworx (admin) --> 2020-03-27 15:43:56 --> users --> insert --> middlename -->  --> Tamares
+Admin, Teemworx (admin) --> 2020-03-27 15:43:56 --> users --> insert --> suffix -->  --> Jr
+Admin, Teemworx (admin) --> 2020-03-27 15:43:56 --> users --> insert --> nickname -->  --> jun
+Admin, Teemworx (admin) --> 2020-03-27 15:43:56 --> users --> insert --> birth_date -->  --> 1976-12-15
+Admin, Teemworx (admin) --> 2020-03-27 15:43:56 --> users --> insert --> user_id -->  --> 9
+Admin, Teemworx (admin) --> 2020-03-27 15:45:04 --> users --> update --> active --> 1 --> 1 else 0
+Admin, Teemworx (admin) --> 2020-03-27 15:45:04 --> users --> update --> company_id --> 2 --> 7
+Admin, Teemworx (admin) --> 2020-03-27 15:45:04 --> users --> update --> nickname --> jun --> junjun
+Admin, Teemworx (admin) --> 2020-03-27 15:47:30 --> authentication --> logout --> logout -->  --> 
+Garcia, Tirso Jr(tirso) --> 2020-03-27 15:47:39 --> authentication --> login --> login -->  --> 
+Garcia, Tirso Jr(tirso) --> 2020-03-27 15:48:13 --> authentication --> logout --> logout -->  --> 
+Admin, Teemworx (admin) --> 2020-03-27 15:48:19 --> authentication --> login --> login -->  --> 

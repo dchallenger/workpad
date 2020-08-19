@@ -1,0 +1,2 @@
+() --> 2020-06-20 12:37:32 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-06-20 12:38:01 --> authentication --> login --> login -->  --> 

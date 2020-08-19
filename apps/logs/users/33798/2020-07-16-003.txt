@@ -1,0 +1,88 @@
+2020-07-16 12:52:19 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 150
+2020-07-16 12:52:19 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+2020-07-16 12:52:19 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> ok added
+2020-07-16 12:52:20 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 12:52:20 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+2020-07-16 12:52:20 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 12:52:20 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 170
+2020-07-16 12:52:20 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+2020-07-16 12:52:20 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 12:52:20 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+2020-07-16 12:52:20 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 12:52:20 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 180
+2020-07-16 12:52:20 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+2020-07-16 12:52:20 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 12:52:20 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+2020-07-16 12:52:20 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 12:52:20 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 190
+2020-07-16 12:52:20 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+2020-07-16 12:52:21 --> appraisal_individual_planning --> insert --> planning_id -->  --> 1
+2020-07-16 12:52:21 --> appraisal_individual_planning --> insert --> user_id -->  --> 57
+2020-07-16 12:52:21 --> appraisal_individual_planning --> insert --> notes -->  --> rtst
+2020-07-16 13:08:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 13:08:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+2020-07-16 13:08:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea1
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> approver naisa added this
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 10
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 5
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 5
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 100
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 100
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 100
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> b
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> please change target
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 10
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 10
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 150
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 150
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> ok added
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 170
+2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 180
+2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 190
+2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea1
+2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> approver naisa added this
+2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 10
+2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 5
+2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 5
+2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 100
+2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 100
+2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 100
+2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> b
+2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> please change target
+2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 
+2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 10
+2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 10
+2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 150
+2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 150
+2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> ok added
+2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 170
+2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20

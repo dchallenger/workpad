@@ -1,0 +1,39 @@
+EH04201802202205690006   PMCRestored Energy Development Corporation                                                                770 E. Rodriguez Ext., Malibay, Pasay City                                                          1300   8893935
+DT10100254503701188          BAUTISTA                      EDGAR                         EVARISTO                      100.00       100.00       152831392      19730115
+DT10100250534901269          OPOSA                         LOPER                         LUCINO                        100.00       100.00       185538185      19740521
+DT10100249242001293          MUNOZ                         RICHARD                       DELOS SANTOS                  100.00       100.00       194816811      19740607
+DT10100249243101297          RECOSOSA                      JOEL                          BOHOL                         100.00       100.00       119934364      19630227
+DT10100037794101649          VALERIO                       DAN                           CASINGAL                      580.72       100.00       193958188      19661223
+DT10100266154901813          TAN                           LEYNARD                       ABERGIDO                      100.00       100.00       218523652      19820608
+DT12105919912630025          SAYO                          RAYMOND ANTHONY               ARCINAS                       280.00       100.00       221692639      19860206
+DT12105931220430118          SALAZAR                       SHIELA                        CUDEL                         100.00       100.00       264321724      19860521
+DT10100225496531120          RICAFRANCA                    RANDOLFO                      RIVAMONTE                     100.00       100.00       218618635      19740523
+DT10100264674031195          PALILEO                       GYPSY ANNE                    NARIDO                        100.00       100.00       223829200      19790610
+DT12107816699832302          AMAN                          GLEN                          ESQUIVEL                      100.00       100.00       282233184      19780830
+DT10400203274632497          GIGANTO                       LEONARDO                      BAOC                          100.00       100.00       242015326      19680703
+DT01412425640632499          ALBINO                        ANGELITO                      GONZALES                      100.00       100.00       220168140      19721025
+DT91426476996032678          TUYAY JR.                     REY                           REGASPI                       100.00       100.00       422213845      19920429
+DT12102299351332896          PAPA                          OFELYN                        SALVADOR                      100.00       100.00       310909052      19880714
+DT10400197709733055          COLO                          JESSIE                        EPE                           100.00       100.00       238607075      19860328
+DT12105768446033056          MAMORNO                       LEANNA                        BANIQUED                      100.00       100.00       442049713      19890724
+DT12111032367033330          VILLA                         VIRGILIO THOMAS                                             100.00       100.00       007114367      19920119
+DT12104536510333326          OCHADA                        ROMEO                         ROMANO                        100.00       100.00       227810513      19810829
+DT12117004796033331          MARBELLA                      TEODY                         HAMOR                         100.00       100.00       340508636      19931106
+DT12116793060933309          MATEO                         AUREO                         ALABADO                       100.00       100.00       219365488      19750720
+DT12107915160033319          NAVARRO                       DANIEL                        VERGARA                       100.00       100.00       293395306      19871223
+DT12111331176033323          ATIENZA                       ROMEO                         DAÑO                          100.00       100.00       403744044      19680830
+DT00410847170833322          BUENAVISTA                    LAURENCE CHRISTOPHER          JOVEN                         100.00       100.00       170954949      19741119
+DT12115753725433325          ARELLA                        NOEL                          PEÑEVERDE                     100.00       100.00       156498502      19650504
+DT12103546064533311          DALDE                         JOSELITO                      PANSACOLA                     100.00       100.00       429999918      19890328
+DT12108566585933310          ESPIRITU                      ROGELIO                       BALDONAD                      100.00       100.00       294070249      19801021
+DT12117428749633328          PALMA                         RONELO                        DOHENA                        100.00       100.00       400570129      19810910
+DT10100261034933320          MALIGO                        RAMIRO                        MENDOZA                       100.00       100.00       170160910      19741220
+DT12102928988533329          SEBASTIAN                     LORETO, JR.                   VALDEZ                        100.00       100.00       239223129      19860222
+DT10400199046633321          ESPADA                        JOHN PAUL                     ELAMPARO                      100.00       100.00       292416835      19810219
+DT12118204934533312          AMAN                          NIÑO                          ESQUIVEL                      100.00       100.00       331272197      19810210
+DT12115145459633324          ANG                           ANTHONY                       DINOROG                       100.00       100.00       45551056       19870409
+DT12111380267833316          AMBAYEC                       JEREMAIAH                     COPREROS                      100.00       100.00       330937140      19960120
+DT10400190399 33313          CALVARIO                      ARIES                         CUNANAN                       100.00       100.00       224463643      19770507
+DT10400203279233314          TUMOLING                      MICHAEL                       BANTOLA                       100.00       100.00       241682714      19841111
+DT12108134435233327          GONZALVO                      WILSON                        ABELINDE                      100.00       100.00       401958565      19860730
+DT12108138478533318          FUNDAL                        BONIFACUI                     FAJA                          100.00       100.00       233259692      19760525

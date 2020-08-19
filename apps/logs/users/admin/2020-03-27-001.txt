@@ -1,0 +1,70 @@
+2020-03-27 14:40:50 --> users --> insert --> login -->  --> tirso
+2020-03-27 14:40:50 --> users --> insert --> hash -->  --> $2a$08$1I5drvvXIfks0qX7PlciKet47IAh6JB5w/oa6RbnVTuD0AK.P9XXK
+2020-03-27 14:40:50 --> users --> insert --> role_id -->  --> 12
+2020-03-27 14:40:50 --> users --> insert --> active -->  --> 1
+2020-03-27 14:40:50 --> users --> insert --> email -->  --> tjkgarcia@yahoo.com
+2020-03-27 14:40:50 --> users --> update --> company_id --> 1 --> 14
+2020-03-27 14:40:50 --> users --> update --> firstname --> JESUS GABRIEL --> Tirso
+2020-03-27 14:40:50 --> users --> update --> lastname --> BUFETE --> Garcia Jr
+2020-03-27 14:40:50 --> users --> update --> middlename --> NERONA --> Tamares
+2020-03-27 14:40:50 --> users --> update --> suffix -->  --> Mr
+2020-03-27 14:40:50 --> users --> update --> nickname --> JESUS GABRIEL --> Jun
+2020-03-27 14:40:50 --> users --> update --> birth_date -->  --> 1983-12-15
+2020-03-27 14:53:57 --> users --> update --> hash --> $2a$08$1I5drvvXIfks0qX7PlciKet47IAh6JB5w/oa6RbnVTuD0AK.P9XXK --> $2a$08$LWN6POCMyLx1yf6F.mF8Xum.pT.kA20lQ9TLAhs4qcBAHKH3xmPq6
+2020-03-27 14:54:04 --> users --> update --> hash --> $2a$08$LWN6POCMyLx1yf6F.mF8Xum.pT.kA20lQ9TLAhs4qcBAHKH3xmPq6 --> $2a$08$q1dFcn7Fyq2hgqECgEc6k.TowZQ3dzvMaTNZo5hYeUMiAerGat79a
+2020-03-27 14:54:32 --> users --> update --> hash --> $2a$08$q1dFcn7Fyq2hgqECgEc6k.TowZQ3dzvMaTNZo5hYeUMiAerGat79a --> $2a$08$lBpKN8y4lGSa2z3PAk6t5eoVa1D3EI0UIkHAHLXQ0mvvwVjxKzfB.
+2020-03-27 14:57:54 --> users --> insert --> login -->  --> tirso
+2020-03-27 14:57:54 --> users --> insert --> hash -->  --> $2a$08$4anY5Mayydak6fagiZt1AOtWbHdpYU8oaQrJpAC695b53F7E27zrG
+2020-03-27 14:57:54 --> users --> insert --> role_id -->  --> 12
+2020-03-27 14:57:54 --> users --> insert --> active -->  --> 1
+2020-03-27 14:57:54 --> users --> insert --> email -->  --> tjkgarcia@yahoo.com
+2020-03-27 14:57:54 --> users --> update --> company_id --> 1 --> 5
+2020-03-27 14:57:54 --> users --> update --> firstname --> ANTONIO --> Tirso
+2020-03-27 14:57:54 --> users --> update --> lastname --> CABIJE --> Garcia
+2020-03-27 14:57:54 --> users --> update --> middlename --> LIBRADILLA --> Tamares
+2020-03-27 14:57:54 --> users --> update --> suffix -->  --> Jr
+2020-03-27 14:57:54 --> users --> update --> nickname --> BIBOY --> jun
+2020-03-27 15:03:29 --> users --> insert --> login -->  --> tirso
+2020-03-27 15:03:29 --> users --> insert --> hash -->  --> $2a$08$amnK80j.zhMrmd4xEtTqu.XpDYrgio9tPqdgrZL2rY9/F2Q4I88Hi
+2020-03-27 15:03:29 --> users --> insert --> role_id -->  --> 12
+2020-03-27 15:03:29 --> users --> insert --> active -->  --> 1
+2020-03-27 15:03:29 --> users --> insert --> email -->  --> tjkgarcia@yahoo.com
+2020-03-27 15:03:29 --> users --> update --> company_id --> 1 --> 5
+2020-03-27 15:03:29 --> users --> update --> firstname --> MA RITA --> Tirso
+2020-03-27 15:03:29 --> users --> update --> lastname --> CARMEN --> Garcia
+2020-03-27 15:03:29 --> users --> update --> middlename --> PERTIERRA --> Tamares
+2020-03-27 15:03:29 --> users --> update --> suffix -->  --> Jr
+2020-03-27 15:03:29 --> users --> update --> nickname --> MA RITA --> jun
+2020-03-27 15:04:57 --> users --> update --> active --> 1 --> 1 else 0
+2020-03-27 15:04:57 --> users --> update --> nickname --> jun --> junjun
+2020-03-27 15:26:36 --> users --> update --> nickname --> junjun --> junjung
+2020-03-27 15:35:41 --> users --> insert --> login -->  --> justin
+2020-03-27 15:35:41 --> users --> insert --> hash -->  --> $2a$08$6gV5..4nnkocUiNbxabWZ.s6Uah.VzUojTY2aL8jV2Om3bnVHMKe2
+2020-03-27 15:35:41 --> users --> insert --> role_id -->  --> 10
+2020-03-27 15:35:41 --> users --> insert --> active -->  --> 1
+2020-03-27 15:35:41 --> users --> insert --> email -->  --> justin@yahoo.com
+2020-03-27 15:35:41 --> users --> update --> company_id --> 1 --> 7
+2020-03-27 15:35:41 --> users --> update --> firstname --> DOLORES --> Justin
+2020-03-27 15:35:41 --> users --> update --> lastname --> CASUL --> Garcia
+2020-03-27 15:35:42 --> users --> update --> middlename --> OPINIANO --> Gabales
+2020-03-27 15:35:42 --> users --> update --> nickname --> DOLORES --> justin
+2020-03-27 15:35:42 --> users --> update --> birth_date --> 1964-02-08 --> 2010-06-15
+2020-03-27 15:43:56 --> users --> insert --> login -->  --> tirso
+2020-03-27 15:43:56 --> users --> insert --> hash -->  --> $2a$08$yKEc9Ke1R8WZviQh.AwrQe6utiV2ID/6EoxcKW1YpcT9W8ZCWCVci
+2020-03-27 15:43:56 --> users --> insert --> role_id -->  --> 12
+2020-03-27 15:43:56 --> users --> insert --> active -->  --> 1
+2020-03-27 15:43:56 --> users --> insert --> email -->  --> tjkgarcia@yahoo.com
+2020-03-27 15:43:56 --> users --> insert --> company_id -->  --> 2
+2020-03-27 15:43:56 --> users --> insert --> business_level_id -->  --> 1
+2020-03-27 15:43:56 --> users --> insert --> firstname -->  --> Tirso
+2020-03-27 15:43:56 --> users --> insert --> lastname -->  --> Garcia
+2020-03-27 15:43:56 --> users --> insert --> middlename -->  --> Tamares
+2020-03-27 15:43:56 --> users --> insert --> suffix -->  --> Jr
+2020-03-27 15:43:56 --> users --> insert --> nickname -->  --> jun
+2020-03-27 15:43:56 --> users --> insert --> birth_date -->  --> 1976-12-15
+2020-03-27 15:43:56 --> users --> insert --> user_id -->  --> 9
+2020-03-27 15:45:04 --> users --> update --> active --> 1 --> 1 else 0
+2020-03-27 15:45:04 --> users --> update --> company_id --> 2 --> 7
+2020-03-27 15:45:04 --> users --> update --> nickname --> jun --> junjun
+2020-03-27 15:47:30 --> authentication --> logout --> logout -->  --> 
+2020-03-27 15:48:19 --> authentication --> login --> login -->  --> 

@@ -1,0 +1,100 @@
+Admin, Emplopad (admin) --> 2020-05-19 14:38:32 --> authentication --> logout --> logout -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-05-19 14:39:50 --> authentication --> login --> login -->  --> 
+Caparas, Ma. Karen (1101025) --> 2020-05-19 14:43:39 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-05-19 14:43:54 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-05-19 14:46:21 --> partners --> insert --> role_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-05-19 14:46:21 --> partners --> insert --> email -->  --> naisa@ortigas.com.ph
+Admin, Emplopad (admin) --> 2020-05-19 14:46:21 --> partners --> insert --> login -->  --> 33798
+Admin, Emplopad (admin) --> 2020-05-19 14:46:21 --> partners --> insert --> title -->  --> Miss
+Admin, Emplopad (admin) --> 2020-05-19 14:46:22 --> partners --> insert --> lastname -->  --> Reyes
+Admin, Emplopad (admin) --> 2020-05-19 14:46:22 --> partners --> insert --> firstname -->  --> Naisa
+Admin, Emplopad (admin) --> 2020-05-19 14:46:22 --> partners --> insert --> company_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:46:22 --> partners --> insert --> department_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:46:22 --> partners --> insert --> division_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:46:22 --> partners --> insert --> branch_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:46:22 --> partners --> insert --> section_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-05-19 14:46:22 --> partners --> insert --> position_id -->  --> 263
+Admin, Emplopad (admin) --> 2020-05-19 14:46:22 --> partners --> insert --> reports_to_id -->  --> 54
+Admin, Emplopad (admin) --> 2020-05-19 14:46:22 --> partners --> insert --> location_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:46:22 --> partners --> insert --> birth_date -->  --> 1989-03-15
+Admin, Emplopad (admin) --> 2020-05-19 14:46:22 --> partners --> insert --> user_id -->  --> 56
+Admin, Emplopad (admin) --> 2020-05-19 14:46:22 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> key_id -->  --> 25
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> key -->  --> religion
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> key_name -->  --> Religion
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> key_id -->  --> 26
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> key -->  --> nationality
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> key_name -->  --> Nationality
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> key_id -->  --> 27
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> key -->  --> height
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> key_name -->  --> Height
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> key_id -->  --> 28
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> key -->  --> weight
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> key_name -->  --> Weight
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> key_id -->  --> 29
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> key -->  --> interests_hobbies
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> key_name -->  --> Interests/Hobbies
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> key_id -->  --> 30
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> key -->  --> language
+Admin, Emplopad (admin) --> 2020-05-19 14:49:11 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:49:12 --> partners --> insert --> key_name -->  --> Language Known
+Admin, Emplopad (admin) --> 2020-05-19 14:49:12 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-05-19 14:49:12 --> partners --> insert --> key_id -->  --> 31
+Admin, Emplopad (admin) --> 2020-05-19 14:49:12 --> partners --> insert --> key -->  --> dialect
+Admin, Emplopad (admin) --> 2020-05-19 14:49:12 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:49:12 --> partners --> insert --> key_name -->  --> Dialect Known
+Admin, Emplopad (admin) --> 2020-05-19 14:49:12 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-05-19 14:49:12 --> partners --> insert --> key_id -->  --> 32
+Admin, Emplopad (admin) --> 2020-05-19 14:49:12 --> partners --> insert --> key -->  --> dependents_count
+Admin, Emplopad (admin) --> 2020-05-19 14:49:12 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:49:12 --> partners --> insert --> key_name -->  --> Number of Dependents
+Admin, Emplopad (admin) --> 2020-05-19 14:49:12 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-05-19 14:49:12 --> partners --> insert --> key_id -->  --> 163
+Admin, Emplopad (admin) --> 2020-05-19 14:49:12 --> partners --> insert --> key -->  --> solo_parent
+Admin, Emplopad (admin) --> 2020-05-19 14:49:12 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:49:12 --> partners --> insert --> key_name -->  --> Is Solo Parent
+Admin, Emplopad (admin) --> 2020-05-19 14:49:16 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-05-19 14:49:16 --> partners --> insert --> key_id -->  --> 128
+Admin, Emplopad (admin) --> 2020-05-19 14:49:16 --> partners --> insert --> key -->  --> taxcode
+Admin, Emplopad (admin) --> 2020-05-19 14:49:16 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:49:16 --> partners --> insert --> key_name -->  --> Tax Status Code
+Admin, Emplopad (admin) --> 2020-05-19 14:49:16 --> partners --> insert --> key_value -->  --> 3
+Admin, Emplopad (admin) --> 2020-05-19 14:49:16 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-05-19 14:49:16 --> partners --> insert --> key_id -->  --> 110
+Admin, Emplopad (admin) --> 2020-05-19 14:49:16 --> partners --> insert --> key -->  --> sss_number
+Admin, Emplopad (admin) --> 2020-05-19 14:49:16 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:49:16 --> partners --> insert --> key_name -->  --> SSS Number
+Admin, Emplopad (admin) --> 2020-05-19 14:49:16 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-05-19 14:49:16 --> partners --> insert --> key_id -->  --> 113
+Admin, Emplopad (admin) --> 2020-05-19 14:49:16 --> partners --> insert --> key -->  --> pagibig_number
+Admin, Emplopad (admin) --> 2020-05-19 14:49:16 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:49:16 --> partners --> insert --> key_name -->  --> Pag-Ibig Number
+Admin, Emplopad (admin) --> 2020-05-19 14:49:16 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-05-19 14:49:17 --> partners --> insert --> key_id -->  --> 119
+Admin, Emplopad (admin) --> 2020-05-19 14:49:17 --> partners --> insert --> key -->  --> philhealth_number
+Admin, Emplopad (admin) --> 2020-05-19 14:49:17 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:49:17 --> partners --> insert --> key_name -->  --> Philhealth Number
+Admin, Emplopad (admin) --> 2020-05-19 14:49:17 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-05-19 14:49:17 --> partners --> insert --> key_id -->  --> 116
+Admin, Emplopad (admin) --> 2020-05-19 14:49:17 --> partners --> insert --> key -->  --> tin_number
+Admin, Emplopad (admin) --> 2020-05-19 14:49:17 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:49:17 --> partners --> insert --> key_name -->  --> TIN
+Admin, Emplopad (admin) --> 2020-05-19 14:49:17 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-05-19 14:49:17 --> partners --> insert --> key_id -->  --> 120
+Admin, Emplopad (admin) --> 2020-05-19 14:49:17 --> partners --> insert --> key -->  --> bank_account_number_savings
+Admin, Emplopad (admin) --> 2020-05-19 14:49:17 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 14:49:17 --> partners --> insert --> key_name -->  --> Bank Account Number Savings
+Admin, Emplopad (admin) --> 2020-05-19 14:49:17 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-05-19 14:49:17 --> partners --> insert --> key_id -->  --> 202
+Admin, Emplopad (admin) --> 2020-05-19 14:49:17 --> partners --> insert --> key -->  --> bank_account_number_current

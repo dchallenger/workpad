@@ -1,0 +1,4 @@
+2020-07-20 14:13:14 --> appraisal_individual_rate --> update --> status_id -->  --> 1
+2020-07-20 14:13:14 --> appraisal_individual_rate --> update --> selfrate_date -->  --> 2020-07-20
+2020-07-20 14:42:56 --> appraisal_individual_rate --> update --> status_id -->  --> 1
+2020-07-20 14:42:56 --> appraisal_individual_rate --> update --> selfrate_date -->  --> 2020-07-20

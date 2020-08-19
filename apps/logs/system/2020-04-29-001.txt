@@ -1,0 +1,5 @@
+Admin, Teemworx (admin) --> 2020-04-29 07:30:02 --> authentication --> login --> login -->  --> 
+Admin, Teemworx (admin) --> 2020-04-29 15:42:30 --> branch --> update --> status_id --> 0 --> 1
+Admin, Teemworx (admin) --> 2020-04-29 15:42:58 --> branch --> insert --> branch -->  --> Greenhills
+Admin, Teemworx (admin) --> 2020-04-29 15:42:58 --> branch --> insert --> branch_code -->  --> GH
+Admin, Teemworx (admin) --> 2020-04-29 15:42:58 --> branch --> insert --> status_id -->  --> 1

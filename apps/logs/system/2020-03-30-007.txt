@@ -1,0 +1,91 @@
+Admin, Teemworx (admin) --> 2020-03-30 14:50:37 --> signatories --> insert --> email -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:50:37 --> signatories --> insert --> approver_id -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 14:50:37 --> signatories --> insert --> condition -->  --> Either Of
+Admin, Teemworx (admin) --> 2020-03-30 14:50:37 --> signatories --> insert --> class_id -->  --> 16
+Admin, Teemworx (admin) --> 2020-03-30 14:50:37 --> signatories --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:50:37 --> signatories --> insert --> company_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:50:37 --> signatories --> insert --> department_id -->  --> 264
+Admin, Teemworx (admin) --> 2020-03-30 14:50:37 --> signatories --> insert --> position_id -->  --> 4
+Admin, Teemworx (admin) --> 2020-03-30 14:50:37 --> signatories --> insert --> user_id -->  --> 17
+Admin, Teemworx (admin) --> 2020-03-30 14:50:37 --> signatories --> insert --> alias -->  --> Garcia, Lexine 
+Admin, Teemworx (admin) --> 2020-03-30 14:53:44 --> signatories --> insert --> approver -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:53:44 --> signatories --> insert --> approver_id -->  --> 10
+Admin, Teemworx (admin) --> 2020-03-30 14:53:44 --> signatories --> insert --> condition -->  --> All
+Admin, Teemworx (admin) --> 2020-03-30 14:53:44 --> signatories --> insert --> class_id -->  --> 20
+Admin, Teemworx (admin) --> 2020-03-30 14:53:44 --> signatories --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:53:44 --> signatories --> insert --> company_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-03-30 14:53:44 --> signatories --> insert --> department_id -->  --> 23
+Admin, Teemworx (admin) --> 2020-03-30 14:53:44 --> signatories --> insert --> position_id -->  --> 16
+Admin, Teemworx (admin) --> 2020-03-30 14:53:44 --> signatories --> insert --> user_id -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 14:53:44 --> signatories --> insert --> alias -->  --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 14:53:44 --> signatories --> insert --> employee -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 14:54:33 --> signatories --> update --> email --> 0 --> 1
+Admin, Teemworx (admin) --> 2020-03-30 14:54:33 --> signatories --> update --> alias --> Garcia, Justin Johannes --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 14:54:33 --> signatories --> update --> employee -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 14:54:44 --> signatories --> update --> alias --> Garcia, Justin Johannes --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 14:54:44 --> signatories --> update --> employee -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 14:56:14 --> signatories --> update --> alias --> Garcia, Justin Johannes --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 14:56:15 --> signatories --> update --> employee -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 14:56:31 --> signatories --> update --> alias --> Garcia, Justin Johannes --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 14:57:43 --> signatories --> update --> alias --> Garcia, Justin Johannes --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 14:57:43 --> signatories --> update --> employee -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 14:58:36 --> signatories --> update --> alias --> Garcia, Justin Johannes --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 14:58:36 --> signatories --> update --> employee -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 15:00:51 --> signatories --> update --> alias --> Garcia, Justin Johannes --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 15:00:51 --> signatories --> update --> employee -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 15:03:34 --> signatories --> update --> alias --> Garcia, Justin Johannes --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 15:03:34 --> signatories --> update --> employee -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 15:05:32 --> signatories --> update --> email --> 0 --> 1
+Admin, Teemworx (admin) --> 2020-03-30 15:05:32 --> signatories --> update --> alias --> Garcia, Justin Johannes --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 15:07:57 --> signatories --> insert --> approver -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 15:07:57 --> signatories --> insert --> email -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 15:07:57 --> signatories --> insert --> approver_id -->  --> 10
+Admin, Teemworx (admin) --> 2020-03-30 15:07:57 --> signatories --> insert --> condition -->  --> All
+Admin, Teemworx (admin) --> 2020-03-30 15:07:57 --> signatories --> insert --> class_id -->  --> 8
+Admin, Teemworx (admin) --> 2020-03-30 15:07:57 --> signatories --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 15:07:57 --> signatories --> insert --> company_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-03-30 15:07:57 --> signatories --> insert --> department_id -->  --> 23
+Admin, Teemworx (admin) --> 2020-03-30 15:07:57 --> signatories --> insert --> position_id -->  --> 16
+Admin, Teemworx (admin) --> 2020-03-30 15:07:57 --> signatories --> insert --> user_id -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 15:07:57 --> signatories --> insert --> alias -->  --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 15:07:57 --> signatories --> insert --> employee -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 15:09:37 --> signatories --> insert --> approver -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 15:09:37 --> signatories --> insert --> email -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 15:09:37 --> signatories --> insert --> approver_id -->  --> 10
+Admin, Teemworx (admin) --> 2020-03-30 15:09:38 --> signatories --> insert --> condition -->  --> All
+Admin, Teemworx (admin) --> 2020-03-30 15:09:38 --> signatories --> insert --> class_id -->  --> 12
+Admin, Teemworx (admin) --> 2020-03-30 15:09:38 --> signatories --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 15:09:38 --> signatories --> insert --> company_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-03-30 15:09:38 --> signatories --> insert --> department_id -->  --> 23
+Admin, Teemworx (admin) --> 2020-03-30 15:09:38 --> signatories --> insert --> position_id -->  --> 16
+Admin, Teemworx (admin) --> 2020-03-30 15:09:38 --> signatories --> insert --> user_id -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 15:09:38 --> signatories --> insert --> alias -->  --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 15:09:38 --> signatories --> insert --> employee -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 15:10:18 --> signatories --> update --> alias --> Garcia, Justin Johannes --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 15:12:07 --> signatories --> insert --> approver -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 15:12:07 --> signatories --> insert --> email -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 15:12:07 --> signatories --> insert --> approver_id -->  --> 10
+Admin, Teemworx (admin) --> 2020-03-30 15:12:07 --> signatories --> insert --> condition -->  --> All
+Admin, Teemworx (admin) --> 2020-03-30 15:12:07 --> signatories --> insert --> class_id -->  --> 19
+Admin, Teemworx (admin) --> 2020-03-30 15:12:08 --> signatories --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 15:12:08 --> signatories --> insert --> company_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-03-30 15:12:08 --> signatories --> insert --> department_id -->  --> 23
+Admin, Teemworx (admin) --> 2020-03-30 15:12:08 --> signatories --> insert --> position_id -->  --> 16
+Admin, Teemworx (admin) --> 2020-03-30 15:12:08 --> signatories --> insert --> user_id -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 15:12:08 --> signatories --> insert --> alias -->  --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 15:12:08 --> signatories --> insert --> employee -->  --> 13
+Admin, Teemworx (admin) --> 2020-03-30 15:12:49 --> signatories --> update --> alias --> Garcia, Justin Johannes --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 15:13:46 --> signatories --> update --> approver --> 0 --> 1
+Admin, Teemworx (admin) --> 2020-03-30 15:13:46 --> signatories --> update --> email --> 0 --> 1
+Admin, Teemworx (admin) --> 2020-03-30 15:13:46 --> signatories --> update --> alias --> Garcia, Justin Johannes --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 15:14:53 --> signatories --> update --> alias --> Garcia, Justin Johannes --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 15:19:27 --> signatories --> update --> alias --> Garcia, Justin Johannes --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 15:25:09 --> signatories --> update --> alias --> Garcia, Justin Johannes --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 15:25:41 --> signatories --> update --> condition --> ALL --> All
+Admin, Teemworx (admin) --> 2020-03-30 15:25:41 --> signatories --> update --> alias --> Garcia, Justin Johannes --> Garcia, Justin Johannes 
+Admin, Teemworx (admin) --> 2020-03-30 15:28:10 --> signatories --> update --> email --> 0 --> 1
+Admin, Teemworx (admin) --> 2020-03-30 15:28:10 --> signatories --> update --> approver_id --> 10 --> 12
+Admin, Teemworx (admin) --> 2020-03-30 15:28:10 --> signatories --> update --> alias --> Garcia, Justin Johannes --> Garcia, Elaine 
+Admin, Teemworx (admin) --> 2020-03-30 15:31:14 --> signatories --> insert --> approver -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 15:31:14 --> signatories --> insert --> email -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 15:31:14 --> signatories --> insert --> approver_id -->  --> 10

@@ -1,0 +1,15 @@
+Admin, Teemworx (admin) --> 2020-05-04 13:49:18 --> signatories --> insert --> approver -->  --> 1
+Admin, Teemworx (admin) --> 2020-05-04 13:49:18 --> signatories --> insert --> email -->  --> 1
+Admin, Teemworx (admin) --> 2020-05-04 13:49:19 --> signatories --> insert --> approver_id -->  --> 54
+Admin, Teemworx (admin) --> 2020-05-04 13:49:19 --> signatories --> insert --> condition -->  --> All
+Admin, Teemworx (admin) --> 2020-05-04 13:49:19 --> signatories --> insert --> class_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-05-04 13:49:19 --> signatories --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-05-04 13:49:19 --> signatories --> insert --> company_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-05-04 15:42:39 --> signatories --> insert --> approver -->  --> 1
+Admin, Teemworx (admin) --> 2020-05-04 15:42:40 --> signatories --> insert --> email -->  --> 1
+Admin, Teemworx (admin) --> 2020-05-04 15:42:40 --> signatories --> insert --> approver_id -->  --> 54
+Admin, Teemworx (admin) --> 2020-05-04 15:42:40 --> signatories --> insert --> condition -->  --> All
+Admin, Teemworx (admin) --> 2020-05-04 15:42:40 --> signatories --> insert --> class_id -->  --> 2
+Admin, Teemworx (admin) --> 2020-05-04 15:42:40 --> signatories --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-05-04 15:42:40 --> signatories --> insert --> company_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-05-04 15:42:40 --> signatories --> insert --> department_id -->  --> 1

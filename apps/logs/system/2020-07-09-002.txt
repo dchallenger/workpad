@@ -1,0 +1,73 @@
+Reyes, Naisa (33798) --> 2020-07-09 17:54:23 --> performance_planning --> insert --> template_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-09 17:54:23 --> performance_planning --> insert --> filter_by -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 17:54:23 --> performance_planning --> insert --> filter_id -->  --> 1,2
+Reyes, Naisa (33798) --> 2020-07-09 17:54:23 --> performance_planning --> insert --> user_id -->  --> 57
+Reyes, Naisa (33798) --> 2020-07-09 17:54:23 --> performance_planning --> insert --> planning_id -->  --> 3
+Reyes, Naisa (33798) --> 2020-07-09 17:55:03 --> performance_planning --> insert --> year -->  --> 2020
+Reyes, Naisa (33798) --> 2020-07-09 17:55:03 --> performance_planning --> insert --> performance_type_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 17:55:03 --> performance_planning --> insert --> date_from -->  --> 2020-07-01
+Reyes, Naisa (33798) --> 2020-07-09 17:55:03 --> performance_planning --> insert --> date_to -->  --> 2020-07-31
+Reyes, Naisa (33798) --> 2020-07-09 17:55:03 --> performance_planning --> insert --> status_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 17:55:03 --> performance_planning --> insert --> notes -->  --> test
+Reyes, Naisa (33798) --> 2020-07-09 17:55:03 --> performance_planning --> insert --> template_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-09 17:55:03 --> performance_planning --> insert --> filter_by -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 17:55:03 --> performance_planning --> insert --> filter_id -->  --> 1,2
+Reyes, Naisa (33798) --> 2020-07-09 17:55:03 --> performance_planning --> insert --> user_id -->  --> 57
+Reyes, Naisa (33798) --> 2020-07-09 17:55:03 --> performance_planning --> insert --> planning_id -->  --> 4
+Reyes, Naisa (33798) --> 2020-07-09 17:56:45 --> performance_planning --> insert --> year -->  --> 2020
+Reyes, Naisa (33798) --> 2020-07-09 17:56:45 --> performance_planning --> insert --> performance_type_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 17:56:45 --> performance_planning --> insert --> date_from -->  --> 2020-07-01
+Reyes, Naisa (33798) --> 2020-07-09 17:56:45 --> performance_planning --> insert --> date_to -->  --> 2020-07-31
+Reyes, Naisa (33798) --> 2020-07-09 17:56:45 --> performance_planning --> insert --> status_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 17:56:45 --> performance_planning --> insert --> notes -->  --> test
+Reyes, Naisa (33798) --> 2020-07-09 17:56:45 --> performance_planning --> insert --> template_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-09 17:56:45 --> performance_planning --> insert --> filter_by -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 17:56:46 --> performance_planning --> insert --> filter_id -->  --> 1,2
+Reyes, Naisa (33798) --> 2020-07-09 17:56:46 --> performance_planning --> insert --> user_id -->  --> 57
+Reyes, Naisa (33798) --> 2020-07-09 17:56:46 --> performance_planning --> insert --> planning_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 18:11:14 --> appraisal_template --> insert --> template_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-09 18:11:15 --> appraisal_template --> insert --> template_section -->  --> Leadership
+Reyes, Naisa (33798) --> 2020-07-09 18:11:15 --> appraisal_template --> insert --> parent_id -->  --> 5
+Reyes, Naisa (33798) --> 2020-07-09 18:11:15 --> appraisal_template --> insert --> sequence -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-09 18:11:15 --> appraisal_template --> insert --> weight -->  --> 25
+Reyes, Naisa (33798) --> 2020-07-09 18:11:15 --> appraisal_template --> insert --> section_type_id -->  --> 3
+Reyes, Naisa (33798) --> 2020-07-09 18:13:35 --> appraisal_template --> update --> weight --> 25 --> 2.5
+Reyes, Naisa (33798) --> 2020-07-09 18:14:43 --> appraisal_template --> update --> weight --> 3.00 --> 2.5
+Reyes, Naisa (33798) --> 2020-07-09 18:15:52 --> appraisal_template --> insert --> template_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-09 18:15:52 --> appraisal_template --> insert --> template_section -->  --> Corporate Values
+Reyes, Naisa (33798) --> 2020-07-09 18:15:52 --> appraisal_template --> insert --> parent_id -->  --> 5
+Reyes, Naisa (33798) --> 2020-07-09 18:15:52 --> appraisal_template --> insert --> sequence -->  --> 3
+Reyes, Naisa (33798) --> 2020-07-09 18:15:52 --> appraisal_template --> insert --> weight -->  --> 5
+Reyes, Naisa (33798) --> 2020-07-09 18:15:52 --> appraisal_template --> insert --> section_type_id -->  --> 3
+Reyes, Naisa (33798) --> 2020-07-09 18:16:58 --> appraisal_template --> insert --> template_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-09 18:16:58 --> appraisal_template --> insert --> template_section -->  --> Core Competencies
+Reyes, Naisa (33798) --> 2020-07-09 18:16:58 --> appraisal_template --> insert --> parent_id -->  --> 5
+Reyes, Naisa (33798) --> 2020-07-09 18:16:58 --> appraisal_template --> insert --> sequence -->  --> 4
+Reyes, Naisa (33798) --> 2020-07-09 18:16:58 --> appraisal_template --> insert --> weight -->  --> 2.5
+Reyes, Naisa (33798) --> 2020-07-09 18:16:58 --> appraisal_template --> insert --> section_type_id -->  --> 3
+Reyes, Naisa (33798) --> 2020-07-09 18:18:43 --> appraisal_template --> insert --> template_section_id -->  --> 7
+Reyes, Naisa (33798) --> 2020-07-09 18:18:43 --> appraisal_template --> insert --> title -->  --> Competencies / Values
+Reyes, Naisa (33798) --> 2020-07-09 18:18:44 --> appraisal_template --> insert --> sequence -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 18:18:44 --> appraisal_template --> insert --> width -->  --> 20
+Reyes, Naisa (33798) --> 2020-07-09 18:18:44 --> appraisal_template --> insert --> uitype_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 18:18:59 --> appraisal_template --> insert --> template_section_id -->  --> 8
+Reyes, Naisa (33798) --> 2020-07-09 18:18:59 --> appraisal_template --> insert --> title -->  --> Competencies / Values
+Reyes, Naisa (33798) --> 2020-07-09 18:18:59 --> appraisal_template --> insert --> sequence -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 18:18:59 --> appraisal_template --> insert --> width -->  --> 20
+Reyes, Naisa (33798) --> 2020-07-09 18:18:59 --> appraisal_template --> insert --> uitype_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 18:19:14 --> appraisal_template --> insert --> template_section_id -->  --> 9
+Reyes, Naisa (33798) --> 2020-07-09 18:19:14 --> appraisal_template --> insert --> title -->  --> Competencies / Values
+Reyes, Naisa (33798) --> 2020-07-09 18:19:14 --> appraisal_template --> insert --> sequence -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 18:19:15 --> appraisal_template --> insert --> width -->  --> 20
+Reyes, Naisa (33798) --> 2020-07-09 18:19:15 --> appraisal_template --> insert --> uitype_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 18:20:29 --> performance_planning --> insert --> year -->  --> 2020
+Reyes, Naisa (33798) --> 2020-07-09 18:20:29 --> performance_planning --> insert --> performance_type_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 18:20:29 --> performance_planning --> insert --> date_from -->  --> 2020-06-30
+Reyes, Naisa (33798) --> 2020-07-09 18:20:29 --> performance_planning --> insert --> date_to -->  --> 2020-07-31
+Reyes, Naisa (33798) --> 2020-07-09 18:20:29 --> performance_planning --> insert --> status_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 18:20:30 --> performance_planning --> insert --> notes -->  --> test
+Reyes, Naisa (33798) --> 2020-07-09 18:20:30 --> performance_planning --> insert --> template_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-07-09 18:20:30 --> performance_planning --> insert --> filter_by -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-09 18:20:30 --> performance_planning --> insert --> filter_id -->  --> 1,2
+Reyes, Naisa (33798) --> 2020-07-09 18:20:30 --> performance_planning --> insert --> user_id -->  --> 57
+Reyes, Naisa (33798) --> 2020-07-09 18:20:30 --> performance_planning --> insert --> planning_id -->  --> 1

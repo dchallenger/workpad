@@ -1,0 +1,36 @@
+<tr class="record">
+    <?php if($can_delete != 0 ): ?>
+    <td>
+        <div>
+            <input type="checkbox" class="record-checker checkboxes" value="<?php echo $record_id; ?>">
+        </div>
+    </td>
+    <?php else: ?>
+    <td>
+        <div>
+        </div>
+    </td>
+    <?php endif; ?>
+    <td>
+        <a href="<?php echo $detail_url; ?>">
+            <?php echo $roles_role; ?>
+        </a>
+    </td>
+    <td>
+        <?php echo $roles_description; ?>
+    </td>
+    <!-- <td>
+        
+    </td> -->
+    <td>
+        <div class="btn-group">
+            <a class="btn btn-xs text-muted" href="<?php echo $edit_url; ?>"><i class="fa fa-pencil"></i> <?php echo lang('roles.edit'); ?></a>
+        </div>
+        <div class="btn-group">
+            <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> <?php echo lang('roles.options'); ?></a>
+            <ul class="dropdown-menu pull-right">
+                <?php echo $options; ?>
+            </ul>
+        </div>
+    </td>
+</tr>

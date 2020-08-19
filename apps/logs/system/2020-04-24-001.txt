@@ -1,0 +1,48 @@
+Admin, Teemworx (admin) --> 2020-04-24 09:16:04 --> partners --> insert --> partner_id -->  --> 3
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_id -->  --> 60
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key -->  --> training-category
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_name -->  --> Category
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_value -->  --> Training
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> partner_id -->  --> 3
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_id -->  --> 59
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key -->  --> training-title
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_name -->  --> Title
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_value -->  --> Training ko sa baguio
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> partner_id -->  --> 3
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_id -->  --> 61
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key -->  --> training-venue
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_name -->  --> Venue
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_value -->  --> Baguio
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> partner_id -->  --> 3
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_id -->  --> 66
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key -->  --> training-start-month
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_name -->  --> Start Month
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_value -->  --> January
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> partner_id -->  --> 3
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_id -->  --> 62
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key -->  --> training-start-year
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_name -->  --> Start Year
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_value -->  --> 2010
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> partner_id -->  --> 3
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_id -->  --> 67
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key -->  --> training-end-month
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_name -->  --> End Month
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_value -->  --> June
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> partner_id -->  --> 3
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key_id -->  --> 63
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> key -->  --> training-end-year
+Admin, Teemworx (admin) --> 2020-04-24 09:16:05 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-04-24 09:16:06 --> partners --> insert --> key_name -->  --> End Year
+Admin, Teemworx (admin) --> 2020-04-24 09:16:06 --> partners --> insert --> key_value -->  --> 2012
+Admin, Teemworx (admin) --> 2020-04-24 09:16:06 --> partners --> insert --> partner_id -->  --> 3
+Admin, Teemworx (admin) --> 2020-04-24 09:16:06 --> partners --> insert --> key_id -->  --> 147
+Admin, Teemworx (admin) --> 2020-04-24 09:16:06 --> partners --> insert --> key -->  --> training-remarks
+Admin, Teemworx (admin) --> 2020-04-24 09:16:06 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-04-24 09:16:06 --> partners --> insert --> key_name -->  --> Remarks
+Admin, Teemworx (admin) --> 2020-04-24 09:16:06 --> partners --> insert --> key_value -->  --> test

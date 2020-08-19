@@ -1,0 +1,7 @@
+2020-07-16 14:02:10 --> authentication --> login --> login -->  --> 
+2020-07-16 14:02:39 --> appraisal_individual_planning --> insert --> planning_id -->  --> 1
+2020-07-16 14:02:39 --> appraisal_individual_planning --> insert --> user_id -->  --> 57
+2020-07-16 14:02:39 --> appraisal_individual_planning --> insert --> notes -->  --> afd
+2020-07-16 14:02:49 --> authentication --> logout --> logout -->  --> 
+2020-07-16 14:03:39 --> authentication --> login --> login -->  --> 
+2020-07-16 14:05:23 --> authentication --> logout --> logout -->  --> 

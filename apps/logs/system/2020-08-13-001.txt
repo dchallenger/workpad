@@ -1,0 +1,22 @@
+Reyes, Naisa (33798) --> 2020-08-13 03:26:29 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-13 05:02:29 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-08-13 05:02:42 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-08-13 06:39:38 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-08-13 06:39:50 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-13 07:32:28 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-08-13 07:32:36 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-08-13 07:33:04 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-08-13 07:33:13 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-13 07:36:58 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-08-13 07:37:09 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-08-13 07:37:59 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-08-13 07:38:08 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-13 09:03:07 --> my201 --> insert --> user_id -->  --> 56
+Reyes, Naisa (33798) --> 2020-08-13 09:03:07 --> my201 --> insert --> key_id -->  --> 25
+Reyes, Naisa (33798) --> 2020-08-13 09:03:07 --> my201 --> insert --> sequence -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-13 09:03:07 --> my201 --> insert --> key_value -->  --> catholic
+Reyes, Naisa (33798) --> 2020-08-13 09:03:07 --> my201 --> insert --> status -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-13 09:34:34 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-08-13 09:34:39 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-08-13 09:41:34 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-08-13 09:41:41 --> authentication --> login --> login -->  --> 

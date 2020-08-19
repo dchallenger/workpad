@@ -1,0 +1,48 @@
+2020-04-24 09:16:05 --> partners --> insert --> partner_id -->  --> 3
+2020-04-24 09:16:05 --> partners --> insert --> key_id -->  --> 60
+2020-04-24 09:16:05 --> partners --> insert --> key -->  --> training-category
+2020-04-24 09:16:05 --> partners --> insert --> sequence -->  --> 1
+2020-04-24 09:16:05 --> partners --> insert --> key_name -->  --> Category
+2020-04-24 09:16:05 --> partners --> insert --> key_value -->  --> Training
+2020-04-24 09:16:05 --> partners --> insert --> partner_id -->  --> 3
+2020-04-24 09:16:05 --> partners --> insert --> key_id -->  --> 59
+2020-04-24 09:16:05 --> partners --> insert --> key -->  --> training-title
+2020-04-24 09:16:05 --> partners --> insert --> sequence -->  --> 1
+2020-04-24 09:16:05 --> partners --> insert --> key_name -->  --> Title
+2020-04-24 09:16:05 --> partners --> insert --> key_value -->  --> Training ko sa baguio
+2020-04-24 09:16:05 --> partners --> insert --> partner_id -->  --> 3
+2020-04-24 09:16:05 --> partners --> insert --> key_id -->  --> 61
+2020-04-24 09:16:05 --> partners --> insert --> key -->  --> training-venue
+2020-04-24 09:16:05 --> partners --> insert --> sequence -->  --> 1
+2020-04-24 09:16:05 --> partners --> insert --> key_name -->  --> Venue
+2020-04-24 09:16:05 --> partners --> insert --> key_value -->  --> Baguio
+2020-04-24 09:16:05 --> partners --> insert --> partner_id -->  --> 3
+2020-04-24 09:16:05 --> partners --> insert --> key_id -->  --> 66
+2020-04-24 09:16:05 --> partners --> insert --> key -->  --> training-start-month
+2020-04-24 09:16:05 --> partners --> insert --> sequence -->  --> 1
+2020-04-24 09:16:05 --> partners --> insert --> key_name -->  --> Start Month
+2020-04-24 09:16:05 --> partners --> insert --> key_value -->  --> January
+2020-04-24 09:16:05 --> partners --> insert --> partner_id -->  --> 3
+2020-04-24 09:16:05 --> partners --> insert --> key_id -->  --> 62
+2020-04-24 09:16:05 --> partners --> insert --> key -->  --> training-start-year
+2020-04-24 09:16:05 --> partners --> insert --> sequence -->  --> 1
+2020-04-24 09:16:05 --> partners --> insert --> key_name -->  --> Start Year
+2020-04-24 09:16:05 --> partners --> insert --> key_value -->  --> 2010
+2020-04-24 09:16:05 --> partners --> insert --> partner_id -->  --> 3
+2020-04-24 09:16:05 --> partners --> insert --> key_id -->  --> 67
+2020-04-24 09:16:05 --> partners --> insert --> key -->  --> training-end-month
+2020-04-24 09:16:05 --> partners --> insert --> sequence -->  --> 1
+2020-04-24 09:16:05 --> partners --> insert --> key_name -->  --> End Month
+2020-04-24 09:16:05 --> partners --> insert --> key_value -->  --> June
+2020-04-24 09:16:05 --> partners --> insert --> partner_id -->  --> 3
+2020-04-24 09:16:05 --> partners --> insert --> key_id -->  --> 63
+2020-04-24 09:16:05 --> partners --> insert --> key -->  --> training-end-year
+2020-04-24 09:16:06 --> partners --> insert --> sequence -->  --> 1
+2020-04-24 09:16:06 --> partners --> insert --> key_name -->  --> End Year
+2020-04-24 09:16:06 --> partners --> insert --> key_value -->  --> 2012
+2020-04-24 09:16:06 --> partners --> insert --> partner_id -->  --> 3
+2020-04-24 09:16:06 --> partners --> insert --> key_id -->  --> 147
+2020-04-24 09:16:06 --> partners --> insert --> key -->  --> training-remarks
+2020-04-24 09:16:06 --> partners --> insert --> sequence -->  --> 1
+2020-04-24 09:16:06 --> partners --> insert --> key_name -->  --> Remarks
+2020-04-24 09:16:06 --> partners --> insert --> key_value -->  --> test

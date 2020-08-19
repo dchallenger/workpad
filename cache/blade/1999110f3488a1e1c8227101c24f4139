@@ -1,0 +1,46 @@
+<tr class="record">
+    <td>
+        <a class="text-success" href="<?php echo $edit_url; ?>"><?php echo str_replace(',', '<br>', $system_email_queue_to); ?></a>
+        <br>
+    	<?php if( !empty($system_email_queue_timein) ): ?>
+        	<span class="text-muted small"><?php echo $system_email_queue_timein; ?></span>
+        <?php endif; ?>
+    </td>
+    <td>
+        <span ><?php echo $system_email_queue_subject; ?></span>
+    </td>
+    <td>
+    	<?php if( $system_email_queue_status == 'sent' ): ?>
+			<span class="badge badge-success"><?php echo ucwords( $system_email_queue_status ); ?></span>
+        <?php elseif($system_email_queue_status == 'sending'): ?>
+            <span class="badge badge-info"><?php echo ucwords( $system_email_queue_status ); ?></span>
+    	<?php else: ?>
+			<span class="badge badge-warning"><?php echo ucwords( $system_email_queue_status ); ?></span>
+    	<?php endif; ?>
+    </td>
+    <td>
+    	<?php if( !empty($system_email_queue_sent_on) ): ?>
+	        <?php echo date( 'M-d', strtotime( $system_email_queue_sent_on ) ); ?>
+	        <span class="text-muted small">
+	            <?php echo date( 'D', strtotime( $system_email_queue_sent_on ) ); ?>
+	        </span>
+	        <br>
+	        <span class="text-muted small">
+	        	<?php echo date( 'Y', strtotime( $system_email_queue_sent_on ) ); ?>
+	        </span>
+        <?php endif; ?>
+    </td>
+    <td>
+        <div class="btn-group">
+            <a class="btn btn-xs text-muted" href="<?php echo $quickview_url; ?>"><i class="fa fa-search"></i> View</a>
+        </div>
+        <!-- <?php if( !empty($options) ): ?>
+            <div class="btn-group">
+                <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> Options</a>
+                <ul class="dropdown-menu pull-right">
+                    <?php echo $options; ?>
+                </ul>
+            </div>
+        <?php endif; ?> -->
+    </td>
+</tr>

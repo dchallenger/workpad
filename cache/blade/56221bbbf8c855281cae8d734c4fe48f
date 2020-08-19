@@ -1,0 +1,33 @@
+<tr class="record">
+    <td class="hidden-xs">
+	<input type="checkbox" value="<?php echo $record_id; ?>" class="record-checker checkboxes">
+    </td>
+
+    <td>
+        <?php echo $memo_memo_title; ?>
+    </td>
+
+    <td class="hidden-xs">
+        <?php echo $memo_memo_type_id; ?>
+    </td>
+
+    <td>
+        <?php echo $memo_publish_from; ?> to <?php echo $memo_publish_to; ?>
+    </td>
+    
+    <td>
+        <?php if( isset( $permission['edit'] ) && $permission['edit'] ): ?>
+        <div class="btn-group">
+            <a class="btn btn-xs text-muted" href="<?php echo $edit_url; ?>"><i class="fa fa-pencil"></i> Edit</a>
+        </div>
+        <?php endif; ?>
+        <?php if( !empty( $options ) ): ?>
+        <div class="btn-group">
+            <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> Options</a>
+            <ul class="dropdown-menu pull-right">
+                <?php echo $options; ?>
+            </ul>
+        </div>
+        <?php endif; ?>
+    </td>
+</tr>

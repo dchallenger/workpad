@@ -1,0 +1,4 @@
+<th width="15%"><?php echo lang('annual_manpower_planning.year'); ?></th>
+<th class="hidden-xs" width="30%"><?php echo lang('annual_manpower_planning.company'); ?></th>
+<th class="hidden-xs" width="20%"><?php echo lang('annual_manpower_planning.created_by'); ?></th>
+<th class="hidden-xs" width="15%"><?php echo lang('common.status'); ?></th>

@@ -1,0 +1,11 @@
+Admin, Emplopad (admin) --> 2020-06-09 09:15:48 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-06-09 01:21:55 --> report_generator --> update --> report_code --> AESR --> ESR
+Admin, Emplopad (admin) --> 2020-06-09 01:21:55 --> report_generator --> update --> report_name --> Active Employee Summary Report --> Employee Summary Report
+Admin, Emplopad (admin) --> 2020-06-09 01:21:55 --> report_generator --> update --> description --> Active Employee Summary Report --> Employee Summary Report
+Admin, Emplopad (admin) --> 2020-06-09 13:14:20 --> menu_manager --> insert --> label -->  --> Loan Application
+Admin, Emplopad (admin) --> 2020-06-09 13:14:21 --> menu_manager --> insert --> icon -->  --> fa-money
+Admin, Emplopad (admin) --> 2020-06-09 13:14:21 --> menu_manager --> insert --> parent_menu_item_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-06-09 13:14:21 --> menu_manager --> insert --> menu_item_type_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-09 13:14:21 --> menu_manager --> insert --> mod_id -->  --> 54
+Admin, Emplopad (admin) --> 2020-06-09 13:19:20 --> module --> insert --> short_name -->  --> Loan Appllication
+Admin, Emplopad (admin) --> 2020-06-09 13:19:20 --> module --> insert --> long_name -->  --> Loan Appllication

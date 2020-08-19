@@ -1,0 +1,2 @@
+<th width="25%"><?php echo lang('transaction_class.class_code'); ?></th>
+<th width="30%"><?php echo lang('transaction_class.class_name'); ?></th>

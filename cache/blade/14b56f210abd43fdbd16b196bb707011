@@ -1,0 +1,68 @@
+
+<?php $__env->startSection('page_styles'); ?>
+	@parent
+	<?php echo $__env->make('edit/page_styles', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page-breadcrumb'); ?>
+	<ul class="page-breadcrumb breadcrumb">
+		<?php $__env->startSection('page-breadcrumb-back'); ?>
+			<li class="btn-group">
+				<a href="<?php echo get_mod_route('user_manager'); ?>"><button class="btn blue" type="button">
+				<span><?php echo lang('position.back'); ?></span>
+				</button></a>
+			</li>
+		<?php echo $__env->yieldSection(); ?>
+		<li>
+			<i class="fa fa-home"></i>
+			<a href="<?php echo base_url(''); ?>"><?php echo lang('position.home'); ?></a> 
+			<i class="fa fa-angle-right"></i>
+		</li>
+		<li>
+			<a href="<?php echo get_mod_route('user_manager'); ?>"><?php echo lang('position.user_manager'); ?></a>
+			<i class="fa fa-angle-right"></i>
+		</li>
+		<li>
+			<!-- jlm i class="fa <?php echo $mod->icon; ?>"></i -->
+			<a href="<?php echo $mod->url; ?>"><?php echo $mod->long_name; ?></a>
+			<?php if( $mod->method != "index" ): ?>
+				<i class="fa fa-angle-right"></i>
+			<?php endif; ?>
+		</li>
+		<?php if( $mod->method != "index" ): ?>
+			<li><?php echo ucwords( $mod->method ); ?></li>
+		<?php endif; ?>
+	</ul>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page_content'); ?>
+	@parent
+
+	<div class="row">
+        <div class="col-md-11">
+			<form class="form-horizontal">
+				<input type="hidden" id="record_id" name="record_id" value="<?php echo $record_id; ?>">
+				<?php echo $__env->make('edit/fgs', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+				<?php echo $__env->make('buttons/edit', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+			</form>
+       	</div>  
+    		
+	</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page_plugins'); ?>
+	@parent
+	<?php echo $__env->make('edit/page_plugins', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page_scripts'); ?>
+	@parent
+	<?php echo $__env->make('edit/page_scripts', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<script type="text/javascript" src="<?php echo theme_path(); ?>modules/common/edit.js"></script> 
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('view_js'); ?>
+	@parent
+	<?php echo get_edit_js( $mod ); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts/master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

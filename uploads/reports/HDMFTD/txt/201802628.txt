@@ -1,0 +1,17 @@
+EH10201802201752620006   PMCNFS Foundation Ministry                                                                                2650 A. Bonifacio St., Bangkal, Makati City                                                         1233   8893935
+DT1471117525  00498          VELARDE                       DIVINA                        DE GUZMAN                     240.00       100.00       115871543      00000000
+DT1471168405  00961          DONES                         JASMIN                        ARAQUE                        380.00       100.00       153439650      00000000
+DT1471125327  01219          LABAPIS                       WILFREDO                      FERNANDEZ                     294.00       100.00       189140501      00000000
+DT1471115255  01371          YAGUE                         NATHANAEL                     TABANIAG                      1032.00      100.00       902309917      19700101
+DT10200064762701978          BUSCANO                       EDELYN                        ARTIAGA                       220.00       100.00       240302710      19851125
+DT10400169616702014          DEL ROSARIO                   GEMILIANO                     CASTILLO                      239.66       100.00       228170590      19611027
+DT1471210872  02139          VARGAS                        DANTE                         CUBINAR                       372.00       100.00       135479798      00000000
+DT12101579667630017          VERGARA                       STANLEY                       BUSTILLO                      398.00       100.00       197386466      20091129
+DT12105745903030047          MORALES                       RICARDO                       ALFONSO                       200.00       100.00       918632319      19770127
+DT12106001106630091          NAGALES                       ALBERTO                       ABOBOTO                       550.00       100.00       130965963      00000000
+DT12105869857931107          MOJICA                        ARNIE JOSE                    ODANG                         100.00       100.00       172135587      19700901
+DT12103704390831233          BAMBO                         FERNANDO                      GARCIA                        100.00       100.00       206920514      19730513
+DT10900036546232532          ESTUESTA                      ROMEL                         NACAR                         100.00       100.00       133864699      19701204
+DT00071046641032879          MONES                         JONATHAN                      AQUINO                        100.00       100.00       157065804      19730714
+DT12109396475232880          PANCHO                        PAULINO                       JERESANO                      100.00       100.00       403108797      19780814
+DT12108743263032930          CABUS                         JENNIFER                      SARINAS                       100.00       100.00       271303458      19840522

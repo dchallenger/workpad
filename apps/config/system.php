@@ -1,0 +1,20 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+$config['system'] = array();
+$config['system']['themes_path'] = "base_path() . '/themes/'";
+$config['system']['application_title'] = "OCLP Holdings, Inc.";
+$config['system']['use_logo'] = 1;
+$config['system']['logo'] = "uploads/system/login/20140414184210_oclp-logo (1).jpg";
+$config['system']['author'] = "Tirso garcia jr.";
+$config['system']['footer'] = "© Emplopad";
+$config['system']['copyright_details'] = "© Emplopad";
+$config['system']['description'] = "emplopad";
+$config['system']['keywords'] = "emplopad";
+$config['system']['copyright'] = "© Emplopad";
+$config['system']['URL'] = "http://hris.abrahamholdings.ph/emplopad/";
+$config['system']['header_logo'] = "uploads/system/header/emplopad_header.png";
+$config['system']['print_logo'] = "";
+$config['system']['bg_image'] = "assets/img/bg/3.jpg";
+$config['system']['bg_image'] = "assets/img/bg/abraham_preview.jpg";
+$config['system']['bg_image'] = "assets/img/bg/abraham_preview_1.jpg";
+$config['system']['bg_image'] = "assets/img/bg/abraham_preview_2.jpg";

@@ -1,0 +1,15 @@
+2020-04-30 10:58:39 --> section --> insert --> section -->  --> User Support
+2020-04-30 10:58:39 --> section --> insert --> section_code -->  --> UST
+2020-04-30 10:58:39 --> section --> insert --> status_id -->  --> 1
+2020-04-30 14:30:57 --> signatories --> insert --> approver -->  --> 1
+2020-04-30 14:30:57 --> signatories --> insert --> email -->  --> 1
+2020-04-30 14:30:57 --> signatories --> insert --> approver_id -->  --> 54
+2020-04-30 14:30:57 --> signatories --> insert --> condition -->  --> All
+2020-04-30 14:30:57 --> signatories --> insert --> class_id -->  --> 2
+2020-04-30 14:30:57 --> signatories --> insert --> sequence -->  --> 1
+2020-04-30 14:30:57 --> signatories --> insert --> company_id -->  --> 2
+2020-04-30 14:34:34 --> partners --> update --> role_id --> 25 --> 11
+2020-04-30 14:34:35 --> partners --> update --> start_date --> 0000-00-00 --> 1970-01-01
+2020-04-30 14:34:35 --> partners --> update --> end_date --> 0000-00-00 --> 1970-01-01
+2020-04-30 14:34:59 --> authentication --> logout --> logout -->  --> 
+2020-04-30 14:36:53 --> authentication --> login --> login -->  --> 

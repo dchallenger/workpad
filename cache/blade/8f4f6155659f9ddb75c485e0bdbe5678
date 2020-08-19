@@ -1,0 +1,84 @@
+<tr class="record">
+	<td>
+		<?php echo $performance_appraisal_year; ?>
+	</td>
+	<td>
+		<?php
+			$href = $mod->url . '/review/'.$record_id.'/'.$user_id;		
+		?>
+		<a class="text-success" href="<?php echo $href; ?>">
+			<?php 
+                $image_dir_thumb = FCPATH.'uploads/users/thumbnail/';
+                $image_dir_full  = FCPATH.'uploads/users/';
+
+                $avatar = basename(base_url( $photo ));
+
+                $file_name_thumbnail = $image_dir_thumb . $avatar;
+                $file_name_full = $image_dir_full . $avatar;
+
+                if(file_exists(urldecode($file_name_thumbnail))){
+                    $avatar = base_url() . "uploads/users/thumbnail/" . $avatar;
+                }
+                else if(file_exists($file_name_full)){
+                    $avatar = base_url() . "uploads/users/" . $avatar;
+                }
+                else{
+                    $avatar = base_url() . "uploads/users/avatar.png";
+                }			
+			?>
+			<span class="pull-left margin-right-10"><img src="<?php echo $avatar; ?>" alt="photo" width="48px" /></span>
+			<span class="pull-left">
+				<?php echo $fullname; ?>
+				<br>
+				<span class="small text-muted" id="date_set">
+					<?php echo $performance_type; ?> / <?php echo date('M d, Y', strtotime( $performance_appraisal_date_from ) ); ?> to <?php echo date('M d, Y', strtotime( $performance_appraisal_date_to ) ); ?>
+				</span>				
+			</span>
+		</a>
+	</td>
+	<!-- <td class="hidden-xs">
+		<a class="text-success" href="<?php echo $edit_url; ?>/<?php echo $user_id; ?>"><?php echo $performance_type; ?></a>
+		<br>
+		<span class="small" id="date_set"><?php echo date('M d, Y', strtotime( $performance_appraisal_date_from ) ); ?> to <?php echo date('M d, Y', strtotime( $performance_appraisal_date_to ) ); ?></span>
+	</td> -->
+	<!-- <td>
+		<span class="badge badge-info"><?php echo $crowdsource; ?></span>
+	</td> -->
+	<td class="hidden-xs">
+		<?php	
+			$href = $mod->url . '/review/'.$record_id.'/'.$user_id;
+			switch($performance_appraisal_performance_status_id){
+				case 1: //Draft
+				case 3: //Draft
+					$color_class = 'yellow';
+				break;
+				case 6: //For Employees Review
+					$color_class = 'yellow';
+				break;
+				case 11: //For Immediate Superior Review
+					$color_class = 'yellow';
+				break;
+				case 2: //For Approval
+					$color_class = 'yellow';
+				break;
+				case 4: //Approved
+				case 13: //Approved
+					$color_class = 'green';
+				break;				
+				default:
+					$color_class = 'default';
+				break;
+			}
+		?>
+		<!-- <a href="<?php echo $edit_url; ?>/<?php echo $user_id; ?>"> -->
+			<span class="btn btn-xs text-muted <?php echo $color_class; ?>">
+				<?php echo $performance_appraisal_performance_status; ?>
+			</span>
+		<!-- </a> -->
+	</td>
+	<td>
+        <div class="btn-group">
+        	<a class="small text-muted" href="<?php echo $href; ?>"><i class="fa fa-search"></i> <?php echo lang('common.view'); ?></a>
+        </div>
+    </td>
+</tr>

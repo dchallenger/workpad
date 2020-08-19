@@ -1,0 +1,95 @@
+Admin, Emplopad (admin) --> 2020-06-23 13:38:30 --> profiles --> edit --> mod_id -->  --> 122
+Admin, Emplopad (admin) --> 2020-06-23 13:38:30 --> profiles --> edit --> action_id -->  --> 10
+Admin, Emplopad (admin) --> 2020-06-23 13:38:30 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:30 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:30 --> profiles --> edit --> mod_id -->  --> 129
+Admin, Emplopad (admin) --> 2020-06-23 13:38:30 --> profiles --> edit --> action_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-23 13:38:30 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:30 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:31 --> profiles --> edit --> mod_id -->  --> 129
+Admin, Emplopad (admin) --> 2020-06-23 13:38:31 --> profiles --> edit --> action_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:31 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:31 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:31 --> profiles --> edit --> mod_id -->  --> 129
+Admin, Emplopad (admin) --> 2020-06-23 13:38:31 --> profiles --> edit --> action_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-06-23 13:38:31 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:31 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:31 --> profiles --> edit --> mod_id -->  --> 129
+Admin, Emplopad (admin) --> 2020-06-23 13:38:31 --> profiles --> edit --> action_id -->  --> 4
+Admin, Emplopad (admin) --> 2020-06-23 13:38:31 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:31 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:31 --> profiles --> edit --> mod_id -->  --> 129
+Admin, Emplopad (admin) --> 2020-06-23 13:38:31 --> profiles --> edit --> action_id -->  --> 6
+Admin, Emplopad (admin) --> 2020-06-23 13:38:31 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:31 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:31 --> profiles --> edit --> mod_id -->  --> 129
+Admin, Emplopad (admin) --> 2020-06-23 13:38:32 --> profiles --> edit --> action_id -->  --> 7
+Admin, Emplopad (admin) --> 2020-06-23 13:38:32 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:32 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:32 --> profiles --> edit --> mod_id -->  --> 129
+Admin, Emplopad (admin) --> 2020-06-23 13:38:32 --> profiles --> edit --> action_id -->  --> 8
+Admin, Emplopad (admin) --> 2020-06-23 13:38:32 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:32 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:32 --> profiles --> edit --> mod_id -->  --> 129
+Admin, Emplopad (admin) --> 2020-06-23 13:38:32 --> profiles --> edit --> action_id -->  --> 9
+Admin, Emplopad (admin) --> 2020-06-23 13:38:32 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:32 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:32 --> profiles --> edit --> mod_id -->  --> 129
+Admin, Emplopad (admin) --> 2020-06-23 13:38:32 --> profiles --> edit --> action_id -->  --> 10
+Admin, Emplopad (admin) --> 2020-06-23 13:38:32 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:32 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:32 --> profiles --> edit --> mod_id -->  --> 46
+Admin, Emplopad (admin) --> 2020-06-23 13:38:32 --> profiles --> edit --> action_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-23 13:38:32 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> mod_id -->  --> 46
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> action_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> mod_id -->  --> 46
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> action_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> mod_id -->  --> 46
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> action_id -->  --> 4
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> mod_id -->  --> 46
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> action_id -->  --> 6
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> mod_id -->  --> 46
+Admin, Emplopad (admin) --> 2020-06-23 13:38:33 --> profiles --> edit --> action_id -->  --> 7
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> mod_id -->  --> 137
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> action_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> mod_id -->  --> 137
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> action_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> mod_id -->  --> 137
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> action_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> mod_id -->  --> 137
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> action_id -->  --> 4
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:34 --> profiles --> edit --> mod_id -->  --> 137
+Admin, Emplopad (admin) --> 2020-06-23 13:38:35 --> profiles --> edit --> action_id -->  --> 6
+Admin, Emplopad (admin) --> 2020-06-23 13:38:35 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:35 --> profiles --> edit --> profile_id -->  --> 2
+Admin, Emplopad (admin) --> 2020-06-23 13:38:35 --> profiles --> edit --> mod_id -->  --> 137
+Admin, Emplopad (admin) --> 2020-06-23 13:38:35 --> profiles --> edit --> action_id -->  --> 7
+Admin, Emplopad (admin) --> 2020-06-23 13:38:35 --> profiles --> edit --> grant -->  --> on
+Admin, Emplopad (admin) --> 2020-06-23 13:38:45 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-06-23 13:39:04 --> authentication --> login --> login -->  --> 
+Marjorie, Nailog (33799) --> 2020-06-23 13:39:15 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-06-23 13:39:21 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-06-23 13:40:29 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-06-23 13:40:34 --> authentication --> login --> login -->  --> 
+Marjorie, Nailog (33799) --> 2020-06-23 16:24:26 --> authentication --> logout --> logout -->  --> 
+Monis, Marybeth (1101060) --> 2020-06-23 16:24:30 --> authentication --> login --> login -->  --> 

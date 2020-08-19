@@ -1,0 +1,45 @@
+<tr class="record">
+	<td>
+        <div>
+            <input type="checkbox" class="record-checker checkboxes" value="<?php echo $record_id; ?>" />
+        </div>
+    </td>
+	<td>
+		<a id="time_shift_shift" href="<?php echo $edit_url; ?>" class="text-success"><?php echo $time_shift_shift; ?></a><br>
+        <span class="text-muted small"><?php echo $time_shift_time_start . ' to '. $time_shift_time_end; ?></span>
+	</td>
+	<td>
+        <?php $companies = $mod->_get_shift_options( $record_id, true , false, 2); ?>
+        <?php if(empty($companies)): ?>
+            <span id="time_shift_company" class="text-muted small">-</span>
+        <?php else: ?>
+            <?php foreach ($companies as $company): ?>
+                <span id="time_shift_company" class="text-muted small"><?php echo $company; ?> / </span>
+            <?php endforeach; ?>
+        <?php endif; ?>    
+	</td>
+	<!-- td>< ?php $departments = $mod->_get_shift_options( $record_id, true , false, 4); ?>
+        <?php if(empty($departments)): ?>
+            <span id="time_shift_department" class="badge badge-default">All</span>
+        <?php else: ?>
+            <?php foreach ($departments as $department): ?>
+                <span id="time_shift_department" class="badge badge-default"><?php echo $department; ?></span>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </td -->
+	<!-- td class="hidden-xs">
+        <span id="time_shift_color;" class="<?php echo (isset($time_shift_color) && $time_shift_color != '') ? 'badge' : ''; ?>" style="background-color:<?php echo strtoupper($time_shift_color); ?>;"> <?php echo strtoupper($time_shift_color); ?></span>
+    </td -->
+    <td>
+        <div class="btn-group">
+            <a class="btn btn-xs text-muted" href="<?php echo $edit_url; ?>"><i class="fa fa-pencil"></i> Edit</a>
+        </div>
+        <div class="btn-group">
+            <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> Options</a>
+            <ul class="dropdown-menu pull-right">
+                <?php echo $options; ?>
+                <li><a href="<?php echo get_mod_route('shift'). '/shift_policy/'. $record_id; ?>"><i class="fa fa-cogs"></i> Set Policy</a></li>
+            </ul>
+        </div>
+    </td>
+</tr>

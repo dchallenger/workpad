@@ -1,0 +1,77 @@
+Reyes, Naisa (33798) --> 2020-07-16 13:46:28 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 10
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 150
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 150
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> ok added
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 170
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 180
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 190
+Reyes, Naisa (33798) --> 2020-07-16 13:46:29 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Reyes, Naisa (33798) --> 2020-07-16 13:55:46 --> appraisal_individual_planning --> insert --> planning_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 13:55:46 --> appraisal_individual_planning --> insert --> user_id -->  --> 57
+Reyes, Naisa (33798) --> 2020-07-16 13:55:46 --> appraisal_individual_planning --> insert --> notes -->  --> asdfdsf
+Marjorie, Nailog (33799) --> 2020-07-16 13:56:27 --> appraisal_individual_planning --> insert --> planning_id -->  --> 1
+Marjorie, Nailog (33799) --> 2020-07-16 13:56:27 --> appraisal_individual_planning --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-07-16 13:56:27 --> appraisal_individual_planning --> insert --> notes -->  --> asdffds
+Reyes, Naisa (33798) --> 2020-07-16 13:58:29 --> appraisal_individual_planning --> insert --> planning_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 13:58:29 --> appraisal_individual_planning --> insert --> user_id -->  --> 57
+Reyes, Naisa (33798) --> 2020-07-16 13:58:29 --> appraisal_individual_planning --> insert --> notes -->  --> asdf
+Marjorie, Nailog (33799) --> 2020-07-16 13:58:56 --> appraisal_individual_planning --> insert --> planning_id -->  --> 1
+Marjorie, Nailog (33799) --> 2020-07-16 13:58:56 --> appraisal_individual_planning --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-07-16 13:58:56 --> appraisal_individual_planning --> insert --> notes -->  --> ddd
+Reyes, Naisa (33798) --> 2020-07-16 13:59:56 --> appraisal_individual_planning --> insert --> planning_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 13:59:56 --> appraisal_individual_planning --> insert --> user_id -->  --> 57
+Reyes, Naisa (33798) --> 2020-07-16 13:59:56 --> appraisal_individual_planning --> insert --> notes -->  --> asdf
+Marjorie, Nailog (33799) --> 2020-07-16 14:00:04 --> appraisal_individual_planning --> insert --> planning_id -->  --> 1
+Marjorie, Nailog (33799) --> 2020-07-16 14:00:04 --> appraisal_individual_planning --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-07-16 14:00:04 --> appraisal_individual_planning --> insert --> notes -->  --> asdf
+Reyes, Naisa (33798) --> 2020-07-16 14:01:16 --> appraisal_individual_planning --> insert --> planning_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-07-16 14:01:16 --> appraisal_individual_planning --> insert --> user_id -->  --> 57
+Reyes, Naisa (33798) --> 2020-07-16 14:01:16 --> appraisal_individual_planning --> insert --> notes -->  --> dd
+Reyes, Naisa (33798) --> 2020-07-16 14:01:56 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-07-16 14:02:10 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-07-16 14:02:39 --> appraisal_individual_planning --> insert --> planning_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-07-16 14:02:39 --> appraisal_individual_planning --> insert --> user_id -->  --> 57
+Admin, Emplopad (admin) --> 2020-07-16 14:02:39 --> appraisal_individual_planning --> insert --> notes -->  --> afd
+Admin, Emplopad (admin) --> 2020-07-16 14:02:49 --> authentication --> logout --> logout -->  --> 
+Monis, Marybeth (1101060) --> 2020-07-16 14:02:54 --> authentication --> login --> login -->  --> 
+Monis, Marybeth (1101060) --> 2020-07-16 14:03:27 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-07-16 14:03:38 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-07-16 14:05:23 --> authentication --> logout --> logout -->  --> 
+Monis, Marybeth (1101060) --> 2020-07-16 14:05:33 --> authentication --> login --> login -->  --> 
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> update --> performance_status_id --> 2 --> 4
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> update --> to_user_id --> 54 --> 57
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea1
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> approver naisa added this
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 10
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 5
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 5
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 100
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 100
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 100
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> b
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> please change target
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 10
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 10
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 150
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:40 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 150
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> ok added
+Monis, Marybeth (1101060) --> 2020-07-16 14:36:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20

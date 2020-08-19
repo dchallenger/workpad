@@ -1,0 +1,37 @@
+2020-07-06 14:14:31 --> authentication --> login --> login -->  --> 
+2020-07-06 14:37:32 --> appraisal_template --> insert --> template_id -->  --> 2
+2020-07-06 14:37:32 --> appraisal_template --> insert --> template_section -->  --> Performance Evaluation and Development Plan
+2020-07-06 14:37:32 --> appraisal_template --> insert --> sequence -->  --> 1
+2020-07-06 14:37:32 --> appraisal_template --> insert --> section_type_id -->  --> 1
+2020-07-06 14:40:01 --> appraisal_template --> insert --> template_id -->  --> 2
+2020-07-06 14:40:01 --> appraisal_template --> insert --> template_section -->  --> Sections 1 - Individual Scorecard
+2020-07-06 14:40:01 --> appraisal_template --> insert --> parent_id -->  --> 5
+2020-07-06 14:40:01 --> appraisal_template --> insert --> sequence -->  --> 2
+2020-07-06 14:40:01 --> appraisal_template --> insert --> weight -->  --> 90
+2020-07-06 14:40:01 --> appraisal_template --> insert --> section_type_id -->  --> 2
+2020-07-06 14:40:01 --> appraisal_template --> insert --> header -->  --> <p>test top</p>
+2020-07-06 14:40:01 --> appraisal_template --> insert --> footer -->  --> <p>test bot</p>
+2020-07-06 14:40:15 --> appraisal_template --> update --> sequence --> 2 --> 1
+2020-07-06 16:40:53 --> appraisal_template --> insert --> template_section_id -->  --> 6
+2020-07-06 16:40:53 --> appraisal_template --> insert --> title -->  --> Key Result Areas
+2020-07-06 16:40:53 --> appraisal_template --> insert --> sequence -->  --> 1
+2020-07-06 16:40:53 --> appraisal_template --> insert --> width -->  --> 100
+2020-07-06 16:40:53 --> appraisal_template --> insert --> uitype_id -->  --> 1
+2020-07-06 16:41:20 --> appraisal_template --> insert --> template_section_id -->  --> 6
+2020-07-06 16:41:20 --> appraisal_template --> insert --> title -->  --> Key in Weight
+2020-07-06 16:41:20 --> appraisal_template --> insert --> sequence -->  --> 2
+2020-07-06 16:41:20 --> appraisal_template --> insert --> width -->  --> 100
+2020-07-06 16:41:20 --> appraisal_template --> insert --> uitype_id -->  --> 2
+2020-07-06 16:41:46 --> appraisal_template --> insert --> template_section_id -->  --> 6
+2020-07-06 16:41:46 --> appraisal_template --> insert --> title -->  --> Key Performance Indicators / Measures
+2020-07-06 16:41:46 --> appraisal_template --> insert --> sequence -->  --> 3
+2020-07-06 16:41:46 --> appraisal_template --> insert --> width -->  --> 100
+2020-07-06 16:41:46 --> appraisal_template --> insert --> uitype_id -->  --> 3
+2020-07-06 16:42:12 --> appraisal_template --> insert --> template_section_id -->  --> 6
+2020-07-06 16:42:12 --> appraisal_template --> insert --> title -->  --> Weight
+2020-07-06 16:42:12 --> appraisal_template --> insert --> sequence -->  --> 4
+2020-07-06 16:42:12 --> appraisal_template --> insert --> width -->  --> 100
+2020-07-06 16:42:12 --> appraisal_template --> insert --> uitype_id -->  --> 2
+2020-07-06 16:55:07 --> authentication --> logout --> logout -->  --> 
+2020-07-06 17:01:09 --> authentication --> login --> login -->  --> 
+2020-07-06 17:01:10 --> authentication --> login --> login -->  --> 

@@ -1,0 +1,68 @@
+<tr class="record">
+    <td class="hidden-xs"><input type="checkbox" value="<?php echo $record_id; ?>" class="record-checker checkboxes"></td>
+    <td>
+        <?php if( !empty($users_profile_photo) ): ?>
+            <a href="#"><img class="avatar img-responsive" src="<?php echo base_url($users_profile_photo); ?>" style="width: 48px;"></a>
+        <?php else: ?>
+            <a href="#"><img class="avatar img-responsive" src="<?php echo base_url('assets/img/avatar.png'); ?>"></a>
+        <?php endif; ?>
+    </td>
+    <td>
+        <a href="<?php echo $detail_url; ?>" id="date_name"><?php echo $users_profile_firstname; ?> <?php echo $users_profile_lastname; ?> <?php echo isset($users_profile_suffix) ? $users_profile_suffix : ''; ?></a>
+        <br>
+        <span class="small" id="date_set"><?php echo $users_profile_position_id; ?></span>
+    </td>
+    <td class="hidden-xs"><?php echo $users_email; ?></td>
+    <td>
+        <?php if( $users_active == 'Yes' ): ?>
+            <span class="badge badge-success"><?php echo lang('partners_immediate.active'); ?></span>
+        <?php else: ?>
+            <span class="badge badge-error"><?php echo lang('partners_immediate.inactive'); ?></span>
+        <?php endif; ?>
+    </td>
+    <td>
+        <?php if( array_key_exists('edit', $permission)): ?>
+            <?php if( $permission['edit'] == 1 ): ?>
+                <div class="btn-group">
+                    <a class="btn btn-xs text-muted" href="<?php echo $edit_url; ?>"><i class="fa fa-pencil"></i> <?php echo lang('common.Edit'); ?></a>
+                </div>
+                <?php if( array_key_exists('detail', $permission) AND array_key_exists('delete', $permission)): ?>
+                    <?php if( $permission['detail'] == 1 AND $permission['delete'] == 1 ): ?>
+                        <div class="btn-group">
+                            <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> <?php echo lang('common.options'); ?></a>
+                            <ul class="dropdown-menu pull-right">
+                                <?php echo $options; ?>
+                            </ul>
+                        </div> 
+                    <?php endif; ?>
+                <?php elseif( array_key_exists('detail', $permission) ): ?>
+                    <?php if( $permission['detail'] == 1 ): ?>
+                        <div class="btn-group">
+                            <a class="btn btn-xs text-muted" href="<?php echo $detail_url; ?>"><i class="fa fa-search"></i> <?php echo lang('common.view'); ?></a>
+                        </div>
+                    <?php endif; ?>
+                <?php elseif( array_key_exists('delete', $permission) ): ?>
+                    <?php if( $permission['delete'] == 1 ): ?>
+                        <div class="btn-group">
+                            <a class="btn btn-xs text-muted" href="<?php echo $delete_url_javascript; ?>"><i class="fa fa-trash-o"></i> <?php echo lang('common.delete'); ?></a>
+                        </div>
+                    <?php endif; ?>
+                <?php endif; ?>
+            <?php endif; ?>
+        <?php else: ?>
+            <?php if( array_key_exists('detail', $permission)): ?>
+                <?php if( $permission['detail'] == 1 ): ?>
+                    <div class="btn-group">
+                        <a class="btn btn-xs text-muted" href="<?php echo $detail_url; ?>"><i class="fa fa-search"></i> <?php echo lang('common.view'); ?></a>
+                    </div>
+                <?php endif; ?>
+            <?php elseif( array_key_exists('delete', $permission) ): ?>
+                <?php if( $permission['delete'] == 1 ): ?>
+                    <div class="btn-group">
+                        <a class="btn btn-xs text-muted" href="<?php echo $delete_url_javascript; ?>"><i class="fa fa-trash-o"></i> <?php echo lang('common.delete'); ?></a>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
+        <?php endif; ?>
+    </td>
+</tr>

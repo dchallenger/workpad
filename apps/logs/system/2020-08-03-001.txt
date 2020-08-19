@@ -1,0 +1,37 @@
+Reyes, Naisa (33798) --> 2020-08-03 09:40:04 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-08-03 10:25:51 --> recurring_transaction --> delete --> recurring_id --> 6 --> 
+Reyes, Naisa (33798) --> 2020-08-03 10:35:52 --> batch_transaction --> insert --> document_no -->  --> 20180115
+Reyes, Naisa (33798) --> 2020-08-03 10:35:52 --> batch_transaction --> insert --> transaction_id -->  --> 90
+Reyes, Naisa (33798) --> 2020-08-03 10:35:52 --> batch_transaction --> insert --> payroll_date -->  --> 2020-08-15
+Reyes, Naisa (33798) --> 2020-08-03 10:35:53 --> batch_transaction --> insert --> unit_rate_main -->  --> ¡æ#­GÚ,™¸òKÑ„†¨
+Reyes, Naisa (33798) --> 2020-08-03 10:35:53 --> batch_transaction --> insert --> remarks -->  --> test
+Reyes, Naisa (33798) --> 2020-08-03 10:35:53 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 1 --> 
+Reyes, Naisa (33798) --> 2020-08-03 10:35:53 --> batch_transaction --> insert --> batch_entry_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-03 10:35:53 --> batch_transaction --> insert --> id_number -->  --> 1101025
+Reyes, Naisa (33798) --> 2020-08-03 10:35:53 --> batch_transaction --> insert --> employee_id -->  --> 55
+Reyes, Naisa (33798) --> 2020-08-03 10:35:53 --> batch_transaction --> insert --> unit_rate -->  --> ÃWÖKõ?’Y§¯‰±j°ø
+Reyes, Naisa (33798) --> 2020-08-03 10:35:53 --> batch_transaction --> insert --> quantity -->  --> +¬Ì`à[ÆœÿN48ô
+Reyes, Naisa (33798) --> 2020-08-03 10:35:53 --> batch_transaction --> insert --> amount -->  --> ÃWÖKõ?’Y§¯‰±j°ø
+Reyes, Naisa (33798) --> 2020-08-03 10:36:52 --> batch_transaction --> insert --> document_no -->  --> 345345
+Reyes, Naisa (33798) --> 2020-08-03 10:36:52 --> batch_transaction --> insert --> transaction_id -->  --> 90
+Reyes, Naisa (33798) --> 2020-08-03 10:36:52 --> batch_transaction --> insert --> payroll_date -->  --> 2020-08-15
+Reyes, Naisa (33798) --> 2020-08-03 10:36:52 --> batch_transaction --> insert --> unit_rate_main -->  --> æ® (g$o¼v ;
+Reyes, Naisa (33798) --> 2020-08-03 10:36:52 --> batch_transaction --> insert --> remarks -->  --> test
+Reyes, Naisa (33798) --> 2020-08-03 10:36:52 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+Reyes, Naisa (33798) --> 2020-08-03 10:36:52 --> batch_transaction --> insert --> batch_entry_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-03 10:36:52 --> batch_transaction --> insert --> id_number -->  --> 1101025
+Reyes, Naisa (33798) --> 2020-08-03 10:36:52 --> batch_transaction --> insert --> employee_id -->  --> 55
+Reyes, Naisa (33798) --> 2020-08-03 10:36:52 --> batch_transaction --> insert --> unit_rate -->  --> º•¤]$F<øÄb0½vUÉ
+Reyes, Naisa (33798) --> 2020-08-03 10:36:52 --> batch_transaction --> insert --> quantity -->  --> +¬Ì`à[ÆœÿN48ô
+Reyes, Naisa (33798) --> 2020-08-03 10:36:52 --> batch_transaction --> insert --> amount -->  --> º•¤]$F<øÄb0½vUÉ
+Reyes, Naisa (33798) --> 2020-08-03 10:37:51 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+Reyes, Naisa (33798) --> 2020-08-03 10:38:25 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+Reyes, Naisa (33798) --> 2020-08-03 10:38:25 --> batch_transaction --> insert --> batch_entry_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-03 10:38:25 --> batch_transaction --> insert --> id_number -->  --> 1101025
+Reyes, Naisa (33798) --> 2020-08-03 10:38:25 --> batch_transaction --> insert --> employee_id -->  --> 55
+Reyes, Naisa (33798) --> 2020-08-03 10:38:25 --> batch_transaction --> insert --> unit_rate -->  --> º•¤]$F<øÄb0½vUÉ
+Reyes, Naisa (33798) --> 2020-08-03 10:38:25 --> batch_transaction --> insert --> quantity -->  --> +¬Ì`à[ÆœÿN48ô
+Reyes, Naisa (33798) --> 2020-08-03 10:38:25 --> batch_transaction --> insert --> amount -->  --> º•¤]$F<øÄb0½vUÉ
+Reyes, Naisa (33798) --> 2020-08-03 10:38:49 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+Reyes, Naisa (33798) --> 2020-08-03 10:40:05 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+Reyes, Naisa (33798) --> 2020-08-03 10:41:04 --> batch_transaction --> delete --> batch_entry_id --> 1 --> 

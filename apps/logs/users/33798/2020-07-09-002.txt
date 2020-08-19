@@ -1,0 +1,19 @@
+2020-07-09 18:18:59 --> appraisal_template --> insert --> sequence -->  --> 1
+2020-07-09 18:18:59 --> appraisal_template --> insert --> width -->  --> 20
+2020-07-09 18:18:59 --> appraisal_template --> insert --> uitype_id -->  --> 1
+2020-07-09 18:19:14 --> appraisal_template --> insert --> template_section_id -->  --> 9
+2020-07-09 18:19:14 --> appraisal_template --> insert --> title -->  --> Competencies / Values
+2020-07-09 18:19:14 --> appraisal_template --> insert --> sequence -->  --> 1
+2020-07-09 18:19:15 --> appraisal_template --> insert --> width -->  --> 20
+2020-07-09 18:19:15 --> appraisal_template --> insert --> uitype_id -->  --> 1
+2020-07-09 18:20:29 --> performance_planning --> insert --> year -->  --> 2020
+2020-07-09 18:20:29 --> performance_planning --> insert --> performance_type_id -->  --> 1
+2020-07-09 18:20:29 --> performance_planning --> insert --> date_from -->  --> 2020-06-30
+2020-07-09 18:20:29 --> performance_planning --> insert --> date_to -->  --> 2020-07-31
+2020-07-09 18:20:30 --> performance_planning --> insert --> status_id -->  --> 1
+2020-07-09 18:20:30 --> performance_planning --> insert --> notes -->  --> test
+2020-07-09 18:20:30 --> performance_planning --> insert --> template_id -->  --> 2
+2020-07-09 18:20:30 --> performance_planning --> insert --> filter_by -->  --> 1
+2020-07-09 18:20:30 --> performance_planning --> insert --> filter_id -->  --> 1,2
+2020-07-09 18:20:30 --> performance_planning --> insert --> user_id -->  --> 57
+2020-07-09 18:20:30 --> performance_planning --> insert --> planning_id -->  --> 1

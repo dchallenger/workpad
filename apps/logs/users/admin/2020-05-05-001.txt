@@ -1,0 +1,21 @@
+2020-05-05 10:43:16 --> signatories --> insert --> approver -->  --> 1
+2020-05-05 10:43:16 --> signatories --> insert --> email -->  --> 1
+2020-05-05 10:43:16 --> signatories --> insert --> approver_id -->  --> 54
+2020-05-05 10:43:16 --> signatories --> insert --> condition -->  --> All
+2020-05-05 10:43:16 --> signatories --> insert --> class_id -->  --> 2
+2020-05-05 10:43:16 --> signatories --> insert --> sequence -->  --> 1
+2020-05-05 10:43:16 --> signatories --> insert --> company_id -->  --> 1
+2020-05-05 10:43:16 --> signatories --> insert --> department_id -->  --> 1
+2020-05-05 10:43:16 --> signatories --> insert --> position_id -->  --> 65
+2020-05-05 12:32:28 --> signatories --> insert --> approver -->  --> 1
+2020-05-05 12:32:28 --> signatories --> insert --> email -->  --> 1
+2020-05-05 12:32:28 --> signatories --> insert --> approver_id -->  --> 1
+2020-05-05 12:32:28 --> signatories --> insert --> condition -->  --> All
+2020-05-05 12:32:28 --> signatories --> insert --> class_id -->  --> 2
+2020-05-05 12:32:28 --> signatories --> insert --> sequence -->  --> 1
+2020-05-05 12:32:28 --> signatories --> insert --> company_id -->  --> 1
+2020-05-05 12:32:28 --> signatories --> insert --> department_id -->  --> 1
+2020-05-05 12:32:28 --> signatories --> insert --> position_id -->  --> 65
+2020-05-05 12:32:28 --> signatories --> insert --> user_id -->  --> 54
+2020-05-05 12:32:28 --> signatories --> insert --> alias -->  --> Admin, Teemworx 
+2020-05-05 12:32:28 --> signatories --> insert --> employee -->  --> 54

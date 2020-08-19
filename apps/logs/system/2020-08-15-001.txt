@@ -1,0 +1,86 @@
+Admin, Emplopad (admin) --> 2020-08-15 06:19:55 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-08-15 06:23:37 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-08-15 06:26:07 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-08-15 06:26:28 --> authentication --> login --> login -->  --> 
+Marjorie, Nailog (33799) --> 2020-08-15 06:28:26 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-08-15 06:28:32 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-08-15 06:31:37 --> system --> update --> config -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-15 06:31:37 --> system --> update --> config -->  --> 0
+Admin, Emplopad (admin) --> 2020-08-15 06:31:37 --> system --> update --> config -->  --> 0
+Admin, Emplopad (admin) --> 2020-08-15 06:31:37 --> system --> update --> config -->  --> 0
+Admin, Emplopad (admin) --> 2020-08-15 06:31:37 --> system --> update --> config -->  --> 36000005
+Admin, Emplopad (admin) --> 2020-08-15 06:31:37 --> system --> update --> config -->  --> 18000005
+Admin, Emplopad (admin) --> 2020-08-15 06:31:37 --> system --> update --> config -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-15 06:31:37 --> system --> update --> config -->  --> 2020-08-14
+Admin, Emplopad (admin) --> 2020-08-15 06:31:37 --> system --> update --> config -->  --> 2020-08-17
+Admin, Emplopad (admin) --> 2020-08-15 06:31:37 --> system --> update --> config -->  --> 56
+Admin, Emplopad (admin) --> 2020-08-15 06:31:38 --> system --> update --> config -->  --> 3
+Admin, Emplopad (admin) --> 2020-08-15 06:31:46 --> authentication --> logout --> logout -->  --> 
+Marjorie, Nailog (33799) --> 2020-08-15 06:31:58 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-08-15 07:09:07 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-08-15 08:02:53 --> system --> update --> config -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-15 08:02:53 --> system --> update --> config -->  --> 0
+Admin, Emplopad (admin) --> 2020-08-15 08:02:53 --> system --> update --> config -->  --> 0
+Admin, Emplopad (admin) --> 2020-08-15 08:02:53 --> system --> update --> config -->  --> 0
+Admin, Emplopad (admin) --> 2020-08-15 08:02:53 --> system --> update --> config -->  --> 36000005
+Admin, Emplopad (admin) --> 2020-08-15 08:02:53 --> system --> update --> config -->  --> 18000005
+Admin, Emplopad (admin) --> 2020-08-15 08:02:53 --> system --> update --> config -->  --> 0
+Admin, Emplopad (admin) --> 2020-08-15 08:02:53 --> system --> update --> config -->  --> 2020-08-14
+Admin, Emplopad (admin) --> 2020-08-15 08:02:53 --> system --> update --> config -->  --> 2020-08-17
+Admin, Emplopad (admin) --> 2020-08-15 08:02:53 --> system --> update --> config -->  --> 56
+Admin, Emplopad (admin) --> 2020-08-15 08:02:53 --> system --> update --> config -->  --> 3
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:15 --> my201 --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:15 --> my201 --> insert --> key_id -->  --> 132
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:15 --> my201 --> insert --> sequence -->  --> 1
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:15 --> my201 --> insert --> key_value -->  --> Father
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:15 --> my201 --> insert --> status -->  --> 2
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:15 --> my201 --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:15 --> my201 --> insert --> key_id -->  --> 133
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:15 --> my201 --> insert --> sequence -->  --> 2
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:15 --> my201 --> insert --> key_value -->  --> Rogelio
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:15 --> my201 --> insert --> status -->  --> 2
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:15 --> my201 --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:15 --> my201 --> insert --> key_id -->  --> 134
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:15 --> my201 --> insert --> sequence -->  --> 3
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:15 --> my201 --> insert --> key_value -->  --> Dec 15,  1805
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:16 --> my201 --> insert --> status -->  --> 2
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:16 --> my201 --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:16 --> my201 --> insert --> key_id -->  --> 135
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:16 --> my201 --> insert --> sequence -->  --> 4
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:16 --> my201 --> insert --> key_value -->  --> none
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:16 --> my201 --> insert --> status -->  --> 2
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:16 --> my201 --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:16 --> my201 --> insert --> key_id -->  --> 136
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:16 --> my201 --> insert --> sequence -->  --> 5
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:16 --> my201 --> insert --> status -->  --> 2
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:16 --> my201 --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:16 --> my201 --> insert --> key_id -->  --> 137
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:16 --> my201 --> insert --> sequence -->  --> 6
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:16 --> my201 --> insert --> status -->  --> 2
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:17 --> my201 --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:17 --> my201 --> insert --> key_id -->  --> 138
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:17 --> my201 --> insert --> sequence -->  --> 7
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:17 --> my201 --> insert --> status -->  --> 2
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:17 --> my201 --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:17 --> my201 --> insert --> key_id -->  --> 139
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:17 --> my201 --> insert --> sequence -->  --> 8
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:17 --> my201 --> insert --> status -->  --> 2
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:17 --> my201 --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:17 --> my201 --> insert --> key_id -->  --> 140
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:17 --> my201 --> insert --> sequence -->  --> 9
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:17 --> my201 --> insert --> status -->  --> 2
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:17 --> my201 --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:17 --> my201 --> insert --> key_id -->  --> 173
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:17 --> my201 --> insert --> sequence -->  --> 10
+Marjorie, Nailog (33799) --> 2020-08-15 08:11:17 --> my201 --> insert --> status -->  --> 2
+Marjorie, Nailog (33799) --> 2020-08-15 10:51:28 --> my201 --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-08-15 10:51:28 --> my201 --> insert --> key_id -->  --> 28
+Marjorie, Nailog (33799) --> 2020-08-15 10:51:28 --> my201 --> insert --> sequence -->  --> 1
+Marjorie, Nailog (33799) --> 2020-08-15 10:51:28 --> my201 --> insert --> key_value -->  --> 5'6
+Marjorie, Nailog (33799) --> 2020-08-15 10:51:28 --> my201 --> insert --> status -->  --> 2
+Marjorie, Nailog (33799) --> 2020-08-15 10:55:33 --> my201 --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-08-15 10:55:33 --> my201 --> insert --> key_id -->  --> 28
+Marjorie, Nailog (33799) --> 2020-08-15 10:55:33 --> my201 --> insert --> sequence -->  --> 1
+Marjorie, Nailog (33799) --> 2020-08-15 10:55:33 --> my201 --> insert --> key_value -->  --> 110 lbs
+Marjorie, Nailog (33799) --> 2020-08-15 10:55:33 --> my201 --> insert --> status -->  --> 2
+Marjorie, Nailog (33799) --> 2020-08-15 10:55:33 --> my201 --> insert --> from_key_value -->  --> 5'6

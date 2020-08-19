@@ -1,0 +1,24 @@
+Reyes, Naisa (33798) --> 2020-08-05 00:00:53 --> signatories --> insert --> approver -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-05 00:00:53 --> signatories --> insert --> email -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-05 00:00:53 --> signatories --> insert --> approver_id -->  --> 56
+Reyes, Naisa (33798) --> 2020-08-05 00:00:53 --> signatories --> insert --> condition -->  --> All
+Reyes, Naisa (33798) --> 2020-08-05 00:00:53 --> signatories --> insert --> class_id -->  --> 40
+Reyes, Naisa (33798) --> 2020-08-05 00:00:53 --> signatories --> insert --> sequence -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-05 00:00:53 --> signatories --> insert --> company_id -->  --> 2
+Reyes, Naisa (33798) --> 2020-08-05 00:00:53 --> signatories --> insert --> department_id -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-05 00:00:53 --> signatories --> insert --> position_id -->  --> 68
+Reyes, Naisa (33798) --> 2020-08-05 00:00:53 --> signatories --> insert --> user_id -->  --> 55
+Reyes, Naisa (33798) --> 2020-08-05 00:00:53 --> signatories --> insert --> alias -->  --> Reyes, Naisa 
+Reyes, Naisa (33798) --> 2020-08-05 00:00:54 --> signatories --> insert --> employee -->  --> 55
+Reyes, Naisa (33798) --> 2020-08-05 02:58:29 --> partners --> insert --> partner_id -->  --> 4
+Reyes, Naisa (33798) --> 2020-08-05 02:58:29 --> partners --> insert --> key_id -->  --> 89
+Reyes, Naisa (33798) --> 2020-08-05 02:58:29 --> partners --> insert --> key -->  --> attachment-name
+Reyes, Naisa (33798) --> 2020-08-05 02:58:29 --> partners --> insert --> sequence -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-05 02:58:29 --> partners --> insert --> key_name -->  --> File Name
+Reyes, Naisa (33798) --> 2020-08-05 02:58:29 --> partners --> insert --> key_value -->  --> test
+Reyes, Naisa (33798) --> 2020-08-05 02:58:29 --> partners --> insert --> partner_id -->  --> 4
+Reyes, Naisa (33798) --> 2020-08-05 02:58:29 --> partners --> insert --> key_id -->  --> 91
+Reyes, Naisa (33798) --> 2020-08-05 02:58:29 --> partners --> insert --> key -->  --> attachment-file
+Reyes, Naisa (33798) --> 2020-08-05 02:58:29 --> partners --> insert --> sequence -->  --> 1
+Reyes, Naisa (33798) --> 2020-08-05 02:58:29 --> partners --> insert --> key_name -->  --> File
+Reyes, Naisa (33798) --> 2020-08-05 02:58:29 --> partners --> insert --> key_value -->  --> uploads/users/GENESIS%20%281%29.doc

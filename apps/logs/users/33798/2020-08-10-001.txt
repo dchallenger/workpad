@@ -1,0 +1,39 @@
+2020-08-10 00:50:27 --> authentication --> logout --> logout -->  --> 
+2020-08-10 02:30:06 --> authentication --> login --> login -->  --> 
+2020-08-10 02:37:35 --> authentication --> logout --> logout -->  --> 
+2020-08-10 02:42:29 --> authentication --> login --> login -->  --> 
+2020-08-10 02:52:21 --> my_change_request --> insert --> user_id -->  --> 56
+2020-08-10 02:52:21 --> my_change_request --> insert --> key_id -->  --> 25
+2020-08-10 02:52:21 --> my_change_request --> insert --> sequence -->  --> 1
+2020-08-10 02:52:21 --> my_change_request --> insert --> key_value -->  --> Budhist
+2020-08-10 02:52:21 --> my_change_request --> insert --> status -->  --> 2
+2020-08-10 02:52:22 --> my_change_request --> insert --> personal_id -->  --> 3
+2020-08-10 02:54:03 --> my_change_request --> insert --> user_id -->  --> 56
+2020-08-10 02:54:03 --> my_change_request --> insert --> key_id -->  --> 8
+2020-08-10 02:54:03 --> my_change_request --> insert --> sequence -->  --> 1
+2020-08-10 02:54:03 --> my_change_request --> insert --> key_value -->  --> Widowed
+2020-08-10 02:54:03 --> my_change_request --> insert --> status -->  --> 2
+2020-08-10 02:54:03 --> my_change_request --> insert --> personal_id -->  --> 4
+2020-08-10 03:06:21 --> change_request --> update --> status -->  --> 3
+2020-08-10 03:10:24 --> change_request --> update --> status -->  --> 3
+2020-08-10 03:13:14 --> change_request --> update --> status -->  --> 3
+2020-08-10 03:13:33 --> change_request --> update --> status -->  --> 3
+2020-08-10 03:17:11 --> change_request --> update --> status -->  --> 3
+2020-08-10 03:21:58 --> my_change_request --> insert --> user_id -->  --> 56
+2020-08-10 03:21:58 --> my_change_request --> insert --> key_id -->  --> 5
+2020-08-10 03:21:58 --> my_change_request --> insert --> sequence -->  --> 1
+2020-08-10 03:21:58 --> my_change_request --> insert --> key_value -->  --> 333333
+2020-08-10 03:21:58 --> my_change_request --> insert --> status -->  --> 1
+2020-08-10 03:21:58 --> my_change_request --> insert --> personal_id -->  --> 5
+2020-08-10 03:28:37 --> change_request --> insert --> user_id -->  --> 57
+2020-08-10 03:28:37 --> change_request --> insert --> key_id -->  --> 26
+2020-08-10 03:28:37 --> change_request --> insert --> sequence -->  --> 1
+2020-08-10 03:28:37 --> change_request --> insert --> key_value -->  --> Vietnam
+2020-08-10 03:28:37 --> change_request --> insert --> status -->  --> 2
+2020-08-10 03:29:07 --> change_request --> update --> status -->  --> 3
+2020-08-10 04:22:44 --> my_change_request --> insert --> user_id -->  --> 56
+2020-08-10 04:22:44 --> my_change_request --> insert --> key_id -->  --> 8
+2020-08-10 04:22:45 --> my_change_request --> insert --> sequence -->  --> 1
+2020-08-10 04:22:45 --> my_change_request --> insert --> key_value -->  --> Married
+2020-08-10 04:22:45 --> my_change_request --> insert --> status -->  --> 2
+2020-08-10 04:22:45 --> my_change_request --> insert --> personal_id -->  --> 7

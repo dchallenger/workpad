@@ -1,0 +1,5 @@
+2020-08-07 02:49:38 --> authentication --> login --> login -->  --> 
+2020-08-07 07:48:12 --> authentication --> login --> login -->  --> 
+2020-08-07 08:07:48 --> partners --> update --> employment_end_date --> 1970-01-01 --> 2020-03-05
+2020-08-07 08:07:48 --> partners --> update --> original_hired_date --> 1970-01-01 --> 2020-06-25
+2020-08-07 08:13:47 --> authentication --> logout --> logout -->  --> 

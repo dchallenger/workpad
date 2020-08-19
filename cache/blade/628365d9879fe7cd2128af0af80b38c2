@@ -1,0 +1,41 @@
+<tr class="record">
+    <?php if( $can_delete != '0'): ?>
+        <td>
+            <div>
+                <input type="checkbox" class="record-checker checkboxes" value="<?php echo $record_id; ?>">
+            </div>
+        </td>
+    <?php else: ?>
+        <td>
+        </td>
+    <?php endif; ?>
+    <td>
+        <span class="text-success"><?php echo $payroll_leave_conversion_company_id; ?></span>
+    </td>    
+    <td>
+        <a href="<?php echo $detail_url; ?>"><?php echo $payroll_leave_conversion_employment_type_id; ?></a>
+    </td>
+    <td>
+        <span class="text-success"><?php echo $payroll_leave_conversion_form_id; ?></span>
+    </td>
+    <td>
+        <span class="text-success"><?php echo $payroll_leave_conversion_convertible; ?></span>
+    </td>
+    <td>
+        <span class="text-success"><?php echo $payroll_leave_conversion_carry_over; ?></span>
+    </td>
+    <td>
+        <span class="text-success"><?php echo $payroll_leave_conversion_forfeited; ?></span>
+    </td>
+    <td>
+        <div class="btn-group">
+            <a class="btn btn-xs text-muted" href="<?php echo $edit_url; ?>"><i class="fa fa-pencil"></i> <?php echo lang('leave_conversion.edit'); ?></a>
+        </div>
+        <div class="btn-group">
+            <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> <?php echo lang('leave_conversion.options'); ?></a>
+            <ul class="dropdown-menu pull-right">
+                <?php echo $options; ?>
+            </ul>
+        </div>
+    </td>
+</tr> 

@@ -1,0 +1,72 @@
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 150
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> ok added
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 170
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 180
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 190
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:31 --> appraisal_individual_planning --> insert --> planning_id -->  --> 1
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:31 --> appraisal_individual_planning --> insert --> user_id -->  --> 57
+Marjorie, Nailog (33799) --> 2020-07-16 12:53:31 --> appraisal_individual_planning --> insert --> notes -->  --> ok na
+Reyes, Naisa (33798) --> 2020-07-16 13:08:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Reyes, Naisa (33798) --> 2020-07-16 13:08:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+Reyes, Naisa (33798) --> 2020-07-16 13:08:30 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea1
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> approver naisa added this
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 10
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 5
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 5
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 100
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 100
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 100
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> b
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> please change target
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 10
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 10
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 150
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 150
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> ok added
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 170
+Reyes, Naisa (33798) --> 2020-07-16 13:08:31 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Reyes, Naisa (33798) --> 2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Reyes, Naisa (33798) --> 2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+Reyes, Naisa (33798) --> 2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Reyes, Naisa (33798) --> 2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 180
+Reyes, Naisa (33798) --> 2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Reyes, Naisa (33798) --> 2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Reyes, Naisa (33798) --> 2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+Reyes, Naisa (33798) --> 2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Reyes, Naisa (33798) --> 2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 190
+Reyes, Naisa (33798) --> 2020-07-16 13:08:32 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Reyes, Naisa (33798) --> 2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20
+Reyes, Naisa (33798) --> 2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea
+Reyes, Naisa (33798) --> 2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> mea1
+Reyes, Naisa (33798) --> 2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> approver naisa added this
+Reyes, Naisa (33798) --> 2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 10
+Reyes, Naisa (33798) --> 2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 5
+Reyes, Naisa (33798) --> 2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 5
+Reyes, Naisa (33798) --> 2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 100
+Reyes, Naisa (33798) --> 2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 100
+Reyes, Naisa (33798) --> 2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 100
+Reyes, Naisa (33798) --> 2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> re
+Reyes, Naisa (33798) --> 2020-07-16 13:17:41 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> b
+Reyes, Naisa (33798) --> 2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> please change target
+Reyes, Naisa (33798) --> 2020-07-16 13:17:42 --> appraisal_individual_planning --> insert --> performance_planning_applicable -->  --> 20

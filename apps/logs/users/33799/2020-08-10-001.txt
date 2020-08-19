@@ -1,0 +1,24 @@
+2020-08-10 01:12:07 --> authentication --> login --> login -->  --> 
+2020-08-10 02:29:52 --> authentication --> logout --> logout -->  --> 
+2020-08-10 02:38:06 --> authentication --> login --> login -->  --> 
+2020-08-10 02:38:36 --> my201 --> insert --> user_id -->  --> 57
+2020-08-10 02:38:36 --> my201 --> insert --> key_id -->  --> 25
+2020-08-10 02:38:36 --> my201 --> insert --> sequence -->  --> 1
+2020-08-10 02:38:36 --> my201 --> insert --> key_value -->  --> Catholic
+2020-08-10 02:38:36 --> my201 --> insert --> status -->  --> 2
+2020-08-10 02:40:05 --> my201 --> insert --> user_id -->  --> 57
+2020-08-10 02:40:05 --> my201 --> insert --> key_id -->  --> 25
+2020-08-10 02:40:05 --> my201 --> insert --> sequence -->  --> 1
+2020-08-10 02:40:05 --> my201 --> insert --> key_value -->  --> Catholic
+2020-08-10 02:40:05 --> my201 --> insert --> status -->  --> 2
+2020-08-10 02:41:23 --> my201 --> insert --> user_id -->  --> 57
+2020-08-10 02:41:23 --> my201 --> insert --> key_id -->  --> 25
+2020-08-10 02:41:23 --> my201 --> insert --> sequence -->  --> 1
+2020-08-10 02:41:23 --> my201 --> insert --> key_value -->  --> Catholic
+2020-08-10 02:41:23 --> my201 --> insert --> status -->  --> 2
+2020-08-10 02:42:05 --> my201 --> insert --> user_id -->  --> 57
+2020-08-10 02:42:05 --> my201 --> insert --> key_id -->  --> 26
+2020-08-10 02:42:05 --> my201 --> insert --> sequence -->  --> 1
+2020-08-10 02:42:05 --> my201 --> insert --> key_value -->  --> American
+2020-08-10 02:42:05 --> my201 --> insert --> status -->  --> 2
+2020-08-10 02:42:12 --> authentication --> logout --> logout -->  --> 

@@ -1,0 +1,12 @@
+EH04201802201843190009   PMCTitanium Corporation                                                                                   733 Wood St., Malibay, Pasay City                                                                   1300   8893935
+DT10400166312801713          DE CASTRO                     CHRISTINA ELENA               CRUZ                          908.84       100.00       119772984      19541031
+DT10400163834800024          CACANINDIN                    JENELYN                       ANGELES                       398.72       100.00       188325909      19740317
+DT10400166313901773          SUBA JR.                      ROMEO                         ATIENZA                       246.30       100.00       213361423      19730509
+DT12105597878931130          INOFERIO                      ARMELA                        SABEROLA                      100.00       100.00       414089511      19731028
+DT12108049795032121          SARGEANT                      ALEXANDER TIMOTHY             SANTIAGO                      100.00       100.00       243659209      19880807
+DT12106599070032584          SIGUA                         MARK LOUIE                    LUCERO                        100.00       100.00       250154351      19860710
+DT12113106747032700          ESPARAGOZA                    GLADYS                        SERDENA                       100.00       100.00       462023479      19940710
+DT12106648777433047          VILLAMOR                      ARNEL                         MACAPULAY                     100.00       100.00       293479811      19830209
+DT10400199124293536          RONSAIRO                      ADRIAN                        BENDO                         219.92       100.00       278383586      19840816
+DT12105349463593601          REDAON                        ROSEMARIE                     BERNARDEZ                     350.00       100.00       161334345      19640502
+DT12103600013533285          MENDOZA                       MARK                          OCTAVIO                       100.00       100.00       296954826      19880106

@@ -1,0 +1,52 @@
+<tr class="record" rel="1">
+    <td>
+        <a class="text-success" href="<?php echo $detail_url; ?>" id="display_name"><?php echo $display_name; ?></a>
+    </td>
+    <td>
+        <span class="text-info"><?php echo $form; ?></span>
+        <br />
+        <span class="text-muted small"><?php echo $createdon; ?></span>
+    </td>
+    <td class="text-muted hidden-xs"><?php echo $date_range; ?>
+    </td>
+    <td>
+        <?php 
+        if($form_status_id != 8){ //not cancelled
+            switch($approver_status_id){ 
+                case 1: ?><span class="badge badge-info"><?php echo $approver_status; ?></span><?php break;
+                case 2: ?><span class="badge badge-warning"><?php echo $approver_status; ?></span><?php break;
+                case 3: ?><span class="badge badge-warning"><?php echo $approver_status; ?></span><?php break;
+                case 4: ?><span class="badge badge-info"><?php echo $approver_status; ?></span><?php break;
+                case 5: ?><span class="badge badge-info"><?php echo $approver_status; ?></span><?php break;
+                case 6: ?><span class="badge badge-success"><?php echo $approver_status; ?></span><?php break;
+                case 7: ?><span class="badge badge-danger"><?php echo $approver_status; ?></span><?php break;
+                case 8:
+                default: ?><span class="badge badge-default"><?php echo $approver_status; ?></span><?php break;
+            }
+        } else { //cancelled
+            ?>
+            <?php if($form_status_id == 6): ?>
+                <span class="badge badge-success"><?php echo $form_status; ?></span>
+            <?php else: ?>
+                <span class="badge badge-default"><?php echo $form_status; ?></span>
+            <?php endif; ?>
+        <?php
+        } ?>
+    </td>
+    <td>
+        <div class="btn-group">
+            <a href="<?php echo $detail_url; ?>" class="btn btn-xs text-muted"><i class="fa fa-search"></i> <?php echo lang('form_application_manage.view'); ?></a>
+        </div>
+
+        <?php if($form_status_id != 8 ): ?>
+            <?php if( $approver_status_id == 2 ): ?>
+                <div class="btn-group">
+                    <span onclick="get_form_details(<?php echo $form_id; ?>, <?php echo $forms_id; ?>)";data-forms-id="<?php echo $forms_id; ?>" data-form-id="<?php echo $form_id; ?>" id="manage_dialog-<?php echo $forms_id; ?>" 
+                    class="btn btn-sm custom_popover text-muted"  data-close-others="true" data-content="" data-placement="left" data-original-title="<?php echo $form; ?>">
+                    <i class="fa fa-gear"></i> <?php echo lang('form_application_manage.options'); ?>
+                    </span>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+    </td>
+</tr>

@@ -1,0 +1,40 @@
+2020-03-01 09:56:16 --> authentication --> login --> login -->  --> 
+2020-03-01 01:57:37 --> movement --> insert --> remarks -->  --> test
+2020-03-01 01:57:37 --> movement --> insert --> due_to_id -->  --> 2
+2020-03-01 01:57:37 --> movement --> insert --> status_id -->  --> 1
+2020-03-01 01:57:37 --> movement --> insert --> type_id -->  --> 6
+2020-03-01 01:57:37 --> movement --> insert --> user_id -->  --> 12
+2020-03-01 01:57:37 --> movement --> insert --> remarks_print_report_id -->  --> 6
+2020-03-01 01:57:37 --> movement --> insert --> movement_id -->  --> 3
+2020-03-01 01:58:28 --> movement --> insert --> remarks -->  --> test
+2020-03-01 01:58:28 --> movement --> insert --> due_to_id -->  --> 2
+2020-03-01 01:58:28 --> movement --> insert --> status_id -->  --> 1
+2020-03-01 01:58:28 --> movement --> insert --> type_id -->  --> 6
+2020-03-01 01:58:28 --> movement --> insert --> user_id -->  --> 12
+2020-03-01 01:58:28 --> movement --> insert --> remarks_print_report_id -->  --> 6
+2020-03-01 01:58:28 --> movement --> insert --> movement_id -->  --> 4
+2020-03-01 02:00:28 --> movement --> insert --> remarks -->  --> test
+2020-03-01 02:00:28 --> movement --> insert --> due_to_id -->  --> 2
+2020-03-01 02:00:28 --> movement --> insert --> status_id -->  --> 1
+2020-03-01 02:00:28 --> movement --> insert --> type_id -->  --> 6
+2020-03-01 02:00:28 --> movement --> insert --> user_id -->  --> 12
+2020-03-01 02:00:28 --> movement --> insert --> remarks_print_report_id -->  --> 10
+2020-03-01 02:00:28 --> movement --> insert --> movement_id -->  --> 1
+2020-03-01 02:01:22 --> movement --> update --> status_id --> 1 --> 2
+2020-03-01 02:04:52 --> movement --> insert --> remarks -->  --> test
+2020-03-01 02:04:52 --> movement --> insert --> due_to_id -->  --> 2
+2020-03-01 02:04:52 --> movement --> insert --> status_id -->  --> 1
+2020-03-01 02:04:52 --> movement --> insert --> type_id -->  --> 6
+2020-03-01 02:04:52 --> movement --> insert --> user_id -->  --> 12
+2020-03-01 02:04:52 --> movement --> insert --> remarks_print_report_id -->  --> 3
+2020-03-01 02:04:52 --> movement --> insert --> movement_id -->  --> 1
+2020-03-01 02:05:59 --> movement --> update --> status_id --> 1 --> 2
+2020-03-01 10:20:26 --> movement_manage --> insert --> remarks -->  --> test
+2020-03-01 10:20:26 --> movement_manage --> insert --> due_to_id -->  --> 2
+2020-03-01 10:20:26 --> movement_manage --> insert --> status_id -->  --> 1
+2020-03-01 10:20:26 --> movement_manage --> insert --> type_id -->  --> 11
+2020-03-01 10:20:26 --> movement_manage --> insert --> user_id -->  --> 13
+2020-03-01 10:20:26 --> movement_manage --> insert --> effectivity_date -->  --> 1970-01-01
+2020-03-01 10:20:26 --> movement_manage --> insert --> remarks_print_report_id -->  --> 3
+2020-03-01 10:20:26 --> movement_manage --> insert --> movement_id -->  --> 2
+2020-03-01 10:20:29 --> movement_manage --> update --> status_id --> 1 --> 2

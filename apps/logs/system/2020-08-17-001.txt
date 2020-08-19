@@ -1,0 +1,2 @@
+Marjorie, Nailog (33799) --> 2020-08-17 02:53:19 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-08-17 02:53:49 --> authentication --> login --> login -->  --> 

@@ -1,0 +1,3 @@
+<th width="28%"><?php echo lang('overtime_rates.company'); ?></th>
+<th width="20%"><?php echo lang('overtime_rates.ot'); ?></th>
+<th width="15%"><?php echo lang('overtime_rates.rate'); ?></th>

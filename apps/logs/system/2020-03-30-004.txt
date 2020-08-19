@@ -1,0 +1,99 @@
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> sequence -->  --> 2
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key_name -->  --> Country
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> partner_id -->  --> 14
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key_id -->  --> 15
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key -->  --> zip_code
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> sequence -->  --> 2
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key_name -->  --> Zip Code
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> partner_id -->  --> 14
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key_id -->  --> 16
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key -->  --> emergency_name
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> sequence -->  --> 2
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key_name -->  --> Contact Name
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> partner_id -->  --> 14
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key_id -->  --> 17
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key -->  --> emergency_relationship
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> sequence -->  --> 2
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key_name -->  --> Relationship
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> partner_id -->  --> 14
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key_id -->  --> 18
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key -->  --> emergency_phone
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> sequence -->  --> 2
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key_name -->  --> Contact Phone
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> partner_id -->  --> 14
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key_id -->  --> 19
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key -->  --> emergency_mobile
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> sequence -->  --> 2
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key_name -->  --> Contact Mobile
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> partner_id -->  --> 14
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key_id -->  --> 20
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key -->  --> emergency_address
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> sequence -->  --> 2
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key_name -->  --> Contact Address
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> partner_id -->  --> 14
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key_id -->  --> 21
+Admin, Teemworx (admin) --> 2020-03-30 13:18:25 --> partners --> insert --> key -->  --> emergency_city
+Admin, Teemworx (admin) --> 2020-03-30 13:18:26 --> partners --> insert --> sequence -->  --> 2
+Admin, Teemworx (admin) --> 2020-03-30 13:18:26 --> partners --> insert --> key_name -->  --> Contact City
+Admin, Teemworx (admin) --> 2020-03-30 13:18:26 --> partners --> insert --> partner_id -->  --> 14
+Admin, Teemworx (admin) --> 2020-03-30 13:18:26 --> partners --> insert --> key_id -->  --> 92
+Admin, Teemworx (admin) --> 2020-03-30 13:18:26 --> partners --> insert --> key -->  --> emergency_country
+Admin, Teemworx (admin) --> 2020-03-30 13:18:26 --> partners --> insert --> sequence -->  --> 2
+Admin, Teemworx (admin) --> 2020-03-30 13:18:26 --> partners --> insert --> key_name -->  --> Country
+Admin, Teemworx (admin) --> 2020-03-30 13:18:26 --> partners --> insert --> partner_id -->  --> 14
+Admin, Teemworx (admin) --> 2020-03-30 13:18:26 --> partners --> insert --> key_id -->  --> 22
+Admin, Teemworx (admin) --> 2020-03-30 13:18:26 --> partners --> insert --> key -->  --> emergency_zip_code
+Admin, Teemworx (admin) --> 2020-03-30 13:18:26 --> partners --> insert --> sequence -->  --> 2
+Admin, Teemworx (admin) --> 2020-03-30 13:18:26 --> partners --> insert --> key_name -->  --> Contact Zip Code
+Admin, Teemworx (admin) --> 2020-03-30 13:21:59 --> partners --> update --> firstname --> Justin --> Justin Johannes
+Admin, Teemworx (admin) --> 2020-03-30 13:22:46 --> partners --> update --> maidenname -->  --> ewan
+Admin, Teemworx (admin) --> 2020-03-30 13:22:46 --> partners --> update --> nickname -->  --> just
+Admin, Teemworx (admin) --> 2020-03-30 13:22:46 --> partners --> update --> specialization_id --> 0 --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> partner_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> key_id -->  --> 24
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> key -->  --> birth_place
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> key_name -->  --> Birth Place
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> key_value -->  --> Mindoro
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> partner_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> key_id -->  --> 25
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> key -->  --> religion
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> key_name -->  --> Religion
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> partner_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> key_id -->  --> 26
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> key -->  --> nationality
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> key_name -->  --> Nationality
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> partner_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> key_id -->  --> 27
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> key -->  --> height
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> key_name -->  --> Height
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> partner_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:38 --> partners --> insert --> key_id -->  --> 28
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> key -->  --> weight
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> key_name -->  --> Weight
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> partner_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> key_id -->  --> 29
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> key -->  --> interests_hobbies
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> key_name -->  --> Interests/Hobbies
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> partner_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> key_id -->  --> 30
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> key -->  --> language
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> key_name -->  --> Language Known
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> partner_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> key_id -->  --> 31
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> key -->  --> dialect
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> key_name -->  --> Dialect Known
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> partner_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> key_id -->  --> 32
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> key -->  --> dependents_count
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> sequence -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> key_name -->  --> Number of Dependents
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> partner_id -->  --> 1
+Admin, Teemworx (admin) --> 2020-03-30 13:23:39 --> partners --> insert --> key_id -->  --> 163

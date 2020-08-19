@@ -1,0 +1,4 @@
+<th width="26%"><?php echo lang('erequest.request_item'); ?></th>
+<th width="18%" class="hidden-xs"><?php echo lang('erequest.date_created'); ?></th>
+<th width="18%" class="hidden-xs"><?php echo lang('erequest.date_needed'); ?></th>
+<th width="18%"><?php echo lang('common.status'); ?></th>

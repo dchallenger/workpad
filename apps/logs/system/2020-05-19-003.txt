@@ -1,0 +1,29 @@
+Admin, Emplopad (admin) --> 2020-05-19 15:34:36 --> partners --> insert --> key_id -->  --> 120
+Admin, Emplopad (admin) --> 2020-05-19 15:34:36 --> partners --> insert --> key -->  --> bank_account_number_savings
+Admin, Emplopad (admin) --> 2020-05-19 15:34:36 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 15:34:36 --> partners --> insert --> key_name -->  --> Bank Account Number Savings
+Admin, Emplopad (admin) --> 2020-05-19 15:34:36 --> partners --> insert --> partner_id -->  --> 4
+Admin, Emplopad (admin) --> 2020-05-19 15:34:36 --> partners --> insert --> key_id -->  --> 202
+Admin, Emplopad (admin) --> 2020-05-19 15:34:36 --> partners --> insert --> key -->  --> bank_account_number_current
+Admin, Emplopad (admin) --> 2020-05-19 15:34:36 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 15:34:36 --> partners --> insert --> key_name -->  --> Bank Account Number Current
+Admin, Emplopad (admin) --> 2020-05-19 15:34:36 --> partners --> insert --> partner_id -->  --> 4
+Admin, Emplopad (admin) --> 2020-05-19 15:34:36 --> partners --> insert --> key_id -->  --> 205
+Admin, Emplopad (admin) --> 2020-05-19 15:34:36 --> partners --> insert --> key -->  --> bank_account_name
+Admin, Emplopad (admin) --> 2020-05-19 15:34:36 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 15:34:36 --> partners --> insert --> key_name -->  --> Bank Account Name
+Admin, Emplopad (admin) --> 2020-05-19 15:35:34 --> signatories --> insert --> approver -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 15:35:34 --> signatories --> insert --> email -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 15:35:34 --> signatories --> insert --> approver_id -->  --> 56
+Admin, Emplopad (admin) --> 2020-05-19 15:35:34 --> signatories --> insert --> condition -->  --> All
+Admin, Emplopad (admin) --> 2020-05-19 15:35:34 --> signatories --> insert --> class_id -->  --> 8
+Admin, Emplopad (admin) --> 2020-05-19 15:35:34 --> signatories --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 15:35:34 --> signatories --> insert --> company_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 15:35:34 --> signatories --> insert --> department_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-05-19 15:35:34 --> signatories --> insert --> position_id -->  --> 86
+Admin, Emplopad (admin) --> 2020-05-19 15:35:34 --> signatories --> insert --> user_id -->  --> 57
+Admin, Emplopad (admin) --> 2020-05-19 15:35:34 --> signatories --> insert --> alias -->  --> Reyes, Naisa 
+Admin, Emplopad (admin) --> 2020-05-19 15:35:34 --> signatories --> insert --> employee -->  --> 57
+Admin, Emplopad (admin) --> 2020-05-19 15:35:49 --> authentication --> logout --> logout -->  --> 
+Reyes, Naisa (33798) --> 2020-05-19 15:36:07 --> authentication --> login --> login -->  --> 
+Reyes, Naisa (33798) --> 2020-05-19 15:36:14 --> authentication --> login --> login -->  --> 

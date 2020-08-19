@@ -1,0 +1,1906 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+
+<Styles>
+ <Style ss:ID="Default" ss:Name="Normal">
+  <Alignment ss:Vertical="Bottom"/>
+  <Borders/>
+  <Font/>
+  <Interior/>
+  <NumberFormat/>
+  <Protection/>
+ </Style>
+ <Style ss:ID="s27">
+  <Font x:Family="Swiss" ss:Color="#0000FF" ss:Bold="1"/>
+ </Style>
+ <Style ss:ID="s21">
+  <NumberFormat ss:Format="yyyy\-mm\-dd"/>
+ </Style>
+ <Style ss:ID="s22">
+  <NumberFormat ss:Format="yyyy\-mm\-dd\ hh:mm:ss"/>
+ </Style>
+ <Style ss:ID="s23">
+  <NumberFormat ss:Format="hh:mm:ss"/>
+ </Style>
+</Styles>
+
+ <Worksheet ss:Name="Sheet1">
+  <ss:Table>
+   <ss:Row>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">user_id</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">id_number</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">full_name</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">company</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">company_id</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">department_id</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">department</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">branch_id</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">branch</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">payroll_date</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">date_from</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">date_to</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">basic</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">cola</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">overtime</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">transpo</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">comm</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">oth_inc_taxable</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">oth_inc_nontax</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">absences</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">gross_pay</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">whtax</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">sss</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">Ssser</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">phic</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">Phicer</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">hdmf</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">Hdmfer</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">hdmf_add</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">sss_loan</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">hdmf_loan</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">oth_ded</Data></ss:Cell>
+    <ss:Cell  ss:StyleID="s27"><Data ss:Type="String">netpay</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">377</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00345</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">NICOLAS, ANICIA </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Administration</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">42000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">426.35</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2600</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">45026.35</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">7183.94</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">437.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">437.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">359.16</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">-0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">36364.45</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">393</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">01543</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">GERONA, ANGELA </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Administration</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16770</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1105.05</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2291.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1750</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">21916.05</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1731.88</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">139.66</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">19163.21</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">375</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00045</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">AVES, RAYMUNDO </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Administration</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">54242</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">539.77</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2600</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">57381.77</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">11588.82</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">437.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">437.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">416.78</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">44257.37</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">406</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">30993</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">GARCIA, KARREN LORRES </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Administration</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">24000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1620</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2600</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">28611</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">4175.58</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">300</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">300</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">500</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1518.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">19958.78</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">421</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">33069</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">CAMASIS, JIMMY </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Administration</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">273.59</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1241</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16488.59</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1593.85</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">545</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1105</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1346.08</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">12728.66</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">416</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">32934</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">MARTIN, HERMENIO </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Administration</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16765</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1617.33</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">545</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1105</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">700</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">13627.67</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">412</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">32679</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">MONTENEGRO, ARNIE KOONCE </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">10</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Information &amp; Communication Technology</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16770</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1750</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">18911</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1130.87</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">715.25</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16183.58</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">404</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">30125</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">GAYAPA, JOEL </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">52</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Engineering</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1051.58</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">70.33</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">19746.25</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">956.32</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">128.24</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2398.05</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">15407.34</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">419</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">33029</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">SAN ANDRES JR., RAMON </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">52</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Engineering</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">30000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2400.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2600</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">35000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6069.78</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">375</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">375</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">27873.92</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">392</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">01352</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">FADERES, ROLANDO </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">52</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Engineering</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1485.43</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">559.73</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">19690.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2275.35</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">146.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2740.66</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">12195.45</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">374</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00037</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">ARRIBAL, ALLAN </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">52</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Engineering</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">17008</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">33.42</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">20765.58</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2013.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">212.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">212.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">4285.39</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">13572.69</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">423</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">93524</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">ENRACA, BERNARD </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">53</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">HouseKeeping</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">18765</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">767.33</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">545</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1105</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">108.88</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2081.54</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">13510.61</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">383</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00606</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">SANTOS, DEXTER </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">53</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">HouseKeeping</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16770</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1060.85</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2291.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1750</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">21871.85</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2726.89</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">139.66</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">-0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">18124</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">381</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00464</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">TALASTAS, ARIEL </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">53</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">HouseKeeping</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16770</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2291.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1750</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">20811</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">685.29</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">173.9</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">4920.29</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">12673.58</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">422</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">93523</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">ACOSTA, RANDO </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">53</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">HouseKeeping</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">24390</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2600</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">27381</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2304.18</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">300</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">300</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">128.24</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">23967.28</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">588</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">02107</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">LORIA, LEA </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">60</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Marketing</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">39500</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">417.34</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2600</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">42517.34</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">7056.13</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">437.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">437.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">411.86</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">3385.99</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">559.99</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">29984.56</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">391</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00897</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">TOPIA, DIWATA </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">61</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Sales</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">44500</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">7703.07</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2600</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">54803.07</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">10763.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">437.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">437.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">196.72</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">-0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">42723.91</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">415</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">32933</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">FRANCISCO, JOHN VINCENT TROY </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">61</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Sales</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1620.79</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1265.81</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1435.21</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16425.39</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1576.25</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">545</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1105</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">259.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">-0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">13769.84</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">413</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">32760</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">ZURBANO, MAYLENE </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">61</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Sales</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16770</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">3053.12</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2188.38</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">22011.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2652.21</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">490.72</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">17987.27</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">414</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">32790</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">MAGALLANO, JHANET </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">61</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Sales</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16770</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">21110.77</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1750</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">39630.77</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">7766.51</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">30982.96</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">401</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">30080</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">BACCAY, RUFINO </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">111</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">KHP / Restaurant</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">947.23</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">3.59</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">19708.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">948.8</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">128.24</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">3868.51</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">13906.79</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">380</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00427</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">SALAMATIN, NOEL </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">111</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">KHP / Restaurant</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">988.66</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">19753.66</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2291.09</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">99.92</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16506.35</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">397</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">01981</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">CABRILLOS, LODOVICO JR</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">111</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">KHP / Restaurant</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">18748.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1180.63</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">545</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1105</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">139.66</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1854.21</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">13277.36</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">394</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">01693</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">CANDOY, LUCIANO </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">111</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">KHP / Restaurant</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">25379</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2600</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">29770</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">3419.05</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">312.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">312.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">163.62</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2794.33</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">22399.2</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">376</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00068</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">BELTRAN, EMMANUEL </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">111</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">KHP / Restaurant</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">24000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">372.26</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2475.39</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1150.16</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">25697.49</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2435.2</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">300</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">300</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">163.62</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2756.37</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">17884.37</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">02133</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">MARASIGAN, ROMEO </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">111</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">KHP / Restaurant</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">13612</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">130.47</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">17072.53</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1732.24</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">490.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">994.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">162.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">162.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">99.92</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1782.99</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">11227.74</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">398</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">01983</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">INTING, ELMER </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">111</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">KHP / Restaurant</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">358.8</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">19123.8</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2138.15</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">563.2</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1141.8</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">108.88</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2659.46</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">11902.47</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">388</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00840</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">CELESTINO, DANILO JR</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">111</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">KHP / Restaurant</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16770</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">642.94</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6884.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16.07</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">26380.87</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2204.14</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">139.66</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">3247.24</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">559.99</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">19348.53</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">405</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">30602</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">ROXAS, ROMEO </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">111</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">KHP / Restaurant</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1306.03</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">20071.03</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">630.54</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">128.24</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">4003.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">12975.61</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">386</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00724</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">SANTOS, MAGDALENA </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">111</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">KHP / Restaurant</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">108.36</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">18656.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">745.66</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">545</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1105</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">128.24</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2833.95</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">12652.15</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">403</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">30112</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">JAMILLA, JERRY </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">111</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">KHP / Restaurant</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1126.63</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">12.92</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">19878.71</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">982.81</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">108.88</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1772.03</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">-0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16158.69</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">384</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00642</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">LORICA, MARCIANO </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">113</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">FBS</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">13612</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">7477.60</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1999.36</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">915.87</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">22173.09</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2781.01</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">454.2</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">920.8</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">162.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">162.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">108.88</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2954.12</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14135.74</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">373</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00028</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">HERNANDEZ, RAISSA </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">113</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">FBS</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">44355</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5531.50</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2600</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">52486.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">10046.88</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">437.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">437.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">519.86</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2278.37</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">37045.95</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">379</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00364</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">PACIS, WILLIAM </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">113</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">FBS</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">15560</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">984.31</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">9048.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">27692.30</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2535.13</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">187.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">187.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">185.32</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">3738.88</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">-0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">20364.18</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">410</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">32666</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">BALITOSTOS, RYAN </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">115</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Front Office</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">358.8</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16406.2</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1132.61</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">526.8</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1068.2</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1318.23</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">-0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">11676.92</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">417</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">33017</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">GANANCIOSO, ABIGAIL </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">115</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Front Office</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1036.93</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">17801.93</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400.86</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">15544.77</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">408</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">31098</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">CANLAS, RICHARD DECK </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">115</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Front Office</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2276.41</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1332.91</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">717.6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">17865.72</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1437.93</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">526.8</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1068.2</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1217.12</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">12932.23</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">382</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00489</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">TUYOR, HENRY </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">115</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Front Office</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">20332</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1800</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">23923</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2693.68</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">250</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">250</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">163.62</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">4806.32</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">13851.44</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">399</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">02052</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">JARAPLASAN, JAY </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">115</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Front Office</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">30110</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">376.01</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2500.32</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1154.38</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">31831.95</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">4037.58</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">342.16</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">-0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">26770.91</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">389</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00876</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">GABRIEL, MARLON </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">115</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Front Office</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">13523</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">855.44</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2299.33</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1153.99</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">518.45</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">17313.31</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1369.35</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">508.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1031.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">162.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">162.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">128.78</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">-0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">15043.98</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">387</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00819</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">REYES, JOAN FRANCES </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">115</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Front Office</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">25406</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1401.4</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">376.01</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2500.32</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1582.8</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">28100.93</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2505.95</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">312.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">312.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">23124.54</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">378</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00346</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">NICOLAS, RESURECCION </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">115</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Front Office</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">28890</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">960</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2600</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">32841</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">3135.68</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">350</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">350</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">267.36</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">4552.32</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">22377.7</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">411</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">32676</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">NUNEZ, SUNDIE </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">115</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Front Office</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2978.77</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">19743.78</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2288.62</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2041.87</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14556.99</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">385</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00721</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">MONTEMAN, JORGE </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">115</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Front Office</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">13523</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">17114</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">907.13</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">490.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">994.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">162.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">162.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2335.62</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">11640.61</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">402</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">30108</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">PACIBE, SAMMY </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">115</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Front Office</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16770</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">803.67</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2071.41</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1582.27</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1607.35</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">19620</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2205.86</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">104.9</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16427.94</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">409</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">31223</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">TAPERLA, GLAIZA </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">115</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Front Office</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">947.23</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1291.69</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16420.54</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1552.08</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">526.8</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1068.2</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">12590.02</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">425</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">93590</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">BLANCO, MARLON </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">115</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Front Office</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">24000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1880</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2600</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">28871</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">3718.18</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">300</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">300</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">128.24</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1498.91</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">-0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">21067.73</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">390</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">00877</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">LOPEZ, MARLON </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">115</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Front Office</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">13523</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">872.29</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1200</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">17986.29</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1491.13</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">526.8</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1068.2</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">162.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">162.5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">128.78</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2437.25</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">11663.19</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">407</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">31086</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">MALAPITAN, FAUSTO JR</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">115</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Front Office</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2093.08</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1225.56</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2009.29</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">16283.34</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1570.43</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">472.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">957.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1106.22</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">12859.4</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">396</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">01980</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">BASAEN, FREDDIE </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">115</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Front Office</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1070.65</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">19835.66</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1390.8</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">108.88</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1476.64</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">2185.76</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">13817.28</Data></ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell><Data ss:Type="Number">420</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">33043</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">GARCIA, DESEREE </Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Legend Hotels International Corporation</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">6</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">115</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Front Office</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">5</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="String">Kabayan Hotel Pasay
+</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-06-15T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-01T00:00:00.000</Data></ss:Cell>
+    <ss:Cell ss:StyleID="s21"><Data ss:Type="DateTime">2017-05-31T00:00:00.000</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">14974</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">947.23</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">391.00</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1400</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">17712.23</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1799.52</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">581.3</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">1178.7</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">175</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">100</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">0</Data></ss:Cell>
+    <ss:Cell><Data ss:Type="Number">15056.41</Data></ss:Cell>
+   </ss:Row>
+  </ss:Table>
+ </Worksheet>
+</Workbook>

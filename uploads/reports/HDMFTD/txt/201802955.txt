@@ -1,0 +1,242 @@
+EH2018020390064138     PMCLegend Hotels International Corporation                                                                60 Pioneer cor. Madison St. Mandaluyong City                                                        1500   8521016
+DT12105597929910002          KING                          CELINE MARIE                  LECAROZ                       100.00       100.00       214972059      19830311
+DT10400167347700028          HERNANDEZ                     RAISSA                        ANTONIO                       619.86       100.00       108076401      19700612
+DT12105833514000037          ARRIBAL                       ALLAN                         ROGERO                        100.00       100.00       907415497      19650512
+DT10400164763100045          AVES                          RAYMUNDO                      SALAZAR                       516.78       100.00       173788398      19700909
+DT10400166752400068          BELTRAN                       EMMANUEL                      LACAMBRA                      263.62       100.00       173983869      19730923
+DT10400164605300345          NICOLAS                       ANICIA                        SALCEDO                       459.16       100.00       145953542      19580501
+DT10400164467900346          NICOLAS                       RESURECCION                   AGUSTIN                       367.36       100.00       176367281      19740920
+DT10400164771900364          PACIS                         WILLIAM                       ARCA                          285.32       100.00       177598872      19700319
+DT10400202319900427          SALAMATIN                     NOEL                          VERRA                         199.92       100.00       207253237      19770211
+DT12104012953100464          TALASTAS                      ARIEL                         PRECLARO                      273.90       100.00       173788371      19730803
+DT10400167098100489          TUYOR                         HENRY                         BERNALES                      263.62       100.00       155721851      19670418
+DT10400166441600606          SANTOS                        DEXTER                        PEREZ                         239.66       100.00       914827034      19760726
+DT10400165447100642          LORICA                        MARCIANO                      PIZARRA                       208.88       100.00       915790741      19800725
+DT12105686975000724          SANTOS                        MAGDALENA                     MARTINEZ                      228.24       100.00       187636401      19770404
+DT10900252121400819          REYES                         JOAN FRANCES                  MATIAS                        100.00       100.00       191560368      19720131
+DT10900251249000840          CELESTINO                     DANILO                        AYSON                         239.66       100.00       120937268      19650627
+DT10400164463400876          GABRIEL                       MARLON                        VILLAROSA                     228.78       100.00       200813094      19740827
+DT10900264945700897          TOPIA                         DIWATA                        CRUZ                          296.72       100.00       208852085      19790117
+DT10400164185901352          FADERES                       ROLANDO                       RAYMUNDO                      246.30       100.00       217828824      19750704
+DT10400164607601543          GERONA                        ANGELA                        ALMIRANEZ                     239.66       100.00       220265967      19790609
+DT10900260398701693          CANDOY                        LUCIANO                       BUENAVENTURA                  263.62       100.00       171326257      19740213
+DT10400167684001980          BASAEN                        FREDDIE                       EDRADA                        208.88       100.00       229921414      19751008
+DT10400167685101981          CABRILLOS                     LODOVICO                      CAMIRO                        239.66       100.00       228915503      19790917
+DT10400167686301983          INTING                        ELMER                         DAMIT                         208.88       100.00       202256687      19730120
+DT1090-0266-8902052          JARAPLASAN                    JAY                           RAPANAN                       442.16       100.00       191902334      19710713
+DT10400173027102133          MARASIGAN                     ROMEO                         LAT                           199.92       100.00       149701482      19700402
+DT10400197562230080          BACCAY                        RUFINO                        DATUL                         228.24       100.00       229956926      19750102
+DT10400198222730108          PACIBE                        SAMMY                         TABOY                         204.90       100.00       219297031      19770427
+DT10400197843030112          JAMILLA                       JERRY                         REY                           208.88       100.00       173740942      19710124
+DT10500109620230125          GAYAPA                        JOEL                          GEDULIAN                      228.24       100.00       223096835      19740521
+DT10400197462330602          ROXAS                         ROMEO                         YUMUL                         228.24       100.00       201145989      00000000
+DT12105693528230993          GARCIA                        KARREN LORRES                 DELA CRUZ                     600.00       100.00       297148905      19880705
+DT12103426629331086          MALAPITAN                     FAUSTO                        CATIBOG                       100.00       100.00       141263645      00000000
+DT10400197840631098          CANLAS                        RICHARD DECK                  SISON                         100.00       100.00       404998501      19860106
+DT12105770673631223          TAPERLA                       GLAIZA                        TERNIDA                       100.00       100.00       409575213      19870609
+DT12106635368132666          BALITOSTOS                    RYAN                          MARTINEZ                      100.00       100.00       310823282      19831206
+DT10400197480032676          NUNEZ                         SUNDIE                        COLINA                        100.00       100.00       228913406      19781226
+DT12104001928332679          MONTENEGRO                    ARNIE KOONCE                  MAMAWAG                       100.00       100.00       249280254      19820905
+DT12112046924932760          ZURBANO                       MAYLENE                       PACULABA                      100.00       100.00       407062011      19880510
+DT12112587647532790          MAGALLANO                     JHANET                        ANG                           100.00       100.00       317239942      19930523
+DT12109380417032933          FRANCISCO                     JOHN VINCENT TROY             SANTIAGO                      100.00       100.00       315643160      19930418
+DT10400197477432934          MARTIN                        HERMENIO                      BERNABE                       100.00       100.00       909337114      19770514
+DT00418851560533017          GANANCIOSO                    ABIGAIL                       TOPE                          100.00       100.00       308890365      19920401
+DT10700223659533029          SAN ANDRES JR.                RAMON                         RODRIGUEZ                     100.00       100.00       223546741      19770202
+DT12118271456533043          GARCIA                        DESEREE                       JAMISOLA                      100.00       100.00       332059097      19950508
+DT10400197437933069          CAMASIS                       JIMMY                         CASIA                         100.00       100.00       914827083      19820111
+DT12103454333893523          ACOSTA                        RANDO                         LEGASPI                       228.24       100.00       914827201      19751031
+DT10400172813693524          ENRACA                        BERNARD                       MARTINEZ                      208.88       100.00       229062384      19760819
+DT12105783275093590          BLANCO                        MARLON                        CRUZ                          228.24       100.00       270555754      19870725
+DT10400171144200252          LAPERA                        NORMAN                        ROMERO                        600.00       100.00       115870981      19650814
+DT10400164543300264          LISING                        JAMES                         BERNACER                      240.00       100.00       140947179      19630204
+DT10400165671200330          MUPAS                         AMANTE                        PASCUA                        239.66       100.00       167324806      19740304
+DT10400164471200425          RUIZOL                        BONIFACIO                     ANORA                         326.40       100.00       184615959      19700514
+DT10400164765300866          DE GUZMAN                     PEDRO                         PARUNGAO                      228.24       100.00       229329161      19750131
+DT10400164762001469          AMARO                         JERRY                         SARIO                         251.08       100.00       915785221      19790317
+DT10900259260701564          ROBLES                        ALLAN                         CASTEL                        263.62       100.00       207745780      19730203
+DT10400165672301629          VIZCARRA JR.                  PORFIRIO                      PUNO                          251.08       100.00       157220045      19730517
+DT10900253255901756          CATACUTAN                     JESSAMINE                     SADE                          239.66       100.00       245335715      19850827
+DT10900267840902086          JARAPLASAN                    ABIGAIL                       DIAZ                          239.66       100.00       907422963      19761114
+DT10400169336002093          DE GUZMAN                     PRUDENCIO                     JUMAQUIO                      284.46       100.00       258064526      19690428
+DT10400202315430077          PASTRANA                      BEVERLY                       PRIETO                        282.58       100.00       199544790      19740424
+DT10400197490030114          CASIAO                        EDMUND                        RIOFRIO                       208.88       100.00       228922097      19731205
+DT10500109618231166          SEVILLA                       LUIS                          TABTAB                        100.00       100.00       170912671      19711017
+DT10400198218431238          LAWAG                         RAUL                          PELICANO                      100.00       100.00       219307086      19820527
+DT12104923013431897          VITUG                         ROGELIO                       JOSE                          100.00       100.00       238159031      19731120
+DT91225525022531927          CRUZ                          JAY                           PELONIA                       100.00       100.00       229064634      19780111
+DT12105693765632727          BAUTISTA                      BILLY REY                     MANUEL                        100.00       100.00       258388620      19831122
+DT12111906213232815          URBANO                        DENNIS                        RIVERA                        100.00       100.00       467574877      19821023
+DT91227618829932816          BAJENTING                     PERRY                         IDUSORA                       100.00       100.00       405534987      19870916
+DT91517507166032861          GONZALES                      IRWIN                         ANOTADO                       100.00       100.00       472451819      19950407
+DT10400203283532864          BRIONES                       EDGARDO                       GUINTO                        100.00       100.00       228036224      19651010
+DT10400200430232900          RABANG                        ROMMEL                        BARRIENTOS                    100.00       100.00       297872482      19870826
+DT12110573085932901          BACCAY JR.                    MARCELO                       PASAMONTE                     100.00       100.00       311747555      19910828
+DT00409150270432910          BOLIVAR                       CHRISTOPHER                   DELA CRUZ                     100.00       100.00       219708977      19811114
+DT12114219195132960          PAPA JR.                      ORLANDO                       SALVADOR                      100.00       100.00       413840131      19930923
+DT3420619340  33000          RAMOS                         ELISHA NISSI                  DEMAFELIZ                     100.00       100.00       292745319      19910605
+DT10400295028933003          AGUSTIN                       ENRICO                        MANANGUIT                     100.00       100.00       305152174      19860805
+DT10400197842933004          DASIGAN                       JERRY                         TAPADO                        200.00       100.00       201965878      19721107
+DT10900261588800018          AMAGAN                        JESSELYN                      GONZALES                      756.88       100.00       162691680      19720406
+DT12105781738500027          ANTONE                        FERDINAND                     RANUDA                        208.88       100.00       191902542      19760820
+DT10900258183000166          DIONISIO                      ANDREA                        MARARANG                      263.62       100.00       221954372      00000000
+DT10400164770700585          MENDOZA                       RENATO                        SABDAO                        228.78       100.00       229328910      19700404
+DT10900251341000764          RIOTOC                        ELOISA                        PARADA                        655.08       100.00       165721002      19710111
+DT10900252113600782          BUGTONG                       LUISITO                       INFANTE                       301.28       100.00       187319240      00000000
+DT10900252115800787          DAGTA                         OFELIA                        DIMAALA                       288.74       100.00       125734133      00000000
+DT10900258122901441          OCANA                         SHERWIN                       HIGUIT                        239.66       100.00       222001371      19830826
+DT12105920251201560          SENORIO                       BERNARDO                      GALIGANO                      239.66       100.00       209447651      00000000
+DT10900259331801589          AMIL                          ARMANDO                       ONG                           276.18       100.00       227694434      19790101
+DT10900260494101704          ORSUA                         ISMAEL                        TURBANADA                     239.66       100.00       206560417      19760605
+DT10400165670001741          ARCANGEL                      PEPITO                        MENESES                       251.08       100.00       185185740      19710427
+DT10900262430101810          PALMA                         AILEEN                        NADAL                         263.62       100.00       218423486      19750708
+DT10900263787901923          BRAZA                         ENRIQUE                       PERDEGUERRA                   208.88       100.00       302194167      19780328
+DT12105615412202152          CASTILLO                      EMERSON                       SIGUA                         228.24       100.00       268252864      19851108
+DT12105821695530104          MANIGO                        ELIGIO                        ONES                          262.90       100.00       914831897      00000000
+DT12105766947130891          MALABANAN                     RICHARD                       MANUEL                        228.24       100.00       926330041      19841212
+DT12105834416730910          ASUNCION                      KATE KATHLEEN                 UMALI                         228.24       100.00       262400428      19870216
+DT12105778193030927          MAYO                          JOSE ROBERTO                  DIMACULANGAN                  100.00       100.00       253666655      19810722
+DT10400199355130933          CATACUTAN                     PATRICK                       JOSE                          228.24       100.00       215981389      19820628
+DT3314849598  31045          BRIONES                       MAIDA                         SUNGCANG                      551.74       100.00       154006139      19700907
+DT12105781060231097          BLANCO                        MA. KATRINA                   CRUZ                          100.00       100.00       407061582      19890210
+DT12100988470931147          GREGORIO                      MA. CARLA PAULINE             VILLANUEVA                    100.00       100.00       407606468      19900330
+DT10400198805331174          ASTEJADA                      ANDRIAN                       PANTE                         100.00       100.00       226075288      19781231
+DT12105741833331175          DELA CRUZ                     ROMMEL                        AGUILAR                       100.00       100.00       264808120      19840625
+DT12106212953031182          TOME                          CHRISELLE JO                  BAQUIRAN                      100.00       100.00       222241570      19800424
+DT10400203287031197          DE LARA                       ANDY                          TARRAS                        100.00       100.00       194691301      00000000
+DT12102804631831257          FAUSTINO                      JOSELITO                      TAMAYO                        100.00       100.00       411459884      19811208
+DT10400198831031272          RAPIZ                         LOUEI                         ISUGA                         100.00       100.00       252951605      19810711
+DT10400200783331273          ARCEGA                        REMIGIO                       SANTOS                        100.00       100.00       160340433      19721001
+DT10400197838631281          ARRIOLA                       JOEL                          BARTOLOME                     100.00       100.00       220956585      19760113
+DT10400198815431702          FAILMAN                       LORY                          SINOSON                       100.00       100.00       401256916      19860605
+DT10400198782231733          BALLESTEROS                   JERYLYN                       ECHANES                       100.00       100.00       254912906      19790714
+DT12105860356231763          VERGARA                       LAIZA FERMI                   RAMIREZ                       100.00       100.00       422337659      19891119
+DT12105690247731764          MANATE                        LENLEN                        CALUAG                        100.00       100.00       424289174      19910911
+DT3367754698  31978          CONCEPCION                    JENNIFER KRISTINE             SASANA                        100.00       100.00       247467135      19810925
+DT10100191544732231          CORONEL                       NORA                          ESTRADA                       100.00       100.00       103347516      00000000
+DT91505699728032789          TABARANZA                     JOIE CHRISTINE MARIE          ESTONACTOC                    100.00       100.00       267068449      19911224
+DT10400201333032868          DELOVINO                      DANILO                        MITAS                         100.00       100.00       208925930      19790729
+DT12102969144532869          BARIOS                        JOEY                          DIONGSON                      100.00       100.00       914831520      19780907
+DT10400198811032873          CALILAN JR.                   BALTAZAR                      DIEGO                         100.00       100.00       245200883      19820731
+DT12108348315332874          ESPESO                        ROLDAN                        PAYTAN                        100.00       100.00       427879330      19880324
+DT12105853640632920          MANAGAYTAY                    FRANCIS JOHN                  EDAR                          100.00       100.00       291023656      19900707
+DT12107196816232921          CELESTINO                     MA. MARIENELLI                SALAZAR                       100.00       100.00       429445014      19900504
+DT12115493083432923          AVILA                         JOHN RAY                      SERDINA                       100.00       100.00       324036102      19910727
+DT12114415889032925          TUAZON                        AIRAH JANE                    GARCIA                        100.00       100.00       327335134000   19950528
+DT12106646349532947          DAVID                         MARK LUKE                     FLORES                        100.00       100.00       432784567      19891010
+DT3418842336  33009          ULMIDO                        HONEYLENE                     BACHOCO                       100.00       100.00       297970685      19900326
+DT91618933521533025          MAGALONA                      XUXA ADIRYN                   CALOPE                        100.00       100.00       329955306      19950921
+DT12106456599433050          OLAGUIR                       LUTHER CRISS                  BALLESTEROS                   100.00       100.00       414551236      19910827
+DT10900255620493522          LUNAG                         MARVIN                        VIVAR                         199.92       100.00       227577331      19800702
+DT12104459457200714          GARCIA                        MAGDALENO                     LOPEZ                         208.88       100.00       916015729      19750527
+DT14700061932500905          ACUPIDO                       SAMUEL                        MARQUEZ                       170.32       100.00       912857995      00000000
+DT14700061942500937          PACHEJO                       ROLANDO                       CLARITO                       349.66       100.00       912857960      00000000
+DT14700062098301068          REY                           LEILANI NOEMI                 BALUYUT                       614.90       100.00       901261803      19750706
+DT14700062511001600          DAGSA                         DARYL                         HERRERA                       167.66       100.00       165797945      19730603
+DT14700063516801829          TADIQUE                       ANNA CONCESSA                 CLAUDIO                       193.76       100.00       929214329      19800626
+DT10400167411901932          LEUTERIO                      FILIPINA                      BILBAO                        246.30       100.00       233890063      19820424
+DT14700063623301977          BADAJOS                       JAMES                         CANDELENA                     190.28       100.00       920639178      19771206
+DT14700063523402030          LUENGAS                       MARIA DESIREE                 ABLAZO                        149.44       100.00       936271250      19830514
+DT14700063427002058          YAYEN                         VICTOR                        MARTIZANO                     131.90       100.00       912833825      00000000
+DT14700063267202063          SILVA                         ARIEL                         DIOLATA                       131.90       100.00       936565302      00000000
+DT14700062547702069          BADIANG                       LOUIE                         BERNAL                        131.90       100.00       931431191      00000000
+DT12105612151730067          CALIMOSO                      WINCY                         ORTIZ                         138.50       100.00       273104080      00000000
+DT12105984558430930          SIENA                         SAMUEL                        LASTAMA                       158.90       100.00       308212048      19830305
+DT12105637925730992          GAPILANGO                     CHRISTIAN                     RIPARIP                       158.90       100.00       390064138      19890429
+DT12105664077631118          ALJECERA                      REY                           CANELAS                       100.00       100.00       912846862      19790812
+DT12105684953431224          CABINTE                       ROLANDO                       CALVARIO                      100.00       100.00       310790462      19731016
+DT12106001746131259          NAVOA JR                      DANILO                        TRAQUENA                      100.00       100.00       934984235      00000000
+DT12105698682631740          FERRER                        CHARLES                       TANGUILIG                     100.00       100.00       405911817      19890520
+DT10400165300232685          TOMAS                         JENNIFER                      DENOSTA                       100.00       100.00       912844422      19780615
+DT12107315030132686          OPPUS                         SOL NINO                      DINI-AY                       100.00       100.00       312474663      19881204
+DT12104695743032810          LIBIRAN                       MARIA THERESA                 CAJOLO                        100.00       100.00       930814618      19850901
+DT10400199354032935          CADIZ                         ANABELLE                      URETA                         100.00       100.00       256170304      19860710
+DT12114686040732961          EDNALINO                      JANICA                        LOOR                          100.00       100.00       322085617      19941130
+DT12116822174332962          APOSTOL                       MIGS                          L                             100.00       100.00       328772277      19951201
+DT12114561475632964          MANDAG                        ANA RONA                      CASTRO                        100.00       100.00       329153015      00000000
+DT04024430810532984          SEMBRIA                       MINERVA                       MANALO                        100.00       100.00       133129248      00000000
+DT10400164766533030          DE LEON                       GILBERT                       MAGNAYE                       100.00       100.00       225880366      19770806
+DT12113047270333033          CATABIAN                      ELEONORE                      SAVET                         100.00       100.00       272635213      00000000
+DT12114648956633037          TERRANO                       MICHAEL                       SALVA                         100.00       100.00       469756540      19941030
+DT18800096900633051          DELA ROSA                     DONNA                         REYES                         100.00       100.00       926647189      00000000
+DT12117120405433053          BACANGALLO                    JAYSABELLE                    BERNARDO                      100.00       100.00       328269237      19700101
+DT10400202306500042          AURELIO                       RICHARD                       VILLAR                        228.24       100.00       200813517      19691113
+DT10400164187200319          MIRAL                         VENUS                         BAYANI                        275.86       100.00        141263759     19660418
+DT10400173023600873          DURAN                         ALAN                          MONSANTO                      262.48       100.00       202516451      19780426
+DT10400164768701625          GARCIA                        JAYSON                        MONTEIRO                      208.88       100.00       219709321      19780708
+DT91224718867030078          MUYUELA                       ALEJANDRO                     POSOC                         228.24       100.00       914827092      19770809
+DT10400197427930995          DONADO                        JERRY                         DE ASIS                       208.88       100.00       219711262      19791207
+DT10400198487131826          NIEVES                        MELCHOR                       NEPISON                       100.00       100.00       217827693      19781201
+DT12108158735032161          PEREZ                         BELLA                         CORTEZ                        100.00       100.00       228946004      19710424
+DT10900252120200813          MUNAR                         OLIGARIO                      BEJAR                         308.14       100.00       134537634      19630304
+DT10900252122500823          SALAUM                        DANILO                        TAAY                          273.90       100.00       152470194      19680904
+DT91225526046201451          PADUA                         IBUEN                         DIAZ                          246.30       100.00       217827601      19700119
+DT3338297294  01513          VERAN                         ISMHAEL                       CANTADA                       413.42       100.00       908575768      19751121
+DT10400165580101720          NATIVIDAD                     EUGENE                        VILORIA                       100.00       100.00       242690739      19831001
+DT12105663593301982          ALCOVENDAS                    BERNABE                       BISNAR                        208.88       100.00       306413241      19760313
+DT10900265328901995          APURA                         J. ABIGAIL                    MELGAREJO                     263.62       100.00       231297566      19831211
+DT3330782817  02107          LORIA                         LEA                           BILBAO                        511.86       100.00       168499123      19730409
+DT10200184526730032          CALIWAN                       ROMMEL                        DIMAON                        228.24       100.00       232622683      19810502
+DT91224809514930081          SUNGA                         JOSE                          YABUT                         228.24       100.00       227418296      19830220
+DT10400201327530192          ASUNCION                      FELIPE                        PAHATI                        228.24       100.00       141265728      19670811
+DT12103885245730887          NISNEA                        RICKY                         QUISMONDO                     228.24       100.00       912037689      19800709
+DT12104254275030907          FLORES                        SARAH JANE                    FAJARDO                       266.36       100.00       105763565      19690727
+DT12105969953331010          ESPEJO                        ROSIEFE                       MERCADO                       280.48       100.00       230576240      19821112
+DT10900255622731047          BUER                          VICTORINO                     DAYADAY                       100.00       100.00       211459565      19700622
+DT12105933019131094          PAREDES                       PATRICK PEYTON                BOBADILLA                     100.00       100.00       288641606      19860325
+DT10800086142631143          DELA CRUZ                     MARIA FATIMA                  CRUZ                          100.00       100.00       216226353      19781014
+DT10900001403331163          ULANDAY                       GERONIMO                      VIRAY                         100.00       100.00       213595766      19730208
+DT12105933443031184          PASAGUI                       ESTHER JOY                    DE JESUS                      100.00       100.00       275286196      19900113
+DT12105640001531896          GUANTERO                      BRYAN JOSE                    PREGUNTA                      100.00       100.00       426784325      19900418
+DT0395073768  32573          REBULADO                      RAMON                         CABARUBIA                     100.00       100.00       269176268      19721126
+DT10400198807632592          BARREDO                       RICARDO                       AUSTRIA                       100.00       100.00       215322345      19701214
+DT12102155996932671          MERCADO                       JOHN ALOYSIUS                 OLIVEROS                      100.00       100.00       244719998      19820621
+DT12110554568832765          FUENTEBELLA JR.               EDUARDO                       CUCIO                         100.00       100.00       164177415      19660823
+DT12102433120232808          CACANINDIN                    MARIZA MAE                    CORPUZ                        100.00       100.00       206172815      19890429
+DT12112026607332946          LEANO                         JOSE ALFONSO                  RIGOR                         100.00       100.00       317012072      19920619
+DT12106669940832963          VILLAMOR                      MARICAR                       VALENZUELA                    100.00       100.00       236120078      19830425
+DT12105040871733006          FIEL                          MIGUEL                        AGUILAR                       100.00       100.00       314066037      19910414
+DT12107467474633007          VICENTE                       JELLYCA ANNE                  VALDEZ                        100.00       100.00       424014432      19951012
+DT12118424764033044          AQUINO                        JOHN PAUL                     EXCIJA                        100.00       100.00       488489578      19950216
+DT10900267839033073          GUEVARRA                      REA                           DIMARANAN                     100.00       100.00       214956702      20170501
+DT12119968368233104          DEL ROSARIO                   KIAH JESHAIAH                 CARURUCAN                     100.00       100.00       338054133      19920920
+DT12113137661133106          AWATIN                        MARIA ELENA                   GUTIERREZ                     100.00       100.00       413500986      19900207
+DT12111109402533118          GARRO                         ROSALIE                       DELOS SANTOS                  100.00       100.00       472611627000   19921223
+DT12100824734533076          GACOTE                        GERSHON                       MANUEL                        100.00       100.00       928055848      19810106
+DT12120083483533156          DELA CRUZ                     TEENAMAE                      CELESTRE                      100.00       100.00       338260032      19970315
+DT12101992231933177          DUCAY                         NORMAN                        HERRERA                       100.00       100.00       935001271      19791104
+DT12100979985133179          AGUILAR                       RAYMOND                       FERRER                        100.00       100.00       496807808      19800718
+DT0           33186          MEFRAGATA JR.                 MELVIN                        PALEC                         100.00       100.00       313656618000   19930813
+DT12109383116933188          VILOG                         JENNA MAY                     SECRETO                       100.00       100.00       314624586000   19950508
+DT91218807718233196          ESCALA                        EVONY GRACE                   ZARDOMA                       100.00       100.00       327742846      19900906
+DT12111449546533221          AQUINO                        ROSELLIE                      REYES                         100.00       100.00       251226465      19831108
+DT12106250183733229          GALAY                         ROWENA                        LIBUNAO                       100.00       100.00       171901521      19701111
+DT12119523861633231          ALMARIEGO                     ABIGAIL SYRAH                 REDON                         100.00       100.00       335530752      19950918
+DT12114475983933235          REYES                         CARL BERNARD                  IBABAO                        100.00       100.00       500659761      19931206
+DT10400198482533239          HERRERA                       POTENCIANO                    PEREZ                         100.00       100.00       217828306      19730907
+DT10400197467933238          ATIENZA                       ARNEL                         PENTASON                      100.00       100.00       903574747      19701121
+DT12105530341233240          SAMSON                        GIANN CARLO                   SAN PEDRO                     100.00       100.00       312206124      19910821
+DT12117183192933249          SUÑGA                         CLARENZE MICK                 VILLARUEL                     100.00       100.00       401393242      19930417
+DT12109518950733255          ERENO                         WARRINELL                     VILLARAN                      100.00       100.00       245188202      19820606
+DT12118834029433245          ESCUBIN                       YMEE SUZETTE                  ALORRO                        100.00       100.00       336092034      19970629
+DT12107175245233258          TANGINAN                      ROLANDO                       PAGUSARA                      100.00       100.00       331479941      19721013
+DT12117309080133257          REPASO                        CHERRIE                       BATERNA                       100.00       100.00       328823418      19950101
+DT12107199307433262          VISITACION                    ABEGAEL                       CAGANDE                       100.00       100.00       31275077       19901222
+DT12119496498933263          MIGUEL                        KIM LEVIN                     CURIOSO                       100.00       100.00       236018198      19961230
+DT12114863044 33264          TAYAG                         MARIA ESTEFAN                 MACION                        100.00       100.00       320829727      19930103
+DT12107154210133265          GREGORIO                      RICHARD                       VUELBA                        100.00       100.00       310268706      19800504
+DT12114868255133244          ELPUZ                         JOMAR                         GOBANGCO                      100.00       100.00       321261993      19940903
+DT14700063901733274          DANGAN                        FLORENCIO                     DAJAY                         100.00       100.00       283663914      19710418
+DT10400202322133281          TABAGO                        FERDINAND                     OMANDAC                       100.00       100.00       233525568      19750318
+DT10400197442333282          RIOFRIO                       ALDRIN                        MANONSON                      100.00       100.00       0              19780228
+DT12121111012633280          KALONG                        ELISHA JELYN                  MAGTALAS                      100.00       100.00       341611563      19950615
+DT12109470706433287          RIVERA                        WILLIAM JESS                  NAVALTA                       100.00       100.00       258199765      19840101
+DT12119736988733288          QUINTINO                      MAYRIE MAE                    ABIQUE                        100.00       100.00       336970602      19961103
+DT12106640476733286          GABALES, JR                   GERARDO                       BUENO                         100.00       100.00       313411320      19841127
+DT12116785748633295          MULATO, JR.                   MARIO                         CUYA                          100.00       100.00       273097915      19880630
+DT12121246119733296          RODRIGUEZ                     MIA NOELLE                    NIETO                         100.00       100.00       0              19951227
+DT12114014471233298          RAGAS                         RUSSEL                        NAMUCO                        100.00       100.00       321060747      19940129
+DT12105423795833297          LAYOSA                        REYNALDO                      ALEGRE                        100.00       100.00       929214303      19801118
+DT10400198010633302          SANTOS                        GILBERT                       LUNA                          100.00       100.00       232408079      19820615
+DT10400190756233303          MANUEL                        FRANCIS                       VALLE                         100.00       100.00       241627644      19760312
+DT12113875364733332          DAEN, JR.                     VICENTE                       FERNANDO                      100.00       100.00       258744303      19860803

@@ -1,0 +1,84 @@
+2020-05-19 15:31:25 --> authentication --> login --> login -->  --> 
+2020-05-19 15:33:33 --> partners --> insert --> role_id -->  --> 12
+2020-05-19 15:33:33 --> partners --> insert --> email -->  --> marjorie@ortigas.com
+2020-05-19 15:33:33 --> partners --> insert --> login -->  --> 33799
+2020-05-19 15:33:34 --> partners --> insert --> title -->  --> Miss
+2020-05-19 15:33:34 --> partners --> insert --> lastname -->  --> Marjorie
+2020-05-19 15:33:34 --> partners --> insert --> firstname -->  --> Nailog
+2020-05-19 15:33:34 --> partners --> insert --> company_id -->  --> 1
+2020-05-19 15:33:34 --> partners --> insert --> department_id -->  --> 1
+2020-05-19 15:33:34 --> partners --> insert --> division_id -->  --> 1
+2020-05-19 15:33:34 --> partners --> insert --> branch_id -->  --> 1
+2020-05-19 15:33:34 --> partners --> insert --> section_id -->  --> 2
+2020-05-19 15:33:34 --> partners --> insert --> position_id -->  --> 86
+2020-05-19 15:33:34 --> partners --> insert --> reports_to_id -->  --> 56
+2020-05-19 15:33:34 --> partners --> insert --> location_id -->  --> 1
+2020-05-19 15:33:34 --> partners --> insert --> birth_date -->  --> 2000-07-13
+2020-05-19 15:33:34 --> partners --> insert --> user_id -->  --> 57
+2020-05-19 15:33:34 --> partners --> insert --> partner_id -->  --> 4
+2020-05-19 15:34:20 --> partners --> update --> coordinator_id --> 0 --> 56
+2020-05-19 15:34:21 --> partners --> update --> effectivity_date --> 0000-00-00 --> 2010-07-14
+2020-05-19 15:34:21 --> partners --> insert --> partner_id -->  --> 4
+2020-05-19 15:34:21 --> partners --> insert --> key_id -->  --> 14
+2020-05-19 15:34:21 --> partners --> insert --> key -->  --> organization
+2020-05-19 15:34:21 --> partners --> insert --> sequence -->  --> 1
+2020-05-19 15:34:21 --> partners --> insert --> key_name -->  --> Organization
+2020-05-19 15:34:21 --> partners --> insert --> partner_id -->  --> 4
+2020-05-19 15:34:21 --> partners --> insert --> key_id -->  --> 209
+2020-05-19 15:34:21 --> partners --> insert --> key -->  --> home_leave
+2020-05-19 15:34:21 --> partners --> insert --> sequence -->  --> 1
+2020-05-19 15:34:21 --> partners --> insert --> key_name -->  --> Home Leave
+2020-05-19 15:34:36 --> partners --> insert --> partner_id -->  --> 4
+2020-05-19 15:34:36 --> partners --> insert --> key_id -->  --> 128
+2020-05-19 15:34:36 --> partners --> insert --> key -->  --> taxcode
+2020-05-19 15:34:36 --> partners --> insert --> sequence -->  --> 1
+2020-05-19 15:34:36 --> partners --> insert --> key_name -->  --> Tax Status Code
+2020-05-19 15:34:36 --> partners --> insert --> key_value -->  --> 2
+2020-05-19 15:34:36 --> partners --> insert --> partner_id -->  --> 4
+2020-05-19 15:34:36 --> partners --> insert --> key_id -->  --> 110
+2020-05-19 15:34:36 --> partners --> insert --> key -->  --> sss_number
+2020-05-19 15:34:36 --> partners --> insert --> sequence -->  --> 1
+2020-05-19 15:34:36 --> partners --> insert --> key_name -->  --> SSS Number
+2020-05-19 15:34:36 --> partners --> insert --> partner_id -->  --> 4
+2020-05-19 15:34:36 --> partners --> insert --> key_id -->  --> 113
+2020-05-19 15:34:36 --> partners --> insert --> key -->  --> pagibig_number
+2020-05-19 15:34:36 --> partners --> insert --> sequence -->  --> 1
+2020-05-19 15:34:36 --> partners --> insert --> key_name -->  --> Pag-Ibig Number
+2020-05-19 15:34:36 --> partners --> insert --> partner_id -->  --> 4
+2020-05-19 15:34:36 --> partners --> insert --> key_id -->  --> 119
+2020-05-19 15:34:36 --> partners --> insert --> key -->  --> philhealth_number
+2020-05-19 15:34:36 --> partners --> insert --> sequence -->  --> 1
+2020-05-19 15:34:36 --> partners --> insert --> key_name -->  --> Philhealth Number
+2020-05-19 15:34:36 --> partners --> insert --> partner_id -->  --> 4
+2020-05-19 15:34:36 --> partners --> insert --> key_id -->  --> 116
+2020-05-19 15:34:36 --> partners --> insert --> key -->  --> tin_number
+2020-05-19 15:34:36 --> partners --> insert --> sequence -->  --> 1
+2020-05-19 15:34:36 --> partners --> insert --> key_name -->  --> TIN
+2020-05-19 15:34:36 --> partners --> insert --> partner_id -->  --> 4
+2020-05-19 15:34:36 --> partners --> insert --> key_id -->  --> 120
+2020-05-19 15:34:36 --> partners --> insert --> key -->  --> bank_account_number_savings
+2020-05-19 15:34:36 --> partners --> insert --> sequence -->  --> 1
+2020-05-19 15:34:36 --> partners --> insert --> key_name -->  --> Bank Account Number Savings
+2020-05-19 15:34:36 --> partners --> insert --> partner_id -->  --> 4
+2020-05-19 15:34:36 --> partners --> insert --> key_id -->  --> 202
+2020-05-19 15:34:36 --> partners --> insert --> key -->  --> bank_account_number_current
+2020-05-19 15:34:36 --> partners --> insert --> sequence -->  --> 1
+2020-05-19 15:34:36 --> partners --> insert --> key_name -->  --> Bank Account Number Current
+2020-05-19 15:34:36 --> partners --> insert --> partner_id -->  --> 4
+2020-05-19 15:34:36 --> partners --> insert --> key_id -->  --> 205
+2020-05-19 15:34:36 --> partners --> insert --> key -->  --> bank_account_name
+2020-05-19 15:34:36 --> partners --> insert --> sequence -->  --> 1
+2020-05-19 15:34:36 --> partners --> insert --> key_name -->  --> Bank Account Name
+2020-05-19 15:35:34 --> signatories --> insert --> approver -->  --> 1
+2020-05-19 15:35:34 --> signatories --> insert --> email -->  --> 1
+2020-05-19 15:35:34 --> signatories --> insert --> approver_id -->  --> 56
+2020-05-19 15:35:34 --> signatories --> insert --> condition -->  --> All
+2020-05-19 15:35:34 --> signatories --> insert --> class_id -->  --> 8
+2020-05-19 15:35:34 --> signatories --> insert --> sequence -->  --> 1
+2020-05-19 15:35:34 --> signatories --> insert --> company_id -->  --> 1
+2020-05-19 15:35:34 --> signatories --> insert --> department_id -->  --> 1
+2020-05-19 15:35:34 --> signatories --> insert --> position_id -->  --> 86
+2020-05-19 15:35:34 --> signatories --> insert --> user_id -->  --> 57
+2020-05-19 15:35:34 --> signatories --> insert --> alias -->  --> Reyes, Naisa 
+2020-05-19 15:35:34 --> signatories --> insert --> employee -->  --> 57
+2020-05-19 15:35:49 --> authentication --> logout --> logout -->  --> 

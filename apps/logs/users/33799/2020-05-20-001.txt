@@ -1,0 +1,12 @@
+2020-05-20 09:37:21 --> authentication --> login --> login -->  --> 
+2020-05-20 09:37:43 --> authentication --> logout --> logout -->  --> 
+2020-05-20 09:38:46 --> authentication --> login --> login -->  --> 
+2020-05-20 09:38:55 --> authentication --> logout --> logout -->  --> 
+2020-05-20 09:58:43 --> authentication --> login --> login -->  --> 
+2020-05-20 09:59:40 --> authentication --> logout --> logout -->  --> 
+2020-05-20 10:04:53 --> authentication --> login --> login -->  --> 
+2020-05-20 10:05:18 --> authentication --> logout --> logout -->  --> 
+2020-05-20 10:10:04 --> authentication --> login --> login -->  --> 
+2020-05-20 10:10:41 --> authentication --> logout --> logout -->  --> 
+2020-05-20 10:14:22 --> authentication --> login --> login -->  --> 
+2020-05-20 10:15:55 --> authentication --> logout --> logout -->  --> 

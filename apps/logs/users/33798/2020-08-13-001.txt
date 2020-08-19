@@ -1,0 +1,13 @@
+2020-08-13 03:26:30 --> authentication --> login --> login -->  --> 
+2020-08-13 05:02:29 --> authentication --> logout --> logout -->  --> 
+2020-08-13 06:39:50 --> authentication --> login --> login -->  --> 
+2020-08-13 07:32:28 --> authentication --> logout --> logout -->  --> 
+2020-08-13 07:33:13 --> authentication --> login --> login -->  --> 
+2020-08-13 07:36:58 --> authentication --> logout --> logout -->  --> 
+2020-08-13 07:38:08 --> authentication --> login --> login -->  --> 
+2020-08-13 09:03:07 --> my201 --> insert --> user_id -->  --> 56
+2020-08-13 09:03:07 --> my201 --> insert --> key_id -->  --> 25
+2020-08-13 09:03:07 --> my201 --> insert --> sequence -->  --> 1
+2020-08-13 09:03:07 --> my201 --> insert --> key_value -->  --> catholic
+2020-08-13 09:03:07 --> my201 --> insert --> status -->  --> 2
+2020-08-13 09:34:34 --> authentication --> logout --> logout -->  --> 

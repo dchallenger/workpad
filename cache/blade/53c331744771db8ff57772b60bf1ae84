@@ -1,0 +1,101 @@
+
+<?php $__env->startSection('page_styles'); ?>
+	@parent	
+	<link href="<?php echo theme_path(); ?>plugins/select2/select2_metro.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo theme_path(); ?>plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="<?php echo theme_path(); ?>plugins/bootstrap-switch/static/stylesheets/bootstrap-switch-metro.css"/>
+	<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page_content'); ?>
+@parent
+
+<!-- BEGIN EXAMPLE TABLE PORTLET-->
+<div class="row">
+	<div class="col-md-9">
+		<div class="portlet">
+			<div class="portlet-title">
+				<!-- div class="caption"><i class="fa <?php echo $mod->icon; ?>"></i>List of <?php echo $mod->short_name; ?></div -->
+				<div class="caption" id="head-caption">&nbsp;</div>
+				<div class="actions">
+            		<?php if( array_key_exists('add', $permission)): ?>
+	        			<?php if( $permission['add'] == 1 ): ?>
+							<a id="goadd" href="javascript:add_partners('')" class="btn btn-success"><i class="fa fa-plus"></i></a>
+	        			<?php endif; ?>
+	        		<?php endif; ?>
+            		<?php if( array_key_exists('delete', $permission)): ?>
+	        			<?php if( $permission['delete'] == 1 ): ?>
+							<a href="javascript:delete_records()" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+	        			<?php endif; ?>
+        			<?php endif; ?>
+				</div>
+			</div>
+			<div class="clearfix">
+				<table id="record-table" class="table table-condensed table-striped table-hover">
+					<thead>
+						<tr>
+							<th width="1%">
+								<div>
+									<span><input type="checkbox" class="group-checkable" data-set=".record-checker"></span>
+								</div>
+							</th>
+							<?php echo $__env->make('list_template_header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+							<th width="20%">
+								<?php echo lang('common.actions'); ?>
+							</th>
+						</tr>
+					</thead>
+					<tbody id="record-list"></tbody>
+				</table>
+				<div id="no_record" class="well" style="display:none;">
+					<p class="bold"><i class="fa fa-exclamation-triangle"></i> <?php echo lang('common.no_record_found'); ?></p>	
+				</div>
+				<div id="loader" class="text-center"><img src="<?php echo theme_path(); ?>img/ajax-loading.gif" alt="loading..." /> <?php echo lang('common.get_record'); ?></div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 visible-lg visible-md">
+		<div class="portlet">
+			<div class="clearfix margin-bottom-20">
+				<?php echo $__env->make('common/search-form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+				<div class="actions margin-top-20 clearfix">
+					<span class="pull-right"><a class="text-muted" id="trash" href="javascript:view_trash()"><?php echo lang('common.trash_folder'); ?> <i class="fa fa-trash-o"></i></a></span>
+				</div>
+			</div>
+
+			<?php echo $__env->make('list_filter', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+			<div class="clearfix margin-bottom-20 hidden">
+				<h4>Filter Items:</h4>
+				<div class="list-group">
+					<a class="list-group-item active bg-blue" href="#"><i class="fa fa-check-square-o"></i> All User</a>
+					<a class="list-group-item" href="#"><i class="fa fa-square-o"></i> HR Admin</a>
+					<a class="list-group-item" href="#"><i class="fa fa-square-o"></i> Manager</a>
+					<a class="list-group-item" href="#"><i class="fa fa-square-o"></i> Supervisor</a>
+					<a class="list-group-item" href="#"><i class="fa fa-square-o"></i> Rank and File</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<div class="modal fade partner-modal modal-container" tabindex="-1" aria-hidden="true" data-width="600"></div>
+<!-- END EXAMPLE TABLE PORTLET-->
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page_plugins'); ?>
+@parent
+<script src="<?php echo theme_path(); ?>plugins/select2/select2.min.js" type="text/javascript" ></script>
+<script src="<?php echo theme_path(); ?>plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript" ></script>
+<script type="text/javascript" src="<?php echo theme_path(); ?>plugins/jquery.infiniteScroll.js"></script>
+<script type="text/javascript" src="<?php echo theme_path(); ?>plugins/bootstrap-switch/static/js/bootstrap-switch.min.js"></script>
+<script src="<?php echo theme_path(); ?>scripts/ui-extended-modals.js"></script> 
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('page_scripts'); ?>
+@parent
+<script type="text/javascript" src="<?php echo theme_path(); ?>modules/partners_immediate/lists_custom.js"></script>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('view_js'); ?>
+@parent
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

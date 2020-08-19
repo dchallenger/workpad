@@ -1,0 +1,49 @@
+2020-04-25 09:22:58 --> authentication --> logout --> logout -->  --> 
+2020-04-25 09:26:07 --> authentication --> login --> login -->  --> 
+2020-04-25 15:33:08 --> partners --> update --> branch_id --> 0 --> 1
+2020-04-25 15:33:08 --> partners --> update --> start_date --> 0000-00-00 --> 1970-01-01
+2020-04-25 15:33:08 --> partners --> update --> end_date --> 0000-00-00 --> 1970-01-01
+2020-04-25 15:33:08 --> partners --> update --> employment_end_date --> 2001-04-23 --> April 26, 2001
+2020-04-25 15:33:08 --> partners --> update --> original_date_hired -->  --> April 23, 2001
+2020-04-25 15:33:08 --> partners --> insert --> partner_id -->  --> 1
+2020-04-25 15:33:08 --> partners --> insert --> key_id -->  --> 14
+2020-04-25 15:33:08 --> partners --> insert --> key -->  --> organization
+2020-04-25 15:33:08 --> partners --> insert --> sequence -->  --> 1
+2020-04-25 15:33:08 --> partners --> insert --> key_name -->  --> Organization
+2020-04-25 15:33:08 --> partners --> insert --> partner_id -->  --> 1
+2020-04-25 15:33:08 --> partners --> insert --> key_id -->  --> 209
+2020-04-25 15:33:08 --> partners --> insert --> key -->  --> home_leave
+2020-04-25 15:33:08 --> partners --> insert --> sequence -->  --> 1
+2020-04-25 15:33:08 --> partners --> insert --> key_name -->  --> Home Leave
+2020-04-25 15:33:13 --> partners --> update --> employment_end_date --> 2001-04-23 --> April 26, 2001
+2020-04-25 15:33:13 --> partners --> update --> original_date_hired -->  --> April 23, 2001
+2020-04-25 15:33:22 --> partners --> update --> employment_end_date --> 2001-04-23 --> April 26, 2001
+2020-04-25 15:33:22 --> partners --> update --> original_date_hired -->  --> April 23, 2001
+2020-04-25 15:44:42 --> partners --> update --> employment_end_date --> 2001-04-23 --> April 26, 2001
+2020-04-25 15:44:42 --> partners --> update --> original_date_hired -->  --> April 23, 2001
+2020-04-25 15:46:48 --> partners --> update --> role_id --> 13 --> 25
+2020-04-25 15:46:48 --> partners --> update --> branch_id --> 0 --> 1
+2020-04-25 15:46:48 --> partners --> update --> start_date --> 0000-00-00 --> 1970-01-01
+2020-04-25 15:46:48 --> partners --> update --> end_date --> 0000-00-00 --> 1970-01-01
+2020-04-25 15:46:48 --> partners --> update --> employment_end_date --> 2001-04-23 --> April 23, 2001
+2020-04-25 15:46:48 --> partners --> update --> original_date_hired -->  --> April 23, 2001
+2020-04-25 15:46:49 --> partners --> insert --> partner_id -->  --> 2
+2020-04-25 15:46:49 --> partners --> insert --> key_id -->  --> 14
+2020-04-25 15:46:49 --> partners --> insert --> key -->  --> organization
+2020-04-25 15:46:49 --> partners --> insert --> sequence -->  --> 1
+2020-04-25 15:46:49 --> partners --> insert --> key_name -->  --> Organization
+2020-04-25 15:46:49 --> partners --> insert --> partner_id -->  --> 2
+2020-04-25 15:46:49 --> partners --> insert --> key_id -->  --> 209
+2020-04-25 15:46:49 --> partners --> insert --> key -->  --> home_leave
+2020-04-25 15:46:49 --> partners --> insert --> sequence -->  --> 1
+2020-04-25 15:46:49 --> partners --> insert --> key_name -->  --> Home Leave
+2020-04-25 15:46:57 --> partners --> update --> employment_end_date --> 2001-04-23 --> April 23, 2001
+2020-04-25 15:46:57 --> partners --> update --> original_date_hired -->  --> April 23, 2001
+2020-04-25 15:52:16 --> partners --> update --> employment_end_date --> 2001-04-23 --> April 23, 2001
+2020-04-25 15:52:22 --> partners --> update --> employment_end_date --> 2001-04-23 --> April 23, 2001
+2020-04-25 15:53:10 --> partners --> update --> employment_end_date --> 2001-04-23 --> April 23, 2001
+2020-04-25 15:53:59 --> partners --> update --> employment_end_date --> 2001-04-23 --> April 23, 2001
+2020-04-25 15:57:26 --> partners --> update --> start_date --> 0000-00-00 --> 1970-01-01
+2020-04-25 15:57:26 --> partners --> update --> end_date --> 0000-00-00 --> 1970-01-01
+2020-04-25 15:57:37 --> partners --> update --> original_hired_date --> 2001-04-23 --> 2001-04-25
+2020-04-25 15:57:53 --> partners --> update --> employment_end_date --> 2001-04-23 --> 2001-04-28

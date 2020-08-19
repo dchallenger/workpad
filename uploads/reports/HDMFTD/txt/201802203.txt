@@ -1,0 +1,34 @@
+EH04201802201713020002   PMCIthiel Corporation                                                                                     733 Wood St. Malibay, Pasay City                                                                    1300   8893935
+DT10400169466900229          HULLEZA                       CESAR                         LLAVE                         3100.00      100.00       141264420      19600629
+DT10400166227500301          MARQUEZ                       JOSE                          CLUTARIO                      240.00       100.00       140947196      19570619
+DT10400166230600517          VILLANUEVA                    FERNANDO                      ALMODIN                       400.00       100.00       116094363      19631203
+DT10400166223000697          CARMEN                        BERNARDO                      MALAQUI                       401.60       100.00       156298705      19600520
+DT10400164623200885          SENODO                        MELVIN                        FEBRES                        247.00       100.00       219467370      19740403
+DT10400164617700886          ABO                           MADONNA                       CUICO                         382.56       100.00       905146134      19760408
+DT10400164619900887          BARTOLOME                     SARAH JANE                    MENDIOLA                      100.00       100.00       218014316      19780913
+DT10400166222900889          BARTOLOME                     ROMEL                         A                             251.78       100.00       208465285      19790101
+DT10400164621001191          ROA                           RAMIL                         RECANIA                       231.42       100.00       224904941      19730126
+DT10400164624301420          UADAN                         CRISTOPHER                    NAPONE                        275.86       100.00       158155227      19651031
+DT10400164618801474          BALLESTEROS                   MONICA                        CASTRO                        256.22       100.00       931679559      19770719
+DT10400166229701475          SANTOS                        MELANIE                       ULANDAY                       158.24       100.00       931679534      19810118
+DT10400164620801520          FRANCISCO                     WILFREDO                      ROJAS                         313.70       100.00       138440709      00000000
+DT12102629916501747          DEITA                         AIREEN                        DUENAS                        400.00       100.00       244214436      19831018
+DT10400169335802096          BASILIO                       MARYBETH                      TIPAY                         275.86       100.00       161847469      19730421
+DT10200045366 30056          JANDOC                        RANDY                         VALENTINO                     219.92       100.00       916632194      19800721
+DT12105863629931112          PEREA                         JEFFREY                       DE LEON                       100.00       100.00       233068861      19810817
+DT12105733005531231          SERIO                         PELMAR                        LAGUITAN                      100.00       100.00       234952991      19780405
+DT12103347322332577          DEPIEDRA                      RENANTE                       CASTILLON                     100.00       100.00       204084913      19780622
+DT14100052509932593          ENCABO                        SHERVI                        MEDIALDIA                     100.00       100.00       912430141      19771015
+DT12105895014732716          LOMOTOS                       GONIEL                        MUTYA                         100.00       100.00       296814017      19800313
+DT10400163405232770          ROSAL                         JERSON                        INTERIOR                      100.00       100.00       204576313      00000000
+DT10400198830832862          PINEDA                        JAYSON                        AW                            100.00       100.00       228924626      19811109
+DT12110550853932937          MENDEZ                        MOISES                        MADRIAGA                      100.00       100.00       940244986      19761110
+DT12117037600332999          DACDAC                        PATRICK JOHN                  RABANAL                       100.00       100.00       329345247      19930920
+DT12117535025233011          RACRAQUIN                     JOANNA MARI                   BONILLA                       100.00       100.00       264009628      19900624
+DT12101650606031278          CORPUZ                        ROMULO                        GERVACIO                      100.00       100.00       213341647      20000101
+DT01050949562433194          COMODA                        RENATO                        EJUSA                         100.00       100.00       150018103      19680929
+DT12101953081833226          GAYO                          MAURITO                       ALCANTARA                     100.00       100.00       108929344      19581115
+DT12120494013433251          MIRANDA                       MAY ANN                       QUINES                        100.00       100.00       340452691      19960512
+DT12116121638133276          CARINO                        CITADEL                       DAMASCO                       100.00       100.00       423771759      19871201
+DT05201366874433272          DE GUZMAN                     RONALD                        LADIA                         100.00       100.00       701779620      19880308
+DT05050104057333271          RABOT                         EDUARDO                       ABRANTES                      100.00       100.00       708589641      19770613

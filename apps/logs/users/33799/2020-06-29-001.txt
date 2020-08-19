@@ -1,0 +1,14 @@
+2020-06-29 08:54:00 --> authentication --> login --> login -->  --> 
+2020-06-29 08:54:46 --> authentication --> logout --> logout -->  --> 
+2020-06-29 09:16:48 --> authentication --> login --> login -->  --> 
+2020-06-29 09:25:47 --> authentication --> logout --> logout -->  --> 
+2020-06-29 10:06:49 --> authentication --> login --> login -->  --> 
+2020-06-29 10:08:02 --> authentication --> logout --> logout -->  --> 
+2020-06-29 10:11:02 --> authentication --> login --> login -->  --> 
+2020-06-29 10:12:23 --> authentication --> logout --> logout -->  --> 
+2020-06-29 11:13:14 --> authentication --> login --> login -->  --> 
+2020-06-29 11:29:55 --> authentication --> logout --> logout -->  --> 
+2020-06-29 11:34:18 --> authentication --> login --> login -->  --> 
+2020-06-29 11:36:01 --> authentication --> logout --> logout -->  --> 
+2020-06-29 13:38:32 --> authentication --> login --> login -->  --> 
+2020-06-29 13:38:46 --> authentication --> logout --> logout -->  --> 

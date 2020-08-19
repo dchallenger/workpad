@@ -1,0 +1,65 @@
+<?php echo $header; ?>
+<table class="table">
+	<tbody>
+		<?php foreach( $sections as $section ): ?>
+			<?php $rowspan = 1;?>
+			<?php foreach( $section->children as $child ): ?>
+				<?php if( !empty( $child->weight ) ): ?>
+					<?php $rowspan++; ?>
+				<?php endif; ?>
+			<?php endforeach; ?>
+
+			<?php if( !empty( $section->weight ) ): ?>
+				<tr section_id="<?php echo $section->template_section_id; ?>">
+					<td rowspan="<?php echo ($rowspan+1); ?>">
+						<h4><?php echo $section->template_section; ?></h4>
+						<?php echo $section->weight; ?>%
+					</td>
+					<?php $fstchild = $section->children[0]?>
+					<td>
+						<?php echo $fstchild->template_section; ?>
+						<?php if( !empty( $fstchild->weight ) ): ?>
+							(<?php echo $fstchild->weight; ?>%)
+						<?php endif; ?>
+					</td>
+					<td>
+						<input type="text" class="form-control summary-section" section_id="<?php echo $fstchild->template_section_id; ?>" readonly>
+					</td>
+				</tr>
+				<?php unset( $section->children[0] )?>
+				<?php foreach( $section->children as $child ): ?>
+					<?php if( !empty( $child->weight ) ): ?>
+						<tr section_id="<?php echo $section->template_section_id; ?>">
+							<td>
+								<?php echo $child->template_section; ?>
+								(<?php echo $child->weight; ?>%)
+							</td>
+							<td>
+								<input type="text" class="form-control summary-section" section_id="<?php echo $child->template_section_id; ?>" readonly>
+							</td>
+						</tr>
+					<?php endif; ?>
+				<?php endforeach; ?>
+				<tr>
+					<td>
+						<span class="pull-right"><?php echo $section->template_section; ?> RATING:<span>
+					</span></span></td>
+					<td><input type="text" name="summary-section-total" rc_id="<?php echo $section->rc_id; ?>" section_id="<?php echo $section->template_section_id; ?>" class="form-control"></td>
+				</tr>
+				<tr class="warning">
+					<td>
+						<span class="pull-right bold"><?php echo lang('appraisal_individual_rate.weighted'); ?> <?php echo $section->template_section; ?> RATING:<span>
+					</span></span></td>
+					<td><input type="text" class="form-control grand-section-total" rc_id="<?php echo $section->rc_id; ?>" weight="<?php echo $section->weight; ?>" section_id="<?php echo $section->template_section_id; ?>" readonly></td>
+				</tr>
+			<?php endif; ?>
+		<?php endforeach; ?>
+		<tr class="success">
+			<td colspan="2">
+				<h4 class="pull-right bold"><?php echo lang('appraisal_individual_rate.final_rate'); ?>:</h4><h4>
+			</h4></td>
+			<td><input type="text" class="form-control final_total" readonly value="0"></td>
+		</tr>
+	</tbody>
+</table>
+<?php echo $footer; ?>

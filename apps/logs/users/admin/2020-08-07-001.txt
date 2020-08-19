@@ -1,0 +1,128 @@
+2020-08-07 08:13:52 --> authentication --> login --> login -->  --> 
+2020-08-07 08:14:54 --> memo --> insert --> memo_type_id -->  --> 1
+2020-08-07 08:14:54 --> memo --> insert --> apply_to_id -->  --> 2
+2020-08-07 08:14:54 --> memo --> insert --> memo_title -->  --> Testing
+2020-08-07 08:14:54 --> memo --> insert --> publish_from -->  --> 2020-08-07
+2020-08-07 08:14:54 --> memo --> insert --> publish_to -->  --> 2020-08-31
+2020-08-07 08:14:54 --> memo --> insert --> publish -->  --> 1
+2020-08-07 08:14:54 --> memo --> insert --> memo_body -->  --> <p>test</p>
+2020-08-07 09:13:44 --> incident_report --> insert --> involved_partners -->  --> 57
+2020-08-07 09:13:44 --> incident_report --> insert --> offense_id -->  --> 1
+2020-08-07 09:13:44 --> incident_report --> insert --> complainants -->  --> 55
+2020-08-07 09:13:44 --> incident_report --> insert --> date_time_of_offense -->  --> 2020-08-07 15:13:00
+2020-08-07 09:13:44 --> incident_report --> insert --> witnesses -->  --> 54
+2020-08-07 09:13:44 --> incident_report --> insert --> location -->  --> pantry
+2020-08-07 09:13:44 --> incident_report --> insert --> violation_details -->  --> dasd
+2020-08-07 09:13:44 --> incident_report --> insert --> damages -->  --> asd
+2020-08-07 09:13:44 --> incident_report --> insert --> incident_status_id -->  --> 2
+2020-08-07 09:13:44 --> incident_report --> insert --> date_sent -->  --> 2020-08-07 09:13:44
+2020-08-07 09:44:47 --> batch_transaction --> update --> unit_rate_main --> æ® (g$o¼v ; --> w
+6ú…îj×Ş^{Ò0g
+2020-08-07 09:44:47 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+2020-08-07 09:48:03 --> batch_transaction --> update --> unit_rate_main --> æ® (g$o¼v ; --> w
+6ú…îj×Ş^{Ò0g
+2020-08-07 09:48:03 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+2020-08-07 09:48:16 --> batch_transaction --> update --> unit_rate_main --> æ® (g$o¼v ; --> w
+6ú…îj×Ş^{Ò0g
+2020-08-07 09:48:16 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+2020-08-07 09:48:41 --> batch_transaction --> update --> unit_rate_main --> æ® (g$o¼v ; --> w
+6ú…îj×Ş^{Ò0g
+2020-08-07 09:48:41 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+2020-08-07 09:55:15 --> batch_transaction --> update --> unit_rate_main --> æ® (g$o¼v ; --> w
+6ú…îj×Ş^{Ò0g
+2020-08-07 09:55:15 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+2020-08-07 09:55:15 --> batch_transaction --> insert --> batch_entry_id -->  --> 2
+2020-08-07 09:55:15 --> batch_transaction --> insert --> id_number -->  --> 1101025
+2020-08-07 09:55:15 --> batch_transaction --> insert --> employee_id -->  --> 55
+2020-08-07 09:55:15 --> batch_transaction --> insert --> unit_rate -->  --> š
+6ò…ìj‹Û]}ß0b
+2020-08-07 09:55:15 --> batch_transaction --> insert --> quantity -->  --> Õ1S€æikŞ]}ÂÕ6b
+2020-08-07 09:55:15 --> batch_transaction --> insert --> amount -->  --> ç
+4ÕìmõŞYy­Ó0a
+2020-08-07 10:13:27 --> batch_transaction --> update --> unit_rate_main --> w
+6ú…îj×Ş^{Ò0g --> È	5›†èc•Ü]~Kß0b
+2020-08-07 10:13:27 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+2020-08-07 10:13:27 --> batch_transaction --> insert --> batch_entry_id -->  --> 2
+2020-08-07 10:13:27 --> batch_transaction --> insert --> id_number -->  --> 1101025
+2020-08-07 10:13:27 --> batch_transaction --> insert --> employee_id -->  --> 55
+2020-08-07 10:13:27 --> batch_transaction --> insert --> unit_rate -->  --> È	5›†èc•Ü]~Kß0b
+2020-08-07 10:13:27 --> batch_transaction --> insert --> quantity -->  --> w
+6ú…îj×Ş^{Ò0g
+2020-08-07 10:13:27 --> batch_transaction --> insert --> amount -->  --> 
+2¼…înoİ]}Ö0a
+2020-08-07 10:18:39 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+2020-08-07 10:18:39 --> batch_transaction --> insert --> batch_entry_id -->  --> 2
+2020-08-07 10:18:39 --> batch_transaction --> insert --> id_number -->  --> 1101025
+2020-08-07 10:18:40 --> batch_transaction --> insert --> employee_id -->  --> 55
+2020-08-07 10:18:40 --> batch_transaction --> insert --> unit_rate -->  --> È	5›†èc•Ü]~Kß0b
+2020-08-07 10:18:40 --> batch_transaction --> insert --> quantity -->  --> ]	0À†éi-Ş]~.Õ0e
+2020-08-07 10:18:40 --> batch_transaction --> insert --> amount -->  --> ”5…ëjjÙ]} Ö0c
+2020-08-07 10:19:39 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 2 --> 
+2020-08-07 10:31:36 --> batch_transaction --> update --> unit_rate_main --> È	5›†èc•Ü]~Kß0b --> 6000
+2020-08-07 10:33:14 --> batch_transaction --> update --> unit_rate_main --> 6000 --> Ó	6]†íc Ú]}ÛŞ0b
+2020-08-07 10:34:39 --> batch_transaction --> insert --> document_no -->  --> 23423423
+2020-08-07 10:34:39 --> batch_transaction --> insert --> transaction_id -->  --> 96
+2020-08-07 10:34:39 --> batch_transaction --> insert --> payroll_date -->  --> 2020-08-21
+2020-08-07 10:34:39 --> batch_transaction --> insert --> unit_rate_main -->  --> 
+4å…îj2Ş^~åÕ3b
+2020-08-07 10:34:40 --> batch_transaction --> insert --> remarks -->  --> tre
+2020-08-07 10:34:40 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 3 --> 
+2020-08-07 10:34:40 --> batch_transaction --> insert --> batch_entry_id -->  --> 3
+2020-08-07 10:34:40 --> batch_transaction --> insert --> id_number -->  --> 1101025
+2020-08-07 10:34:40 --> batch_transaction --> insert --> employee_id -->  --> 55
+2020-08-07 10:34:40 --> batch_transaction --> insert --> unit_rate -->  --> £	2ş…îjõÚ]}IŞ9g
+2020-08-07 10:34:40 --> batch_transaction --> insert --> quantity -->  --> ]	0À†éi-Ş]~.Õ0e
+2020-08-07 10:34:40 --> batch_transaction --> insert --> amount -->  --> £	2ş…îjõÚ]}IŞ9g
+2020-08-07 10:34:40 --> batch_transaction --> insert --> batch_entry_id -->  --> 3
+2020-08-07 10:34:40 --> batch_transaction --> insert --> id_number -->  --> 33799
+2020-08-07 10:34:40 --> batch_transaction --> insert --> employee_id -->  --> 57
+2020-08-07 10:34:40 --> batch_transaction --> insert --> unit_rate -->  --> £	2ş…îjõÚ]}IŞ9g
+2020-08-07 10:34:40 --> batch_transaction --> insert --> quantity -->  --> ]	0À†éi-Ş]~.Õ0e
+2020-08-07 10:34:40 --> batch_transaction --> insert --> amount -->  --> £	2ş…îjõÚ]}IŞ9g
+2020-08-07 10:35:46 --> recurring_transaction --> update --> amount --> Q]\À25æí9>™ib} --> D	6¼†èj.ŞZ~ŸÖ3a
+2020-08-07 10:36:46 --> batch_transaction --> update --> unit_rate_main --> Ó	6]†íc Ú]}ÛŞ0b --> È	5›†èc•Ü]~Kß0b
+2020-08-07 10:36:55 --> batch_transaction --> update --> unit_rate_main --> È	5›†èc•Ü]~Kß0b --> ½
+6…îjàØY}âÖ3c
+2020-08-07 11:12:57 --> batch_transaction --> update --> unit_rate_main --> Ù‹¶M›/,¹?şÕú‹_ --> BmgIawM2VmA=
+2020-08-07 11:13:11 --> batch_transaction --> update --> unit_rate_main --> 
+4å…îj2Ş^~åÕ3b --> Uz1VMlRkADNYMA==
+2020-08-07 11:13:11 --> batch_transaction --> delete --> payroll_entry_batch_employee - batch_entry_id --> 3 --> 
+2020-08-07 11:13:11 --> batch_transaction --> insert --> batch_entry_id -->  --> 3
+2020-08-07 11:13:11 --> batch_transaction --> insert --> id_number -->  --> 1101025
+2020-08-07 11:13:11 --> batch_transaction --> insert --> employee_id -->  --> 55
+2020-08-07 11:13:11 --> batch_transaction --> insert --> unit_rate -->  --> å	6Ò†æi´Ş[uUÔ8b
+2020-08-07 11:13:11 --> batch_transaction --> insert --> quantity -->  --> å	6Ò†æi´Ş[uUÔ8b
+2020-08-07 11:13:11 --> batch_transaction --> insert --> amount -->  --> å	6Ò†æi´Ş[uUÔ8b
+2020-08-07 11:13:11 --> batch_transaction --> insert --> batch_entry_id -->  --> 3
+2020-08-07 11:13:11 --> batch_transaction --> insert --> id_number -->  --> 33799
+2020-08-07 11:13:11 --> batch_transaction --> insert --> employee_id -->  --> 57
+2020-08-07 11:13:11 --> batch_transaction --> insert --> unit_rate -->  --> å	6Ò†æi´Ş[uUÔ8b
+2020-08-07 11:13:11 --> batch_transaction --> insert --> quantity -->  --> å	6Ò†æi´Ş[uUÔ8b
+2020-08-07 11:13:12 --> batch_transaction --> insert --> amount -->  --> å	6Ò†æi´Ş[uUÔ8b
+2020-08-07 12:40:45 --> users --> update --> active --> 1 --> 1 else 0
+2020-08-07 13:02:12 --> clearance_sign --> update --> layout_name -->  --> Head Office
+2020-08-07 13:07:46 --> system --> update --> config -->  --> 1
+2020-08-07 13:07:46 --> system --> update --> config -->  --> 0
+2020-08-07 13:07:46 --> system --> update --> config -->  --> 0
+2020-08-07 13:07:46 --> system --> update --> config -->  --> 0
+2020-08-07 13:07:46 --> system --> update --> config -->  --> 36000005
+2020-08-07 13:07:46 --> system --> update --> config -->  --> 18000005
+2020-08-07 13:07:46 --> system --> update --> config -->  --> 1
+2020-08-07 13:07:46 --> system --> update --> config -->  --> 2017-08-07
+2020-08-07 13:07:46 --> system --> update --> config -->  --> 2017-08-11
+2020-08-07 13:07:46 --> system --> update --> config -->  --> 56
+2020-08-07 13:07:46 --> system --> update --> config -->  --> 3
+2020-08-07 13:08:46 --> profiles --> edit --> profile_id -->  --> 14
+2020-08-07 13:08:47 --> profiles --> edit --> mod_id -->  --> 264
+2020-08-07 13:08:47 --> profiles --> edit --> action_id -->  --> 1
+2020-08-07 13:08:47 --> profiles --> edit --> grant -->  --> on
+2020-08-07 13:08:47 --> profiles --> edit --> profile_id -->  --> 14
+2020-08-07 13:08:47 --> profiles --> edit --> mod_id -->  --> 264
+2020-08-07 13:08:47 --> profiles --> edit --> action_id -->  --> 2
+2020-08-07 13:08:47 --> profiles --> edit --> grant -->  --> on
+2020-08-07 13:08:47 --> profiles --> edit --> profile_id -->  --> 14
+2020-08-07 13:08:47 --> profiles --> edit --> mod_id -->  --> 264
+2020-08-07 13:08:47 --> profiles --> edit --> action_id -->  --> 3
+2020-08-07 13:08:47 --> profiles --> edit --> grant -->  --> on
+2020-08-07 13:08:47 --> profiles --> edit --> profile_id -->  --> 14
+2020-08-07 13:08:47 --> profiles --> edit --> mod_id -->  --> 264

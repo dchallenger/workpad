@@ -1,0 +1,44 @@
+<tr class="record">
+ <!--    <td class="hidden-xs">
+        <div>
+            
+            <input type="checkbox" class="record-checker checkboxes" value="<?php echo $record_id; ?>">
+        </div>
+    </td> -->
+    <td>
+        <a href="<?php echo $detail_url; ?>" class="text-success">
+            <?php echo $time_form_balance_year; ?>
+        </a>
+        <?php if($time_form_balance_period_to != '2099-12-31'): ?>
+         <span class="help-block" style="font-size:80%"><?php echo ($time_form_balance_period_from == '0000-00-00') ? 'Until' : date('M d, Y', strtotime($time_form_balance_period_from)) . ' - '; ?> <?php echo date('M d, Y', strtotime($time_form_balance_period_to)); ?></span>
+        <?php endif; ?>
+
+    </td>
+     <td>
+        <?php echo $time_form_balance_form; ?>
+    </td>
+    <td>
+        <?php echo $time_form_balance_previous; ?>
+    </td>
+    <td >
+        <?php echo (float) $time_form_balance_current; ?>
+    </td>
+    <td >
+        <?php echo (float) $time_form_balance_used; ?>
+    </td>
+    <td >
+        <?php echo (float) $time_form_balance_converted; ?>
+    </td>        
+    <td >
+        <?php echo (float) $time_form_balance_forfeited; ?>
+    </td>    
+    <td >
+        <?php echo (float) $time_form_balance_balance; ?>
+    </td>
+    
+    <td>
+        <div class="btn-group">
+            <a class="btn btn-xs text-muted" href="<?php echo $detail_url; ?>"><i class="fa fa-search"></i> <?php echo lang('leave_balance.view'); ?></a>
+        </div>
+    </td>
+</tr>
