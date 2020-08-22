@@ -64,21 +64,31 @@ $db['local']['swap_pre'] = '';
 $db['local']['autoinit'] = FALSE;
 $db['local']['stricton'] = FALSE;
 
-$db['default']['hostname'] = 'hris.abrahamholdings.ph';
-$db['default']['username'] = 'emplopad';
-$db['default']['password'] = 'PasswOrd';
-$db['default']['database'] = 'emplopad.testing';
-$db['default']['dbdriver'] = 'mysqli';
-$db['default']['dbprefix'] = 'ww_';
-$db['default']['pconnect'] = FALSE;
-$db['default']['db_debug'] = FALSE;
-$db['default']['cache_on'] = FALSE;
-$db['default']['cachedir'] = '';
-$db['default']['char_set'] = 'utf8';
-$db['default']['dbcollat'] = 'utf8_general_ci';
-$db['default']['swap_pre'] = '';
-$db['default']['autoinit'] = FALSE;
-$db['default']['stricton'] = FALSE;
+$db['ms_sql']['hostname'] = "192.168.0.54\SQLEXPRESS";
+$db['ms_sql']['username'] = "HDIUser";
+$db['ms_sql']['password'] = "Pr0@ctiv3";
+$db['ms_sql']['database'] = "NitgenAccessManager";
+$db['ms_sql']['dbdriver'] = 'mssql';
+$db['ms_sql']['dbprefix'] = FALSE;
+$db['ms_sql']['pconnect'] = TRUE;
+$db['ms_sql']['db_debug'] = TRUE;
+$db['ms_sql']['cache_on'] = FALSE;
+$db['ms_sql']['cachedir'] = '';
+$db['ms_sql']['char_set'] = 'utf8';
+$db['ms_sql']['dbcollat'] = 'utf8_general_ci';
+
+$db['ms_sql_portal']['hostname'] = "13.228.34.85";
+$db['ms_sql_portal']['username'] = "HRIS";
+$db['ms_sql_portal']['password'] = "SFJJUy1DUk9OX0pPQg==";
+$db['ms_sql_portal']['database'] = "ORT_WEB_OTP";
+$db['ms_sql_portal']['dbdriver'] = "mssql";
+$db['ms_sql_portal']['dbprefix'] = FALSE;
+$db['ms_sql_portal']['pconnect'] = TRUE;
+$db['ms_sql_portal']['db_debug'] = TRUE;
+$db['ms_sql_portal']['cache_on'] = FALSE;
+$db['ms_sql_portal']['cachedir'] = "";
+$db['ms_sql_portal']['char_set'] = "utf8";
+$db['ms_sql_portal']['dbcollat'] = "utf8_general_ci";
 
 
 /* End of file database.php */

@@ -1,7 +1,0 @@
-<th width="19%"><?php echo lang('audit.date_time'); ?></th>
-<th width="10%"><?php echo lang('audit.module'); ?></th>
-<th width="10%"><?php echo lang('audit.item'); ?></th>
-<th width="25%"><?php echo lang('audit.original'); ?></th>
-<th width="25%"><?php echo lang('audit.new'); ?></th>
-<th width="10%"><?php echo lang('audit.transaction'); ?></th>
-<th width="10%"><?php echo lang('audit.user'); ?></th>

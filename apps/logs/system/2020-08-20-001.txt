@@ -1,0 +1,99 @@
+() --> 2020-08-20 04:43:35 --> authentication --> logout --> logout -->  --> 
+Admin, Emplopad (admin) --> 2020-08-20 08:16:10 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-08-20 09:27:58 --> partners --> update --> lastname --> Caparas --> Torres
+Admin, Emplopad (admin) --> 2020-08-20 09:27:58 --> partners --> update --> firstname --> Ma. Karen --> Kelly
+Reyes, Naisa (33798) --> 2020-08-20 09:33:30 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-08-20 09:39:21 --> partners --> update --> lastname --> Monis --> Meeks
+Admin, Emplopad (admin) --> 2020-08-20 09:39:21 --> partners --> update --> firstname --> Marybeth --> Latonya
+Admin, Emplopad (admin) --> 2020-08-20 09:41:22 --> authentication --> login --> login -->  --> 
+Admin, Emplopad (admin) --> 2020-08-20 09:48:08 --> partners --> insert --> partner_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:48:08 --> partners --> insert --> key_id -->  --> 5
+Admin, Emplopad (admin) --> 2020-08-20 09:48:08 --> partners --> insert --> key -->  --> phone
+Admin, Emplopad (admin) --> 2020-08-20 09:48:08 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:48:08 --> partners --> insert --> key_name -->  --> Phone 
+Admin, Emplopad (admin) --> 2020-08-20 09:48:08 --> partners --> insert --> key_value -->  --> +631234567
+Admin, Emplopad (admin) --> 2020-08-20 09:48:08 --> partners --> insert --> partner_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:48:08 --> partners --> insert --> key_id -->  --> 5
+Admin, Emplopad (admin) --> 2020-08-20 09:48:08 --> partners --> insert --> key -->  --> phone
+Admin, Emplopad (admin) --> 2020-08-20 09:48:08 --> partners --> insert --> sequence -->  --> 2
+Admin, Emplopad (admin) --> 2020-08-20 09:48:08 --> partners --> insert --> key_name -->  --> Phone 
+Admin, Emplopad (admin) --> 2020-08-20 09:48:08 --> partners --> insert --> key_value -->  --> +6312345678
+Admin, Emplopad (admin) --> 2020-08-20 09:48:08 --> partners --> insert --> partner_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:48:08 --> partners --> insert --> key_id -->  --> 7
+Admin, Emplopad (admin) --> 2020-08-20 09:48:08 --> partners --> insert --> key -->  --> mobile
+Admin, Emplopad (admin) --> 2020-08-20 09:48:08 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:48:08 --> partners --> insert --> key_name -->  --> Mobile
+Admin, Emplopad (admin) --> 2020-08-20 09:48:08 --> partners --> insert --> key_value -->  --> +639107105328
+Admin, Emplopad (admin) --> 2020-08-20 09:49:06 --> partners --> update --> lastname --> Marjorie --> Rock
+Admin, Emplopad (admin) --> 2020-08-20 09:49:06 --> partners --> update --> firstname --> Nailog --> Susan
+Admin, Emplopad (admin) --> 2020-08-20 09:49:50 --> partners --> update --> lastname --> Reyes --> Somers
+Admin, Emplopad (admin) --> 2020-08-20 09:49:50 --> partners --> update --> firstname --> Naisa --> Rose
+Admin, Emplopad (admin) --> 2020-08-20 09:50:28 --> partners --> update --> email --> naisa@ortigas.com.ph --> rose@ortigas.com.ph
+Admin, Emplopad (admin) --> 2020-08-20 09:50:28 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-08-20 09:50:28 --> partners --> insert --> key_id -->  --> 5
+Admin, Emplopad (admin) --> 2020-08-20 09:50:28 --> partners --> insert --> key -->  --> phone
+Admin, Emplopad (admin) --> 2020-08-20 09:50:28 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:50:28 --> partners --> insert --> key_name -->  --> Phone 
+Admin, Emplopad (admin) --> 2020-08-20 09:50:28 --> partners --> insert --> key_value -->  --> +6312345678
+Admin, Emplopad (admin) --> 2020-08-20 09:50:28 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-08-20 09:50:28 --> partners --> insert --> key_id -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:50:28 --> partners --> insert --> key -->  --> address_1
+Admin, Emplopad (admin) --> 2020-08-20 09:50:28 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key_name -->  --> Street
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key -->  --> city_town
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key_name -->  --> City/Town
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key_id -->  --> 4
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key -->  --> country
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key_name -->  --> Country
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key_id -->  --> 15
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key -->  --> zip_code
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key_name -->  --> Zip Code
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key_id -->  --> 16
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key -->  --> emergency_name
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key_name -->  --> Contact Name
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key_id -->  --> 17
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key -->  --> emergency_relationship
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key_name -->  --> Relationship
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key_id -->  --> 18
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key -->  --> emergency_phone
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:50:29 --> partners --> insert --> key_name -->  --> Contact Phone
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> key_id -->  --> 19
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> key -->  --> emergency_mobile
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> key_name -->  --> Contact Mobile
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> key_id -->  --> 20
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> key -->  --> emergency_address
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> key_name -->  --> Contact Address
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> key_id -->  --> 21
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> key -->  --> emergency_city
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> key_name -->  --> Contact City
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> key_id -->  --> 92
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> key -->  --> emergency_country
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> key_name -->  --> Country
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> partner_id -->  --> 3
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> key_id -->  --> 22
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> key -->  --> emergency_zip_code
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> sequence -->  --> 1
+Admin, Emplopad (admin) --> 2020-08-20 09:50:30 --> partners --> insert --> key_name -->  --> Contact Zip Code
+Admin, Emplopad (admin) --> 2020-08-20 09:55:00 --> partners --> update --> email --> marjorie@ortigas.com --> susan@ortigas.com
+Admin, Emplopad (admin) --> 2020-08-20 09:55:01 --> partners --> insert --> partner_id -->  --> 4

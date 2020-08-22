@@ -1803,9 +1803,9 @@ class Partners extends MY_PrivateController
 					$mobile = $this->check_mobile($partners_personal['emergency_mobile'], $this->record_id);
 					if(!$mobile){
 						$this->response->invalid=true;
-						$this->response->invalid_message='Invalid contact mobile number';
+						$this->response->invalid_message='Invalid Emergency contact mobile number';
 						$this->response->message[] = array(
-					    	'message' => 'Invalid contact mobile number',
+					    	'message' => 'Invalid Emergency contact mobile number',
 					    	'type' => 'warning'
 						);
 		        		$this->_ajax_return();
@@ -1818,9 +1818,9 @@ class Partners extends MY_PrivateController
 					$mobile = $this->check_phone($partners_personal['emergency_phone'], $this->record_id);
 					if(!$mobile){
 						$this->response->invalid=true;
-						$this->response->invalid_message='Invalid contact phone number';
+						$this->response->invalid_message='Invalid Emergency contact phone number';
 						$this->response->message[] = array(
-					    	'message' => 'Invalid contact phone number',
+					    	'message' => 'Invalid Emergency contact phone number',
 					    	'type' => 'warning'
 						);
 		        		$this->_ajax_return();

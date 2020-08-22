@@ -1,2 +1,0 @@
-<th width="25%"><?php echo lang('account_type.account_type'); ?></th>
-<th width="30%"><?php echo lang('account_type.description'); ?></th>

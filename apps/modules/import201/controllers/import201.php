@@ -6,7 +6,7 @@ class Import201 extends MY_PrivateController
 	{
 		$this->load->model('import201_model', 'mod');
 		parent::__construct();
-		$this->filename = 'D:\oclp new version\employee 201 record.xls';
+		$this->filename = 'D:\oclp new version\employee 201 master file from oclp.xls';
 	}
 
 	function import_payroll_summary(){
@@ -581,6 +581,7 @@ class Import201 extends MY_PrivateController
 
 	function import_company(){
 		$this->db->truncate('users_company');
+		$this->db->truncate('users_company_contact');
 
 		$this->load->library('excel');
 
@@ -1624,22 +1625,28 @@ class Import201 extends MY_PrivateController
 
 		// Remove non-matching cells.
 		foreach ($import_data as $row) {		
-			$arr_field_val = array('status_id' => 1);
 			foreach ($valid_cells as $key => $value) {
-				$arr_field_val[$value] = $row[$key];
-
 				switch ($value) {
 					case 'educational_attainment':
-						if ($row[$key] != '')
+						if ($row[$key] != '') {
+							$arr_field_val = array('status_id' => 1);
+							$arr_field_val[$value] = $row[$key];
 							$this->db->insert('users_educational_attainment',$arr_field_val);
+						}
 						break;
 					case 'education_school':
-						if ($row[$key] != '')
+						if ($row[$key] != '') {
+							$arr_field_val = array('status_id' => 1);
+							$arr_field_val[$value] = $row[$key];
 							$this->db->insert('users_education_school',$arr_field_val);
+						}
 						break;		
 					case 'education_degree_obtained':
-						if ($row[$key] != '')
+						if ($row[$key] != '') {
+							$arr_field_val = array('status_id' => 1);
+							$arr_field_val[$value] = $row[$key];
 							$this->db->insert('users_education_degree_obtained',$arr_field_val);
+						}
 						break;
 				}	
 				

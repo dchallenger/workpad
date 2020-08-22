@@ -1,6 +1,9 @@
 
 $(document).ready(function(){
-
+	$('.form-undo').click(function() {
+	    $('form').submit();
+	});
+	
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         // save the latest tab; use cookies if you like 'em better:
         localStorage.setItem('lastTab', $(this).attr('href'));

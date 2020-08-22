@@ -1,4 +1,8 @@
 $(document).ready(function(){
+$('.form-undo').click(function() {
+    $('form').submit();
+});
+
 $('#users_profile-department_id').select2({
     placeholder: "Select an option",
     allowClear: true

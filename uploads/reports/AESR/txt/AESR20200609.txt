@@ -1,5 +1,0 @@
-Company ID,Company,Department ID,Department,Employee ID,Last Name,First Name,Middle Name,Position ID,Position,Branch Id
-"2","OCLP Holdings, Inc.","1","","1101025","Caparas","Ma. Karen","Isidro","68","","1"
-"1","Ortigas & Company, Limited Partnership","1","","33799","Marjorie","Nailog","","86","","1"
-"1","Ortigas & Company, Limited Partnership","1","","33798","Reyes","Naisa","","263","","1"
-"1","Ortigas & Company, Limited Partnership","1","Finance & Admin.","1101060","Monis","Marybeth","Gonzaga","65","Senior Executive Associate","1"
