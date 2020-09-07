@@ -27,7 +27,7 @@
 						<?php 
 							foreach($options->result() as $option)
 							{
-							$selected = ($option->cause_id == $record['partners_movement.due_to_id']) ? "selected" : $option->cause_id == 2 ? "selected"  : "";
+							$selected = ($option->cause_id == $record['partners_movement.due_to_id'] ? "selected" : ($option->cause_id == 2 ? "selected"  : ""));
 						?>
 							<option <?php echo $selected; ?> value="<?php echo $option->cause_id ?>"><?php echo $option->cause; ?> </option>
 						<?php

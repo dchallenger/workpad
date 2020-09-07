@@ -52,7 +52,8 @@ class movement_manage_ver_model extends Record
 			$qry .= " AND ww_partners_movement.deleted = 0";	
 		}
 		
-		$qry .= " AND (T6.user_id = " . $this->user->user_id . " AND T6.movement_status_id >= 2) OR ww_partners_movement.created_by = " . $this->user->user_id;
+		//$qry .= " AND (T6.user_id = " . $this->user->user_id . " AND T6.movement_status_id >= 2) OR ww_partners_movement.created_by = " . $this->user->user_id;
+		$qry .= " AND (T6.user_id = " . $this->user->user_id . " AND T6.movement_status_id >= 2)";
 
 		$filter .= ' GROUP BY record_id ORDER BY ww_partners_movement.created_on DESC';
 

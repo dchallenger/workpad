@@ -14,14 +14,14 @@
 			<div class="portlet">
 				<div class="tabbable-custom ">
 					<ul class="nav nav-tabs ">
-						<li><a href="{{ get_mod_route('my_change_request') }}">{{ lang('common.personal') }}</a></li>
+						<li class="hidden"><a href="{{ get_mod_route('my_change_request') }}">{{ lang('common.personal') }}</a></li>
 						<li class="active"><a>{{ lang('common.manage') }}</a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="portlet margin-bottom-50 margin-top-20">
 							<div class="portlet-title">
 								<div class="caption" id="head-caption">{{ lang('my_change_request.update_history') }}</div>
-								<div class="actions">
+								<div class="actions hidden">
 									<a id="goadd" href="javascript:show_cr_form()" class="btn btn-success btn-sm"><i class="fa fa-plus"></i></a>
 								</div>
 							</div>

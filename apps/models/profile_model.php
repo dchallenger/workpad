@@ -156,7 +156,7 @@ class profile_model extends Record
 	{
 
 		$this->db->order_by('key_class', 'asc');
-		$classes = $this->db->get_where('partners_key_class', array('deleted' => 0, 'user_edit' => 1));
+		$classes = $this->db->get_where('partners_key_class', array('deleted' => 0, 'user_edit_change_request' => 1));
 		if( $classes->num_rows() > 0 )
 			return $classes->result();
 		else

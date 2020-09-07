@@ -25,7 +25,9 @@
     ?>    
     <td>
         <div>
-            <input type="checkbox" class="record-checker checkboxes" value="{{ $record_id }}">
+            @if($partners_movement_status_id == 1)
+                <input type="checkbox" class="record-checker checkboxes" value="{{ $record_id }}">
+            @endif
         </div>
     </td>
     <td>

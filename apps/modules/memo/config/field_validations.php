@@ -1,6 +1,11 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 $config['field_validations'] = array();
+$config['field_validations']['memo.memo_type_id'][] = array(
+	'field'   => 'memo[memo_type_id]',
+	'label'   => 'Memo Type',
+	'rules'   => 'required'
+);
 $config['field_validations']['memo.apply_to_id'][] = array(
 	'field'   => 'memo[apply_to_id]',
 	'label'   => 'Recipient',

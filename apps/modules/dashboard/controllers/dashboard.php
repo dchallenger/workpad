@@ -945,6 +945,7 @@ class Dashboard extends MY_PrivateController{
 	function update_mobile(){
 		$this->_ajax_only();
 
+		$request_done = array();
 		$this->load->model('partners_model', 'partners_mod');
 		$partner_id = $this->partners_mod->get_partner_id($this->user->user_id);
 		if(!empty($partner_id)){
@@ -954,8 +955,11 @@ class Dashboard extends MY_PrivateController{
 								WHERE partner_id = {$partner_id} AND deleted = 0 
 								AND key_id = {$partners_key['key_id']} AND key_value !='' ";
 			$key_personal_sql = $this->db->query($key_personal_qry);
-			$request_done = $this->db->get_where('partners_personal_request', array('status' => 2, 'deleted' => 0, 'user_id' => $this->user->user_id, 'key_id' => $partners_key['key_id']))->row_array();
-			
+			$request_result = $this->db->get_where('partners_personal_request', array('status' => 2, 'deleted' => 0, 'user_id' => $this->user->user_id, 'key_id' => $partners_key['key_id']));
+
+			if ($request_result)
+				$request_done = $request_result->row_array();
+
 			if( !(count($request_done) > 0) && !($key_personal_sql->num_rows() > 0) ){
 				$this->response->message[] = array(
 			    	'message' => '',

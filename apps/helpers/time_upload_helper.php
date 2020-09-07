@@ -473,7 +473,7 @@ function get_close_date($shift_time, $focus_date_time) {
 	return array('best'=>$best,'alldaway'=>$alldaway,'bestDiff'=>$bestDiff);
 }
 
-public function get_shift_details($date='', $user_id=0){
+function get_shift_details($date='', $user_id=0){
     $shift_details_qry = "SELECT * FROM time_shift_logs WHERE date='$date' AND user_id = $user_id";
     $shift_details = $this->db->query($shift_details_qry);
 

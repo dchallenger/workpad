@@ -366,7 +366,7 @@ class My201 extends MY_PrivateController
 						WHERE ppr.user_id = {$this->user->user_id}";
 		$cr_sql = $this->db->query($cr_qry);
 
-		if($cr_sql->num_rows() > 0){
+		if($cr_sql && $cr_sql->num_rows() > 0){
 			$cr_tab = $cr_sql->result_array();
 		}
 		$data['cr_tab'] = $cr_tab;
@@ -377,10 +377,12 @@ class My201 extends MY_PrivateController
 					WHERE pk.deleted = 0 AND pkc.user_view = 1 ";
 		$key_qry = $this->db->query($key_sql);
 
-		$partners_keys = $key_qry->result_array();
-		foreach($partners_keys as $keys){
-			$data['partners_keys'][] = $keys['key_code'];
-			$data['partners_labels'][$keys['key_code']] = $keys['key_label'];
+		if ($key_qry->num_rows() > 0) {
+			$partners_keys = $key_qry->result_array();
+			foreach($partners_keys as $keys){
+				$data['partners_keys'][] = $keys['key_code'];
+				$data['partners_labels'][$keys['key_code']] = $keys['key_label'];
+			}
 		}
 
 		//specific indo requirement

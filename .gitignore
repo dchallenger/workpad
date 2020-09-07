@@ -1,0 +1,6 @@
+apps/cache/blade/
+uploads/
+apps/logs/
+apps/config/default/
+mysql/
+logs/

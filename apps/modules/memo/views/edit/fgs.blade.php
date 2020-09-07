@@ -5,7 +5,7 @@
 	</div>
 			<p>{{ lang('memo.basic_memo_info') }}</p>
 		<div class="portlet-body form">			<div class="form-group">
-				<label class="control-label col-md-3">{{ lang('memo.memo_type') }}</label>
+				<label class="control-label col-md-3"><span class="required">* </span>{{ lang('memo.memo_type') }}</label>
 				<div class="col-md-7"><?php									                            		$db->select('memo_type_id,memo_type');
 	                            			                            		$db->order_by('memo_type', '0');
 	                            		$db->where('deleted', '0');

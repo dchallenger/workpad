@@ -6,7 +6,8 @@ class Import201 extends MY_PrivateController
 	{
 		$this->load->model('import201_model', 'mod');
 		parent::__construct();
-		$this->filename = 'D:\oclp new version\employee 201 master file from oclp.xls';
+		//$this->filename = 'D:\oclp new version\employee 201 master file from oclp.xls';
+		$this->filename = 'D:\oclp new version\employee 201 record 08122020.xls';
 	}
 
 	function import_payroll_summary(){
@@ -1659,11 +1660,11 @@ class Import201 extends MY_PrivateController
 	function import_employment(){
 		$this->db->where('user_id >',1);
 		$this->db->delete('users');
-		$this->db->query("ALTER TABLE users AUTO_INCREMENT = 2");
+		$this->db->query("ALTER TABLE ww_users AUTO_INCREMENT = 2");
 
 		$this->db->where('user_id >',1);
 		$this->db->delete('users_profile');
-		$this->db->query("ALTER TABLE users_profile AUTO_INCREMENT = 2");	
+		$this->db->query("ALTER TABLE ww_users_profile AUTO_INCREMENT = 2");	
 
 		$this->db->truncate('partners');
 
@@ -1717,69 +1718,72 @@ class Import201 extends MY_PrivateController
 								break;	
 							case 'Middle Name':
 								$valid_cells_users_profile[5] = 'middlename';
-								break;								
+								break;
+							case 'Middle Initial':
+								$valid_cells_users_profile[6] = 'middleinitial';
+								break;
 							case 'Suffix':
-								$valid_cells_users_profile[6] = 'suffix';
+								$valid_cells_users_profile[7] = 'suffix';
 								break;
 							case 'Maiden Name':
-								$valid_cells_users_profile[7] = 'maidenname';
+								$valid_cells_users_profile[8] = 'maidenname';
 								break;
 							case 'Nick Name':
-								$valid_cells_users_profile[8] = 'nickname';
+								$valid_cells_users_profile[9] = 'nickname';
 								break;
 							case 'Specialization':
-								$valid_cells_users_profile[9] = 'specialization_id';
+								$valid_cells_users_profile[10] = 'specialization_id';
 								break;		
 							case 'Location':
-								$valid_cells_users_profile[10] = 'location_id';
+								$valid_cells_users_profile[11] = 'location_id';
 								break;	
 							case 'Position Title':
-								$valid_cells_users_profile[11] = 'position_id';
+								$valid_cells_users_profile[12] = 'position_id';
 								break;	
 							case 'Role':
-								$valid_cells_users[12] = 'role_id';
+								$valid_cells_users[13] = 'role_id';
 								break;
 							case 'Work Schedule':
-								$valid_cells_partners[13] = 'calendar_id';
+								$valid_cells_partners[14] = 'calendar_id';
 								break;
 							case 'Employment Status':
-								$valid_cells_partners[14] = 'status_id';
+								$valid_cells_partners[15] = 'status_id';
 								break;	
 							case 'Employment Type':
-								$valid_cells_partners[15] = 'employment_type_id';
+								$valid_cells_partners[16] = 'employment_type_id';
 								break;	
 							case 'Job Grade':
-								$valid_cells_partners[16] = 'job_grade_id';
+								$valid_cells_partners[17] = 'job_grade_id';
 								break;	
 							case 'Classification':
-								$valid_cells_partners[17] = 'classification_id';
+								$valid_cells_partners[18] = 'classification_id';
 								break;	
 							case 'Date Hired':
-								$valid_cells_partners[18] = 'effectivity_date';
+								$valid_cells_partners[19] = 'effectivity_date';
 								break;	
 							case 'Employment End Date':
-								$valid_cells_partners[19] = 'employment_end_date';
+								$valid_cells_partners[20] = 'employment_end_date';
 								break;
 							case 'Regularization Date':
-								$valid_cells_partners[20] = 'regularization_date';
+								$valid_cells_partners[21] = 'regularization_date';
 								break;																
 							case 'Original Hired Date':
-								$valid_cells_partners[21] = 'original_hired_date';
+								$valid_cells_partners[22] = 'original_hired_date';
 								break;
 							case 'Reports To ID Number':
-								$valid_cells_users_profile[22] = 'reports_to_id';
+								$valid_cells_users_profile[23] = 'reports_to_id';
 								break;	
 							case 'Division':
-								$valid_cells_users_profile[23] = 'division_id';
+								$valid_cells_users_profile[24] = 'division_id';
 								break;	
 							case 'Department':
-								$valid_cells_users_profile[24] = 'department_id';
+								$valid_cells_users_profile[25] = 'department_id';
 								break;
 							case 'Branch':
-								$valid_cells_users_profile[25] = 'branch_id';
+								$valid_cells_users_profile[26] = 'branch_id';
 								break;		
 							case 'Section':
-								$valid_cells_users_profile[26] = 'section_id';
+								$valid_cells_users_profile[27] = 'section_id';
 								break;								
 						}
 					}
@@ -1805,7 +1809,7 @@ class Import201 extends MY_PrivateController
 			foreach ($valid_cells_users as $key => $value) {
 				switch ($value) {				
 					case 'company_id':
-						$result = $this->db->get_where('users_company',array('company' => $row[$key]));
+						$result = $this->db->get_where('users_company',array('company_initial' => $row[$key]));
 						if ($result && $result->num_rows() > 0){
 							$company = $result->row();
 							$row[$key] = $company->company_id;						
@@ -1871,7 +1875,8 @@ class Import201 extends MY_PrivateController
 							$row[$key] = $row_employment_type->employment_type_id;						
 						}
 						else{
-							$row[$key] = '';
+							$this->db->insert('partners_employment_type',array('employment_type' => $row[$key]));
+							$row[$key] = $this->db->insert_id();
 						}
 						break;
 					case 'job_grade_id':
@@ -1899,7 +1904,8 @@ class Import201 extends MY_PrivateController
 					case 'original_hired_date':
 					case 'regularization_date':
 						if ($row[$key] != ''){
-							$row[$key] = date ( 'Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($row[$key]));
+							//$row[$key] = date ( 'Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($row[$key]));
+							$row[$key] = date ( 'Y-m-d', strtotime($row[$key]));
 						}
 						else{
 							$row[$key] = '';
@@ -1938,7 +1944,8 @@ class Import201 extends MY_PrivateController
 							$row[$key] = $row_location->location_id;						
 						}
 						else{
-							$row[$key] = '';
+							$this->db->insert('users_location',array('location' => $row[$key]));
+							$row[$key] = $this->db->insert_id();
 						}
 						break;
 					case 'position_id':
@@ -1948,7 +1955,8 @@ class Import201 extends MY_PrivateController
 							$row[$key] = $row_position->position_id;						
 						}
 						else{
-							$row[$key] = '';
+							$this->db->insert('users_position',array('position' => $row[$key]));
+							$row[$key] = $this->db->insert_id();
 						}
 						break;	
 					case 'reports_to_id':
@@ -1968,7 +1976,8 @@ class Import201 extends MY_PrivateController
 							$row[$key] = $row_division->division_id;						
 						}
 						else{
-							$row[$key] = '';
+							$this->db->insert('users_division',array('division' => $row[$key]));
+							$row[$key] = $this->db->insert_id();
 						}
 						break;	
 					case 'department_id':
@@ -1978,7 +1987,8 @@ class Import201 extends MY_PrivateController
 							$row[$key] = $row_department->department_id;						
 						}
 						else{
-							$row[$key] = '';
+							$this->db->insert('users_department',array('department' => $row[$key]));
+							$row[$key] = $this->db->insert_id();
 						}
 						break;		
 					case 'branch_id':
@@ -2113,7 +2123,7 @@ class Import201 extends MY_PrivateController
 				}
 
 				if ($row[$key] != '' && $value == 'email'){
-					$this->db->where('user_id',$user);
+					$this->db->where('user_id',$user_id);
 					$this->db->update('users',array('email' => $row[$key]));
 				}
 			}
@@ -2321,7 +2331,8 @@ class Import201 extends MY_PrivateController
 			$arr_field_val_user = array();
 			foreach ($valid_cells as $key => $value) {
 				if ($value == 'birth_date') {
-					$arr_field_val_user[$value] = date ( 'Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($row[$key]));
+					//$arr_field_val_user[$value] = date ( 'Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($row[$key]));
+					$arr_field_val_user[$value] = date ( 'Y-m-d', strtotime($row[$key]));
 				}
 				else{
 					if ($row[$key] != '' && $value != 'id_number'){
@@ -2809,14 +2820,24 @@ class Import201 extends MY_PrivateController
 					switch ($value) {
 						case 'employment-month-hired':
 							$year_month_arr = explode('-', $row[$key]);
-							$month = trim($year_month_arr[0]);
-							$year = trim($year_month_arr[1]);
+							if (count($year_month_arr) > 1) {
+								$month = trim($year_month_arr[0]);
+								$year = trim($year_month_arr[1]);
+							} else {
+								$month = date('F',strtotime($row[$key]));
+								$year = date('Y',strtotime($row[$key]));
+							}
 							$row[$key] = $month;
 							break;
 						case 'employment-month-end':
 							$year_month_arr = explode('-', $row[$key]);
-							$month = trim($year_month_arr[0]);
-							$year = trim($year_month_arr[1]);
+							if (count($year_month_arr) > 1) {
+								$month = trim($year_month_arr[0]);
+								$year = trim($year_month_arr[1]);
+							} else {
+								$month = date('F',strtotime($row[$key]));								
+								$year = date('Y',strtotime($row[$key]));
+							}
 							$row[$key] = $month;
 							break;															
 					}
@@ -3840,7 +3861,109 @@ class Import201 extends MY_PrivateController
 		}
 
 		echo "Done.";	
-	}					
+	}		
+
+	function import_approver(){
+		$this->db->truncate('users_position');
+
+		$this->load->library('excel');
+
+		$objReader = new PHPExcel_Reader_Excel5;
+
+		if (!$objReader) {
+			show_error('Could not get reader.');
+		}
+
+		$objReader->setReadDataOnly(true);
+		$objPHPExcel = $objReader->load($this->filename);
+		$rowIterator = $objPHPExcel->getActiveSheet()->getRowIterator();
+	
+		$ctr = 0;	
+		$import_data = array();
+
+		foreach($rowIterator as $row){
+			$cellIterator = $row->getCellIterator();
+			$cellIterator->setIterateOnlyExistingCells(false); // Loop all cells, even if it is not set
+			
+			$rowIndex = $row->getRowIndex();
+			
+			// Build the array to insert and check for validation errors as well.
+			foreach ($cellIterator as $cell) {
+				$import_data[$ctr][] = $cell->getCalculatedValue();
+			}
+
+			if ($rowIndex == 1) {
+
+				foreach ($import_data as $row) {
+					foreach ($row as $cell => $value) {
+						switch ($value) {														
+							case 'Position':
+								$valid_cells[] = 'position';
+								break;
+							case 'Position Code':
+								$valid_cells[] = 'position_code';
+								break;
+							case 'Employee Type':
+								$valid_cells[] = 'employee_type_id';
+								break;
+							case 'Immediate Head ID Number':
+								$valid_cells[] = 'immediate_id';
+								break;																							
+						}
+					}
+				}
+
+				unset($import_data[$ctr]);
+			}
+
+			$ctr++;
+		}
+
+
+		$ctr = 0;
+
+		// Remove non-matching cells.
+		foreach ($import_data as $row) {		
+			$arr_field_val = array();
+			foreach ($valid_cells as $key => $value) {
+				switch ($value) {
+					case 'employee_type_id':
+						$result = $this->db->get_where('partners_employment_type',array('employment_type' => $row[$key]));
+						if ($result && $result->num_rows() > 0){
+							$row_employment_type = $result->row();
+							$row[$key] = $row_employment_type->employment_type_id;						
+						}
+						else{
+							$row[$key] = '';
+						}
+						break;
+					case 'immediate_id':
+						$result = $this->db->get_where('partners',array('id_number' => $row[$key]));
+						if ($result && $result->num_rows() > 0){
+							$row_partners = $result->row();
+							$row[$key] = $row_partners->user_id;						
+						}
+						else{
+							$row[$key] = '';
+						}
+						break;	
+					case 'position_code':
+						if ($row[$key] == '')
+							$row[$key] = '';
+						break;
+				}			
+				$arr_field_val[$value] = $row[$key];
+			}
+
+			// fixed column to be inserted
+			$arr_field_val['status_id'] = 1;
+
+			$this->db->insert('users_position',$arr_field_val);
+		}
+
+		echo "Done.";	
+	}
+
 	/************************************************************************************************/	
 
 	public function get_import_form()

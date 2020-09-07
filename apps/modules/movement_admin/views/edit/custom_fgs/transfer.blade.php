@@ -75,7 +75,9 @@
 						<?php
 						foreach($options->result() as $option)
 						{
-							$option_field_id = strtolower($transfer_field['field_name'].'_id');		
+							$option_field_id = strtolower($transfer_field['field_name'].'_id');
+							$field_name = $transfer_field['field_name'];
+
 							if($transfer_field['table_name'] == 'ww_users'){
 								$selected = ($option->user_id == $transfer_field['to_id']) ? "selected" : "";
 							}elseif($transfer_field['table_name'] == 'ww_users_job_grade_level'){
@@ -87,12 +89,12 @@
 							if($transfer_field['table_name'] == 'ww_users'){
 								$text_value = $option->display_name;
 							}elseif($transfer_field['table_name'] == 'ww_users_department'){
-								$text_value = $option->department_code .' - '. $option->$transfer_field['field_name'];
+								$text_value = $option->department_code .' - '. $option->$field_name;
 							}else{
-								$text_value = $option->$transfer_field['field_name'];
+								$text_value = $option->$field_name;
 							}								
 						?>
-							<option <?php echo $selected; ?>  value="<?php echo $transfer_field['table_name'] == 'ww_users' ? $option->user_id : $transfer_field['table_name'] == 'ww_users_job_grade_level' ? $option->job_grade_id : $option->$option_field_id; ?>">
+							<option <?php echo $selected; ?>  value="<?php echo ($transfer_field['table_name'] == 'ww_users' ? $option->user_id : ($transfer_field['table_name'] == 'ww_users_job_grade_level' ? $option->job_grade_id : $option->$option_field_id)); ?>">
 								<?php echo $text_value?></option>
 							<?php
 						}

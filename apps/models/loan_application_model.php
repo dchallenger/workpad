@@ -28,8 +28,8 @@ class loan_application_model extends Record
 		$this->primary_key = 'loan_application_id';
 		$this->table = 'partners_loan_application';
 		$this->icon = '';
-		$this->short_name = 'Loan Appllication';
-		$this->long_name  = 'Loan Appllication';
+		$this->short_name = 'Loan Application';
+		$this->long_name  = 'Loan Application';
 		$this->description = '';
 		$this->path = APPPATH . 'modules/loan_application/';
 

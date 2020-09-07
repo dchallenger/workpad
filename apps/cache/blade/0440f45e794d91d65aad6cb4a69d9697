@@ -36,7 +36,7 @@
 						<div class="caption"><i class="fa fa-list"></i><?php echo lang('menu_manager.menu_tree'); ?></div>
 						<div class="actions">
 							<a href="javascript:save_role_menu()" class="save-btn btn btn-info"><i class="fa fa-save"></i></a>
-<!-- 							<a id="goadd" href="javascript:quick_add()" class="btn btn-success"><i class="fa fa-plus"></i></a> -->
+							<a id="goadd" href="javascript:quick_add()" class="btn btn-success"><i class="fa fa-plus"></i></a>
 						</div>
 					</div>
 

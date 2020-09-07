@@ -5,7 +5,7 @@
 	</div>
 			<p>Basic memorandum information</p>
 		<div class="portlet-body form">			<div class="form-group">
-				<label class="control-label col-md-3">Memo Type</label>
+				<label class="control-label col-md-3"><span class="required">* </span>Memo Type</label>
 				<div class="col-md-7"><?php									                            		$db->select('memo_type_id,memo_type');
 	                            			                            		$db->order_by('memo_type', '0');
 	                            		$db->where('deleted', '0');
