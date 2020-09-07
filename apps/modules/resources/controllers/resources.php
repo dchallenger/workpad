@@ -97,11 +97,11 @@ class Resources extends MY_PrivateController
 
 	        $pdata['title'] = $partner_record['firstname']." ".$partner_record['middlename']." ".$partner_record['lastname'];
 	        $pdata['employee_name'] = $partner_record['firstname']." ".substr($partner_record['middlename'],0, 1).". ".$partner_record['lastname'];
-	        $pdata['position'] = ucwords($partner_record['position']);
+	        $pdata['position'] = $partner_record['position'] ?? '';
 	        $pdata['date_hired'] =  ($partner_record['date_hired'] && $partner_record['date_hired'] != '0000-00-00' && $partner_record['date_hired'] != 'January 01, 1970' && $partner_record['date_hired'] != '1970-01-01') ? date('F d, Y', strtotime($partner_record['date_hired'])) : '';
 	        $pdata['resigned_date'] = ($partner_record['resigned_date'] && $partner_record['resigned_date'] != '0000-00-00' && $partner_record['resigned_date'] != 'January 01, 1970' && $partner_record['resigned_date'] != '1970-01-01') ? date('F d, Y', strtotime($partner_record['resigned_date'])) : '';
 	        $pdata['gender'] = $partner_record['title'];
-	        $pdata['company'] = $partner_record['company_coe'];
+	        $pdata['company'] = $partner_record['company_coe'] ?? '';
 	        $pdata['basic'] = $partner_record['basic'];
 	        $pdata['logo'] = $logo;
 	        $pdata['basic_in_words'] = strtoupper(convert_number_to_words($partner_record['basic']));
@@ -111,7 +111,7 @@ class Resources extends MY_PrivateController
 	        $pdata['her_his_caps'] = ($partner_record['title'] == 'Mr.') ? 'His' : 'Her';
 	        $pdata['she_he'] = ($partner_record['title'] == 'Mr.') ? 'he' : 'she';
 	        $pdata['his_her'] = ($partner_record['title'] == 'Mr.') ? 'his' : 'her';
-	        $pdata['firstname'] = $partner_record['title'] ." ". $partner_record['lastname'];
+	        $pdata['firstname'] = $partner_record['title'] ." ". $partner_record['lastname'] ?? '';
 	        $pdata['purpose'] = $coe_purpose;
 
 	        $allowances = "SELECT SUM(aes_decrypt(`pere`.`amount`, encryption_key()) * 1) AS total_alowance FROM {$this->db->dbprefix}payroll_entry_recurring per
@@ -143,13 +143,20 @@ class Resources extends MY_PrivateController
 	        
 	        $pdf->AddPage('P','A4',true);
 	        $this->load->helper('file');
+	        
 	        $path = 'uploads/reports/coe/pdf/';
+
+	        $main_path = PPATH . 'uploads/reports/coe/pdf/';
+	        
 	        $this->check_path( $path );
+
 	        $filename = $path . strtotime(date('Y-m-d H:i:s')) . '-' . "coe.pdf";
-	        $pdf->writeHTML($html, true, false, false, false, '');
+	        $main_filename = $main_path . strtotime(date('Y-m-d H:i:s')) . '-' . "coe.pdf";
+
+	        $pdf->writeHTML($html, true, false, true, false, '');
 
 	        
-	        $pdf->Output($filename, 'F');
+	        $pdf->Output($main_filename, 'F');
 
 	        $this->response->message[] = array(
 	            'message' => 'Download file ready.',

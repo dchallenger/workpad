@@ -605,8 +605,8 @@ class Partners extends MY_PrivateController
 		$data['resigned_date'] = $profile_header_details['resigned_date'] == "" ? "n/a" : date("F d, Y", strtotime($profile_header_details['resigned_date']));
 		$probationary_date = $this->profile_mod->get_partners_personal($user_id, 'probationary_date');
 		$data['probationary_date'] = (count($probationary_date) > 0 ? date("F d, Y", strtotime($probationary_date[0]['key_value'])) : "n/a");
-		$data['original_date_hired'] = ($profile_header_details['original_hired_date'] == "" ? "n/a" : date("F d, Y", strtotime($profile_header_details['original_hired_date'])));
-		$data['employment_end_date'] = ($profile_header_details['employment_end_date'] == "" ? "n/a" : date("F d, Y", strtotime($profile_header_details['employment_end_date'])));
+		$data['original_date_hired'] = ($profile_header_details['original_hired_date'] == "" || $profile_header_details['original_hired_date'] == "0000-00-00" ? "n/a" : date("F d, Y", strtotime($profile_header_details['original_hired_date'])));
+		$data['employment_end_date'] = ($profile_header_details['employment_end_date'] == "" || $profile_header_details['employment_end_date'] == "0000-00-00" ? "n/a" : date("F d, Y", strtotime($profile_header_details['employment_end_date'])));
 		$last_probationary = $this->profile_mod->get_partners_personal($user_id, 'last_probationary');
 		$data['last_probationary'] = (count($last_probationary) > 0 ? date("F d, Y", strtotime($last_probationary[0]['key_value'])) : "n/a");
 		$last_salary_adjustment = $this->profile_mod->get_partners_personal($user_id, 'last_salary_adjustment');
