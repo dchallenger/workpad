@@ -601,12 +601,12 @@ class Partners extends MY_PrivateController
 		$data['job_level'] = $profile_header_details['job_level'] == "" ? "n/a" : $profile_header_details['job_level'];
 		$data['classification'] = $profile_header_details['classification'] == "" ? "n/a" : $profile_header_details['classification'];
 		$data['date_hired'] = $profile_header_details['effectivity_date'] == "" || $profile_header_details['effectivity_date'] == "0000-00-00" ? "n/a" : date("F d, Y", strtotime($profile_header_details['effectivity_date']));
-		$data['regularization_date'] = $profile_header_details['regularization_date'] == "" || $profile_header_details['regularization_date'] == "0000-00-00" ? "n/a" : date("F d, Y", strtotime($profile_header_details['regularization_date']));
+		$data['regularization_date'] = valid_date($profile_header_details['regularization_date']);
 		$data['resigned_date'] = $profile_header_details['resigned_date'] == "" ? "n/a" : date("F d, Y", strtotime($profile_header_details['resigned_date']));
 		$probationary_date = $this->profile_mod->get_partners_personal($user_id, 'probationary_date');
 		$data['probationary_date'] = (count($probationary_date) > 0 ? date("F d, Y", strtotime($probationary_date[0]['key_value'])) : "n/a");
-		$data['original_date_hired'] = ($profile_header_details['original_hired_date'] == "" || $profile_header_details['original_hired_date'] == "0000-00-00" ? "n/a" : date("F d, Y", strtotime($profile_header_details['original_hired_date'])));
-		$data['employment_end_date'] = ($profile_header_details['employment_end_date'] == "" || $profile_header_details['employment_end_date'] == "0000-00-00" ? "n/a" : date("F d, Y", strtotime($profile_header_details['employment_end_date'])));
+		$data['original_date_hired'] = valid_date($profile_header_details['original_hired_date']);
+		$data['employment_end_date'] = valid_date($profile_header_details['employment_end_date']);
 		$last_probationary = $this->profile_mod->get_partners_personal($user_id, 'last_probationary');
 		$data['last_probationary'] = (count($last_probationary) > 0 ? date("F d, Y", strtotime($last_probationary[0]['key_value'])) : "n/a");
 		$last_salary_adjustment = $this->profile_mod->get_partners_personal($user_id, 'last_salary_adjustment');
@@ -629,10 +629,15 @@ class Partners extends MY_PrivateController
 		$agency_assignment = $this->profile_mod->get_partners_personal($user_id, 'agency_assignment');
         $data['record']['agency_assignment'] = (count($agency_assignment) > 0 ? $agency_assignment[0]['key_value'] : " ");   
         $data['project'] = ($profile_header_details['project'] == "" ? "n/a" : $profile_header_details['project']);
-        $data['start_date'] = ($profile_header_details['start_date'] == "" ? "n/a" : date("F d, Y", strtotime($profile_header_details['start_date'])));
-        $data['end_date'] = ($profile_header_details['end_date'] == "" ? "n/a" : date("F d, Y", strtotime($profile_header_details['end_date'])));
+        $data['project_hr'] = ($profile_header_details['project_hr'] == "" ? "n/a" : $profile_header_details['project_hr']);
+        $data['coordinator'] = ($profile_header_details['coordinator'] == "" ? "n/a" : $profile_header_details['coordinator']);
+        $data['credit_setup'] = ($profile_header_details['credit_setup'] == "" ? "n/a" : $profile_header_details['credit_setup']);
+        $data['start_date'] = valid_date($profile_header_details['start_date']);
+        $data['end_date'] = valid_date($profile_header_details['end_date']);
         $data['division'] = ($profile_header_details['division'] == "" ? "n/a" : $profile_header_details['division']);
+        $data['cost_center_code'] = ($profile_header_details['cost_center_code'] == "" ? "n/a" : $profile_header_details['cost_center_code']);
 		$data['department'] = ($profile_header_details['department'] == "" ? "n/a" : $profile_header_details['department']);
+		$data['sbu_unit'] = ($profile_header_details['sbu_unit'] == "" ? "n/a" : $profile_header_details['sbu_unit']);
 		$data['group'] = ($profile_header_details['group'] == "" ? "n/a" : $profile_header_details['group']);
 
 		/***** CONTACTS TAB *****/
@@ -680,6 +685,10 @@ class Partners extends MY_PrivateController
 		$data['record']['bank_number_savings'] = (count($bank_number_savings) > 0 ? $bank_number_savings[0]['key_value'] : " ");
 		$bank_number_current = $this->profile_mod->get_partners_personal($user_id, 'bank_account_number_current');
 		$data['record']['bank_number_current'] = (count($bank_number_current) > 0 ? $bank_number_current[0]['key_value'] : " ");
+			$payroll_bank_account_number = $this->profile_mod->get_partners_personal($user_id, 'payroll_bank_account_number');
+			$data['record']['payroll_bank_account_number'] = (count($payroll_bank_account_number) == 0 ? " " : ($payroll_bank_account_number[0]['key_value'] == "" ? "" : $payroll_bank_account_number[0]['key_value']));
+			$payroll_bank_name = $this->profile_mod->get_partners_personal($user_id, 'payroll_bank_name');
+			$data['record']['payroll_bank_name'] = (count($payroll_bank_name) == 0 ? " " : ($payroll_bank_name[0]['key_value'] == "" ? "" : $payroll_bank_name[0]['key_value']));									
 		$bank_account_name = $this->profile_mod->get_partners_personal($user_id, 'bank_account_name');
 		$data['record']['bank_account_name'] = (count($bank_account_name) > 0 ? $bank_account_name[0]['key_value'] : " ");
 		$health_care = $this->profile_mod->get_partners_personal($user_id, 'health_care');
@@ -721,8 +730,22 @@ class Partners extends MY_PrivateController
 		$data['language'] = (count($language) > 0 ? $language[0]['key_value'] : " ");
 		$dialect = $this->profile_mod->get_partners_personal($user_id, 'dialect');
 		$data['dialect'] = (count($dialect) > 0 ? $dialect[0]['key_value'] : " ");
-		$dependents_count = $this->profile_mod->get_partners_personal($user_id, 'dependents_count');
-		$data['dependents_count'] = (count($dependents_count) > 0 ? $dependents_count[0]['key_value'] : " ");
+
+		$dependents_result = $this->profile_mod->get_partners_personal_history($user_id, 'family');
+
+		$number_children = 0;
+		$dependents_count = 0;
+		foreach ($dependents_result as $key => $value) {
+			if ($value['key'] == 'family-relationship') {
+				$dependents_count++;
+
+				if ($value['key_value'] == 'Son' || $value['key_value'] == 'Daughter')
+					$number_children++;
+			}
+		}
+
+		$data['dependents_count'] = ($dependents_count == 0 ? '' : $dependents_count);
+		$data['number_children'] = ($number_children == 0 ? '' : $number_children);
 
 		/***** Header Details *****/
 		$data['profile_live_in'] = $city_town;
@@ -1092,6 +1115,10 @@ class Partners extends MY_PrivateController
 			$data['record']['bank_number_savings'] = (count($bank_number_savings) == 0 ? " " : ($bank_number_savings[0]['key_value'] == "" ? "" : $bank_number_savings[0]['key_value']));
 			$bank_number_current = $this->profile_mod->get_partners_personal($user_id, 'bank_account_number_current');
 			$data['record']['bank_number_current'] = (count($bank_number_current) == 0 ? " " : ($bank_number_current[0]['key_value'] == "" ? "" : $bank_number_current[0]['key_value']));
+			$payroll_bank_account_number = $this->profile_mod->get_partners_personal($user_id, 'payroll_bank_account_number');
+			$data['record']['payroll_bank_account_number'] = (count($payroll_bank_account_number) == 0 ? " " : ($payroll_bank_account_number[0]['key_value'] == "" ? "" : $payroll_bank_account_number[0]['key_value']));
+			$payroll_bank_name = $this->profile_mod->get_partners_personal($user_id, 'payroll_bank_name');
+			$data['record']['payroll_bank_name'] = (count($payroll_bank_name) == 0 ? " " : ($payroll_bank_name[0]['key_value'] == "" ? "" : $payroll_bank_name[0]['key_value']));							
 			$bank_account_name = $this->profile_mod->get_partners_personal($user_id, 'bank_account_name');
 			$data['record']['bank_account_name'] = (count($bank_account_name) == 0 ? " " : ($bank_account_name[0]['key_value'] == "" ? "" : $bank_account_name[0]['key_value']));
 			$health_care = $this->profile_mod->get_partners_personal($user_id, 'health_care');
@@ -1576,12 +1603,12 @@ class Partners extends MY_PrivateController
 	                'label' => 'Location',
 	                'rules' => 'required'
 	                );
-	            $validation_rules[] = 
+/*	            $validation_rules[] = 
 	            array(
 	                'field' => 'users_profile[branch_id]',
 	                'label' => 'Branch',
 	                'rules' => 'required'
-	                );	            
+	                );*/	            
 				$validation_rules[] = 
 				array(
 					'field' => 'users[role_id]',
@@ -2121,11 +2148,11 @@ class Partners extends MY_PrivateController
 			}
 			elseif($payroll_partners_result['account_type_id'] == 2){
 
-				$partners_personal_key['bank_account'] = $partners_personal['bank_account_number_savings'];
+				$partners_personal_key['bank_account'] = $partners_personal['bank_account_number_savings'] ?? '';
 			}
 
 			$other_tables['payroll_partners'] = $partners_personal_key;
-			$partners_personal_key = array('taxcode', 'sss_number', 'pagibig_number', 'philhealth_number', 'tin_number', 'bank_account_number_savings', 'bank_account_number_current', 'bank_account_name', 'health_care');
+			$partners_personal_key = array('taxcode', 'sss_number', 'pagibig_number', 'philhealth_number', 'tin_number', 'bank_account_number_savings', 'bank_account_number_current', 'payroll_bank_account_number', 'payroll_bank_name', 'bank_account_name', 'health_care');
 			break;
 			case 16:
 			//Test Profile tab

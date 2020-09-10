@@ -175,7 +175,7 @@ $config['fields'][1]['users_company.phic'] = array(
 );
 
 $config['fields'][1]['users_company.country_id'] = array(
-	'f_id' => 5,
+	'f_id' => 6,
 	'fg_id' => 1,
 	'label' => 'Country',
 	'description' => '',
@@ -199,7 +199,7 @@ $config['fields'][1]['users_company.country_id'] = array(
 	)
 );
 $config['fields'][1]['users_company.city_id'] = array(
-	'f_id' => 4,
+	'f_id' => 5,
 	'fg_id' => 1,
 	'label' => 'City',
 	'description' => '',
@@ -223,7 +223,7 @@ $config['fields'][1]['users_company.city_id'] = array(
 	)
 );
 $config['fields'][1]['users_company.address'] = array(
-	'f_id' => 3,
+	'f_id' => 4,
 	'fg_id' => 1,
 	'label' => 'Address',
 	'description' => '',
@@ -233,6 +233,21 @@ $config['fields'][1]['users_company.address'] = array(
 	'display_id' => 3,
 	'quick_edit' => 1,
 	'sequence' => 3,
+	'datatype' => 'required',
+	'active' => '1',
+	'encrypt' => 0
+);
+$config['fields'][1]['users_company.company_initial'] = array(
+	'f_id' => 3,
+	'fg_id' => 1,
+	'label' => 'Company Initial',
+	'description' => '',
+	'table' => 'users_company',
+	'column' => 'company_initial',
+	'uitype_id' => 1,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 2,
 	'datatype' => 'required',
 	'active' => '1',
 	'encrypt' => 0

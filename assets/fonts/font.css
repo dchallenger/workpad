@@ -22,3 +22,9 @@
   font-weight: 700;
   src: local('Open Sans Bold'), local('OpenSans-Bold'), url(../fonts/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff) format('woff');
 }
+@font-face {
+  font-family: "AzoSans-Regular";
+  font-style: normal;
+  font-weight: 300;
+  url(../fonts/AzoSans-Regular.woff) format('woff');
+}

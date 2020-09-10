@@ -166,6 +166,23 @@ Buttons & Dropdown Buttons
   outline: none !important;
 }
 
+/*  Green */
+.btn.bluegreen {
+  color: white;
+  text-shadow: none;   
+  background-color: #3ab399;
+}
+.btn.green:hover, 
+.btn.green:focus, 
+.btn.green:active, 
+.btn.green.active,
+.btn.green.disabled, 
+.btn.green[disabled]{ 
+  background-color: #34a289 !important;
+  color: #fff !important;
+  outline: none !important;
+}
+
 /*  Purple */
 .btn.purple {
   color: white; 

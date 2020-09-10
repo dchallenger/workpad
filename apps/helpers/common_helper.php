@@ -792,3 +792,16 @@ function get_tenure($employment_date) {
 
 	return $diff->y;
 }
+
+function valid_date($date_val) {
+	$invalid_date = ['1970-01-01',"",'0000-00-00'];
+
+	if (in_array($date_val, $invalid_date))
+		return 'n/a';
+	else {
+		if ($date_val < '1900-01-01')
+			return 'n/a';
+		else
+			return date('F d, Y',strtotime($date_val));
+	}
+}

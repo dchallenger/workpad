@@ -88,4 +88,8 @@ $lang['common'] = array(
 	'print' => 'Print Form',
 	'print_only' => 'Print',
 	'processing_message' => 'Processing, please wait....',
+	'option_yes' => 'Yes',
+	'option_no' => 'No',	
+	'home' => 'Home',
+	'user_manager' => 'User Manager',
 ); 

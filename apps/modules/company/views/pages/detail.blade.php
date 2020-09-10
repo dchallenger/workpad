@@ -37,6 +37,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="control-label col-md-3">{{ lang('company.company_initial') }}
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" disabled="disabled" class="form-control" maxlength="16" name="users_company[company_code]" id="maxlength_defaultconfig" placeholder="{{ lang('company.company_initial') }}" value="{{{ $record['users_company.company_initial'] }}}">
+                                </div>
+                            </div>                            
+                            <div class="form-group">
                                 <label class="control-label col-md-3">{{ lang('company.company_code') }}
                                     <span class="required">*</span>
                                 </label>

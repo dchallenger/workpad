@@ -29,7 +29,7 @@
 		<label class="checkbox pull-right">
 		<input type="checkbox" name="remember" value="1"/> {{ lang('authentication.remember') }}
 		</label>
-		<button type="submit" class="btn btn-lg green">
+		<button type="submit" class="btn btn-default bluegreen">
 		{{ lang('authentication.loginbutton') }} <!-- i class="m-icon-swapright m-icon-white"></i -->
 		</button>            
 	</div>

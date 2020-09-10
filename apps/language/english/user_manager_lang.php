@@ -35,4 +35,6 @@ $lang['user_manager'] = array(
 	'view' => 'View',
 	'view_list_button' => 'View List',
 	'branch' => 'Branch',
+	'sbu_unit' => 'SBU Unit',
+	'p_sbu_unit' => 'Manage and list sbu unit.',
 );

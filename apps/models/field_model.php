@@ -234,7 +234,7 @@ class field_model extends Record
         write_file($field_config, $to_write);
 
         require( $field_config );
-        if(sizeof( $config['fields'] > 0 ))
+        if(isset($config['fields']) && sizeof($config['fields']) > 0 )
         {
             $validation_config = APPPATH . 'modules/'. $mod['mod_code'] .'/config/field_validations.php';
             $to_write = "<?php if (!defined('BASEPATH')) exit('No direct script access allowed');\r\n\r\n";

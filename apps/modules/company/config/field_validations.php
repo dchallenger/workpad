@@ -21,6 +21,11 @@ $config['field_validations']['users_company.address'][] = array(
 	'label'   => 'Address',
 	'rules'   => 'required'
 );
+$config['field_validations']['users_company.company_initial'][] = array(
+	'field'   => 'users_company[company_initial]',
+	'label'   => 'Company Initial',
+	'rules'   => 'required'
+);
 $config['field_validations']['users_company.company_code'][] = array(
 	'field'   => 'users_company[company_code]',
 	'label'   => 'Company Code',

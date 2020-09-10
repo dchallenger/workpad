@@ -79,6 +79,22 @@
                     </div>
                 </div>
                 @endif
+                @if(in_array('payroll_bank_account_number', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-5">{{ $partners_labels['payroll_bank_account_number'] }}</label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="partners_personal[payroll_bank_account_number]" id="partners_personal-payroll_bank_account_number" value="{{ $record['payroll_bank_account_number'] }}" placeholder="Enter {{ $partners_labels['payroll_bank_account_number'] }}"/>
+                    </div>
+                </div>
+                @endif
+                @if(in_array('payroll_bank_name', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-5">{{ $partners_labels['payroll_bank_name'] }}</label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="partners_personal[payroll_bank_name]" id="partners_personal-payroll_bank_name" value="{{ $record['payroll_bank_name'] }}" placeholder="Enter {{ $partners_labels['payroll_bank_name'] }}"/>
+                    </div>
+                </div>
+                @endif                                
                 @if(in_array('bank_account_name', $partners_keys))
                 <div class="form-group">
                     <label class="control-label col-md-5">{{ $partners_labels['bank_account_name'] }}</label>

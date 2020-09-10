@@ -12,6 +12,7 @@ $config["detail_cached_query"] = 'SELECT
 	`ww_users_company`.`country_id` as "users_company.country_id",
 	`ww_users_company`.`city_id` as "users_company.city_id", 
 	`ww_users_company`.`address` as "users_company.address", 
+	`ww_users_company`.`company_initial` as "users_company.company_initial", 
 	`ww_users_company`.`company_code` as "users_company.company_code", 
 	`ww_users_company`.`company` as "users_company.company",
 	ww_users_company.sss as "users_company.sss", 

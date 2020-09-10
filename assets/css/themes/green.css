@@ -5,7 +5,7 @@ Grey theme
 Reset and overrides  
 ***/
 body {
-  background-color: #066424 !important;
+  background-color: #1c5532 !important;
 }
 /***
 Page header
@@ -13,14 +13,14 @@ Page header
 .header {
   filter: none !important;
   background-image: none !important;
-  background-color: #066424 !important;
+  background-color: #1c5532 !important;
 }
 .header .btn-navbar {
-  background-color: #066424 !important;
+  background-color: #1c5532 !important;
 }
 .header .navbar-nav .dropdown-toggle:hover,
 .header .navbar-nav .dropdown.open .dropdown-toggle {
-  background-color: #0c8031 !important;
+  background-color: #20633a !important;
 }
 .header .navbar-nav li.dropdown .dropdown-toggle i {
   color: #b3b3b3 !important;
@@ -86,10 +86,10 @@ Hor menu
 Page sidebar
 ***/
 .page-sidebar {
-  background-color: #1e9a02;
+  background-color: #6aa743;
 }
 ul.page-sidebar-menu > li > a {
-  border-top: 1px solid #858585 !important;
+  border-top: 1px solid #20633a !important;
   color: #ffffff !important;
 }
 ul.page-sidebar-menu > li:last-child > a {
@@ -101,10 +101,10 @@ ul.page-sidebar-menu > li a i {
 ul.page-sidebar-menu > li.open > a,
 ul.page-sidebar-menu > li > a:hover,
 ul.page-sidebar-menu > li:hover > a {
-  background: #097b2d;
+  background: #1c5532;
 }
 ul.page-sidebar-menu > li.active > a {
-  background: #e02222 !important;
+  background: #1c5532 !important;
   border-top-color: transparent !important;
   color: #ffffff;
 }
@@ -117,17 +117,17 @@ ul.page-sidebar-menu > li > ul.sub-menu > li:first-child > a {
 ul.page-sidebar-menu > li > ul.sub-menu > li.active > a,
 ul.page-sidebar-menu > li > ul.sub-menu > li > a:hover {
   color: #ffffff !important;
-  background: #7bcc69 !important;
+  background: #247041 !important;
 }
 ul.page-sidebar-menu > li > ul.sub-menu > li > a:hover {
-  background: #7bcc69 !important;
+  background: #247041 !important;
 }
 /* 3rd level sub menu */
 ul.page-sidebar-menu > li > ul.sub-menu li > ul.sub-menu > li.active > a,
 ul.page-sidebar-menu > li > ul.sub-menu li > ul.sub-menu > li > a:hover,
 ul.page-sidebar-menu > li > ul.sub-menu li.open > a {
   color: #ffffff !important;
-  background: #7bcc69 !important;
+  background: #247041 !important;
 }
 /* font color for all sub menu links*/
 ul.page-sidebar-menu li > ul.sub-menu > li > a {
@@ -136,11 +136,11 @@ ul.page-sidebar-menu li > ul.sub-menu > li > a {
 /* menu arrows */
 ul.page-sidebar-menu > li > a .arrow:before,
 ul.page-sidebar-menu > li > a .arrow.open:before {
-  color: #a6a6a6 !important;
+  color: #fff !important;
 }
 ul.page-sidebar-menu > li > ul.sub-menu a .arrow:before,
 ul.page-sidebar-menu > li > ul.sub-menu a .arrow.open:before {
-  color: #999999 !important;
+  color: #fff !important;
 }
 ul.page-sidebar-menu > li > a > .arrow.open:before {
   color: #b3b3b3 !important;
@@ -288,10 +288,10 @@ Landscape phone to portrait tablet
     page sidebar
     ***/
   .page-sidebar {
-    background-color: #525252 !important;
+    background-color: #6aa743 !important;
   }
   ul.page-sidebar-menu > li > a {
-    border-top: 1px solid #737373 !important;
+    border-top: 1px solid #1c5532 !important;
   }
   ul.page-sidebar-menu > li:last-child > a {
     border-bottom: 0 !important;
@@ -302,6 +302,6 @@ Landscape phone to portrait tablet
   ul.page-sidebar-menu > li.open > a,
   ul.page-sidebar-menu > li > a:hover,
   ul.page-sidebar-menu > li:hover > a {
-    background: #474747;
+    background: #1c5532;
   }
 }

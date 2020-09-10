@@ -4,6 +4,7 @@ $lang['company'] = array(
 	'edit' => 'edit',
 	'company' => 'Company',
 	'p_company' => 'Enter Company Name',
+	'company_initial' => 'Company Initial',
 	'company_code' => 'Company Code',
 	'p_company_code' => 'Enter Company Code',
 	'm_company_code' => '16 character max to be used internnaly.',

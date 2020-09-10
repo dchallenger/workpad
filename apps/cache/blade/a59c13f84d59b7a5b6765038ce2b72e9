@@ -120,7 +120,31 @@
                         </div>
                     </div>  
                 </div>
-                <?php endif; ?> 
+                <?php endif; ?>
+
+                <?php if(in_array('sbu_unit', $partners_keys)): ?>
+                <div class="form-group">
+                    <label class="control-label col-md-3"><?php echo lang('partners.sbu_unit'); ?></label>
+                    <div class="col-md-5">
+                        <?php   $db->select('sbu_unit_id,sbu_unit');
+                                $db->where('deleted', '0');
+                                $options = $db->get('users_sbu_unit');
+
+                                $users_sbu_unit_id_options = array('' => 'Select...');
+                                foreach($options->result() as $option)
+                                {
+                                    $users_sbu_unit_id_options[$option->sbu_unit_id] = $option->sbu_unit;
+                                } ?>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                        <?php echo form_dropdown('users_profile[sbu_unit_id]',$users_sbu_unit_id_options, $record['users_profile.sbu_unit_id'], 'class="form-control select2me" data-placeholder="Select..."'); ?>
+                        </div>
+                    </div>  
+                </div>
+                <?php endif; ?>
+
                 <?php if(in_array('branch', $partners_keys)): ?>
                 <div class="form-group">
                     <label class="control-label col-md-3"><?php echo lang('partners.branch'); ?><span class="required">*</span></label>
@@ -267,7 +291,12 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-list-ul"></i>
                             </span>
-                            <?php echo form_multiselect('users_profile[coordinator_id][]',$users_coordinator_id_options, explode(',', $record['users_profile.coordinator_id']), 'class="form-control select2me" id="users_profile-coordinator_id" data-placeholder="Select..."'); ?>
+                            <?php
+                                $coordinator_val = 1;
+                                if (!empty($record['users_profile.coordinator_id']))
+                                    $coordinator_val = explode(',', $record['users_profile.coordinator_id']);
+                            ?>
+                            <?php echo form_multiselect('users_profile[coordinator_id][]',$users_coordinator_id_options, $coordinator_val, 'class="form-control select2me" id="users_profile-coordinator_id" data-placeholder="Select..."'); ?>
                         </div>              
                     </div>  
                 </div>
