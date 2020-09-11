@@ -1033,7 +1033,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row hidden">
 							<div class="col-md-12">
 								<div class="form-group">
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted">Dependent :</label>
@@ -1043,7 +1043,30 @@
 								</div>
 							</div>
 						</div>
-
+						<?php if(in_array('family-dependent-hmo', $partners_keys)): ?>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo $partners_labels['family-dependent-hmo']; ?> :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="civil-status"><?php echo (isset($family['family-dependent-hmo']) ? $family['family-dependent-hmo'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>						
+						<?php endif; ?>
+						<?php if(in_array('family-dependent-insurance', $partners_keys)): ?>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo $partners_labels['family-dependent-insurance']; ?> :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="civil-status"><?php echo (isset($family['family-dependent-insurance']) ? $family['family-dependent-insurance'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>							
+						<?php endif; ?>						
 					</div>
 				</div>
 				<?php } ?>

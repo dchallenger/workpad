@@ -109,16 +109,39 @@
                                     value="<?php echo $family_age ?>" />
                                 </div>
                             </div>
-                            <div class="form-group">
+                            @if(in_array('dependent', $partners_keys))
+                            <div class="form-group hidden">
                                 <label class="control-label col-md-3">Dependent</label>
                                 <div class="col-md-5">
                                     <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
                                         <input type="checkbox" value="1" @if( isset($family['family-dependent']) ? $family['family-dependent'] : "" ) checked="checked" @endif name="partners_personal_history[family-dependent][temp][]" id="partners_personal_history-family-dependent-temp" class="dontserializeme toggle dependent"/>
-                                        <input type="hidden" name="partners_personal_history[family-dependent][]" id="partners_personal_history-family-dependent" value="@if( isset($family['family-dependent']) ? $family['family-dependent'] : '' ) 1 else 0 @endif"/>
+                                        <input type="hidden" name="partners_personal_history[family-dependent][]" id="partners_personal_history-family-dependent" value="@if( isset($family['family-dependent'])) 1 else 0 @endif"/>
                                     </div> 
                                 </div>
                             </div>
-
+                            @endif
+                            @if(in_array('family-dependent-hmo', $partners_keys))
+                            <div class="form-group">
+                                <label class="control-label col-md-3">{{$partners_labels['family-dependent-hmo']}}</label>
+                                <div class="col-md-5">
+                                    <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
+                                        <input type="checkbox" value="1" @if( isset($family['family-dependent-hmo']) ? $family['family-dependent-hmo'] : "" ) checked="checked" @endif name="partners_personal_history[family-dependent-hmo][temp][]" id="partners_personal_history-family-dependent-hmo-temp" class="dontserializeme toggle dependent"/>
+                                        <input type="hidden" name="partners_personal_history[family-dependent-hmo][]" id="partners_personal_history-family-dependent-hmo" value="@if( isset($family['family-dependent-hmo'])) 1 else 0 @endif"/>
+                                    </div> 
+                                </div>
+                            </div>                            
+                            @endif
+                            @if(in_array('family-dependent-insurance', $partners_keys))
+                            <div class="form-group">
+                                <label class="control-label col-md-3">{{$partners_labels['family-dependent-insurance']}}</label>
+                                <div class="col-md-5">
+                                    <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
+                                        <input type="checkbox" value="1" @if( isset($family['family-dependent-insurance']) ? $family['family-dependent-insurance'] : "" ) checked="checked" @endif name="partners_personal_history[family-dependent-insurance][temp][]" id="partners_personal_history-family-dependent-insurance-temp" class="dontserializeme toggle dependent"/>
+                                        <input type="hidden" name="partners_personal_history[family-dependent-insurance][]" id="partners_personal_history-family-dependent-insurance" value="@if( isset($family['family-dependent-insurance'])) 1 else 0 @endif"/>
+                                    </div> 
+                                </div>
+                            </div>                            
+                            @endif                            
                         </div>
                     </div>
                 </div>

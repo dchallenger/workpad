@@ -276,8 +276,11 @@ $(document).ready(function(){
 	});
 	$('label[for="partners_personal-with_parking-temp"]').css('margin-top', '0');
 
-        $('.make-switch').not(".has-switch")['bootstrapSwitch']();
-        $('label[for="partners_personal_history-family-dependent-temp"]').css('margin-top', '0');
+    $('.make-switch').not(".has-switch")['bootstrapSwitch']();
+    $('label[for="partners_personal_history-family-dependent-temp"]').css('margin-top', '0');
+    $('label[for="partners_personal_history-family-dependent-hmo-temp"]').css('margin-top', '0');
+    $('label[for="partners_personal_history-family-dependent-insurance-temp"]').css('margin-top', '0');
+
 	$('.dependent').change(function(){
 	    if( $(this).is(':checked') ){
 	    	$(this).parent().next().val(1);

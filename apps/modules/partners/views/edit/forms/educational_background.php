@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <?php 
-    $type_with_degree = array('tertiary', 'graduate studies', 'vocational');
+                $type_with_degree = array('tertiary', 'graduate studies', 'vocational');
                 if(in_array(strtolower($category), $type_with_degree)) { 
                     ?>
                     <div class="form-group">

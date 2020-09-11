@@ -89,6 +89,33 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php if (in_array('division', $partners_keys)) { ?>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Division</label>
+                                                <div class="col-md-8">
+                                                <?php   $db->select('division_id,division');
+                                                        $db->where('deleted', '0');
+                                                        $db->order_by('division');
+                                                        $options = $db->get('users_division');
+                                                    ?>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                           <i class="fa fa-group"></i>
+                                                         </span>
+                                                        <select  class="form-control select2me" data-placeholder="Select..." name="users_profile[division_id]" id="users_profile-division_id">
+                                                            <option></option>
+                                                            <?php
+                                                                foreach($options->result() as $option)
+                                                                {
+                                                                    // $selected = ($option->division_id == $record['users_profile.division_id']) ? "selected" : "";
+                                                                    echo '<option value="'.$option->division_id.'">'.$option->division.'</option>';
+                                                                } 
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php } ?>                                            
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">Department<span class="required">*</span></label>
                                                 <div class="col-md-8">
@@ -114,33 +141,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <?php if (in_array('division', $partners_keys)) { ?>
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">Division</label>
-                                                <div class="col-md-8">
-                                                <?php   $db->select('division_id,division');
-                                                        $db->where('deleted', '0');
-														$db->order_by('division');
-                                                        $options = $db->get('users_division');
-                                                    ?>
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                           <i class="fa fa-group"></i>
-                                                         </span>
-                                                        <select  class="form-control select2me" data-placeholder="Select..." name="users_profile[division_id]" id="users_profile-division_id">
-                                                            <option></option>
-                                                            <?php
-                                                                foreach($options->result() as $option)
-                                                                {
-                                                                    // $selected = ($option->division_id == $record['users_profile.division_id']) ? "selected" : "";
-                                                                    echo '<option value="'.$option->division_id.'">'.$option->division.'</option>';
-                                                                } 
-                                                            ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <?php } ?>
                                             <?php if (in_array('branch', $partners_keys)) { ?>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">Branch</label>

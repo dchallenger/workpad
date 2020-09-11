@@ -685,10 +685,10 @@ class Partners extends MY_PrivateController
 		$data['record']['bank_number_savings'] = (count($bank_number_savings) > 0 ? $bank_number_savings[0]['key_value'] : " ");
 		$bank_number_current = $this->profile_mod->get_partners_personal($user_id, 'bank_account_number_current');
 		$data['record']['bank_number_current'] = (count($bank_number_current) > 0 ? $bank_number_current[0]['key_value'] : " ");
-			$payroll_bank_account_number = $this->profile_mod->get_partners_personal($user_id, 'payroll_bank_account_number');
-			$data['record']['payroll_bank_account_number'] = (count($payroll_bank_account_number) == 0 ? " " : ($payroll_bank_account_number[0]['key_value'] == "" ? "" : $payroll_bank_account_number[0]['key_value']));
-			$payroll_bank_name = $this->profile_mod->get_partners_personal($user_id, 'payroll_bank_name');
-			$data['record']['payroll_bank_name'] = (count($payroll_bank_name) == 0 ? " " : ($payroll_bank_name[0]['key_value'] == "" ? "" : $payroll_bank_name[0]['key_value']));									
+		$payroll_bank_account_number = $this->profile_mod->get_partners_personal($user_id, 'payroll_bank_account_number');
+		$data['record']['payroll_bank_account_number'] = (count($payroll_bank_account_number) == 0 ? " " : ($payroll_bank_account_number[0]['key_value'] == "" ? "" : $payroll_bank_account_number[0]['key_value']));
+		$payroll_bank_name = $this->profile_mod->get_partners_personal($user_id, 'payroll_bank_name');
+		$data['record']['payroll_bank_name'] = (count($payroll_bank_name) == 0 ? " " : ($payroll_bank_name[0]['key_value'] == "" ? "" : $payroll_bank_name[0]['key_value']));									
 		$bank_account_name = $this->profile_mod->get_partners_personal($user_id, 'bank_account_name');
 		$data['record']['bank_account_name'] = (count($bank_account_name) > 0 ? $bank_account_name[0]['key_value'] : " ");
 		$health_care = $this->profile_mod->get_partners_personal($user_id, 'health_care');
@@ -866,13 +866,19 @@ class Partners extends MY_PrivateController
 		$family_tab = array();
 		$families_tab = array();
 		$family_tab = $this->profile_mod->get_partners_personal_history($user_id, 'family');
+
 		foreach($family_tab as $emp){
 			if($emp['key'] == 'family-dependent'){
 				$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'] == 0 ? "No" : "Yes";
+			}elseif($emp['key'] == 'family-dependent-hmo'){
+				$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'] == 0 ? "No" : "Yes";
+			}elseif($emp['key'] == 'family-dependent-insurance'){
+				$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'] == 0 ? "No" : "Yes";				
 			}else{
 				$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
-			}
+			}			
 		}
+
 		$data['family_tab'] = $families_tab;
 		
 		$old_id_number = $this->profile_mod->get_partners_personal($user_id, 'old_id_number');
@@ -2125,7 +2131,7 @@ class Partners extends MY_PrivateController
 				'rules' => 'required'
 				);
 			$partners_personal_table = "partners_personal_history";
-			$partners_personal_key = array('family-relationship', 'family-name', 'family-birthdate', 'family-dependent');
+			$partners_personal_key = array('family-relationship', 'family-name', 'family-birthdate', 'family-dependent', 'family-dependent-hmo', 'family-dependent-insurance');
 			$partners_personal = (isset($post['partners_personal_history'])) ? $post['partners_personal_history'] : '';
 			break;
 			case 15:

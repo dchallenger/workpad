@@ -127,16 +127,38 @@
 								</div>
 							</div>
 						</div>
+						@if( in_array('job_level', $partners_keys) )
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.type') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.rank') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="job-class">{{$job_level}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						@endif							
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.level') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="employment-status">{{$type}}</span>
 									</div>
 								</div>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">Classification :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="employment-type">{{$classification}}</span>
+									</div>
+								</div>
+							</div>
+						</div>						
 						@if( in_array( 'job_class', $partners_keys ))
 						<div class="row">
 							<div class="col-md-12">
@@ -162,7 +184,7 @@
                         </div>
                         @endif
                         @if( in_array( 'job_level', $partners_keys ))
-                        <div class="row">
+                        <div class="row hidden">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.job_level') }} :</label>
@@ -245,18 +267,6 @@
 							</div>
 						</div>
 	                @endif
-	                @if(in_array('original_date_hired', $partners_keys))
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.ohire_date') }} :</label>
-									<div class="col-md-7 col-sm-7">
-										<span id="lastname">{{$original_date_hired}}</span>
-									</div>
-								</div>
-							</div>
-						</div>
-                	@endif
 	                @if(in_array('regularization_date', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
@@ -268,7 +278,19 @@
 								</div>
 							</div>
 						</div>
-                	@endif                	
+                	@endif    	                
+	                @if(in_array('original_date_hired', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.ohire_date') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="lastname">{{$original_date_hired}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                	@endif            	
                 	@if(in_array('last_probationary', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
@@ -315,6 +337,16 @@
 								</div>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.project_hr') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="reports-to">{{$project_hr}}</span>
+									</div>
+								</div>
+							</div>
+						</div>							
 	                	@if(in_array('organization', $partners_keys))
 							<div class="row ">
 								<div class="col-md-12">
@@ -334,6 +366,8 @@
 										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.div') }} :</label>
 										<div class="col-md-7 col-sm-7">
 											<span id="position-title">{{$division}}</span>
+	                        				<br>
+											<span class="text-muted small">Cost Center Code : {{$cost_center_code}}</span>																					
 										</div>
 									</div>
 								</div>
@@ -350,7 +384,31 @@
 									</div>
 								</div>
 							</div>
-						@endif		
+						@endif
+						@if(in_array('sbu_unit', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.sbu_unit') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="role-permission">{{$sbu_unit}}</span>
+									</div>
+								</div>
+							</div>
+						</div>						
+						@endif
+						@if(in_array('section', $partners_keys))
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $partners_labels['section'] }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="role-permission">{{ $record['section'] or '' }}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						@endif								
                 		@if(in_array('branch', $partners_keys))
 							<div class="row">
 								<div class="col-md-12">
@@ -375,18 +433,60 @@
                                 </div>
                             </div>
                         @endif
-						@if(in_array('section', $partners_keys))
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $partners_labels['project_id'] }} :</label>
+                                    <div class="col-md-7 col-sm-7">
+                                        <span id="role-permission">{{$project}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                     
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $partners_labels['start_date'] }} :</label>
+                                    <div class="col-md-7 col-sm-7">
+                                        <span id="role-permission">{{$start_date}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $partners_labels['end_date'] }} :</label>
+                                    <div class="col-md-7 col-sm-7">
+                                        <span id="role-permission">{{$end_date}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						@if(in_array('work_schedule_coordinator', $partners_keys))
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
-										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $partners_labels['section']}} :</label>
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $partners_labels['work_schedule_coordinator'] }} :</label>
 										<div class="col-md-7 col-sm-7">
-											<span id="emergency-name">{{ $record['section'] or '' }}</span>
+											<span id="role-permission">{{ $coordinator }}</span>
 										</div>
 									</div>
 								</div>
 							</div>
-						@endif
+						@endif     
+						@if(in_array('credit_setup', $partners_keys))
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $partners_labels['credit_setup'] }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="role-permission">{{ $credit_setup }}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						@endif                         
 						<div class="row hidden">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -735,7 +835,42 @@
 							</div>
 						</div>
                 @endif
-                                                
+                @if(in_array('bank_account_number_current', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-5 col-sm-5 text-right text-muted">{{ $partners_labels['bank_account_number_current'] }} :</label>
+									<div class="col-md-6 col-sm-6">
+										<span id="emergency-name">{{$record['bank_number_current']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                @endif
+                @if(in_array('payroll_bank_account_number', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-5 col-sm-5 text-right text-muted">{{ $partners_labels['payroll_bank_account_number'] }} :</label>
+									<div class="col-md-6 col-sm-6">
+										<span id="emergency-name">{{$record['payroll_bank_account_number']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                @endif    
+                @if(in_array('payroll_bank_name', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-5 col-sm-5 text-right text-muted">{{ $partners_labels['payroll_bank_name'] }} :</label>
+									<div class="col-md-6 col-sm-6">
+										<span id="emergency-name">{{$record['payroll_bank_name']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                @endif 
                 @if(in_array('bank_account_name', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
@@ -880,7 +1015,7 @@
 					</div>
 					<div class="portlet-body form">
 						<!-- START FORM -->
-                @if(in_array('height', $partners_keys))
+                		@if(in_array('height', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -891,8 +1026,8 @@
 								</div>
 							</div>
 						</div>
-                @endif
-                @if(in_array('weight', $partners_keys))
+                		@endif
+                		@if(in_array('weight', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -903,8 +1038,8 @@
 								</div>
 							</div>
 						</div>
-                @endif
-                @if(in_array('interests_hobbies', $partners_keys))
+                		@endif
+                		@if(in_array('interests_hobbies', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -915,8 +1050,8 @@
 								</div>
 							</div>
 						</div>
-                @endif
-                @if(in_array('language', $partners_keys))
+                		@endif
+                		@if(in_array('language', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -927,8 +1062,8 @@
 								</div>
 							</div>
 						</div>
-                @endif
-                @if(in_array('dialect', $partners_keys))
+                		@endif
+                		@if(in_array('dialect', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -939,8 +1074,8 @@
 								</div>
 							</div>
 						</div>
-                @endif
-                @if(in_array('dependents_count', $partners_keys))
+                		@endif
+                		@if(in_array('dependents_count', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -951,7 +1086,19 @@
 								</div>
 							</div>
 						</div>
-                @endif
+                		@endif
+                		@if(in_array('number_children', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.number_children') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="no-of-dependents">{{$number_children}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                		@endif                   
 					</div>
 				</div>
 			</div>

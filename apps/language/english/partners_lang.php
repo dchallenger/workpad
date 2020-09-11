@@ -187,4 +187,5 @@ $lang['partners'] = array(
     'change_request' => 'Change Request',
     'sbu_unit' => 'SBU Unit',
     'number_children' => 'Number of Children',
+    'other_info' => 'Other Information ',
 );
