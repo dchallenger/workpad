@@ -105,6 +105,15 @@
                     <?php
                         } 
                     ?>
+                    @if(in_array('education-honors_awards', $partners_keys))
+                    <div class="form-group">
+                        <label class="control-label col-md-3">{{ lang('partners.honors_receive') }}<span class="required">*</span></label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="partners_personal_history[education-honors_awards][]" id="partners_personal_history-education-honors_awards" 
+                            value="<?php echo (isset($education['education-honors_awards']) ? $education['education-honors_awards'] : ""); ?>" placeholder="{{ lang('common.enter') }} {{ lang('partners.honors_receive') }}"/>
+                        </div>
+                    </div>                    
+                    @endif
                     <div class="form-group">
                         <label class="control-label col-md-3">{{ lang('common.status') }}<span class="required">*</span></label>
                         <div class="col-md-7 checkbox-list">

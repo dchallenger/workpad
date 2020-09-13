@@ -11,6 +11,12 @@
                         <form action="#" class="form-horizontal">
                             <div class="form-body">
                                 <div class="form-group">
+                                    <label class="col-md-4 text-right text-muted">Asset Type :</label>
+                                    <div class="col-md-7">
+                                        <?php echo (isset($details['accountabilities-asset-type']) ? $details['accountabilities-asset-type'] : ""); ?>
+                                    </div>
+                                </div>                                  
+                                <div class="form-group">
                                     <label class="control-label col-md-4 text-right text-muted">Item Name :</label>
                                     <div class="col-md-7">
                                         <?php echo (isset($details['accountabilities-name']) ? $details['accountabilities-name'] : ""); ?>
@@ -23,34 +29,36 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="col-md-4 text-right text-muted">Asset Number :</label>
+                                    <div class="col-md-7">
+                                        <?php echo (isset($details['accountabilities-asset-number']) ? $details['accountabilities-asset-number'] : ""); ?>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 text-right text-muted">Serial Number :</label>
+                                    <div class="col-md-7">
+                                        <?php echo (isset($details['accountabilities-serial-number']) ? $details['accountabilities-serial-number'] : ""); ?>
+                                    </div>
+                                </div>                                  
+                                <div class="form-group">
                                     <label class="control-label col-md-4 text-right text-muted">Quantity :</label>
                                     <div class="col-md-7">
                                         <?php echo (isset($details['accountabilities-quantity']) ? $details['accountabilities-quantity'] : ""); ?>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 text-right text-muted">Date Issued :</label>
+                                    <label class="col-md-4 text-right text-muted">Date Issued :</label>
                                     <div class="col-md-7">
-                                        <?php 
-                                            $month_issued = (isset($details['accountabilities-month-issued']) ? $details['accountabilities-month-issued'] : ""); 
-                                            $day_issued = (isset($details['accountabilities-day-issued']) ? $details['accountabilities-day-issued']."," : ""); 
-                                            $year_issued = (isset($details['accountabilities-year-issued']) ? $details['accountabilities-year-issued'] : "");                                         
-                                        ?>
-                                        <?=$month_issued." ".$day_issued." ".$year_issued ?>
+                                        <?php echo (isset($details['accountabilities-date-issued']) ? $details['accountabilities-date-issued'] : ""); ?>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 text-right text-muted">Date Returned :</label>
+                                    <label class="col-md-4 text-right text-muted">Date Returned :</label>
                                     <div class="col-md-7">
-                                        <?php 
-                                            $month_returned = (isset($details['accountabilities-month-returned']) ? $details['accountabilities-month-returned'] : ""); 
-                                            $day_returned = (isset($details['accountabilities-day-returned']) ? $details['accountabilities-day-returned']."," : ""); 
-                                            $year_returned = (isset($details['accountabilities-year-returned']) ? $details['accountabilities-year-returned'] : "");  
-                                        ?>
-                                        <?=$month_returned." ".$day_returned." ".$year_returned ?>
+                                        <?php echo (isset($details['accountabilities-date-returned']) ? $details['accountabilities-date-returned'] : ""); ?>
                                     </div>
                                 </div>
-                                                               <div class="form-group">
+                                <div class="form-group">
                                     <label class="control-label col-md-4 text-right text-muted">Attachment :</label>
                                     <div class="col-md-7">
                                         <ul class="padding-none margin-top-11">

@@ -91,6 +91,18 @@
 								</div>
 							</div>
 						</div>
+	                    <?php if(in_array('education-honors_awards', $partners_keys)): ?>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('my201.honors_receive'); ?> :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="education-degree[1]"><?php echo (isset($education['education-honors_awards']) ? $education['education-honors_awards'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>                 
+	                    <?php endif; ?>						
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -156,6 +168,42 @@
 								</div>
 							</div>
 						</div>
+						<?php if(in_array('employment-reason-for-leaving', $partners_keys)): ?>						
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('partners.reason_leaving'); ?> :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="employment-reason-for-leaving[1]"><?php echo (isset($employment['employment-reason-for-leaving']) ? $employment['employment-reason-for-leaving'] : ""); ?></span>
+										</div>
+									</div>
+								</div>
+							</div>							
+						<?php endif; ?>
+						<?php if(in_array('employment-latest-salary', $partners_keys)): ?>						
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('partners.latest_salary'); ?> :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="employment-latest-salary[1]"><?php echo (isset($employment['employment-latest-salary']) ? $employment['employment-latest-salary'] : ""); ?></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						<?php endif; ?>
+						<?php if(in_array('employment-supervisor', $partners_keys)): ?>						
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('partners.name_immediate_superior'); ?> :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="employment-supervisor[1]"><?php echo (isset($employment['employment-supervisor']) ? $employment['employment-supervisor'] : ""); ?></span>
+										</div>
+									</div>
+								</div>
+							</div>						
+						<?php endif; ?>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -493,6 +541,30 @@
 								</div>
 							</div>
 						</div>
+						<?php if(in_array('training-provider', $partners_keys)): ?>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('my201.training_provider'); ?> :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="training-provider[1]"><?php echo (isset($training['training-provider']) ? $training['training-provider'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<?php endif; ?>
+						<?php if(in_array('training-cost', $partners_keys)): ?>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('my201.training_cost'); ?> :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="training-cost[1]"><?php echo (isset($training['training-cost']) ? $training['training-cost'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>						
+						<?php endif; ?>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -519,7 +591,18 @@
 								</div>
 							</div>
 						</div>
-
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('my201.remarks'); ?> :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="training-end-month[1]">
+											<?php echo (isset($training['training-remarks']) ? $training['training-remarks'] : ""); ?>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<?php } ?>
@@ -684,9 +767,7 @@
 									<!-- this first column shows the year of this holiday item -->
 									
 									<td>
-										<a id="date_name" href="#" class="text-success">
-											<?php echo (isset($accountable['accountabilities-name']) ? $accountable['accountabilities-name'] : ""); ?>	
-										</a>
+										<?php echo (isset($accountable['accountabilities-name']) ? $accountable['accountabilities-name'] : ""); ?>	
 										<br />
 										<span id="date_set" class="small ">
 											<?php echo (isset($accountable['accountabilities-code']) ? $accountable['accountabilities-code'] : ""); ?>	
@@ -734,9 +815,7 @@
 								<tr rel="0">
 									
 									<td>
-										<a id="date_name" href="#" class="text-success">
-											<?php echo (isset($attachment['attachment-name']) ? $attachment['attachment-name'] : ""); ?>	
-										</a>
+										<?php echo (isset($attachment['attachment-name']) ? $attachment['attachment-name'] : ""); ?>	
 										<br />
 										<span id="date_set" class="small text-muted">
 											<?php echo (isset($attachment['attachment-category']) ? $attachment['attachment-category'] : ""); ?>	

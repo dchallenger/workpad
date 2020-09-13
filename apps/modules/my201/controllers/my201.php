@@ -117,6 +117,27 @@ class My201 extends MY_PrivateController
 		$data['complete_address'] = $address_1." ".$address_2;		
 		$zip_code = $this->mod->get_partners_personal($this->user->user_id, 'zip_code');
 			$data['zip_code'] = (count($zip_code) == 0 ? " " : ($zip_code[0]['key_value'] == "" ? "" : $zip_code[0]['key_value']));
+			
+		$country = $this->mod->get_partners_personal($this->user->user_id, 'country');
+		$data['country'] = (count($country) > 0 ? $country[0]['key_value'] : " ");		
+		$permanent_address = $this->mod->get_partners_personal($this->user->user_id, 'permanent_address');
+		$data['permanent_address'] = $permanent_address = (count($permanent_address) == 0 ? " " : ($permanent_address[0]['key_value'] == "" ? "" : $permanent_address[0]['key_value']));
+		$permanent_city_town = $this->mod->get_partners_personal($this->user->user_id, 'permanent_city_town');
+		$data['permanent_city_town'] = $permanent_city_town = (count($permanent_city_town) == 0 ? " " : ($permanent_city_town[0]['key_value'] == "" ? "" : $permanent_city_town[0]['key_value']));
+		$permanent_country = $this->mod->get_partners_personal($this->user->user_id, 'permanent_country');
+		$data['permanent_country'] = $permanent_country = (count($permanent_country) == 0 ? " " : ($permanent_country[0]['key_value'] == "" ? "" : $permanent_country[0]['key_value']));			
+		$permanent_zipcode = $this->mod->get_partners_personal($this->user->user_id, 'permanent_zipcode');
+		$data['permanent_zipcode'] = $permanent_zipcode = (count($permanent_zipcode) == 0 ? " " : ($permanent_zipcode[0]['key_value'] == "" ? "" : $permanent_zipcode[0]['key_value']));						
+		$phone_numbers = $this->mod->get_partners_personal($this->user->user_id, 'phone');
+		$data['office_telephones'] = $phone_numbers = (count($phone_numbers) == 0 ? " " : ($phone_numbers[0]['key_value'] == "" ? "" : $phone_numbers[0]['key_value']));
+		$mobile_numbers = $this->mod->get_partners_personal($this->user->user_id, 'mobile');
+		$data['office_mobiles'] = $mobile_numbers = (count($mobile_numbers) == 0 ? " " : ($mobile_numbers[0]['key_value'] == "" ? "" : $mobile_numbers[0]['key_value']));
+		$personal_phone_numbers = $this->mod->get_partners_personal($this->user->user_id, 'personal_phone');
+		$data['personal_telephone'] = $personal_phone_numbers = (count($personal_phone_numbers) == 0 ? " " : ($personal_phone_numbers[0]['key_value'] == "" ? "" : $personal_phone_numbers[0]['key_value']));
+		$personal_mobile_numbers = $this->mod->get_partners_personal($this->user->user_id, 'personal_mobile');
+		$data['personal_mobile'] = $personal_mobile_numbers = (count($personal_mobile_numbers) == 0 ? " " : ($personal_mobile_numbers[0]['key_value'] == "" ? "" : $personal_mobile_numbers[0]['key_value']));
+		$personal_email = $this->mod->get_partners_personal($this->user->user_id, 'personal_email');
+		$data['personal_email'] = $personal_email = (count($personal_email) == 0 ? " " : ($personal_email[0]['key_value'] == "" ? "" : $personal_email[0]['key_value']));
 		//Emergency Contact
 		$emergency_name = $this->mod->get_partners_personal($this->user->user_id, 'emergency_name');
 			$data['emergency_name'] = (count($emergency_name) == 0 ? " " : ($emergency_name[0]['key_value'] == "" ? "" : $emergency_name[0]['key_value']));

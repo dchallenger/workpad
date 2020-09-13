@@ -86,6 +86,24 @@
                                     value="<?php echo (isset($training['training-venue']) ? $training['training-venue'] : ""); ?>" placeholder="Enter Venue"/>
                                 </div>
                             </div>
+                            @if(in_array('training-provider', $partners_keys))
+                            <div class="form-group">
+                                <label class="control-label col-md-3">{{ lang('partners.training_provider') }}<span class="required">*</span></label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="partners_personal_history[training-provider][]" id="partners_personal_history-training-provider" 
+                                    value="<?php echo (isset($training['training-provider']) ? $training['training-provider'] : ""); ?>" placeholder="Enter {{lang('partners.training_provider')}}"/>
+                                </div>
+                            </div>                            
+                            @endif
+                            @if(in_array('training-cost', $partners_keys))
+                            <div class="form-group">
+                                <label class="control-label col-md-3">{{ lang('partners.training_cost') }}<span class="required">*</span></label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="partners_personal_history[training-cost][]" id="partners_personal_history-training-cost" 
+                                    value="<?php echo (isset($training['training-cost']) ? $training['training-cost'] : ""); ?>" placeholder="Enter {{lang('partners.training_cost')}}" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>
+                                </div>
+                            </div>                            
+                            @endif                            
                             <div class="form-group">
                                 <label class="control-label col-md-3">{{ lang('partners.start_date') }}<span class="required">*</span></label>                                
                                 <div class="col-md-9">

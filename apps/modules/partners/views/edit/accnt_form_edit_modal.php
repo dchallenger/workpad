@@ -14,7 +14,13 @@
                         <!-- BEGIN FORM-->
                             <div action="#" class="form-horizontal">
                                 <div class="form-body">
-                                            <input type="hidden" class="form-control" maxlength="25" name="sequence" id="sequence" value="<?php echo $sequence; ?>" >
+                                    <input type="hidden" class="form-control" maxlength="25" name="sequence" id="sequence" value="<?php echo $sequence; ?>" >
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">Asset Type<span class="required">*</span></label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" maxlength="25" name="partners_personal_history[accountabilities-asset-type]" id="partners_personal_history-accountabilities-asset-type" value="<?php echo (isset($details['accountabilities-asset-type']) ? $details['accountabilities-asset-type'] : ""); ?>" placeholder="Enter Asset Type">
+                                        </div>
+                                    </div>                                    
                                     <div class="form-group">
                                         <label class="control-label col-md-4">Item Name<span class="required">*</span></label>
                                         <div class="col-md-7">
@@ -25,6 +31,18 @@
                                         <label class="control-label col-md-4">Item Code</label>
                                         <div class="col-md-7">
                                             <input type="text" class="form-control" maxlength="25" name="partners_personal_history[accountabilities-code]" id="partners_personal_history-accountabilities-code" value="<?php echo (isset($details['accountabilities-code']) ? $details['accountabilities-code'] : ""); ?>" placeholder="Enter Item Code">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">Asset Number</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" maxlength="25" name="partners_personal_history[accountabilities-asset-number]" id="partners_personal_history-accountabilities-asset-number" value="<?php echo (isset($details['accountabilities-asset-number']) ? $details['accountabilities-asset-number'] : ""); ?>" placeholder="Enter Asset Number">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">Serial Number</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" maxlength="25" name="partners_personal_history[accountabilities-serial-number]" id="partners_personal_history-accountabilities-serial-number" value="<?php echo (isset($details['accountabilities-serial-number']) ? $details['accountabilities-serial-number'] : ""); ?>" placeholder="Enter Serial Number">
                                         </div>
                                     </div>
                                     <div class="form-group">

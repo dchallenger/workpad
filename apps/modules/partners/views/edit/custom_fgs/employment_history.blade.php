@@ -65,12 +65,39 @@
                             value="<?php echo (isset($employment['employment-location']) ? $employment['employment-location'] : ""); ?>" placeholder="Enter Location"/>
                         </div>
                     </div>
+                    @if(in_array('employment-reason-for-leaving', $partners_keys))
+                        <div class="form-group">
+                            <label class="control-label col-md-3">{{ lang('partners.reason_leaving') }}</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="partners_personal_history[employment-reason-for-leaving][]" id="partners_personal_history-employment-reason-for-leaving" 
+                                value="<?php echo (isset($employment['employment-reason-for-leaving']) ? $employment['employment-reason-for-leaving'] : ""); ?>" placeholder="Enter {{lang('partners.reason_leaving')}}"/>
+                            </div>
+                        </div>
+                    @endif
+                    @if(in_array('employment-latest-salary', $partners_keys))
+                        <div class="form-group">
+                            <label class="control-label col-md-3">{{ lang('partners.latest_salary') }}</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="partners_personal_history[employment-latest-salary][]" id="partners_personal_history-employment-latest-salary" 
+                                value="<?php echo (isset($employment['employment-latest-salary']) ? $employment['employment-latest-salary'] : ""); ?>" placeholder="{{ lang('partners.latest_salary') }}" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>
+                            </div>
+                        </div>
+                    @endif
+                    @if(in_array('employment-supervisor', $partners_keys))
+                        <div class="form-group">
+                            <label class="control-label col-md-3">{{ lang('partners.name_immediate_superior') }}</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="partners_personal_history[employment-supervisor][]" id="partners_personal_history-employment-supervisor" 
+                                value="<?php echo (isset($employment['employment-supervisor']) ? $employment['employment-supervisor'] : ""); ?>" placeholder="{{ lang('partners.name_immediate_superior') }}"/>
+                            </div>
+                        </div>                    
+                    @endif                                        
                     <div class="form-group">
                         <label class="control-label col-md-3">{{ lang('partners.hire_date') }}<span class="required">*</span></label>
                         <div class="col-md-9">
                             <div class="input-group input-medium pull-left">
                                 <?php $employment_month_hired = (isset($employment['employment-month-hired']) ? $employment['employment-month-hired'] : ""); ?>
-                        {{ form_dropdown('partners_personal_history[employment-month-hired][]',$months_options, $employment_month_hired, 'class="form-control select2me" data-placeholder="Select..."') }}
+                                {{ form_dropdown('partners_personal_history[employment-month-hired][]',$months_options, $employment_month_hired, 'class="form-control select2me" data-placeholder="Select..."') }}
                             </div>
                             <span class="pull-left padding-left-right-10">-</span>
                             <span class="pull-left">
@@ -84,7 +111,7 @@
                         <div class="col-md-9">
                             <div class="input-group input-medium pull-left">
                                 <?php $employment_month_end = (isset($employment['employment-month-end']) ? $employment['employment-month-end'] : ""); ?>
-                        {{ form_dropdown('partners_personal_history[employment-month-end][]',$months_options, $employment_month_end, 'class="form-control select2me" data-placeholder="Select..."') }}
+                                {{ form_dropdown('partners_personal_history[employment-month-end][]',$months_options, $employment_month_end, 'class="form-control select2me" data-placeholder="Select..."') }}
                             </div>
                             <span class="pull-left padding-left-right-10">-</span>
                             <span class="pull-left">

@@ -26,6 +26,20 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-md-3"><?php echo lang('partners.training_provider') ?></label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="partners_personal_history[training-provider][]" id="partners_personal_history-training-provider" 
+                            value="<?php echo (isset($training['training-provider']) ? $training['training-provider'] : ""); ?>" placeholder="Enter <?php echo lang('partners.training_provider')?>"/>
+                        </div>
+                    </div>   
+                    <div class="form-group">
+                        <label class="control-label col-md-3"><?php echo lang('partners.training_cost') ?></label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="partners_personal_history[training-cost][]" id="partners_personal_history-training-cost" 
+                            value="<?php echo (isset($training['training-cost']) ? $training['training-cost'] : ""); ?>" placeholder="Enter <?php echo lang('partners.training_cost')?>" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>
+                        </div>
+                    </div>                                            
+                    <div class="form-group">
                         <label class="control-label col-md-3">Start Date<span class="required">*</span></label>
                         <div class="col-md-9">
                             <div class="input-group input-medium pull-left">

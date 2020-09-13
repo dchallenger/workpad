@@ -81,11 +81,7 @@
 						</ul>
 						<!--  LOOP ALL PHONE NUMBERS HERE -->
 						<ul class="list-inline text-muted margin-bottom-10">
-							<?php foreach($profile_telephones as $telephone){ 
-									if(!empty($telephone)){ ?>
-									<li><i class="fa fa-phone"></i> <?=$telephone?></li>
-							<?php 	}
-								  } ?>
+							<li><i class="fa fa-phone"></i> <?=$profile_telephones?></li>
 						</ul>
 						<!--  LOOP ALL FAX NUMBERS HERE -->
 						<ul class="list-inline text-muted margin-bottom-10">
@@ -97,11 +93,7 @@
 						</ul>
 						<!-- LOOP ALL MOBILE NUMBERS HERE -->
 						<ul class="list-inline text-muted margin-bottom-10">
-							<?php foreach($profile_mobiles as $mobile){
-									if(!empty($mobile)){ ?>
-									<li><i class="fa fa-mobile"></i> <?=$mobile?></li>
-							<?php 	}
-								  } ?>
+							<li><i class="fa fa-mobile"></i> <?=$profile_mobiles?></li>
 						</ul>
 					</div>
 					<!-- PERSONAL INFORMATION -->

@@ -187,5 +187,12 @@ $lang['partners'] = array(
     'change_request' => 'Change Request',
     'sbu_unit' => 'SBU Unit',
     'number_children' => 'Number of Children',
-    'other_info' => 'Other Information ',
+    'other_info' => 'Other Information',
+    'honors_receive' => 'Honors Receive',
+    'reason_leaving' => 'Reason for Leaving',
+    'latest_salary' => 'Latest Salary',
+    'name_immediate_superior' => 'Name of Immediate Superior',
+    'training_provider' => 'Training Provider',
+    'training_cost' => 'Training Cost',
+    'personal_contact' => 'Personal Contact',
 );

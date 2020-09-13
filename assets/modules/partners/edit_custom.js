@@ -3,7 +3,9 @@ $(document).ready(function(){
 	$('.form-undo').click(function() {
 	    $('form').submit();
 	});
-	
+
+	$(":input").inputmask();
+
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         // save the latest tab; use cookies if you like 'em better:
         localStorage.setItem('lastTab', $(this).attr('href'));
@@ -525,6 +527,7 @@ function add_form(add_form, mode, sequence){
 				$('#personal_'+mode).append(response.add_form);
 				// handleSelect2();
 				FormComponents.init();
+				$(":input").inputmask();
 			}
 
 			$("[id^='partners_personal_history-cost_center-cost_center']").change(function(){

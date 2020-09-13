@@ -61,6 +61,13 @@
                 }
                 ?>
                 <div class="form-group">
+                    <label class="control-label col-md-3"><?php echo lang('partners.honors_receive') ?><span class="required">*</span></label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="partners_personal_history[education-honors_awards][]" id="partners_personal_history-education-honors_awards" 
+                        value="" placeholder="<?php echo lang('common.enter') ?> <?php echo lang('partners.honors_receive') ?>"/>
+                    </div>
+                </div>                
+                <div class="form-group">
                     <label class="control-label col-md-3">Status<span class="required">*</span></label>
                     <div class="col-md-7 checkbox-list">
                         <label class="checkbox-inline">

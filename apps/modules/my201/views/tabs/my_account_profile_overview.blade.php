@@ -510,111 +510,178 @@
 						</div>
 					</div>
 					<div class="portlet-body form">
-						<!-- START FORM -->
-                @if(in_array('phone', $partners_keys))
-                	<?php foreach($profile_telephones as $telephone){ 
-                            if(!empty($telephone)){ ?>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.phone') }} :</label>
-									<div class="col-md-7 col-sm-7">
-										<span id="phone"><?=$telephone?></span>
+		                <div>&nbsp;&nbsp;Present Address:</div>
+		                <br>		
+		                @if(in_array('address_1', $partners_keys))
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.address') }} :</label>
+											<div class="col-md-7 col-sm-7">
+												<span id="lastname">{{$complete_address}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+		                @endif	
+		                @if(in_array('city_town', $partners_keys))
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.city') }} :</label>
+											<div class="col-md-7 col-sm-7">
+												<span id="lastname">{{$profile_live_in}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+		                @endif
+		                @if(in_array('country', $partners_keys))
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.country') }} :</label>
+											<div class="col-md-7 col-sm-7">
+												<span id="lastname">{{$country}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+		                @endif		                
+		                @if(in_array('zip_code', $partners_keys))
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.zip') }} :</label>
+											<div class="col-md-7 col-sm-7">
+												<span id="lastname">{{$zip_code}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+		                @endif
+		                <div>&nbsp;&nbsp;Permanent Address:</div>
+		                <br>		
+		                @if(in_array('permanent_address', $partners_keys))
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.address') }} :</label>
+											<div class="col-md-7 col-sm-7">
+												<span id="lastname">{{$permanent_address}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+		                @endif	
+		                @if(in_array('permanent_city_town', $partners_keys))
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.city') }} :</label>
+											<div class="col-md-7 col-sm-7">
+												<span id="lastname">{{$permanent_city_town}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+		                @endif
+		                @if(in_array('permanent_country', $partners_keys))
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.country') }} :</label>
+											<div class="col-md-7 col-sm-7">
+												<span id="lastname">{{$permanent_country}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+		                @endif		                
+		                @if(in_array('permanent_zipcode', $partners_keys))
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.zip') }} :</label>
+											<div class="col-md-7 col-sm-7">
+												<span id="lastname">{{$permanent_zipcode}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+		                @endif
+		                <div>&nbsp;&nbsp;Office:</div>
+		                <br>	
+		                @if(in_array('phone', $partners_keys))
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.phone') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="phone"><?=$office_telephones?></span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-                	<?php }
-                	}
-                	if (empty($profile_telephones)){ 
-                	?>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.phone') }} :</label>
-									<div class="col-md-7 col-sm-7">
-										<span id="phone">n/a</span>
+		                @endif
+		                @if(in_array('mobile', $partners_keys))
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.mobile') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="lastname"><?=$office_mobiles?></span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-                	<?php } ?>
-                @endif
-                @if(in_array('mobile', $partners_keys))
-                    <?php foreach($profile_mobiles as $mobile){ 
-                            if(!empty($mobile)){ ?>
+		                @endif					
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.mobile') }} :</label>
-									<div class="col-md-7 col-sm-7">
-										<span id="lastname"><?=$mobile?></span>
-									</div>
-								</div>
-							</div>
-						</div>
-                	<?php }
-                	} 
-                	if (empty($profile_mobiles)){ 
-                	?>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.mobile') }} :</label>
-									<div class="col-md-7 col-sm-7">
-										<span id="phone">n/a</span>
-									</div>
-								</div>
-							</div>
-						</div>
-                	<?php } ?>
-                @endif							
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.email') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.email') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="lastname">{{$profile_email}}</span>
 									</div>
 								</div>
 							</div>
 						</div>
-                @if(in_array('address_1', $partners_keys))
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.address') }} :</label>
-									<div class="col-md-7 col-sm-7">
-										<span id="lastname">{{$complete_address}}</span>
+		                <div>&nbsp;&nbsp;Personal:</div>
+		                <br>	
+		                @if(in_array('personal_phone', $partners_keys))
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.phone') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="phone"><?=$personal_telephone?></span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-                @endif
-                @if(in_array('city_town', $partners_keys))
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.city') }} :</label>
-									<div class="col-md-7 col-sm-7">
-										<span id="lastname">{{$profile_live_in}}</span>
+		                @endif
+		                @if(in_array('personal_mobile', $partners_keys))
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.mobile') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="lastname"><?=$personal_mobile?></span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-                @endif
-                @if(in_array('zip_code', $partners_keys))
+		                @endif					
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.zip') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.email') }} :</label>
 									<div class="col-md-7 col-sm-7">
-										<span id="lastname">{{$zip_code}}</span>
+										<span id="lastname">{{$personal_email}}</span>
 									</div>
 								</div>
 							</div>
-						</div>
-                @endif
+						</div>	
 					</div>
 				</div>
 				<!-- Company Information -->

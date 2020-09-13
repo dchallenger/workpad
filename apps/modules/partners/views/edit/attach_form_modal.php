@@ -16,7 +16,7 @@
                                         <?php echo (isset($details['attachment-name']) ? $details['attachment-name'] : ""); ?>   
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group hidden">
                                     <label class="control-label col-md-4 text-right text-muted">Category :</span></label>
                                     <div class="col-md-7">
                                         <?php echo (isset($details['attachment-category']) ? $details['attachment-category'] : ""); ?>

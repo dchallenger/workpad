@@ -652,6 +652,27 @@ class Partners extends MY_PrivateController
 		$data['complete_address'] = $address_1." ".$address_2;		
 		$zip_code = $this->profile_mod->get_partners_personal($user_id, 'zip_code');
 		$data['zip_code'] = (count($zip_code) > 0 ? $zip_code[0]['key_value'] : " ");
+		$country = $this->profile_mod->get_partners_personal($user_id, 'country');
+		$data['country'] = (count($country) > 0 ? $country[0]['key_value'] : " ");		
+		$permanent_address = $this->profile_mod->get_partners_personal($user_id, 'permanent_address');
+		$data['permanent_address'] = $permanent_address = (count($permanent_address) == 0 ? " " : ($permanent_address[0]['key_value'] == "" ? "" : $permanent_address[0]['key_value']));
+		$permanent_city_town = $this->profile_mod->get_partners_personal($user_id, 'permanent_city_town');
+		$data['permanent_city_town'] = $permanent_city_town = (count($permanent_city_town) == 0 ? " " : ($permanent_city_town[0]['key_value'] == "" ? "" : $permanent_city_town[0]['key_value']));
+		$permanent_country = $this->profile_mod->get_partners_personal($user_id, 'permanent_country');
+		$data['permanent_country'] = $permanent_country = (count($permanent_country) == 0 ? " " : ($permanent_country[0]['key_value'] == "" ? "" : $permanent_country[0]['key_value']));			
+		$permanent_zipcode = $this->profile_mod->get_partners_personal($user_id, 'permanent_zipcode');
+		$data['permanent_zipcode'] = $permanent_zipcode = (count($permanent_zipcode) == 0 ? " " : ($permanent_zipcode[0]['key_value'] == "" ? "" : $permanent_zipcode[0]['key_value']));						
+		$phone_numbers = $this->profile_mod->get_partners_personal($user_id, 'phone');
+		$data['office_telephones'] = $phone_numbers = (count($phone_numbers) == 0 ? " " : ($phone_numbers[0]['key_value'] == "" ? "" : $phone_numbers[0]['key_value']));
+		$mobile_numbers = $this->profile_mod->get_partners_personal($user_id, 'mobile');
+		$data['office_mobiles'] = $mobile_numbers = (count($mobile_numbers) == 0 ? " " : ($mobile_numbers[0]['key_value'] == "" ? "" : $mobile_numbers[0]['key_value']));
+		$personal_phone_numbers = $this->profile_mod->get_partners_personal($user_id, 'personal_phone');
+		$data['personal_telephone'] = $personal_phone_numbers = (count($personal_phone_numbers) == 0 ? " " : ($personal_phone_numbers[0]['key_value'] == "" ? "" : $personal_phone_numbers[0]['key_value']));
+		$personal_mobile_numbers = $this->profile_mod->get_partners_personal($user_id, 'personal_mobile');
+		$data['personal_mobile'] = $personal_mobile_numbers = (count($personal_mobile_numbers) == 0 ? " " : ($personal_mobile_numbers[0]['key_value'] == "" ? "" : $personal_mobile_numbers[0]['key_value']));
+		$personal_email = $this->profile_mod->get_partners_personal($user_id, 'personal_email');
+		$data['personal_email'] = $personal_email = (count($personal_email) == 0 ? " " : ($personal_email[0]['key_value'] == "" ? "" : $personal_email[0]['key_value']));
+								
 		//Emergency Contact
 		$emergency_name = $this->profile_mod->get_partners_personal($user_id, 'emergency_name');
 		$data['emergency_name'] = (count($emergency_name) > 0 ? $emergency_name[0]['key_value'] : " ");
@@ -1024,7 +1045,7 @@ class Partners extends MY_PrivateController
 			$birthday = new DateTime($result['users_profile.birth_date']);
 			$data['profile_age'] = $birthday->diff(new DateTime)->y;
 
-			$telephones = array();
+/*			$telephones = array();
 			$phone_numbers = $this->profile_mod->get_partners_personal($user_id, 'phone');
 			foreach($phone_numbers as $phone){
 				// $telephones[] = $this->format_phone($phone['key_value']);
@@ -1032,7 +1053,8 @@ class Partners extends MY_PrivateController
 					$telephones[] = $phone['key_value'];
 				}
 			}
-			$data['profile_telephones'] = $telephones;	
+			$data['profile_telephones'] = $telephones;*/	
+			
 			$fax = array();
 			$fax_numbers = $this->profile_mod->get_partners_personal($user_id, 'fax');
 			foreach($fax_numbers as $fax_no){
@@ -1042,7 +1064,8 @@ class Partners extends MY_PrivateController
 				}
 			}
 			$data['profile_fax'] = $fax;		
-			$mobiles = array();
+
+/*			$mobiles = array();
 			$mobile_numbers = $this->profile_mod->get_partners_personal($user_id, 'mobile');
 			foreach($mobile_numbers as $mobile){
 				// $mobiles[] = $this->format_phone($mobile['key_value']);
@@ -1051,6 +1074,37 @@ class Partners extends MY_PrivateController
 				}
 			}
 			$data['profile_mobiles'] = $mobiles;
+
+			$personal_telephones = array();
+			$personal_phone_numbers = $this->profile_mod->get_partners_personal($user_id, 'personal_phone');
+			foreach($personal_phone_numbers as $personal_phone){
+				if(!empty($personal_phone['key_value'])){
+					$personal_telephones[] = $personal_phone['key_value'];
+				}
+			}
+			$data['personal_telephones'] = $personal_telephones;	
+
+			$personal_mobiles = array();
+			$personal_mobile_numbers = $this->profile_mod->get_partners_personal($user_id, 'personal_mobile');
+			foreach($personal_mobile_numbers as $personal_mobile){
+				// $mobiles[] = $this->format_phone($mobile['key_value']);
+				if(!empty($personal_mobile_numbers['key_value'])){
+					$personal_mobiles[] = $personal_mobile_numbers['key_value'];
+				}
+			}
+			$data['personal_mobiles'] = $personal_mobiles;*/
+
+			$phone_numbers = $this->profile_mod->get_partners_personal($user_id, 'phone');
+			$data['profile_telephones'] = $phone_numbers = (count($phone_numbers) == 0 ? " " : ($phone_numbers[0]['key_value'] == "" ? "" : $phone_numbers[0]['key_value']));
+			$mobile_numbers = $this->profile_mod->get_partners_personal($user_id, 'mobile');
+			$data['profile_mobiles'] = $mobile_numbers = (count($mobile_numbers) == 0 ? " " : ($mobile_numbers[0]['key_value'] == "" ? "" : $mobile_numbers[0]['key_value']));
+			$personal_phone_numbers = $this->profile_mod->get_partners_personal($user_id, 'personal_phone');
+			$data['personal_telephone'] = $personal_phone_numbers = (count($personal_phone_numbers) == 0 ? " " : ($personal_phone_numbers[0]['key_value'] == "" ? "" : $personal_phone_numbers[0]['key_value']));
+			$personal_mobile_numbers = $this->profile_mod->get_partners_personal($user_id, 'personal_mobile');
+			$data['personal_mobile'] = $personal_mobile_numbers = (count($personal_mobile_numbers) == 0 ? " " : ($personal_mobile_numbers[0]['key_value'] == "" ? "" : $personal_mobile_numbers[0]['key_value']));
+			$personal_email = $this->profile_mod->get_partners_personal($user_id, 'personal_email');
+			$data['personal_email'] = $personal_email = (count($personal_email) == 0 ? " " : ($personal_email[0]['key_value'] == "" ? "" : $personal_email[0]['key_value']));
+
 			$city_town = $this->profile_mod->get_partners_personal($user_id, 'city_town');
 			$city_town = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $city_town[0]['key_value']));
 			$data['profile_live_in'] = $city_town;
@@ -1074,6 +1128,15 @@ class Partners extends MY_PrivateController
 			$data['complete_address'] = $address_1." ".$address_2;	
 			$data['address_1'] = $address_1;	
 			$data['address_2'] = $address_2;	
+			
+			$permanent_address = $this->profile_mod->get_partners_personal($user_id, 'permanent_address');
+			$data['permanent_address'] = $permanent_address = (count($permanent_address) == 0 ? " " : ($permanent_address[0]['key_value'] == "" ? "" : $permanent_address[0]['key_value']));
+			$permanent_city_town = $this->profile_mod->get_partners_personal($user_id, 'permanent_city_town');
+			$data['permanent_city_town'] = $permanent_city_town = (count($permanent_city_town) == 0 ? " " : ($permanent_city_town[0]['key_value'] == "" ? "" : $permanent_city_town[0]['key_value']));
+			$permanent_country = $this->profile_mod->get_partners_personal($user_id, 'permanent_country');
+			$data['permanent_country'] = $permanent_country = (count($permanent_country) == 0 ? " " : ($permanent_country[0]['key_value'] == "" ? "" : $permanent_country[0]['key_value']));			
+			$permanent_zipcode = $this->profile_mod->get_partners_personal($user_id, 'permanent_zipcode');
+			$data['permanent_zipcode'] = $permanent_zipcode = (count($permanent_zipcode) == 0 ? " " : ($permanent_zipcode[0]['key_value'] == "" ? "" : $permanent_zipcode[0]['key_value']));						
 
 			$zip_code = $this->profile_mod->get_partners_personal($user_id, 'zip_code');
 			$data['zip_code'] = (count($zip_code) == 0 ? " " : ($zip_code[0]['key_value'] == "" ? "" : $zip_code[0]['key_value']));
@@ -1753,12 +1816,18 @@ class Partners extends MY_PrivateController
 				break;
 			case 3:
 				//Contacts Tab
-				// $validation_rules[] = 
-				// array(
-				// 	'field' => 'users[email]',
-				// 	'label' => 'Email Address',
-				// 	'rules' => 'required|valid_email'
-				// 	);
+				$validation_rules[] = 
+				array(
+					'field' => 'users[email]',
+					'label' => 'Ofice Email Address',
+					'rules' => 'valid_email'
+					);
+				$validation_rules[] = 
+				array(
+					'field' => 'partners_personal[personal_email]',
+					'label' => 'Personal Email Address',
+					'rules' => 'valid_email'
+					);				
 				// $validation_rules[] = 
 				// array(
 				// 	'field' => 'partners_personal[phone]',
@@ -1784,54 +1853,64 @@ class Partners extends MY_PrivateController
 				// 	'rules' => 'numeric'
 				// 	);
 				$partners_personal_table = "partners_personal";
-				$partners_personal_key = array('phone', 'mobile', 'address_1', 'city_town', 'country', 'zip_code', 'emergency_name', 'emergency_relationship', 'emergency_phone', 'emergency_mobile', 'emergency_address', 'emergency_city', 'emergency_country', 'emergency_zip_code');
+				$partners_personal_key = array('phone', 'mobile', 'address_1', 'city_town', 'country', 'zip_code', 'emergency_name', 'emergency_relationship', 'emergency_phone', 'emergency_mobile', 'emergency_address', 'emergency_city', 'emergency_country', 'emergency_zip_code', 'permanent_address', 'permanent_city_town', 'permanent_country', 'permanent_zipcode', 'personal_phone', 'personal_mobile', 'personal_email');
 				$partners_personal = $post['partners_personal'];
 
-				$partner_phone = $_POST['partners_personal']['phone'];
-				$partner_mobile = $_POST['partners_personal']['mobile'];
 				$emergency_phone = $_POST['partners_personal']['emergency_phone'];
 				$emergency_mobile = $_POST['partners_personal']['emergency_mobile'];
+				
+				if(!empty($partners_personal['profile_mobiles'])){
+					$mobile = $this->check_mobile($_POST['partners_personal']['profile_mobiles'], $this->record_id);
+					if(!($mobile)){
+						$this->response->invalid=true;
+						$this->response->invalid_message='Invalid ofice mobile number';
+						$this->response->message[] = array(
+					    	'message' => 'Invalid ofice mobile number',
+					    	'type' => 'warning'
+						);
+		        		$this->_ajax_return();
+		        	}
+	        	}
 
-				unset($partners_personal['mobile']);
-				foreach ($partner_mobile as $phone){
-					$mobile = $this->check_mobile($phone, $this->record_id);
-					if(!empty($phone)){
-						if(!$mobile){
-							$this->response->invalid=true;
-							$this->response->invalid_message='Invalid mobile number';
-							$this->response->message[] = array(
-						    	'message' => 'Invalid mobile number',
-						    	'type' => 'warning'
-							);
-			        		$this->_ajax_return();
-			        	}else{
-			        		$partners_personal['mobile'][] = $mobile;
-			        	}
-			        }
-				}
-	        	if(!isset($partners_personal['mobile'])){
-	        		$partners_personal['mobile'] = array();
-	        	}
-				unset($partners_personal['phone']);
-				foreach ($partner_phone as $phone){
-					$mobile = $this->check_phone($phone, $this->record_id);
-					if(!empty($phone)){
-						if(!$mobile){
-							$this->response->invalid=true;
-							$this->response->invalid_message='Invalid phone number';
-							$this->response->message[] = array(
-						    	'message' => 'Invalid phone number',
-						    	'type' => 'warning'
-							);
-			        		$this->_ajax_return();
-			        	}else{
-			        		$partners_personal['phone'][] = $mobile;
-			        	}
-			        }
-				}
-	        	if(!isset($partners_personal['phone'])){
-	        		$partners_personal['phone'] = array();
-	        	}
+	        	if(!empty($partners_personal['profile_telephones'])){
+		        	$phone = $this->check_phone($_POST['partners_personal']['profile_telephones'], $this->record_id);
+					if(!($phone)){
+						$this->response->invalid=true;
+						$this->response->invalid_message='Invalid ofice phone number';
+						$this->response->message[] = array(
+					    	'message' => 'Invalid phone number',
+					    	'type' => 'warning'
+						);
+		        		$this->_ajax_return();
+		        	}
+	        	}	
+
+				if(!empty($partners_personal['personal_mobile'])){
+					$personal_mobile = $this->check_mobile($_POST['partners_personal']['personal_mobile'], $this->record_id);
+					if(!($personal_mobile)){
+						$this->response->invalid=true;
+						$this->response->invalid_message='Invalid personal mobile number';
+						$this->response->message[] = array(
+					    	'message' => 'Invalid personal mobile number',
+					    	'type' => 'warning'
+						);
+		        		$this->_ajax_return();
+		        	}
+		        }
+	        	
+	        	if(!empty($partners_personal['personal_phone'])){
+		        	$personal_phone = $this->check_phone($_POST['partners_personal']['personal_phone'], $this->record_id);
+					if(!($personal_phone)){
+						$this->response->invalid=true;
+						$this->response->invalid_message='Invalid personal phone number';
+						$this->response->message[] = array(
+					    	'message' => 'Invalid personal phone number',
+					    	'type' => 'warning'
+						);
+		        		$this->_ajax_return();
+		        	}
+		        }
+
 				if(!empty($partners_personal['emergency_mobile'])){
 					$mobile = $this->check_mobile($partners_personal['emergency_mobile'], $this->record_id);
 					if(!$mobile){
@@ -1915,7 +1994,7 @@ class Partners extends MY_PrivateController
 					'rules' => 'required'
 					);
 				$partners_personal_table = "partners_personal_history";
-				$partners_personal_key = array('education-type', 'education-school', 'education-year-from', 'education-year-to', 'education-degree', 'education-status');
+				$partners_personal_key = array('education-type', 'education-school', 'education-year-from', 'education-year-to', 'education-degree', 'education-honors_awards', 'education-status');
 				$partners_personal = $post['partners_personal_history'];
 				break;
 			case 6:
@@ -1945,7 +2024,7 @@ class Partners extends MY_PrivateController
 					'rules' => 'numeric'
 					);
 				$partners_personal_table = "partners_personal_history";
-				$partners_personal_key = array('employment-company', 'employment-position-title', 'employment-location', 'employment-duties', 'employment-month-hired', 'employment-month-end', 'employment-year-hired', 'employment-year-end');
+				$partners_personal_key = array('employment-company', 'employment-position-title', 'employment-location', 'employment-duties', 'employment-month-hired', 'employment-month-end', 'employment-year-hired', 'employment-year-end', 'employment-reason-for-leaving', 'employment-latest-salary', 'employment-supervisor');
 				$partners_personal = $post['partners_personal_history'];
 				break;
 			case 7:
@@ -2011,7 +2090,7 @@ class Partners extends MY_PrivateController
 					'rules' => 'required|numeric'
 					);
 				$partners_personal_table = "partners_personal_history";
-				$partners_personal_key = array('training-category', 'training-title', 'training-venue', 'training-start-month', 'training-start-year', 'training-end-month', 'training-end-year', 'training-remarks');
+				$partners_personal_key = array('training-category', 'training-title', 'training-venue', 'training-start-month', 'training-start-year', 'training-end-month', 'training-end-year', 'training-remarks', 'training-provider', 'training-cost');
 				$partners_personal = $post['partners_personal_history'];
 				break;
 			case 10:
@@ -2082,6 +2161,12 @@ class Partners extends MY_PrivateController
 				'label' => 'Item Name',
 				'rules' => 'required'
 				);
+			$validation_rules[] = 
+			array(
+				'field' => 'partners_personal_history[accountabilities-asset-type]',
+				'label' => 'Asset Type',
+				'rules' => 'required'
+				);			
 			// $validation_rules[] = 
 			// array(
 			// 	'field' => 'partners_personal_history[accountabilities-code]',
@@ -2089,7 +2174,7 @@ class Partners extends MY_PrivateController
 			// 	'rules' => 'required'
 			// 	);
 			$partners_personal_table = "partners_personal_history";
-			$partners_personal_key = array(/*'accountabilities-department_id',*/'accountabilities-name', 'accountabilities-code', 'accountabilities-quantity', 'accountabilities-date-issued', 'accountabilities-date-returned', 'accountabilities-remarks', 'accountabilities-attachment');
+			$partners_personal_key = array('accountabilities-name', 'accountabilities-code', 'accountabilities-quantity', 'accountabilities-date-issued', 'accountabilities-date-returned', 'accountabilities-remarks', 'accountabilities-attachment', 'accountabilities-asset-type', 'accountabilities-asset-number', 'accountabilities-serial-number');
 			$partners_personal = $post['partners_personal_history'];
 			break;
 			case 13:
