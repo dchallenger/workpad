@@ -1,4 +1,10 @@
 
+<?php
+    $db->select('education_school_id,education_school');
+    $db->where('deleted', '0');
+    $db->order_by('education_school');
+    $education_school = $db->get('users_education_school');
+?>
 <div class="portlet">
 	<div class="portlet-title">
 		<div class="caption" id="education-category">
@@ -14,26 +20,40 @@
     <div class="portlet-body form">
         <div class="form-horizontal">
             <div class="form-body">
-              <!-- START FORM -->	
+              <!-- START FORM -->
                 <div class="form-group">
-                    <label class="control-label col-md-3">School<span class="required">*</span></label>
+                    <label class="control-label col-md-3">School</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="partners_personal_history[education-school][]" id="partners_personal_history-education-school" 
-                        value="" placeholder="Enter School"/>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            <select  class="form-control form-select" data-placeholder="Select..." name="partners_personal_history[education-school][]" id="partners_personal_history-reference-country">
+                                <option value=""></option>
+                            <?php
+                                foreach($education_school->result() as $option) {
+                            ?>
+                                    <option value="<?php echo $option->education_school_id ?>"><?php echo $option->education_school ?></option>
+                            <?php
+                                }
+                            ?>                                
+                            </select>                            
+                        </div>                        
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-3">Start Year<span class="required">*</span></label>
                     <div class="col-md-6">
                         <input type="text" class="form-control" name="partners_personal_history[education-year-from][]" id="partners_personal_history-education-year-from" 
-                        value="" placeholder="Enter Year From"/>
+                        value="" placeholder="Enter Year From" data-inputmask="'mask': '9999'"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-3">End Year<span class="required">*</span></label>
                     <div class="col-md-6">
                         <input type="text" class="form-control" name="partners_personal_history[education-year-to][]" id="partners_personal_history-education-year-to" 
-                        value="" placeholder="Enter Year To"/>
+                        value="" placeholder="Enter Year To" data-inputmask="'mask': '9999'"/>
                     </div>
                 </div>
                 <?php 
@@ -41,7 +61,7 @@
                 if(in_array(strtolower($category), $type_with_degree)) { 
                     ?>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Degree<span class="required">*</span></label>
+                        <label class="control-label col-md-3">Degree</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control" name="partners_personal_history[education-degree][]" id="partners_personal_history-education-degree" 
                             value="" placeholder="Enter Degree"/>
@@ -61,7 +81,7 @@
                 }
                 ?>
                 <div class="form-group">
-                    <label class="control-label col-md-3"><?php echo lang('partners.honors_receive') ?><span class="required">*</span></label>
+                    <label class="control-label col-md-3"><?php echo lang('partners.honors_receive') ?></label>
                     <div class="col-md-6">
                         <input type="text" class="form-control" name="partners_personal_history[education-honors_awards][]" id="partners_personal_history-education-honors_awards" 
                         value="" placeholder="<?php echo lang('common.enter') ?> <?php echo lang('partners.honors_receive') ?>"/>
@@ -72,12 +92,12 @@
                     <div class="col-md-7 checkbox-list">
                         <label class="checkbox-inline">
                             <input type="checkbox" name="partners_personal_history[education-status][]" id="partners_personal_history-education-status-graduate-<?php echo $count?>"  
-                            value="Graduated" onclick="check_graduate_status(this, <?php echo $count; ?>);" />
+                            value="Graduate" onclick="check_graduate_status(this, <?php echo $count; ?>);" />
                             Graduate
                         </label>
                         <label class="checkbox-inline">
                             <input type="checkbox" name="partners_personal_history[education-status][]" id="partners_personal_history-education-status-undergraduate-<?php echo $count?>" 
-                            value="Undergrad" onclick="check_graduate_status(this, <?php echo $count; ?>);"/> 
+                            value="Undergraduate" onclick="check_graduate_status(this, <?php echo $count; ?>);"/> 
                             Undergraduate
                         </label>
                     </div>

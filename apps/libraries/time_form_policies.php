@@ -550,19 +550,24 @@ class time_form_policies {
             }
         }
 
-        $count_uploads = count($uploads);
-        if($count_uploads ==  1){
 
-            if (is_array($uploads)){
-                $count_uploads = $uploads[0] == "" ? 0 : 1;
-            }else{
-                $count_uploads = $uploads == "" ? 0 : 1;
+        if (is_array($uploads)) {
+            $count_uploads = count($uploads);
+            if($count_uploads ==  1){
+
+                if (is_array($uploads)){
+                    $count_uploads = $uploads[0] == "" ? 0 : 1;
+                }else{
+                    $count_uploads = $uploads == "" ? 0 : 1;
+                }
+            }
+
+
+            if($days > $value && $count_uploads == 0){
+                return 'error';
             }
         }
-
-        if($days > $value && $count_uploads == 0){
-            return 'error';
-        }
+        
         return false;
     }
 

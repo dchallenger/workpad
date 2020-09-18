@@ -19,7 +19,7 @@
                                 $db->order_by('display_name');
                     			$options = $db->get('users');
 
-                    			$users_department_immediate_id_options = array('' => 'Select...');
+                    			$users_department_immediate_id_options = array('' => '');
                     			foreach($options->result() as $option)
                     			{
                     				$users_department_immediate_id_options[$option->user_id] = $option->display_name;
@@ -40,7 +40,7 @@
                                 $db->order_by('display_name');
                                 $options = $db->get('users');
 
-                                $users_department_immediate_id_options = array('' => 'Select...');
+                                $users_department_immediate_id_options = array('' => '');
                                 foreach($options->result() as $option)
                                 {
                                     $users_department_immediate_id_options[$option->user_id] = $option->display_name;
@@ -79,16 +79,18 @@
                 @endif
                 @if(in_array('division', $partners_keys))
                 <div class="form-group">
-                    <label class="control-label col-md-3">{{ lang('partners.div') }}</label>
+                    <label class="control-label col-md-3">{{ lang('partners.div') }}<span class="required">*</span></label>
                     <div class="col-md-5">
-                    	<?php 	$db->select('division_id,division');
-                    			$db->where('deleted', '0');
+                    	<?php 	$db->select('division_id,division,company_initial');
+                    			$db->where('users_division.deleted', '0');
+                                $db->order_by('division');
+                                $db->join('users_company','users_division.company_id=users_company.company_id');
                     			$options = $db->get('users_division');
 
-                    			$users_profile_division_id_options = array('' => 'Select...');
+                    			$users_profile_division_id_options = array('' => '');
                     			foreach($options->result() as $option)
                     			{
-                    				$users_profile_division_id_options[$option->division_id] = $option->division;
+                    				$users_profile_division_id_options[$option->division_id] = $option->division. ' ('.$option->company_initial.')';
                     			} ?>
                     	<div class="input-group">
 							<span class="input-group-addon">
@@ -101,13 +103,14 @@
                 @endif
                 @if(in_array('department', $partners_keys))
                 <div class="form-group">
-                    <label class="control-label col-md-3">{{ lang('partners.dept') }}</label>
+                    <label class="control-label col-md-3">{{ lang('partners.dept') }}<span class="required">*</span></label>
                     <div class="col-md-5">
                         <?php   $db->select('department_id,department');
                                 $db->where('deleted', '0');
+                                $db->order_by('department');
                                 $options = $db->get('users_department');
 
-                                $users_profile_department_id_options = array('' => 'Select...');
+                                $users_profile_department_id_options = array('' => '');
                                 foreach($options->result() as $option)
                                 {
                                     $users_profile_department_id_options[$option->department_id] = $option->department;
@@ -124,13 +127,13 @@
 
                 @if(in_array('sbu_unit', $partners_keys))
                 <div class="form-group">
-                    <label class="control-label col-md-3">{{ lang('partners.sbu_unit') }}</label>
+                    <label class="control-label col-md-3">{{ lang('partners.sbu_unit') }}<span class="required">*</span></label>
                     <div class="col-md-5">
                         <?php   $db->select('sbu_unit_id,sbu_unit');
                                 $db->where('deleted', '0');
                                 $options = $db->get('users_sbu_unit');
 
-                                $users_sbu_unit_id_options = array('' => 'Select...');
+                                $users_sbu_unit_id_options = array('' => '');
                                 foreach($options->result() as $option)
                                 {
                                     $users_sbu_unit_id_options[$option->sbu_unit_id] = $option->sbu_unit;
@@ -153,7 +156,7 @@
                                 $db->where('deleted', '0');
                                 $options = $db->get('users_branch');
 
-                                $users_profile_branch_id_options = array('' => 'Select...');
+                                $users_profile_branch_id_options = array('' => '');
                                 foreach($options->result() as $option)
                                 {
                                     $users_profile_branch_id_options[$option->branch_id] = $option->branch;
@@ -176,7 +179,7 @@
                             $db->where('deleted', '0');
                             $options = $db->get('users_section');
 
-                            $users_section_section_id_options = array('' => 'Select...');
+                            $users_section_section_id_options = array('' => '');
                             foreach($options->result() as $option)
                             {
                                 $users_section_section_id_options[$option->section_id] = $option->section;
@@ -199,7 +202,7 @@
                                 $db->where('deleted', '0');
                                 $options = $db->get('users_group');
 
-                                $users_profile_group_id_options = array('' => 'Select...');
+                                $users_profile_group_id_options = array('' => '');
                                 foreach($options->result() as $option)
                                 {
                                     $users_profile_group_id_options[$option->group_id] = $option->group;
@@ -221,7 +224,7 @@
                             $db->where('deleted', '0');
                             $options = $db->get('users_project');
 
-                            $users_project = array('' => 'Select...');
+                            $users_project = array('' => '');
                             foreach($options->result() as $option)
                             {
                                 $users_project[$option->project_id] = $option->project;
@@ -281,7 +284,7 @@
                             $db->order_by('display_name');
                             $options = $db->get('users');
 
-                            $users_coordinator_id_options = array('' => 'Select...');
+                            $users_coordinator_id_options = array('' => '');
                             foreach($options->result() as $option)
                             {
                                 $users_coordinator_id_options[$option->user_id] = $option->display_name;
@@ -311,7 +314,7 @@
                             $db->where('form_code', 'LIP');
                             $options = $db->get('time_form_balance_credit_class');
 
-                            $users_credit_class_options = array('' => 'Select...');
+                            $users_credit_class_options = array('' => '');
                             foreach($options->result() as $option)
                             {
                                 $users_credit_class_options[$option->class_id] = $option->class;

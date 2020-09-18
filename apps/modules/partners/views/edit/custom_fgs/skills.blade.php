@@ -48,7 +48,7 @@
                     <label class="control-label col-md-3">{{ lang('partners.proficiency_level') }}</label>
                     <div class="col-md-6">
                         <?php
-                            $users_proficiency_level_options = array('Advance' => 'Advance', 'Intermediate' => 'Intermediate', 'Beginner' => 'Beginner');
+                            $users_proficiency_level_options = array('' => '', 'Advance' => 'Advance', 'Intermediate' => 'Intermediate', 'Beginner' => 'Beginner');
                         ?>
                         <div class="input-group">
                             <span class="input-group-addon">

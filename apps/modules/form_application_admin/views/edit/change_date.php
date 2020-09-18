@@ -16,7 +16,7 @@
             </select>
 
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 hidden">
 
             <select class="duration form-control form-select" data-placeholder="Select..." name="leave_duration[]" id="leave_duration[]" class="leave_duration">
                 <?php 

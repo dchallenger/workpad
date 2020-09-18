@@ -42,7 +42,7 @@
                                 $options = $db->get('users_project');
 
                                 $users_profile_project_options = '';
-                                echo '<option value="">Select...</option>';
+                                echo '<option value=""></option>';
                                 foreach($options->result() as $option)
                                 {
                                     if($cost_center['cost_center-cost_center'] != $option->project_id)

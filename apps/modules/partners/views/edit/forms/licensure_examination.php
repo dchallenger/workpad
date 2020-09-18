@@ -17,13 +17,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3">License No.</label>
+                    <label class="control-label col-md-3"><?php echo lang('partners.license_no') ?></label>
                     <div class="col-md-6">
                         <input type="text" class="form-control" name="partners_personal_history[licensure-number][]" id="partners_personal_history-licensure-number" placeholder="Enter License Number"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3">Date Taken<span class="required">*</span></label>
+                    <label class="control-label col-md-3"><?php echo lang('partners.date_taken') ?></label>
                     <div class="col-md-9">
                         <div class="input-group input-medium pull-left">
                             <select  class="form-control form-select" data-placeholder="Select Month.." name="partners_personal_history[licensure-month-taken][]" id="partners_personal_history-licensure-month-taken">
@@ -42,9 +42,32 @@
                             </select>
                         </div>
                         <span class="pull-left padding-left-right-10">-</span>
-                        <span class="pull-left"><input type="text" class="form-control input-small" maxlength="4" name="partners_personal_history[licensure-year-taken][]" id="partners_personal_history-licensure-year-taken" placeholder="Year"></span>
+                        <span class="pull-left"><input type="text" class="form-control input-small" maxlength="4" name="partners_personal_history[licensure-year-taken][]" id="partners_personal_history-licensure-year-taken" placeholder="Year" data-inputmask="'mask': '9999'"></span>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3"><?php echo lang('partners.validity_until') ?></label>
+                    <div class="col-md-9">
+                        <div class="input-group input-medium pull-left">
+                            <select  class="form-control form-select" data-placeholder="Select Month.." name="partners_personal_history[licensure-month-validity-until][]" id="partners_personal_history-licensure-month-validity-until">
+                                <option value="January">January</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                            </select>
+                        </div>
+                        <span class="pull-left padding-left-right-10">-</span>
+                        <span class="pull-left"><input type="text" class="form-control input-small" maxlength="4" name="partners_personal_history[licensure-year-validity-unti][]" id="partners_personal_history-licensure-year-validity-until" placeholder="Year" data-inputmask="'mask': '9999'"></span>
+                    </div>
+                </div>                
                 <div class="form-group">
                     <label class="control-label col-md-3">Remarks</label>
                     <div class="col-md-6">

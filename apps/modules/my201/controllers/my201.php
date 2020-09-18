@@ -66,8 +66,8 @@ class My201 extends MY_PrivateController
 		$data['type'] = $profile_header_details['employment_type'] == "" ? "n/a" : $profile_header_details['employment_type'];
 		$data['job_level'] = $profile_header_details['job_level'] == "" ? "n/a" : $profile_header_details['job_level'];
 		$data['classification'] = $profile_header_details['classification'] == "" ? "n/a" : $profile_header_details['classification'];		
-		$data['date_hired'] = $profile_header_details['effectivity_date'] == "" ? "n/a" : date("F d, Y", strtotime($profile_header_details['effectivity_date']));
-		$data['regularization_date'] = $profile_header_details['regularization_date'] == "" ? "n/a" : date("F d, Y", strtotime($profile_header_details['regularization_date']));
+		$data['date_hired'] = valid_date($profile_header_details['effectivity_date']);
+		$data['regularization_date'] = valid_date($profile_header_details['regularization_date']);
 		$probationary_date = $this->mod->get_partners_personal($this->user->user_id, 'probationary_date');
 			$data['probationary_date'] = (count($probationary_date) == 0 ? "n/a" : ($probationary_date[0]['key_value'] == "" ? "n/a" : date("F d, Y", strtotime($probationary_date[0]['key_value']))));
 		$original_date_hired = $this->mod->get_partners_personal($this->user->user_id, 'original_date_hired');
@@ -76,6 +76,7 @@ class My201 extends MY_PrivateController
 			$data['last_probationary'] = (count($last_probationary) == 0 ? "n/a" : ($last_probationary[0]['key_value'] == "" ? "n/a" : date("F d, Y", strtotime($last_probationary[0]['key_value']))));
 		$last_salary_adjustment = $this->mod->get_partners_personal($this->user->user_id, 'last_salary_adjustment');
 			$data['last_salary_adjustment'] = (count($last_salary_adjustment) == 0 ? "n/a" : ($last_salary_adjustment[0]['key_value'] == "" ? "n/a" : date("F d, Y", strtotime($last_salary_adjustment[0]['key_value']))));
+		$data['last_promotion_date'] = valid_date($profile_header_details['last_promotion_date']);
 		//Work Assignment
 		$reports_to = $profile_header_details['immediate'] == "" ? "n/a" : $this->mod->get_user_details($profile_header_details['immediate']);
 		if($reports_to == "n/a"){
@@ -113,19 +114,19 @@ class My201 extends MY_PrivateController
 		$address_2 = $this->mod->get_partners_personal($this->user->user_id, 'address_2');
 			$address_2 = (count($address_2) == 0 ? " " : ($address_2[0]['key_value'] == "" ? "" : $address_2[0]['key_value']));
 		$city_town = $this->mod->get_partners_personal($this->user->user_id, 'city_town');
-			$city_town = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $city_town[0]['key_value']));
+			$city_town = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $this->mod->get_city($city_town[0]['key_value'])));
 		$data['complete_address'] = $address_1." ".$address_2;		
 		$zip_code = $this->mod->get_partners_personal($this->user->user_id, 'zip_code');
 			$data['zip_code'] = (count($zip_code) == 0 ? " " : ($zip_code[0]['key_value'] == "" ? "" : $zip_code[0]['key_value']));
 			
 		$country = $this->mod->get_partners_personal($this->user->user_id, 'country');
-		$data['country'] = (count($country) > 0 ? $country[0]['key_value'] : " ");		
+		$data['country'] = (count($country) > 0 ? $this->mod->get_country($country[0]['key_value']) : " ");		
 		$permanent_address = $this->mod->get_partners_personal($this->user->user_id, 'permanent_address');
 		$data['permanent_address'] = $permanent_address = (count($permanent_address) == 0 ? " " : ($permanent_address[0]['key_value'] == "" ? "" : $permanent_address[0]['key_value']));
 		$permanent_city_town = $this->mod->get_partners_personal($this->user->user_id, 'permanent_city_town');
-		$data['permanent_city_town'] = $permanent_city_town = (count($permanent_city_town) == 0 ? " " : ($permanent_city_town[0]['key_value'] == "" ? "" : $permanent_city_town[0]['key_value']));
+		$data['permanent_city_town'] = $permanent_city_town = (count($permanent_city_town) == 0 ? " " : ($permanent_city_town[0]['key_value'] == "" ? "" : $this->mod->get_city($permanent_city_town[0]['key_value'])));
 		$permanent_country = $this->mod->get_partners_personal($this->user->user_id, 'permanent_country');
-		$data['permanent_country'] = $permanent_country = (count($permanent_country) == 0 ? " " : ($permanent_country[0]['key_value'] == "" ? "" : $permanent_country[0]['key_value']));			
+		$data['permanent_country'] = $permanent_country = (count($permanent_country) == 0 ? " " : ($permanent_country[0]['key_value'] == "" ? "" : $this->mod->get_country($permanent_country[0]['key_value'])));			
 		$permanent_zipcode = $this->mod->get_partners_personal($this->user->user_id, 'permanent_zipcode');
 		$data['permanent_zipcode'] = $permanent_zipcode = (count($permanent_zipcode) == 0 ? " " : ($permanent_zipcode[0]['key_value'] == "" ? "" : $permanent_zipcode[0]['key_value']));						
 		$phone_numbers = $this->mod->get_partners_personal($this->user->user_id, 'phone');
@@ -150,9 +151,9 @@ class My201 extends MY_PrivateController
 		$emergency_address = $this->mod->get_partners_personal($this->user->user_id, 'emergency_address');
 			$data['emergency_address'] = (count($emergency_address) == 0 ? " " : ($emergency_address[0]['key_value'] == "" ? "" : $emergency_address[0]['key_value']));
 		$emergency_city = $this->mod->get_partners_personal($this->user->user_id, 'emergency_city');
-			$data['emergency_city'] = (count($emergency_city) == 0 ? " " : ($emergency_city[0]['key_value'] == "" ? "" : $emergency_city[0]['key_value']));
+			$data['emergency_city'] = (count($emergency_city) == 0 ? " " : ($emergency_city[0]['key_value'] == "" ? "" : $this->mod->get_city($emergency_city[0]['key_value'])));
 		$emergency_country = $this->mod->get_partners_personal($this->user->user_id, 'emergency_country');
-			$data['emergency_country'] = (count($emergency_country) == 0 ? " " : ($emergency_country[0]['key_value'] == "" ? "" : $emergency_country[0]['key_value']));
+			$data['emergency_country'] = (count($emergency_country) == 0 ? " " : ($emergency_country[0]['key_value'] == "" ? "" : $this->mod->get_country($emergency_country[0]['key_value'])));
 		$emergency_zip_code = $this->mod->get_partners_personal($this->user->user_id, 'emergency_zip_code');
 			$data['emergency_zip_code'] = (count($emergency_zip_code) == 0 ? " " : ($emergency_zip_code[0]['key_value'] == "" ? "" : $emergency_zip_code[0]['key_value']));
 
@@ -276,7 +277,11 @@ class My201 extends MY_PrivateController
 		$educational_tab = array();
 		$education_tab = $this->mod->get_partners_personal_history($this->user->user_id, 'education');
 			foreach($education_tab as $educ){
-				$educational_tab[$educ['sequence']][$educ['key']] = $educ['key_value'];
+				if ($educ['key'] == 'education-school') {
+					$educational_tab[$educ['sequence']][$educ['key']] = $this->mod->get_school($educ['key_value']);
+				}
+				else
+					$educational_tab[$educ['sequence']][$educ['key']] = $educ['key_value'];				
 			}
 			$data['education_tab'] = $educational_tab;
 		//Employment
@@ -292,7 +297,15 @@ class My201 extends MY_PrivateController
 		$references_tab = array();
 		$reference_tab = $this->mod->get_partners_personal_history($this->user->user_id, 'reference');
 			foreach($reference_tab as $emp){
-				$references_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+				if ($emp['key'] == 'reference-city') {
+					$references_tab[$emp['sequence']][$emp['key']] = $this->mod->get_city($emp['key_value']);
+				}
+				elseif ($emp['key'] == 'reference-country') {
+					$references_tab[$emp['sequence']][$emp['key']] = $this->mod->get_country($emp['key_value']);
+				}
+				else
+					$references_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+
 			}
 			$data['reference_tab'] = $references_tab;
 		//Licensure
@@ -314,6 +327,14 @@ class My201 extends MY_PrivateController
 				$trainings_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
 			}
 			$data['training_tab'] = $trainings_tab;
+		//Test Profile
+		$test_profile_tab = array();
+		$test_profiles_tab = array();
+		$test_profile_tab = $this->mod->get_partners_personal_history($this->user->user_id, 'test');
+		foreach($test_profile_tab as $emp){
+			$test_profiles_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+		}
+		$data['test_profile_tab'] = $test_profiles_tab;			
 		//Skills
 		$skill_tab = array();
 		$skills_tab = array();

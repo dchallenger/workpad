@@ -607,6 +607,7 @@ class Partners extends MY_PrivateController
 		$data['probationary_date'] = (count($probationary_date) > 0 ? date("F d, Y", strtotime($probationary_date[0]['key_value'])) : "n/a");
 		$data['original_date_hired'] = valid_date($profile_header_details['original_hired_date']);
 		$data['employment_end_date'] = valid_date($profile_header_details['employment_end_date']);
+		$data['last_promotion_date'] = valid_date($profile_header_details['last_promotion_date']);
 		$last_probationary = $this->profile_mod->get_partners_personal($user_id, 'last_probationary');
 		$data['last_probationary'] = (count($last_probationary) > 0 ? date("F d, Y", strtotime($last_probationary[0]['key_value'])) : "n/a");
 		$last_salary_adjustment = $this->profile_mod->get_partners_personal($user_id, 'last_salary_adjustment');
@@ -648,18 +649,18 @@ class Partners extends MY_PrivateController
 		$address_2 = $this->profile_mod->get_partners_personal($user_id, 'address_2');
 		$address_2 = (count($address_2) > 0 ? $address_2[0]['key_value'] : "");
 		$city_town = $this->profile_mod->get_partners_personal($user_id, 'city_town');
-		$city_town = (count($city_town) > 0 ? $city_town[0]['key_value'] : "");
+		$city_town = (count($city_town) > 0 ? $this->profile_mod->get_city($city_town[0]['key_value']) : "");
 		$data['complete_address'] = $address_1." ".$address_2;		
 		$zip_code = $this->profile_mod->get_partners_personal($user_id, 'zip_code');
 		$data['zip_code'] = (count($zip_code) > 0 ? $zip_code[0]['key_value'] : " ");
 		$country = $this->profile_mod->get_partners_personal($user_id, 'country');
-		$data['country'] = (count($country) > 0 ? $country[0]['key_value'] : " ");		
+		$data['country'] = (count($country) > 0 ? $this->profile_mod->get_country($country[0]['key_value']) : " ");		
 		$permanent_address = $this->profile_mod->get_partners_personal($user_id, 'permanent_address');
 		$data['permanent_address'] = $permanent_address = (count($permanent_address) == 0 ? " " : ($permanent_address[0]['key_value'] == "" ? "" : $permanent_address[0]['key_value']));
 		$permanent_city_town = $this->profile_mod->get_partners_personal($user_id, 'permanent_city_town');
-		$data['permanent_city_town'] = $permanent_city_town = (count($permanent_city_town) == 0 ? " " : ($permanent_city_town[0]['key_value'] == "" ? "" : $permanent_city_town[0]['key_value']));
+		$data['permanent_city_town'] = $permanent_city_town = (count($permanent_city_town) == 0 ? " " : ($permanent_city_town[0]['key_value'] == "" ? "" : $this->profile_mod->get_city($permanent_city_town[0]['key_value'])));
 		$permanent_country = $this->profile_mod->get_partners_personal($user_id, 'permanent_country');
-		$data['permanent_country'] = $permanent_country = (count($permanent_country) == 0 ? " " : ($permanent_country[0]['key_value'] == "" ? "" : $permanent_country[0]['key_value']));			
+		$data['permanent_country'] = $permanent_country = (count($permanent_country) == 0 ? " " : ($permanent_country[0]['key_value'] == "" ? "" : $this->profile_mod->get_country($permanent_country[0]['key_value'])));			
 		$permanent_zipcode = $this->profile_mod->get_partners_personal($user_id, 'permanent_zipcode');
 		$data['permanent_zipcode'] = $permanent_zipcode = (count($permanent_zipcode) == 0 ? " " : ($permanent_zipcode[0]['key_value'] == "" ? "" : $permanent_zipcode[0]['key_value']));						
 		$phone_numbers = $this->profile_mod->get_partners_personal($user_id, 'phone');
@@ -685,9 +686,9 @@ class Partners extends MY_PrivateController
 		$emergency_address = $this->profile_mod->get_partners_personal($user_id, 'emergency_address');
 		$data['emergency_address'] = (count($emergency_address) > 0 ? $emergency_address[0]['key_value'] : " ");
 		$emergency_city = $this->profile_mod->get_partners_personal($user_id, 'emergency_city');
-		$data['emergency_city'] = (count($emergency_city) > 0 ? $emergency_city[0]['key_value'] : " ");
+		$data['emergency_city'] = (count($emergency_city) > 0 ? $this->profile_mod->get_city($emergency_city[0]['key_value']) : " ");
 		$emergency_country = $this->profile_mod->get_partners_personal($user_id, 'emergency_country');
-		$data['emergency_country'] = (count($emergency_country) > 0 ? $emergency_country[0]['key_value'] : " ");
+		$data['emergency_country'] = (count($emergency_country) > 0 ? $this->profile_mod->get_country($emergency_country[0]['key_value']) : " ");
 		$emergency_zip_code = $this->profile_mod->get_partners_personal($user_id, 'emergency_zip_code');
 		$data['emergency_zip_code'] = (count($emergency_zip_code) > 0 ? $emergency_zip_code[0]['key_value'] : " ");
 
@@ -812,8 +813,13 @@ class Partners extends MY_PrivateController
 		$educational_tab = array();
 		$education_tab = $this->profile_mod->get_partners_personal_history($user_id, 'education');
 		foreach($education_tab as $educ){
-			$educational_tab[$educ['sequence']][$educ['key']] = $educ['key_value'];
+			if ($educ['key'] == 'education-school') {
+				$educational_tab[$educ['sequence']][$educ['key']] = $this->profile_mod->get_school($educ['key_value']);
+			}
+			else
+				$educational_tab[$educ['sequence']][$educ['key']] = $educ['key_value'];
 		}
+
 		$data['education_tab'] = $educational_tab;
 		//Employment
 		$employment_tab = array();
@@ -828,7 +834,14 @@ class Partners extends MY_PrivateController
 		$references_tab = array();
 		$reference_tab = $this->profile_mod->get_partners_personal_history($user_id, 'reference');
 		foreach($reference_tab as $emp){
-			$references_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			if ($emp['key'] == 'reference-city') {
+				$references_tab[$emp['sequence']][$emp['key']] = $this->profile_mod->get_city($emp['key_value']);
+			}
+			elseif ($emp['key'] == 'reference-country') {
+				$references_tab[$emp['sequence']][$emp['key']] = $this->profile_mod->get_country($emp['key_value']);
+			}
+			else
+				$references_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
 		}
 		$data['reference_tab'] = $references_tab;
 		//Licensure
@@ -850,6 +863,14 @@ class Partners extends MY_PrivateController
 			$trainings_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
 		}
 		$data['training_tab'] = $trainings_tab;
+		//Test Profile
+		$test_profile_tab = array();
+		$test_profiles_tab = array();
+		$test_profile_tab = $this->profile_mod->get_partners_personal_history($user_id, 'test');
+		foreach($test_profile_tab as $emp){
+			$test_profiles_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+		}
+		$data['test_profile_tab'] = $test_profiles_tab;
 		//Skills
 		$skill_tab = array();
 		$skills_tab = array();
@@ -1017,6 +1038,15 @@ class Partners extends MY_PrivateController
 		readfile($path);
 	}	
 
+	function download_file_directly($attachment_file){	
+		$attach_file = base64_decode(urldecode($attachment_file));
+
+		$path = base_url() . $attach_file;
+		
+		header('Content-disposition: attachment; filename='.substr( $attach_file, strrpos( $attach_file, '/' )+1 ).'');
+		header('Content-type: txt/pdf');
+		readfile($path);
+	}	
 
 	public function edit( $user_id=0, $rehire=false )
 	{
@@ -1500,6 +1530,12 @@ class Partners extends MY_PrivateController
 				'rules' => 'required'
 				);
 			$validation_rules[] = 
+				array(
+					'field' => 'users_profile[division_id]',
+					'label' => 'Division',
+					'rules' => 'required'
+					);				
+			$validation_rules[] = 
 			array(
 				'field' => 'users_profile[department_id]',
 				'label' => 'Department',
@@ -1538,7 +1574,7 @@ class Partners extends MY_PrivateController
 			$validation_rules[] = 
 			array(
 				'field' => 'users_profile[reports_to_id]',
-				'label' => 'Reports To',
+				'label' => 'Immediate Superior',
 				'rules' => 'required'
 				);
 			$validation_rules[] = 
@@ -1559,12 +1595,12 @@ class Partners extends MY_PrivateController
 				'label' => 'Biometric ID',
 				'rules' => 'required'
 				);
-			$validation_rules[] = 
+/*			$validation_rules[] = 
 			array(
 				'field' => 'partners[shift_id]',
-				'label' => 'Schedule',
+				'label' => 'Work Schedule',
 				'rules' => 'required'
-				);
+				);*/
 			$validation_rules[] = 
 			array(
 				'field' => 'users[email]',
@@ -1573,10 +1609,22 @@ class Partners extends MY_PrivateController
 				);
 			$validation_rules[] = 
 			array(
+				'field' => 'partners[status_id]',
+				'label' => 'Status',
+				'rules' => 'required'
+				);
+			$validation_rules[] = 
+			array(
+				'field' => 'partners[employment_type_id]',
+				'label' => 'Level',
+				'rules' => 'required'
+				);					
+/*			$validation_rules[] = 
+			array(
 				'field' => 'partners_personal[civil_status]',
 				'label' => lang('partners.civil_status'),
 				'rules' => 'required'
-				);
+				);*/
 			$partners_personal_table = "partners_personal";
 			$post[$this->mod->table]['login'] = $post['partners']['id_number'];
 			$other_tables['users_profile'] = $post['users_profile'];
@@ -1656,6 +1704,24 @@ class Partners extends MY_PrivateController
 					);
 				$validation_rules[] = 
 				array(
+					'field' => 'users_profile[division_id]',
+					'label' => 'Division',
+					'rules' => 'required'
+					);				
+				$validation_rules[] = 
+				array(
+					'field' => 'users_profile[department_id]',
+					'label' => 'Department',
+					'rules' => 'required'
+					);
+				$validation_rules[] = 
+				array(
+					'field' => 'users_profile[sbu_unit_id]',
+					'label' => 'SBU Unit',
+					'rules' => 'required'
+					);
+				$validation_rules[] = 
+				array(
 					'field' => 'users_profile[location_id]',
 					'label' => 'Location',
 					'rules' => 'required'
@@ -1705,7 +1771,7 @@ class Partners extends MY_PrivateController
 				$validation_rules[] = 
 				array(
 					'field' => 'partners[employment_type_id]',
-					'label' => 'Type',
+					'label' => 'Level',
 					'rules' => 'required'
 					);
 				$validation_rules[] = 
@@ -1968,6 +2034,13 @@ class Partners extends MY_PrivateController
 				$partners_personal = $post['partners_personal'];
 				break;
 			case 5:
+				if (count($_POST['partners_personal_history']['education-status']) < count($_POST['partners_personal_history']['education-school'])) {
+					foreach ($_POST['partners_personal_history']['education-school'] as $key => $value) {
+						if (!array_key_exists($key,$_POST['partners_personal_history']['education-status'])) {
+							$_POST['partners_personal_history']['education-status'][$key] = '';
+						}
+					}
+				}
 				//Education Tab
 				$validation_rules[] = 
 				array(
@@ -1990,7 +2063,7 @@ class Partners extends MY_PrivateController
 				$validation_rules[] = 
 				array(
 					'field' => 'partners_personal_history[education-status]',
-					'label' => 'School',
+					'label' => 'Status',
 					'rules' => 'required'
 					);
 				$partners_personal_table = "partners_personal_history";
@@ -2060,7 +2133,7 @@ class Partners extends MY_PrivateController
 					'rules' => 'required|numeric'
 					);
 				$partners_personal_table = "partners_personal_history";
-				$partners_personal_key = array('licensure-title', 'licensure-number', 'licensure-remarks', 'licensure-month-taken', 'licensure-year-taken', 'licensure-attach');
+				$partners_personal_key = array('licensure-title', 'licensure-number', 'licensure-remarks', 'licensure-month-taken', 'licensure-year-taken', 'licensure-month-validity-until', 'licensure-year-validity-until', 'licensure-attach');
 				$partners_personal = $post['partners_personal_history'];
 				break;
 			case 9:
@@ -2090,7 +2163,7 @@ class Partners extends MY_PrivateController
 					'rules' => 'required|numeric'
 					);
 				$partners_personal_table = "partners_personal_history";
-				$partners_personal_key = array('training-category', 'training-title', 'training-venue', 'training-start-month', 'training-start-year', 'training-end-month', 'training-end-year', 'training-remarks', 'training-provider', 'training-cost');
+				$partners_personal_key = array('training-category', 'training-title', 'training-venue', 'training-start-month', 'training-start-year', 'training-end-month', 'training-end-year', 'training-remarks', 'training-provider', 'training-cost', 'training-budgeted');
 				$partners_personal = $post['partners_personal_history'];
 				break;
 			case 10:
@@ -2259,7 +2332,7 @@ class Partners extends MY_PrivateController
 				'label' => 'Date Taken',
 				'rules' => 'required'
 				);
-			$validation_rules[] = 
+/*			$validation_rules[] = 
 			array(
 				'field' => 'partners_personal_history[test-location]',
 				'label' => 'Location',
@@ -2270,7 +2343,7 @@ class Partners extends MY_PrivateController
 				'field' => 'partners_personal_history[test-score]',
 				'label' => 'Score/Rating',
 				'rules' => 'required'
-				);
+				);*/
 			$partners_personal_table = "partners_personal_history";
 			$partners_personal_key = array('test-category', 'test-date-taken', 'test-location', 'test-score', 'test-result', 'test-remarks', 'test-attachments', 'test-title');
 			$partners_personal = $post['partners_personal_history'];
@@ -3133,9 +3206,12 @@ class Partners extends MY_PrivateController
                 );
             }
         } else {
+        	$company_code = '';
             $company_id = $this->input->post('company_id');
-            $company_code = $this->db->get_where('users_company', array('company_id' => $company_id))->row()->company_code;
-        
+            $company_code_result = $this->db->get_where('users_company', array('company_id' => $company_id));
+            if ($company_code_result && $company_code_result->num_rows() > 0)
+        		$company_code = $company_code_result->row()->company_code;
+
             $series = get_system_series('AHI_ID_NUMBER', $company_code);
 
             $this->response->id_number = $series;

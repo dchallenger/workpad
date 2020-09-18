@@ -1,3 +1,23 @@
+<?php
+    $db->select('city_id,city');
+    $db->where('deleted', '0');
+    $db->order_by('city');
+    $options = $db->get('cities');
+    $partners_city_options = array('' => '');
+    foreach($options->result() as $option) {
+        $partners_city_options[$option->city_id] = $option->city;
+    }
+
+    $db->select('country_id,short_name');
+    $db->where('deleted', '0');
+    $db->order_by('short_name');
+    $options = $db->get('countries');
+
+    $partners_country_options = array('' => '');
+    foreach($options->result() as $option) {
+        $partners_country_options[$option->country_id] = $option->short_name;
+    }    
+?>
 <div class="portlet">
 	<div class="portlet-title">
 		<div class="caption" id="education-category"><?php echo lang('partners.character_ref'); ?></div>
@@ -48,7 +68,7 @@
                     <label class="control-label col-md-3"><?php echo lang('partners.years_known'); ?><span class="required">*</span></label>
                     <div class="col-md-6">
                         <input type="text" class="form-control" name="partners_personal_history[reference-years-known][]" id="partners_personal_history-reference-years-known" 
-                        value="<?php echo (isset($reference['reference-years-known']) ? $reference['reference-years-known'] : ""); ?>" placeholder="<?php echo lang('common.enter'); ?> <?php echo lang('partners.years_known'); ?>"/>
+                        value="<?php echo (isset($reference['reference-years-known']) ? $reference['reference-years-known'] : ""); ?>" placeholder="<?php echo lang('common.enter'); ?> <?php echo lang('partners.years_known'); ?>" data-inputmask="'mask': '9', 'repeat': 2, 'greedy' : false"/>
                     </div>
                 </div>
                 <div class="form-group hidden-sm hidden-xs">
@@ -57,7 +77,7 @@
                          <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                         <input type="text" class="form-control" name="partners_personal_history[reference-phone][]" id="partners_personal_history-reference-phone" 
-                        value="<?php echo (isset($reference['reference-phone']) ? $reference['reference-phone'] : ""); ?>" placeholder="<?php echo lang('common.enter'); ?> <?php echo lang('partners.phone'); ?> <?php echo lang('partners.number'); ?>"/>
+                        value="<?php echo (isset($reference['reference-phone']) ? $reference['reference-phone'] : ""); ?>" placeholder="<?php echo lang('common.enter'); ?> <?php echo lang('partners.phone'); ?> <?php echo lang('partners.number'); ?>" data-inputmask="'mask': '9', 'repeat': 10, 'greedy' : false"/>
                          </div>
                     </div>
                 </div>
@@ -67,7 +87,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
                         <input type="text" class="form-control" name="partners_personal_history[reference-mobile][]" id="partners_personal_history-reference-mobile" 
-                        value="<?php echo (isset($reference['reference-mobile']) ? $reference['reference-mobile'] : ""); ?>" placeholder="<?php echo lang('common.enter'); ?> <?php echo lang('partners.mobile'); ?> <?php echo lang('partners.number'); ?>"/>
+                        value="<?php echo (isset($reference['reference-mobile']) ? $reference['reference-mobile'] : ""); ?>" placeholder="<?php echo lang('common.enter'); ?> <?php echo lang('partners.mobile'); ?> <?php echo lang('partners.number'); ?>" data-inputmask="'mask': '9', 'repeat': 12, 'greedy' : false"/>
                          </div>
                     </div>
                 </div>
@@ -88,11 +108,10 @@
                     <div class="col-md-6">
                         <div class="input-group">
                             <span class="input-group-addon">
-                               <i class="fa fa-map-marker"></i>
-                             </span>
-                        <input type="text" class="form-control" name="partners_personal_history[reference-city][]" id="partners_personal_history-reference-city" 
-                        value="<?php echo (isset($reference['reference-city']) ? $reference['reference-city'] : ""); ?>" placeholder="<?php echo lang('common.enter'); ?> <?php echo lang('partners.city'); ?>"/>
-                         </div>
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            <?php echo form_dropdown('partners_personal_history[reference-city][]',$partners_city_options, $reference['reference-city'], 'class="form-control select2me" data-placeholder="Select..."'); ?>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -100,10 +119,9 @@
                     <div class="col-md-6">
                         <div class="input-group">
                             <span class="input-group-addon">
-                               <i class="fa fa-map-marker"></i>
-                             </span>
-                        <input type="text" class="form-control" name="partners_personal_history[reference-country][]" id="partners_personal_history-reference-country" 
-                        value="<?php echo (isset($reference['reference-country']) ? $reference['reference-country'] : ""); ?>" placeholder="<?php echo lang('common.enter'); ?> <?php echo lang('partners.country'); ?>"/>
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            <?php echo form_dropdown('partners_personal_history[reference-country]',$partners_country_options, $reference['reference-country'], 'class="form-control select2me" data-placeholder="Select..."'); ?>
                         </div>
                     </div>
                 </div>

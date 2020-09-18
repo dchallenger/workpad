@@ -16,7 +16,7 @@
                                 $db->where('deleted', '0');
                                 $options = $db->get('partners_family_relationship');
 
-                                $family_relationship_options = array();
+                                $family_relationship_options = array('' => '');
                                 foreach($options->result() as $option)
                                 {
                                     $family_relationship_options[$option->family_relationship] = $option->family_relationship;
@@ -28,7 +28,7 @@
                             </span>
                         {{ form_dropdown('family_category',$family_relationship_options, '', 'class="form-control select2me" id="family_category"') }}                   
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" onclick="add_form('family', 'family')"><i class="fa fa-plus"></i></button>
+                                <button type="button" class="btn btn-default" onclick="add_form('family', 'family', '', 'Relationship')"><i class="fa fa-plus"></i></button>
                             </span>
                         </div>
                         <div class="help-block">

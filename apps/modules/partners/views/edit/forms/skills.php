@@ -30,6 +30,7 @@
                          <i class="fa fa-star"></i>
                      </span>
                         <select  class="form-control form-select" data-placeholder="Select..." name="partners_personal_history[skill-level][]" id="partners_personal_history-skill-level">
+                            <option value=""></option>
                             <option value="Advance">Advance</option>
                             <option value="Intermediate">Intermediate</option>
                             <option value="Beginner">Beginner</option>
@@ -49,6 +50,9 @@
 </div>
 <script language="javascript">
     $(document).ready(function(){
-        $('select.form-select').select2();
+        $('.form-select').select2({
+            placeholder: "Select an option",
+            allowClear: true        
+        }); 
     });
 </script>

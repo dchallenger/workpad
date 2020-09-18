@@ -54,6 +54,7 @@
             <div class="col-md-9">
                 <div class="input-group input-medium pull-left">
                     <select  class="form-control form-select" data-placeholder="Select Month.." name="partners_personal_history[employment-month-hired][]" id="partners_personal_history-employment-month-hired">
+                        <option value=""></option>
                         <option value="January">January</option>
                         <option value="February">February</option>
                         <option value="March">March</option>
@@ -69,7 +70,7 @@
                     </select>
                 </div>
                 <span class="pull-left padding-left-right-10">-</span>
-                <span class="pull-left"><input type="text" class="form-control input-small" maxlength="4" name="partners_personal_history[employment-year-hired][]" id="partners_personal_history-employment-year-hired" placeholder="Year"></span>
+                <span class="pull-left"><input type="text" class="form-control input-small" maxlength="4" name="partners_personal_history[employment-year-hired][]" id="partners_personal_history-employment-year-hired" placeholder="Year" data-inputmask="'mask': '9999'"></span>
             </div>
         </div>
         <div class="form-group">
@@ -77,6 +78,7 @@
             <div class="col-md-9">
                 <div class="input-group input-medium pull-left">
                     <select  class="form-control form-select" data-placeholder="Select Month.." name="partners_personal_history[employment-month-end][]" id="partners_personal_history-employment-month-end">
+                        <option value=""></option>
                         <option value="January">January</option>
                         <option value="February">February</option>
                         <option value="March">March</option>
@@ -92,7 +94,7 @@
                     </select>
                 </div>
                 <span class="pull-left padding-left-right-10">-</span>
-                <span class="pull-left"><input type="text" class="form-control input-small" maxlength="4" name="partners_personal_history[employment-year-end][]" id="partners_personal_history-employment-year-end" placeholder="Year"></span>
+                <span class="pull-left"><input type="text" class="form-control input-small" maxlength="4" name="partners_personal_history[employment-year-end][]" id="partners_personal_history-employment-year-end" placeholder="Year" data-inputmask="'mask': '9999'"></span>
             </div>
         </div>
         <div class="form-group">
@@ -109,7 +111,9 @@
 
 <script language="javascript">
     $(document).ready(function(){
-        $('select.form-select').select2();
-
+        $('select.form-select').select2({
+            placeholder: "Select an option",
+            allowClear: true        
+        });   
     });
 </script>

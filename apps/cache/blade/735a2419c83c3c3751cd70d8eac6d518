@@ -15,7 +15,7 @@
                     <label class="control-label col-md-3"><?php echo lang('partners.gender'); ?><span class="required">*</span></label>
                     <div class="col-md-5">
                         <?php
-                            $users_profile_gender_options = array('Male' => lang('common.male'), 'Female' => lang('common.female'));
+                            $users_profile_gender_options = array('' => '','Male' => lang('common.male'), 'Female' => lang('common.female'));
                         ?>
                        <div class="input-group">
                             <span class="input-group-addon">
@@ -71,7 +71,7 @@
                             $db->where('active', 1);
                             $partners_civil_status = $db->get('partners_civil_status');
 
-                            $users_profile_civil_status_options = array('' => 'Select...');
+                            $users_profile_civil_status_options = array('' => '');
                             foreach($partners_civil_status->result() as $option)
                             {
                                 $users_profile_civil_status_options[$option->civil_status] = $option->civil_status;

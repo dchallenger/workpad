@@ -18,7 +18,7 @@
                           $db->order_by('taxcode', '0');
                           $db->where('deleted', '0');
                           $options = $db->get('taxcode');                                 
-                          $payroll_partners_taxcode_id_options = array('' => 'Select...');
+                          $payroll_partners_taxcode_id_options = array('' => '');
                             
                             foreach($options->result() as $option)
                             {
@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-5">{{ $partners_labels['sss_number'] }}</label>
                     <div class="col-md-5">
-                        <input type="text" class="form-control" name="partners_personal[sss_number]" id="partners_personal-sss_number" value="{{ $record['sss_number'] }}" placeholder="Enter {{ $partners_labels['sss_number'] }}"/>
+                        <input type="text" class="form-control" name="partners_personal[sss_number]" id="partners_personal-sss_number" value="{{ $record['sss_number'] }}" placeholder="Enter {{ $partners_labels['sss_number'] }}" data-inputmask="'mask': '99-9999999-9'"/>
                     </div>
                 </div>
                 @endif
@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-5">{{ $partners_labels['pagibig_number'] }}</label>
                     <div class="col-md-5">
-                        <input type="text" class="form-control" name="partners_personal[pagibig_number]" id="partners_personal-pagibig_number" value="{{ $record['pagibig_number'] }}" placeholder="Enter {{ $partners_labels['pagibig_number'] }}"/>
+                        <input type="text" class="form-control" name="partners_personal[pagibig_number]" id="partners_personal-pagibig_number" value="{{ $record['pagibig_number'] }}" placeholder="Enter {{ $partners_labels['pagibig_number'] }}" data-inputmask="'mask': '9999-9999-9999'"/>
                     </div>
                 </div>
                 @endif
@@ -51,7 +51,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-5">{{ $partners_labels['philhealth_number'] }}</label>
                         <div class="col-md-5">
-                            <input type="text" class="form-control" name="partners_personal[philhealth_number]" id="partners_personal-philhealth_number" value="{{ $record['philhealth_number'] }}" placeholder="Enter {{ $partners_labels['philhealth_number'] }}"/>
+                            <input type="text" class="form-control" name="partners_personal[philhealth_number]" id="partners_personal-philhealth_number" value="{{ $record['philhealth_number'] }}" placeholder="Enter {{ $partners_labels['philhealth_number'] }}" data-inputmask="'mask': '99-999999999-9'"/>
                         </div>
                     </div>
                 @endif
@@ -59,7 +59,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-5">{{ $partners_labels['tin_number'] }}</label>
                     <div class="col-md-5">
-                        <input type="text" class="form-control" name="partners_personal[tin_number]" id="partners_personal-tin_number" value="{{ $record['tin_number'] }}" placeholder="Enter {{ $partners_labels['tin_number'] }}"/>
+                        <input type="text" class="form-control" name="partners_personal[tin_number]" id="partners_personal-tin_number" value="{{ $record['tin_number'] }}" placeholder="Enter {{ $partners_labels['tin_number'] }}" data-inputmask="'mask': '999-999-999-999'"/>
                     </div>
                 </div>
                 @endif

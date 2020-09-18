@@ -48,7 +48,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-4">Quantity</label>
                                         <div class="col-md-7">
-                                            <input type="text" class="form-control" maxlength="25" name="partners_personal_history[accountabilities-quantity]" id="partners_personal_history-accountabilities-quantity" value="<?php echo (isset($details['accountabilities-quantity']) ? $details['accountabilities-quantity'] : ""); ?>" placeholder="Enter Item Code">
+                                            <input type="text" class="form-control" maxlength="25" name="partners_personal_history[accountabilities-quantity]" id="partners_personal_history-accountabilities-quantity" value="<?php echo (isset($details['accountabilities-quantity']) ? $details['accountabilities-quantity'] : ""); ?>" placeholder="Enter Item Code" data-inputmask="'mask': '9', 'repeat': 3, 'greedy' : false">
                                         </div>
                                     </div>
                                     <div class="form-group">

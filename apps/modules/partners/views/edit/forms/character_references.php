@@ -1,3 +1,14 @@
+<?php
+    $db->select('city_id,city');
+    $db->where('deleted', '0');
+    $db->order_by('city');
+    $options_cities = $db->get('cities');
+
+    $db->select('country_id,short_name');
+    $db->where('deleted', '0');
+    $db->order_by('short_name');
+    $options_countries = $db->get('countries'); 
+?>
 <div class="portlet">
 	<div class="portlet-title">
 		<!-- <div class="caption" id="education-category">Company Name</div> -->
@@ -25,7 +36,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-3">Years Known<span class="required">*</span></label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="partners_personal_history[reference-years-known][]" id="partners_personal_history-reference-years-known" placeholder="Enter Years Known"/>
+                        <input type="text" class="form-control" name="partners_personal_history[reference-years-known][]" id="partners_personal_history-reference-years-known" placeholder="Enter Years Known" data-inputmask="'mask': '9', 'repeat': 2, 'greedy' : false"/>
                     </div>
                 </div>
                 <div class="form-group hidden-sm hidden-xs">
@@ -33,7 +44,7 @@
                     <div class="col-md-6">
                          <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                        <input type="text" class="form-control" name="partners_personal_history[reference-phone][]" id="partners_personal_history-reference-phone" placeholder="Enter Telephone Number"/>
+                        <input type="text" class="form-control" name="partners_personal_history[reference-phone][]" id="partners_personal_history-reference-phone" placeholder="Enter Telephone Number" data-inputmask="'mask': '9', 'repeat': 10, 'greedy' : false"/>
                          </div>
                     </div>
                 </div>
@@ -42,7 +53,7 @@
                     <div class="col-md-6">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
-                        <input type="text" class="form-control" name="partners_personal_history[reference-mobile][]" id="partners_personal_history-reference-mobile" placeholder="Enter Mobile Number"/>
+                        <input type="text" class="form-control" name="partners_personal_history[reference-mobile][]" id="partners_personal_history-reference-mobile" placeholder="Enter Mobile Number" data-inputmask="'mask': '9', 'repeat': 12, 'greedy' : false"/>
                          </div>
                     </div>
                 </div>
@@ -62,10 +73,19 @@
                     <div class="col-md-6">
                         <div class="input-group">
                             <span class="input-group-addon">
-                               <i class="fa fa-map-marker"></i>
-                             </span>
-                        <input type="text" class="form-control" name="partners_personal_history[reference-city][]" id="partners_personal_history-reference-city" placeholder="Enter City"/>
-                         </div>
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            <select  class="form-control form-select" data-placeholder="Select..." name="partners_personal_history[reference-city][]" id="partners_personal_history-reference-city">
+                                <option value=""></option>
+                            <?php
+                                foreach($options_cities->result() as $option) {
+                            ?>
+                                    <option value="<?php echo $option->city_id ?>"><?php echo $option->city ?></option>
+                            <?php
+                                }
+                            ?>                                
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -73,9 +93,19 @@
                     <div class="col-md-6">
                         <div class="input-group">
                             <span class="input-group-addon">
-                               <i class="fa fa-map-marker"></i>
-                             </span>
-                        <input type="text" class="form-control" name="partners_personal_history[reference-country][]" id="partners_personal_history-reference-country" placeholder="Enter Country"/>
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            <select  class="form-control form-select" data-placeholder="Select..." name="partners_personal_history[reference-country][]" id="partners_personal_history-reference-country">
+                                <option value=""></option>
+                            <?php
+                                foreach($options_countries->result() as $option) {
+                            ?>
+                                    <option value="<?php echo $option->country_id ?>"><?php echo $option->short_name ?></option>
+                            <?php
+                                }
+                            ?>                                
+                            </select>                            
+                        </div>                        
                         </div>
                     </div>
                 </div>
@@ -90,3 +120,12 @@
 		</div>
 	</div>
 </div>
+
+<script language="javascript">
+    $(document).ready(function(){
+        $('.form-select').select2({
+            placeholder: "Select an option",
+            allowClear: true        
+        });     
+    });
+</script>

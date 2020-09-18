@@ -10,7 +10,7 @@
 				<li><a data-toggle="tab" href="#historical_tab3"><i class="fa fa-list"></i><?php echo lang('partners.character_ref'); ?></a></li>
 				<li><a data-toggle="tab" href="#historical_tab4"><i class="fa fa-list"></i><?php echo lang('partners.licensure'); ?></a></li>
 				<li><a data-toggle="tab" href="#historical_tab5"><i class="fa fa-list"></i><?php echo lang('partners.training'); ?></a></li>
-				<li><a data-toggle="tab" href="#historical_tab16"><i class="fa fa-list"></i>Test Profile</a></li>
+				<li><a data-toggle="tab" href="#historical_tab16"><i class="fa fa-list"></i><?php echo lang('partners.test_profile'); ?></a></li>
 				<li><a data-toggle="tab" href="#historical_tab6"><i class="fa fa-list"></i><?php echo lang('partners.skills'); ?></a></li>
 				<li><a data-toggle="tab" href="#historical_tab7"><i class="fa fa-list"></i><?php echo lang('partners.affiliation'); ?></a></li>
 				<li><a data-toggle="tab" href="#historical_tab8"><i class="fa fa-list"></i><?php echo lang('partners.accountabilities'); ?></a></li>

@@ -23,7 +23,7 @@
                                                                <i class="fa fa-list-ul"></i>
                                                              </span>
                                                         <select data-placeholder="Select..." class="form-control select2me" name="users_profile[title]" id="users_profile-title" >
-                                                            <option value="">Select...</option>
+                                                            <option value=""></option>
                                                             <option value="Mr.">Mr.</option>
                                                             <option value="Mrs.">Mrs.</option>
                                                             <option value="Miss">Miss</option>
@@ -50,6 +50,12 @@
                                                     <input type="text" class="form-control" name="users_profile[middlename]" id="users_profile-middlename" placeholder="Enter Middle Name"/>
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><?php echo lang('partners.suffix') ?></label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" name="users_profile[suffix]" id="users_profile-suffix" placeholder="Enter Suffix"/>
+                                                </div>
+                                            </div>                                            
                                         </div>
                                         
                                     </div>
@@ -77,7 +83,7 @@
                                                            <i class="fa fa-building"></i>
                                                          </span>
                                                         <select  class="form-control select2me" data-placeholder="Select..." name="users_profile[company_id]" id="users_profile-company_id">                                                            
-                                                            <option></option>
+                                                            <option value=""></option>
                                                             <?php
                                                                 foreach($options->result() as $option)
                                                                 {
@@ -91,11 +97,12 @@
                                             </div>
                                             <?php if (in_array('division', $partners_keys)) { ?>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">Division</label>
+                                                <label class="control-label col-md-3">Division<span class="required">*</span></label>
                                                 <div class="col-md-8">
-                                                <?php   $db->select('division_id,division');
-                                                        $db->where('deleted', '0');
+                                                <?php   $db->select('division_id,division,company_initial');
+                                                        $db->where('users_division.deleted', '0');
                                                         $db->order_by('division');
+                                                        $db->join('users_company','users_division.company_id=users_company.company_id');
                                                         $options = $db->get('users_division');
                                                     ?>
                                                     <div class="input-group">
@@ -103,12 +110,12 @@
                                                            <i class="fa fa-group"></i>
                                                          </span>
                                                         <select  class="form-control select2me" data-placeholder="Select..." name="users_profile[division_id]" id="users_profile-division_id">
-                                                            <option></option>
+                                                            <option value=""></option>
                                                             <?php
                                                                 foreach($options->result() as $option)
                                                                 {
                                                                     // $selected = ($option->division_id == $record['users_profile.division_id']) ? "selected" : "";
-                                                                    echo '<option value="'.$option->division_id.'">'.$option->division.'</option>';
+                                                                    echo '<option value="'.$option->division_id.'">'.$option->division.' ('.$option->company_initial.')</option>';
                                                                 } 
                                                             ?>
                                                         </select>
@@ -129,7 +136,7 @@
                                                            <i class="fa fa-group"></i>
                                                          </span>
                                                         <select  class="form-control select2me" data-placeholder="Select..." name="users_profile[department_id]" id="users_profile-department_id">
-                                                            <option></option>
+                                                            <option value=""></option>
                                                             <?php
                                                                 foreach($options->result() as $option)
                                                                 {
@@ -155,7 +162,7 @@
                                                            <i class="fa fa-group"></i>
                                                          </span>
                                                         <select  class="form-control select2me" data-placeholder="Select..." name="users_profile[branch_id]" id="users_profile-branch_id">
-                                                            <option></option>
+                                                            <option value=""></option>
                                                             <?php
                                                                 foreach($options->result() as $option)
                                                                 {
@@ -183,7 +190,7 @@
                                                             <i class="fa fa-list-ul"></i>
                                                         </span>
                                                         <select  class="form-control select2me" data-placeholder="Select..." name="users_profile[section_id]" id="users_profile-section_id">
-                                                            <option></option>
+                                                            <option value=""></option>
                                                             <?php
                                                                 foreach($options->result() as $option)
                                                                 {
@@ -208,7 +215,7 @@
                                                            <i class="fa fa-user"></i>
                                                          </span>
                                                         <select  class="form-control select2me" data-placeholder="Select..." name="users_profile[position_id]" id="users_profile-position_id">
-                                                            <option></option>
+                                                            <option value=""></option>
                                                             <?php
                                                                 foreach($options->result() as $option)
                                                                 {
@@ -234,7 +241,7 @@
                                                            <i class="fa fa-user"></i>
                                                          </span>
                                                         <select  class="form-control select2me" data-placeholder="Select..." name="users[role_id]" id="users-role_id">
-                                                            <option></option>
+                                                            <option value=""></option>
                                                             <?php
                                                                 foreach($options->result() as $option)
                                                                 {
@@ -247,7 +254,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">Reports To<span class="required">*</span></label>
+                                                <label class="control-label col-md-3">Immediate Superior<span class="required">*</span></label>
                                                 <div class="col-md-8">
                                                 <?php   $db->select('user_id,full_name');
                                                         $db->where('active', '1');
@@ -260,7 +267,7 @@
                                                            <i class="fa fa-group"></i>
                                                          </span>
                                                         <select  class="form-control select2me" data-placeholder="Select..." name="users_profile[reports_to_id]" id="users_profile-reports_to_id">
-                                                            <option></option>
+                                                            <option value=""></option>
                                                             <?php
                                                                 foreach($options->result() as $option)
                                                                 {
@@ -285,7 +292,7 @@
                                                            <i class="fa fa-group"></i>
                                                          </span>
                                                         <select  class="form-control select2me" data-placeholder="Select..." name="users_profile[location_id]" id="users_profile-location_id">
-                                                            <option value="">Select...</option>
+                                                            <option value=""></option>
                                                             <?php
                                                                 foreach($options->result() as $option)
                                                                 {
@@ -304,7 +311,7 @@
                                                            <i class="fa fa-group"></i>
                                                         </span>
                                                         <select  class="form-control select2me" name="users_profile[project_id]" id="users_profile-project_id">
-                                                            <option value="">Select...</option>
+                                                            <option value=""></option>
                                                             <?php
 																$this->db->order_by('project');
                                                                 $option = $this->db->get_where('users_project', array('deleted' => 0));
@@ -330,7 +337,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">Schedule<span class="required">*</span></label>
+                                                <label class="control-label col-md-3">Work Schedule</label>
                                                 <div class="col-md-8">
                                                 <?php   $db->select('calendar_id,calendar,default');
                                                         $db->where('deleted', '0');
@@ -349,8 +356,8 @@
                                                         <span class="input-group-addon">
                                                            <i class="fa fa-group"></i>
                                                          </span>
-                                                        <select  class="form-control select2me" data-placeholder="Select..." name="partners[shift_id]" id="partners-shift_id">
-                                                            <option></option>
+                                                        <select  class="form-control select2me" data-placeholder="Select..." name="partners[calendar_id]" id="partners-shift_id">
+                                                            <option value=""></option>
                                                             <?php
                                                                 foreach($options->result() as $option)
                                                                 {
@@ -361,7 +368,57 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><?php echo lang('partners.status') ?><span class="required">*</span></label>
+                                                <div class="col-md-8">
+                                                    <?php   $db->select('employment_status_id,employment_status, active');
+                                                            //$db->where('active', '1');
+                                                            $db->where('deleted', '0');
+                                                            $db->order_by('employment_status');
+                                                            $options = $db->get('partners_employment_status');
+
+                                                            $partners_status_id_options = array('' => '');
+                                                            $selected = 'selected="selected"';
+                                                    ?>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-list-ul"></i>
+                                                        </span>
+                                                        <select name="partners[status_id]" id="partners-emp_status_id" class="form-control select2me" data-placeholder="Select..." >
+                                                            <option value=""></option>
+                                                        <?php
+                                                            foreach($options->result() as $option)
+                                                            {
+                                                        ?>
+                                                            <option value="<?php echo $option->employment_status_id ?>" data-active="<?php echo $option->active ?>"><?php echo $option->employment_status ?></option>
+                                                        <?php
+                                                            }
+                                                        ?>
+                                                        </select>
+                                                    </div>
+                                                </div>  
+                                            </div>                                            
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"><?php echo lang('partners.level') ?><span class="required">*</span></label>
+                                                <div class="col-md-8">
+                                                    <?php   $db->select('employment_type_id,employment_type');
+                                                            $db->where('deleted', '0');
+                                                            $db->order_by('employment_type');
+                                                            $options = $db->get('partners_employment_type');
+
+                                                            $partners_type_id_options = array('' => '');
+                                                            foreach($options->result() as $option)
+                                                            {
+                                                                $partners_type_id_options[$option->employment_type_id] = $option->employment_type;
+                                                            } ?>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-list-ul"></i>
+                                                        </span>
+                                                    <?php echo form_dropdown('partners[employment_type_id]',$partners_type_id_options,'','class="form-control select2me" data-placeholder="Select..."') ?>
+                                                    </div>
+                                                </div>  
+                                            </div>
                                         </div>
                                         
                                     </div>
@@ -393,6 +450,7 @@
                                                            <i class="fa fa-user"></i>
                                                          </span>
                                                         <select class="form-control select2me" data-placeholder="Select..." name="partners_personal[gender]" id="partners_personal-gender"> 
+                                                            <option value=""></option>
                                                             <?php
                                                                 foreach($options as $key => $option)
                                                                 {
@@ -415,12 +473,13 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3"><?php echo lang('partners.civil_status')?><span class="required">*</span></label>
+                                                <label class="control-label col-md-3"><?php echo lang('partners.civil_status')?></label>
                                                 <div class="col-md-6">
                                                 <?php
                                                     $options = array('Single' => 'Single', 'Married' => 'Married', 'Divorced' => 'Divorced');
                                                 ?>
                                                         <select class="form-control select2me" data-placeholder="Select..." name="partners_personal[civil_status]" id="partners_personal-civil_status" >
+                                                            <option value=""></option>
                                                              <?php
                                                                 foreach($options as $key => $option)
                                                                 {
@@ -456,10 +515,9 @@
 </form>
 
 <script language="javascript">
-                
 $('.select2me').select2({
-    placeholder: "Select an option",
-    allowClear: true
+    placeholder: "Select an option",    
+    allowClear: true        
 });
 if (jQuery().datepicker) {
     $('.date-picker').datepicker({

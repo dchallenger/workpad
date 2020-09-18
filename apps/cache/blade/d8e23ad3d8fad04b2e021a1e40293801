@@ -2,7 +2,7 @@
 	<div class="portlet-title">
 		<div class="caption" id="employment-category"><?php echo lang('partners.employment_history'); ?></div>
 		<div class="actions">
-            <a class="btn btn-default" onclick="add_form('employment_history', 'employment')">
+            <a class="btn btn-default" onclick="add_form('employment_history', 'employment', '', '')">
                 <i class="fa fa-plus"></i>
             </a>
 		</div>
@@ -15,7 +15,7 @@
     <?php 
     $count_employment = 0;
     $months_options = array(
-        '' => 'Select...',
+        '' => '',
         'January' => 'January', 
         'February' => 'February', 
         'March' => 'March', 
@@ -102,7 +102,7 @@
                             <span class="pull-left padding-left-right-10">-</span>
                             <span class="pull-left">
                                 <input type="text" class="form-control input-small" maxlength="4" name="partners_personal_history[employment-year-hired][]" id="partners_personal_history-employment-year-hired" 
-                            value="<?php echo (isset($employment['employment-year-hired']) ? $employment['employment-year-hired'] : ""); ?>"placeholder="Year">
+                            value="<?php echo (isset($employment['employment-year-hired']) ? $employment['employment-year-hired'] : ""); ?>"placeholder="Year" data-inputmask="'mask': '9999'">
                             </span>                            
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                             <span class="pull-left padding-left-right-10">-</span>
                             <span class="pull-left">
                                 <input type="text" class="form-control input-small" maxlength="4" name="partners_personal_history[employment-year-end][]" id="partners_personal_history-employment-year-end" 
-                            value="<?php echo (isset($employment['employment-year-end']) ? $employment['employment-year-end'] : ""); ?>"placeholder="Year">
+                            value="<?php echo (isset($employment['employment-year-end']) ? $employment['employment-year-end'] : ""); ?>"placeholder="Year" data-inputmask="'mask': '9999'">
                             </span>                            
                         </div>
                     </div>

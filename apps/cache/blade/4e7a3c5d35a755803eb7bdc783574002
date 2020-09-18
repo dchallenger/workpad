@@ -17,7 +17,7 @@
                             	<i class="fa fa-list-ul"></i>
 	                        </span>
 		                    <select data-placeholder="Select..." class="form-control select2me" name="users_profile[title]" id="users_profile-title" >
-		                    	<option value="">Select...</option>
+		                    	<option value=""></option>
 		                    	<option value="Mr." <?php echo ($record['users_profile.title'] == "Mr.") ? 'selected="selected"'  : ''; ?> >Mr.</option>
 		                    	<option value="Mrs." <?php echo ($record['users_profile.title'] == "Mrs.") ? 'selected="selected"'  : ''; ?>>Mrs.</option>
 		                    	<option value="Miss" <?php echo ($record['users_profile.title'] == "Miss") ? 'selected="selected"'  : ''; ?>>Miss</option>
@@ -107,7 +107,7 @@
                     			$db->where('deleted', '0');
                     			$options = $db->get('users_specialization');
 
-                    			$users_profile_specialization_options = array('' => 'Select...');
+                    			$users_profile_specialization_options = array('' => '');
                     			foreach($options->result() as $option)
                     			{
                     				$users_profile_specialization_options[$option->specialization_id] = $option->specialization;

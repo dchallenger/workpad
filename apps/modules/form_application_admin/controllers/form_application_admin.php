@@ -1468,24 +1468,25 @@ class Form_application_admin extends MY_PrivateController
                         $time_forms_date_table[] = array(
                             'forms_id' => $forms_id,
                             'date' => $dt->format('Y-m-d'),
-                            'day' => $leave_durations[0]['leave_duration'] * 0.125,//$duration[$selected_date_count] == 1 ? 1 : 0.5,
+                            'day' => $duration_details[0]['credit'] * 0.125,//$leave_durations[0]['leave_duration'] - for abraham //$duration[$selected_date_count] == 1 ? 1 : 0.5 - default if 8 and 4 hours only,
                             'duration_id' => $duration[$selected_date_count],
-                            'credit' => $duration_details[0]['credit'],
-                            'hrs' => $leave_durations[0]['leave_duration']
+                            'credit' => $duration_details[0]['credit'], //$leave_durations[0]['leave_duration'] for abraham,//$duration_details[0]['credit']
+                            'hrs' => $duration_details[0]['credit']
                             );
                     }else{
                         $time_forms_date_table[] = array(
                             'forms_id' => $forms_id,
                             'date' => $dt->format('Y-m-d'),
-                            'day' => $leave_durations[0]['leave_duration'] * 0.125,//$duration[$selected_date_count] == 1 ? 1 : 0.5,
+                            'day' => $duration_details[0]['credit'] * 0.125,//$duration[$selected_date_count] == 1 ? 1 : 0.5,
                             'duration_id' => $duration[$selected_date_count],
-                            'credit' => $duration_details[0]['credit'],
+                            'credit' => $duration_details[0]['credit'],//$duration_details[0]['credit'],
                             'cancelled_comment' => $this->input->post('cancelled_comment'),
-                            'hrs' => $leave_durations[0]['leave_duration']
+                            'hrs' => $duration_details[0]['credit'],
                             );
                     }                    
-                    $hrs = $leave_durations[0]['leave_duration']; 
-                    $days += $leave_durations[0]['leave_duration'] * 0.125; 
+                    $hrs = $duration_details[0]['credit']; 
+                    $days += $duration_details[0]['credit'] * 0.125;
+                    //$days += $leave_durations[0]['leave_duration'] * 0.125; 
                     $selected_date_count++;               
                 }
                 else{

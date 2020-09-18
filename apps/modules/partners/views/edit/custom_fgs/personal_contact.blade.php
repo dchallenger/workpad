@@ -1,3 +1,23 @@
+<?php
+    $db->select('city_id,city');
+    $db->where('deleted', '0');
+    $db->order_by('city');
+    $options = $db->get('cities');
+    $partners_city_options = array('' => '');
+    foreach($options->result() as $option) {
+        $partners_city_options[$option->city_id] = $option->city;
+    }
+
+    $db->select('country_id,short_name');
+    $db->where('deleted', '0');
+    $db->order_by('short_name');
+    $options = $db->get('countries');
+
+    $partners_country_options = array('' => '');
+    foreach($options->result() as $option) {
+        $partners_country_options[$option->country_id] = $option->short_name;
+    }    
+?>
 <div class="portlet">
 	<div class="portlet-title">
 		<div class="caption">{{ lang('partners.personal_contact') }}</div>
@@ -30,10 +50,10 @@
                     <div class="col-md-5">
                         <div class="input-group">
                             <span class="input-group-addon">
-                               <i class="fa fa-map-marker"></i>
-                             </span>
-                        <input type="text" class="form-control" name="partners_personal[city_town]" id="partners_personal-city_town" value="{{ $profile_live_in }}" placeholder="Enter City/Town"/>
-                         </div>
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            {{ form_dropdown('partners_personal[city_town]',$partners_city_options, $profile_live_in, 'class="form-control select2me" data-placeholder="Select..."') }}
+                        </div>
                     </div>
                 </div>
                 @endif
@@ -43,9 +63,9 @@
                     <div class="col-md-5">
                         <div class="input-group">
                             <span class="input-group-addon">
-                               <i class="fa fa-map-marker"></i>
-                             </span>
-                        <input type="text" class="form-control" name="partners_personal[country]" id="partners_personal-country" value="{{ $profile_country }}" placeholder="Enter Country"/>
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            {{ form_dropdown('partners_personal[country]',$partners_country_options, $profile_country, 'class="form-control select2me" data-placeholder="Select..."') }}
                         </div>
                     </div>
                 </div>
@@ -80,10 +100,10 @@
                     <div class="col-md-5">
                         <div class="input-group">
                             <span class="input-group-addon">
-                               <i class="fa fa-map-marker"></i>
-                             </span>
-                        <input type="text" class="form-control" name="partners_personal[permanent_city_town]" id="partners_personal-permanent_city_town" value="{{ $permanent_city_town }}" placeholder="Enter City/Town"/>
-                         </div>
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            {{ form_dropdown('partners_personal[permanent_city_town]',$partners_city_options, $permanent_city_town, 'class="form-control select2me" data-placeholder="Select..."') }}
+                        </div>
                     </div>
                 </div>
                 @endif
@@ -93,9 +113,9 @@
                     <div class="col-md-5">
                         <div class="input-group">
                             <span class="input-group-addon">
-                               <i class="fa fa-map-marker"></i>
-                             </span>
-                        <input type="text" class="form-control" name="partners_personal[permanent_country]" id="partners_personal-permanent_country" value="{{ $permanent_country }}" placeholder="Enter Country"/>
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            {{ form_dropdown('partners_personal[permanent_country]',$partners_country_options, $permanent_country, 'class="form-control select2me" data-placeholder="Select..."') }}
                         </div>
                     </div>
                 </div>
@@ -116,7 +136,7 @@
                     <label class="control-label col-md-3">{{ lang('partners.phone') }}</label>
                     <div class="col-md-5">
                         <div class="input-group"><span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                            <input type="text" class="form-control" name="partners_personal[phone]" id="partners_personal-profile_telephones" value="{{ $profile_telephones }}" placeholder="Enter Telephone Number"/>
+                            <input type="text" class="form-control" name="partners_personal[phone]" id="partners_personal-profile_telephones" value="{{ $profile_telephones }}" placeholder="Enter Telephone Number" data-inputmask="'mask': '9', 'repeat': 10, 'greedy' : false"/>
                         </div>                            
                     </div>
                 </div>
@@ -126,7 +146,7 @@
                     <label class="control-label col-md-3">{{ lang('partners.mobile') }}</label>
                     <div class="col-md-5">
                         <div class="input-group"><span class="input-group-addon"><i class="fa fa-mobile"></i></span>                            
-                            <input type="text" class="form-control" name="partners_personal[mobile]" id="partners_personal-profile_mobiles" value="{{ $profile_mobiles }}" placeholder="Enter Mobile Number"/>
+                            <input type="text" class="form-control" name="partners_personal[mobile]" id="partners_personal-profile_mobiles" value="{{ $profile_mobiles }}" placeholder="Enter Mobile Number" data-inputmask="'mask': '9', 'repeat': 12, 'greedy' : false"/>
                         </div>
                     </div>
                 </div>
@@ -147,7 +167,7 @@
                     <label class="control-label col-md-3">{{ lang('partners.phone') }}</label>
                     <div class="col-md-5">
                         <div class="input-group"><span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                            <input type="text" class="form-control" name="partners_personal[personal_phone]" id="partners_personal-personal_telephone" value="{{ $personal_telephone }}" placeholder="Enter Telephone Number"/>
+                            <input type="text" class="form-control" name="partners_personal[personal_phone]" id="partners_personal-personal_telephone" value="{{ $personal_telephone }}" placeholder="Enter Telephone Number" data-inputmask="'mask': '9', 'repeat': 10, 'greedy' : false"/>
                         </div>
                     </div>
                 </div>
@@ -157,7 +177,7 @@
                     <label class="control-label col-md-3">{{ lang('partners.mobile') }}</label>
                     <div class="col-md-5">
                         <div class="input-group"><span class="input-group-addon"><i class="fa fa-mobile"></i></span>                            
-                            <input type="text" class="form-control" name="partners_personal[personal_mobile]" id="partners_personal-personal_mobile" value="{{ $personal_mobile }}" placeholder="Enter Mobile Number"/>
+                            <input type="text" class="form-control" name="partners_personal[personal_mobile]" id="partners_personal-personal_mobile" value="{{ $personal_mobile }}" placeholder="Enter Mobile Number" data-inputmask="'mask': '9', 'repeat': 12, 'greedy' : false"/>
                         </div>
                     </div>
                 </div>

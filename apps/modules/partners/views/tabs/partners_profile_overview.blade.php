@@ -181,7 +181,18 @@
 								</div>
 							</div>
 						</div>
-
+		                @if(in_array('original_date_hired', $partners_keys))
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.ohire_date') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="lastname">{{$original_date_hired}}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+	                	@endif
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -192,21 +203,7 @@
 								</div>
 							</div>
 						</div>
-                	@if(in_array('probationary_date', $partners_keys))
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $partners_labels['probationary_date'] }} :</label>
-									<div class="col-md-7 col-sm-7">
-										<span id="lastname">{{$employment_end_date}}</span>
-                        				<br>
-										<span class="text-muted small">End date of employment/contract service</span>
-									</div>
-								</div>
-							</div>
-						</div>
-	                @endif
-	                <div class="row">
+		                <div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.regularization_date') }} :</label>
@@ -216,42 +213,55 @@
 								</div>
 							</div>
 						</div>
-	                @if(in_array('original_date_hired', $partners_keys))
+
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.ohire_date') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.last_promotion_date') }} :</label>
 									<div class="col-md-7 col-sm-7">
-										<span id="lastname">{{$original_date_hired}}</span>
+										<span id="lastname">{{$last_promotion_date}}</span>
 									</div>
 								</div>
 							</div>
 						</div>
-                @endif
-                @if(in_array('last_probationary', $partners_keys))
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.last_probi') }} :</label>
-									<div class="col-md-7 col-sm-7">
-										<span id="lastname">{{$last_probationary}}</span>
+	                	@if(in_array('probationary_date', $partners_keys))
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $partners_labels['probationary_date'] }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="lastname">{{$employment_end_date}}</span>
+	                        				<br>
+											<span class="text-muted small">End date of employment/contract service</span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-                @endif
-                @if(in_array('last_salary_adjustment', $partners_keys))
-						<div class="row ">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.last_sa') }} :</label>
-									<div class="col-md-7 col-sm-7">
-										<span id="lastname">{{$last_salary_adjustment}}</span>
+		                @endif						
+	                	@if(in_array('last_probationary', $partners_keys))
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.last_probi') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="lastname">{{$last_probationary}}</span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-                @endif
+	                	@endif
+	                	@if(in_array('last_salary_adjustment', $partners_keys))
+							<div class="row ">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.last_sa') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="lastname">{{$last_salary_adjustment}}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+	                	@endif
 					</div>
 				</div>
 				<!-- Work Assignment Information -->

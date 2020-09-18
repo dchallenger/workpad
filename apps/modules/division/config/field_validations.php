@@ -13,8 +13,8 @@ $config['field_validations']['users_division.division_code'][] = array(
 );
 $config['field_validations']['users_division.immediate_id'][] = array(
 	'field'   => 'users_division[immediate_id]',
-	'label'   => 'Immediate Head',
-	'rules'   => 'V'	
+	'label'   => 'Division Head',
+	'rules'   => 'required'	
 );
 $config['field_validations']['users_division.position'][] = array(
 	'field'   => 'users_division[position]',

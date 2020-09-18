@@ -42,7 +42,7 @@ class profile_model extends Record
 		$this->db->select('title, lastname, firstname, middlename, suffix, users_position.position, 
 			department, sbu_unit,  v_coordinator as coordinator, v_credit_setup as credit_setup, v_project_hr as project_hr, ww_users_company.company, email, birth_date, photo, resigned_date, 
 			location, id_number, biometric, shift, employment_status, effectivity_date, regularization_date, 
-			original_hired_date,employment_end_date,users_division.division, users_division.cost_center_code, users_profile.reports_to_id as immediate, group, role,
+			original_hired_date,employment_end_date,last_promotion_date,users_division.division, users_division.cost_center_code, users_profile.reports_to_id as immediate, group, role,
 			maidenname, nickname, partners_employment_type.employment_type, resigned_date')
 	    ->from('users')
 	    ->join('users_profile', 'users.user_id = users_profile.user_id', 'left')

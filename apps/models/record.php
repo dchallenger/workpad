@@ -93,6 +93,36 @@ class Record extends MY_Model
 		return $company;
 	}
 
+	public function get_country($country_id = 0){
+		$country_val = '';
+		$this->db->where('country_id',$country_id);
+		$country = $this->db->get('countries');
+		if ($country && $country->num_rows() > 0) {
+			$country_val = $country->row()->short_name;
+		}
+		return $country_val;
+	}
+
+	public function get_school($school_id = 0){
+		$school_val = '';
+		$this->db->where('education_school_id',$school_id);
+		$school = $this->db->get('users_education_school');
+		if ($school && $school->num_rows() > 0) {
+			$school_val = $school->row()->education_school;
+		}		
+		return $school_val;
+	}
+
+	public function get_city($city_id = 0){
+		$city_val = '';
+		$this->db->where('city_id',$city_id);
+		$city = $this->db->get('cities');
+		if ($city && $city->num_rows() > 0) {
+			$city_val = $city->row()->city;
+		}		
+		return $city_val;
+	}
+
 	function db_which()
 	{
 		if( $this->session->userdata('current_db') && $this->session->userdata('current_db') != "default" )

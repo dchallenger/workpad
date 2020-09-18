@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3">{{ lang('partners.date_taken') }}<span class="required">*</span></label>
+                    <label class="control-label col-md-3">{{ lang('partners.date_taken') }}</label>
                         <div class="col-md-9">
                             <div class="input-group input-medium pull-left">
                                 <?php $licensure_month_taken = (isset($licensure['licensure-month-taken']) ? $licensure['licensure-month-taken'] : ""); ?>
@@ -68,10 +68,24 @@
                             <span class="pull-left padding-left-right-10">-</span>
                             <span class="pull-left">
                                 <input type="text" class="form-control input-small" maxlength="4" name="partners_personal_history[licensure-year-taken][]" id="partners_personal_history-licensure-year-taken" 
-                            value="<?php echo (isset($licensure['licensure-year-taken']) ? $licensure['licensure-year-taken'] : ""); ?>"placeholder="Year">
+                            value="<?php echo (isset($licensure['licensure-year-taken']) ? $licensure['licensure-year-taken'] : ""); ?>"placeholder="Year" data-inputmask="'mask': '9999'">
                             </span>                            
                         </div>
                 </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.validity_until') }}</label>
+                        <div class="col-md-9">
+                            <div class="input-group input-medium pull-left">
+                                <?php $licensure_month_validity_until = (isset($licensure['licensure-month-validity-until']) ? $licensure['licensure-month-validity-until'] : ""); ?>
+                        {{ form_dropdown('partners_personal_history[licensure-month-validity-until][]',$months_options, $licensure_month_validity_until, 'class="form-control select2me" data-placeholder="Select..."') }}
+                            </div>
+                            <span class="pull-left padding-left-right-10">-</span>
+                            <span class="pull-left">
+                                <input type="text" class="form-control input-small" maxlength="4" name="partners_personal_history[licensure-year-validity-until][]" id="partners_personal_history-licensure-year-validity-until" 
+                            value="<?php echo (isset($licensure['licensure-year-validity-until']) ? $licensure['licensure-year-validity-until'] : ""); ?>"placeholder="Year" data-inputmask="'mask': '9999'">
+                            </span>                            
+                        </div>
+                </div>                
                 <div class="form-group">
                     <label class="control-label col-md-3">{{ lang('common.remarks') }}</label>
                     <div class="col-md-6">

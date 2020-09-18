@@ -15,12 +15,11 @@
                         <span class="input-group-addon">
                             <i class="fa fa-list-ul"></i>
                         </span>
-                        <select data-placeholder="Select..." class="form-control select2me" name="partners_personal_history[cost_center-cost_center][]" id="partners_personal_history-cost_center-cost_center-<?php echo $count;?>" >
+                        <select data-placeholder="Select..." class="form-control select2me cost-center" name="partners_personal_history[cost_center-cost_center][]" id="partners_personal_history-cost_center-cost_center-<?php echo $count;?>" >
+                            <option value=""></option>
                         <?php   $db->select('project_id,project');
                                 $db->where('deleted', '0');
                                 $options = $db->get('users_project');
-
-                                echo '<option value="">Select...</option>';
                                 foreach($options->result() as $option)
                                 {
                                     echo '<option value="'.$option->project_id.'">'. $option->project.'</option>';
@@ -48,6 +47,9 @@
 </div>
 <script language="javascript">
     $(document).ready(function(){
-        $('select.form-select').select2();
+        $('.cost-center').select2({
+            placeholder: "Select an option",
+            allowClear: true        
+        });     
     });
 </script>

@@ -1,3 +1,23 @@
+<?php
+    $db->select('city_id,city');
+    $db->where('deleted', '0');
+    $db->order_by('city');
+    $options = $db->get('cities');
+    $partners_city_options = array('' => '');
+    foreach($options->result() as $option) {
+        $partners_city_options[$option->city_id] = $option->city;
+    }
+
+    $db->select('country_id,short_name');
+    $db->where('deleted', '0');
+    $db->order_by('short_name');
+    $options = $db->get('countries');
+
+    $partners_country_options = array('' => '');
+    foreach($options->result() as $option) {
+        $partners_country_options[$option->country_id] = $option->short_name;
+    }    
+?>
 <div class="portlet">
 	<div class="portlet-title">
 		<div class="caption">{{ lang('partners.emergency_contact') }}</div>
@@ -36,7 +56,7 @@
                         <div class="col-md-5">
                              <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                            <input type="text" class="form-control" name="partners_personal[emergency_phone]" id="partners_personal-emergency_phone" value="{{ $emergency_phone }}" placeholder="{{ lang('common.enter') }} {{ lang('partners.phone') }} {{ lang('partners.number') }}"/>
+                            <input type="text" class="form-control" name="partners_personal[emergency_phone]" id="partners_personal-emergency_phone" value="{{ $emergency_phone }}" placeholder="{{ lang('common.enter') }} {{ lang('partners.phone') }} {{ lang('partners.number') }}" data-inputmask="'mask': '9', 'repeat': 10, 'greedy' : false"/>
                              </div>
                         </div>
                     </div>
@@ -47,7 +67,7 @@
                     <div class="col-md-5">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
-                        <input type="text" class="form-control" name="partners_personal[emergency_mobile]" id="partners_personal-emergency_mobile" value="{{ $emergency_mobile }}" placeholder="{{ lang('common.enter') }} {{ lang('partners.mobile') }} {{ lang('partners.number') }}"/>
+                        <input type="text" class="form-control" name="partners_personal[emergency_mobile]" id="partners_personal-emergency_mobile" value="{{ $emergency_mobile }}" placeholder="{{ lang('common.enter') }} {{ lang('partners.mobile') }} {{ lang('partners.number') }}" data-inputmask="'mask': '9', 'repeat': 12, 'greedy' : false"/>
                          </div>
                     </div>
                 </div>
@@ -71,10 +91,10 @@
                     <div class="col-md-5">
                         <div class="input-group">
                             <span class="input-group-addon">
-                               <i class="fa fa-map-marker"></i>
-                             </span>
-                        <input type="text" class="form-control" name="partners_personal[emergency_city]" id="partners_personal-emergency_city" value="{{ $emergency_city }}" placeholder="{{ lang('common.enter') }} {{ lang('partners.city') }}"/>
-                         </div>
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            {{ form_dropdown('partners_personal[emergency_city]',$partners_city_options, $emergency_city, 'class="form-control select2me" data-placeholder="Select..."') }}
+                        </div>
                     </div>
                 </div>
                 @endif
@@ -84,9 +104,9 @@
                     <div class="col-md-5">
                         <div class="input-group">
                             <span class="input-group-addon">
-                               <i class="fa fa-map-marker"></i>
-                             </span>
-                        <input type="text" class="form-control" name="partners_personal[emergency_country]" id="partners_personal-emergency_country" value="{{ $emergency_country }}" placeholder="{{ lang('common.enter') }} {{ lang('partners.country') }}"/>
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            {{ form_dropdown('partners_personal[emergency_country]',$partners_country_options, $emergency_country, 'class="form-control select2me" data-placeholder="Select..."') }}
                         </div>
                     </div>
                 </div>

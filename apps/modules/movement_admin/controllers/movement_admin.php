@@ -580,7 +580,7 @@ class Movement_admin extends MY_PrivateController
 
 			// save as draft save approver for hr
 			if ($post['save_from'] == '' || $to_insert_hr_approver){
-				if (isset($post['hr_approver']) && count($post['hr_approver'] > 0)){
+				if (isset($post['hr_approver']) && count($post['hr_approver']) > 0){
 					$this->db->where('movement_id',$this->record_id);
 					$this->db->delete('partners_movement_approver_hr');
 

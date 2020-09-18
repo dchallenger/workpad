@@ -18,8 +18,8 @@ $config['field_validations']['users_department.division_id'][] = array(
 );
 $config['field_validations']['users_department.immediate_id'][] = array(
 	'field'   => 'users_department[immediate_id]',
-	'label'   => 'Immediate Head',
-	'rules'   => 'V'
+	'label'   => 'Department Head',
+	'rules'   => 'required'
 );
 $config['field_validations']['users_department.status_id'][] = array(
 	'field'   => 'users_department[status_id]',

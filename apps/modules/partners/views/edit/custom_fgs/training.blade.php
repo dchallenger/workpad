@@ -14,12 +14,13 @@
                     <div class="col-md-6">
                         <div class="input-group">
                             <select  class="form-control select2me" data-placeholder="Select..." name="training_category" id="training_category">
+                                <option value=""></option>
                                 <option value="Training">{{ lang('partners.train') }}</option>
                                 <option value="Seminar">{{ lang('partners.seminar') }}</option>
                             </select>
 
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" onclick="add_form('training_seminar', 'training')"><i class="fa fa-plus"></i></button>
+                                <button type="button" class="btn btn-default" onclick="add_form('training_seminar', 'training', '', 'Category')"><i class="fa fa-plus"></i></button>
                             </span>
                         </div>
                         <div class="help-block">
@@ -88,7 +89,7 @@
                             </div>
                             @if(in_array('training-provider', $partners_keys))
                             <div class="form-group">
-                                <label class="control-label col-md-3">{{ lang('partners.training_provider') }}<span class="required">*</span></label>
+                                <label class="control-label col-md-3">{{ lang('partners.training_provider') }}</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="partners_personal_history[training-provider][]" id="partners_personal_history-training-provider" 
                                     value="<?php echo (isset($training['training-provider']) ? $training['training-provider'] : ""); ?>" placeholder="Enter {{lang('partners.training_provider')}}"/>
@@ -97,13 +98,26 @@
                             @endif
                             @if(in_array('training-cost', $partners_keys))
                             <div class="form-group">
-                                <label class="control-label col-md-3">{{ lang('partners.training_cost') }}<span class="required">*</span></label>
+                                <label class="control-label col-md-3">{{ lang('partners.training_cost') }}</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="partners_personal_history[training-cost][]" id="partners_personal_history-training-cost" 
                                     value="<?php echo (isset($training['training-cost']) ? $training['training-cost'] : ""); ?>" placeholder="Enter {{lang('partners.training_cost')}}" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>
                                 </div>
                             </div>                            
-                            @endif                            
+                            @endif
+                            @if(in_array('training-budgeted', $partners_keys))
+                            <div class="form-group">
+                                <label class="control-label col-md-3">{{ lang('partners.budgeted') }}</label>
+                                <div class="col-md-6">
+                                    <div class="make-switch" data-on="success" data-off="danger" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
+                                        <?php $budgeted = (isset($training['training-budgeted']) ? $training['training-budgeted'] : ""); ?>
+                                        <input type="checkbox" value="1" @if( $budgeted ) checked="checked" @endif name="partners_personal_history[training-budgeted][temp][]" id="partners_personal_history-training-budgeted-temp" class="dontserializeme toggle"/>
+                                        <input type="hidden" name="partners_personal_history[training-budgeted][]" id="partners_personal_history-training-budgeted" 
+                                        value="<?php echo (isset($training['training-budgeted']) ? $training['training-budgeted'] : 0); ?>"/>
+                                    </div> 
+                                </div>
+                            </div>
+                            @endif                                                       
                             <div class="form-group">
                                 <label class="control-label col-md-3">{{ lang('partners.start_date') }}<span class="required">*</span></label>                                
                                 <div class="col-md-9">
@@ -114,7 +128,7 @@
                                     <span class="pull-left padding-left-right-10">-</span>
                                     <span class="pull-left">
                                         <input type="text" class="form-control input-small" maxlength="4" name="partners_personal_history[training-start-year][]" id="partners_personal_history-training-start-year" 
-                                    value="<?php echo (isset($training['training-start-year']) ? $training['training-start-year'] : ""); ?>"placeholder="Year">
+                                    value="<?php echo (isset($training['training-start-year']) ? $training['training-start-year'] : ""); ?>"placeholder="Year" data-inputmask="'mask': '9999'">
                                     </span>                            
                                 </div>
                             </div>
@@ -128,7 +142,7 @@
                                     <span class="pull-left padding-left-right-10">-</span>
                                     <span class="pull-left">
                                         <input type="text" class="form-control input-small" maxlength="4" name="partners_personal_history[training-end-year][]" id="partners_personal_history-training-end-year" 
-                                    value="<?php echo (isset($training['training-end-year']) ? $training['training-end-year'] : ""); ?>"placeholder="Year">
+                                    value="<?php echo (isset($training['training-end-year']) ? $training['training-end-year'] : ""); ?>"placeholder="Year" data-inputmask="'mask': '9999'">
                                     </span>                            
                                 </div>
                             </div>

@@ -14,9 +14,10 @@
                     <div class="col-md-5">
                     	<?php	$db->select('company_id,company');
                     			$db->where('deleted', '0');
+                                $db->order_by('company');
                     			$options = $db->get('users_company');
 
-                    			$users_profile_company_options = array('' => 'Select...');
+                    			$users_profile_company_options = array('' => '');
                     			foreach($options->result() as $option)
                     			{
                     				$users_profile_company_options[$option->company_id] = $option->company;
@@ -34,9 +35,10 @@
                     <div class="col-md-5">
                     	<?php 	$db->select('location_id,location');
                     			$db->where('deleted', '0');
+                                $db->order_by('location');
                     			$options = $db->get('users_location');
 
-                    			$users_profile_location_id_options = array('' => 'Select...');
+                    			$users_profile_location_id_options = array('' => '');
                     			foreach($options->result() as $option)
                     			{
                     				$users_profile_location_id_options[$option->location_id] = $option->location;
@@ -54,9 +56,10 @@
                     <div class="col-md-5">
                     	<?php 	$db->select('position_id,position');
                     			$db->where('deleted', '0');
+                                $db->order_by('position');
                     			$options = $db->get('users_position');
 
-                    			$users_profile_position_id_options = array('' => 'Select...');
+                    			$users_profile_position_id_options = array('' => '');
                     			foreach($options->result() as $option)
                     			{
                     				$users_profile_position_id_options[$option->position_id] = $option->position;
@@ -78,7 +81,7 @@
                                 $db->order_by('role');
                     			$options = $db->get('roles');
 
-								$users_role_id_options = array('' => 'Select...');
+								$users_role_id_options = array('' => '');
 	                            foreach($options->result() as $option)
 	                            {
 	                            	$users_role_id_options[$option->role_id] = $option->role;
@@ -116,9 +119,10 @@
                     <div class="col-md-5">
                         <?php   $db->select('calendar_id,calendar');
                                 $db->where('deleted', '0');
+                                $db->order_by('calendar');
                                 $options = $db->get('time_shift_weekly');
                                 
-                                $partners_calendar_id_options = array('' => 'Select...');
+                                $partners_calendar_id_options = array('' => '');
                                 foreach($options->result() as $option)
                                 {
                                     $partners_calendar_id_options[$option->calendar_id] = $option->calendar;

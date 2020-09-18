@@ -31,15 +31,15 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Location<span class="required">*</span></label>
+                        <label class="control-label col-md-3">Location</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control" name="partners_personal_history[test-location][]" id="partners_personal_history-test-location" placeholder="Enter Location"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Score/Rating<span class="required">*</span></label>
+                        <label class="control-label col-md-3">Score/Rating</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="partners_personal_history[test-score][]" id="partners_personal_history-test-score" placeholder="Enter Score/Rating"/>
+                            <input type="text" class="form-control" name="partners_personal_history[test-score][]" id="partners_personal_history-test-score" placeholder="Enter Score/Rating" data-inputmask="'mask': '9', 'repeat': 3, 'greedy' : false"/>
                         </div>
                     </div>
                     <div class="form-group">

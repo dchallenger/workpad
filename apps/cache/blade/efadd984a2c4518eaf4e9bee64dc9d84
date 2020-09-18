@@ -15,7 +15,7 @@
     <?php 
     $count_affiliation = 0;
     $months_options = array(
-        '' => 'Select...',
+        '' => '',
         'January' => 'January', 
         'February' => 'February', 
         'March' => 'March', 
@@ -68,7 +68,7 @@
                             <span class="pull-left padding-left-right-10">-</span>
                             <span class="pull-left">
                                 <input type="text" class="form-control input-small" maxlength="4" name="partners_personal_history[affiliation-year-start][]" id="partners_personal_history-affiliation-year-start" 
-                            value="<?php echo (isset($affiliation['affiliation-year-start']) ? $affiliation['affiliation-year-start'] : ""); ?>"placeholder="Year">
+                            value="<?php echo (isset($affiliation['affiliation-year-start']) ? $affiliation['affiliation-year-start'] : ""); ?>"placeholder="Year" data-inputmask="'mask': '9999'">
                             </span>                            
                         </div>
                 </div>
@@ -82,7 +82,7 @@
                             <span class="pull-left padding-left-right-10">-</span>
                             <span class="pull-left">
                                 <input type="text" class="form-control input-small" maxlength="4" name="partners_personal_history[affiliation-year-end][]" id="partners_personal_history-affiliation-year-end" 
-                            value="<?php echo (isset($affiliation['affiliation-year-end']) ? $affiliation['affiliation-year-end'] : ""); ?>"placeholder="<?php echo lang('partners.year'); ?>">
+                            value="<?php echo (isset($affiliation['affiliation-year-end']) ? $affiliation['affiliation-year-end'] : ""); ?>"placeholder="<?php echo lang('partners.year'); ?>" data-inputmask="'mask': '9999'">
                             </span>                            
                         </div>
                 </div>

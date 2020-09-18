@@ -14,13 +14,14 @@
                     <div class="col-md-6">
                         <div class="input-group">
                             <select  class="form-control select2me" data-placeholder="Select..." name="test_category" id="test_category">
+                                <option value=""></option>
                                 <option value="Government Examination">Government Examination</option>
                                 <option value="Professional Examination">Professional Examination</option>
                                 <option value="Application Exam">Application Exam</option>
                             </select>
 
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" onclick="add_form('test_profile', 'test')"><i class="fa fa-plus"></i></button>
+                                <button type="button" class="btn btn-default" onclick="add_form('test_profile', 'test', '', 'Exam Type')"><i class="fa fa-plus"></i></button>
                             </span>
                         </div>
                         <div class="help-block">
@@ -77,17 +78,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3">Location<span class="required">*</span></label>
+                                <label class="control-label col-md-3">Location</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="partners_personal_history[test-location][]" id="partners_personal_history-test-location" 
                                     value="<?php echo (isset($test['test-location']) ? $test['test-location'] : ""); ?>" placeholder="Enter Location"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3">Score/Rating<span class="required">*</span></label>
+                                <label class="control-label col-md-3">Score/Rating</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="partners_personal_history[test-score][]" id="partners_personal_history-test-score" 
-                                    value="<?php echo (isset($test['test-score']) ? $test['test-score'] : ""); ?>" placeholder="Enter Score/Rating"/>
+                                    value="<?php echo (isset($test['test-score']) ? $test['test-score'] : ""); ?>" placeholder="Enter Score/Rating" data-inputmask="'mask': '9', 'repeat': 3, 'greedy' : false"/>
                                 </div>
                             </div>
                             <div class="form-group">

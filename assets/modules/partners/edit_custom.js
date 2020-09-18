@@ -4,6 +4,11 @@ $(document).ready(function(){
 	    $('form').submit();
 	});
 
+	$('.select2me').select2({
+		placeholder: "Select an option",
+		allowClear: true		
+	});
+
 	$(":input").inputmask();
 
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -20,38 +25,6 @@ $(document).ready(function(){
 	$('#modal_global_id').on('hidden', function () {
 		window.location.reload();
 	});
-
-	//UIExtendedModals.init();
-	$('#users_profile-reports_to_id').select2({
-		placeholder: "Select an option",
-		allowClear: true
-	});
-	$('#users_profile-department_id').select2({
-		placeholder: "Select an option",
-		allowClear: true
-	});
-	$('#users_profile-group_id').select2({
-		placeholder: "Select an option",
-		allowClear: true
-	});
-	$('#users_profile-division_id').select2({
-		placeholder: "Select an option",
-		allowClear: true
-	});
-	$('#users_department-immediate_id').select2({
-		placeholder: "Select an option",
-		allowClear: true
-	});
-
-	$('#users_profile-coordinator_id').select2({
-	    placeholder: "Select coordinator",
-	    allowClear: true
-	});  
-
-	$('#users_profile-credit_setup').select2({
-	    placeholder: "Select credit setup",
-	    allowClear: true
-	});  
 
 /*	$('#partners_personal-city_town').select2({
 	    placeholder: "Select an option",
@@ -106,30 +79,6 @@ $(document).ready(function(){
 		});
 	    $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
 	}
-	$('#partners-status_id').select2({
-		placeholder: "Select an option",
-		allowClear: true
-	});
-	$('#users_profile-location_id').select2({
-		placeholder: "Select an option",
-		allowClear: true
-	});
-	$('#users_profile-company').select2({
-		placeholder: "Select an option",
-		allowClear: true
-	});
-	$('#users_profile-position_id').select2({
-		placeholder: "Select an option",
-		allowClear: true
-	});
-	$('#partners-shift_id').select2({
-		placeholder: "Select an option",
-		allowClear: true
-	});
-	$('#users-role_id').select2({
-		placeholder: "Select an option",
-		allowClear: true
-	});
 
 	$('#users_profile-photo-fileupload').fileupload({ 
 		url: base_url + module.get('route') + '/single_upload',
@@ -179,6 +128,16 @@ $(document).ready(function(){
             }
         });        
         $('label[for="partners_personal_history-test-result-temp"]').css('margin-top', '0');
+
+        $('#partners_personal_history-training-budgeted-temp').change(function(){
+            if( $(this).is(':checked') ){
+                $(this).parent().next().val(1);
+            }
+            else{
+                $(this).parent().next().val(0);
+            }
+        }); 
+		$('label[for="partners_personal_history-training-budgeted-temp"]').css('margin-top', '0');
 
         $('.test_attach').fileupload({ 
             url: base_url + module.get('route') + '/single_upload',
@@ -449,6 +408,7 @@ function edit_personal_details(modal_form, key_class, sequence){
 					if( typeof(response.view_details) != 'undefined' )
 					{	
 						$('.modal-container-partners').html(response.view_details).modal();		
+						$(":input").inputmask();
 					}
 
 				}
@@ -492,10 +452,16 @@ function remove_form(div_form, mode, tab){
 }
 
 //add phone 
-function add_form(add_form, mode, sequence){
+function add_form(add_form, mode, sequence, message = ''){
 	var count = $('#'+mode+'_count').val();
 	var counting = $('#'+mode+'_counting').val();
 	var form_category = ( $('#'+mode+'_category').length ) ? $('#'+mode+'_category').val() : '';
+
+	if (message != '' && form_category == '') {
+		notify('error', 'Please select '+message);
+		return false;
+	}
+
 	if( count == 1 ){
 		$('.action_'+mode).remove();
 		var span_delete_add = '<a class="btn btn-default action_"'+mode+' id="delete_'+mode+'-'+counting+'" onclick="remove_form(this.id, \''+mode+'\')" ><i class="fa fa-trash-o"></i></a>';
@@ -527,7 +493,8 @@ function add_form(add_form, mode, sequence){
 				$('#personal_'+mode).append(response.add_form);
 				// handleSelect2();
 				FormComponents.init();
-				$(":input").inputmask();
+				
+				$(":input").inputmask();		
 			}
 
 			$("[id^='partners_personal_history-cost_center-cost_center']").change(function(){
@@ -559,7 +526,7 @@ var customHandleUniform = function () {
 //education graduate/undergrad checkbox
 function check_graduate_status(grad_stat, count_educ){
 	if(grad_stat.checked == true){
-		if(grad_stat.value == 'Graduated'){
+		if(grad_stat.value == 'Graduate'){
 	// console.log();
 	$('#partners_personal_history-education-status-undergraduate-'+count_educ).attr('checked', false);
 	$('#partners_personal_history-education-status-undergraduate-'+count_educ).parent().removeClass();

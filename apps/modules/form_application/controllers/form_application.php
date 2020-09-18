@@ -1749,32 +1749,33 @@ class Form_application extends MY_PrivateController
                     case get_time_form_id('HL'):
                     case get_time_form_id('FLV'):
                     $duration_details = $this->mod->get_duration($duration[$selected_date_count]);
-                    $leave_durations = $this->mod->get_leave_duration($leave_duration[$selected_date_count]);
+                    $leave_durations = $this->mod->get_leave_duration($leave_duration[$selected_date_count]); // it will use if many hours options like abraham 4 6 8 10 12
                     if($this->input->post('form_status_id') != 8){
                         $time_forms_date_table[] = array(
                             'forms_id' => $forms_id,
                             'date' => $dt->format('Y-m-d'),
-                            'day' => $leave_durations[0]['leave_duration'] * 0.125,//$duration[$selected_date_count] == 1 ? 1 : 0.5,
+                            'day' => $duration_details[0]['credit'] * 0.125,//$leave_durations[0]['leave_duration'] - for abraham //$duration[$selected_date_count] == 1 ? 1 : 0.5 - default if 8 and 4 hours only,
                             'duration_id' => $duration[$selected_date_count],
-                            'credit' => $leave_durations[0]['leave_duration'],//$duration_details[0]['credit']
-                            'hrs' => $leave_durations[0]['leave_duration']
+                            'credit' => $duration_details[0]['credit'], //$leave_durations[0]['leave_duration'] for abraham,//$duration_details[0]['credit']
+                            'hrs' => $duration_details[0]['credit']
                             );
                     }else{
                         $time_forms_date_table[] = array(
                             'forms_id' => $forms_id,
                             'date' => $dt->format('Y-m-d'),
-                            'day' => $leave_durations[0]['leave_duration'] * 0.125,//$duration[$selected_date_count] == 1 ? 1 : 0.5,
+                            'day' => $duration_details[0]['credit'] * 0.125,//$duration[$selected_date_count] == 1 ? 1 : 0.5,
                             'duration_id' => $duration[$selected_date_count],
-                            'credit' => $leave_durations[0]['leave_duration'],//$duration_details[0]['credit'],
+                            'credit' => $duration_details[0]['credit'],//$duration_details[0]['credit'],
                             'cancelled_comment' => $this->input->post('cancelled_comment') ,
-                            'hrs' => $leave_durations[0]['leave_duration'],
+                            'hrs' => $duration_details[0]['credit'],
                             );
                     }
 /*                    if($duration[$selected_date_count] != 1){
                         $days -= 0.5;
                     }*/
                     //for abraham since they different durations, for standard just remove this line
-                    $days += $leave_durations[0]['leave_duration'] * 0.125;
+                    //$days += $leave_durations[0]['leave_duration'] * 0.125;
+                    $days += $duration_details[0]['credit'] * 0.125;
 
                     break;
                     case get_time_form_id('ADDL')://addl                    
