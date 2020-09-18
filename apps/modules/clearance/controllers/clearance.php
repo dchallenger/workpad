@@ -1085,7 +1085,7 @@ class Clearance extends MY_PrivateController
 		$item = $post['item'];
 		$exit_interview_layout_item_id = $post['exit_interview_layout_item_id'];
 		$interview = $post['interview'];
-		$yes_no = $post['yes_no'];
+		$yes_no = (isset($post['yes_no']) ? $post['yes_no'] : array());
 		$sub_answer = (isset($post['sub_answer']) ? $post['sub_answer'] : array());
 
 		$this->db->where('clearance_id',$this->record_id);

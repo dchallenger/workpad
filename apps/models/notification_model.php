@@ -65,7 +65,7 @@ class notification_model extends Record
 	public function _unnotify( $user_id )
 	{
 		$response = new stdClass();
-		$this->db->query("UPDATE `dashboard_notification`
+		$this->db->query("UPDATE `ww_system_feeds`
 		SET reactedon = NOW()
 		WHERE (recipient_id = ". $user_id ." OR recipient_id = 0) AND (readon IS NULL OR readon = '0000-00-00 00:00:00') AND (reactedon IS NULL OR reactedon = '0000-00-00 00:00:00')");
 		if( $this->db->_error_message() != "" )

@@ -269,7 +269,8 @@ class Disciplinary_manage extends MY_PrivateController
                               sanc.sanction,
                               dis_act.date_from AS 'susp_date_from',
                               dis_act.date_to AS 'susp_date_to',
-                              sanc_categ.offense_sanction_category AS 'sanc_category'
+                              sanc_categ.offense_sanction_category AS 'sanc_category',
+                              involved_employee_explanation.explanation AS 'involve_employee_explanation'
                             FROM
                               ww_partners_incident i 
                               LEFT JOIN ww_users u 
@@ -302,6 +303,8 @@ class Disciplinary_manage extends MY_PrivateController
                                 ON up_approver.user_id = approver.user_id 
                               LEFT JOIN ww_users_position upos_approver 
                                 ON up_approver.position_id = upos_approver.position_id */
+                              LEFT JOIN ww_partners_incident_nte involved_employee_explanation
+                                ON i.incident_id = involved_employee_explanation.incident_id AND i.involved_partners = involved_employee_explanation.user_id
                               LEFT JOIN ww_partners_disciplinary_action dis_act  
                                 ON dis_act.incident_id = i.`incident_id` 
                               LEFT JOIN ww_partners_offense_sanction sanc 
@@ -325,6 +328,7 @@ class Disciplinary_manage extends MY_PrivateController
         $template_data['sanction'] = $partner_record['sanction'];
         $template_data['susp_date_from'] = ($partner_record['susp_date_from'] != '' && $partner_record['susp_date_from'] != '0000-00-00' && $partner_record['susp_date_from'] != '1970-01-01') ? date('M d, Y',strtotime($partner_record['susp_date_from'])): '';
         $template_data['susp_date_to'] = ($partner_record['susp_date_to'] != '' && $partner_record['susp_date_to'] != '0000-00-00' && $partner_record['susp_date_to'] != '1970-01-01') ? date('M d, Y',strtotime($partner_record['susp_date_to'])): '';
+        $template_data['nte_explanation'] = $partner_record['involve_employee_explanation'];
         switch ($partner_record['sanc_category']) {
             case 'Verbal Warning':
                 $template_data['v_action'] = "checked='true'";
