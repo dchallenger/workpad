@@ -10,7 +10,7 @@ var $CSS;
 var $tbCSSlvl;
 
 
-function cssmgr(&$mpdf) {
+function __construct(&$mpdf) {
 	$this->mpdf = $mpdf;
 	$this->tablecascadeCSS = array();
 	$this->CSS=array();
@@ -1133,7 +1133,11 @@ function MergeCSS($inherit,$tag,$attr) {
 	if (isset($attr['CLASS'])) {
 		$classes = preg_split('/\s+/',$attr['CLASS']);
 	}
-	if (!isset($attr['ID'])) { $attr['ID']=''; }
+	if (!isset($attr['ID'])) { 
+		if (empty($attr)) {
+			$attr = ['ID'];
+		}
+	}
 	// mPDF 6
 	$shortlang = '';
 	if (!isset($attr['LANG'])) { $attr['LANG']=''; }
