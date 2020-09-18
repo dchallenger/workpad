@@ -111,7 +111,7 @@
 										<div class="panel panel-info">
 											<div class="panel-heading">
 												<h3 class="panel-title"><?php echo $value['panel_title'] ?>
-													<span class="pull-right "><a class="small text-muted" onclick="delete_signatories($(this))" href="#">Delete</a></span>
+													<span class="pull-right hidden"><a class="small text-muted" onclick="delete_signatories($(this))" href="#">Delete</a></span>
 												</h3>
 											</div>
 												
@@ -145,7 +145,7 @@
 												<tr>
 													<?php
 										                    $query = "SELECT * FROM partners_personal_history_accountabilities
-										                    		  WHERE user_id = {$clearance_record['partner_id']}
+										                    		  WHERE partner_id = {$clearance_record['partner_id']}
 										                    		 ";
 										                    $options = $db->query($query);
 
@@ -316,7 +316,7 @@
 										<div class="panel panel-info">
 											<div class="panel-heading">
 												<h3 class="panel-title"><?php echo $value['panel_title'] ?>
-													<span class="pull-right "><a class="small text-muted" onclick="delete_signatories($(this))" href="#">Delete</a></span>		
+													<span class="pull-right hidden"><a class="small text-muted" onclick="delete_signatories($(this))" href="#">Delete</a></span>		
 												</h3>
 											</div>
 												
@@ -350,7 +350,7 @@
 												<tr>
 													<?php
 										                    $query = "SELECT * FROM partners_personal_history_accountabilities
-										                    		  WHERE user_id = {$clearance_record['partner_id']}
+										                    		  WHERE partner_id = {$clearance_record['partner_id']}
 										                    		 ";
 										                    $options = $db->query($query);
 
