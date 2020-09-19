@@ -835,27 +835,35 @@
 							</thead>
 							<tbody>
 							<?php foreach($attachment_tab as $index => $attachment){ 
+										$file = FCPATH . urldecode($attachment['attachment-file']);
+                                    	if( file_exists( $file ) ) {
+	                                        $f_info = get_file_info( $file );
+	                                        $f_type = filetype( $file );
+	                                        $real_file_name = basename($f_info['name'])
 								?>
-								<tr rel="0">
-									
-									<td>
-										<?php echo (isset($attachment['attachment-name']) ? $attachment['attachment-name'] : ""); ?>	
-										<br />
-										<span id="date_set" class="small text-muted">
-											<?php echo (isset($attachment['attachment-category']) ? $attachment['attachment-category'] : ""); ?>	
-										</span>
-									</td>
-									<td class="hidden-xs">
-											<?php echo (isset($attachment['attachment-file']) ? substr( $attachment['attachment-file'], strrpos( $attachment['attachment-file'], '/' )+1 ) : ""); ?>	
-									</td>
-									<td>
-										<div class="btn-group">
-											<input type="hidden" id="attachment_sequence" name="attachment_sequence" value="<?=$index?>" />
-											<a  href="javascript:view_personal_details('attach_form_modal', 'attachment', <?=$index?>);" ><i class="fa fa-search"></i> View</a>									
-										</div>
-									</td>
-								</tr>
-								<?php } ?>
+											<tr rel="0">
+												
+												<td>
+													<?php echo (isset($attachment['attachment-name']) ? $attachment['attachment-name'] : ""); ?>	
+													<br />
+													<span id="date_set" class="small text-muted">
+														<?php echo (isset($attachment['attachment-category']) ? $attachment['attachment-category'] : ""); ?>	
+													</span>
+												</td>
+												<td class="hidden-xs">
+														<?php echo $real_file_name; ?>	
+												</td>
+												<td>
+													<div class="btn-group">
+														<input type="hidden" id="attachment_sequence" name="attachment_sequence" value="<?=$index?>" />
+														<a  href="javascript:view_personal_details('attach_form_modal', 'attachment', <?=$index?>);" ><i class="fa fa-search"></i> View</a>									
+													</div>
+												</td>
+											</tr>
+								<?php 
+										}
+									} 
+								?>
 							</tbody>
 						</table>
 					</div>
