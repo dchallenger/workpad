@@ -272,7 +272,7 @@
                     <label class="control-label col-md-3">{{ lang('partners.hire_date') }}<span class="required">*</span></label>
                     <div class="col-md-5">
                    		<div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
-								<input type="text" class="form-control" name="partners[effectivity_date]" id="partners-effectivity_date" value="{{ $record['partners.effectivity_date'] }}" placeholder="{{ lang('common.enter') }} {{ lang('partners.hier_date') }}" >
+								<input type="text" class="form-control" name="partners[effectivity_date]" id="partners-effectivity_date" value="{{ $record['partners.effectivity_date'] }}" placeholder="{{ lang('common.enter') }} {{ lang('partners.hire_date') }}" >
                             <span class="input-group-btn">
                             <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
                             </span>
