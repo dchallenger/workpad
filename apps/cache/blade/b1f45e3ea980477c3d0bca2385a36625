@@ -26,6 +26,7 @@
                                 <i class="fa fa-list-ul"></i>
                             </span>
                             <select name="partners[status_id]" id="partners-emp_status_id" class="form-control select2me" data-placeholder="Select..." >
+                                <option value=""></option>
                             <?php
                                 foreach($options->result() as $option)
                                 {
@@ -272,7 +273,7 @@
                     <label class="control-label col-md-3"><?php echo lang('partners.hire_date'); ?><span class="required">*</span></label>
                     <div class="col-md-5">
                    		<div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
-								<input type="text" class="form-control" name="partners[effectivity_date]" id="partners-effectivity_date" value="<?php echo $record['partners.effectivity_date']; ?>" placeholder="<?php echo lang('common.enter'); ?> <?php echo lang('partners.hier_date'); ?>" >
+								<input type="text" class="form-control" name="partners[effectivity_date]" id="partners-effectivity_date" value="<?php echo $record['partners.effectivity_date']; ?>" placeholder="<?php echo lang('common.enter'); ?> <?php echo lang('partners.hire_date'); ?>" >
                             <span class="input-group-btn">
                             <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
                             </span>

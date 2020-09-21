@@ -26,6 +26,7 @@
                                 <i class="fa fa-list-ul"></i>
                             </span>
                             <select name="partners[status_id]" id="partners-emp_status_id" class="form-control select2me" data-placeholder="Select..." >
+                                <option value=""></option>
                             <?php
                                 foreach($options->result() as $option)
                                 {

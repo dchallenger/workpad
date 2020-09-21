@@ -4,21 +4,25 @@
     </td>
 
     <td>
-        {{ $company }}
+        {{ $time_form_balance_setup_policy_form }}
     </td>
 
     <td>
-        {{ $time_form_balance_setup_policy_balance_setup_id  .' - '. $employment_status}}
+        {{ $time_form_balance_setup_policy_description}}
     </td>
 
     <td>
-        {{ $time_form_balance_setup_policy_form_id}}
+        {{ $time_form_balance_setup_policy_company}}
     </td>
 
     <td>
-        {{ $time_form_balance_setup_policy_starting_credit }}
+        {{ $time_form_balance_setup_policy_employment_type }}
     </td>
-    
+
+    <td>
+        {{ $time_form_balance_setup_policy_employment_status }}
+    </td>
+        
     <td>
         <div class="btn-group">
             <a class="btn btn-xs text-muted" href="{{ $edit_url }}"><i class="fa fa-pencil"></i> Edit</a>

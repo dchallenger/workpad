@@ -636,6 +636,7 @@ class Partners extends MY_PrivateController
         $data['start_date'] = valid_date($profile_header_details['start_date']);
         $data['end_date'] = valid_date($profile_header_details['end_date']);
         $data['division'] = ($profile_header_details['division'] == "" ? "n/a" : $profile_header_details['division']);
+        $data['cost_center'] = ($profile_header_details['cost_center_code'] == "" ? "n/a" : $profile_header_details['cost_center_code']);
         $data['cost_center_code'] = ($profile_header_details['cost_center_code'] == "" ? "n/a" : $profile_header_details['cost_center_code']);
 		$data['department'] = ($profile_header_details['department'] == "" ? "n/a" : $profile_header_details['department']);
 		$data['sbu_unit'] = ($profile_header_details['sbu_unit'] == "" ? "n/a" : $profile_header_details['sbu_unit']);
@@ -844,6 +845,40 @@ class Partners extends MY_PrivateController
 				$references_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
 		}
 		$data['reference_tab'] = $references_tab;
+		//Cost Center
+		$cost_center_tab = array();
+		$cost_centers_tab = array();
+		$cost_center_tab = $this->profile_mod->get_partners_personal_history($user_id, 'cost_center');
+
+		if(!empty($cost_center_tab)){
+
+			foreach($cost_center_tab as $emp){
+				
+				$cost_centers_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			}
+		}
+		else{
+
+			$this->db->select('project_id,project_code');
+            $this->db->where('project_id', $data['record']['users_profile.project_id']);
+            $this->db->where('deleted', '0');
+            $project = $this->db->get('users_project')->result_array();
+
+			if(!empty($project)){
+
+				$cost_centers_tab[1]['cost_center-cost_center'] = $project[0]['project_id'];
+				$cost_centers_tab[1]['cost_center-code'] = $project[0]['project_code'];
+			}
+			else{
+
+				$cost_centers_tab[1]['cost_center-cost_center'] = '';
+				$cost_centers_tab[1]['cost_center-code'] = '';
+			}
+
+			$cost_centers_tab[1]['cost_center-percentage'] = '';
+		}
+
+		$data['cost_center_tab'] = $cost_centers_tab;		
 		//Licensure
 		$licensure_tab = array();
 		$licensures_tab = array();
@@ -1777,7 +1812,7 @@ class Partners extends MY_PrivateController
 				$validation_rules[] = 
 				array(
 					'field' => 'partners[effectivity_date]',
-					'label' => 'Date Hired',
+					'label' => 'Hired Date',
 					'rules' => 'required'
 					);
 				$partners_personal_table = "partners_personal";
@@ -2294,6 +2329,12 @@ class Partners extends MY_PrivateController
 			break;
 			case 15:
 			//ID numbers
+			$validation_rules[] = 
+			array(
+				'field' => 'partners_personal[taxcode]',
+				'label' => 'Tax Code',
+				'rules' => 'required'
+				);			
 			$partners_personal_table = "partners_personal";
 			$partners_personal = $post['partners_personal'];
 			$partners_personal_key = array(

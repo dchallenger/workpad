@@ -335,6 +335,40 @@ class My201 extends MY_PrivateController
 			$test_profiles_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
 		}
 		$data['test_profile_tab'] = $test_profiles_tab;			
+		//Cost Center
+		$cost_center_tab = array();
+		$cost_centers_tab = array();
+		$cost_center_tab = $this->mod->get_partners_personal_history($this->user->user_id, 'cost_center');
+
+		if(!empty($cost_center_tab)){
+
+			foreach($cost_center_tab as $emp){
+				
+				$cost_centers_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			}
+		}
+		else{
+
+			$this->db->select('project_id,project_code');
+            $this->db->where('project_id', $data['record']['users_profile.project_id']);
+            $this->db->where('deleted', '0');
+            $project = $this->db->get('users_project')->result_array();
+
+			if(!empty($project)){
+
+				$cost_centers_tab[1]['cost_center-cost_center'] = $project[0]['project_id'];
+				$cost_centers_tab[1]['cost_center-code'] = $project[0]['project_code'];
+			}
+			else{
+
+				$cost_centers_tab[1]['cost_center-cost_center'] = '';
+				$cost_centers_tab[1]['cost_center-code'] = '';
+			}
+
+			$cost_centers_tab[1]['cost_center-percentage'] = '';
+		}
+
+		$data['cost_center_tab'] = $cost_centers_tab;			
 		//Skills
 		$skill_tab = array();
 		$skills_tab = array();
@@ -374,9 +408,13 @@ class My201 extends MY_PrivateController
 		foreach($family_tab as $emp){
 			if($emp['key'] == 'family-dependent'){
 				$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'] == 0 ? "No" : "Yes";
+			}elseif($emp['key'] == 'family-dependent-hmo'){
+				$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'] == 0 ? "No" : "Yes";
+			}elseif($emp['key'] == 'family-dependent-insurance'){
+				$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'] == 0 ? "No" : "Yes";				
 			}else{
 				$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
-			}
+			}			
 		}
 		$data['family_tab'] = $families_tab;
 

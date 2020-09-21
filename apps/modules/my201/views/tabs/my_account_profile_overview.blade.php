@@ -6,6 +6,7 @@
 					<span class="after"></span>
 				</li>
 				<li><a data-toggle="tab" href="#overview_tab2"><i class="fa fa-phone"></i>{{ lang('my201.contacts') }}</a></li>
+				<li><a data-toggle="tab" href="#overview_tab17"><i class="fa fa-money"></i>{{ lang('partners.cost_center') }}</a></li>
 				<li><a data-toggle="tab" href="#overview_tab15"><i class="fa fa-user"></i>{{ lang('my201.id_no') }}</a></li>
 				<li><a data-toggle="tab" href="#overview_tab3"><i class="fa fa-user"></i>{{ lang('my201.personal') }}</a></li>
 				<li><a data-toggle="tab" href="#overview_tab14"><i class="fa fa-group"></i>{{ lang('my201.family') }}</a></li
@@ -53,7 +54,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row hidden">
+						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.role') }} :</label>
@@ -510,6 +511,61 @@
 					</div>
 				</div>
 			</div>
+			<div class="tab-pane" id="overview_tab17">
+				<!-- Cost Center Information -->
+				<?php
+	                $cost_center = '';				
+					if (isset($cost_center_tab[1]) && isset($cost_center_tab[1]['cost_center-cost_center'])) {
+	            		$db->select('project_id,project');
+	            		$db->where('project_id', $cost_center_tab[1]['cost_center-cost_center']);
+	                    $db->where('deleted', '0');
+	                    $project = $db->get('users_project');
+	                    if ($project && $project->num_rows() > 0) {
+	                    	$cost_center = $project->row()->project;
+	                    }
+					}
+				?>
+				<div class="portlet">
+					<div class="portlet-title">
+						<div class="caption">{{ lang('partners.cost_center') }}</div>
+						<div class="tools">
+							<a class="collapse" href="javascript:;"></a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.cost_center') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="lastname">{{$cost_center}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.code') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="lastname">{{$cost_center_tab[1]['cost_center-code']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.percentage') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="lastname">{{$cost_center_tab[1]['cost_center-percentage']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+		            </div>
+		        </div>
+		    </div>				
 			<div class="tab-pane" id="overview_tab2">
 				<!-- Contact Information -->
 				<div class="portlet">
@@ -1250,7 +1306,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row hidden">
 							<div class="col-md-12">
 								<div class="form-group">
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted">Dependent :</label>
@@ -1260,6 +1316,30 @@
 								</div>
 							</div>
 						</div>
+						@if(in_array('family-dependent-hmo', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{$partners_labels['family-dependent-hmo']}} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="civil-status"><?php echo (isset($family['family-dependent-hmo']) ? $family['family-dependent-hmo'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>						
+						@endif
+						@if(in_array('family-dependent-insurance', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{$partners_labels['family-dependent-insurance']}} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="civil-status"><?php echo (isset($family['family-dependent-insurance']) ? $family['family-dependent-insurance'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>							
+						@endif							
 					</div>
 				</div>
 				<?php } ?>

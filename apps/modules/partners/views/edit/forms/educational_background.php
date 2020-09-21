@@ -126,7 +126,11 @@
     }
 
     jQuery(document).ready(function() { 
-
+        $('select.form-select').select2({
+            placeholder: "Select an option",
+            allowClear: true        
+        });  
+        
         customHandleUniform();
     });
 </script>

@@ -45,7 +45,12 @@
 					?>
 				<div class="portlet">
 					<div class="portlet-title">
-						<div class="caption" id="education-type[1]"><?php echo (isset($education['education-type']) ? $education['education-type'] : ""); ?></div>
+						<div class="caption" id="education-type[1]">
+						<?php 
+							$education_type = (isset($education['education-type']) ? $education['education-type'] : "");
+							echo $education_type; 
+						?>							
+						</div>
 						<div class="tools">
 							<a class="collapse" href="javascript:;"></a>
 						</div>
@@ -82,6 +87,10 @@
 								</div>
 							</div>
 						</div>
+			            <?php 
+    					$type_with_degree = array('tertiary', 'graduate studies', 'vocational');
+			            if(in_array(strtolower($education_type), $type_with_degree)) { 
+			                ?>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -92,6 +101,7 @@
 								</div>
 							</div>
 						</div>
+						<?php } ?>
 	                    <?php if(in_array('education-honors_awards', $partners_keys)): ?>
 						<div class="row">
 							<div class="col-md-12">

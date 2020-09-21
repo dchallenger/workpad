@@ -123,6 +123,8 @@
 
 <script language="javascript">
     $(document).ready(function(){
+        $(":input").inputmask();
+        
         $('.form-select').select2({
             placeholder: "Select an option",
             allowClear: true        

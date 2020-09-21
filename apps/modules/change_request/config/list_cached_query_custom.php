@@ -15,7 +15,7 @@ ppa.user_id AS approver_id
 FROM (`ww_partners_personal_request`)
 
 LEFT JOIN `ww_users` T1 ON `T1`.`user_id` = `ww_partners_personal_request`.`user_id`
-LEFT JOIN `ww_partners` T2 ON `T2`.`user_id` = `t1`.`user_id`
+LEFT JOIN `ww_partners` T2 ON `T2`.`user_id` = `T1`.`user_id`
 LEFT JOIN `ww_partners_personal_request_status` T3 on `T3`.`status_id` = `ww_partners_personal_request`.`status`
 
 LEFT JOIN ww_partners_personal_approver ppa ON ww_partners_personal_request.personal_id = ppa.personal_request_id

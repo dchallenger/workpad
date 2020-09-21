@@ -64,7 +64,7 @@
             <div class="form-group">
                 <label class="control-label col-md-3"><?php echo lang('partners.percentage'); ?></label>
                 <div class="col-md-5">
-                    <input type="text" class="form-control" name="partners_personal_history[cost_center-percentage][]" id="partners_personal_history-cost_center-percentage" value="<?php echo $cost_center['cost_center-percentage']; ?>" placeholder="<?php echo lang('partners.p_percentage'); ?>"/>
+                    <input type="text" class="form-control" name="partners_personal_history[cost_center-percentage][]" id="partners_personal_history-cost_center-percentage" value="<?php echo $cost_center['cost_center-percentage']; ?>" placeholder="<?php echo lang('partners.p_percentage'); ?>" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>
                 </div>
             </div>
 

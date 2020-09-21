@@ -38,7 +38,7 @@
                             <input disabled type="text" class="form-control" name="partners_personal_history[family-age][]" id="partners_personal_history-family-age<?php echo $count;?>" />
                         </div>
                     </div>                    
-                    <div class="form-group">
+                    <div class="form-group hidden">
                         <label class="control-label col-md-3">Dependent</label>
                         <div class="col-md-5">
                             <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
@@ -47,8 +47,24 @@
                             </div> 
                         </div>
                     </div>
-
-
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Dependent on HMO</label>
+                        <div class="col-md-5">
+                            <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
+                                <input type="checkbox" value="0" name="partners_personal_history[family-dependent-hmo][temp][]" id="partners_personal_history-family-dependent-hmo-temp" class="dontserializeme toggle dependent"/>
+                                <input type="hidden" name="partners_personal_history[family-dependent-hmo][]" id="partners_personal_history-family-dependent-hmo" value="0"/>
+                            </div> 
+                        </div>
+                    </div>                            
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Dependent on Life Insurance</label>
+                        <div class="col-md-5">
+                            <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
+                                <input type="checkbox" value="0" name="partners_personal_history[family-dependent-insurance][temp][]" id="partners_personal_history-family-dependent-insurance-temp" class="dontserializeme toggle dependent"/>
+                                <input type="hidden" name="partners_personal_history[family-dependent-insurance][]" id="partners_personal_history-family-dependent-insurance" value="0"/>
+                            </div> 
+                        </div>
+                    </div>                            
                 </div>
             </div>
         </div>
@@ -65,7 +81,8 @@
             $('body').removeClass("modal-open"); 
         }
         $('.make-switch').not(".has-switch")['bootstrapSwitch']();
-        $('label[for="partners_personal_history-family-dependent-temp"]').css('margin-top', '0');
+        $('label[for="partners_personal_history-family-dependent-hmo-temp"]').css('margin-top', '0');
+        $('label[for="partners_personal_history-family-dependent-insurance-temp"]').css('margin-top', '0');
 
         $('.dependent').change(function(){
             if( $(this).is(':checked') ){
