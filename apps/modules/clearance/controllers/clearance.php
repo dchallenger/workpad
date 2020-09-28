@@ -58,7 +58,7 @@ class Clearance extends MY_PrivateController
 
 					$attachments = $this->db->get_where('partners_clearance_signatories_attachment', array( 'clearance_signatories_id' => $row->clearance_signatories_id, 'type' => 0 ) ); 
 					if ($attachments && $attachments->num_rows() > 0){
-						$attachments_arr[$row->clearance_layout_sign_id] = $attachments->row()->attachments;
+						$attachments_arr[$row->clearance_layout_sign_id][$row->clearance_signatories_id] = $attachments->result_array();
 					}					
 				}
 			}
@@ -81,7 +81,10 @@ class Clearance extends MY_PrivateController
 		$data['signatories'] = $signatories_arr;
 		$data['accountabilities'] = $accountabilities_arr;
 		$data['attachments_arr'] = $attachments_arr;
-
+/*
+		debug($data);
+		die();
+		*/
 		$this->load->vars( $data );
 
 		echo $this->load->blade('pages.edit_sign')->with( $this->load->get_cached_vars() );
@@ -393,31 +396,31 @@ class Clearance extends MY_PrivateController
 		$attachments_arr = (isset($post[$sign_table]['attachments']) ? $post[$sign_table]['attachments'] : array());
 		$status_id_arr = (isset($post[$sign_table]['status_id']) ? $post[$sign_table]['status_id'] : array());
 
-		$this->db->where('clearance_id',$this->record_id);
-		$this->db->delete($sign_table);
-
-		$this->db->where_in('clearance_signatories_id',$signatories_arr);
-		$this->db->delete('partners_clearance_signatories_accountabilities');
-
-		$this->db->where_in('clearance_signatories_id',$signatories_arr);
-		$this->db->delete('partners_clearance_signatories_attachment');
-
 		foreach ($signatories_arr as $key => $value) {
 			if ($value != 0){
-				$record = $this->db->get_where( $sign_table, array( $sign_key => $value ) );
+				$record = $this->db->get_where( $sign_table, array( 'user_id' => $value, 'clearance_id' => $this->record_id ) );
 
-				$signatories_info = array(
-											'clearance_id' => $this->record_id,
-											'user_id' => $value,
-											'panel_title' => $panel_title_arr[$key],
-											'clearance_layout_sign_id' => $clearance_layout_sign_id_arr[$key],
-											'attachments' => $attachments_arr[$key],
-											'remarks' => $remarks_arr[$key],
-											'status_id' => 1
-										 );
+				if ($record && $record->num_rows() > 0) {
+					$clearance_signatories_record = $record->row();
+
+					$this->db->where_in('clearance_signatories_id',$clearance_signatories_record->clearance_signatories_id);
+					$this->db->delete('partners_clearance_signatories_accountabilities');
+
+					$this->db->where_in('clearance_signatories_id',$clearance_signatories_record->clearance_signatories_id);
+					$this->db->delete('partners_clearance_signatories_attachment');
+				}
+
 				switch( true )
 				{
 					case $record->num_rows() == 0:
+						$signatories_info = array(
+													'clearance_id' => $this->record_id,
+													'user_id' => $value,
+													'panel_title' => $panel_title_arr[$key],
+													'clearance_layout_sign_id' => $clearance_layout_sign_id_arr[$key],
+													'remarks' => $remarks_arr[$key],
+													'status_id' => 1
+												 );					
 						//add mandatory fields
 						// $main_record['created_by'] = $this->user->user_id;
 						$this->db->insert($sign_table, $signatories_info);
@@ -428,9 +431,13 @@ class Clearance extends MY_PrivateController
 						$this->response->action = 'insert';
 						break;
 					case $record->num_rows() == 1:
+						$signatories_info = array(
+													'user_id' => $value
+												 );					
 						// $main_record['modified_by'] = $this->user->user_id;
 						// $main_record['modified_on'] = date('Y-m-d H:i:s');
-						$this->db->update( $sign_table, $signatories_info, array( $sign_key => $value ) );
+						$this->db->update( $sign_table, $signatories_info, array( $sign_key => $clearance_signatories_record->clearance_signatories_id ) );
+						$this->clearance_signatories_id = $clearance_signatories_record->clearance_signatories_id;
 						$this->response->action = 'update';
 						break;
 					default:
@@ -442,13 +449,15 @@ class Clearance extends MY_PrivateController
 						goto stop;
 				}
 
-				if (isset($attachments_arr[$key]) && $attachments_arr[$key] != ''){
-					$attachment_info = array(
-												'clearance_signatories_id' => $this->clearance_signatories_id,
-												'attachments' => $attachments_arr[$key],
-											 );
+				if (isset($attachments_arr[$clearance_layout_sign_id_arr[$key]]) && $attachments_arr[$clearance_layout_sign_id_arr[$key]] != ''){
+					foreach ($attachments_arr[$clearance_layout_sign_id_arr[$key]] as $key_attach => $value_attach) {
+						$attachment_info = array(
+													'clearance_signatories_id' => $this->clearance_signatories_id,
+													'attachments' => $value_attach,
+												 );
 
-					$this->db->insert('partners_clearance_signatories_attachment', $attachment_info);
+						$this->db->insert('partners_clearance_signatories_attachment', $attachment_info);
+					}
 				}
 
 				if (isset($post['partners_clearance_signatories_accountabilities'][$clearance_layout_sign_id_arr[$key]])){
@@ -474,7 +483,7 @@ class Clearance extends MY_PrivateController
 							}
 						}
 					}
-				}
+				}					
 			}
 		}
 
@@ -508,6 +517,7 @@ class Clearance extends MY_PrivateController
 			}
 
 			$signatories_qry = "SELECT * FROM {$this->db->dbprefix}partners_clearance_signatories pcs
+						   INNER JOIN ww_partners_clearance_signatories_accountabilities pcsa ON pcs.clearance_signatories_id = pcsa.clearance_signatories_id
 						   LEFT JOIN {$this->db->dbprefix}users u ON pcs.user_id = u.user_id
 						   WHERE pcs.deleted = 0
 						   AND clearance_id = {$this->clearance_id}
@@ -527,7 +537,7 @@ class Clearance extends MY_PrivateController
 						'user_id' => $this->user->user_id,
 						'feed_content' => $user_for_clearance . ' clearance already for your verification',
 						'recipient_id' => $signatories_user->user_id,
-						'uri' => str_replace(base_url(), '', $this->manage_mod->url).'/detail/'.$this->clearance_id
+						'uri' => str_replace(base_url(), '', $this->manage_mod->url).'/edit/'.$this->clearance_id
 					);
 
 					$this->db->insert('system_feeds', $insert);
@@ -692,7 +702,7 @@ class Clearance extends MY_PrivateController
 				$this->db->update( $this->mod->table, $main_record, array( $this->mod->primary_key => $this->record_id ) );
 				$this->response->action = 'update';
 
-				if(isset($post['interview'])){
+/*				if(isset($post['interview'])){
 					foreach ($post['interview'] as $exit_interview_id => $value) {
 						$this->db->update('partners_clearance_exit_interview_answers', array('remarks' => $value), array('exit_interview_answers_id' => $exit_interview_id));
 						if( $this->db->_error_message() != "" ){
@@ -700,7 +710,7 @@ class Clearance extends MY_PrivateController
 							goto stop;
 						}
 					}
-				}
+				}*/
 
 				
 
@@ -782,20 +792,22 @@ class Clearance extends MY_PrivateController
 				$sign_records = $record->result_array();
 				foreach($sign_records as $val){
 					$insert_signatories[$this->mod->primary_key] = $record_id;
+					$insert_signatories['exit_interview_layout_item_id'] = $val['exit_interview_layout_item_id'];
 					$insert_signatories['item'] = $val['item'];
 					$insert_signatories['status_id'] = 1;
+					$insert_signatories['yes_no'] = $val['wiht_yes_no'];
 					$this->db->insert('partners_clearance_exit_interview_answers', $insert_signatories);
 				}
 			}
 		}
 		$sign_table = 'partners_clearance_exit_interview_answers';
 		$sign_key = $this->mod->primary_key;
-		$this->db->select('partners_clearance_exit_interview_answers.exit_interview_layout_item_id,partners_clearance_exit_interview_answers.item,partners_clearance_exit_interview_answers.remarks,partners_clearance_exit_interview_answers.yes_no,partners_clearance_exit_interview_layout_item.wiht_yes_no');
+		$this->db->select('partners_clearance_exit_interview_answers.exit_interview_answers_id,partners_clearance_exit_interview_answers.exit_interview_layout_item_id,partners_clearance_exit_interview_answers.item,partners_clearance_exit_interview_answers.remarks,partners_clearance_exit_interview_answers.yes_no,partners_clearance_exit_interview_layout_item.wiht_yes_no,partners_clearance_exit_interview_answers.answer,partners_clearance_exit_interview_answers.answer_radio');
 		$this->db->join('partners_clearance_exit_interview_layout_item','partners_clearance_exit_interview_answers.exit_interview_layout_item_id = partners_clearance_exit_interview_layout_item.exit_interview_layout_item_id','left');
 		$record = $this->db->get_where( $sign_table, array( $sign_key => $record_id, 'partners_clearance_exit_interview_answers.deleted' => 0) );
 
 		$sign_records = $record->result_array();
-		
+
 		$this->load->helper('form');
 		$this->load->helper('file');
 		$data['clearance_record'] = $clearance_record;
@@ -1062,9 +1074,22 @@ class Clearance extends MY_PrivateController
 
 		//start saving with main table
 		$main_record['status_id'] = $post['status_id'];
-		$main_record['exit_interview_layout_id'] = $post['partners_clearance']['exit_interview_layout_id'];
-		$main_record['turn_around_time'] = date('Y-m-d',strtotime($post['partners_clearance']['turn_around_time']));
+		$main_record['exit_interviewed'] = $post['exit_interviewed'];
+
+		if (isset($post['partners_clearance']['exit_interview_layout_id']))
+			$main_record['exit_interview_layout_id'] = $post['partners_clearance']['exit_interview_layout_id'];
+		if (isset($post['partners_clearance']['turn_around_time']))
+			$main_record['turn_around_time'] = date('Y-m-d',strtotime($post['partners_clearance']['turn_around_time']));
+
 		$record = $this->db->get_where( $this->mod->table, array( $this->mod->primary_key => $this->record_id ) );
+
+		$to_delete_existing_exit_interview_answer = 0;
+		if ($record && $record->num_rows() > 0) {
+			$clearance_record = $record->row();
+			if (isset($post['partners_clearance']) && $post['partners_clearance']['exit_interview_layout_id'] != $clearance_record->exit_interview_layout_id)
+				$to_delete_existing_exit_interview_answer = 1;
+		}
+
 		switch( true )
 		{
 			case $record->num_rows() == 1:
@@ -1082,41 +1107,66 @@ class Clearance extends MY_PrivateController
 				goto stop;
 		}
 
-		$item = $post['item'];
-		$exit_interview_layout_item_id = $post['exit_interview_layout_item_id'];
-		$interview = $post['interview'];
+		$item = (isset($post['item']) ? $post['item'] : array());
+		$exit_interview_answers_id = (isset($post['exit_interview_answers_id']) ? $post['exit_interview_answers_id'] : array());
+		$exit_interview_layout_item_id = (isset($post['exit_interview_layout_item_id']) ? $post['exit_interview_layout_item_id'] : array());
+		$interview = (isset($post['interview']) ? $post['interview'] : array());
 		$yes_no = (isset($post['yes_no']) ? $post['yes_no'] : array());
+		$answer_radio = (isset($post['answer']) ? $post['answer'] : array());
+		$answer_text = (isset($post['answer_text']) ? $post['answer_text'] : array());
 		$sub_answer = (isset($post['sub_answer']) ? $post['sub_answer'] : array());
 
-		$this->db->where('clearance_id',$this->record_id);
-		$this->db->delete('partners_clearance_exit_interview_answers');
+		if ($to_delete_existing_exit_interview_answer) {
+			$this->db->where('clearance_id',$this->record_id);
+			$this->db->delete('partners_clearance_exit_interview_answers');
 
-		foreach ($item as $key => $value) {
-			$interview_info = array('clearance_id' => $this->record_id,
-									 'exit_interview_layout_item_id' => $exit_interview_layout_item_id[$key],
-									 'item' => $value,
-									 'remarks' => $interview[$key],
-									 'yes_no' => (isset($yes_no[$exit_interview_layout_item_id[$key]]) ? $yes_no[$exit_interview_layout_item_id[$key]] : 5),
-									);
 
-			$this->db->insert('partners_clearance_exit_interview_answers',$interview_info);
+			foreach ($item as $key => $value) {
+				$interview_info = array('clearance_id' => $this->record_id,
+										 'exit_interview_layout_item_id' => $exit_interview_layout_item_id[$key],
+										 'item' => $value,
+										 'remarks' => (isset($interview[$key]) ? $interview[$key] : ''),
+										 'yes_no' => (isset($yes_no[$exit_interview_layout_item_id[$key]]) ? $yes_no[$exit_interview_layout_item_id[$key]] : 0),
+										 'answer_radio' => (isset($answer_radio[$exit_interview_layout_item_id[$key]]) ? $answer_radio[$exit_interview_layout_item_id[$key]] : 0),
+										 'answer' => (isset($answer_text[$exit_interview_layout_item_id[$key]]) ? $answer_text[$exit_interview_layout_item_id[$key]] : ''),
+										);
 
-			$this->db->where('exit_interview_layout_item_id',$exit_interview_layout_item_id[$key]);
-			$this->db->delete('partners_clearance_exit_interview_layout_item_sub_answer');
+				$this->db->insert('partners_clearance_exit_interview_answers',$interview_info);
 
-			if (isset($sub_answer[$exit_interview_layout_item_id[$key]])){
-				foreach ($sub_answer[$exit_interview_layout_item_id[$key]] as $exit_interview_layout_item_sub_id => $answer1) {
-					foreach ($answer1 as $key1 => $value1) {
-						$answer_array = array(
-												'exit_interview_layout_item_id' => $exit_interview_layout_item_id[$key],
-												'exit_interview_layout_item_sub_id' => $exit_interview_layout_item_sub_id,
-												'answer' => $value1
-											  );
-						$this->db->insert('partners_clearance_exit_interview_layout_item_sub_answer',$answer_array);
+				$this->db->where('exit_interview_layout_item_id',$exit_interview_layout_item_id[$key]);
+				$this->db->delete('partners_clearance_exit_interview_layout_item_sub_answer');
+
+				if (isset($sub_answer[$exit_interview_layout_item_id[$key]])){
+					foreach ($sub_answer[$exit_interview_layout_item_id[$key]] as $exit_interview_layout_item_sub_id => $answer1) {
+						foreach ($answer1 as $key1 => $value1) {
+							$answer_array = array(
+													'exit_interview_layout_item_id' => $exit_interview_layout_item_id[$key],
+													'exit_interview_layout_item_sub_id' => $exit_interview_layout_item_sub_id,
+													'answer' => $value1
+												  );
+							$this->db->insert('partners_clearance_exit_interview_layout_item_sub_answer',$answer_array);
+						}
 					}
 				}
-			}
 
+			}
+		}
+		else {
+			if (!$this->permission['process']) {
+				foreach ($item as $key => $value) {
+					$interview_info = array('clearance_id' => $this->record_id,
+											 'exit_interview_layout_item_id' => $exit_interview_layout_item_id[$key],
+											 'item' => $value,
+											 'remarks' => (isset($interview[$key]) ? $interview[$key] : ''),
+											 'yes_no' => (isset($yes_no[$exit_interview_layout_item_id[$key]]) ? $yes_no[$exit_interview_layout_item_id[$key]] : 0),
+											 'answer_radio' => (isset($answer_radio[$exit_interview_layout_item_id[$key]]) ? $answer_radio[$exit_interview_layout_item_id[$key]] : 0),
+											 'answer' => (isset($answer_text[$exit_interview_layout_item_id[$key]]) ? $answer_text[$exit_interview_layout_item_id[$key]] : ''),
+											);
+
+					$this->db->where('exit_interview_answers_id',$exit_interview_answers_id[$key]);
+					$this->db->update('partners_clearance_exit_interview_answers',$interview_info);
+				}
+			}
 		}
 
 		if( $this->db->_error_message() != "" ){
@@ -1253,75 +1303,59 @@ class Clearance extends MY_PrivateController
         $template_data['filled_date'] = date('F d, Y');
         $template_data['reason'] = $partner_record['reason'];
 		$template_data['logo'] = base_url().$partner_record['print_logo'];
+		$template_data['hr_head'] = 'Marybeth G. Monis';
 
-        $html = '<ul style="list-style: none; margin: 0; padding: 0;">';
+        //$this->db->where('clearance_id',$record_id);
+        //$exit_interview_answer_result = $this->db->get('partners_clearance_exit_interview_answers');
 
-        $this->db->where('clearance_id',$record_id);
-        $exit_interview_answer_result = $this->db->get('partners_clearance_exit_interview_answers');
-
-		$this->db->select('partners_clearance_exit_interview_answers.exit_interview_layout_item_id,partners_clearance_exit_interview_answers.item,partners_clearance_exit_interview_answers.remarks,partners_clearance_exit_interview_answers.yes_no,partners_clearance_exit_interview_layout_item.wiht_yes_no');
+		$this->db->select('partners_clearance_exit_interview_answers.exit_interview_layout_item_id,partners_clearance_exit_interview_answers.item,partners_clearance_exit_interview_answers.remarks,partners_clearance_exit_interview_answers.yes_no,partners_clearance_exit_interview_answers.answer_radio,partners_clearance_exit_interview_layout_item.wiht_yes_no');
 		$this->db->where('partners_clearance_exit_interview_answers.clearance_id',$record_id);
+		$this->db->where('partners_clearance_exit_interview_answers.yes_no',0);
 		$this->db->join('partners_clearance_exit_interview_layout_item','partners_clearance_exit_interview_answers.exit_interview_layout_item_id = partners_clearance_exit_interview_layout_item.exit_interview_layout_item_id','left');
 		$exit_interview_answer_result = $this->db->get('partners_clearance_exit_interview_answers');
 
 
         if ($exit_interview_answer_result && $exit_interview_answer_result->num_rows() > 0){
         	$ctr = 1;
+        	$html = '<table width="100%" border="1" cellspacing="0" style="border-collapse: collapse;border-spacing: 0; font-size: 10px;">
+        				<thead>
+        					<tr>
+        						<th></th>
+        						<th>Not at All</th>
+        						<th>Small Degree</th>
+        						<th>Moderate Degree</th>
+        						<th>High Degree</th>
+        					</tr>
+        				</thead>
+        				<tbody>';
+
         	foreach ($exit_interview_answer_result->result() as $row) {
-        		if ($row->wiht_yes_no){
-        			$html .= '<li>'.$ctr.'. '.$row->item.'</li>';
-
-				     $html .= '<li style="padding-left:15px">
-				     <table width="50%" style="font-size: 12px;">
-				     	<tr>
-				     		<td width="15%">OO</td>
-				     		<td width="30%" style="border-bottom:1px solid black" align="center">'.($row->yes_no == 1 ? 'x' : '') .'</td>
-				     		<td width="10%"></td>
-				     		<td width="15%">HINDI</td>
-				     		<td width="30%" style="border-bottom:1px solid black" align="center">'.($row->yes_no == 5 ? 'x' : '') .'</td>
-				     	</tr>
-				     </table>
-				     <table width="100%" style="font-size: 12px;">
-				     	<tr>
-				     		<td width="30%">Kung hindi, ipaliwanag:</td>
-				     		<td width="70%" style="border-bottom:1px solid black">'.$row->remarks.'</td>
-				     	</tr>				     	
-				     </table>
-				     </li>';
-        		}
-        		else{
-        			$html .= '<li>'.$ctr.'. '.$row->item.'</li>';
-				     $html .= '<li style="padding-left:15px">
-				     <table width="100%" style="font-size: 12px;">
-				     	<tr>
-				     		<td width="70%" style="'.($row->remarks != '' ? "border-bottom:1px solid black" : "").'">'.$row->remarks.'</td>
-				     	</tr>				     	
-				     </table>
-				     </li>';        			
-        		}
-
-				$this->db->where('partners_clearance_exit_interview_layout_item_sub.deleted',0);
-				$this->db->where('partners_clearance_exit_interview_layout_item_sub.exit_interview_layout_item_id',$row->exit_interview_layout_item_id);
-				$this->db->join('partners_clearance_exit_interview_layout_item_sub_answer','partners_clearance_exit_interview_layout_item_sub.exit_interview_layout_item_sub_id = partners_clearance_exit_interview_layout_item_sub_answer.exit_interview_layout_item_sub_id');
-				$result = $this->db->get('partners_clearance_exit_interview_layout_item_sub');        		
-
-				if ($result && $result->num_rows() > 0){
-					foreach ($result->result() as $row1) {
-						$html .= '<li style="padding-left:15px">
-								 <table width="100%" style="font-size: 12px;">
-									<tr>
-										<td width="20%" style="border-bottom:1px solid black" align="center">'.$row1->answer.'</td>
-										<td width="80%">'.$row1->question.'</td>
-									</tr>
-								 </table></li>';
-					}
-				}
-
-        		$ctr++;
+			    $html .= '
+			     	<tr>
+			     		<td width="60%">'.$row->item.'</td>
+			     		<td width="10%" align="center">'.($row->answer_radio == 1 ? 'X' : '').'</td>
+			     		<td width="10%" align="center">'.($row->answer_radio == 2 ? 'X' : '').'</td>
+			     		<td width="10%" align="center">'.($row->answer_radio == 3 ? 'X' : '').'</td>
+			     		<td width="10%" align="center">'.($row->answer_radio == 4 ? 'X' : '').'</td>
+			     	</tr>
+			    ';
         	}			
+
+        	$html .= '</tbody></table>';
         }
 
-        $html .= '</ul>';
+		$this->db->select('partners_clearance_exit_interview_answers.exit_interview_layout_item_id,partners_clearance_exit_interview_answers.item,partners_clearance_exit_interview_answers.remarks,partners_clearance_exit_interview_answers.yes_no,partners_clearance_exit_interview_answers.answer_radio,partners_clearance_exit_interview_answers.answer,partners_clearance_exit_interview_layout_item.wiht_yes_no');
+		$this->db->where('partners_clearance_exit_interview_answers.clearance_id',$record_id);
+		$this->db->where('partners_clearance_exit_interview_answers.yes_no',1);
+		$this->db->join('partners_clearance_exit_interview_layout_item','partners_clearance_exit_interview_answers.exit_interview_layout_item_id = partners_clearance_exit_interview_layout_item.exit_interview_layout_item_id','left');
+		$exit_interview_answer_result_text = $this->db->get('partners_clearance_exit_interview_answers');
+
+		if ($exit_interview_answer_result_text && $exit_interview_answer_result_text->num_rows() > 0) {
+			foreach ($exit_interview_answer_result_text->result() as $row_text) {
+				$html .= '<p>'.$row_text->item.'</p>';
+				$html .= '<p>'.$row_text->answer.'</p>';
+			}
+		}
 
         $template_data['exit_interview_body'] = $html;
 
@@ -1434,14 +1468,14 @@ class Clearance extends MY_PrivateController
         		$html .= '<p>1st PART (Property Based)</p>';
         	}
 
-			$html .= '<table width="100%" border="1" cellspacing="0" style="border-collapse: collapse;border-spacing: 0; font-size: 12px;">
+			$html .= '<table width="100%" border="1" cellspacing="0" style="border-collapse: collapse;border-spacing: 0; font-size: 10px;">
 				<thead>
 					<tr>
 						<td width="20%"><center>OFFICE</center></td>
 						<td width="20%"><center>ACCOUNTABILITY</center></td>
 						<td width="30%"><center>REMARKS</center></td>
 						<td width="10%"><center>STATUS</center></td>
-						<td width="20%"><center>NAME/SIGNATURE</center></td>
+						<td width="20%"><center>NAME & SIGNATURE</center></td>
 					</tr>			
 				</thead>';
 
@@ -1470,10 +1504,10 @@ class Clearance extends MY_PrivateController
         		$html .= '<p>2nd PART (Head Office)</p>';
         	}
 
-			$html .= '<table width="100%" border="1" cellspacing="0" style="border-collapse: collapse;border-spacing: 0; font-size: 12px;">
+			$html .= '<table width="100%" border="1" cellspacing="0" style="border-collapse: collapse;border-spacing: 0; font-size: 10px;">
 				<thead>
 					<tr>
-						<td width="20%"><center>OFFICE</center></td>
+						<td width="20%"><center>DEPARTMENT</center></td>
 						<td width="20%"><center>ACCOUNTABILITY</center></td>
 						<td width="30%"><center>REMARKS</center></td>
 						<td width="10%"><center>STATUS</center></td>
@@ -1704,5 +1738,52 @@ class Clearance extends MY_PrivateController
         return true;
     }
 
+	public function multiple_upload()
+	{
+		$this->_ajax_only();
+		define('UPLOAD_DIR', 'uploads/'.$this->mod->mod_code . '/');
+		
+		$this->load->library("UploadHandler");
+
+		$this->response->message[] = array();	
+
+		$files = $this->uploadhandler->post();
+		$file = $files[0];
+		if( isset($file->error) && $file->error != "" )
+		{
+			$this->response->message[] = array(
+				'message' => $file->error,
+				'type' => 'error'
+			);	
+		}
+		$this->response->file = $file;
+		$this->_ajax_return();
+	}
+
+	public function delete_bg_image()
+	{
+		$this->_ajax_only();
+		if(isset($_POST['bg_image']))
+		{
+		    $bgm = $_POST['bg_image'];
+		    //$this->db->delete('config', array( 'config_id' => $bgm ) );
+		    
+            $this->db->update( 'config', array( 'deleted' => 1 ) , array( 'config_id' => $bgm ) );
+		    $this->response->message = array(
+				'message' => 'Successful.',
+				'type' => 'success'
+			);
+
+		}
+		
+		else{
+			$this->response->message = array(
+				'message' => 'Failed.',
+				'type' => 'error'
+			);	
+		} 
+		
+		$this->_ajax_return();	
+	}	
 }
 

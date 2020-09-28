@@ -38,26 +38,29 @@ class profile_model extends Record
 
 
 	function get_profile_header_details($user_id=0){
-
-		$this->db->select('title, lastname, firstname, middlename, suffix, users_position.position, 
-			department, sbu_unit,  v_coordinator as coordinator, v_credit_setup as credit_setup, v_project_hr as project_hr, ww_users_company.company, email, birth_date, photo, resigned_date, 
-			location, id_number, biometric, shift, employment_status, effectivity_date, regularization_date, 
+		$this->db->select('title, lastname, firstname, middlename, suffix, users_position.position, users_profile.project_id as project_id, users_profile.v_project as project,
+			department, v_project_hr as project_hr, sbu_unit, v_coordinator as coordinator, v_credit_setup as credit_setup, branch, ww_users_company.company, email, birth_date, photo, job_level, 
+			location, id_number, biometric, shift, calendar, employment_status, effectivity_date, regularization_date,
 			original_hired_date,employment_end_date,last_promotion_date,users_division.division, users_division.cost_center_code, users_profile.reports_to_id as immediate, group, role,
-			maidenname, nickname, partners_employment_type.employment_type, resigned_date')
+			maidenname, nickname, partners_employment_type.employment_type, partners_classification.classification, resigned_date, start_date, end_date')		
 	    ->from('users')
 	    ->join('users_profile', 'users.user_id = users_profile.user_id', 'left')
 	    ->join('users_position', 'users_profile.position_id = users_position.position_id', 'left')
 	    ->join('users_department', 'users_profile.department_id = users_department.department_id', 'left')
+	    ->join('users_branch', 'users_profile.branch_id = users_branch.branch_id', 'left')
+	    ->join('users_project', 'users_profile.project_id = users_project.project_id', 'left')
 	    ->join('users_company', 'users_profile.company_id = users_company.company_id', 'left')
 	    ->join('users_location', 'users_profile.location_id = users_location.location_id', 'left')
 	    ->join('partners', 'users_profile.user_id = partners.user_id', 'left')
 	    ->join('partners_employment_status', 'partners.status_id = partners_employment_status.employment_status_id', 'left')
 	    ->join('partners_employment_type', 'partners.employment_type_id = partners_employment_type.employment_type_id', 'left')
+	    ->join('partners_classification', 'partners.classification_id = partners_classification.classification_id', 'left')
 	    ->join('users_division', 'users_profile.division_id = users_division.division_id', 'left')
+	    ->join('users_job_grade_level', 'partners.job_grade_id = users_job_grade_level.job_grade_id', 'left')
 	    ->join('users_group', 'users_profile.group_id = users_group.group_id', 'left')
 	    ->join('roles', 'users.role_id = roles.role_id', 'left')
 	    ->where("users.user_id = $user_id");
-
+	    
 	    $profile_header_details = $this->db->get('');	
 
 	    return $profile_header_details->row_array();

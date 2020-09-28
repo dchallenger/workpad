@@ -1,3 +1,8 @@
+<style type="text/css">
+.required {
+	color: red;
+}
+</style>
 <div class="portlet">
 	<div class="portlet-title">
 		<div class="caption bold">{{ lang('clearance_manage.clearance_form') }}</div>
@@ -83,153 +88,145 @@
 					<a class="collapse" href="javascript:;"></a>
 					</div>
 			</div>
-			<div class="portlet-body">				
+			<div class="portlet-body">		
+				<input type="hidden" class="form-control" name="partners_clearance_signatories[clearance_signatories_id]" value="{{$sign['clearance_signatories_id']}}">		
 				<!-- <div class="clearfix"> -->
-					
-					<div class="panel panel-info">
-						<div class="panel-heading">
-							<h3 class="panel-title"><?php echo $sign['panel_title'] ?>
-								<!-- <span class="pull-right "><a class="small text-muted" onclick="delete_signatories(<?php echo $value['clearance_signatories_id']?>)" href="#">Delete</a></span>
-								<span class="pull-right "><a class="small text-muted"> &nbsp;|&nbsp; </a></span>
-								<span class="pull-right "><a class="small text-muted"  onclick="add_sign(<?php echo $value['clearance_signatories_id']?>)" href="#">Edit</a></span> -->
-							</h3>
-						</div>
-							
-						<table class="table">
-							<tr>
-								<td width="30%" class="active">
-									<span class="bold">{{ lang('clearance_manage.sign') }}</span>
-								</td>
-								<td>
-									<input type="text" class="form-control" readonly value="{{ $sign['firstname'] }} {{ $sign['lastname'] }}">
-									<input type="hidden" class="form-control" name="partners_clearance_signatories[clearance_signatories_id]" value="{{$sign['clearance_signatories_id']}}">
-								</td>
-							</tr>
-							<tr>
-								<td class="active"><span class="bold">{{ lang('clearance_manage.accountabilities') }}</span></td>
-								<td>
-									<div class="form-group">
-										<label class="control-label col-md-3">
-											<span>
-							                	<button type="button" class="btn btn-success btn-xs" data-toggle="modal" href="#temp_section" onclick="add_account($(this),<?php echo $sign["clearance_layout_sign_id"] ?>)">Add Item</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							                </span>																	
-										</label>
-										<div class="col-md-7">
-											&nbsp;
-							            </div>	
-						            </div>	
-									<div class="form-group">													
-										<label class="control-label col-md-3">Attachments</label>
-										<div class="col-md-7">
-											<div data-provides="fileupload" class="fileupload fileupload-new" id="clearace_signatories-attachments-container">
-												<input type="hidden" name="partners_clearance_signatories[attachments]" id="clearace_signatories-attachments" value=""/>
-												<div class="input-group">
-													<span class="input-group-btn">
-														<span class="uneditable-input">
-														<i class="fa fa-file fileupload-exists"></i> 
-														<span class="fileupload-preview"></span>
-														</span>
-													</span>
-													<span class="btn default btn-file">
-														<span class="fileupload-new"><i class="fa fa-paper-clip"></i>Select File</span>
-														<span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
-														<input type="file" class="clearace_signatories-attachments-fileupload" id="clearace_signatories-attachments-fileupload" type="file" name="files[]">
-													</span>
-													<a data-dismiss="fileupload" class="btn red fileupload-exists fileupload-delete"><i class="fa fa-trash-o"></i>Remove</a>
-												</div>
-											</div>
-										</div>
-									</div>							            									
-					                <div class="form-group">
-										<label class="col-md-3 col-sm-3 text-muted">Attachments</label>
-										<div class="controls col-md-6">
-											<?php
-												$attachments = $db->get_where('partners_clearance_signatories_attachment',array('clearance_signatories_id' => $sign['clearance_signatories_id'], 'type' => 0));
-												if ($attachments && $attachments->num_rows() > 0){
-													$sign['attachments'] = $attachments->row()->attachments;
-												}
-												else{
-													$sign['attachments'] = '';
-												}
-											?>																		
-				                            <!-- <ul class="padding-none margin-top-10"> -->
-				                            @if( !empty($sign['attachments']) )
-												<?php 
-													$file = FCPATH . urldecode( $sign['attachments']);
-													if( file_exists( $file ) )
-													{
-														$f_info = get_file_info( $file );
-														$f_type = filetype( $file );
+				<?php if ($records && $records->num_rows() > 0) { ?>
+					<?php 
+					foreach ( $records->result_array() as $value) { 
+						$disabled = 'disabled';
+						if ($value['user_id'] == $sign['user_id'])
+							$disabled = '';
+					?>
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h3 class="panel-title"><?php echo $value['panel_title'] ?>
+									<span class="pull-right hidden"><a class="small text-muted" onclick="delete_signatories($(this))" href="#">Delete</a></span>
+								</h3>
+							</div>
+								
+							<table class="table">
+								<tr>
+									<td width="30%" class="active">
+										<span class="bold">Signatory</span>
+									</td>
+									<td>						
+					                    <?php
+						                    $db->select('user_id, full_name');
+						                    $db->where('deleted', '0');
+						                    $options = $db->get('users');
+						                    $user_id_options = array('0' => 'Select...');
+					                        foreach($options->result() as $option)
+					                        {
+					                            $user_id_options[$option->user_id] = $option->full_name;
+					                        } 
+					                    ?>
+					                    <div class="input-group">
+					                        <span class="input-group-addon">
+					                            <i class="fa fa-list-ul"></i>
+					                        </span>
+			                        	    <?php echo form_dropdown('partners_clearance_signatories_oth[clearance_signatories_id]['.$value["clearance_layout_sign_id"].']',$user_id_options, $value['user_id'], 'class="form-control select2me" data-placeholder="Select..." id="partners_clearance_layout_sign-user_id" disabled') ?>
+					                    </div>
+									</td>
+								</tr>
+								<tr>
+									<td class="active"><span class="bold">Accountabilities </span></td>
+									<td>
+							            <div class="row">
+							            	<label class="col-md-12 col-sm-12 text-muted">Attachments List</label>
+							            </div><br>
 
-				/*										$finfo = finfo_open(FILEINFO_MIME_TYPE);
-														$f_type = finfo_file($finfo, $file);*/
+						                <div class="uploaded_container">
+											<?php 
+												$attachments = $db->get_where('partners_clearance_signatories_attachment', array( 'clearance_signatories_id' => $value['clearance_signatories_id'], 'type' => 0 ) );
 
-														switch( $f_type )
+												if ($attachments && $attachments->num_rows() > 0){ 
+													foreach ($attachments->result_array() as $value_attachment) {
+														$file = FCPATH . urldecode( $value_attachment['attachments']);
+														if( file_exists( $file ) )
 														{
-															case 'image/jpeg':
-																$icon = 'fa-picture-o';
-																echo '<a class="fancybox-button" href="'.base_url($sign['attachments']).'"><span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
-												            	<span>'. basename($f_info['name']) .'</span></a>';
-																break;
-															case 'video/mp4':
-																$icon = 'fa-film';
-																echo '<a href="'.base_url($sign['attachments']).'" target="_blank"><span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
-												            <span>'. basename($f_info['name']) .'</span></a>';
-																break;
-															case 'audio/mpeg':
-																$icon = 'fa-volume-up';
-																echo '<a href="'.base_url($sign['attachments']).'" target="_blank"><span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
-												            <span>'. basename($f_info['name']) .'</span></a>';
-																break;
-															default:
-																$icon = 'fa-file-text-o';
-																echo '<a href="'.base_url($sign['attachments']).'" target="_blank"><span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
-												            <span>'. basename($f_info['name']) .'</span></a>';
-														}
-												        	// <li class="padding-3 fileupload-delete-'.$record_id.'" style="list-style:none;">
-												        	// </li>
-												            // <span class="padding-left-10"><a style="float: none;" data-dismiss="fileupload" class="close fileupload-delete" upload_id="'.$record_id.'" href="javascript:void(0)"></a></span>
-													}
-												?>
-											@endif
-				                            <!-- </ul> -->
-										</div>
-									</div>										
-									<div class="accountability">
-										@if(count($account) > 0)
-											@foreach($account as $val)
-											<div>			
-												<input readonly="readonly" value="{{$val['accountability']}}" type="text" class="form-control" name="partners_clearance_signatories_accountabilities[accountability][]">
-											</div>
-											<br />
-											@endforeach
-										@else
-										<div>
-											<input readonly="readonly" type="text" class="form-control" name="partners_clearance_signatories_accountabilities[accountability][]">
-										</div>
-										@endif
-						            </div>
-					        	</td>
-							</tr>
-							<tr >
-								<td class="active"><span class="bold">{{ lang('clearance_manage.remarks') }}</span></td>
-								<td>
-									<textarea rows="2" class="form-control" name="partners_clearance_signatories[remarks]">{{ $sign['remarks'] }}</textarea>
-								</td>
-							</tr>
-							<tr>
-								<td class="active"><span class="bold">{{ lang('clearance_manage.status') }}</td>
-								<td>
-									<select  class="form-control select2me" data-placeholder="Select..." name="partners_clearance_signatories[status_id]">
-					                    <option value=''>Select...</option>
-					                    <option value='4' @if($sign['status_id']==4) selected @endif>{{ lang('common.cleared') }}</option>
-					                    <option value='3' @if($sign['status_id']==3) selected @endif>Pending</option>
-					                </select>
-								</td>
-							</tr>
-						</table>
-					</div>
+															$f_info = get_file_info( $file );
+															$f_type = filetype( $file );
 
+					/*										$finfo = finfo_open(FILEINFO_MIME_TYPE);
+															$f_type = finfo_file($finfo, $file);*/																	
+											?>
+															<div class="row">
+																<div class="col-md-12">
+																	<div class="form-group">
+																		<div class="col-md-8">
+																		<?php
+																			switch( $f_type )
+																			{
+																				case 'image/jpeg':
+																					$icon = 'fa-picture-o';
+																					echo '<a class="fancybox-button" href="'.base_url($value_attachment['attachments']).'"><span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
+																	            	<span>'. basename($f_info['name']) .'</span></a>';
+																					break;
+																				case 'video/mp4':
+																					$icon = 'fa-film';
+																					echo '<a href="'.base_url($value_attachment['attachments']).'" target="_blank"><span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
+																	            <span>'. basename($f_info['name']) .'</span></a>';
+																					break;
+																				case 'audio/mpeg':
+																					$icon = 'fa-volume-up';
+																					echo '<a href="'.base_url($value_attachment['attachments']).'" target="_blank"><span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
+																	            <span>'. basename($f_info['name']) .'</span></a>';
+																					break;
+																				default:
+																					$icon = 'fa-file-text-o';
+																					echo '<a href="'.base_url($value_attachment['attachments']).'" target="_blank"><span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
+																	            <span>'. basename($f_info['name']) .'</span></a>';
+																			}																							
+																		?>
+																		</div>
+																	</div>
+																</div>
+															</div>																				
+											<?php
+														}
+													}
+												} 
+											?>												                	
+										</div>					
+										<br>
+										<div class="accountability">
+											<?php 
+												$accountabilities = $db->get_where('partners_clearance_signatories_accountabilities', array( 'clearance_signatories_id' => $value['clearance_signatories_id'] ) ); 
+
+												if ($accountabilities && $accountabilities->num_rows() > 0){ 
+													foreach ($accountabilities->result_array() as $value_acct) {
+											?>
+														<div class="padding-bot-5">
+															<input type="text" class="form-control act<?php echo $value["clearance_layout_sign_id"] ?>" name="partners_clearance_signatories_accountabilities_oth[<?php echo $value['clearance_layout_sign_id'] ?>][accountability][]" value="<?php echo $value_acct['accountability'] ?>" disabled>
+														</div>							
+											<?php
+													}
+												} 
+											?>																
+										</div>														 							
+						        	</td>
+								</tr>
+								<tr >
+									<td class="active"><span class="bold">Remarks</span>@if($disabled == '') <span class="required">*</span> @endif</td>
+									<td><textarea rows="2" class="form-control" name="partners_clearance_signatories[remarks]" {{$disabled}}><?php echo $value['remarks'] ?></textarea></td>
+								</tr>
+								<tr>
+									<td class="active"><span class="bold">Status</span>@if($disabled == '') <span class="required">*</span> @endif</td>
+									<td>
+										<select class="form-control select2me" data-placeholder="Select..." name="partners_clearance_signatories[status_id]" {{$disabled}}>
+											<option value="">Select...</option>
+						                    <option value="4" <?php echo ($value['status_id'] == 4) ? "selected='selected'" : '' ?> >Cleared</option>
+						                    <option value="3" <?php echo ($value['status_id'] == 3) ? "selected='selected'" : '' ?> >Pending</option>
+						                </select>
+									</td>
+								</tr>
+							</table>
+						</div>   
+				<?php 
+					} 
+				}
+				?>
 				<!-- </div> -->
 			</div>
 		</div>

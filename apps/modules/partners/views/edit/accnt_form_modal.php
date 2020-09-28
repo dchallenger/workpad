@@ -63,7 +63,7 @@
                                     <div class="col-md-7">
                                         <ul class="padding-none margin-top-11">
                                             <?php 
-                                                if( isset($details['accountabilities-attachment'])) {
+                                                if( isset($details['accountabilities-attachment']) && $details['accountabilities-attachment'] != '') {
                                                     $file = FCPATH . urldecode($details['accountabilities-attachment']);
                                                     if( file_exists( $file ) )
                                                     {

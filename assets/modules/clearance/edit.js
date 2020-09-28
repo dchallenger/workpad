@@ -25,42 +25,54 @@ $(document).ready(function(){
         allowClear: true
     });
 
-	$('.clearace_signatories-attachments-fileupload').fileupload({
-	    url: base_url + module.get('route') + '/single_upload',
+	$('.clearace_signatories-attachments-multi-fileupload').fileupload({
+	    url: base_url + module.get('route') + '/multiple_upload',
 	    autoUpload: true,
 	}).bind('fileuploadadd', function (e, data) {
 		$.blockUI({ message: '<div>Attaching file, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />' });
 	}).bind('fileuploaddone', function (e, data) {
 		$.unblockUI();
 		var file = data.result.file;
+		var clearance_layout_sign_id = $(this).closest('td').find('.clearance_layout_sign_id').html();
 	    if(file.error != undefined && file.error != "")
 	    {
 	        notify('error', file.error);
 	    }
 	    else{
-	    	$(this).closest('.fileupload').find('#clearace_signatories-attachments').val(file.url);
-	    	$(this).closest('.fileupload').find('.fileupload-preview').html(file.name);
-	    	$(this).closest('.fileupload').find('.fileupload-new').each(function(){ $(this).css('display', 'none') });
-	    	$(this).closest('.fileupload').find('.fileupload-exists').each(function(){ $(this).css('display', 'inline-block') });
+	    	var html = '<div class="row">\
+	    					<input type="hidden" name="partners_clearance_signatories[attachments]['+clearance_layout_sign_id+'][]" value="'+file.url+'"/>\
+							<div class="col-md-12">\
+								<div class="form-group">\
+									<div class="col-md-8">'+file.name+'</div>\
+									<div class="col-md-4">\
+										<button type="button" class="btn red btn-sm delete-attachement">\
+						                    <i class="fa fa-ban"></i>\
+						                    <span>Delete</span>\
+						                </button>\
+									</div>\
+								</div>\
+							</div>\
+						</div>';
+			$(this).closest('td').find('.uploaded_container').append(html);						
+	    	//$(this).closest('.fileupload').find('#clearace_signatories-attachments').val(file.url);
+	    	//$(this).closest('.fileupload').find('.fileupload-preview').html(file.name);
+	    	//$(this).closest('.fileupload').find('.fileupload-exists').each(function(){ $(this).css('display', 'inline-block') });
 	    }
 	}).bind('fileuploadfail', function (e, data) {
 		$.unblockUI();
 		notify('error', data.errorThrown);
 	});
 
-	$('.fileupload-delete').click(function(){
-		$(this).closest('.fileupload').find('#clearace_signatories-attachments').val('');
-		$(this).closest('.fileupload').find('.fileupload-preview').html('');
-		$(this).closest('.fileupload').find('.fileupload-new').each(function(){ $(this).css('display', 'inline-block') });
-		$(this).closest('.fileupload').find('.fileupload-exists').each(function(){ $(this).css('display', 'none') });
+	$('.delete-attachement').live('click',function(){
+		$(this).closest('div.row').html('');
 	});
 
-    $('.clearace_signatories-attachments-fileupload').each(function () {
+/*    $('.clearace_signatories-attachments-fileupload').each(function () {
         if( $(this).closest('.fileupload').find('#clearace_signatories-attachments').val() != "" ){
 			$(this).closest('.fileupload').find('.fileupload-new').each(function(){ $(this).css('display', 'none') });
 			$(this).closest('.fileupload').find('.fileupload-exists').each(function(){ $(this).css('display', 'inline-block') });
         }
-    });
+    });*/
 
     $('.partners_clearance_exit_interview_layout_item-wiht_yes_no-temp').live('change',function(){
         if( $(this).is(':checked') ){
@@ -107,42 +119,47 @@ function get_clearance_template( layout_id, clearance_id )
 			        allowClear: true
 			    });
 
-				$('.clearace_signatories-attachments-fileupload').fileupload({
-				    url: base_url + module.get('route') + '/single_upload',
+				$('.clearace_signatories-attachments-multi-fileupload').fileupload({
+				    url: base_url + module.get('route') + '/multiple_upload',
 				    autoUpload: true,
 				}).bind('fileuploadadd', function (e, data) {
 					$.blockUI({ message: '<div>Attaching file, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />' });
 				}).bind('fileuploaddone', function (e, data) {
 					$.unblockUI();
 					var file = data.result.file;
+					var clearance_layout_sign_id = $(this).closest('td').find('.clearance_layout_sign_id').html();
 				    if(file.error != undefined && file.error != "")
 				    {
 				        notify('error', file.error);
 				    }
 				    else{
-				    	$(this).closest('.fileupload').find('#clearace_signatories-attachments').val(file.url);
-				    	$(this).closest('.fileupload').find('.fileupload-preview').html(file.name);
-				    	$(this).closest('.fileupload').find('.fileupload-new').each(function(){ $(this).css('display', 'none') });
-				    	$(this).closest('.fileupload').find('.fileupload-exists').each(function(){ $(this).css('display', 'inline-block') });
+				    	var html = '<div class="row">\
+				    					<input type="hidden" name="partners_clearance_signatories[attachments]['+clearance_layout_sign_id+'][]" value="'+file.url+'"/>\
+										<div class="col-md-12">\
+											<div class="form-group">\
+												<div class="col-md-8">'+file.name+'</div>\
+												<div class="col-md-4">\
+													<button type="button" class="btn red btn-sm delete-attachement">\
+									                    <i class="fa fa-ban"></i>\
+									                    <span>Delete</span>\
+									                </button>\
+												</div>\
+											</div>\
+										</div>\
+									</div>';
+						$(this).closest('td').find('.uploaded_container').append(html);						
+				    	//$(this).closest('.fileupload').find('#clearace_signatories-attachments').val(file.url);
+				    	//$(this).closest('.fileupload').find('.fileupload-preview').html(file.name);
+				    	//$(this).closest('.fileupload').find('.fileupload-exists').each(function(){ $(this).css('display', 'inline-block') });
 				    }
 				}).bind('fileuploadfail', function (e, data) {
 					$.unblockUI();
 					notify('error', data.errorThrown);
 				});
 
-				$('.fileupload-delete').click(function(){
-					$(this).closest('.fileupload').find('#clearace_signatories-attachments').val('');
-					$(this).closest('.fileupload').find('.fileupload-preview').html('');
-					$(this).closest('.fileupload').find('.fileupload-new').each(function(){ $(this).css('display', 'inline-block') });
-					$(this).closest('.fileupload').find('.fileupload-exists').each(function(){ $(this).css('display', 'none') });
+				$('.delete-attachement').live('click',function(){
+					$(this).closest('div.row').html('');
 				});
-
-			    $('.clearace_signatories-attachments-fileupload').each(function () {
-			        if( $(this).closest('.fileupload').find('#clearace_signatories-attachments').val() != "" ){
-						$(this).closest('.fileupload').find('.fileupload-new').each(function(){ $(this).css('display', 'none') });
-						$(this).closest('.fileupload').find('.fileupload-exists').each(function(){ $(this).css('display', 'inline-block') });
-			        }
-			    });
 			    			    
 	        	/*$('#greetings_dialog').html(response.greetings);
 				$('#greetings_dialog').modal('show');	*/            
@@ -725,7 +742,7 @@ function save_exit_interview( form, action, callback )
 			$.ajax({
 				url: base_url + module.get('route') + '/save_exit_interview',
 				type:"POST",
-				data: data+'&status_id='+action,
+				data: data+'&status_id='+action+'&exit_interviewed='+callback,
 				dataType: "json",
 				async: false,
 				success: function ( response ) {
@@ -766,7 +783,6 @@ function add_account_from_201( element,key )
 	$(sel).children(':selected').remove();	
 
 	var html = '<div>' +
-			   '<br>' +
 			   '<span class="pull-right small text-muted">' +
 		       '<a style="cursor:pointer" class="pull-right small text-muted" onclick="delete_account(this)">delete</a>' +
 		       '</span><br>' +      

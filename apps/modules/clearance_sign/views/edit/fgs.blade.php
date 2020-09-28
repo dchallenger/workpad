@@ -28,7 +28,7 @@
 						</div>
 						<p class="margin-bottom-25 small">{{ lang('clearance_signatories.signatories_note') }}</p>
 
-						<div class="portlet-body">
+<!-- 						<div class="portlet-body">
 							<div class="clearfix">
 								<button type="button" class="btn btn-success pull-right margin-bottom-25" onclick="add_sign(0,0)">{{ lang('clearance_signatories.add_signatories') }}</button>
 							</div>
@@ -38,12 +38,9 @@
 									</h3>
 								</div>	
 							</div>							
-                            <!-- /. Clearance: modal -->
-							<?php //include "partners_clearance_signatory-add.php" ?>
-							<!-- /.modal -->
 							<div id="signatories" name="signatories">
 							</div>
-						</div>
+						</div> -->
 
 						<div class="portlet-body">
 							<div class="clearfix">

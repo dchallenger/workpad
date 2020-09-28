@@ -93,6 +93,17 @@
 
 									<div>
 										<div class="col-md-9 margin-bottom-10">
+											<h4>{{ lang('time_reference.leave_fcc_policy')}}</h4>
+											<div class="text-muted small">{{ lang('time_reference.leave_fcc_desc')}}</div>
+										</div>
+										<div class="col-md-3 margin-bottom-25">
+											<a class="btn btn-default" type="button" rel="{{ get_mod_route('leave_fcc_setup') }}" href="{{ get_mod_route('leave_fcc_setup') }}">{{ lang('time_reference.view_list_button') }}</a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+
+									<div>
+										<div class="col-md-9 margin-bottom-10">
 											<h4>{{ lang('time_reference.coordinator')}}</h4>
 											<div class="text-muted small">{{ lang('time_reference.coordinator_desc')}}</div>
 										</div>

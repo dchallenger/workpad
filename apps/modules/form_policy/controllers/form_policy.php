@@ -114,22 +114,6 @@ class Form_policy extends MY_PrivateController
 		$this->_ajax_return();
 	}
 
-	public function detail($record_id, $child_call = false){
-		
-		if( !$this->permission['list'] ){
-			$this->response->message[] = array(
-				'message' => lang('common.insufficient_permission'),
-				'type' => 'warning'
-				);
-			$this->_ajax_return();
-		}
-
-		$data = array();
-
-		$this->load->vars($data);
-		echo $this->load->blade('edit.detail_custom')->with( $this->load->get_cached_vars() );
-	}
-
 	function _list_options_active( $record, &$rec )
 	{
 		if( isset($this->permission['detail']) && $this->permission['detail'] )

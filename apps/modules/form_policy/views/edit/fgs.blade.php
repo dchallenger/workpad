@@ -91,7 +91,7 @@
 	                            </span>
 	                            {{ form_dropdown('time_form_class_policy[department_id][]',$time_form_class_policy_department_id_options, explode(',', $record['time_form_class_policy.department_id']), 'class="form-control" data-placeholder="Select..." multiple="multiple" id="time_form_class_policy-department_id"') }}
 	                        </div> 				</div>	
-			</div>			<div class="form-group">
+			</div>			<div class="form-group hidden">
 				<label class="control-label col-md-3">Group</label>
 				<div class="col-md-7"><?php                                                        		$db->select('group_id,group');
                             		                            		$db->where('deleted', '0');

@@ -24,6 +24,9 @@ class Clearance_manage extends MY_PrivateController
 		$record_check = false;
 		$this->record_id = $data['record_id'] = '';
 
+		$this->load->helper('form');
+		$this->load->helper('file');
+
 		if( !$new ){
 			if( !$this->_set_record_id() )
 			{
@@ -59,16 +62,21 @@ class Clearance_manage extends MY_PrivateController
 			$this->db->select('partners_clearance_signatories.*, users_profile.lastname, users_profile.firstname');
 			$this->db->join('users_profile','partners_clearance_signatories.user_id = users_profile.user_id','inner');
 			$this->db->where('clearance_id', $this->record_id);
+			$sign_record = $this->db->get('partners_clearance_signatories');
+
+			$data['records'] = $sign_record;
+
+			$this->db->select('partners_clearance_signatories.*, users_profile.lastname, users_profile.firstname');
+			$this->db->join('users_profile','partners_clearance_signatories.user_id = users_profile.user_id','inner');
+			$this->db->where('clearance_id', $this->record_id);
 			$this->db->where('partners_clearance_signatories.user_id', $this->user->user_id);
 			$this->db->where('status_id !=', 4);
 			$sign_record = $this->db->get('partners_clearance_signatories');
 
 			$data['sign'] = $sign_record->row_array();
 
-			$account_record = $this->db->get_where( 'partners_clearance_signatories_accountabilities', array( 'clearance_signatories_id' => $data['sign']['clearance_signatories_id'] ) );
-			$data['account'] = $account_record->result_array();
-
 			$this->load->vars( $data );
+
 			if( !$child_call ){
 				$this->load->helper('form');
 				$this->load->helper('file');
@@ -137,13 +145,17 @@ class Clearance_manage extends MY_PrivateController
 			$this->db->select('partners_clearance_signatories.*, users_profile.lastname, users_profile.firstname');
 			$this->db->join('users_profile','partners_clearance_signatories.user_id = users_profile.user_id','inner');
 			$this->db->where('clearance_id', $this->record_id);
+			$sign_record = $this->db->get('partners_clearance_signatories');
+
+			$data['records'] = $sign_record;
+
+			$this->db->select('partners_clearance_signatories.*, users_profile.lastname, users_profile.firstname');
+			$this->db->join('users_profile','partners_clearance_signatories.user_id = users_profile.user_id','inner');
+			$this->db->where('clearance_id', $this->record_id);
 			$this->db->where('partners_clearance_signatories.user_id', $this->user->user_id);
 			$sign_record = $this->db->get('partners_clearance_signatories');
 			$data['sign'] = $sign_record->row_array();
 
-			$account_record = $this->db->get_where( 'partners_clearance_signatories_accountabilities', array( 'clearance_signatories_id' => $data['sign']['clearance_signatories_id'] ) );
-			$data['account'] = $account_record->result_array();
-			
 			$this->record = $data['record'];
 			$this->load->vars( $data );
 
@@ -179,7 +191,9 @@ class Clearance_manage extends MY_PrivateController
         $transactions = true;
 		$error = false;
 		$post = $_POST;
+
 		$this->response->record_id = $this->record_id = $post['partners_clearance_signatories']['clearance_signatories_id'];
+
 		unset( $post['record_id'] );
 		unset( $post['partners_clearance_signatories']['clearance_signatories_id'] );
 
@@ -235,18 +249,30 @@ class Clearance_manage extends MY_PrivateController
 				$this->db->update( 'partners_clearance_signatories', $main_record, array( 'clearance_signatories_id' => $this->record_id ) );
 				$this->response->action = 'update';
 
-				$attachment_info = array(
+/*				$attachment_info = array(
 											'clearance_signatories_id' => $this->record_id,
 											'attachments' => $main_record['attachments'],
 											'type' => 1
-										 );
-				$this->db->insert('partners_clearance_signatories_attachment', $attachment_info);
+										 );*/
+				//$this->db->insert('partners_clearance_signatories_attachment', $attachment_info);
 				
 				$pending = $this->mod->get_pending_status($record->row()->clearance_id);
 
-				if($pending == 0){
+				$this->db->where('clearance_id',$record->row()->clearance_id);
+				$clearance_record_result = $this->db->get('partners_clearance');
+
+				$exit_interviewed = 0;
+				if ($clearance_record_result && $clearance_record_result->num_rows() > 0) {
+					$clearance_record = $clearance_record_result->row();
+					$exit_interviewed = $clearance_record->exit_interviewed;
+				}
+
+				$to_email = 0;
+
+				if($pending == 0 && $exit_interviewed){
 					$this->db->where('clearance_id', $record->row()->clearance_id);
 					$this->db->update('partners_clearance', array('status_id' => 3, 'date_cleared' => date('Y-m-d')));
+					$to_email = 1;
 
 					if( $this->db->_error_message() != "" ){
 						$error = true;
@@ -254,8 +280,16 @@ class Clearance_manage extends MY_PrivateController
 					}
 				}
 
-				if ($main_record['status_id'] >= 4){
+				if ($to_email){
 					$this->db->query("CALL sp_partners_clearance_action_email( {$record->row()->clearance_id} )");
+					mysqli_next_result($this->db->conn_id);
+
+					if( $this->db->_error_message() != "" ){
+						$error = true;
+						goto stop;
+					}
+
+					$this->db->query("CALL sp_partners_clearance_email_notification_to_hr( {$record->row()->clearance_id} )");
 					mysqli_next_result($this->db->conn_id);
 
 					if( $this->db->_error_message() != "" ){
@@ -282,7 +316,7 @@ class Clearance_manage extends MY_PrivateController
 			goto stop;
 		}
 
-		$account_record = array();
+/*		$account_record = array();
 		$accountabilities = $post['partners_clearance_signatories_accountabilities']['accountability'];
 		$this->db->delete('partners_clearance_signatories_accountabilities', array('clearance_signatories_id' => $this->record_id )); 
 		if(count($accountabilities) > 0){
@@ -303,7 +337,7 @@ class Clearance_manage extends MY_PrivateController
 					}
 				}
 			}
-		}
+		}*/
 
         
 		stop:

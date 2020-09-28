@@ -29,7 +29,7 @@ class partners_immediate_model extends Record
 		$this->table = 'users';
 		$this->icon = 'fa-user';
 		$this->short_name = 'Partners Immediate';
-		$this->long_name  = 'Partners Immediate';
+		$this->long_name  = 'Subordinates';
 		$this->description = 'List of subordinates. ';
 		$this->path = APPPATH . 'modules/partners_immediate/';
 

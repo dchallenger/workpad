@@ -9,8 +9,8 @@
 				<li><a data-toggle="tab" href="#historical_tab3"><i class="fa fa-list"></i><?php echo lang('partners.character_ref'); ?></a></li>
 				<li><a data-toggle="tab" href="#historical_tab4"><i class="fa fa-list"></i><?php echo lang('partners.licensure'); ?></a></li>
 				<li><a data-toggle="tab" href="#historical_tab5"><i class="fa fa-list"></i><?php echo lang('partners.training'); ?></a></li>
+				<li><a data-toggle="tab" href="#historical_tab16"><i class="fa fa-list"></i><?php echo lang('partners.test_profile'); ?></a></li>				
 				<li><a data-toggle="tab" href="#historical_tab6"><i class="fa fa-list"></i><?php echo lang('partners.skills'); ?></a></li>
-				<li><a data-toggle="tab" href="#historical_tab16"><i class="fa fa-list"></i><?php echo lang('partners.test_profile'); ?></a></li>
 				<li><a data-toggle="tab" href="#historical_tab7"><i class="fa fa-list"></i><?php echo lang('partners.affiliation'); ?></a></li>
 				<li><a data-toggle="tab" href="#historical_tab8"><i class="fa fa-list"></i><?php echo lang('partners.accountabilities'); ?></a></li>
 				<li><a data-toggle="tab" href="#historical_tab9"><i class="fa fa-files-o"></i><?php echo lang('partners.attachment'); ?></a></li>
@@ -844,7 +844,7 @@
 											<tr rel="0">
 												
 												<td>
-													<?php echo (isset($attachment['attachment-name']) ? $attachment['attachment-name'] : ""); ?>	
+													asdfasdf
 													<br />
 													<span id="date_set" class="small text-muted">
 														<?php echo (isset($attachment['attachment-category']) ? $attachment['attachment-category'] : ""); ?>	

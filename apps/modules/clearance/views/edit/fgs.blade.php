@@ -105,43 +105,47 @@
 						</div>
 						<div class="panel-body">
 							<a class="btn btn-info btn-sm" data-toggle="modal" href="{{get_mod_route('clearance', 'view_exit_interview/'.$record_id)}}"> View Form</a>
-							<a class="btn dark btn-sm" data-toggle="modal" href="#for_approval" onclick="print_exit_interview({{$record_id}})"> <i class="fa fa-print"></i> Print Form</a>
+							@if ($permission['process'])
+								<a class="btn dark btn-sm" data-toggle="modal" href="#for_approval" onclick="print_exit_interview({{$record_id}})"> <i class="fa fa-print"></i> Print Form</a>
+							@endif
 						</div>
 					</div>
 
-					<div class="panel panel-warning">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								2. Employee Clearance Signatories
-							</h3>
+					@if ($permission['process'])
+						<div class="panel panel-warning">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									2. Employee Clearance Signatories
+								</h3>
+							</div>
+							<div class="panel-body">
+								<a class="btn btn-info btn-sm" href="{{get_mod_route('clearance', 'view_signatories/'.$record_id)}}"> View Form</a>
+								<a class="btn dark btn-sm" data-toggle="modal" href="#" onclick="print_clearance_form({{$record_id}})"> <i class="fa fa-print"></i> Print Form</a>
+							</div>
 						</div>
-						<div class="panel-body">
-							<a class="btn btn-info btn-sm" href="{{get_mod_route('clearance', 'view_signatories/'.$record_id)}}"> View Form</a>
-							<a class="btn dark btn-sm" data-toggle="modal" href="#" onclick="print_clearance_form({{$record_id}})"> <i class="fa fa-print"></i> Print Form</a>
-						</div>
-					</div>
 
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								3. Quitclaim
-							</h3>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									3. Quitclaim
+								</h3>
+							</div>
+							<div class="panel-body">
+								<a class="btn dark btn-sm" data-toggle="modal" href="#" onclick="print_release_quitclaim({{$record_id}})"> <i class="fa fa-print"></i> Print Form</a> 
+							</div>
 						</div>
-						<div class="panel-body">
-							<a class="btn dark btn-sm" data-toggle="modal" href="#" onclick="print_release_quitclaim({{$record_id}})"> <i class="fa fa-print"></i> Print Form</a> 
-						</div>
-					</div>
 
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								4. Certificate of Employment
-							</h3>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									4. Certificate of Employment
+								</h3>
+							</div>
+							<div class="panel-body">
+								<a class="btn dark btn-sm" data-toggle="modal" href="#" onclick="print_coe({{$record_id}})"> <i class="fa fa-print"></i> Print Form</a>
+							</div>
 						</div>
-						<div class="panel-body">
-							<a class="btn dark btn-sm" data-toggle="modal" href="#" onclick="print_coe({{$record_id}})"> <i class="fa fa-print"></i> Print Form</a>
-						</div>
-					</div>
+					@endif
 				</div>
 			</div>
 		</div>

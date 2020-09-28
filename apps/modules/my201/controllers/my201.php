@@ -96,6 +96,7 @@ class My201 extends MY_PrivateController
         $data['agency_assignment'] = (count($agency_assignment) == 0 ? "n/a" : ($agency_assignment[0]['key_value'] == "" ? "n/a" : $agency_assignment[0]['key_value']));
         // debug($data); die;
         $data['project'] = ($profile_header_details['project'] == "" ? "n/a" : $profile_header_details['project']);
+        $data['project_id'] = ($profile_header_details['project_id'] == "" ? "n/a" : $profile_header_details['project_id']);
         $data['project_hr'] = ($profile_header_details['project_hr'] == "" ? "n/a" : $profile_header_details['project_hr']);
         $data['coordinator'] = ($profile_header_details['coordinator'] == "" ? "n/a" : $profile_header_details['coordinator']);
         $data['credit_setup'] = ($profile_header_details['credit_setup'] == "" ? "n/a" : $profile_header_details['credit_setup']);
@@ -151,8 +152,9 @@ class My201 extends MY_PrivateController
 		$emergency_address = $this->mod->get_partners_personal($this->user->user_id, 'emergency_address');
 			$data['emergency_address'] = (count($emergency_address) == 0 ? " " : ($emergency_address[0]['key_value'] == "" ? "" : $emergency_address[0]['key_value']));
 		$emergency_city = $this->mod->get_partners_personal($this->user->user_id, 'emergency_city');
-			$data['emergency_city'] = (count($emergency_city) == 0 ? " " : ($emergency_city[0]['key_value'] == "" ? "" : $this->mod->get_city($emergency_city[0]['key_value'])));
+			$data['emergency_city'] = (count($emergency_city) > 0 ? $this->mod->get_city($emergency_city[0]['key_value']) : " ");
 		$emergency_country = $this->mod->get_partners_personal($this->user->user_id, 'emergency_country');
+			$data['emergency_country'] = (count($emergency_country) > 0 ? $this->mod->get_country($emergency_country[0]['key_value']) : " ");
 			$data['emergency_country'] = (count($emergency_country) == 0 ? " " : ($emergency_country[0]['key_value'] == "" ? "" : $this->mod->get_country($emergency_country[0]['key_value'])));
 		$emergency_zip_code = $this->mod->get_partners_personal($this->user->user_id, 'emergency_zip_code');
 			$data['emergency_zip_code'] = (count($emergency_zip_code) == 0 ? " " : ($emergency_zip_code[0]['key_value'] == "" ? "" : $emergency_zip_code[0]['key_value']));
@@ -350,7 +352,7 @@ class My201 extends MY_PrivateController
 		else{
 
 			$this->db->select('project_id,project_code');
-            $this->db->where('project_id', $data['record']['users_profile.project_id']);
+            $this->db->where('project_id', $data['project_id']);
             $this->db->where('deleted', '0');
             $project = $this->db->get('users_project')->result_array();
 

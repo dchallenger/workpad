@@ -16,7 +16,7 @@
                                         <?php echo (isset($details['attachment-name']) ? $details['attachment-name'] : ""); ?>   
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group hidden">
                                     <label class="control-label col-md-4 text-right text-muted">Category :</span></label>
                                     <div class="col-md-7">
                                         <?php echo (isset($details['attachment-category']) ? $details['attachment-category'] : ""); ?>
@@ -27,15 +27,15 @@
                                     <div class="col-md-7">
                                         <ul class="padding-none margin-top-11">
                                             <?php 
-                                                if( (isset($details['attachment-file']) ) {
+                                                if( isset($details['attachment-file'])) {
                                                     $file = FCPATH . urldecode($details['attachment-file']);
                                                     if( file_exists( $file ) )
                                                     {
                                                         $f_info = get_file_info( $file );
                                                         $f_type = filetype( $file );
 
-                                                        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-                                                        $f_type = finfo_file($finfo, $file);
+/*                                                        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                                                        $f_type = finfo_file($finfo, $file);*/
                                                         $is_image = false;
                                                         switch( $f_type )
                                                         {
@@ -57,7 +57,7 @@
                                                                 $icon = 'fa-file-text-o';
                                                         }
 
-                                                        $filepath = base_url()."partners_immediate/download_file/".$details_data_id['attachment-file'];
+                                                        $filepath = base_url()."partners/download_file/".$details_data_id['attachment-file'];
                                                         $file_view = base_url().$details['attachment-file'];
                                                         // $path = site_url() . 'uploads/' . $this->module_link . '/' . $file;
                                                         echo '<li class="padding-3 fileupload-delete-'.$details_data_id['attachment-file'].'" style="list-style:none;">';

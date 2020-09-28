@@ -1,3 +1,16 @@
+<?php
+	$disabled = '';
+	if ($permission['process'] || $clearance_record['exit_interviewed'])
+		$disabled = 'disabled';
+
+	$disabled_item_for_hr = '';
+	if ($clearance_record['exit_interviewed'])
+		$disabled_item_for_hr = 'disabled';
+
+	$disabled_item_for_employee = '';
+	if (!$permission['process'])
+		$disabled_item_for_employee = 'disabled';	
+?>
 <div class="portlet">
 	<div class="portlet">
         <div class="portlet-title">
@@ -35,7 +48,7 @@
                     <div class="form-group">
 						<label class="control-label col-md-4">Effectivity Date<span class="required">*</span></label>
 						<div class="col-md-5">							
-                            <input type="text" class="form-control" readonly value="{{ date('F d, Y', strtotime($clearance_record['effectivity_date'])) }}" /> 
+                            <input type="text" class="form-control" readonly value="{{ date('F d, Y', strtotime($clearance_record['effectivity_date'])) }}" {{$disabled_item_for_hr}}/> 
 						</div>
 					</div>
 					<?php
@@ -54,9 +67,11 @@
 						<label class="control-label col-md-4">Turnaround Date<span class="required">*</span></label>
 						<div class="col-md-5">
 							<div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
-								<input type="text" class="form-control" name="partners_clearance[turn_around_time]" id="partners_clearance-turn_around_time" value="{{ $turn_around_time }}" placeholder="Enter Turnaround Date" readonly>
+								<input type="text" class="form-control" name="partners_clearance[turn_around_time]" id="partners_clearance-turn_around_time" value="{{ $turn_around_time }}" placeholder="Enter Turnaround Date" readonly {{$disabled_item_for_hr}} {{$disabled_item_for_employee}}>
 								<span class="input-group-btn">
-									<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+									@if(!$disabled_item_for_hr && !$disabled_item_for_employee)
+										<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+									@endif
 								</span>
 							</div> 
 						</div>
@@ -83,7 +98,11 @@
 								<span class="input-group-addon">
 									<i class="fa fa-list-ul"></i>
 								</span>
-								{{ form_dropdown('partners_clearance[exit_interview_layout_id]',$exit_interview_layout_id_options, (isset($layout_record['exit_interview_layout_id']) ? $layout_record['exit_interview_layout_id'] : null), 'class="form-control select2me" data-placeholder="Select..." id="partners_clearance-exit_interview_layout_id"') }}
+								@if ($disabled_item_for_hr || $disabled_item_for_employee)
+									{{ form_dropdown('partners_clearance[exit_interview_layout_id]',$exit_interview_layout_id_options, (isset($layout_record['exit_interview_layout_id']) ? $layout_record['exit_interview_layout_id'] : null), 'class="form-control select2me" data-placeholder="Select..." id="partners_clearance-exit_interview_layout_id" disabled') }}
+								@else
+									{{ form_dropdown('partners_clearance[exit_interview_layout_id]',$exit_interview_layout_id_options, (isset($layout_record['exit_interview_layout_id']) ? $layout_record['exit_interview_layout_id'] : null), 'class="form-control select2me" data-placeholder="Select..." id="partners_clearance-exit_interview_layout_id"') }}
+								@endif
 							</div>
                         </div>
                     </div>
@@ -102,7 +121,7 @@
 						<p class="margin-bottom-25 small">This section manage to add and edit items in exit interview questionaire.</p>
 
 						<div class="portlet-body">
-							<div class="clearfix">
+							<div class="clearfix hidden">
 								<button type="button" class="btn btn-success pull-right margin-bottom-25" data-toggle="modal" onclick="add_item(0)">Add Question</button>
 							</div>
                             <!-- /. Clearance: modal -->
@@ -117,26 +136,43 @@
 									<div class="panel panel-info">
 										<div class="panel-heading">
 											<h3 class="panel-title"><?php echo ++$count.". ".$value['item'] ?>
-												<span class="pull-right "><a class="small text-muted" onclick="delete_item($(this))" href="#">Delete</a></span>
+												<span class="pull-right hidden"><a class="small text-muted" onclick="delete_item($(this))" href="#">Delete</a></span>
 											</h3>
 											<input type="hidden" name="exit_interview_layout_item_id[]" value="<?php echo $value['exit_interview_layout_item_id'] ?>">
 											<input type="hidden" name="item[]" value="<?php echo $value['item'] ?>">
+											<input type="hidden" name="exit_interview_answers_id[]" value="<?php echo $value['exit_interview_answers_id'] ?>">
 										</div>
 										<table class="table">
+											@if ($value['yes_no'] == 0)
 											<tr >
 												<td class="active"><span class="bold">Answer</td>
-												<td><textarea rows="2" class="form-control" name="interview[]">{{ $value['remarks'] }}</textarea></td>
+												<td>											
+													<div class="form-group">
+														<label class="col-md-1 control-label">&nbsp;</label>
+														<div class="radio-list">
+															<label class="radio-inline">
+															<input type="radio" name="answer[{{$value['exit_interview_layout_item_id']}}]" id="optionsRadios4" value="1" @if ($value['answer_radio'] == 1 ) checked @endif {{$disabled}}> Not at All </label>
+															<label class="radio-inline">
+															<input type="radio" name="answer[{{$value['exit_interview_layout_item_id']}}]" id="optionsRadios5" value="2" @if ($value['answer_radio'] == 2 ) checked @endif {{$disabled}}> Small Degree </label>
+															<label class="radio-inline">
+															<input type="radio" name="answer[{{$value['exit_interview_layout_item_id']}}]" id="optionsRadios6" value="3" @if ($value['answer_radio'] == 3 ) checked @endif {{$disabled}}> Moderate Degree </label>
+															<label class="radio-inline">
+															<input type="radio" name="answer[{{$value['exit_interview_layout_item_id']}}]" id="optionsRadios6" value="4" @if ($value['answer_radio'] == 4 ) checked @endif {{$disabled}}> High Degree </label>															
+														</div>
+													</div>												
+												</td>
+												<!-- <td><textarea rows="2" class="form-control" name="interview[]">{{ $value['remarks'] }}</textarea></td> -->
 											</tr>
-											<?php if ($value['wiht_yes_no']) { ?>
+											@endif
+
+											<?php if ($value['yes_no']) { ?>
 												<tr >
 													<td class="active"><span class="bold">&nbsp;</td>
 													<td>
 								                        <div class="form-group">
-								                            <div class="col-md-4">                          
-								                                <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
-								                                    <input type="checkbox" value="1" @if( $value['yes_no'] == 1 ) checked="checked" @endif name="partners_clearance_exit_interview_layout_item[wiht_yes_no][temp]" id="partners_clearance_exit_interview_layout_item-wiht_yes_no-temp" class="partners_clearance_exit_interview_layout_item-wiht_yes_no-temp dontserializeme toggle"/>
-								                                    <input type="hidden" name="yes_no[<?php echo $value['exit_interview_layout_item_id'] ?>]" id="partners_clearance_exit_interview_layout_item-wiht_yes_no" value="<?php echo ($value['yes_no'] == 1 ? 1 : 5) ?>"/>
-								                                </div>           
+								                            <div class="col-md-12">    
+								                            	<input type="hidden" name="yes_no[<?php echo $value['exit_interview_layout_item_id'] ?>]" class="wiht_yes_no" value="1" readonly/>                      
+																<textarea rows="2" class="form-control" name="answer_text[<?php echo $value['exit_interview_layout_item_id'] ?>]" {{$disabled}}>{{$value['answer']}}</textarea>
 								                            </div>  
 								                        </div>
 													</td>
@@ -182,14 +218,14 @@
 
                 <div class="form-actions fluid">
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-offset-4 col-md-8">
-                            	@if(!in_array($clearance_record['status_id'], array(4,5) ))
-        						<button type="button" class="btn green btn-sm" onclick="save_exit_interview( $(this).closest('form'), {{ $clearance_record['status_id'] }})">Save</button>
+                        <div class="col-md-12" align="center">
+                            	@if(!in_array($clearance_record['status_id'], array(4,5)) && !$disabled_item_for_hr && !$clearance_record['exit_interviewed'])
+        							<button type="button" class="btn green btn-sm" onclick="save_exit_interview( $(this).closest('form'), {{ $clearance_record['status_id'] }}, 0)">{{lang('common.save')}}</button>
+                                @endif
+                                @if(!$permission['process']  && !$disabled && !$clearance_record['exit_interviewed'])
+                                	<button type="button" class="btn green btn-sm" onclick="save_exit_interview( $(this).closest('form'), {{ $clearance_record['status_id'] }}, 1)">{{lang('common.submit')}}</button>
                                 @endif
                                 <a href="{{ $mod->url }}/edit/{{ $record_id }}" class="btn btn-default btn-sm" type="button"> Back to list</a>
-                                                           
-                            </div>
                         </div>
                     </div>
                 </div>

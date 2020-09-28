@@ -9,11 +9,14 @@
 				<li><a data-toggle="tab" href="#historical_tab3"><i class="fa fa-list"></i>{{ lang('partners_immediate.character_ref') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab4"><i class="fa fa-list"></i>{{ lang('partners_immediate.licensure') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab5"><i class="fa fa-list"></i>{{ lang('partners_immediate.training') }}</a></li>
+				<li><a data-toggle="tab" href="#historical_tab16"><i class="fa fa-list"></i>{{ lang('partners.test_profile') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab6"><i class="fa fa-list"></i>{{ lang('partners_immediate.skills') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab7"><i class="fa fa-list"></i>{{ lang('partners_immediate.affiliation') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab8"><i class="fa fa-list"></i>{{ lang('partners_immediate.accountabilities') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab9"><i class="fa fa-files-o"></i>{{ lang('partners_immediate.attachment') }}</a></li>
-
+				<li><a data-toggle="tab" href="#historical_tab17"><i class="fa fa-list"></i>{{ lang('partners.movement') }}</a></li>
+				<li><a data-toggle="tab" href="#historical_tab18"><i class="fa fa-list"></i>{{ lang('partners.da') }}</a></li>
+				<li><a data-toggle="tab" href="#historical_tab19"><i class="fa fa-list"></i>{{ lang('partners.change_request') }}</a></li>				
 			</ul>
 		</div>
 
@@ -37,7 +40,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.school') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.school') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="education-school[1]"><?php echo (isset($education['education-school']) ? $education['education-school'] : ""); ?></span>
 									</div>
@@ -47,7 +50,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.from') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.start_year') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="education-year-from[1]"><?php echo (isset($education['education-year-from']) ? $education['education-year-from'] : ""); ?></span>
 									</div>
@@ -57,7 +60,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.to') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.end_year') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="education-year-to[1]"><?php echo (isset($education['education-year-to']) ? $education['education-year-to'] : ""); ?></span>
 									</div>
@@ -65,13 +68,13 @@
 							</div>
 						</div>
 			            <?php 
-    $type_with_degree = array('tertiary', 'graduate studies', 'vocational');
+    					$type_with_degree = array('tertiary', 'graduate studies', 'vocational');
 			            if(in_array(strtolower($education_type), $type_with_degree)) { 
 			                ?>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.degree') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.degree') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="education-degree[1]"><?php echo (isset($education['education-degree']) ? $education['education-degree'] : ""); ?></span>
 									</div>
@@ -79,10 +82,22 @@
 							</div>
 						</div>
 						<?php } ?>
+						@if(in_array('education-honors_awards', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.status') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.honors_receive') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="education-honors_awards[1]"><?php echo (isset($education['education-honors_awards']) ? $education['education-honors_awards'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>						
+						@endif
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('common.status') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="education-status[1]"><?php echo (isset($education['education-status']) ? $education['education-status'] : ""); ?></span>
 									</div>
@@ -109,7 +124,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.position') }} {{ lang('partners_immediate.title') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.pos_title') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="employment-position-title[1]"><?php echo (isset($employment['employment-position-title']) ? $employment['employment-position-title'] : ""); ?></span>
 									</div>
@@ -119,17 +134,53 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.location') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.location') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="employment-location[1]"><?php echo (isset($employment['employment-location']) ? $employment['employment-location'] : ""); ?></span>
 									</div>
 								</div>
 							</div>
 						</div>
+						@if(in_array('employment-reason-for-leaving', $partners_keys))						
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.reason_leaving') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="employment-reason-for-leaving[1]"><?php echo (isset($employment['employment-reason-for-leaving']) ? $employment['employment-reason-for-leaving'] : ""); ?></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						@endif
+						@if(in_array('employment-latest-salary', $partners_keys))						
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.latest_salary') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="employment-latest-salary[1]"><?php echo (isset($employment['employment-latest-salary']) ? $employment['employment-latest-salary'] : ""); ?></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						@endif
+						@if(in_array('employment-supervisor', $partners_keys))						
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.name_immediate_superior') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="employment-supervisor[1]"><?php echo (isset($employment['employment-supervisor']) ? $employment['employment-supervisor'] : ""); ?></span>
+										</div>
+									</div>
+								</div>
+							</div>						
+						@endif
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.hire_date') }}:</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.hire_date') }}:</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="employment-date-hired[1]">
 											<?php echo (isset($employment['employment-month-hired']) ? $employment['employment-month-hired'] : ""); ?>
@@ -142,7 +193,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.end_date') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.end_date') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="employment-end-date[1]">
 											<?php echo (isset($employment['employment-month-end']) ? $employment['employment-month-end'] : ""); ?>
@@ -155,7 +206,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.duties') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.duties') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="employment-duties[1]"><?php echo (isset($employment['employment-duties']) ? nl2br($employment['employment-duties']) : ""); ?></span>
 									</div>
@@ -280,7 +331,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.license_no') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.license_no') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="licensure-number[1]"><?php echo (isset($licensure['licensure-number']) ? $licensure['licensure-number'] : ""); ?></span>
 									</div>
@@ -290,7 +341,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.date_taken') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.date_taken') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="licensure-date-taken[1]">
 											<?php echo (isset($licensure['licensure-month-taken']) ? $licensure['licensure-month-taken'] : ""); ?>
@@ -303,75 +354,85 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.remarks') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.validity_until') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="licensure-date-taken[1]">
+											<?php echo (isset($licensure['licensure-month-validity-until']) ? $licensure['licensure-month-validity-until'] : ""); ?>
+											<?php echo (isset($licensure['licensure-year-validity-until']) ? $licensure['licensure-year-validity-until'] : ""); ?>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>				
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('common.remarks') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="licensure-remarks[1]"><?php echo (isset($licensure['licensure-remarks']) ? nl2br($licensure['licensure-remarks']) : ""); ?></span>
 									</div>
 								</div>
 							</div>
 						</div>
-						<!-- <div class="row">
+						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">Supporting Documents :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.attachment') }} :</label>
 									<div class="col-md-7 col-sm-7">
-										<span id="licensure-attachments[1]">
-											<ul class="padding-none margin-top-11">
+                                        <ul class="padding-none margin-top-11">
                                             <?php 
-                                            	// if(array_key_exists('licensure-attachments', $licensure)){
-                                             //        $file = FCPATH . $licensure['licensure-attachments'];
-                                             //        if( file_exists( $file ) )
-                                             //        {
-                                             //            $f_info = get_file_info( $file );
-                                             //            $f_type = filetype( $file );
+                                                if( isset($licensure['licensure-attach'])) {
+                                                    $file = FCPATH . urldecode($licensure['licensure-attach']);
+                                                    if( file_exists( $file ) )
+                                                    {
+                                                        $f_info = get_file_info( $file );
+                                                        $f_type = filetype( $file );
 
-                                             //            $finfo = finfo_open(FILEINFO_MIME_TYPE);
-                                             //            $f_type = finfo_file($finfo, $file);
-                                             //            $is_image = false;
-                                             //            switch( $f_type )
-                                             //            {
-                                             //                case 'image/jpeg':
-                                             //                case 'image/jpg':
-                                             //                case 'image/bmp':
-                                             //                case 'image/png':
-                                             //                case 'image/gif':
-                                             //                    $icon = 'fa-picture-o';
-                                             //            		$is_image = true;
-                                             //                    break;
-                                             //                case 'video/mp4':
-                                             //                    $icon = 'fa-film';
-                                             //                    break;
-                                             //                case 'audio/mpeg':
-                                             //                    $icon = 'fa-volume-up';
-                                             //                    break;
-                                             //                default:
-                                             //                    $icon = 'fa-file-text-o';
-                                             //            }
+/*                                                        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                                                        $f_type = finfo_file($finfo, $file);*/
+                                                        $is_image = false;
+                                                        switch( $f_type )
+                                                        {
+                                                            case 'image/jpeg':
+                                                            case 'image/jpg':
+                                                            case 'image/bmp':
+                                                            case 'image/png':
+                                                            case 'image/gif':
+                                                                $icon = 'fa-picture-o';
+                                                                $is_image = true;
+                                                                break;
+                                                            case 'video/mp4':
+                                                                $icon = 'fa-film';
+                                                                break;
+                                                            case 'audio/mpeg':
+                                                                $icon = 'fa-volume-up';
+                                                                break;
+                                                            default:
+                                                                $icon = 'fa-file-text-o';
+                                                        }
 
-                                             //            $filepath = base_url()."profile/download_file/".$details_data_id[$index]['licensure-attachments'];
-                                             //            $file_view = base_url().$licensure['licensure-attachments'];
-                                             //            // $path = site_url() . 'uploads/' . $this->module_link . '/' . $file;
-                                             //            echo '<li class="padding-3 fileupload-delete-'.$details_data_id[$index]['licensure-attachments'].'" style="list-style:none;">';
-                                             //            if($is_image){
-                                             //            	echo '<img src="'.$file_view.'" class="img-responsive" alt="" />';
-                                             //            }
-                                             //            echo '<a href="'.$filepath.'">
-                                             //                <span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
-                                             //                <span>'. basename($f_info['name']) .'</span>
-                                             //                </a>
-                                             //            </li>'
-                                             //            // <span class="padding-left-10"><a style="float: none;" data-dismiss="fileupload" class="close fileupload-delete" upload_id="'.$details['attachment-file'].'" href="javascript:void(0)"></a></span>
-                                             //            ;
-                                             //        }
-                                             //    }
+                                                        $filepath = base_url()."partners/download_file_directly/".urlencode(base64_encode($licensure['licensure-attach']));
+                                                        $file_view = base_url().$licensure['licensure-attach'];
+                                                        // $path = site_url() . 'uploads/' . $this->module_link . '/' . $file;
+                                                        echo '<li class="padding-3 fileupload-delete-'.$licensure['licensure-attach'].'" style="list-style:none;">';
+                                                        if($is_image){
+                                                            echo '<img src="'.$file_view.'" class="img-responsive" alt="" />';
+                                                        }
+                                                        echo '<a href="'.$filepath.'">
+                                                            <span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
+                                                            <span>'. basename($f_info['name']) .'</span>
+                                                            </a>
+                                                        </li>'
+                                                        // <span class="padding-left-10"><a style="float: none;" data-dismiss="fileupload" class="close fileupload-delete" upload_id="'.$details['attachment-file'].'" href="javascript:void(0)"></a></span>
+                                                        ;
+                                                    }
+                                                }
                                             ?>
                                         </ul>
-										</span>
 									</div>
 								</div>
 							</div>
-						</div> -->
-
+						</div>								
 					</div>
 				</div>
 				<?php } ?>
@@ -382,7 +443,7 @@
 					?>
 				<div class="portlet">
 					<div class="portlet-title">
-						<div class="caption" id="training-title[1]"><?php echo (isset($training['training-title']) ? $training['training-title'] : ""); ?></div>
+						<div class="caption" id="training-title[1]"><?php echo (isset($training['training-category']) ? $training['training-category'] : ""); ?></div>
 						<div class="tools">
 							<a class="collapse" href="javascript:;"></a>
 						</div>
@@ -392,9 +453,9 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.category') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.title') }} :</label>
 									<div class="col-md-7 col-sm-7">
-										<span id="training-category[1]"><?php echo (isset($training['training-category']) ? $training['training-category'] : ""); ?></span>
+										<span id="training-category[1]"><?php echo (isset($training['training-title']) ? $training['training-title'] : ""); ?></span>
 									</div>
 								</div>
 							</div>
@@ -402,17 +463,53 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.venue') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.venue') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="training-venue[1]"><?php echo (isset($training['training-venue']) ? $training['training-venue'] : ""); ?></span>
 									</div>
 								</div>
 							</div>
 						</div>
+						@if(in_array('training-provider', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.start_date') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.training_provider') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="training-provider[1]"><?php echo (isset($training['training-provider']) ? $training['training-provider'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						@endif
+						@if(in_array('training-cost', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.training_cost') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="training-cost[1]"><?php echo (isset($training['training-cost']) ? $training['training-cost'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>						
+						@endif
+						@if(in_array('training-budgeted', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.budgeted') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="training-cost[1]"><?php echo (isset($training['training-budgeted']) && $training['training-budgeted'] == 1 ? "Yes" : "No"); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>						
+						@endif
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.start_date') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="training-start-month[1]">
 											<?php echo (isset($training['training-start-month']) ? $training['training-start-month'] : ""); ?>
@@ -425,7 +522,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.end_date') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.end_date') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="training-end-month[1]">
 											<?php echo (isset($training['training-end-month']) ? $training['training-end-month'] : ""); ?>
@@ -435,12 +532,40 @@
 								</div>
 							</div>
 						</div>
-
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.remarks') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="training-end-month[1]">
+											<?php echo (isset($training['training-remarks']) ? $training['training-remarks'] : ""); ?>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<?php } ?>
 			</div>
 			<div class="tab-pane" id="historical_tab6">
+				@if(sizeof($skill_tab) == 0)
+					<div class="portlet">
+						<div class="portlet-title">
+							<div id="employment-company[1]" class="caption">{{ lang('partners.skills') }}</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse"></a>
+							</div>
+						</div>
+						<div class="portlet-body form">
+							<!-- START FORM -->
+							<div id="no_record" class="well" style="">
+								<p class="bold"><i class="fa fa-exclamation-triangle"></i> {{ lang('common.no_record_found') }} </p>
+								<span><p class="small margin-bottom-0">{{ lang('partners.no_info_skill') }}</p></span>
+							</div>
+						</div>
+					</div>
+				@endif				
 				<!-- Previous Trainings : start doing the loop-->
 				<?php foreach($skill_tab as $index => $skill){ 
 					?>
@@ -456,7 +581,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.type') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.skills_type') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="skill-type[1]"><?php echo (isset($skill['skill-type']) ? $skill['skill-type'] : ""); ?></span>
 									</div>
@@ -466,7 +591,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.proficiency_level') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.proficiency_level') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="skill-level[1]"><?php echo (isset($skill['skill-level']) ? $skill['skill-level'] : ""); ?></span>
 									</div>
@@ -476,7 +601,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.remarks') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('common.remarks') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="skill-remarks[1]"><?php echo (isset($skill['skill-remarks']) ? nl2br($skill['skill-remarks']) : ""); ?></span>
 									</div>
@@ -489,6 +614,23 @@
 				<?php } ?>
 			</div>
 			<div class="tab-pane" id="historical_tab7">
+				@if(sizeof($affiliation_tab) == 0)
+					<div class="portlet">
+						<div class="portlet-title">
+							<div id="employment-company[1]" class="caption">{{ lang('partners.affiliation') }}</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse"></a>
+							</div>
+						</div>
+						<div class="portlet-body form">
+							<!-- START FORM -->
+							<div id="no_record" class="well" style="">
+								<p class="bold"><i class="fa fa-exclamation-triangle"></i> {{ lang('common.no_record_found') }} </p>
+								<span><p class="small margin-bottom-0"> {{ lang('partners.no_info_affi') }} </p></span>
+							</div>
+						</div>
+					</div>
+				@endif
 				<!-- Previous Trainings : start doing the loop-->
 				<?php foreach($affiliation_tab as $index => $affiliation){ 
 					?>
@@ -504,7 +646,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.position') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.position') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="affiliation-position[1]"><?php echo (isset($affiliation['affiliation-position']) ? $affiliation['affiliation-position'] : ""); ?></span>
 									</div>
@@ -514,7 +656,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.start_date') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.start_date') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="affiliation-date-start[1]">
 											<?php echo (isset($affiliation['affiliation-month-start']) ? $affiliation['affiliation-month-start'] : ""); ?>											
@@ -527,9 +669,9 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.end_date') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.end_date') }} :</label>
 									<div class="col-md-7 col-sm-7">
-											<?php echo (isset($affiliation['affiliation-month-end']) ? $affiliation['affiliation-month-end'] : ""); ?>											
+											<?php echo (isset($affiliation['affiliation-month-end']) ? $affiliation['affiliation-month-end'] : ""); ?>
 											<?php echo (isset($affiliation['affiliation-year-end']) ? $affiliation['affiliation-year-end'] : ""); ?>
 										</span>
 									</div>
@@ -552,8 +694,8 @@
 							<thead>
 								<tr>
 									
-									<th width="30%">{{ lang('partners_immediate.item_name') }}</th>
-									<th width="45%" class="hidden-xs">{{ lang('partners_immediate.qty') }}</th>
+									<th width="30%">{{ lang('partners.item_name') }}</th>
+									<th width="45%" class="hidden-xs">{{ lang('partners.qty') }}</th>
 									<th width="20%">{{ lang('common.actions') }}</th>
 								</tr>
 							</thead>
@@ -564,9 +706,7 @@
 									<!-- this first column shows the year of this holiday item -->
 									
 									<td>
-										<a id="date_name" href="#" class="text-success">
-											<?php echo (isset($accountable['accountabilities-name']) ? $accountable['accountabilities-name'] : ""); ?>	
-										</a>
+										<?php echo (isset($accountable['accountabilities-name']) ? $accountable['accountabilities-name'] : ""); ?>	
 										<br />
 										<span id="date_set" class="small ">
 											<?php echo (isset($accountable['accountabilities-code']) ? $accountable['accountabilities-code'] : ""); ?>	
@@ -578,7 +718,7 @@
 									<td>
 										<div class="btn-group">
 											<input type="hidden" id="accountabilities_sequence" name="accountabilities_sequence" value="<?=$index?>" />
-											<a  href="javascript:view_personal_details('accnt_form_modal', 'accountabilities', <?=$index?>);" ><i class="fa fa-search"></i> View</a>
+											<a  href="javascript:view_personal_details('accnt_form_modal', 'accountabilities', <?=$index?>);" ><i class="fa fa-search"></i> {{ lang('common.view') }}</a>
 											
 										</div>
 									</td>
@@ -595,7 +735,7 @@
 				<!--Attachments--> 
                 <div class="portlet">
                 	<div class="portlet-title">
-                    	<div class="caption">{{ lang('partners_immediate.attachment') }}</div>
+                    	<div class="caption">{{ lang('partners.attachment') }}</div>
                     </div>
                     <div class="portlet-body">
 						<!-- Table -->
@@ -603,36 +743,42 @@
 							<thead>
 								<tr>
 									
-									<th width="30%">{{ lang('partners_immediate.name') }}</th>
-									<th width="45%" class="hidden-xs">{{ lang('partners_immediate.filename') }}</th>
+									<th width="30%">{{ lang('partners.name') }}</th>
+									<th width="45%" class="hidden-xs">{{ lang('partners.filename') }}</th>
 									<th width="20%">{{ lang('common.actions') }}</th>
 								</tr>
 							</thead>
 							<tbody>
 							<?php foreach($attachment_tab as $index => $attachment){ 
+										$file = FCPATH . urldecode($attachment['attachment-file']);
+                                    	if( file_exists( $file ) ) {
+	                                        $f_info = get_file_info( $file );
+	                                        $f_type = filetype( $file );
+	                                        $real_file_name = basename($f_info['name'])
 								?>
-								<tr rel="0">
-									
-									<td>
-										<a id="date_name" href="#" class="text-success">
-											<?php echo (isset($attachment['attachment-name']) ? $attachment['attachment-name'] : ""); ?>	
-										</a>
-										<br />
-										<span id="date_set" class="small text-muted">
-											<?php echo (isset($attachment['attachment-category']) ? $attachment['attachment-category'] : ""); ?>	
-										</span>
-									</td>
-									<td class="hidden-xs">
-											<?php echo (isset($attachment['attachment-file']) ? substr( $attachment['attachment-file'], strrpos( $attachment['attachment-file'], '/' )+1 ) : ""); ?>	
-									</td>
-									<td>
-										<div class="btn-group">
-											<input type="hidden" id="attachment_sequence" name="attachment_sequence" value="<?=$index?>" />
-											<a  href="javascript:view_personal_details('attach_form_modal', 'attachment', <?=$index?>);" ><i class="fa fa-search"></i> View</a>									
-										</div>
-									</td>
-								</tr>
-								<?php } ?>
+											<tr rel="0">
+												
+												<td>
+													<?php echo (isset($attachment['attachment-name']) ? $attachment['attachment-name'] : ""); ?>	
+													<br />
+													<span id="date_set" class="small text-muted">
+														<?php echo (isset($attachment['attachment-category']) ? $attachment['attachment-category'] : ""); ?>	
+													</span>
+												</td>
+												<td class="hidden-xs">
+														<?php echo $real_file_name; ?>	
+												</td>
+												<td>
+													<div class="btn-group">
+														<input type="hidden" id="attachment_sequence" name="attachment_sequence" value="<?=$index?>" />
+														<a  href="javascript:view_personal_details('attach_form_modal', 'attachment', <?=$index?>);" ><i class="fa fa-search"></i> View</a>									
+													</div>
+												</td>
+											</tr>
+								<?php 
+										}
+									} 
+								?>
 							</tbody>
 						</table>
 					</div>
@@ -640,5 +786,289 @@
                 <!--end portlet-->
 			</div>
 
+			<div class="tab-pane" id="historical_tab16">
+				@if(sizeof($test_profile_tab) == 0)
+					<div class="portlet">
+						<div class="portlet-title">
+							<div id="employment-company[1]" class="caption">{{ lang('partners.test_profile') }}</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse"></a>
+							</div>
+						</div>
+						<div class="portlet-body form">
+							<!-- START FORM -->
+							<div id="no_record" class="well" style="">
+								<p class="bold"><i class="fa fa-exclamation-triangle"></i> {{ lang('common.no_record_found') }} </p>
+								<span><p class="small margin-bottom-0"> {{ lang('partners.no_info_test_profile') }} </p></span>
+							</div>
+						</div>
+					</div>
+				@endif
+				<!-- Previous Trainings : start doing the loop-->
+				<?php foreach($test_profile_tab as $index => $test_profile){ 
+					?>
+				<div class="portlet">
+					<div class="portlet-title">
+						<div class="caption" id="training-title[1]"><?php echo (isset($test_profile['test-title']) ? $test_profile['test-title'] : ""); ?></div>
+						<div class="tools">
+							<a class="collapse" href="javascript:;"></a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<!-- START FORM -->
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">Date Taken :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="training-category[1]"><?php echo (isset($test_profile['test-date-taken']) ? $test_profile['test-date-taken'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">Location :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="training-venue[1]"><?php echo (isset($test_profile['test-location']) ? $test_profile['test-location'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">Score/Rating :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="training-provider[1]"><?php echo (isset($test_profile['test-score']) ? $test_profile['test-score'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">Result :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="training-cost[1]"><?php echo (isset($test_profile['test-result']) && $test_profile['test-result'] == 1 ? "Passed" : "Failed"); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>						
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">Remarks :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="training-cost[1]"><?php echo (isset($test_profile['test-remarks']) ? $test_profile['test-remarks'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>						
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">Supporting Documents :</label>
+									<div class="col-md-7 col-sm-7">
+                                        <ul class="padding-none margin-top-11">
+                                            <?php 
+                                                if( isset($test_profile['test-attachments'])) {
+                                                    $file = FCPATH . urldecode($test_profile['test-attachments']);
+                                                    if( file_exists( $file ) )
+                                                    {
+                                                        $f_info = get_file_info( $file );
+                                                        $f_type = filetype( $file );
+
+/*                                                        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                                                        $f_type = finfo_file($finfo, $file);*/
+                                                        $is_image = false;
+                                                        switch( $f_type )
+                                                        {
+                                                            case 'image/jpeg':
+                                                            case 'image/jpg':
+                                                            case 'image/bmp':
+                                                            case 'image/png':
+                                                            case 'image/gif':
+                                                                $icon = 'fa-picture-o';
+                                                                $is_image = true;
+                                                                break;
+                                                            case 'video/mp4':
+                                                                $icon = 'fa-film';
+                                                                break;
+                                                            case 'audio/mpeg':
+                                                                $icon = 'fa-volume-up';
+                                                                break;
+                                                            default:
+                                                                $icon = 'fa-file-text-o';
+                                                        }
+
+                                                        $filepath = base_url()."partners/download_file_directly/".urlencode(base64_encode($test_profile['test-attachments']));
+                                                        $file_view = base_url().$test_profile['test-attachments'];
+                                                        // $path = site_url() . 'uploads/' . $this->module_link . '/' . $file;
+                                                        echo '<li class="padding-3 fileupload-delete-'.$test_profile['test-attachments'].'" style="list-style:none;">';
+                                                        if($is_image){
+                                                            echo '<img src="'.$file_view.'" class="img-responsive" alt="" />';
+                                                        }
+                                                        echo '<a href="'.$filepath.'">
+                                                            <span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
+                                                            <span>'. basename($f_info['name']) .'</span>
+                                                            </a>
+                                                        </li>'
+                                                        // <span class="padding-left-10"><a style="float: none;" data-dismiss="fileupload" class="close fileupload-delete" upload_id="'.$details['attachment-file'].'" href="javascript:void(0)"></a></span>
+                                                        ;
+                                                    }
+                                                }
+                                            ?>
+                                        </ul>
+									</div>
+								</div>
+							</div>
+						</div>	
+					</div>
+				</div>
+				<?php } ?>
+			</div>			
+			<div class="tab-pane" id="historical_tab17">
+				<!--Attachments--> 
+                <div class="portlet">
+                	<div class="portlet-title">
+                    	<div class="caption">{{ lang('partners.movement') }}</div>
+                    </div>
+                    <div class="portlet-body">
+				<table class="table table-condensed table-striped table-hover">
+					<thead>
+						<tr>
+							<!-- <th width="1%"><input type="checkbox" class="group-checkable" data-set=".record-checker" /></th> -->
+							<th width="30%">Movement Type</th>
+							<th width="25%" class="hidden-xs">Due To</th>
+							<th width="25%" class="hidden-xs">{{ lang('common.remarks') }}</th>
+							<th width="25%" class="hidden-xs">Effective Date</th>
+							<th width="20%">{{ lang('common.actions') }}</th>
+						</tr>
+					</thead>
+					<tbody id="movement-list">
+						<?php 
+							foreach($movement_tab as $index => $movement){ 
+						?>
+						<tr class="record">
+							<!-- this first column shows the year of this holiday item -->
+							<td>
+								<span class="text-success">
+								<?php echo $movement['type']; ?>		
+								</span>
+								<br>
+								<span class="text-muted small">
+									<?php echo date('F d, Y - H:ia', strtotime($movement['created_on'])); ?>		
+								</span>
+							</td>
+							<td>
+								<?php echo $movement['cause']; ?>
+							</td>
+							<td>{{ $movement['remarks'] }}</td>
+							<td class="hidden-xs">
+								<?php echo date('F d, Y', strtotime($movement['effectivity_date'])); ?>	
+							</td>
+							<td>
+								<div class="btn-group">
+									<a  href="javascript:view_movement_details(<?php echo $movement['action_id'] ?>, <?php echo $movement['type_id'] ?>, '<?php echo $movement['cause'] ?>');" class="btn btn-xs text-muted" ><i class="fa fa-search"></i> {{ lang('common.view') }}</a>		
+								</div>
+							</td>
+						</tr>
+						<?php } ?>
+					</tbody>
+				</table>
+					</div>
+                </div>
+                <!--end portlet-->
+			</div>
+			<div class="tab-pane" id="historical_tab18">
+				<!--Attachments--> 
+                <div class="portlet">
+                	<div class="portlet-title">
+                    	<div class="caption">{{ lang('partners.da') }}</div>
+                    </div>
+                    <div class="portlet-body">
+				<table class="table table-condensed table-striped table-hover">
+					<thead>
+						<tr>
+							<!-- <th width="1%"><input type="checkbox" class="group-checkable" data-set=".record-checker" /></th> -->
+							<th width="30%">Type of Offense</th>
+							<th width="25%">No of Offense</th>
+							<th width="25%">Level</th>
+							<th width="25%">Penalty</th>
+							<th width="20%">Date</th>
+						</tr>
+					</thead>
+					<tbody id="movement-list">
+						<?php 
+							$ctr = 1;
+							foreach($da_tab as $index => $da){ 
+						?>
+						<tr class="record">
+							<!-- this first column shows the year of this holiday item -->
+							<td>
+								<?php echo $da['offense']; ?>
+							</td>
+							<td>
+								<?php echo $ctr ?>
+							</td>
+							<td><?php echo $da['offense_level']; ?></td>
+							<td>
+								<?php echo $da['sanction']; ?>	
+							</td>
+							<td>
+								<?php echo date('F d, Y', strtotime($da['created_on'])); ?>
+							</td>
+						</tr>
+						<?php $ctr++; } ?>
+					</tbody>
+				</table>
+					</div>
+                </div>
+                <!--end portlet-->
+			</div>
+			<div class="tab-pane" id="historical_tab19">
+				<!--Attachments--> 
+                <div class="portlet">
+                	<div class="portlet-title">
+                    	<div class="caption">{{ lang('partners.change_request') }}</div>
+                    </div>
+                    <div class="portlet-body">
+				<table class="table table-condensed table-striped table-hover">
+					<thead>
+						<tr>
+							<!-- <th width="1%"><input type="checkbox" class="group-checkable" data-set=".record-checker" /></th> -->
+							<th width="30%">Type of Request</th>
+							<th width="25%">From</th>
+							<th width="25%">To</th>
+							<th width="20%">Request Date</th>
+						</tr>
+					</thead>
+					<tbody id="movement-list">
+						<?php 
+							$ctr = 1;
+							foreach($cr_tab as $index => $cr){ 
+						?>
+						<tr class="record">
+							<!-- this first column shows the year of this holiday item -->
+							<td>
+								<?php echo $cr['key_class']; ?>
+							</td>
+							<td>
+								<?php echo $cr['from_key_value'] ?>
+							</td>
+							<td><?php echo $cr['key_value']; ?></td>
+							<td>
+								<?php echo date('F d, Y H:ia', strtotime($cr['created_on'])); ?>
+							</td>
+						</tr>
+						<?php $ctr++; } ?>
+					</tbody>
+				</table>
+					</div>
+                </div>
+                <!--end portlet-->
+			</div>	
 		</div>
 	</div>

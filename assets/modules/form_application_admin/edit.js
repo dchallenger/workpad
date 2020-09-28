@@ -1,4 +1,9 @@
 $(document).ready(function(){
+    $('.select2me').select2({
+        placeholder: "Select an option",
+        allowClear: true
+    });
+
     $('#time_forms_upload-upload_id-fileupload').fileupload({
         url: base_url + module.get('route') + '/multiple_upload',
         autoUpload: true,
@@ -91,6 +96,8 @@ $(document).ready(function(){
     $('#users_assignment-assignment_id').multiselect();
 
     $('#form_type').change(function () {
+        $('#employees_count').html('');
+        $("#partners-partner_id").multiselect("destroy");
         var form_type = $(this).val()
         if(form_type != 0){
             //location select all
@@ -181,6 +188,8 @@ $(document).ready(function(){
 
     $('#filter_employees').click(function () {
         var forms = ['1','2','3','4','5','6','7','8','14','15','16','19','20'];
+        $('#partners-partner_id').find("option:selected").removeAttr("selected");
+        
         if ($('#partners-partner_id').length > 0){
             if ($.inArray($('#form_type').val(),forms) >= 0){
                 $('#partners-partner_id').multiselect({
@@ -239,7 +248,7 @@ function back_to_mainform_emp(cancel){
         update_employees( $('#users_location-location_id').val(), $('#users_division-division_id').val(), $('#users_department-department_id').val());
     }
     var employees_count = $("#partners-partner_id :selected").length;
-    $('#employees_count').html(employees_count);
+    $('#employees_count').html(employees_count+' employee/s selected.');
     $('#change_employees').hide();
     $('#main_form').show();
     $('.form-actions').show();
@@ -265,7 +274,7 @@ function update_employees( location_id, company_id, division_id, department_id)
                     // on before send?
                 },
                 success: function (response) {  
-                    $('#employees_count').html(response.count);
+                    $('#employees_count').html(response.count+' employee/s selected.');
                     $('#change_employees').html(response.filtered_employees);
                     $('#partners-partner_id').html(response.employees);
                     // $("#partners-partner_id").multiselect("destroy");
@@ -275,6 +284,7 @@ function update_employees( location_id, company_id, division_id, department_id)
                         $('#partners-partner_id').multiselect({
                             multiple: false
                         });
+                        //$("#partners-partner_id").find("option:selected").removeAttr("selected");
                     }
                     else{
                         $('#partners-partner_id').multiselect({
@@ -282,10 +292,10 @@ function update_employees( location_id, company_id, division_id, department_id)
                             multiple: true
                         });                        
                     }
-                    $('input[name="multiselect_partners-partner_id"]').each( function() {
+/*                    $('input[name="multiselect_partners-partner_id"]').each( function() {
                         $(this).attr('checked',true);
                         $(this).attr('aria-selected',true);
-                    });
+                    });*/
                 }
             }); 
         //  }

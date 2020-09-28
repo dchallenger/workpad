@@ -9,8 +9,8 @@
 				<li><a data-toggle="tab" href="#historical_tab3"><i class="fa fa-list"></i>{{ lang('partners.character_ref') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab4"><i class="fa fa-list"></i>{{ lang('partners.licensure') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab5"><i class="fa fa-list"></i>{{ lang('partners.training') }}</a></li>
+				<li><a data-toggle="tab" href="#historical_tab16"><i class="fa fa-list"></i>{{ lang('partners.test_profile') }}</a></li>				
 				<li><a data-toggle="tab" href="#historical_tab6"><i class="fa fa-list"></i>{{ lang('partners.skills') }}</a></li>
-				<li><a data-toggle="tab" href="#historical_tab16"><i class="fa fa-list"></i>{{ lang('partners.test_profile') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab7"><i class="fa fa-list"></i>{{ lang('partners.affiliation') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab8"><i class="fa fa-list"></i>{{ lang('partners.accountabilities') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab9"><i class="fa fa-files-o"></i>{{ lang('partners.attachment') }}</a></li>

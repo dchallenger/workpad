@@ -6,10 +6,12 @@ $config["list_cached_query"] = 'SELECT ww_partners_clearance.*,
 										`ww_partners_clearance`.`modified_on` as "partner_clearance_modified_on", 
 										`ww_partners_clearance`.`modified_by` as "partner_clearance_modified_by", 
 										`ww_partners_clearance_status`.`status` as clearance_status,
+										`ww_partners_clearance`.`status_id` as status_id,
 										`ww_partners`.`alias` as "display_name",
 										`ww_users_position`.`position` as "position",
 										`ww_partners`.`user_id` as "user_id",
-										`ww_partners_clearance`.`action_id` as "action_id"
+										`ww_partners_clearance`.`action_id` as "action_id",
+										`ww_partners_clearance`.`exit_interviewed` as "exit_interviewed"
 								FROM (`ww_partners_clearance`) 
 								INNER JOIN ww_partners_clearance_status ON `ww_partners_clearance`.`status_id` = `ww_partners_clearance_status`.`status_id` 
 								INNER JOIN ww_partners ON `ww_partners_clearance`.`partner_id` = `ww_partners`.`partner_id` 

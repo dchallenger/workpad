@@ -62,26 +62,41 @@
 	
 	<td>
 	
-		@if( $permission['edit'] == 1 )
-		<div class="btn-group">
-			<a class="btn btn-xs text-muted" href="{{$edit_url}}"><i class="fa fa-pencil"></i> Edit</a>
-		</div>
+		@if( $permission['edit'] == 1 && $status_id <= 3)
+			@if((!$permission['process'] && !$exit_interviewed) || $permission['process'])
+				<div class="btn-group">
+					<a class="btn btn-xs text-muted" href="{{$edit_url}}"><i class="fa fa-pencil"></i> Edit</a>
+				</div>
+			@endif
 		@endif
 
-		@if($permission['decline'] && in_array($clearance_status, array('Open', 'Ongoing', 'Pending')))
+		@if($permission['process'] && $permission['detail'] && $permission['decline'] && in_array($clearance_status, array('Open', 'Ongoing', 'Pending', 'Cleared')))
 		<div class="btn-group">
 			<a class="btn btn-xs text-muted" href="#" data-close-others="true"  data-toggle="dropdown"><i class="fa fa-gear"></i> Options</a>
 
 			<ul class="dropdown-menu pull-right">
+				@if($exit_interviewed)
+					<li><a href="{{$edit_url}}"><i class="fa fa-search"></i> View</a></li>
+				@endif
+
 				@if($clearance_status == "Pending")
 					<form>
 	        		<li><a href="#" onclick="send_sign( $(this).closest('form'), 4 , {{ $record_id }} )"><i class="fa fa-check text-success"></i> Cleared</a></li>
 	        		</form>
 	        	@endif
+	        	@if($clearance_status != "Cleared")
         		<li><a href="#" onclick="cancel_clearance({{ $user_id }}, {{ $action_id }}, {{ $record_id }})"><i class="fa fa-ban text-danger"></i> Cancel</a></li>
+        		@endif
     		</ul>
 
 		</div>
 		@endif
+
+		@if( !$permission['process'] && $permission['detail'] == 1 && $exit_interviewed)
+		<div class="btn-group">
+			<a class="btn btn-xs text-muted" href="{{$edit_url}}"><i class="fa fa-search"></i> View</a>
+		</div>
+		@endif
+
 	</td>
 </tr>

@@ -29,7 +29,7 @@ class clearance_manage_model extends Record
 		$this->table = 'partners_clearance';
 		$this->icon = '';
 		$this->short_name = 'Clearance';
-		$this->long_name  = 'Clearance Manage';
+		$this->long_name  = 'Manage Clearance';
 		$this->description = '';
 		$this->path = APPPATH . 'modules/clearance_manage/';
 
@@ -71,6 +71,7 @@ class clearance_manage_model extends Record
 
 	function get_pending_status($clearance_id)
 	{
+		$this->db->join('partners_clearance_signatories_accountabilities','partners_clearance_signatories.clearance_signatories_id=partners_clearance_signatories_accountabilities.clearance_signatories_id');
 		$clearance = $this->db->get_where('partners_clearance_signatories', array('clearance_id' => $clearance_id, 'status_id <>' => 4 ));
 		$pending = 0;
 		if($clearance && $clearance->num_rows() > 0){

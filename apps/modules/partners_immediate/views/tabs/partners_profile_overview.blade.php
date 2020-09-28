@@ -6,6 +6,8 @@
 					<span class="after"></span>
 				</li>
 				<li><a data-toggle="tab" href="#overview_tab2"><i class="fa fa-phone"></i>{{ lang('partners_immediate.contacts') }}</a></li>
+				<li><a data-toggle="tab" href="#overview_tab17"><i class="fa fa-money"></i>{{ lang('partners.cost_center') }}</a></li>				
+				<li><a data-toggle="tab" href="#overview_tab15"><i class="fa fa-list"></i>{{ lang('partners.id_nos') }}</a></li>
 				<li><a data-toggle="tab" href="#overview_tab3"><i class="fa fa-user"></i>{{ lang('partners_immediate.personal') }}</a></li>
 				<li><a data-toggle="tab" href="#overview_tab14"><i class="fa fa-group"></i>{{ lang('partners_immediate.family') }}</a></li>
 			</ul>
@@ -52,7 +54,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row hidden">
+						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.role') }} :</label>
@@ -87,7 +89,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.work_sched') }} :</label>
 									<div class="col-md-7 col-sm-7">
-										<span id="shift">{{$shift}}</span>
+										<span id="shift">{{$calendar}}</span>
 									</div>
 								</div>
 							</div>
@@ -104,18 +106,6 @@
 					</div>
 					<div class="portlet-body form">
 						<!-- START FORM -->
-                        @if( in_array( 'taxcode', $partners_keys ))
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.taxcode') }} :</label>
-                                    <div class="col-md-7 col-sm-7">
-                                        <span id="employment-status">{{$record['taxcode']}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif  
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -126,28 +116,50 @@
 								</div>
 							</div>
 						</div>
+						@if( in_array('job_level', $partners_keys) )
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.type') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.rank') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="job-class">{{$job_level}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						@endif							
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.level') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="employment-type">{{$type}}</span>
 									</div>
 								</div>
 							</div>
 						</div>
-                        @if( in_array( 'job_class', $partners_keys ))
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.jobClass') }} :</label>
-                                    <div class="col-md-7 col-sm-7">
-                                        <span id="employment-status">{{$record['job_class']}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">Classification :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="employment-type">{{$classification}}</span>
+									</div>
+								</div>
+							</div>
+						</div>		
+						@if( in_array( 'job_class', $partners_keys ))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.jobClass') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="employment-status">{{$record['job_class']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						@endif
                         @if( in_array( 'job_rank_level', $partners_keys ))
                         <div class="row">
                             <div class="col-md-12">
@@ -161,7 +173,7 @@
                         </div>
                         @endif
                         @if( in_array( 'job_level', $partners_keys ))
-                        <div class="row">
+                        <div class="row hidden">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.job_level') }} :</label>
@@ -211,6 +223,16 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.ohire_date') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="lastname">{{$original_date_hired}}</span>
+									</div>
+								</div>
+							</div>
+						</div>                        
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.hire_date') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="date-hired">{{$date_hired}}</span>
@@ -218,26 +240,41 @@
 								</div>
 							</div>
 						</div>
+	                	@if(in_array('regularization_date', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.probi_date') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.reg_date') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="lastname">{{$regularization_date}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+	                	@endif    	                
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.last_promotion_date') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="lastname">{{$last_promotion_date}}</span>
+									</div>
+								</div>
+							</div>
+						</div>  						
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $partners_labels['probationary_date'] }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="lastname">{{$probationary_date}}</span>
+										<br>
+		                        		<span class="text-muted small">End date of employment/contract service</span>										
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.ohire_date') }} :</label>
-									<div class="col-md-7 col-sm-7">
-										<span id="lastname">{{$original_date_hired}}</span>
-									</div>
-								</div>
-							</div>
-						</div>
+						@if(in_array('last_probationary', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -248,6 +285,8 @@
 								</div>
 							</div>
 						</div>
+						@endif
+						@if(in_array('last_salary_adjustment', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -258,6 +297,7 @@
 								</div>
 							</div>
 						</div>
+						@endif
 					</div>
 				</div>
 				<!-- Work Assignment Information -->
@@ -283,6 +323,17 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.project_hr') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="reports-to">{{$project_hr}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						@if(in_array('organization', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.org') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="organization">{{$organization}}</span>
@@ -290,12 +341,15 @@
 								</div>
 							</div>
 						</div>
+						@endif
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.div') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="position-title">{{$division}}</span>
+                        				<br>
+										<span class="text-muted small">Cost Center Code : {{$cost_center_code}}</span>										
 									</div>
 								</div>
 							</div>
@@ -310,26 +364,19 @@
 								</div>
 							</div>
 						</div>
+						@if(in_array('sbu_unit', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.group') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.sbu_unit') }} :</label>
 									<div class="col-md-7 col-sm-7">
-										<span id="id-number">{{$group}}</span>
+										<span id="role-permission">{{$sbu_unit}}</span>
 									</div>
 								</div>
 							</div>
-						</div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.agency_assignment') }} :</label>
-                                    <div class="col-md-7 col-sm-7">
-                                        <span id="agency_assignment">{{$agency_assignment}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+						</div>						
+						@endif
+						@if(in_array('section', $partners_keys))
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -340,9 +387,143 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
+                        @if(in_array('group', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.group') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="id-number">{{$group}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						@endif
+						@if(in_array('agency_assignment', $partners_keys))
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.agency_assignment') }} :</label>
+                                    <div class="col-md-7 col-sm-7">
+                                        <span id="agency_assignment">{{$agency_assignment}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $partners_labels['project_id'] }} :</label>
+                                    <div class="col-md-7 col-sm-7">
+                                        <span id="role-permission">{{$project}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                     
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $partners_labels['start_date'] }} :</label>
+                                    <div class="col-md-7 col-sm-7">
+                                        <span id="role-permission">{{$start_date}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $partners_labels['end_date'] }} :</label>
+                                    <div class="col-md-7 col-sm-7">
+                                        <span id="role-permission">{{$end_date}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						@if(in_array('work_schedule_coordinator', $partners_keys))
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $partners_labels['work_schedule_coordinator'] }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="role-permission">{{ $coordinator }}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						@endif     
+						@if(in_array('credit_setup', $partners_keys))
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $partners_labels['credit_setup'] }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="role-permission">{{ $credit_setup }}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						@endif                          
 					</div>
 				</div>
 			</div>
+			<div class="tab-pane" id="overview_tab17">
+				<!-- Cost Center Information -->
+				<?php
+	                $cost_center = '';				
+					if (isset($cost_center_tab[1]) && isset($cost_center_tab[1]['cost_center-cost_center'])) {
+	            		$db->select('project_id,project');
+	            		$db->where('project_id', $cost_center_tab[1]['cost_center-cost_center']);
+	                    $db->where('deleted', '0');
+	                    $project = $db->get('users_project');
+	                    if ($project && $project->num_rows() > 0) {
+	                    	$cost_center = $project->row()->project;
+	                    }
+					}
+				?>
+				<div class="portlet">
+					<div class="portlet-title">
+						<div class="caption">{{ lang('partners.cost_center') }}</div>
+						<div class="tools">
+							<a class="collapse" href="javascript:;"></a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.cost_center') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="lastname">{{$cost_center}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.code') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="lastname">{{$cost_center_tab[1]['cost_center-code']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.percentage') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="lastname">{{$cost_center_tab[1]['cost_center-percentage']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+		            </div>
+		        </div>
+		    </div>			
 			<div class="tab-pane" id="overview_tab2">
 				<!-- Contact Information -->
 				<div class="portlet">
@@ -353,71 +534,178 @@
 						</div>
 					</div>
 					<div class="portlet-body form">
-						<!-- START FORM -->
-                	<?php foreach($profile_telephones as $telephone){ ?>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.phone') }} :</label>
-									<div class="col-md-7 col-sm-7">
-										<span id="phone"><?=$telephone?></span>
+		                <div>&nbsp;&nbsp;Present Address:</div>
+		                <br>		
+		                @if(in_array('address_1', $partners_keys))
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.address') }} :</label>
+											<div class="col-md-7 col-sm-7">
+												<span id="lastname">{{$complete_address}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+		                @endif	
+		                @if(in_array('city_town', $partners_keys))
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.city') }} :</label>
+											<div class="col-md-7 col-sm-7">
+												<span id="lastname">{{$profile_live_in}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+		                @endif
+		                @if(in_array('country', $partners_keys))
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.country') }} :</label>
+											<div class="col-md-7 col-sm-7">
+												<span id="lastname">{{$country}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+		                @endif		                
+		                @if(in_array('zip_code', $partners_keys))
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.zip') }} :</label>
+											<div class="col-md-7 col-sm-7">
+												<span id="lastname">{{$zip_code}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+		                @endif
+		                <div>&nbsp;&nbsp;Permanent Address:</div>
+		                <br>		
+		                @if(in_array('permanent_address', $partners_keys))
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.address') }} :</label>
+											<div class="col-md-7 col-sm-7">
+												<span id="lastname">{{$permanent_address}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+		                @endif	
+		                @if(in_array('permanent_city_town', $partners_keys))
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.city') }} :</label>
+											<div class="col-md-7 col-sm-7">
+												<span id="lastname">{{$permanent_city_town}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+		                @endif
+		                @if(in_array('permanent_country', $partners_keys))
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.country') }} :</label>
+											<div class="col-md-7 col-sm-7">
+												<span id="lastname">{{$permanent_country}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+		                @endif		                
+		                @if(in_array('permanent_zipcode', $partners_keys))
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.zip') }} :</label>
+											<div class="col-md-7 col-sm-7">
+												<span id="lastname">{{$permanent_zipcode}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+		                @endif
+		                <div>&nbsp;&nbsp;Office:</div>
+		                <br>	
+		                @if(in_array('phone', $partners_keys))
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.phone') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="phone"><?=$office_telephones?></span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-                	<?php } ?>
-                    <?php foreach($profile_mobiles as $mobile){ ?>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.mobile') }} :</label>
-									<div class="col-md-7 col-sm-7">
-										<span id="lastname"><?=$mobile?></span>
+		                @endif
+		                @if(in_array('mobile', $partners_keys))
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.mobile') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="lastname"><?=$office_mobiles?></span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-                	<?php } ?>						
+		                @endif					
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.email') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.email') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="lastname">{{$profile_email}}</span>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.address') }} :</label>
-									<div class="col-md-7 col-sm-7">
-										<span id="lastname">{{$complete_address}}</span>
+		                <div>&nbsp;&nbsp;Personal:</div>
+		                <br>	
+		                @if(in_array('personal_phone', $partners_keys))
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.phone') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="phone"><?=$personal_telephone?></span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.city') }} :</label>
-									<div class="col-md-7 col-sm-7">
-										<span id="lastname">{{$profile_live_in}}</span>
+		                @endif
+		                @if(in_array('personal_mobile', $partners_keys))
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.mobile') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="lastname"><?=$personal_mobile?></span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
+		                @endif					
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.zip') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.email') }} :</label>
 									<div class="col-md-7 col-sm-7">
-										<span id="lastname">{{$zip_code}}</span>
+										<span id="lastname">{{$personal_email}}</span>
 									</div>
 								</div>
 							</div>
-						</div>
+						</div>	
 					</div>
 				</div>
 				<!-- Company Information -->
@@ -513,6 +801,152 @@
 					</div>
 				</div>
 			</div>
+			<div class="tab-pane" id="overview_tab15">
+				<!-- ID Numbers -->
+				<div class="portlet">
+					<div class="portlet-title">
+						<div class="caption">{{ lang('partners.id_no') }}</div>
+						<div class="tools">
+							<a class="collapse" href="javascript:;"></a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<!-- START FORM -->
+                @if(in_array('taxcode', $partners_keys))
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-5 col-sm-5 text-right text-muted">{{ $partners_labels['taxcode'] }} :</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <span id="emergency-name">{{$record['taxcode']}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                @endif
+                @if(in_array('sss_number', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-5 col-sm-5 text-right text-muted">{{ $partners_labels['sss_number'] }} :</label>
+									<div class="col-md-6 col-sm-6">
+										<span id="emergency-name">{{$record['sss_number']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                @endif
+                @if(in_array('pagibig_number', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-5 col-sm-5 text-right text-muted">{{ $partners_labels['pagibig_number'] }} :</label>
+									<div class="col-md-6 col-sm-6">
+										<span id="emergency-name">{{$record['pagibig_number']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                @endif
+                @if(in_array('philhealth_number', $partners_keys))
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-5 col-sm-5 text-right text-muted">{{ $partners_labels['philhealth_number'] }} :</label>
+										<div class="col-md-6 col-sm-6">
+											<span id="emergency-name">{{$record['philhealth_number']}}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+                @endif
+                @if(in_array('tin_number', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-5 col-sm-5 text-right text-muted">{{ $partners_labels['tin_number'] }} :</label>
+									<div class="col-md-6 col-sm-6">
+										<span id="emergency-name">{{$record['tin_number']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                @endif
+                @if(in_array('bank_account_number_savings', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-5 col-sm-5 text-right text-muted">{{ $partners_labels['bank_account_number_savings'] }} :</label>
+									<div class="col-md-6 col-sm-6">
+										<span id="emergency-name">{{$record['bank_number_savings']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                @endif
+                @if(in_array('bank_account_number_current', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-5 col-sm-5 text-right text-muted">{{ $partners_labels['bank_account_number_current'] }} :</label>
+									<div class="col-md-6 col-sm-6">
+										<span id="emergency-name">{{$record['bank_number_current']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                @endif
+                @if(in_array('payroll_bank_account_number', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-5 col-sm-5 text-right text-muted">{{ $partners_labels['payroll_bank_account_number'] }} :</label>
+									<div class="col-md-6 col-sm-6">
+										<span id="emergency-name">{{$record['payroll_bank_account_number']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                @endif
+                @if(in_array('payroll_bank_name', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-5 col-sm-5 text-right text-muted">{{ $partners_labels['payroll_bank_name'] }} :</label>
+									<div class="col-md-6 col-sm-6">
+										<span id="emergency-name">{{$record['payroll_bank_name']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                @endif                
+                @if(in_array('bank_account_name', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-5 col-sm-5 text-right text-muted">{{ $partners_labels['bank_account_name'] }} :</label>
+									<div class="col-md-6 col-sm-6">
+										<span id="emergency-name">{{$record['bank_account_name']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                @endif
+                @if(in_array('health_care', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-5 col-sm-5 text-right text-muted">{{ $partners_labels['health_care'] }} :</label>
+									<div class="col-md-6 col-sm-6">
+										<span id="emergency-name">{{$record['health_care']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                @endif
+					</div>
+				</div>
+			</div>			
 			<div class="tab-pane" id="overview_tab3">
 				<!-- Personal Information -->
 				<div class="portlet">
@@ -666,6 +1100,18 @@
 								</div>
 							</div>
 						</div>
+                		@if(in_array('number_children', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.number_children') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="no-of-dependents">{{$number_children}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                		@endif  						
 					</div>
 				</div>
 			</div>
@@ -740,6 +1186,30 @@
 								</div>
 							</div>
 						</div>
+						@if(in_array('family-dependent-hmo', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{$partners_labels['family-dependent-hmo']}} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="civil-status"><?php echo (isset($family['family-dependent-hmo']) ? $family['family-dependent-hmo'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>						
+						@endif
+						@if(in_array('family-dependent-insurance', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{$partners_labels['family-dependent-insurance']}} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="civil-status"><?php echo (isset($family['family-dependent-insurance']) ? $family['family-dependent-insurance'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>							
+						@endif							
 					</div>
 				</div>
 				<?php } ?>

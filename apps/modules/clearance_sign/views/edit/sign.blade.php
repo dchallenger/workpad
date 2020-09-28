@@ -44,7 +44,7 @@
 	</div>
 	<div class="modal-footer">
 		<button type="button" data-dismiss="modal" class="btn default btn-sm">Close</button>
-		<button type="button" class="btn green btn-sm" onclick="save_sign($(this).closest('form'),'','',<?php echo $properties_tagging ?>)">Add Signatory</button>
+		<button type="button" class="btn green btn-sm" onclick="save_sign($(this).closest('form'),'','',<?php echo $properties_tagging ?>)">Save</button>
 	</div>
 </form>
 

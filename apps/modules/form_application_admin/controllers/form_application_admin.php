@@ -1108,7 +1108,7 @@ class Form_application_admin extends MY_PrivateController
         foreach( $employees->result() as $employee )
         {   
             $data['partner_id_options'][$employee->user_id] = $employee->alias;
-            $this->response->employees .= '<option value="'.$employee->user_id.'" selected="selected">'.$employee->alias.'</option>';
+            $this->response->employees .= '<option value="'.$employee->user_id.'">'.$employee->alias.'</option>';
         }
 
         $data['record']['partners.partner_id'] = '';
@@ -1135,6 +1135,15 @@ class Form_application_admin extends MY_PrivateController
                 'message' => 'You dont have sufficient permission to get the list of field groups for this module, please notify the System Administrator.',
                 'type' => 'warning'
             );
+            $this->_ajax_return();
+        }
+
+        if (empty($this->input->post('partners'))) {
+            $this->response->message[] = array(
+                'message' => 'There is none employee selected.',
+                'type' => 'error'
+                );
+
             $this->_ajax_return();
         }
 

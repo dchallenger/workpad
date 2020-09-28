@@ -59,46 +59,26 @@
 					<td class="active"><span class="bold">Accountabilities </span></td>
 					<td>
 						<div class="form-group">
-							<label class="control-label col-md-3">
+							<label class="control-label col-md-3 hidden">
 								<span>
 				                	<button type="button" class="btn btn-success btn-xs" data-toggle="modal" href="#temp_section" onclick="add_account($(this),<?php echo $value["clearance_layout_sign_id"] ?>)">Add Item</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				                </span>																	
 							</label>
-							<div class="col-md-7">
-								&nbsp;
-				            </div>	
+							<label class="col-md-7">
+									<span class="btn btn-primary btn-sm btn-file">
+                                    <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 
+                                    <i class="fa fa-plus" type="file"></i>
+                                    <span>Add Files...</span>
+                                    </span>
+                                    <input type="file" class="clearace_signatories-attachments-multi-fileupload" type="file" name="files[]" multiple="">
+                                </span>
+				            </label>
 			            </div>														
-						<div class="form-group">														
-							<label class="control-label col-md-3">Attachments</label>
-							<div class="col-md-7">
-								<div data-provides="fileupload" class="fileupload fileupload-new" id="clearace_signatories-attachments-container">
-									<?php  
-										$f_info = '';
-										if( !empty($signatories[$value['clearance_layout_sign_id']]['attachments']) ){
-											$file = FCPATH . urldecode( $signatories[$value['clearance_layout_sign_id']]['attachments'] );
-											if( file_exists( $file ) )
-											{
-												$f_info = get_file_info( $file );
-											}
-										}
-									?>
-									<input type="hidden" name="partners_clearance_signatories[attachments][<?php echo $value["clearance_layout_sign_id"] ?>]" id="clearace_signatories-attachments" value=""/>
-									<div class="input-group">
-										<span class="input-group-btn">
-											<span class="uneditable-input">
-											<i class="fa fa-file fileupload-exists"></i> 
-											<span class="fileupload-preview"></span>
-											</span>
-										</span>
-										<span class="btn default btn-file">
-											<span class="fileupload-new"><i class="fa fa-paper-clip"></i>Select File</span>
-											<span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
-											<input type="file" class="clearace_signatories-attachments-fileupload" id="clearace_signatories-attachments-fileupload" type="file" name="files[]">
-										</span>
-										<a data-dismiss="fileupload" class="btn red fileupload-exists fileupload-delete"><i class="fa fa-trash-o"></i>Remove</a>
-									</div>
-								</div>
-							</div>
+			            <div class="row">
+			            	<label class="col-md-12 col-sm-12 text-muted">Attachments List</label>
+			            </div><br>
+
+		                <div class="uploaded_container">
 						</div>	 						
 						<div class="input-group">
 							<span class="input-group-addon">
@@ -109,6 +89,7 @@
 								<button type="button" class="btn btn-default" onclick="add_account_from_201($(this),<?php echo $value["clearance_layout_sign_id"] ?>)"><i class="fa fa-plus"></i></button>
 							</span>
 						</div>
+						<br>
 						<div class="accountability">
 						</div>								 							
 		        	</td>
@@ -197,46 +178,26 @@
 					<td class="active"><span class="bold">Accountabilities </span></td>
 					<td>
 						<div class="form-group">
-							<label class="control-label col-md-3">
+							<label class="control-label col-md-3 hidden">
 								<span>
 				                	<button type="button" class="btn btn-success btn-xs" data-toggle="modal" href="#temp_section" onclick="add_account($(this),<?php echo $value["clearance_layout_sign_id"] ?>)">Add Item</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				                </span>																	
 							</label>
-							<div class="col-md-7">
-								&nbsp;
-				            </div>	
+							<label class="col-md-7">
+									<span class="btn btn-primary btn-sm btn-file">
+                                    <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 
+                                    <i class="fa fa-plus" type="file"></i>
+                                    <span>Add Files...</span>
+                                    </span>
+                                    <input type="file" class="clearace_signatories-attachments-multi-fileupload" type="file" name="files[]" multiple="">
+                                </span>
+				            </label>
 			            </div>														
-						<div class="form-group">														
-							<label class="control-label col-md-3">Attachments</label>
-							<div class="col-md-7">
-								<div data-provides="fileupload" class="fileupload fileupload-new" id="clearace_signatories-attachments-container">
-									<?php  
-										$f_info = '';
-										if( !empty($signatories[$value['clearance_layout_sign_id']]['attachments']) ){
-											$file = FCPATH . urldecode( $signatories[$value['clearance_layout_sign_id']]['attachments'] );
-											if( file_exists( $file ) )
-											{
-												$f_info = get_file_info( $file );
-											}
-										}
-									?>
-									<input type="hidden" name="partners_clearance_signatories[attachments][<?php echo $value["clearance_layout_sign_id"] ?>]" id="clearace_signatories-attachments" value=""/>
-									<div class="input-group">
-										<span class="input-group-btn">
-											<span class="uneditable-input">
-											<i class="fa fa-file fileupload-exists"></i> 
-											<span class="fileupload-preview"></span>
-											</span>
-										</span>
-										<span class="btn default btn-file">
-											<span class="fileupload-new"><i class="fa fa-paper-clip"></i>Select File</span>
-											<span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
-											<input type="file" class="clearace_signatories-attachments-fileupload" id="clearace_signatories-attachments-fileupload" type="file" name="files[]">
-										</span>
-										<a data-dismiss="fileupload" class="btn red fileupload-exists fileupload-delete"><i class="fa fa-trash-o"></i>Remove</a>
-									</div>
-								</div>
-							</div>
+			            <div class="row">
+			            	<label class="col-md-12 col-sm-12 text-muted">Attachments List</label>
+			            </div><br>
+
+		                <div class="uploaded_container">
 						</div>	                					
 						<div class="input-group">
 							<span class="input-group-addon">
@@ -246,7 +207,8 @@
 							<span class="input-group-btn">
 								<button type="button" class="btn btn-default" onclick="add_account_from_201($(this),<?php echo $value["clearance_layout_sign_id"] ?>)"><i class="fa fa-plus"></i></button>
 							</span>
-						</div> 
+						</div>
+						<br> 
 						<div class="accountability">
 						</div>							
 		        	</td>

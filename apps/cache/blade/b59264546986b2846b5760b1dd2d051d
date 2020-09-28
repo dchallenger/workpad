@@ -604,7 +604,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('my201.start_date'); ?> :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('partners.start_date'); ?> :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="training-start-month[1]">
 											<?php echo (isset($training['training-start-month']) ? $training['training-start-month'] : ""); ?>
@@ -617,7 +617,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('my201.end_date'); ?> :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('partners.end_date'); ?> :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="training-end-month[1]">
 											<?php echo (isset($training['training-end-month']) ? $training['training-end-month'] : ""); ?>
@@ -743,7 +743,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('my201.position'); ?> :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('partners.position'); ?> :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="affiliation-position[1]"><?php echo (isset($affiliation['affiliation-position']) ? $affiliation['affiliation-position'] : ""); ?></span>
 									</div>
@@ -753,7 +753,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('my201.date_start'); ?> :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('partners.start_date'); ?> :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="affiliation-date-start[1]">
 											<?php echo (isset($affiliation['affiliation-month-start']) ? $affiliation['affiliation-month-start'] : ""); ?>
@@ -766,7 +766,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('my201.date_end'); ?> :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('partners.end_date'); ?> :</label>
 									<div class="col-md-7 col-sm-7">
 											<?php echo (isset($affiliation['affiliation-month-end']) ? $affiliation['affiliation-month-end'] : ""); ?>
 											<?php echo (isset($affiliation['affiliation-year-end']) ? $affiliation['affiliation-year-end'] : ""); ?>

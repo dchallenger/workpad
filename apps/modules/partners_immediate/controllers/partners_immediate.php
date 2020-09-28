@@ -6,6 +6,7 @@ class Partners_immediate extends MY_PrivateController
 	{
 		$this->load->model('partners_immediate_model', 'mod');
 		parent::__construct();
+		$this->lang->load( 'partners' );
 	}
 
 
@@ -185,10 +186,14 @@ class Partners_immediate extends MY_PrivateController
 		$data['id_number'] = $profile_header_details['id_number'] == "" ? "n/a" : $profile_header_details['id_number'];
 		$data['biometric'] = $profile_header_details['biometric'] == "" ? "n/a" : $profile_header_details['biometric'];
 		$data['shift'] = $profile_header_details['shift'] == "" ? "n/a" : $profile_header_details['shift'];
+		$data['calendar'] = $profile_header_details['calendar'] == "" ? "n/a" : $profile_header_details['calendar'];
 		//Employment Information
 		$data['status'] = $profile_header_details['employment_status'] == "" ? "n/a" : $profile_header_details['employment_status'];
 		$data['type'] = $profile_header_details['employment_type'] == "" ? "n/a" : $profile_header_details['employment_type'];
-		$data['date_hired'] = $profile_header_details['effectivity_date'] == "" ? "n/a" : date("F d, Y", strtotime($profile_header_details['effectivity_date']));
+		$data['job_level'] = $profile_header_details['job_level'] == "" ? "n/a" : $profile_header_details['job_level'];
+		$data['classification'] = $profile_header_details['classification'] == "" ? "n/a" : $profile_header_details['classification'];		
+		$data['date_hired'] = valid_date($profile_header_details['effectivity_date']);
+		$data['regularization_date'] = valid_date($profile_header_details['regularization_date']);
 		$probationary_date = $this->profile_mod->get_partners_personal($user_id, 'probationary_date');
 		$data['probationary_date'] = (count($probationary_date) == 0 ? "n/a" : ($probationary_date[0]['key_value'] == "" ? "n/a" : date("F d, Y", strtotime($probationary_date[0]['key_value']))));
 		$original_date_hired = $this->profile_mod->get_partners_personal($user_id, 'original_date_hired');
@@ -197,6 +202,7 @@ class Partners_immediate extends MY_PrivateController
 		$data['last_probationary'] = (count($last_probationary) == 0 ? "n/a" : ($last_probationary[0]['key_value'] == "" ? "n/a" : date("F d, Y", strtotime($last_probationary[0]['key_value']))));
 		$last_salary_adjustment = $this->profile_mod->get_partners_personal($user_id, 'last_salary_adjustment');
 		$data['last_salary_adjustment'] = (count($last_salary_adjustment) == 0 ? "n/a" : ($last_salary_adjustment[0]['key_value'] == "" ? "n/a" : date("F d, Y", strtotime($last_salary_adjustment[0]['key_value']))));
+		$data['last_promotion_date'] = valid_date($profile_header_details['last_promotion_date']);
 		//Work Assignment
 		$reports_to = $profile_header_details['immediate'] == "" ? "n/a" : $this->profile_mod->get_user_details($profile_header_details['immediate']);
 		if($reports_to == "n/a"){
@@ -216,10 +222,18 @@ class Partners_immediate extends MY_PrivateController
         $data['agency_assignment'] = (count($agency_assignment) == 0 ? "n/a" : ($agency_assignment[0]['key_value'] == "" ? "n/a" : $agency_assignment[0]['key_value']));
         $section = $this->profile_mod->get_partners_personal($user_id, 'section');
         $data['section'] = (count($section) == 0 ? "n/a" : ($section[0]['key_value'] == "" ? "n/a" : $section[0]['key_value']));
+        $data['project'] = ($profile_header_details['project'] == "" ? "n/a" : $profile_header_details['project']);
+        $data['project_id'] = ($profile_header_details['project_id'] == "" ? "n/a" : $profile_header_details['project_id']);
+        $data['project_hr'] = ($profile_header_details['project_hr'] == "" ? "n/a" : $profile_header_details['project_hr']);
+        $data['coordinator'] = ($profile_header_details['coordinator'] == "" ? "n/a" : $profile_header_details['coordinator']);
+        $data['credit_setup'] = ($profile_header_details['credit_setup'] == "" ? "n/a" : $profile_header_details['credit_setup']);
+        $data['start_date'] = valid_date($profile_header_details['start_date']);
+        $data['end_date'] = valid_date($profile_header_details['end_date']);           
 		$data['division'] = $profile_header_details['division'] == "" ? "n/a" : $profile_header_details['division'];
 		$data['department'] = $profile_header_details['department'] == "" ? "n/a" : $profile_header_details['department'];
 		$data['group'] = $profile_header_details['group'] == "" ? "n/a" : $profile_header_details['group'];
-
+        $data['cost_center_code'] = ($profile_header_details['cost_center_code'] == "" ? "n/a" : $profile_header_details['cost_center_code']);
+        $data['sbu_unit'] = ($profile_header_details['sbu_unit'] == "" ? "n/a" : $profile_header_details['sbu_unit']);
 		/***** CONTACTS TAB *****/
 		//Personal Contact
 		$address_1 = $this->profile_mod->get_partners_personal($user_id, 'address_1');
@@ -232,6 +246,28 @@ class Partners_immediate extends MY_PrivateController
 		$data['complete_address'] = $address_1." ".$address_2;		
 		$zip_code = $this->profile_mod->get_partners_personal($user_id, 'zip_code');
 		$data['zip_code'] = (count($zip_code) == 0 ? " " : ($zip_code[0]['key_value'] == "" ? "" : $zip_code[0]['key_value']));
+
+		$country = $this->profile_mod->get_partners_personal($user_id, 'country');
+		$data['country'] = (count($country) > 0 ? $this->profile_mod->get_country($country[0]['key_value']) : " ");		
+		$permanent_address = $this->profile_mod->get_partners_personal($user_id, 'permanent_address');
+		$data['permanent_address'] = $permanent_address = (count($permanent_address) == 0 ? " " : ($permanent_address[0]['key_value'] == "" ? "" : $permanent_address[0]['key_value']));
+		$permanent_city_town = $this->profile_mod->get_partners_personal($user_id, 'permanent_city_town');
+		$data['permanent_city_town'] = $permanent_city_town = (count($permanent_city_town) == 0 ? " " : ($permanent_city_town[0]['key_value'] == "" ? "" : $this->profile_mod->get_city($permanent_city_town[0]['key_value'])));
+		$permanent_country = $this->profile_mod->get_partners_personal($user_id, 'permanent_country');
+		$data['permanent_country'] = $permanent_country = (count($permanent_country) == 0 ? " " : ($permanent_country[0]['key_value'] == "" ? "" : $this->profile_mod->get_country($permanent_country[0]['key_value'])));			
+		$permanent_zipcode = $this->profile_mod->get_partners_personal($user_id, 'permanent_zipcode');
+		$data['permanent_zipcode'] = $permanent_zipcode = (count($permanent_zipcode) == 0 ? " " : ($permanent_zipcode[0]['key_value'] == "" ? "" : $permanent_zipcode[0]['key_value']));						
+		$phone_numbers = $this->profile_mod->get_partners_personal($user_id, 'phone');
+		$data['office_telephones'] = $phone_numbers = (count($phone_numbers) == 0 ? " " : ($phone_numbers[0]['key_value'] == "" ? "" : $phone_numbers[0]['key_value']));
+		$mobile_numbers = $this->profile_mod->get_partners_personal($user_id, 'mobile');
+		$data['office_mobiles'] = $mobile_numbers = (count($mobile_numbers) == 0 ? " " : ($mobile_numbers[0]['key_value'] == "" ? "" : $mobile_numbers[0]['key_value']));
+		$personal_phone_numbers = $this->profile_mod->get_partners_personal($user_id, 'personal_phone');
+		$data['personal_telephone'] = $personal_phone_numbers = (count($personal_phone_numbers) == 0 ? " " : ($personal_phone_numbers[0]['key_value'] == "" ? "" : $personal_phone_numbers[0]['key_value']));
+		$personal_mobile_numbers = $this->profile_mod->get_partners_personal($user_id, 'personal_mobile');
+		$data['personal_mobile'] = $personal_mobile_numbers = (count($personal_mobile_numbers) == 0 ? " " : ($personal_mobile_numbers[0]['key_value'] == "" ? "" : $personal_mobile_numbers[0]['key_value']));
+		$personal_email = $this->profile_mod->get_partners_personal($user_id, 'personal_email');
+		$data['personal_email'] = $personal_email = (count($personal_email) == 0 ? " " : ($personal_email[0]['key_value'] == "" ? "" : $personal_email[0]['key_value']));		
+
 		//Emergency Contact
 		$emergency_name = $this->profile_mod->get_partners_personal($user_id, 'emergency_name');
 		$data['emergency_name'] = (count($emergency_name) == 0 ? " " : ($emergency_name[0]['key_value'] == "" ? "" : $emergency_name[0]['key_value']));
@@ -244,9 +280,9 @@ class Partners_immediate extends MY_PrivateController
 		$emergency_address = $this->profile_mod->get_partners_personal($user_id, 'emergency_address');
 		$data['emergency_address'] = (count($emergency_address) == 0 ? " " : ($emergency_address[0]['key_value'] == "" ? "" : $emergency_address[0]['key_value']));
 		$emergency_city = $this->profile_mod->get_partners_personal($user_id, 'emergency_city');
-		$data['emergency_city'] = (count($emergency_city) == 0 ? " " : ($emergency_city[0]['key_value'] == "" ? "" : $emergency_city[0]['key_value']));
+		$data['emergency_city'] = (count($emergency_city) > 0 ? $this->profile_mod->get_city($emergency_city[0]['key_value']) : " ");
 		$emergency_country = $this->profile_mod->get_partners_personal($user_id, 'emergency_country');
-		$data['emergency_country'] = (count($emergency_country) == 0 ? " " : ($emergency_country[0]['key_value'] == "" ? "" : $emergency_country[0]['key_value']));
+		$data['emergency_country'] = (count($emergency_country) > 0 ? $this->profile_mod->get_country($emergency_country[0]['key_value']) : " ");
 		$emergency_zip_code = $this->profile_mod->get_partners_personal($user_id, 'emergency_zip_code');
 		$data['emergency_zip_code'] = (count($emergency_zip_code) == 0 ? " " : ($emergency_zip_code[0]['key_value'] == "" ? "" : $emergency_zip_code[0]['key_value']));
 
@@ -271,12 +307,47 @@ class Partners_immediate extends MY_PrivateController
 		$data['language'] = (count($language) == 0 ? " " : ($language[0]['key_value'] == "" ? "" : $language[0]['key_value']));
 		$dialect = $this->profile_mod->get_partners_personal($user_id, 'dialect');
 		$data['dialect'] = (count($dialect) == 0 ? " " : ($dialect[0]['key_value'] == "" ? "" : $dialect[0]['key_value']));
-		$dependents_count = $this->profile_mod->get_partners_personal($user_id, 'dependents_count');
-		$data['dependents_count'] = (count($dependents_count) == 0 ? " " : ($dependents_count[0]['key_value'] == "" ? "" : $dependents_count[0]['key_value']));
+
+		$dependents_result = $this->profile_mod->get_partners_personal_history($user_id, 'family');
+
+		$number_children = 0;
+		$dependents_count = 0;
+		foreach ($dependents_result as $key => $value) {
+			if ($value['key'] == 'family-relationship') {
+				$dependents_count++;
+
+				if ($value['key_value'] == 'Son' || $value['key_value'] == 'Daughter')
+					$number_children++;
+			}
+		}
+
+		$data['dependents_count'] = ($dependents_count == 0 ? '' : $dependents_count);
+		$data['number_children'] = ($number_children == 0 ? '' : $number_children);
+
         // Employment Information
         $taxcode = $this->profile_mod->get_partners_personal($user_id, 'taxcode');
         $taxcode_result =  $this->profile_mod->get_taxcode($taxcode);
         $data['record']['taxcode'] = ($taxcode_result == "" ? " " : ($taxcode_result['taxcode'] == "" ? "" : $taxcode_result['taxcode']));
+		$tin_number = $this->profile_mod->get_partners_personal($user_id, 'tin_number');
+		$data['record']['tin_number'] = (count($tin_number) > 0 ? $tin_number[0]['key_value'] : " ");
+		$sss_number = $this->profile_mod->get_partners_personal($user_id, 'sss_number');
+		$data['record']['sss_number'] = (count($sss_number) > 0 ? $sss_number[0]['key_value'] : " ");
+		$pagibig_number = $this->profile_mod->get_partners_personal($user_id, 'pagibig_number');
+		$data['record']['pagibig_number'] = (count($pagibig_number) > 0 ? $pagibig_number[0]['key_value'] : " ");
+		$philhealth_number = $this->profile_mod->get_partners_personal($user_id, 'philhealth_number');
+		$data['record']['philhealth_number'] = (count($philhealth_number) > 0 ? $philhealth_number[0]['key_value'] : " ");
+		$bank_number_savings = $this->profile_mod->get_partners_personal($user_id, 'bank_account_number_savings');
+		$data['record']['bank_number_savings'] = (count($bank_number_savings) > 0 ? $bank_number_savings[0]['key_value'] : " ");
+		$bank_number_current = $this->profile_mod->get_partners_personal($user_id, 'bank_account_number_current');
+		$data['record']['bank_number_current'] = (count($bank_number_current) > 0 ? $bank_number_current[0]['key_value'] : " ");
+		$payroll_bank_account_number = $this->profile_mod->get_partners_personal($user_id, 'payroll_bank_account_number');
+		$data['record']['payroll_bank_account_number'] = (count($payroll_bank_account_number) == 0 ? " " : ($payroll_bank_account_number[0]['key_value'] == "" ? "" : $payroll_bank_account_number[0]['key_value']));
+		$payroll_bank_name = $this->profile_mod->get_partners_personal($user_id, 'payroll_bank_name');
+		$data['record']['payroll_bank_name'] = (count($payroll_bank_name) == 0 ? " " : ($payroll_bank_name[0]['key_value'] == "" ? "" : $payroll_bank_name[0]['key_value']));									
+		$bank_account_name = $this->profile_mod->get_partners_personal($user_id, 'bank_account_name');
+		$data['record']['bank_account_name'] = (count($bank_account_name) > 0 ? $bank_account_name[0]['key_value'] : " ");
+		$health_care = $this->profile_mod->get_partners_personal($user_id, 'health_care');
+		$data['record']['health_care'] = (count($health_care) > 0 ? $health_care[0]['key_value'] : " ");        
         $job_class = $this->profile_mod->get_partners_personal($user_id, 'job_class');
         $data['record']['job_class'] = (count($job_class) == 0 ? " " : ($job_class[0]['key_value'] == "" ? "" : $job_class[0]['key_value']));
         $job_rank_level = $this->profile_mod->get_partners_personal($user_id, 'job_rank_level');
@@ -325,8 +396,12 @@ class Partners_immediate extends MY_PrivateController
 		$educational_tab = array();
 		$education_tab = $this->profile_mod->get_partners_personal_history($user_id, 'education');
 		foreach($education_tab as $educ){
-			$educational_tab[$educ['sequence']][$educ['key']] = $educ['key_value'];
-		}
+			if ($educ['key'] == 'education-school') {
+				$educational_tab[$educ['sequence']][$educ['key']] = $this->profile_mod->get_school($educ['key_value']);
+			}
+			else
+				$educational_tab[$educ['sequence']][$educ['key']] = $educ['key_value'];
+		}		
 		$data['education_tab'] = $educational_tab;
 		//Employment
 		$employment_tab = array();
@@ -341,7 +416,14 @@ class Partners_immediate extends MY_PrivateController
 		$references_tab = array();
 		$reference_tab = $this->profile_mod->get_partners_personal_history($user_id, 'reference');
 		foreach($reference_tab as $emp){
-			$references_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			if ($emp['key'] == 'reference-city') {
+				$references_tab[$emp['sequence']][$emp['key']] = $this->profile_mod->get_city($emp['key_value']);
+			}
+			elseif ($emp['key'] == 'reference-country') {
+				$references_tab[$emp['sequence']][$emp['key']] = $this->profile_mod->get_country($emp['key_value']);
+			}
+			else
+				$references_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
 		}
 		$data['reference_tab'] = $references_tab;
 		//Licensure
@@ -363,6 +445,48 @@ class Partners_immediate extends MY_PrivateController
 			$trainings_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
 		}
 		$data['training_tab'] = $trainings_tab;
+		//Test Profile
+		$test_profile_tab = array();
+		$test_profiles_tab = array();
+		$test_profile_tab = $this->profile_mod->get_partners_personal_history($user_id, 'test');
+		foreach($test_profile_tab as $emp){
+			$test_profiles_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+		}
+		$data['test_profile_tab'] = $test_profiles_tab;			
+		//Cost Center
+		$cost_center_tab = array();
+		$cost_centers_tab = array();
+		$cost_center_tab = $this->profile_mod->get_partners_personal_history($user_id, 'cost_center');
+
+		if(!empty($cost_center_tab)){
+
+			foreach($cost_center_tab as $emp){
+				
+				$cost_centers_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			}
+		}
+		else{
+
+			$this->db->select('project_id,project_code');
+            $this->db->where('project_id', $data['project_id']);
+            $this->db->where('deleted', '0');
+            $project = $this->db->get('users_project')->result_array();
+
+			if(!empty($project)){
+
+				$cost_centers_tab[1]['cost_center-cost_center'] = $project[0]['project_id'];
+				$cost_centers_tab[1]['cost_center-code'] = $project[0]['project_code'];
+			}
+			else{
+
+				$cost_centers_tab[1]['cost_center-cost_center'] = '';
+				$cost_centers_tab[1]['cost_center-code'] = '';
+			}
+
+			$cost_centers_tab[1]['cost_center-percentage'] = '';
+		}
+
+		$data['cost_center_tab'] = $cost_centers_tab;			
 		//Skills
 		$skill_tab = array();
 		$skills_tab = array();
@@ -399,11 +523,73 @@ class Partners_immediate extends MY_PrivateController
 		$family_tab = array();
 		$families_tab = array();
 		$family_tab = $this->profile_mod->get_partners_personal_history($user_id, 'family');
+
 		foreach($family_tab as $emp){
-			$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			if($emp['key'] == 'family-dependent'){
+				$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'] == 0 ? "No" : "Yes";
+			}elseif($emp['key'] == 'family-dependent-hmo'){
+				$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'] == 0 ? "No" : "Yes";
+			}elseif($emp['key'] == 'family-dependent-insurance'){
+				$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'] == 0 ? "No" : "Yes";				
+			}else{
+				$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			}			
 		}
+
 		$data['family_tab'] = $families_tab;
 
+		//Movements
+		$movements_tab = array();
+		$movement_qry = " SELECT  pma.action_id, pma.movement_id, pma.type_id,
+							pma.effectivity_date, pma.type, pmc.cause, pma.created_on, pm.remarks
+						FROM {$this->db->dbprefix}partners_movement_action pma
+						INNER JOIN {$this->db->dbprefix}partners_movement pm 
+							ON pma.movement_id = pm.movement_id
+						INNER JOIN {$this->db->dbprefix}partners_movement_cause pmc 
+							ON pm.due_to_id = pmc.cause_id 
+						WHERE pm.status_id = 3 
+						AND pma.user_id = {$user_id}";
+		$movement_sql = $this->db->query($movement_qry);
+
+		if($movement_sql->num_rows() > 0){
+			$movements_tab = $movement_sql->result_array();
+		}
+		$data['movement_tab'] = $movements_tab;
+
+		$da_tab = array();
+		$da_qry = " SELECT  offense,offense_level,sanction,pda.created_on
+						FROM {$this->db->dbprefix}partners_disciplinary_action pda
+						LEFT JOIN {$this->db->dbprefix}partners_incident pi 
+							ON pda.incident_id = pi.incident_id	
+						LEFT JOIN {$this->db->dbprefix}partners_offense po 
+							ON pi.offense_id = po.offense_id													
+						LEFT JOIN {$this->db->dbprefix}partners_offense_sanction pos 
+							ON pda.sanction_id = pos.sanction_id
+						LEFT JOIN {$this->db->dbprefix}partners_offense_level pol 
+							ON pos.offense_level_id = pol.offense_level_id 
+						WHERE pi.involved_partners IN ({$user_id})";
+		$da_sql = $this->db->query($da_qry);
+
+		if($da_sql->num_rows() > 0){
+			$da_tab = $da_sql->result_array();
+		}
+		$data['da_tab'] = $da_tab;
+
+		$cr_tab = array();
+		$cr_qry = " SELECT  key_class,ppr.from_key_value,ppr.key_value,ppr.created_on
+						FROM {$this->db->dbprefix}partners_personal_request ppr
+						LEFT JOIN {$this->db->dbprefix}partners_key pk 
+							ON ppr.key_id = pk.key_id	
+						LEFT JOIN {$this->db->dbprefix}partners_key_class pkc 
+							ON pk.key_class_id = pkc.key_class_id
+						WHERE ppr.user_id = {$user_id}";
+		$cr_sql = $this->db->query($cr_qry);
+
+		if($cr_sql->num_rows() > 0){
+			$cr_tab = $cr_sql->result_array();
+		}
+		$data['cr_tab'] = $cr_tab;
+		
         $key_sql = "SELECT * FROM {$this->db->dbprefix}partners_key pk 
                     LEFT JOIN {$this->db->dbprefix}partners_key_class pkc 
                     ON pk.key_class_id = pkc.key_class_id 
@@ -437,6 +623,7 @@ class Partners_immediate extends MY_PrivateController
 		}
 		$data['details'] = $details_data;
 		$data['details_data_id'] = $details_data_id;
+		$data['sequence'] = $this->input->post('sequence');
 
 		$this->load->helper('file');
         // $view['title'] = $data['forms_title'];

@@ -1746,19 +1746,19 @@ class Import201 extends MY_PrivateController
 							case 'Work Schedule':
 								$valid_cells_partners[14] = 'calendar_id';
 								break;
-							case 'Employment Status':
+							case 'Status':
 								$valid_cells_partners[15] = 'status_id';
 								break;	
-							case 'Employment Type':
+							case 'Level':
 								$valid_cells_partners[16] = 'employment_type_id';
 								break;	
-							case 'Job Grade':
+							case 'Rank':
 								$valid_cells_partners[17] = 'job_grade_id';
 								break;	
 							case 'Classification':
 								$valid_cells_partners[18] = 'classification_id';
 								break;	
-							case 'Date Hired':
+							case 'Hired Date':
 								$valid_cells_partners[19] = 'effectivity_date';
 								break;	
 							case 'Employment End Date':
@@ -1770,7 +1770,7 @@ class Import201 extends MY_PrivateController
 							case 'Original Hired Date':
 								$valid_cells_partners[22] = 'original_hired_date';
 								break;
-							case 'Reports To ID Number':
+							case 'Immediate Superior ID Number':
 								$valid_cells_users_profile[23] = 'reports_to_id';
 								break;	
 							case 'Division':
@@ -1779,8 +1779,8 @@ class Import201 extends MY_PrivateController
 							case 'Department':
 								$valid_cells_users_profile[25] = 'department_id';
 								break;
-							case 'Branch':
-								$valid_cells_users_profile[26] = 'branch_id';
+							case 'SBU Unit':
+								$valid_cells_users_profile[26] = 'sbu_unit_id';
 								break;		
 							case 'Section':
 								$valid_cells_users_profile[27] = 'section_id';
@@ -1991,11 +1991,11 @@ class Import201 extends MY_PrivateController
 							$row[$key] = $this->db->insert_id();
 						}
 						break;		
-					case 'branch_id':
-						$result = $this->db->get_where('users_branch',array('branch' => $row[$key]));
+					case 'sbu_unit_id':
+						$result = $this->db->get_where('sbu_unit',array('sbu_unit_id' => $row[$key]));
 						if ($result && $result->num_rows() > 0){
-							$row_branch = $result->row();
-							$row[$key] = $row_branch->branch_id;						
+							$row_sbu_unit = $result->row();
+							$row[$key] = $row_sbu_unit->sbu_unit_id;						
 						}
 						else{
 							$row[$key] = '';
@@ -2062,27 +2062,48 @@ class Import201 extends MY_PrivateController
 							case 'ID Number':
 								$valid_cells[] = 'id_number';
 								break;
-							case 'Phone':
-								$valid_cells[] = 'phone';
-								break;								
-							case 'Mobile':
-								$valid_cells[] = 'mobile';
-								break;	
-							case 'E-mail':
-								$valid_cells[] = 'email';
-								break;
-							case 'Address':
+							case 'Present Address':
 								$valid_cells[] = 'address_1';
 								break;
-							case 'City/Town':
+							case 'Present City/Town':
 								$valid_cells[] = 'city_town';
 								break;
-							case 'Country':
+							case 'Present Country':
 								$valid_cells[] = 'country';
 								break;
-							case 'Zip Code ':
+							case 'Present Zip Code ':
 								$valid_cells[] = 'zip_code';
+								break;
+							case 'Permanent Address':
+								$valid_cells[] = 'permanent_address';
+								break;
+							case 'Permanent City/Town':
+								$valid_cells[] = 'permanent_city_town';
+								break;
+							case 'Permanent Country':
+								$valid_cells[] = 'permanent_country';
+								break;
+							case 'Permanent Zip Code ':
+								$valid_cells[] = 'permanent_zipcode';
 								break;								
+							case 'Office Phone':
+								$valid_cells[] = 'phone';
+								break;								
+							case 'Office Mobile':
+								$valid_cells[] = 'mobile';
+								break;	
+							case 'Office E-mail':
+								$valid_cells[] = 'email';
+								break;
+							case 'Personal Phone':
+								$valid_cells[] = 'personal_phone';
+								break;								
+							case 'Personal Mobile':
+								$valid_cells[] = 'personal_mobile';
+								break;	
+							case 'Personal E-mail':
+								$valid_cells[] = 'personal_email';
+								break;									
 						}
 					}
 				}
@@ -2275,7 +2296,7 @@ class Import201 extends MY_PrivateController
 							case 'Date of Birth':
 								$valid_cells[] = 'birth_date';
 								break;	
-							case 'Place of Birth':
+							case 'Birth Place':
 								$valid_cells[] = 'birth_place';
 								break;	
 							case 'Religion':
@@ -2419,13 +2440,13 @@ class Import201 extends MY_PrivateController
 							case 'TIN':
 								$valid_cells[] = 'tin_number';
 								break;														
-							case 'Bank Account Number Savings':
-								$valid_cells[] = 'bank_account_number_savings';
+							case 'Payroll Bank Account Number':
+								$valid_cells[] = 'payroll_bank_account_number';
 								break;		
-							case 'Bank Account Number Current':
-								$valid_cells[] = 'bank_account_number_current';
+							case 'Payroll Bank Name':
+								$valid_cells[] = 'payroll_bank_name';
 								break;
-							case 'Bank Account Name':
+							case 'Payroll Bank Account Name':
 								$valid_cells[] = 'bank_account_name';
 								break;								
 						}
@@ -2526,12 +2547,15 @@ class Import201 extends MY_PrivateController
 							case 'Name':
 								$valid_cells[] = 'family-name';
 								break;	
-							case 'Date of Birth':
+							case 'Birthday':
 								$valid_cells[] = 'family-birthdate';
 								break;	
-							case 'Dependent':
-								$valid_cells[] = 'family-dependent';
-								break;								
+							case 'Dependent on HMO':
+								$valid_cells[] = 'family-dependent-hmo';
+								break;
+							case 'Dependent on Life Insurance':
+								$valid_cells[] = 'family-dependent-insurance';
+								break;
 						}
 					}
 				}
@@ -2653,6 +2677,9 @@ class Import201 extends MY_PrivateController
 							case 'Degree':
 								$valid_cells[] = 'education-degree';
 								break;
+							case 'Honors Receive':
+								$valid_cells[] = 'education-honors_awards';
+								break;								
 							case 'Status':
 								$valid_cells[] = 'education-status';
 								break;
@@ -2770,8 +2797,17 @@ class Import201 extends MY_PrivateController
 								break;	
 							case 'Location':
 								$valid_cells[] = 'employment-location';
-								break;	
-							case 'Date Hired':
+								break;
+							case 'Reason for Leaving':
+								$valid_cells[] = 'employment-reason-for-leaving';
+								break;
+							case 'Latest Salary':
+								$valid_cells[] = 'employment-latest-salary';
+								break;
+							case 'Name of Immediate Superior':
+								$valid_cells[] = 'employment-supervisor';
+								break;
+							case 'Hired Date':
 								$valid_cells[] = 'employment-month-hired';
 								break;	
 							case 'End Date':
@@ -2963,7 +2999,7 @@ class Import201 extends MY_PrivateController
 							case 'Address':
 								$valid_cells[] = 'reference-address';
 								break;
-							case 'City':
+							case 'City/Town':
 								$valid_cells[] = 'reference-city';
 								break;		
 							case 'Country':
@@ -3072,12 +3108,15 @@ class Import201 extends MY_PrivateController
 							case 'Title':
 								$valid_cells[] = 'licensure-title';
 								break;									
-							case 'License No':
+							case 'License Registration Number':
 								$valid_cells[] = 'licensure-number';
 								break;	
-							case 'Date Taken':
+							case 'Registration Date':
 								$valid_cells[] = 'licensure-month-taken';
-								break;								
+								break;
+							case 'Validity Until':
+								$valid_cells[] = 'licensure-month-validity-until';
+								break;
 							case 'Remarks':
 								$valid_cells[] = 'licensure-remarks';
 								break;		
@@ -3124,7 +3163,13 @@ class Import201 extends MY_PrivateController
 							$month = trim($year_month_arr[0]);
 							$year = trim($year_month_arr[1]);
 							$row[$key] = $month;
-							break;														
+							break;
+						case 'licensure-month-validity-until':
+							$year_month_arr = explode('-', $row[$key]);
+							$month = trim($year_month_arr[0]);
+							$year = trim($year_month_arr[1]);
+							$row[$key] = $month;
+							break;								
 					}
 
 					$result = $this->db->get_where('partners_key',array('key_code' => $value));
@@ -3166,7 +3211,27 @@ class Import201 extends MY_PrivateController
 
 								$this->db->insert('partners_personal_history',$arr_field_val);						
 							}
-							break;														
+							break;
+						case 'licensure-month-validity-until':
+							$result = $this->db->get_where('partners_key',array('key_code' => 'licensure-year-validity-until'));
+							if ($result && $result->num_rows() > 0){
+								$row_key = $result->row();
+								$arr_field_val['partner_id'] = $partner_id;
+								$arr_field_val['key_id'] = $row_key->key_id;
+								$arr_field_val['key'] = $row_key->key_code;
+								$arr_field_val['sequence'] = $seq;
+								$arr_field_val['key_name'] = $row_key->key_label;
+								$arr_field_val['key_value'] = $year;
+
+								$this->db->where('partner_id',$partner_id);
+								$this->db->where('key',$row_key->key_code);
+								$this->db->where('sequence',$seq);
+								$this->db->where('key_value',$year);
+								$this->db->delete('partners_personal_history');		
+
+								$this->db->insert('partners_personal_history',$arr_field_val);						
+							}
+							break;																					
 					}			
 				}					
 			}
@@ -3218,7 +3283,16 @@ class Import201 extends MY_PrivateController
 								break;	
 							case 'Venue':
 								$valid_cells[] = 'training-venue';
+								break;
+							case 'Training Provider':
+								$valid_cells[] = 'training-provider';
 								break;	
+							case 'Training Cost':
+								$valid_cells[] = 'training-cost';
+								break;
+							case 'Budgeted':
+								$valid_cells[] = 'training-budgeted';
+								break;
 							case 'Start Date':
 								$valid_cells[] = 'training-start-month';
 								break;	
@@ -3616,10 +3690,10 @@ class Import201 extends MY_PrivateController
 							case 'Position':
 								$valid_cells[] = 'affiliation-position';
 								break;	
-							case 'Date Started':
+							case 'Start Date':
 								$valid_cells[] = 'affiliation-month-start';
 								break;	
-							case 'Date End':
+							case 'End Date':
 								$valid_cells[] = 'affiliation-month-end';
 								break;
 						}
@@ -3777,12 +3851,21 @@ class Import201 extends MY_PrivateController
 							case 'ID Number':
 								$valid_cells[] = 'id_number';
 								break;
+							case 'Asset Type':
+								$valid_cells[] = 'accountabilities-asset-type';
+								break;
 							case 'Item Name':
 								$valid_cells[] = 'accountabilities-name';
 								break;									
 							case 'Item Code':
 								$valid_cells[] = 'accountabilities-code';
-								break;	
+								break;
+							case 'Asset Number':
+								$valid_cells[] = 'accountabilities-asset-number';
+								break;
+							case 'Serial Number':
+								$valid_cells[] = 'accountabilities-serial-number';
+								break;
 							case 'Quantity':
 								$valid_cells[] = 'accountabilities-quantity';
 								break;	

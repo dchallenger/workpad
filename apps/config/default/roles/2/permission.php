@@ -333,6 +333,7 @@ $permission['clearance']['detail'] = 1;
 $permission['clearance']['add'] = 1;
 $permission['clearance']['edit'] = 1;
 $permission['clearance']['delete'] = 1;
+$permission['clearance']['process'] = 1;
 $permission['clearance']['approve'] = 1;
 $permission['clearance']['decline'] = 1;
 $permission['leave_filed_admin']['list'] = 1;

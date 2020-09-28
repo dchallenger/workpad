@@ -1,7 +1,8 @@
 $(document).ready(function(){
 // $('#time_holiday-locations').multiselect();
-
- 	$('#time_holiday_location-location_id').multiselect();
+	
+	if ($('#time_holiday_location-location_id').length > 0)
+ 		$('#time_holiday_location-location_id').multiselect();
 
 	$('#time_holiday-legal-temp').change(function(){
 		if( $(this).is(':checked') )

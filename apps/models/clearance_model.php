@@ -38,6 +38,8 @@ class clearance_model extends Record
 
 	function _get_list($start, $limit, $search, $filter, $trash = false)
 	{
+		$permission = $this->config->item('permission');
+
 		$data = array();				
 		
 		$qry = $this->_get_list_cached_query();
@@ -50,6 +52,10 @@ class clearance_model extends Record
 			$qry .= " AND {$this->db->dbprefix}{$this->table}.deleted = 0";	
 		}
 		
+		if (!isset($permission[$this->mod_code]['process'])) {
+			$qry .= " AND {$this->db->dbprefix}{$this->table}.user_id = ".$this->user->user_id."";
+		}
+
 		$qry .= ' '. $filter;
 		$qry .= " ORDER BY {$this->db->dbprefix}{$this->table}.effectivity_date DESC";
 		$qry .= " LIMIT $limit OFFSET $start";
@@ -57,7 +63,7 @@ class clearance_model extends Record
 		$this->load->library('parser');
 		$this->parser->set_delimiters('{$', '}');
 		$qry = $this->parser->parse_string($qry, array('search' => $search), TRUE);
-
+		
 		$result = $this->db->query( $qry );
 		if($result->num_rows() > 0)
 		{			

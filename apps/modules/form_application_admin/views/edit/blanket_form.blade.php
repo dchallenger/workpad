@@ -65,7 +65,7 @@
 							$db->where('is_blanket', '1');
                     		$options = $db->get('time_form');
 
-							$form_type_options = array('' => 'Select...');
+							$form_type_options = array('' => '');
                     		foreach($options->result() as $option)
                     		{
                     			$form_type_options[$option->form_id] = $option->form;
@@ -254,7 +254,7 @@
 							<label class="control-label col-md-4 text-danger small">Filter Employees: </label>
 							<div class="col-md-6">
 								<div class="help-block small">
-									<span id="employees_count" name="employees_count">All</span> employee/s selected. Click to select specific employees.
+									<span id="employees_count" name="employees_count"></span> Click to select specific employees.
 									<input type="hidden" id="employee_filtered" value="0">
 								</div>
 								<div class="btn-grp">

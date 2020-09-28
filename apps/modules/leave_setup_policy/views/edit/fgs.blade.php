@@ -5,7 +5,7 @@
 	</div>
 		<div class="portlet-body form">		
 			<div class="form-group">
-				<label class="control-label col-md-3">Company</label>
+				<label class="control-label col-md-3">{{ lang('leave_setup_policy.company') }}</label>
 				<div class="col-md-7">
 					<?php	
 						$db->select('*');
@@ -30,7 +30,7 @@
 	            </div>	
 			</div>
 			<div class="form-group">
-				<label class="control-label col-md-3">Employment Type</label>
+				<label class="control-label col-md-3">{{ lang('leave_setup_policy.employment_type') }}</label>
 				<div class="col-md-7">
 					<?php	
 						$db->select('*');
@@ -55,7 +55,7 @@
 	            </div>	
 			</div>
 			<div class="form-group">
-				<label class="control-label col-md-3">Employment Status</label>
+				<label class="control-label col-md-3">{{ lang('leave_setup_policy.employment_status') }}</label>
 				<div class="col-md-7">
 					<?php	
 						$db->select('*');
@@ -80,13 +80,13 @@
 	            </div>	
 			</div>
 			<div class="form-group">
-				<label class="control-label col-md-3"><span class="required">* </span>Description</label>
+				<label class="control-label col-md-3"><span class="required">* </span>{{ lang('leave_setup_policy.description') }}</label>
 				<div class="col-md-7">
 					<input type="text" class="form-control" name="time_form_balance_setup_policy[description]" id="time_form_balance_setup_policy-starting_credit" value="{{ $record['time_form_balance_setup_policy.description'] }}" placeholder="Enter Description" />
 				</div>	
 			</div>			
 			<div class="form-group">
-				<label class="control-label col-md-3"><span class="required">* </span>Leave Type</label>
+				<label class="control-label col-md-3"><span class="required">* </span>{{ lang('leave_setup_policy.leave_type') }}</label>
 				<div class="col-md-7">
 					<?php	
 						$db->select('form_id,form');
@@ -108,7 +108,7 @@
 	            </div>	
 			</div>
 			<div class="form-group">
-				<label class="control-label col-md-3"><span class="required">* </span>Accumulation Type</label>
+				<label class="control-label col-md-3"><span class="required">* </span>{{ lang('leave_setup_policy.accumulation_type') }}</label>
 				<div class="col-md-7">
 					<?php	
 						$accumulation_option = array('' => '',1 => 'Monthly',2 => 'Yearly');
@@ -126,31 +126,31 @@
 	            </div>	
 			</div>			
 			<div class="form-group">
-				<label class="control-label col-md-3"><span class="required">* </span>Credit (1 to 15 of the month)</label>
+				<label class="control-label col-md-3">{{ lang('leave_setup_policy.credit_1_15') }}</label>
 				<div class="col-md-7">
 					<input type="text" class="form-control" name="time_form_balance_setup_policy[credit_1_15]" id="time_form_balance_setup_policy-starting_credit" value="{{ $record['time_form_balance_setup_policy.credit_1_15'] }}" placeholder="Enter Credit (1 to 15 of the month)" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>
 				</div>	
 			</div>
 			<div class="form-group">
-				<label class="control-label col-md-3"><span class="required">* </span>Credit (16 to 31 of the month)</label>
+				<label class="control-label col-md-3">{{ lang('leave_setup_policy.credit_16_31') }}</label>
 				<div class="col-md-7">
 					<input type="text" class="form-control" name="time_form_balance_setup_policy[credit_16_31]" id="time_form_balance_setup_policy-starting_credit" value="{{ $record['time_form_balance_setup_policy.credit_16_31'] }}" placeholder="Enter Credit (16 to 31 of the month)" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>
 				</div>	
 			</div>
 			<div class="form-group">
-				<label class="control-label col-md-3"><span class="required">* </span>Credit</label>
+				<label class="control-label col-md-3"><span class="required">* </span>{{ lang('leave_setup_policy.credit') }}</label>
 				<div class="col-md-7">
 					<input type="text" class="form-control" name="time_form_balance_setup_policy[credit]" id="time_form_balance_setup_policy-starting_credit" value="{{ $record['time_form_balance_setup_policy.credit'] }}" placeholder="Enter Credit" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>
 				</div>	
 			</div>			
 			<div class="form-group">
-				<label class="control-label col-md-3">Maximum</label>
+				<label class="control-label col-md-3">{{ lang('leave_setup_policy.maximum') }}</label>
 				<div class="col-md-7">
 					<input type="text" class="form-control" name="time_form_balance_setup_policy[max_credit]" id="time_form_balance_setup_policy-max_credit" value="{{ $record['time_form_balance_setup_policy.max_credit'] }}" placeholder="Enter Maximum" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>
 				</div>	
 			</div>
             <div class="form-group">
-                <label class="control-label col-md-3" style="margin-top: 0px;">Pro-rated</label>
+                <label class="control-label col-md-3" style="margin-top: 0px;">{{ lang('leave_setup_policy.prorated') }}</label>
                 <div class="col-md-5">
                     <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
                     	<input type="checkbox" value="1" @if( $record['time_form_balance_setup_policy.prorated'] ) checked="checked" @endif name="partners_personal[home_leave][temp]" id="partners_personal-home_leave-temp" class="dontserializeme toggle"/>
@@ -159,7 +159,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-3">Leave Reset Date</label>
+                <label class="control-label col-md-3">{{ lang('leave_setup_policy.leave_reset_date') }}</label>
                 <div class="col-md-5">
                     <div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
                         <input type="text" class="form-control" name="time_form_balance_setup_policy[leave_reset_date]" id="time_form_balance_setup_policy-leave_reset_date" value="{{ $record['time_form_balance_setup_policy.leave_reset_date'] }}" placeholder="Enter Leave Reset Date" >

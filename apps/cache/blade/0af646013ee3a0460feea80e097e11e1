@@ -26,7 +26,7 @@
 				 
 					<li ><a rel="<?php echo site_url('partners/clearance');?>" href="<?php echo site_url('partners/clearance');?>" menu_id="33" parent="3">Clearance</a></li>
 				 
-					<li ><a rel="<?php echo site_url('partner/clearance_manage');?>" href="<?php echo site_url('partner/clearance_manage');?>" menu_id="116" parent="3">Clearance Manage</a></li>
+					<li ><a rel="<?php echo site_url('partner/clearance_manage');?>" href="<?php echo site_url('partner/clearance_manage');?>" menu_id="116" parent="3">Manage Clearance</a></li>
 				 
 					<li ><a rel="<?php echo site_url('partner/resources');?>" href="<?php echo site_url('partner/resources');?>" menu_id="107" parent="3">Resources</a></li>
 				 

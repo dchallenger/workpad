@@ -33,6 +33,8 @@
 				 
 					<li ><a rel="<?php echo site_url('partner/code_of_conduct');?>" href="<?php echo site_url('partner/code_of_conduct');?>" menu_id="106" parent="3">Code of Conduct</a></li>
 				 
+					<li ><a rel="<?php echo site_url('partners/clearance');?>" href="<?php echo site_url('partners/clearance');?>" menu_id="33" parent="3">Clearance</a></li>
+				 
 					<li ><a rel="<?php echo site_url('partner/resources');?>" href="<?php echo site_url('partner/resources');?>" menu_id="107" parent="3">Resources</a></li>
 				 
 					<li ><a rel="<?php echo site_url('partners/loan_application');?>" href="<?php echo site_url('partners/loan_application');?>" menu_id="130" parent="3">Loan Application</a></li>

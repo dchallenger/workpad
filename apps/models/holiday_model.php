@@ -82,24 +82,11 @@ class holiday_model extends Record
 			foreach($result->result_array() as $row){
 
 				if($row['location_count'] > 0){
-					$ids = explode(',', $row['locations']);
-					$rows = array();
-					//debug( 'ids: ');
-					//debug( $ids );
-					foreach($ids as $idno){
-						$loc = $this->get_location_data($idno);
-						//debug( $loc );
-						if (isset($loc[0]))
-							$rows[] = $loc[0]['location_code'];
-					}
-					$row['locations'] = implode(', ', $rows);
-
+					$row['locations'] = $this->get_multiple_location_data($row['locations']);
 				}
 				else{
 					$row['locations'] = '-';
 				}
-				
-
 				//debug( $row );
 				$data[] = $row;
 			}
@@ -176,6 +163,21 @@ class holiday_model extends Record
 		return $data;
 	}
 
+	function get_multiple_location_data($location_ids = ''){
+
+		$data = array();	
+
+		$qry = "SELECT GROUP_CONCAT(location) as location
+				FROM ww_users_location 
+				WHERE location_id IN (".$location_ids.")";
+
+		$result = $this->db->query( $qry );
+
+		if($result->num_rows() > 0)	
+			return $result->row()->location;
+		else
+			return '';
+	}
 
 	function get_users_from_location($location_id){
 

@@ -6,9 +6,7 @@ foreach($attachment_tab as $index => $attachment){
 		<!-- this first column shows the year of this holiday item -->
 		<td><input type="checkbox" class="checkboxes record-checker" value="<?=$index?>" /></td>
 		<td>
-			<a id="date_name" href="#" class="text-success">
-				<?php echo (isset($attachment['attachment-name']) ? $attachment['attachment-name'] : ""); ?>	
-			</a>
+			<?php echo (isset($attachment['attachment-name']) ? $attachment['attachment-name'] : ""); ?>	
 			<br />
 			<span id="date_set" class="small">
 				<?php echo (isset($attachment['attachment-category']) ? $attachment['attachment-category'] : ""); ?>	

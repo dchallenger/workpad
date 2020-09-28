@@ -9,8 +9,8 @@
 					<span class="pull-right "><a class="small text-muted" onclick="delete_signatories(<?php echo $value['exit_interview_layout_item_id']?>)" href="javascript:void(0)">Delete</a></span>
 					<span class="pull-right "><a class="small text-muted"> &nbsp;|&nbsp; </a></span>
 					<span class="pull-right "><a class="small text-muted"  onclick="add_sign(<?php echo $value['exit_interview_layout_item_id']?>)" href="javascript:void(0)">Edit</a></span>
-					<span class="pull-right "><a class="small text-muted"> &nbsp;|&nbsp; </a></span>
-					<span class="pull-right "><a class="small text-muted"  onclick="add_sign_sub(<?php echo $value['exit_interview_layout_item_id']?>)" href="javascript:void(0)">Add Sub Question</a></span>
+					<span class="pull-right hidden"><a class="small text-muted"> &nbsp;|&nbsp; </a></span>
+					<span class="pull-right hidden"><a class="small text-muted"  onclick="add_sign_sub(<?php echo $value['exit_interview_layout_item_id']?>)" href="javascript:void(0)">Add Sub Question</a></span>
 				</h3>
 			</div>
 			

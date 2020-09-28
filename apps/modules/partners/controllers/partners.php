@@ -630,6 +630,7 @@ class Partners extends MY_PrivateController
 		$agency_assignment = $this->profile_mod->get_partners_personal($user_id, 'agency_assignment');
         $data['record']['agency_assignment'] = (count($agency_assignment) > 0 ? $agency_assignment[0]['key_value'] : " ");   
         $data['project'] = ($profile_header_details['project'] == "" ? "n/a" : $profile_header_details['project']);
+        $data['project_id'] = ($profile_header_details['project_id'] == "" ? "n/a" : $profile_header_details['project_id']);
         $data['project_hr'] = ($profile_header_details['project_hr'] == "" ? "n/a" : $profile_header_details['project_hr']);
         $data['coordinator'] = ($profile_header_details['coordinator'] == "" ? "n/a" : $profile_header_details['coordinator']);
         $data['credit_setup'] = ($profile_header_details['credit_setup'] == "" ? "n/a" : $profile_header_details['credit_setup']);
@@ -860,7 +861,7 @@ class Partners extends MY_PrivateController
 		else{
 
 			$this->db->select('project_id,project_code');
-            $this->db->where('project_id', $data['record']['users_profile.project_id']);
+            $this->db->where('project_id', $data['project_id']);
             $this->db->where('deleted', '0');
             $project = $this->db->get('users_project')->result_array();
 

@@ -5,9 +5,7 @@ foreach($accountabilities_tab as $index => $accountable){
 		<!-- this first column shows the year of this holiday item -->
 		<td><input type="checkbox" class="checkboxes record-checker" value="<?=$index?>" /></td>
 		<td>
-			<a id="date_name" href="#" class="text-success">
-				<?php echo (isset($accountable['accountabilities-name']) ? $accountable['accountabilities-name'] : ""); ?>	
-			</a>
+			<?php echo (isset($accountable['accountabilities-name']) ? $accountable['accountabilities-name'] : ""); ?>	
 			<br />
 			<span id="date_set" class="small">
 				<?php echo (isset($accountable['accountabilities-code']) ? $accountable['accountabilities-code'] : ""); ?>	
