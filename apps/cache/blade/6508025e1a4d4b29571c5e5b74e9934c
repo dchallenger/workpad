@@ -844,7 +844,7 @@
 											<tr rel="0">
 												
 												<td>
-													asdfasdf
+													<?php echo (isset($attachment['attachment-name']) ? $attachment['attachment-name'] : ""); ?>	
 													<br />
 													<span id="date_set" class="small text-muted">
 														<?php echo (isset($attachment['attachment-category']) ? $attachment['attachment-category'] : ""); ?>	

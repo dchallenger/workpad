@@ -17,6 +17,7 @@ $config["edit_cached_query"] = 'SELECT `ww_partners_movement`.`movement_id` as r
 	ww_partners_movement.due_to_id as "partners_movement.due_to_id", 
 	ww_partners_movement.due_to_id as "partners_movement.remarks_print_report_id",
 	ww_partners_movement_action.user_id as "partners_movement_action.user_id", 
+	ww_partners_movement_action.action_id as "partners_movement_action.action_id",
 	ww_partners_movement_action.photo as "partners_movement_action.photo", 
 	ww_partners_movement_action_compensation.to_salary as "partners_movement_action_compensation.to_salary", 
 	ww_partners_movement_action_compensation.current_salary as "partners_movement_action_compensation.current_salary",

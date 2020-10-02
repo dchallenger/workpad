@@ -2,20 +2,67 @@
 		$disable = '';
 		if ($record['partners_movement_action.created_by'] && $record['partners_movement_action.created_by'] != $user_id){
 			$disable = 'disabled';
+		} else {
+			if ($record['partners_movement.status_id'] >= 3)
+				$disable = 'disabled';
 		}
+
+		$db->select('users.user_id, users.display_name');
+		$db->from('users');
+		$db->join('partners', 'users.user_id = partners.user_id');
+		$db->join('users_profile', 'users_profile.user_id = partners.user_id');
+
+	    if ($qry_category != ''){
+	        $this->db->where($qry_category, '', false);
+	    }	
+	    										
+		$db->where('users.active', '1');
+		$db->where('users.deleted', '0');
+		$db->where('users.role_id <>', '1');
+		$db->order_by('users.display_name', '0');
+		$user_options = $db->get(); 		
 	?>	
 	<div class="portlet">
 	<div class="portlet-title">
 		<div class="caption">Employee Movement</div>
 		<div class="tools"><a class="collapse" href="javascript:;"></a></div>
 	</div>
-	<div class="portlet-body form">		
+	<div class="portlet-body form">
+		<div class="form-group">
+			<label class="control-label col-md-3">
+				Employee<span class="required"> *</span>
+			</label>
+			<div class="col-md-7">
+				<div class="input-group">
+					<input type="hidden" name="partners_movement[movement_from]" id="" value="3" />
+					<input type="hidden" name="partners_movement_action[action_id]" id="partners_movement_action-action_id" value="<?php echo $record['partners_movement_action.action_id']; ?>" />
+					<?php if ($disable != '') { ?>
+						<input type="hidden" name="partners_movement_action[user_id]" value="<?php echo $record['partners_movement_action.user_id'] ?>" />
+					<?php } ?>						
+					<span class="input-group-addon">
+						<i class="fa fa-list-ul"></i>
+					</span>
+					<select name="partners_movement_action[user_id]" id="partners_movement_action-user_id"  class="form-control partner_id select2me" data-placeholder="Select..." <?php echo $disable ?>>
+					<option value=""></option>
+						<?php 
+							foreach($user_options->result() as $option)
+							{
+							$selected = ($option->user_id == $record['partners_movement_action.user_id']) ? "selected" : "";
+						?>
+							<option <?php echo $selected; ?> value="<?php echo $option->user_id ?>"><?php echo $option->display_name; ?> </option>
+						<?php
+							} 
+						?>
+					</select>
+				</div> 				
+			</div>	
+		</div>		
 		<div class="form-group">
 			<?php if ($disable != '') { ?>
 				<input type="hidden" name="partners_movement[due_to_id]" value="<?php echo $record['partners_movement.due_to_id'] ?>" />
 			<?php } ?>				
 			<label class="control-label col-md-3">
-				<span class="required">* </span>Due To
+				Due To<span class="required"> *</span>
 			</label>
 			<div class="col-md-7">
 				<?php									                            		
@@ -30,8 +77,8 @@
 						<i class="fa fa-list-ul"></i>
 					</span>
 					<select <?php echo $disable ?> name="partners_movement[due_to_id]" id="partners_movement-due_to_id"
-					 class="form-control form-select" data-placeholder="Select...">
-					 <option value="">Select... </option>
+					 class="form-control select2me" data-placeholder="Select...">
+					 <option value=""></option>
 						<?php 
 							foreach($options->result() as $option)
 							{
@@ -44,16 +91,13 @@
 					</select>
 				</div> 				
 			</div>	
-		</div>		
+		</div>
 		<div class="form-group">
-			<label class="control-label col-md-3">Justification Remarks</label>
-			<div class="col-md-7">							
-				<textarea <?php echo $disable ?> class="form-control" name="partners_movement[remarks]" id="partners_movement-remarks" placeholder="Enter Remarks" rows="4"><?php echo $record['partners_movement.remarks'] ?></textarea> 				
-			</div>	
-		</div>	
-		<div class="form-group">
+			<?php if ($disable != '') { ?>
+				<input type="hidden" name="partners_movement_action[type_id]" value="<?php echo $record['partners_movement_action.type_id'] ?>" />
+			<?php } ?>			
 			<label class="control-label col-md-3">
-				<span class="required">* </span>Type
+				Type<span class="required"> *</span>
 			</label>
 			<div class="col-md-7">
 				<?php									                            		
@@ -61,28 +105,96 @@
 				$db->order_by('type', '0');
 				$db->where('deleted', '0');
 				$options = $db->get('partners_movement_type'); 	                            
-				$partners_movement_action_type_id_options = array('' => 'Select...');
+				$partners_movement_action_type_id_options = array('' => '');
 				foreach($options->result() as $option)
 				{
 					$partners_movement_action_type_id_options[$option->type_id] = $option->type;
 				} 
 
-				$others = 'class="form-control select2me" data-placeholder="Select..." id="type_id"';
+				$others = 'class="form-control select2me" data-placeholder="Select..." id="type_id" '.$disable.'';
 				?>							
 				<div class="input-group">
 					<span class="input-group-addon">
 						<i class="fa fa-list-ul"></i>
 					</span>
-					{{ form_dropdown('type_id',$partners_movement_action_type_id_options, $record['partners_movement_action.type_id'], $others) }}
-					<span class="input-group-btn">
-						<button type="button" class="btn btn-default" onclick="edit_movement_details(0,0,<?php echo (isset($record_id) && $record_id != '' ? $record_id : 0) ?>,<?php echo (isset($record['partners_movement_action.user_id']) && $record['partners_movement_action.user_id'] != '' ? $record['partners_movement_action.user_id'] : 0) ?>)"><i class="fa fa-plus"></i></button>
-					</span>
+					{{ form_dropdown('partners_movement_action[type_id]',$partners_movement_action_type_id_options, $record['partners_movement_action.type_id'], $others) }}
 				</div> 				
 			</div>	
 		</div>
-		<div class="form-group cat_type" style="<?php echo ($record['partners_movement_action.type_id'] != 8) ? 'display:none' : '' ?>">
+		<div class="form-group">
 			<label class="control-label col-md-3">
-				<span class="required">* </span>Category
+				Effective Date<span class="required"> *</span>
+			</label>
+			<div class="col-md-7">			
+				<div class="input-group input-large date date-picker" data-date-format="MM dd, yyyy">
+					<input type="text" class="form-control" name="partners_movement_action[effectivity_date]" value="{{$record['partners_movement_action.effectivity_date']}}"
+					id="partners_movement_action-effectivity_date" placeholder="Enter Effective">
+					<span class="input-group-btn">
+						<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+					</span>
+				</div> 				
+			</div>	
+		</div>					
+		<div class="form-group">
+			<label class="control-label col-md-3">Remarks</label>
+			<div class="col-md-7">							
+				<textarea <?php echo $disable ?> class="form-control" name="partners_movement[remarks]" id="partners_movement-remarks" placeholder="Enter Remarks" rows="4"><?php echo $record['partners_movement.remarks'] ?></textarea> 				
+			</div>	
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3">Attachments</label>
+			<div class="col-md-7">
+				<span class="btn green fileinput-button">
+					<i class="fa fa-plus"></i>
+					<span>
+						Add files...
+					</span>
+					<input type="file" id="partners_movement-photo-fileupload" name="files[]" multiple>
+				</span>										
+				<!-- The table listing the files available for upload/download -->
+				<br /><br />
+				<table role="presentation" class="table table-striped clearfix">
+				<tbody class="files">
+					<?php
+					if (!empty($record['attachement'])){
+						foreach ($record['attachement'] as $key => $value) {
+                        	$filename = urldecode(basename($value->photo)); 
+                        	if(strtolower($filename) == 'avatar.png'){
+                        		$record['partners_movement_action.photo'] = '';
+                        		$filename = '';
+                        	}													
+					?>
+						    <tr class="template-download">
+						    	<input type="hidden" name="partners_movement_action[photo][]" value="<?php echo $value->photo ?>"/>
+						    	<input type="hidden" name="partners_movement_action[type][]" value="<?php echo $value->type ?>"/>
+						    	<input type="hidden" name="partners_movement_action[filename][]" value="<?php echo $value->filename ?>"/>
+						    	<input type="hidden" name="partners_movement_action[size][]" value="<?php echo $value->size ?>"/>
+						        <td>
+						            <p class="name">
+						            	<?php echo $filename ?>
+						            </p>
+						        </td>
+						        <td>
+						            <span class="size"><?php echo $value->size ?></span>
+						        </td>
+						        <td>
+						        	<a data-dismiss="fileupload" class="btn red delete_attachment">
+					                    <i class="glyphicon glyphicon-trash"></i>
+					                    <span>Delete</span>
+						        	</a>
+						        </td>
+						    </tr>
+					<?php
+						}
+					}
+					?>										
+				</tbody>
+				</table>										
+			</div>
+		</div>			
+		<div class="form-group cat_type hidden" style="<?php echo ($record['partners_movement_action.type_id'] != 8) ? 'display:none' : '' ?>">
+			<label class="control-label col-md-3">
+				Category <span class="required">* </span>
 			</label>
 			<div class="col-md-7">
 				<?php									                            		
@@ -106,7 +218,7 @@
 		</div>
 		<div class="form-group">
 			<label class="control-label col-md-3">
-				<span class="required">* </span>Reviewed By:
+				Reviewed By <span class="required"> *</span>
 			</label>
 			<div class="col-md-7">
 				<?php								                            		
@@ -114,7 +226,7 @@
 				$db->order_by('full_name', '0');
 				$db->where('deleted', '0');
 				$options = $db->get('users'); 	                            
-				$partners_movement_action_type_id_options = array('' => 'Select...');
+				$partners_movement_action_type_id_options = array('' => '');
 				foreach($options->result() as $option)
 				{
 					$partners_movement_action_type_id_options[$option->user_id] = $option->full_name;
@@ -141,7 +253,7 @@
 		</div>	
 		<div class="form-group">
 			<label class="control-label col-md-3">
-				<span class="required">* </span>Approver 1:
+				Approver 1 <span class="required"> *</span>
 			</label>
 			<div class="col-md-7">
 				<?php									                            		
@@ -149,7 +261,7 @@
 				$db->order_by('full_name', '0');
 				$db->where('deleted', '0');
 				$options = $db->get('users'); 	                            
-				$partners_movement_action_type_id_options = array('' => 'Select...');
+				$partners_movement_action_type_id_options = array('' => '');
 				foreach($options->result() as $option)
 				{
 					$partners_movement_action_type_id_options[$option->user_id] = $option->full_name;
@@ -184,7 +296,7 @@
 				$db->order_by('full_name', '0');
 				$db->where('deleted', '0');
 				$options = $db->get('users'); 	                            
-				$partners_movement_action_type_id_options = array('' => 'Select...');
+				$partners_movement_action_type_id_options = array('' => '');
 				foreach($options->result() as $option)
 				{
 					$partners_movement_action_type_id_options[$option->user_id] = $option->full_name;
@@ -208,17 +320,23 @@
 					{{ form_dropdown('hr_approver[]',$partners_movement_action_type_id_options, $approver_hr_2, $others) }}
 				</div> 				
 			</div>	
-		</div>	
+		</div>
+		@if ($record['partners_movement.status_id'] == 9)
 		<div class="form-group">
-			<label class="control-label col-md-3">HRD Remarks</label>
+			<label class="control-label col-md-3">Remarks</label>
 			<div class="col-md-7">							
-				<textarea <?php echo ($record['partners_movement.status_id'] >= 9 ? "disabled" : "") ?> class="form-control" name="partners_movement[hrd_remarks]" id="partners_movement-hrd-remarks" placeholder="Enter Remarks" rows="4"><?php echo $record['partners_movement.hrd_remarks'] ?></textarea> 				
+				<textarea class="form-control" name="partners_movement_approver_hr[remarks]" id="partners_movement-hrd-remarks" placeholder="Enter Remarks" rows="4"><?php echo $hr_approver_remarks ?></textarea> 				
 			</div>	
-		</div>											
+		</div>
+		@endif
+		<div style="border-bottom:1px solid #eee;padding-bottom:8px;">Employee Movement Details</div>
+
+		<div style="padding-top:10px" id="movement_type_container">
+		</div>												
 	</div>
 </div>
 <br>
-<div id="nature_movement" class="portlet-body form">
+<div id="nature_movement" class="portlet-body form hidden">
     <input type="hidden" name="movement_count" id="movement_count" value="{{ $record['movement_count'] }}" />
     <div class="form-horizontal">
         <div class="form-body">
@@ -285,7 +403,7 @@
             		}
             		if ( (in_array($record['partners_movement.status_id'], array(6,9,10)) || empty($record_id)) || $record['partners_movement_action.created_by'] == $user_id){
 				?>
-                		<button class="btn green btn-sm" type="button" onclick="save_movement( $(this).closest('form'), '')" ><i class="fa fa-check"></i> Save as draft</button>
+                		<button class="btn blue btn-sm" type="button" onclick="save_movement( $(this).closest('form'), '')" >Save as draft</button>
                 <?php
                 		if (in_array($record['partners_movement.status_id'], array(9,10))){
                 ?>
@@ -295,7 +413,7 @@
                 		}
                 		else{
 				?>
-							<button class="btn blue btn-sm" type="button" onclick="save_movement( $(this).closest('form'), <?php echo $status ?>)"><i class="fa fa-undo"></i> Save and Submit</button>
+							<button class="btn green btn-sm" type="button" onclick="save_movement( $(this).closest('form'), <?php echo $status ?>)"></i> Submit</button>
 				<?php                			
                 		}
 					}

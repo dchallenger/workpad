@@ -155,7 +155,6 @@ class My201 extends MY_PrivateController
 			$data['emergency_city'] = (count($emergency_city) > 0 ? $this->mod->get_city($emergency_city[0]['key_value']) : " ");
 		$emergency_country = $this->mod->get_partners_personal($this->user->user_id, 'emergency_country');
 			$data['emergency_country'] = (count($emergency_country) > 0 ? $this->mod->get_country($emergency_country[0]['key_value']) : " ");
-			$data['emergency_country'] = (count($emergency_country) == 0 ? " " : ($emergency_country[0]['key_value'] == "" ? "" : $this->mod->get_country($emergency_country[0]['key_value'])));
 		$emergency_zip_code = $this->mod->get_partners_personal($this->user->user_id, 'emergency_zip_code');
 			$data['emergency_zip_code'] = (count($emergency_zip_code) == 0 ? " " : ($emergency_zip_code[0]['key_value'] == "" ? "" : $emergency_zip_code[0]['key_value']));
 

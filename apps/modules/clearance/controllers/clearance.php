@@ -1595,7 +1595,9 @@ class Clearance extends MY_PrivateController
             $address = '_______________';
         }
 
-        $template_data['title'] = $partner_record['firstname']." ".$partner_record['middlename']." ".$partner_record['lastname'];
+        $nationality = $this->partners_mod->get_partners_personal($partner_record['user_id'], 'partners_personal', 'nationality', 1);
+
+        //$template_data['title'] = $partner_record['firstname']." ".$partner_record['middlename']." ".$partner_record['lastname'];
         $template_data['employee_no'] = $partner_record['login'];
         $template_data['employee_name'] = $partner_record['firstname']." ".substr($partner_record['middlename'],0, 1).". ".$partner_record['lastname'];
         $template_data['position'] = $partner_record['position'];
@@ -1607,10 +1609,15 @@ class Clearance extends MY_PrivateController
         $template_data['date_month'] = date('F');
         $template_data['year'] = date('Y');
         $template_data['address'] = $address;
-        $template_data['gender'] = $partner_record['title'];
+        $template_data['title'] = $partner_record['title'];
         $template_data['day'] = date('j\<\s\u\p\>S\<\/\s\u\p\>');
 		$template_data['company'] = $partner_record['company'];
 		$template_data['logo'] = base_url().$partner_record['print_logo'];
+		$template_data['nationality'] = ($nationality[0]['key_value'] != '' ? $nationality[0]['key_value'] : 'Filipino');
+
+		$template_data['amount_words'] = ' ';
+		$template_data['amount'] = '0';
+		$template_data['hrd'] = 'MARYBETH G. MONIS';
 
         $this->load->helper('file');
         $this->load->library('parser');

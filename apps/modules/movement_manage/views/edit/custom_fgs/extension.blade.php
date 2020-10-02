@@ -48,38 +48,12 @@
             $('body').removeClass("modal-open"); 
         }
         
-		$('#partners_movement_action_extension-no_of_months').on('keyup', function() {
-			var type = $('#partners_movement_action-type_id').val();
-			if(type==13 && $.trim($(this).val()) > 0){
-				no_months = $(this).val();
-				var endDate = new Date($('#partners_movement_action-effectivity_date').val());
-				var start_day = endDate.getDate();
-				endDate.setMonth(endDate.getMonth() + parseInt(no_months));			
-
-				d = new Date(endDate);
-				var m_names = new Array("January", "February", "March", 
-				"April", "May", "June", "July", "August", "September", 
-				"October", "November", "December");
-
-				var day = d.getDay();
-				var month = d.getMonth();
-				var year = d.getFullYear();
-				end_date = m_names[month] + " " + start_day + ", " + year;	
-
-				$('.end_date').datepicker('update',endDate);
-			}
-		});
-
-		$("#partners_movement_action_extension-no_of_months").keypress(function (e) {
-		     //if the letter is not digit then display error and don't type anything
-		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-		        //display error message
-		        //$("#errmsg").html("Digits Only").show().fadeOut("slow");
-		               return false;
-		    }
-	   });
-
 		$( "#partners_movement_action_extension-no_of_months" ).keyup(function() {
+			if ($("#partners_movement_action-effectivity_date").val() == '') {
+				notify('error', 'Please input effectivity date.');
+				return false;
+			}
+						
 			get_end_date($('#partners_movement_action-user_id').val());
 		});
 

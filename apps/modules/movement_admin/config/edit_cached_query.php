@@ -7,6 +7,7 @@ $config["edit_cached_query"] = 'SELECT `ww_partners_movement`.`movement_id` as r
 	ww_partners_movement_action_moving.further_reason as "partners_movement_action_moving.further_reason", 
 	ww_partners_movement_action_moving.reason_id as "partners_movement_action_moving.reason_id", 
 	ww_partners_movement_action_moving.blacklisted as "partners_movement_action_moving.blacklisted", 
+	ww_partners_movement_action_moving.eligible_for_rehire as "partners_movement_action_moving.eligible_for_rehire", 
 	DATE_FORMAT(ww_partners_movement_action_moving.end_date, \'%M %d, %Y\') as "partners_movement_action_moving.end_date", 
 	ww_partners_movement_action_extension.end_date as "partners_movement_action_extension.end_date", 
 	ww_partners_movement_action_extension.no_of_months as "partners_movement_action_extension.no_of_months", 
@@ -23,7 +24,8 @@ $config["edit_cached_query"] = 'SELECT `ww_partners_movement`.`movement_id` as r
 	ww_partners_movement_action.photo as "partners_movement_action.photo", 
 	ww_partners_movement_action_compensation.to_salary as "partners_movement_action_compensation.to_salary", 
 	ww_partners_movement_action_compensation.current_salary as "partners_movement_action_compensation.current_salary",
-	`ww_partners_movement`.`status_id` as "partners_movement.status_id"
+	`ww_partners_movement`.`status_id` as "partners_movement.status_id",
+	ww_partners_movement_action.action_id as "partners_movement_action.action_id"
 FROM (`ww_partners_movement`)
 LEFT JOIN `ww_partners_movement_action_moving` ON `ww_partners_movement_action_moving`.`movement_id` = `ww_partners_movement`.`movement_id`
 LEFT JOIN `ww_partners_movement_action_extension` ON `ww_partners_movement_action_extension`.`movement_id` = `ww_partners_movement`.`movement_id`

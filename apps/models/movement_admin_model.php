@@ -41,7 +41,7 @@ class movement_admin_model extends Record
 		$data = array();	
 		$user = $this->config->item('user');			
 
-		$role_permission = $this->get_role_permission(22);		
+		$role_permission = array();//$this->get_role_permission(22);		
 		
 		$qry = $this->_get_list_cached_query();
 		
@@ -54,9 +54,9 @@ class movement_admin_model extends Record
 		}
 		
 		//$qry .= " AND (T6.user_id = " . $this->user->user_id . " AND T6.movement_status_id >= 2) OR ww_partners_movement.created_by = " . $this->user->user_id;
-		$qry .= " AND ww_partners_movement.status_id > 2";
+		//$qry .= " AND ww_partners_movement.status_id >= 1";
 
-		if (count($role_permission) > 0 && in_array($user['role_id'], $role_permission)){
+/*		if (count($role_permission) > 0 && in_array($user['role_id'], $role_permission)){
 			//$qry .= " AND (ww_partners_movement.status_id = 6 OR (ww_partners_movement.status_id > 6 AND ".$this->user->user_id." IN (SELECT user_id FROM ww_partners_movement_approver_hr WHERE movement_id = ww_partners_movement.`movement_id`))) OR (ww_partners_movement.status_id > 6 AND ww_partners_movement.`created_by` = ".$this->user->user_id.")";
 			$qry .= " AND ((ww_partners_movement.status_id >= 6 OR (ww_partners_movement.status_id > 6 AND ".$this->user->user_id." IN (SELECT user_id FROM ww_partners_movement_approver_hr WHERE movement_id = ww_partners_movement.`movement_id`))) OR (ww_partners_movement.status_id > 6 AND ww_partners_movement.`created_by` = ".$this->user->user_id."))";
 
@@ -65,7 +65,15 @@ class movement_admin_model extends Record
 	        if ($qry_category != ''){
 	            $qry .= ' AND ' . $qry_category;
 	        }			
-		}
+		}*/
+
+		$qry .= " AND ((ww_partners_movement.status_id >= 6 OR (ww_partners_movement.status_id > 6 AND ".$this->user->user_id." IN (SELECT user_id FROM ww_partners_movement_approver_hr WHERE movement_id = ww_partners_movement.`movement_id`))) OR (ww_partners_movement.status_id IN (1,6) AND ww_partners_movement.`created_by` = ".$this->user->user_id."))";
+
+        $qry_category = $this->mod->get_role_category();
+
+        if ($qry_category != ''){
+            $qry .= ' AND ' . $qry_category;
+        }
 
 		$filter .= ' GROUP BY record_id ORDER BY ww_partners_movement.created_on DESC';
 
@@ -76,30 +84,35 @@ class movement_admin_model extends Record
 		$this->parser->set_delimiters('{$', '}');
 		$qry = $this->parser->parse_string($qry, array('search' => $search), TRUE);
 
+/*		debug($qry);
+		die();*/
+
 		$result = $this->db->query( $qry );
 
 		if($result && $result->num_rows() > 0)
 		{			
 			foreach($result->result_array() as $row){
 				// to get hr approval status
-				$this->db->where('movement_id',$row['record_id']);
-				$this->db->where('movement_status_id',9);
-				$this->db->where('user_id',$this->user->user_id);
-				$hr_approver = $this->db->get('partners_movement_approver_hr');
+				if ($row['partners_movement_status_id'] > 1 || ($row['partners_movement_status_id'] == 1 && $row['partners_movement_created_by']) == $this->user->user_id && $row['partners_movement_movement_from'] == 3) {
+					$this->db->where('movement_id',$row['record_id']);
+					$this->db->where('movement_status_id',9);
+					$this->db->where('user_id',$this->user->user_id);
+					$hr_approver = $this->db->get('partners_movement_approver_hr');
 
-				if ($hr_approver && $hr_approver->num_rows() > 0){
-					$row['hr_approver_movement_status_id'] = 9;
-				}
-				else{
-					$row['hr_approver_movement_status_id'] = 1;
-				}
-				// to get hr approval status
-				$row['hr_admin_movement'] = 0;
-				if (count($role_permission) > 0 && in_array($user['role_id'], $role_permission)){
-					$row['hr_admin_movement'] = 1;
-				}				
+					if ($hr_approver && $hr_approver->num_rows() > 0){
+						$row['hr_approver_movement_status_id'] = 9;
+					}
+					else{
+						$row['hr_approver_movement_status_id'] = 1;
+					}
+					// to get hr approval status
+					$row['hr_admin_movement'] = 1; //change to 1 for oclp
+					if (count($role_permission) > 0 && in_array($user['role_id'], $role_permission)){
+						$row['hr_admin_movement'] = 1;
+					}				
 
-				$data[] = $row;
+					$data[] = $row;
+				}
 			}
 		}
 
@@ -228,7 +241,7 @@ class movement_admin_model extends Record
 
 		$data = array();
 
-		$qry = "SELECT * FROM {$this->db->dbprefix}partners_movement_fields WHERE from_to = 1 "; // WHERE user_id = '$userID';
+		$qry = "SELECT * FROM {$this->db->dbprefix}partners_movement_fields WHERE from_to = 1 ORDER BY orderby"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
 		if($result->num_rows() > 0){
@@ -236,9 +249,10 @@ class movement_admin_model extends Record
 			foreach($result->result_array() as $row){
 				$data[] = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -296,9 +310,10 @@ class movement_admin_model extends Record
 			foreach($result->result_array() as $row){
 				$data[] = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -320,9 +335,10 @@ class movement_admin_model extends Record
 			foreach($result->result_array() as $row){
 				$data[] = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -388,9 +404,10 @@ class movement_admin_model extends Record
 			foreach($result->result_array() as $row){
 				$data[] = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -407,14 +424,14 @@ class movement_admin_model extends Record
 				WHERE pma.action_id = {$action_id}"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
-				
+		if($result && $result->num_rows() > 0){	
 			foreach($result->result_array() as $row){
 				$data = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -431,9 +448,10 @@ class movement_admin_model extends Record
 		
 		if($result && $result->num_rows() > 0){
 			$data = $result->result();		
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}	
 
@@ -448,14 +466,15 @@ class movement_admin_model extends Record
 				WHERE action_id = {$action_id}"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -471,14 +490,15 @@ class movement_admin_model extends Record
 				WHERE pmam.action_id = {$action_id}"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -493,14 +513,15 @@ class movement_admin_model extends Record
 				WHERE action_id = {$action_id}"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data = $row;
 			}			
+
+			$result->free_result();			
 		}
-			
-		$result->free_result();
+		
 		return $data;	
 	}
 
@@ -516,14 +537,15 @@ class movement_admin_model extends Record
 				AND field_id = {$field_id}"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data[] = $row;
-			}			
+			}
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -544,9 +566,10 @@ class movement_admin_model extends Record
 			foreach($result->result_array() as $row){
 				$data[] = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 

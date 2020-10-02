@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    display_movement_details($('#type_id').val(),$('#action_id').val());
+
 	$('.approve').click(function(){
         var movement_id     = $(this).data('movement-id');
         var user_id     = $(this).data('user-id');
@@ -190,7 +192,7 @@ function display_movement_details(type_id, action_id){
 			data: data,
 			dataType: "json",
 			beforeSend: function(){
-						$('body').modalmanager('loading');
+						//$('body').modalmanager('loading');
 					},
 					success: function ( response ) {
 
@@ -205,9 +207,10 @@ function display_movement_details(type_id, action_id){
 
 						if( typeof(response.add_movement) != 'undefined' )
 						{	
-							$('.modal-container-action').html(response.add_movement);
-							$('.move_action_modal').append(response.type_of_movement);	
-							$('.modal-container-action').modal('show');									// FormComponents.init();
+                            $('#movement_type_container').html(response.type_of_movement);
+							//$('.modal-container-action').html(response.add_movement);
+							//$('.move_action_modal').append(response.type_of_movement);	
+							//$('.modal-container-action').modal('show');									// FormComponents.init();
 						}
 
 					}

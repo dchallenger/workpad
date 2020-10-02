@@ -90,14 +90,15 @@ class movement_model extends Record
 		$qry = "SELECT * FROM {$this->db->dbprefix}partners_movement_fields WHERE from_to = 1 "; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data[] = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -114,14 +115,15 @@ class movement_model extends Record
 		 FROM partner_movement_current WHERE user_id = {$user_id}"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result &&$result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data[] = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -166,14 +168,15 @@ class movement_model extends Record
 				ORDER BY pmoveact.effectivity_date DESC"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data[] = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -190,14 +193,15 @@ class movement_model extends Record
 				WHERE pma.action_id = {$action_id}"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -214,9 +218,10 @@ class movement_model extends Record
 		
 		if($result && $result->num_rows() > 0){
 			$data = $result->result();		
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -231,14 +236,15 @@ class movement_model extends Record
 				WHERE action_id = {$action_id}"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -254,14 +260,15 @@ class movement_model extends Record
 				WHERE pmam.action_id = {$action_id}"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -276,14 +283,15 @@ class movement_model extends Record
 				WHERE action_id = {$action_id}"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -299,14 +307,15 @@ class movement_model extends Record
 				AND field_id = {$field_id}"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data[] = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 

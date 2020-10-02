@@ -203,19 +203,8 @@ class Movement_manage extends MY_PrivateController
 	    	<input type="hidden" name="partners_movement_action[filename][]" value="'.$file->name.'"/>
 	    	<input type="hidden" name="partners_movement_action[size][]" value="'.$file->size.'"/>
 	        <td>
-	            <span class="preview">';
-	                if (isset($file->thumbnailUrl)) {
-	                    $html .= '<a href="'.$file->url.'" title="'.$file->name.'" download="'.$file->name.'" data-gallery><img src="'.base_url().$file->thumbnailUrl.'"></a>';
-	                }
-	            $html .= '</span>
-	        </td>
-	        <td>
-	            <p class="name">';
-	                if (isset($file->url)) {
-	                    $html .= '<a href="javascript:void(0)" title="'.$file->name.'">'.$file->name.'</a>';
-	                } else {
-	                    $html .= '<span>"'.$file->name.'"</span>';
-	                }
+	            <p class="name">
+					<span>'.$file->name.'</span>';
 	            $html .= '</p>';
 	            if (isset($file->error)) {
 	                $html .= '<div><span class="label label-danger">Error</span>'.$file->error.'</div>';
@@ -437,6 +426,14 @@ class Movement_manage extends MY_PrivateController
 			}
 
 			$data['approver_list'] = $this->mod->call_sp_approvers($this->user->user_id);
+			$data['qry_category'] = $this->mod->get_role_category();
+			$data['user_id'] = $this->user->user_id;
+
+			$action_movement_attachment = array();
+			if (isset($record['partners_movement_action.action_id']))
+				$action_movement_attachment = $this->mod->get_action_movement_attachment($record['partners_movement_action.action_id']);
+
+			$data['record']['attachement'] = $action_movement_attachment;						
 
 			$this->load->vars( $data );
 
@@ -520,6 +517,9 @@ class Movement_manage extends MY_PrivateController
 
 			$data['hr_approver_list'] = $this->mod->get_hr_approver_list($this->record_id);
 
+			$action_movement_attachment = $this->mod->get_action_movement_attachment($record['partners_movement_action.action_id']);
+			$data['record']['attachement'] = $action_movement_attachment;
+
 			$this->load->vars( $data );
 
 			if( !$child_call ){
@@ -544,16 +544,6 @@ class Movement_manage extends MY_PrivateController
 		$this->response->record_id = $this->record_id = $post['record_id'];
 		unset( $post['record_id'] );
 
-		if($post['save_from'] != 'modal'){
-			if(!($post['movement_count']) > 0){
-	            $this->response->message[] = array(
-	                'message' => 'Please add movement type.',
-	                'type' => 'warning'
-	                );
-	            $this->_ajax_return();
-			}
-		}
-
 		$validation_rules = array();
 			$validation_rules[] = 
 			array(
@@ -562,117 +552,74 @@ class Movement_manage extends MY_PrivateController
 				'rules' => 'required'
 				);
 
-			if($post['save_from'] == 'modal'){
-/*				$validation_rules[] = 
-				array(
-					'field' => 'partners_movement_action[effectivity_date]',
-					'label' => 'Effective',
-					'rules' => 'required'
-					);*/
-				$validation_rules[] = 
-				array(
-					'field' => 'partners_movement_action[user_id]',
-					'label' => 'Partner',
-					'rules' => 'required'
-					);
-				switch ($post['partners_movement_action']['type_id']){
-					case 1://Regularization
-					case 3://Promotion
-					case 8://Transfer
-					case 9://Employment Status
-					case 12://Temporary Assignment
-					$error_val = false;
-					$count_values = array_count_values($post['partners_movement_action_transfer']['to_name']);
-					if(!(count($count_values)>1)){
-						$error_val = true;
-			            $this->response->message[] = array(
-			                'message' => 'Please change at least one field.',
-			                'type' => 'warning'
-			                );
-			            $this->_ajax_return();
-					}
-					if($post['partners_movement_action']['type_id'] == 12){
-/*						$validation_rules[] = 
-						array(
-							'field' => 'partners_movement_action_transfer[end_date]',
-							'label' => 'End Date of Temporary Assignment',
-							'rules' => 'required'
-							);
-						$transfer_end_date = $post['partners_movement_action_transfer']['end_date'];*/
-						unset($post['partners_movement_action_transfer']['end_date']);
-					}
-					break;
-					case 2://Salary Increase
-					case 18://Salary Alignment
-					case 4://Wage Order
-						// $validation_rules[] = 
-						// array(
-						// 	'field' => 'partners_movement_action_compensation[current_salary]',
-						// 	'label' => 'Current Salary',
-						// 	'rules' => 'required'
-						// 	);
-/*						$validation_rules[] = 
-						array(
-							'field' => 'partners_movement_action_compensation[to_salary]',
-							'label' => 'New Salary',
-							'rules' => 'required'
-							);*/
-					break;
-					case 6://Resignation
-					case 7://Termination
-/*						$validation_rules[] = 
-						array(
-							'field' => 'partners_movement_action_moving[end_date]',
-							'label' => 'End Date',
-							'rules' => 'required'
-							);*/
-						$validation_rules[] = 
-						array(
-							'field' => 'partners_movement_action_moving[reason_id]',
-							'label' => 'Reason',
-							'rules' => 'required'
-							);
-					break;
-					case 10://End Contract
-					case 11://Retirement
-/*						$validation_rules[] = 
-						array(
-							'field' => 'partners_movement_action_moving[end_date]',
-							'label' => 'End Date',
-							'rules' => 'required'
-							);*/
-					break;
-					case 15://extension
-						$validation_rules[] = 
-						array(
-							'field' => 'partners_movement_action_extension[no_of_months]',
-							'label' => 'Months',
-							'rules' => 'numeric'
-							);
-/*						$validation_rules[] = 
-						array(
-							'field' => 'partners_movement_action_extension[end_date]',
-							'label' => 'End Date',
-							'rules' => 'required'
-							);*/
-						//end date
-					break;
-					case 17://Developmental Assignment
-						$validation_rules[] = 
-						array(
-							'field' => 'partners_movement_action_extension[no_of_months]',
-							'label' => 'Months',
-							'rules' => 'numeric'
-							);
-/*						$validation_rules[] = 
-						array(
-							'field' => 'partners_movement_action_extension[end_date]',
-							'label' => 'End Date',
-							'rules' => 'required'
-							);*/
-						//end date
-					break;
+			$validation_rules[] = 
+			array(
+				'field' => 'partners_movement_action[type_id]',
+				'label' => 'Type',
+				'rules' => 'required'
+				);
+
+			$validation_rules[] = 
+			array(
+				'field' => 'partners_movement_action[effectivity_date]',
+				'label' => 'Effective Date',
+				'rules' => 'required'
+				);
+
+			$validation_rules[] = 
+			array(
+				'field' => 'partners_movement_action[user_id]',
+				'label' => 'Employee',
+				'rules' => 'required'
+				);			
+
+
+			switch ($post['partners_movement_action']['type_id']){
+				case 1://Regularization
+				case 3://Promotion
+				case 8://Transfer
+				case 9://Employment Status
+				case 12://Temporary Assignment
+				$error_val = false;
+				$count_values = array_count_values($post['partners_movement_action_transfer']['to_name']);
+				if(!(count($count_values)>1)){
+					$error_val = true;
+		            $this->response->message[] = array(
+		                'message' => 'Please change at least one field.',
+		                'type' => 'warning'
+		                );
+		            $this->_ajax_return();
 				}
+				if($post['partners_movement_action']['type_id'] == 12){
+					unset($post['partners_movement_action_transfer']['end_date']);
+				}
+				break;
+				case 2://Salary Increase
+				case 18://Salary Alignment
+				case 4://Wage Order
+				break;
+				case 6://Resignation
+				case 7://Termination
+				break;
+				case 10://End Contract
+				case 11://Retirement
+				break;
+				case 15://extension
+					$validation_rules[] = 
+					array(
+						'field' => 'partners_movement_action_extension[no_of_months]',
+						'label' => 'Months',
+						'rules' => 'numeric'
+						);
+				break;
+				case 17://Developmental Assignment
+					$validation_rules[] = 
+					array(
+						'field' => 'partners_movement_action_extension[no_of_months]',
+						'label' => 'Months',
+						'rules' => 'numeric'
+						);
+				break;
 			}
 
 		if( sizeof( $validation_rules ) > 0 )
@@ -761,204 +708,206 @@ class Movement_manage extends MY_PrivateController
 				$this->db->update('partners_movement_action', array('type_category_id' => $post['type_category_id']), array( 'movement_id' => $this->record_id ) );
 			}
 					
-			if($post['save_from'] == 'modal'){
-				//partners_movement_action
-				$movement_action = $post['partners_movement_action'];	
-				$attachement = (isset($movement_action['photo']) ? $movement_action['photo'] : array());
-				$filename = (isset($movement_action['filename']) ? $movement_action['filename'] : array());
-				$type = (isset($movement_action['type']) ? $movement_action['type'] : array());
-				$size = (isset($movement_action['size']) ? $movement_action['size'] : array());
-				unset($movement_action['photo']);
-				unset($movement_action['filename']);
-				unset($movement_action['type']);
-				unset($movement_action['size']);			
-				$movement_action['movement_id'] =  $this->response->record_id;
-				$movement_action['effectivity_date'] = date('Y-m-d', strtotime($movement_action['effectivity_date']));	
-				$record = $this->db->get_where('partners_movement_action', array( 'action_id' => $movement_action['action_id'] ) );
-				$this->response->action_id = $this->action_id = $movement_action['action_id'];
+			//partners_movement_action
+			$movement_action = $post['partners_movement_action'];	
+			$attachement = (isset($movement_action['photo']) ? $movement_action['photo'] : array());
+			$filename = (isset($movement_action['filename']) ? $movement_action['filename'] : array());
+			$type = (isset($movement_action['type']) ? $movement_action['type'] : array());
+			$size = (isset($movement_action['size']) ? $movement_action['size'] : array());
+			unset($movement_action['photo']);
+			unset($movement_action['filename']);
+			unset($movement_action['type']);
+			unset($movement_action['size']);			
+			$movement_action['movement_id'] =  $this->response->record_id;
+			$movement_action['effectivity_date'] = date('Y-m-d', strtotime($movement_action['effectivity_date']));	
+			$record = $this->db->get_where('partners_movement_action', array( 'action_id' => $movement_action['action_id'] ) );
+			$this->response->action_id = $this->action_id = $movement_action['action_id'];
 
-				$previous_main_data = array();
+			$previous_main_data = array();
 
-				switch( true )
-				{				
-					case $record->num_rows() == 0:
-						$movement_action['created_on'] = date('Y-m-d H:i:s');
-						$movement_action['created_by'] = $this->user->user_id;
-						//status_id
-						$this->db->insert('partners_movement_action', $movement_action);
-						if( $this->db->_error_message() == "" )
-						{
-							$this->response->action_id = $this->action_id = $this->db->insert_id();	
-						}
-						$this->response->action = 'insert';
-						break;
-					case $record->num_rows() == 1:
-						$previous_main_data = $this->db->get_where('partners_movement_action', array('action_id' => $movement_action['action_id']))->row_array();
-
-						$movement_action['modified_on'] = date('Y-m-d H:i:s');
-						$movement_action['modified_by'] = $this->user->user_id;
-						$this->db->update( 'partners_movement_action', $movement_action, array( 'action_id' => $movement_action['action_id'] ) );
-						$this->response->action = 'update';
-						$this->response->action_id = $movement_action['action_id'];
-						break;
-					default:
-						$this->response->message[] = array(
-							'message' => lang('common.inconsistent_data'),
-							'type' => 'error'
-						);
-						$error = true;
-						goto stop;
-				}
-
-				$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, 'partners_movement_action', $previous_main_data, $movement_action);
-
-				// save movement attachement multiple
-				if (!empty($attachement)){
-					$this->db->where('movement_id',$this->response->record_id);
-					$this->db->where('action_id',$this->action_id);
-					$this->db->delete('partners_movement_action_attachment');
-
-					foreach ($attachement as $key => $value) {
-						$info = array(
-									'action_id' => $this->action_id,
-									'movement_id' => $this->response->record_id,
-									'photo' => $value,
-									'type' => $type[$key],
-									'filename' => $filename[$key],
-									'size' => $size[$key]
-								);
-
-						$this->db->insert('partners_movement_action_attachment',$info);
+			switch( true )
+			{				
+				case $record->num_rows() == 0:
+					$movement_action['created_on'] = date('Y-m-d H:i:s');
+					$movement_action['created_by'] = $this->user->user_id;
+					//status_id
+					$this->db->insert('partners_movement_action', $movement_action);
+					if( $this->db->_error_message() == "" )
+					{
+						$this->response->action_id = $this->action_id = $this->db->insert_id();	
 					}
-				}
+					$this->response->action = 'insert';
+					break;
+				case $record->num_rows() == 1:
+					$previous_main_data = $this->db->get_where('partners_movement_action', array('action_id' => $movement_action['action_id']))->row_array();
 
-				if( $this->db->_error_message() != "" ){
+					$movement_action['modified_on'] = date('Y-m-d H:i:s');
+					$movement_action['modified_by'] = $this->user->user_id;
+					$this->db->update( 'partners_movement_action', $movement_action, array( 'action_id' => $movement_action['action_id'] ) );
+					$this->response->action = 'update';
+					$this->response->action_id = $movement_action['action_id'];
+					break;
+				default:
 					$this->response->message[] = array(
-						'message' => $this->db->_error_message(),
+						'message' => lang('common.inconsistent_data'),
 						'type' => 'error'
 					);
 					$error = true;
 					goto stop;
+			}
+
+			$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, 'partners_movement_action', $previous_main_data, $movement_action);
+
+			// save movement attachement multiple
+			if (!empty($attachement)){
+				$this->db->where('movement_id',$this->response->record_id);
+				$this->db->where('action_id',$this->action_id);
+				$this->db->delete('partners_movement_action_attachment');
+
+				foreach ($attachement as $key => $value) {
+					$info = array(
+								'action_id' => $this->action_id,
+								'movement_id' => $this->response->record_id,
+								'photo' => $value,
+								'type' => $type[$key],
+								'filename' => $filename[$key],
+								'size' => $size[$key]
+							);
+
+					$this->db->insert('partners_movement_action_attachment',$info);
 				}
+			}
 
-				$movement_details = array();
-				$not_transfer = true;
-				switch ($movement_action['type_id']){
-					case 1://Regularization
-					case 3://Promotion
-					case 8://Transfer
-					case 9://Employment Status
-					case 12://Temporary Assignment
-						$movement_details = $post['partners_movement_action_transfer'];
+			if( $this->db->_error_message() != "" ){
+				$this->response->message[] = array(
+					'message' => $this->db->_error_message(),
+					'type' => 'error'
+				);
+				$error = true;
+				goto stop;
+			}
 
-						$transfer_record['action_id'] = $this->action_id;
-						$transfer_record['movement_id'] = $this->response->record_id;
-						//delete transfer details
-						$this->db->where('action_id', $this->action_id);
-						$this->db->delete('partners_movement_action_transfer'); 
-						foreach ($movement_details['to_name'] as $to_index => $to_name){
-							if($to_name != ''){
-								$transfer_record['field_id'] = $movement_details['field_id'][$to_index];
-								$transfer_record['field_name'] = $movement_details['field_name'][$to_index];
-								$transfer_record['from_id'] = $movement_details['from_id'][$to_index];
-								$transfer_record['from_name'] = $movement_details['from_name'][$to_index];
-								$transfer_record['to_id'] = $movement_details['to_id'][$to_index];
-								$transfer_record['to_name'] = $movement_details['to_name'][$to_index];
-								$this->db->insert('partners_movement_action_transfer', $transfer_record);
-							}
-						}
-						if($movement_action['type_id'] == 12){ //temporary assignment
-							$transfer_record['field_id'] = 11;
-							$transfer_record['field_name'] = 'end_date';
-							$transfer_record['to_name'] = $transfer_end_date;
+			$movement_details = array();
+			$not_transfer = true;
+			switch ($movement_action['type_id']){
+				case 1://Regularization
+				case 3://Promotion
+				case 8://Transfer
+				case 9://Employment Status
+				case 12://Temporary Assignment
+					$movement_details = $post['partners_movement_action_transfer'];
+
+					$transfer_record['action_id'] = $this->action_id;
+					$transfer_record['movement_id'] = $this->response->record_id;
+					//delete transfer details
+					$this->db->where('action_id', $this->action_id);
+					$this->db->delete('partners_movement_action_transfer'); 
+					foreach ($movement_details['to_name'] as $to_index => $to_name){
+						if($to_name != ''){
+							$transfer_record['field_id'] = $movement_details['field_id'][$to_index];
+							$transfer_record['field_name'] = $movement_details['field_name'][$to_index];
+							$transfer_record['from_id'] = $movement_details['from_id'][$to_index];
+							$transfer_record['from_name'] = $movement_details['from_name'][$to_index];
+							$transfer_record['to_id'] = $movement_details['to_id'][$to_index];
+							$transfer_record['to_name'] = $movement_details['to_name'][$to_index];
 							$this->db->insert('partners_movement_action_transfer', $transfer_record);
 						}
-					$not_transfer = false;	
-						break;
-					case 2://Salary Increase
-					case 18://Salary Alignmenta
-					case 4://Wage Order
-						$movement_details = $post['partners_movement_action_compensation'];
-						if (isset($movement_details['current_salary']) && $movement_details['current_salary'] != ''){
-							$movement_details['current_salary'] = str_replace(',','',$movement_details['current_salary']);
-						}
-						if (isset($movement_details['to_salary']) && $movement_details['to_salary'] != ''){
-							$movement_details['to_salary'] = str_replace(',','',$movement_details['to_salary']);
-						}						
-						$movement_details['action_id'] = $this->action_id;
-						$movement_details['movement_id'] = $this->response->record_id;
-						$movement_details_table = 'partners_movement_action_compensation';
-						break;
-					case 6://Resignation
-					case 7://Termination
-					case 10://End Contract
-					case 11://Retirement
-						$movement_details = $post['partners_movement_action_moving'];
-						$movement_details['action_id'] = $this->action_id;
-						$movement_details['movement_id'] = $this->response->record_id;
-						$movement_details['end_date'] = date('Y-m-d', strtotime($movement_details['end_date']));
-						$movement_details_table = 'partners_movement_action_moving';
-						break;
-					case 15://extension
-						$movement_details = $post['partners_movement_action_extension'];
-						$movement_details['action_id'] = $this->action_id;
-						$movement_details['movement_id'] = $this->response->record_id;
-						$movement_details['end_date'] = date('Y-m-d', strtotime($movement_details['end_date']));
-						$movement_details_table = 'partners_movement_action_extension';
-						break;
-					case 17://Developmental Assignment
-						$movement_details = $post['partners_movement_action_extension'];
-						$movement_details['action_id'] = $this->action_id;
-						$movement_details['movement_id'] = $this->response->record_id;
-						$movement_details['end_date'] = date('Y-m-d', strtotime($movement_details['end_date']));
-						$movement_details_table = 'partners_movement_action_extension';
-						break;
-					case 19://Temporary Assignment
-						$movement_details = $post['partners_movement_action_additional_allowance'];
+					}
+					if($movement_action['type_id'] == 12){ //temporary assignment
+						$transfer_record['field_id'] = 11;
+						$transfer_record['field_name'] = 'end_date';
+						$transfer_record['to_name'] = $transfer_end_date;
+						$this->db->insert('partners_movement_action_transfer', $transfer_record);
+					}
+				$not_transfer = false;	
+					break;
+				case 2://Salary Increase
+				case 18://Salary Alignmenta
+				case 4://Wage Order
+					$movement_details = $post['partners_movement_action_compensation'];
+					if (isset($movement_details['current_salary']) && $movement_details['current_salary'] != ''){
+						$movement_details['current_salary'] = str_replace(',','',$movement_details['current_salary']);
+					}
+					if (isset($movement_details['to_salary']) && $movement_details['to_salary'] != ''){
+						$movement_details['to_salary'] = str_replace(',','',$movement_details['to_salary']);
+					}						
+					$movement_details['action_id'] = $this->action_id;
+					$movement_details['movement_id'] = $this->response->record_id;
+					$movement_details_table = 'partners_movement_action_compensation';
+					break;
+				case 6://Resignation
+				case 7://Termination
+				case 10://End Contract
+				case 11://Retirement
+					$movement_details = $post['partners_movement_action_moving'];
+					$movement_details['action_id'] = $this->action_id;
+					$movement_details['movement_id'] = $this->response->record_id;
+					//$movement_details['end_date'] = date('Y-m-d', strtotime($movement_details['end_date']));
+					$movement_details['blacklisted'] =$movement_details['blacklisted'];
+					$movement_details['eligible_for_rehire'] = $movement_details['eligible_for_rehire'];
+					$movement_details_table = 'partners_movement_action_moving';
+					break;
+				case 15://extension
+					$movement_details = $post['partners_movement_action_extension'];
+					$movement_details['action_id'] = $this->action_id;
+					$movement_details['movement_id'] = $this->response->record_id;
+					$movement_details['end_date'] = date('Y-m-d', strtotime($movement_details['end_date']));
+					$movement_details_table = 'partners_movement_action_extension';
+					break;
+				case 17://Developmental Assignment
+					$movement_details = $post['partners_movement_action_extension'];
+					$movement_details['action_id'] = $this->action_id;
+					$movement_details['movement_id'] = $this->response->record_id;
+					$movement_details['end_date'] = date('Y-m-d', strtotime($movement_details['end_date']));
+					$movement_details_table = 'partners_movement_action_extension';
+					break;
+				case 19://Temporary Assignment
+					$movement_details = $post['partners_movement_action_additional_allowance'];
 
-						$transfer_record['action_id'] = $this->action_id;
-						$transfer_record['movement_id'] = $this->response->record_id;
-						//delete transfer details
-						$this->db->where('action_id', $this->action_id);
-						$this->db->delete('partners_movement_action_additional_allowance'); 
+					$transfer_record['action_id'] = $this->action_id;
+					$transfer_record['movement_id'] = $this->response->record_id;
+					//delete transfer details
+					$this->db->where('action_id', $this->action_id);
+					$this->db->delete('partners_movement_action_additional_allowance'); 
 
-						$previous_main_data = array();
-						
-						foreach ($movement_details['to_allowance'] as $to_index => $to_allowance){						
-							if($to_allowance != ''){
-								$this->db->where('transaction_id',$movement_details['transaction_id'][$to_index]);
-								$payroll_transaction = $this->db->get('payroll_entry_recurring');
-								if (!$payroll_transaction || $payroll_transaction->num_rows() == 0){
-						            $this->response->message[] = array(
-						                'message' => 'Please create "'.$movement_details['transaction_label'][$to_index].'" for payroll recurring.',
-						                'type' => 'warning'
-						                );
-						            $this->_ajax_return();
-									$error = true;
-									goto stop;
-								}	
+					$previous_main_data = array();
+					
+					foreach ($movement_details['to_allowance'] as $to_index => $to_allowance){						
+						if($to_allowance != ''){
+							$this->db->where('transaction_id',$movement_details['transaction_id'][$to_index]);
+							$payroll_transaction = $this->db->get('payroll_entry_recurring');
+							if (!$payroll_transaction || $payroll_transaction->num_rows() == 0){
+					            $this->response->message[] = array(
+					                'message' => 'Please create "'.$movement_details['transaction_label'][$to_index].'" for payroll recurring.',
+					                'type' => 'warning'
+					                );
+					            $this->_ajax_return();
+								$error = true;
+								goto stop;
+							}	
 
-								$transfer_record['transaction_id'] = $movement_details['transaction_id'][$to_index];
-								$transfer_record['transaction_label'] = $movement_details['transaction_label'][$to_index];
+							$transfer_record['transaction_id'] = $movement_details['transaction_id'][$to_index];
+							$transfer_record['transaction_label'] = $movement_details['transaction_label'][$to_index];
 
-								if (isset($movement_details['from_allowance'][$to_index]) && $movement_details['from_allowance'][$to_index] != ''){
-									$transfer_record['from_allowance'] = str_replace(',','',$movement_details['from_allowance'][$to_index]);
-								}
-								if (isset($movement_details['to_allowance'][$to_index]) && $movement_details['to_allowance'][$to_index] != ''){
-									$transfer_record['to_allowance'] = str_replace(',','',$movement_details['to_allowance'][$to_index]);
-								}
-
-								$this->db->insert('partners_movement_action_additional_allowance', $transfer_record);
-
-								$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'partners_movement_action_additional_allowance', $previous_main_data, $transfer_record);
+							if (isset($movement_details['from_allowance'][$to_index]) && $movement_details['from_allowance'][$to_index] != ''){
+								$transfer_record['from_allowance'] = str_replace(',','',$movement_details['from_allowance'][$to_index]);
 							}
-						}
-						$not_transfer = false;	
-						break;							
-				}
+							if (isset($movement_details['to_allowance'][$to_index]) && $movement_details['to_allowance'][$to_index] != ''){
+								$transfer_record['to_allowance'] = str_replace(',','',$movement_details['to_allowance'][$to_index]);
+							}
 
-				//partners_movement details	
-				if($not_transfer == true){
+							$this->db->insert('partners_movement_action_additional_allowance', $transfer_record);
+
+							$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'partners_movement_action_additional_allowance', $previous_main_data, $transfer_record);
+						}
+					}
+					$not_transfer = false;	
+					break;							
+			}
+
+			//partners_movement details	
+			if($not_transfer){
+				if (isset($movement_details['id'])) {
 					$record = $this->db->get_where($movement_details_table, array( 'id' => $movement_details['id'] ) );
 					switch( true )
 					{				
@@ -1042,67 +991,8 @@ class Movement_manage extends MY_PrivateController
 	            	}
 	            }				
 			}
-/*			if($post['save_from'] == 3){
-				$sp_partners_movements = $this->db->query('Call `sp_partners_movements`()');
-				mysqli_next_result($this->db->conn_id);
-				if( $this->db->_error_message() != "" )
-				{
-					$this->response->message[] = array(
-						'message' => $this->db->_error_message(),
-						'type' => 'error'
-					);
-					
-					$error = true;
-					goto stop;
-				}
-			}*/
-			
-
 		}
 
-		//insert to partners clearance
-		//Resignation
-		//Termination
-		//End Contract
-		//Retirement
-/*		if(array_key_exists('partners_movement_action', $post) && $post['save_from'] == 'modal'){
-			if( in_array( $post['partners_movement_action']['type_id'], array(6,7,10,11) ) ) {
-				$clearance_table = 'partners_clearance';
-				$clearance_record = $this->db->get_where( $clearance_table, array( 'action_id' =>$this->response->action_id ) );
-				$clearance_data = array();
-				switch( true )
-				{				
-					case $clearance_record->num_rows() == 0:
-						$user_records = $this->db->get_where( 'users_profile', array( 'user_id' => $post['partners_movement_action']['user_id'] ) )->row_array();
-						$clearance_data['partner_id'] = $user_records['partner_id'];
-						$clearance_data['action_id'] = $this->response->action_id;
-						$clearance_data['created_by'] = $this->user->user_id;
-						$clearance_data['effectivity_date'] = date('Y-m-d', strtotime($post['partners_movement_action']['effectivity_date']));	
-						$this->db->insert($clearance_table, $clearance_data);
-						if( $this->db->_error_message() == "" )
-						{
-							$this->response->clearance_id = $this->db->insert_id();
-						}else{
-							$error = true;
-							goto stop;
-						}
-						// $this->response->action = 'insert';
-						break;
-					// case $record->clearance_record() == 1:
-					// 	$this->db->update( $movement_details_table, $movement_details, array( 'id' => $movement_details['id'] ) );
-					// 	$this->response->action = 'update';
-					// 	break;
-					// default:
-					// 	$this->response->message[] = array(
-					// 		'message' => lang('common.inconsistent_data'),
-					// 		'type' => 'error'
-					// 	);
-					// 	$error = true;
-					// 	goto stop;
-				}
-			}
-		}*/
-			
 		stop:
 		if( $transactions )
 		{
@@ -1147,6 +1037,7 @@ class Movement_manage extends MY_PrivateController
 
 		$this->response->action_id = $action_id = $this->input->post("action_id");
 		$this->response->type_id = $type_id = $this->input->post("type_id");
+		$user_id = $this->input->post('user_id');
 
 		$action_details = $this->mod->get_action_movement($action_id);
 		$action_movement_attachment = $this->mod->get_action_movement_attachment($action_id);
@@ -1193,17 +1084,39 @@ class Movement_manage extends MY_PrivateController
 				break;
 				case 2://Salary Increase
 				case 18://Salary Alignment
-				$movement_type_details = $this->mod->get_compensation_movement($action_id);
-					$data['record']['partners_movement_action_compensation.id'] = $movement_type_details['id'];//id
-					$data['record']['partners_movement_action_compensation.current_salary'] = ($movement_type_details['current_salary'] != '' && $movement_type_details['current_salary'] > 0 ? number_format($movement_type_details['current_salary'], 2, '.', ',') : '');//current_salary
-					$data['record']['partners_movement_action_compensation.to_salary'] = ($movement_type_details['to_salary'] != '' && $movement_type_details['to_salary'] > 0 ? number_format($movement_type_details['to_salary'], 2, '.', ',') : '');//to_salary					
+					$movement_type_details = $this->mod->get_compensation_movement($action_id);
+					if (!empty($movement_type_details)) {
+						$data['record']['partners_movement_action_compensation.id'] = $movement_type_details['id'];//id
+						$data['record']['partners_movement_action_compensation.current_salary'] = ($movement_type_details['current_salary'] != '' && $movement_type_details['current_salary'] > 0 ? number_format($movement_type_details['current_salary'], 2, '.', ',') : '');//current_salary
+						$data['record']['partners_movement_action_compensation.to_salary'] = ($movement_type_details['to_salary'] != '' && $movement_type_details['to_salary'] > 0 ? number_format($movement_type_details['to_salary'], 2, '.', ',') : '');//to_salary					
+					} else {
+						$salary = '';
+						$salary_from_payroll = $this->mod->get_recurring_tansaction($user_id,1);
+						if (!empty($salary_from_payroll))
+							$salary = $salary_from_payroll->amount;
+
+						$data['record']['partners_movement_action_compensation.id'] = '';//id
+						$data['record']['partners_movement_action_compensation.current_salary'] = $salary;//current_salary
+						$data['record']['partners_movement_action_compensation.to_salary'] = '';//to_salary					
+					}
 					$data['movement_file'] = 'compensation.blade.php';
 				break;
 				case 4://Wage Order
-				$movement_type_details = $this->mod->get_compensation_movement($action_id);
-					$data['record']['partners_movement_action_compensation.id'] = $movement_type_details['id'];//id
-					$data['record']['partners_movement_action_compensation.current_salary'] = $movement_type_details['current_salary'];//current_salary
-					$data['record']['partners_movement_action_compensation.to_salary'] = $movement_type_details['to_salary'];//to_salary
+					$movement_type_details = $this->mod->get_compensation_movement($action_id);
+					if (!empty($movement_type_details)) {
+						$data['record']['partners_movement_action_compensation.id'] = $movement_type_details['id'];//id
+						$data['record']['partners_movement_action_compensation.current_salary'] = $movement_type_details['current_salary'];//current_salary
+						$data['record']['partners_movement_action_compensation.to_salary'] = $movement_type_details['to_salary'];//to_salary
+					} else {
+						$salary = '';
+						$salary_from_payroll = $this->mod->get_recurring_tansaction($user_id,1);
+						if (!empty($salary_from_payroll))
+							$salary = $salary_from_payroll->amount;		
+											
+						$data['record']['partners_movement_action_compensation.id'] = '';//id
+						$data['record']['partners_movement_action_compensation.current_salary'] = $salary;//current_salary
+						$data['record']['partners_movement_action_compensation.to_salary'] = '';//to_salary						
+					}
 					$data['movement_file'] = 'wage.blade.php';
 				break;
 				case 6://Resignation
@@ -1221,6 +1134,7 @@ class Movement_manage extends MY_PrivateController
 				$movement_type_details = $this->mod->get_moving_movement($action_id);
 					$data['record']['partners_movement_action_moving.id'] = $movement_type_details['id'];//id
 					$data['record']['partners_movement_action_moving.blacklisted'] = $movement_type_details['blacklisted'];//blacklisted
+					$data['record']['partners_movement_action_moving.eligible_for_rehire'] = $movement_type_details['eligible_for_rehire'];//blacklisted
 					$data['record']['partners_movement_action_moving.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
 					// $data['record']['partners_movement_action_moving.reason_id'] = $movement_type_details['reason_id'];//reason_id
 					$data['record']['partners_movement_action_moving.further_reason'] = $movement_type_details['further_reason'];//further_reason
@@ -1426,6 +1340,7 @@ class Movement_manage extends MY_PrivateController
 				$movement_type_details = $this->mod->get_moving_movement($action_id);
 					$data['record']['partners_movement_action_moving.id'] = $movement_type_details['id'];//id
 					$data['record']['partners_movement_action_moving.blacklisted'] = $movement_type_details['blacklisted'];//blacklisted
+					$data['record']['partners_movement_action_moving.eligible_for_rehire'] = $movement_type_details['eligible_for_rehire'];//blacklisted
 					$data['record']['partners_movement_action_moving.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
 					// $data['record']['partners_movement_action_moving.reason_id'] = $movement_type_details['reason_id'];//reason_id
 					$data['record']['partners_movement_action_moving.further_reason'] = $movement_type_details['further_reason'];//further_reason
@@ -1645,6 +1560,43 @@ class Movement_manage extends MY_PrivateController
 	}
 
 	function get_end_date(){
+		$this->_ajax_only();
+
+		$user_id = $this->input->post('user_id');
+		$months = $this->input->post('months');
+		$effective = $this->input->post('effective_date');
+		
+		$this->db->where('user_id',$user_id);
+		$partners = $this->db->get('partners');
+
+		if ($partners && $partners->num_rows() > 0) {
+			$partner_info = $partners->row();
+			$employment_end_date = $partner_info->employment_end_date;
+			$employment_end_date = date('Y-m-d', strtotime($employment_end_date));
+		} else {
+			$employment_end_date = date('Y-m-d', strtotime($effective));
+		}
+
+		if(strtotime($employment_end_date) && $months > 0){
+			$this->response->end_date = date( 'F d, Y', strtotime("+".$months." month", strtotime($employment_end_date)));
+			//$date= date_create($end_date);
+			//$final = date_add($date, date_interval_create_from_date_string(" ".$months." months"));
+			//debug($final);
+			//$this->response->end_date = date_format($final,"F g, Y");
+			//$this->response->end_date = date_format($final,"F g, Y");
+			$this->response->retrieved_enddate = true;
+		}
+
+
+		$this->response->message[] = array(
+			'message' => '',
+			'type' => 'success'
+			);
+
+        $this->_ajax_return();
+	}
+	
+	function get_end_date_org(){
 		$this->_ajax_only();
 
 		$user_id = $this->input->post('user_id');

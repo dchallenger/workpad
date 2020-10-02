@@ -3,9 +3,8 @@
 		Current Salary
 	</label>
 	<div class="col-md-7">
-	    <input type="hidden" name="partners_movement_action_compensation[id]" id="partners_movement_action_compensation-id" 
-	    value="<?php echo $record['partners_movement_action_compensation.id']; ?>" />						
-		<input type="text" readonly class="form-control" name="partners_movement_action_compensation[current_salary]" id="partners_movement_action_compensation-current_salary" value="<?php echo $record['partners_movement_action_compensation.current_salary'] ?>" placeholder="Enter Current Salary" /> 				
+	    <input type="hidden" name="partners_movement_action_compensation[id]" id="partners_movement_action_compensation-id" value="<?php echo $record['partners_movement_action_compensation.id']; ?>" />						
+		<input type="text" readonly class="form-control" name="partners_movement_action_compensation[current_salary]" id="partners_movement_action_compensation-current_salary" value="<?php echo $record['partners_movement_action_compensation.current_salary'] ?>" placeholder="" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/> 				
 	</div>	
 </div>			
 <div class="form-group">

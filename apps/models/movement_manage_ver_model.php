@@ -46,16 +46,16 @@ class movement_manage_ver_model extends Record
 		
 		if( $trash )
 		{
-			$qry .= " AND ww_partners_movement.deleted = 1";
+			$qry .= " AND {$this->db->dbprefix}partners_movement.deleted = 1";
 		}
 		else{
-			$qry .= " AND ww_partners_movement.deleted = 0";	
+			$qry .= " AND {$this->db->dbprefix}partners_movement.deleted = 0";	
 		}
 		
-		//$qry .= " AND (T6.user_id = " . $this->user->user_id . " AND T6.movement_status_id >= 2) OR ww_partners_movement.created_by = " . $this->user->user_id;
-		$qry .= " AND (T6.user_id = " . $this->user->user_id . " AND T6.movement_status_id >= 2)";
+		$qry .= " AND (T6.user_id = " . $this->user->user_id . " AND T6.movement_status_id >= 2) OR ({$this->db->dbprefix}partners_movement.created_by = " . $this->user->user_id ." AND {$this->db->dbprefix}partners_movement_action.created_by <> {$this->db->dbprefix}partners_movement_action.user_id)";
+		//$qry .= " AND (T6.user_id = " . $this->user->user_id . " AND T6.movement_status_id >= 2)";
 
-		$filter .= ' GROUP BY record_id ORDER BY ww_partners_movement.created_on DESC';
+		$filter .= " GROUP BY record_id ORDER BY {$this->db->dbprefix}partners_movement.created_on DESC";
 
 		$qry .= ' '. $filter;
 		$qry .= " LIMIT $limit OFFSET $start";
@@ -66,12 +66,28 @@ class movement_manage_ver_model extends Record
 
 		$result = $this->db->query( $qry );
 
-		if($result && $result->num_rows() > 0)
-		{			
-			foreach($result->result_array() as $row){
-				$data[] = $row;
+		if($result && $result->num_rows() > 0){			
+			foreach($result->result_array() as $row) {
+				if ($row['partners_movement_movement_from'] == 2)
+					$data[] = $row;
 			}
 		}
+		return $data;
+	}
+
+	public function get_recurring_tansaction($user_id = 0,$transaction_id = 0) {
+		$qry = "SELECT transaction_id,transaction_code,CAST( AES_DECRYPT( `pere`.`amount`, encryption_key()) AS CHAR) as amount
+				FROM {$this->db->dbprefix}payroll_entry_recurring per
+				LEFT JOIN {$this->db->dbprefix}payroll_entry_recurring_employee pere ON per.recurring_id = pere.recurring_id
+				WHERE employee_id = {$user_id} 
+				AND transaction_id = {$transaction_id}";
+		$result = $this->db->query($qry);
+
+		$data = array();
+		if ($result && $result->num_rows() > 0) {
+			$data = $result->row();
+		}
+
 		return $data;
 	}
 
@@ -318,17 +334,18 @@ class movement_manage_ver_model extends Record
 
 		$data = array();
 
-		$qry = "SELECT * FROM {$this->db->dbprefix}partners_movement_fields WHERE from_to = 1 "; // WHERE user_id = '$userID';
+		$qry = "SELECT * FROM {$this->db->dbprefix}partners_movement_fields WHERE from_to = 1 ORDER BY orderby"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data[] = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -342,14 +359,15 @@ class movement_manage_ver_model extends Record
 		$qry = "SELECT * FROM {$this->db->dbprefix}payroll_transaction WHERE show_in_movement = 1 AND deleted = 0"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data[] = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}	
 
@@ -366,14 +384,15 @@ class movement_manage_ver_model extends Record
 		 FROM partner_movement_current WHERE user_id = {$user_id}"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data[] = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -615,9 +634,10 @@ class movement_manage_ver_model extends Record
 			foreach($result->result_array() as $row){
 				$data[] = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -706,14 +726,15 @@ class movement_manage_ver_model extends Record
 				WHERE pma.action_id = {$action_id}"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -730,9 +751,10 @@ class movement_manage_ver_model extends Record
 		
 		if($result && $result->num_rows() > 0){
 			$data = $result->result();		
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 	
@@ -747,14 +769,15 @@ class movement_manage_ver_model extends Record
 				WHERE action_id = {$action_id}"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -770,14 +793,15 @@ class movement_manage_ver_model extends Record
 				WHERE pmam.action_id = {$action_id}"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -792,14 +816,15 @@ class movement_manage_ver_model extends Record
 				WHERE action_id = {$action_id}"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -815,14 +840,15 @@ class movement_manage_ver_model extends Record
 				AND field_id = {$field_id}"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
-		if($result->num_rows() > 0){
+		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
 				$data[] = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 
@@ -843,9 +869,10 @@ class movement_manage_ver_model extends Record
 			foreach($result->result_array() as $row){
 				$data[] = $row;
 			}			
+
+			$result->free_result();			
 		}
 			
-		$result->free_result();
 		return $data;	
 	}
 

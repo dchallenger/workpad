@@ -13,6 +13,7 @@ ww_partners_movement_action_transfer.to_id as "partners_movement_action_transfer
 ww_partners_movement_action_transfer.from_id as "partners_movement_action_transfer_from_id", 
 ww_partners_movement_action_transfer.field_id as "partners_movement_action_transfer_field_id", 
 ww_partners_movement.remarks as "partners_movement_remarks", 
+ww_partners_movement.movement_from as "partners_movement_movement_from", 
 T4.type as "partners_movement_action_type_id", 
 T2.cause as "partners_movement_due_to_id", 
 T1.display_name as "partners_movement_action_user_id", 
@@ -22,6 +23,7 @@ T5.status as "partners_movement_status",
 T7.status as "approver_movement_status",
 T5.status_id as "partners_movement_status_id",
 T7.status_id as "approver_movement_status_id",
+T8.reports_to_id as "reports_to_id",
 `ww_partners_movement`.`created_on` as "partners_movement_created_on", 
 `ww_partners_movement`.`created_by` as "partners_movement_created_by",
 `ww_partners_movement`.`modified_on` as "partners_movement_modified_on", 
@@ -39,6 +41,7 @@ LEFT JOIN `ww_partners_movement_status` T5 ON `T5`.`status_id` = `ww_partners_mo
 LEFT JOIN `ww_partners_movement_approver` T6 ON `T6`.`movement_id` = `ww_partners_movement`.`movement_id`
 LEFT JOIN `ww_partners_movement_status` T7 ON `T7`.`status_id` = `T6`.`movement_status_id`
 LEFT JOIN `ww_users` T1 ON `T1`.`user_id` = `ww_partners_movement_action`.`user_id`
+LEFT JOIN `ww_users_profile` T8 ON `T8`.`user_id` = `T1`.`user_id`
 WHERE (
 	ww_partners_movement_action_moving.further_reason like "%{$search}%" OR 
 	T13.reason like "%{$search}%" OR 

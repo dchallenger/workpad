@@ -13,6 +13,7 @@ ww_partners_movement_action_transfer.to_id as "partners_movement_action_transfer
 ww_partners_movement_action_transfer.from_id as "partners_movement_action_transfer_from_id", 
 ww_partners_movement_action_transfer.field_id as "partners_movement_action_transfer_field_id", 
 ww_partners_movement.remarks as "partners_movement_remarks", 
+ww_partners_movement.movement_from as "partners_movement_movement_from", 
 T4.type as "partners_movement_action_type_id", 
 T2.cause as "partners_movement_due_to_id", 
 T1.display_name as "partners_movement_action_user_id", 

@@ -7,6 +7,8 @@
 		<div class="form-body">
 			<div class="row">
 				<div class="col-md-12">
+					<input type="hidden" id="action_id" name="action_id" value="<?=$movement_details[0]['action_id']?>" />
+					<input type="hidden" id="type_id" name="type_id" value="<?=$movement_details[0]['type_id']?>" />
 					<div class="form-group">
 						<label class="col-md-4 text-muted text-right">
 							Employee:
@@ -20,52 +22,98 @@
 							Due To:
 						</label>
 						<div class="col-md-7">
-							<?php									                            		
-							$db->select('cause_id,cause');
-							$db->order_by('cause', '0');
-							$db->where('deleted', '0');
-							$options = $db->get('partners_movement_cause'); 	                            
-							$partners_movement_due_to_id_options = array('' => 'Select...');
-							
-							foreach($options->result() as $option)
-							{
-								if($option->cause_id == $record['partners_movement_due_to_id']) {
-									$selected = $option->cause;
-									break;
-								}
-							} 
-							echo $selected;
-							?>
+							<?php echo $record['partners_movement_due_to_id'] ?>
 						</div>	
 					</div>	
+					<div class="form-group">
+						<label class="col-md-4 text-muted text-right">
+							Type:
+						</label>
+						<div class="col-md-7">
+							<?php echo $record['partners_movement_action_type_id'] ?>		
+						</div>	
+					</div>	
+		 			<div class="form-group">
+						<label class="col-md-4 text-muted text-right">
+							Effective Date:
+						</label>
+						<div class="col-md-7">
+							<?php echo ($record['partners_movement_action_effectivity_date'] && $record['partners_movement_action_effectivity_date'] != '0000-00-00' && $record['partners_movement_action_effectivity_date'] != 'November 30, -0001' && $record['partners_movement_action_effectivity_date'] != 'January 01, 1970') ? $record['partners_movement_action_effectivity_date'] : ''?>
+						</div>	
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 text-muted text-right">
+							 Remarks:
+						</label>
+						<div class="col-md-7">							
+							<?php echo $record['partners_movement_remarks'] ?>
+						</div>	
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 text-muted text-right">
+							Attachments:
+						</label>
+						<div class="col-md-7">
+							<?php
+								if (!empty($record['attachement'])){
+									foreach ($record['attachement'] as $key => $value) {
+										if ( !empty($value->photo)) {
+											$file = FCPATH . urldecode( $value->photo );
+											if( file_exists( $file ) )
+											{
+												$f_type = '';
+
+												if (function_exists('get_file_info')) {
+													$f_info = get_file_info( $file );
+													$f_type = filetype( $file );
+												}
+
+												if (function_exists('finfo_open')) {
+													$finfo = finfo_open(FILEINFO_MIME_TYPE);
+													$f_type = finfo_file($finfo, $file);
+												}
+
+												switch( $f_type )
+												{
+													case 'image/jpeg':
+														$icon = 'fa-picture-o';
+														break;
+													case 'video/mp4':
+														$icon = 'fa-film';
+														break;
+													case 'audio/mpeg':
+														$icon = 'fa-volume-up';
+														break;
+													default:
+														$icon = 'fa-file-text-o';
+												}
+												
+												$filepath = base_url()."partners/admin/movement/download_file/".$value->movement_attachment_id;
+												echo '<li class="padding-3 fileupload-delete-'.$value->movement_attachment_id.'" style="list-style:none;">
+										            <a href="'.$filepath.'">
+										            <span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
+										            <span>'. basename($f_info['name']) .'</span>
+										            <span class="padding-left-10"></span>
+										        </a></li>';	
+											}
+										}
+									}
+								} 
+							?>
+						</div>	
+					</div>
+					@if (($record['partners_movement_action.user_id'] != $record['partners_movement_action.created_by']) && ($record['partners_movement_action.created_by'] != $user_id))
+					<div class="form-group">
+						<label class="col-md-4 text-muted text-right">
+							Requested By:
+						</label>
+						<div class="col-md-7">
+							<?php echo $record['partners_movement_created_by_fname'] ?>
+						</div>	
+					</div>
+					@endif
 				</div>
-			</div>
-
-
-			<div class="form-group">
-				<label class="col-md-4 text-muted text-right">
-					Justification Remarks:
-				</label>
-				<div class="col-md-7">							
-					<?php echo $record['partners_movement_remarks'] ?>
-				</div>	
-			</div>	
-			<div class="form-group">
-				<label class="col-md-4 text-muted text-right">
-					Type:
-				</label>
-				<div class="col-md-7">
-					<?php echo $record['partners_movement_action_type_id'] ?>		
-				</div>	
-			</div>
-<!-- 			<div class="form-group">
-				<label class="col-md-4 text-muted text-right">
-					Effective:
-				</label>
-				<div class="col-md-7">
-					<?php echo ($record['partners_movement_action_effectivity_date'] && $record['partners_movement_action_effectivity_date'] != '0000-00-00' && $record['partners_movement_action_effectivity_date'] != 'November 30, -0001' && $record['partners_movement_action_effectivity_date'] != 'January 01, 1970') ? $record['partners_movement_action_effectivity_date'] : ''?>
-				</div>	
-			</div> -->
+			</div>			
 			<?php
 				if ($movement_approver_remarks && count($movement_approver_remarks) > 0){
 			?>
@@ -110,15 +158,8 @@
 		            <textarea rows='4' id='comment' class='form-control' name="comment"></textarea>
 		        </div>	
 			</div>
-			<?php } ?>	
-			<div class="form-group">
-				<label class="col-md-4 text-muted text-right">
-					Requested By:
-				</label>
-				<div class="col-md-7">
-					<?php echo $record['partners_movement_created_by_fname'] ?>
-				</div>	
-			</div>	
+			<?php } ?>
+
 			<div class="form-group">
 				<label class="col-md-4 text-muted text-right">
 					HR Reviewed By:
@@ -158,17 +199,22 @@
 					?>
 				</div>	
 			</div>
-			<div class="form-group">
+			<div class="form-group hidden">
 				<label class="col-md-4 text-muted text-right">HRD Remarks:</label>
 				<div class="col-md-7">		
 					<?php echo $record['partners_movement_hrd_remarks'] ?>					
 				</div>	
-			</div>														
+			</div>
+
+			<div style="border-bottom:1px solid #eee;padding-bottom:8px;">Employee Movement Details</div>
+			<div style="padding-top:10px" id="movement_type_container">
+
+			</div>																		
 		</div>
 	</div>
 </div>
 <br>
-<div id="nature_movement" class="portlet-body form">
+<div id="nature_movement" class="portlet-body form hidden">
 	<input type="hidden" name="movement_count" id="movement_count" value="" />
 	<div class="form-horizontal">
 		<div class="form-body">

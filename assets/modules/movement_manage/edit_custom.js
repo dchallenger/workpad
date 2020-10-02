@@ -119,6 +119,10 @@ function get_employee_details(user_id, count){
 					$('#branch-from_name').val(partner_details.branch);					
 					$('#division-from_id').val(partner_details.division_id);
 					$('#division-from_name').val(partner_details.division);
+					$('#sbu_unit-from_id').val(partner_details.sbu_unit_id);
+					$('#sbu_unit-from_name').val(partner_details.sbu_unit);
+					$('#section-from_id').val(partner_details.section_id);
+					$('#section-from_name').val(partner_details.section);					
 					$('#location-from_id').val(partner_details.location_id);
 					$('#location-from_name').val(partner_details.location);
 					$('#position-from_id').val(partner_details.position_id);
@@ -186,16 +190,19 @@ function edit_movement_details(type_id, action_id){
 	if(type_id > 0){
 		var data = {
 			type_id: type_id,
-			action_id: action_id
+			action_id: action_id,
+			type_name: $('#type_id option:selected').text(),
+			user_id: $('#partners_movement_action-user_id').val()
 		};
 	}else{		
 		var data = {
 			type_id: $('#type_id').val(),
 			type_name: $('#type_id option:selected').text(),
-			action_id: 0
+			action_id: 0,
+			user_id: $('#partners_movement_action-user_id').val()
 		}
 	}
-	if($('#partners_movement-due_to_id').val() > 0){
+	if($('#partners_movement-due_to_id').val() > 0 && $('#partners_movement_action-user_id').val() > 0){
 		if(data.type_id > 0){
 			$.ajax({
 				url: base_url + module.get('route') + '/get_action_movement_details',
@@ -204,63 +211,66 @@ function edit_movement_details(type_id, action_id){
 				data: data,
 				dataType: "json",
 				beforeSend: function(){
-							$('body').modalmanager('loading');
-						},
-						success: function ( response ) {
 
-							for( var i in response.message )
-							{
-								if(response.message[i].message != "")
-								{
-									var message_type = response.message[i].type;
-									notify(response.message[i].type, response.message[i].message);
-								}
-							}
+				},
+				success: function ( response ) {
 
-							if( typeof(response.add_movement) != 'undefined' )
-							{	
-								$('.modal-container-action').html(response.add_movement);
-								$('.move_action_modal').append(response.type_of_movement);	
-								$('.modal-container-action').modal('show');	
-
-								$('#partners_movement-photo-fileupload').fileupload({ 
-									url: base_url + module.get('route') + '/single_upload',
-									autoUpload: true,
-									contentType: false,
-								}).bind('fileuploadadd', function (e, data) {
-									$.blockUI({ message: '<div>Attaching file, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />' });
-								}).bind('fileuploaddone', function (e, data) { 
-
-								    $.unblockUI();
-								    var file = data.result.file;
-								    if(file.error != undefined && file.error != "")
-									{
-										notify('error', file.error);
-									}
-									else{
-										$('.files').append(data.result.html);
-									}
-								}).bind('fileuploadfail', function (e, data) { 
-									$.unblockUI();
-									notify('error', data.errorThrown);
-								});
-
-								$('.delete_attachment').live('click', function(){
-									$(this).closest('tr').remove();
-								});			
-
-								$(":input").inputmask();							
-								// FormComponents.init();
-							}
-
+					for( var i in response.message )
+					{
+						if(response.message[i].message != "")
+						{
+							var message_type = response.message[i].type;
+							notify(response.message[i].type, response.message[i].message);
 						}
-				});	
-		}else{
+					}
+
+					if( typeof(response.add_movement) != 'undefined' )
+					{	
+						//$('.modal-container-action').html(response.add_movement);
+						//$('.move_action_modal').append(response.type_of_movement);	
+						//$('.modal-container-action').modal('show');	
+
+						$('#movement_type_container').html(response.type_of_movement);
+
+						$(":input").inputmask();							
+						// FormComponents.init();
+						
+						var movement_type_transfer = ["1","3","8","9"];
+
+						if ($.inArray($('#type_id').val(),movement_type_transfer) !== -1)
+							get_employee_details($('#partners_movement_action-user_id').val());
+
+						$('.trans_field').change(function(){
+							to_name = $('#'+this.id +' option:selected').text();
+
+							if($(this).val() > 0){
+								$('#partners_movement_action_transfer-to_name-'+$(this).data('field')).val($.trim(to_name));		
+							}else{
+								$('#partners_movement_action_transfer-to_name-'+$(this).data('field')).val('');
+							}
+						});	
+
+					    if (jQuery().datepicker) {
+					        $('#partners_movement_action_moving-end_date').parent('.date-picker').datepicker({
+					            rtl: App.isRTL(),
+					            autoclose: true
+					        });
+					        $('body').removeClass("modal-open"); 
+					    }												
+					}
+
+				}
+			});	
+		} else {
 			notify('warning', 'Please select a movement Type.');
 		}
-	}else{
+	}else {
+		$("#type_id").select2("val", "");
+		if ($('#partners_movement-due_to_id').val() <= 0)
 			notify('warning', 'Please select Due To.');
-		}
+		if ($('#partners_movement_action-user_id').val() <= 0)
+			notify('warning', 'Please select Employee.');			
+	}
 }
 
 function edit_movement_signatory(user_id, movement_id){	

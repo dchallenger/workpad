@@ -3,11 +3,13 @@ $config["detail_cached_query"] = 'SELECT `ww_partners_movement`.`movement_id` as
 	ww_partners_movement_action_moving.further_reason as "partners_movement_action_moving_further_reason", 
 	ww_partners_movement_reason.reason as "partners_movement_action_moving_reason_id", 
 	IF(ww_partners_movement_action_moving.blacklisted = 1, "Yes", "No") as "partners_movement_action_moving_blacklisted", 
+	IF(ww_partners_movement_action_moving.eligible_for_rehire = 1, "Yes", "No") as "partners_movement_action_moving_eligible_for_rehire", 
 	DATE_FORMAT(ww_partners_movement_action_moving.end_date, \'%M %d, %Y\') as "partners_movement_action_moving_end_date", 
 	ww_partners_movement_action_extension.end_date as "partners_movement_action_extension_end_date", 
 	ww_partners_movement_action_extension.no_of_months as "partners_movement_action_extension_no_of_months", 
 	DATE_FORMAT(ww_partners_movement_action.effectivity_date, \'%M %d, %Y\') as "partners_movement_action_effectivity_date", 
 	ww_partners_movement_action.remarks as "partners_movement_action_remarks", 
+	ww_partners_movement_action.action_id as "partners_movement_action.action_id", 
 	ww_partners_movement.remarks as "partners_movement_remarks", 
 	ww_partners_movement.hrd_remarks as "partners_movement_hrd_remarks", 
 	ww_partners_movement_type.type as "partners_movement_action_type_id", 
@@ -26,7 +28,13 @@ $config["detail_cached_query"] = 'SELECT `ww_partners_movement`.`movement_id` as
 	MAX(`T11`.full_name) as "partners_movement_approver2",
 	MAX(CASE WHEN `ww_partners_movement_approver_hr`.`sequence` = 1 THEN `ww_partners_movement_approver_hr`.`comment_date` END) AS "partners_movement_reviewed_by_approved_date",
 	MAX(CASE WHEN `ww_partners_movement_approver_hr`.`sequence` = 2 THEN `ww_partners_movement_approver_hr`.`comment_date` END) AS "partners_movement_approver1_approved_date",
-	MAX(CASE WHEN `ww_partners_movement_approver_hr`.`sequence` = 3 THEN `ww_partners_movement_approver_hr`.`comment_date` END) AS "partners_movement_approver2_approved_date"
+	MAX(CASE WHEN `ww_partners_movement_approver_hr`.`sequence` = 3 THEN `ww_partners_movement_approver_hr`.`comment_date` END) AS "partners_movement_approver2_approved_date",
+	MAX(CASE WHEN `ww_partners_movement_approver_hr`.`sequence` = 1 THEN `ww_partners_movement_approver_hr`.`comment` END) AS "partners_movement_reviewed_by_comment",
+	MAX(CASE WHEN `ww_partners_movement_approver_hr`.`sequence` = 2 THEN `ww_partners_movement_approver_hr`.`comment` END) AS "partners_movement_approver1_comment",
+	MAX(CASE WHEN `ww_partners_movement_approver_hr`.`sequence` = 3 THEN `ww_partners_movement_approver_hr`.`comment` END) AS "partners_movement_approver2_comment",	
+	`ww_partners_movement_action`.`user_id` as "partners_movement_action.user_id",
+	`ww_partners_movement_action`.`created_by` as "partners_movement_action.created_by",
+	`ww_partners_movement_action`.`action_id` as "partners_movement_action.action_id"	
 FROM (`ww_partners_movement`)
 LEFT JOIN `ww_partners_movement_action_moving` ON `ww_partners_movement_action_moving`.`movement_id` = `ww_partners_movement`.`movement_id`
 LEFT JOIN `ww_partners_movement_action_extension` ON `ww_partners_movement_action_extension`.`movement_id` = `ww_partners_movement`.`movement_id`

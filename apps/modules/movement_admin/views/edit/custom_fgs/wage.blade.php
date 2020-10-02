@@ -1,3 +1,4 @@
+<input type="hidden" name="partners_movement_action_compensation[id]" id="partners_movement_action_compensation-id">
 <div class="form-group">
 	<label class="control-label col-md-3">
 		<span class="required">* </span>Current Wage

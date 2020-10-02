@@ -565,7 +565,7 @@
 						</div>
 		            </div>
 		        </div>
-		    </div>				
+		    </div>
 			<div class="tab-pane" id="overview_tab2">
 				<!-- Contact Information -->
 				<div class="portlet">
