@@ -17,6 +17,7 @@
 				<div class="form-group"><?php
 					$db->select('role,role_id');
 					$db->where('deleted', '0');
+					$db->where('role_id >', 1);
 					$db->order_by('role');
 					$options = $db->get('roles');
 					$role_options = array('' => 'Select...');

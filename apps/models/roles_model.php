@@ -53,9 +53,11 @@ class roles_model extends Record
 		$role = $this->config->item('user');
 		$roleid = $role['role_id'];
 		
-		if( $roleid <> 1)
+		if( $roleid <> 1) {
 			$qry .= " AND {$this->db->dbprefix}{$this->table}.role_id <> {$roleid} ";
-		
+			$qry .= " AND {$this->db->dbprefix}{$this->table}.role_id <> 1 ";
+		}
+
 		$qry .= ' '. $filter;
         $qry .= " ORDER BY {$this->db->dbprefix}{$this->table}.role_id ";
 		$qry .= " LIMIT $limit OFFSET $start";
