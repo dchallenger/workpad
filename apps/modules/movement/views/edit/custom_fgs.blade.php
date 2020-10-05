@@ -26,6 +26,7 @@
 			</label>
 			<div class="col-md-7">		
 				<div class="input-group">
+					<input type="hidden" name="partners_movement[movement_from]" id="" value="1" />
 					<input type="hidden" name="partners_movement_action[action_id]" id="partners_movement_action-action_id" value="<?php echo $record['partners_movement_action.action_id']; ?>" />
 					<input type="hidden" class="form-control" name="partners_movement_action[user_id]" value="<?php echo $user_id ?>" />
 					<span class="input-group-addon">

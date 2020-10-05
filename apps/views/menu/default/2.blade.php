@@ -167,6 +167,12 @@
 					<ul class="sub-menu">
 				 
 					<li ><a rel="<?php echo site_url('admin/system');?>" href="<?php echo site_url('admin/system');?>" menu_id="13" parent="10">Settings</a></li>
+				 
+					<li ><a rel="<?php echo site_url('admin/menu_manager');?>" href="<?php echo site_url('admin/menu_manager');?>" menu_id="15" parent="10">Menu Manager</a></li>
+				 
+					<li ><a rel="<?php echo site_url('admin/roles');?>" href="<?php echo site_url('admin/roles');?>" menu_id="18" parent="10">Roles</a></li>
+				 
+					<li ><a rel="<?php echo site_url('admin/permissions');?>" href="<?php echo site_url('admin/permissions');?>" menu_id="19" parent="10">Permission</a></li>
 							</ul>
 			</li>
 	<li>

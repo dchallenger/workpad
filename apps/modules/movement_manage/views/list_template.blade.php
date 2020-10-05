@@ -53,7 +53,7 @@
         <div class="btn-group">
             <span class="btn-sm"><a class="btn btn-xs text-muted" href="{{ $detail_url }}"><i class="fa fa-info"></i> View</a></span>
         </div>
-        @if (!in_array($partners_movement_status_id,array(1,4,5)) && $approver_movement_status_id != 1 && $partners_movement_created_by != $user_id)
+        @if (in_array($partners_movement_status_id,array(2)) && $approver_movement_status_id != 1 && $partners_movement_created_by != $user_id)
             <div class="btn-group">
                 <span onclick="get_movement_details({{ $record_id }})" id="manage_dialog-{{$record_id}}" class="btn btn-sm custom_popover text-muted" data-close-others="true" data-content="" data-placement="left" data-original-title="">
                 <i class="fa fa-gear"></i> Options

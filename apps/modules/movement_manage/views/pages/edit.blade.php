@@ -38,7 +38,49 @@
 							<?php } ?>
 						</ul>
 					</div>
-				</div> 				
+				</div>
+				<div class="clearfix">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<h4 class="panel-title">HR Approval Status</h4>
+						</div>
+
+						<ul class="list-group">
+							<?php foreach($hr_approver_list as $index => $value){ ?>
+								<li class="list-group-item"><?=$value['display_name']?>
+									<br><small class="text-muted"><?=$value['position']?></small>
+								<?php if($value['movement_status_id'] >= 2){ 
+							            $form_style = 'info';
+							            switch($value['movement_status_id']){
+							                case 7:
+							                    $form_style = 'danger';
+							                break;
+							                case 3:
+							                case 6:
+							                case 11:
+							                    $form_style = 'success';
+							                break;
+							                case 5:
+							                case 4:
+							                case 2:
+							                case 9:
+							                    $form_style = 'warning';
+							                break;
+							                case 1:
+							                    $form_style = 'info';
+							                break;
+							                case 8:
+							                default:
+							                    $form_style = 'default';
+							                break;
+							            }
+							        ?>
+								<br><p><span class="badge badge-<?php echo $form_style ?>"><?=$value['status']?></span></p> </li>
+							<?php }
+							} ?>
+						</ul>
+					</div>
+				</div> 					
 			</div>
 		</div>		
 	</div>

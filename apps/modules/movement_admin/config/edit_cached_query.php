@@ -25,7 +25,8 @@ $config["edit_cached_query"] = 'SELECT `ww_partners_movement`.`movement_id` as r
 	ww_partners_movement_action_compensation.to_salary as "partners_movement_action_compensation.to_salary", 
 	ww_partners_movement_action_compensation.current_salary as "partners_movement_action_compensation.current_salary",
 	`ww_partners_movement`.`status_id` as "partners_movement.status_id",
-	ww_partners_movement_action.action_id as "partners_movement_action.action_id"
+	ww_partners_movement_action.action_id as "partners_movement_action.action_id",
+	ww_partners_movement.movement_from as "partners_movement.movement_from"
 FROM (`ww_partners_movement`)
 LEFT JOIN `ww_partners_movement_action_moving` ON `ww_partners_movement_action_moving`.`movement_id` = `ww_partners_movement`.`movement_id`
 LEFT JOIN `ww_partners_movement_action_extension` ON `ww_partners_movement_action_extension`.`movement_id` = `ww_partners_movement`.`movement_id`

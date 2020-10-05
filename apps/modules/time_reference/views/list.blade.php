@@ -113,7 +113,7 @@
 										<div class="clearfix"></div>
 									</div>
 
-									<div>
+									<div class="hidden">
 										<div class="col-md-9 margin-bottom-10">
 											<h4>{{ lang('time_reference.habitual_tardiness')}}</h4>
 											<div class="text-muted small">{{ lang('time_reference.habitual_tardiness_desc')}}</div>

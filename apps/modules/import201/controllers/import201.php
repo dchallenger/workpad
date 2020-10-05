@@ -4264,4 +4264,25 @@ class Import201 extends MY_PrivateController
 
 		$this->_ajax_return();
 	}		
+
+	public function truncate_transaction() {
+		TRUNCATE `ww_partners_clearance`;
+		TRUNCATE `ww_partners_clearance_exit_interview_answers`;
+		TRUNCATE `ww_partners_clearance_signatories`;
+		TRUNCATE `ww_partners_clearance_signatories_accountabilities`;
+
+		TRUNCATE `ww_partners_movement`;
+		TRUNCATE `ww_partners_movement_action`;
+		TRUNCATE `ww_partners_movement_action_attachment`;
+		TRUNCATE `ww_partners_movement_action_compensation`;
+		TRUNCATE `ww_partners_movement_action_extension`;
+		TRUNCATE `ww_partners_movement_action_moving`;
+		TRUNCATE `ww_partners_movement_action_transfer`;
+		TRUNCATE `ww_partners_movement_approver`;
+		TRUNCATE `ww_partners_movement_approver_hr`;		
+
+		TRUNCATE `ww_system_email_queue`;
+		TRUNCATE `ww_system_feeds`;
+		TRUNCATE `ww_system_feeds_recipient`;		
+	}
 }

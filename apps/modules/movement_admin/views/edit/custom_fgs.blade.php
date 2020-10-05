@@ -34,7 +34,7 @@
 			</label>
 			<div class="col-md-7">
 				<div class="input-group">
-					<input type="hidden" name="partners_movement[movement_from]" id="" value="3" />
+					<input type="hidden" name="partners_movement[movement_from]" id="" value="{{$movement_from}}" />
 					<input type="hidden" name="partners_movement_action[action_id]" id="partners_movement_action-action_id" value="<?php echo $record['partners_movement_action.action_id']; ?>" />
 					<?php if ($disable != '') { ?>
 						<input type="hidden" name="partners_movement_action[user_id]" value="<?php echo $record['partners_movement_action.user_id'] ?>" />
@@ -222,15 +222,17 @@
 			</label>
 			<div class="col-md-7">
 				<?php								                            		
-				$db->select('user_id,full_name');
+/*				$db->select('user_id,full_name');
 				$db->order_by('full_name', '0');
 				$db->where('deleted', '0');
-				$options = $db->get('users'); 	                            
+				$options = $db->get('users'); */
 				$partners_movement_action_type_id_options = array('' => '');
-				foreach($options->result() as $option)
-				{
-					$partners_movement_action_type_id_options[$option->user_id] = $option->full_name;
-				} 
+				if ($hr_admin_movement_profile && $hr_admin_movement_profile->num_rows() > 0) {
+					foreach($hr_admin_movement_profile->result() as $option)
+					{
+						$partners_movement_action_type_id_options[$option->user_id] = $option->full_name;
+					} 
+				}
 
 				$others = 'class="form-control select2me" data-placeholder="Select..." id="reviewed_by"';
 				if ($record['partners_movement.status_id'] >= 9){
@@ -257,15 +259,16 @@
 			</label>
 			<div class="col-md-7">
 				<?php									                            		
-				$db->select('user_id,full_name');
+/*				$db->select('user_id,full_name');
 				$db->order_by('full_name', '0');
 				$db->where('deleted', '0');
-				$options = $db->get('users'); 	                            
+				$options = $db->get('users'); */	                            
 				$partners_movement_action_type_id_options = array('' => '');
-				foreach($options->result() as $option)
-				{
-					$partners_movement_action_type_id_options[$option->user_id] = $option->full_name;
-				} 
+				if ($hr_admin_movement_profile && $hr_admin_movement_profile->num_rows() > 0) {
+					foreach($hr_admin_movement_profile->result() as $option) {
+						$partners_movement_action_type_id_options[$option->user_id] = $option->full_name;
+					}
+				}
 
 				$others = 'class="form-control select2me" data-placeholder="Select..." id="approver_hr_1"';
 				if ($record['partners_movement.status_id'] >= 9){
@@ -292,15 +295,16 @@
 			</label>
 			<div class="col-md-7">
 				<?php									                            		
-				$db->select('user_id,full_name');
+/*				$db->select('user_id,full_name');
 				$db->order_by('full_name', '0');
 				$db->where('deleted', '0');
-				$options = $db->get('users'); 	                            
+				$options = $db->get('users'); */	                            
 				$partners_movement_action_type_id_options = array('' => '');
-				foreach($options->result() as $option)
-				{
-					$partners_movement_action_type_id_options[$option->user_id] = $option->full_name;
-				} 
+				if ($hr_admin_movement_profile && $hr_admin_movement_profile->num_rows() > 0) {
+					foreach($hr_admin_movement_profile->result() as $option) {
+						$partners_movement_action_type_id_options[$option->user_id] = $option->full_name;
+					}
+				}
 
 				$others = 'class="form-control select2me" data-placeholder="Select..." id="approver_hr_2"';
 				if ($record['partners_movement.status_id'] >= 9){
@@ -321,7 +325,7 @@
 				</div> 				
 			</div>	
 		</div>
-		@if ($record['partners_movement.status_id'] == 9)
+		@if (in_array($record['partners_movement.status_id'],array(9,10)))
 		<div class="form-group">
 			<label class="control-label col-md-3">Remarks</label>
 			<div class="col-md-7">							
@@ -403,12 +407,14 @@
             		}
             		if ( (in_array($record['partners_movement.status_id'], array(6,9,10)) || empty($record_id)) || $record['partners_movement_action.created_by'] == $user_id){
 				?>
-                		<button class="btn blue btn-sm" type="button" onclick="save_movement( $(this).closest('form'), '')" >Save as draft</button>
+						@if (!in_array($record['partners_movement.status_id'],array(9,10)))
+                			<button class="btn blue btn-sm" type="button" onclick="save_movement( $(this).closest('form'), '')" >Save as draft</button>
+                		@endif
                 <?php
                 		if (in_array($record['partners_movement.status_id'], array(9,10))){
                 ?>
                 			<button class="btn blue btn-sm" type="button" onclick="save_movement( $(this).closest('form'), 11)"> Approve</button>
-                			<button class="btn red btn-sm" type="button" onclick="save_movement( $(this).closest('form'), 12)"> Disapprove</button>
+                			<button class="btn red btn-sm" type="button" onclick="save_movement( $(this).closest('form'), 12)"> Decline</button>
                 <?php
                 		}
                 		else{

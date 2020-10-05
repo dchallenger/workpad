@@ -639,8 +639,13 @@ class Movement extends MY_PrivateController
 						$movement_details['action_id'] = $this->action_id;
 						$movement_details['movement_id'] = $this->response->record_id;
 						$movement_details['end_date'] = ($movement_details['end_date'] && $movement_details['end_date'] != '') ? date('Y-m-d', strtotime($movement_details['end_date'])) : '';
-						$movement_details_table = 'partners_movement_action_moving';
+					} else {
+						$movement_details['id'] = 0;
+						$movement_details['action_id'] = $this->action_id;
+						$movement_details['movement_id'] = $this->response->record_id;
+						$movement_details['end_date'] = $movement_action['effectivity_date'];
 					}
+					$movement_details_table = 'partners_movement_action_moving';
 					break;
 				case 15://extension
 					$movement_details = $post['partners_movement_action_extension'];

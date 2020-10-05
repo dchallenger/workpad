@@ -425,7 +425,13 @@ class Movement_manage extends MY_PrivateController
 				$data['record']['movement_count'] = count($data['movement_details']);
 			}
 
-			$data['approver_list'] = $this->mod->call_sp_approvers($this->user->user_id);
+			$data['approver_list'] = $this->mod->get_approver_list($this->record_id);
+
+			$data['hr_approver_list'] = $this->mod->get_hr_approver_list($this->record_id);
+
+			if (empty($data['approver_list']))
+				$data['approver_list'] = $this->mod->call_sp_approvers($this->user->user_id);
+
 			$data['qry_category'] = $this->mod->get_role_category();
 			$data['user_id'] = $this->user->user_id;
 
@@ -839,27 +845,38 @@ class Movement_manage extends MY_PrivateController
 				case 7://Termination
 				case 10://End Contract
 				case 11://Retirement
-					$movement_details = $post['partners_movement_action_moving'];
-					$movement_details['action_id'] = $this->action_id;
-					$movement_details['movement_id'] = $this->response->record_id;
-					//$movement_details['end_date'] = date('Y-m-d', strtotime($movement_details['end_date']));
-					$movement_details['blacklisted'] =$movement_details['blacklisted'];
-					$movement_details['eligible_for_rehire'] = $movement_details['eligible_for_rehire'];
-					$movement_details_table = 'partners_movement_action_moving';
+					if (isset($post['partners_movement_action_moving'])) {
+						$movement_details = $post['partners_movement_action_moving'];
+						$movement_details['action_id'] = $this->action_id;
+						$movement_details['movement_id'] = $this->response->record_id;
+						$movement_details['end_date'] = date('Y-m-d', strtotime($movement_action['effectivity_date']));
+						$movement_details['blacklisted'] = (isset($movement_details['blacklisted']) ? $movement_details['blacklisted'] : '');
+						$movement_details['eligible_for_rehire'] = (isset($movement_details['eligible_for_rehire']) ? $movement_details['eligible_for_rehire'] : '');
+					} else {
+						$movement_details['id'] = 0;
+						$movement_details['action_id'] = $this->action_id;
+						$movement_details['movement_id'] = $this->response->record_id;
+						$movement_details['end_date'] = date('Y-m-d', strtotime($movement_action['effectivity_date']));						
+					}
+					$movement_details_table = 'partners_movement_action_moving';					
 					break;
 				case 15://extension
-					$movement_details = $post['partners_movement_action_extension'];
-					$movement_details['action_id'] = $this->action_id;
-					$movement_details['movement_id'] = $this->response->record_id;
-					$movement_details['end_date'] = date('Y-m-d', strtotime($movement_details['end_date']));
-					$movement_details_table = 'partners_movement_action_extension';
+					if (isset($post['partners_movement_action_extension'])) {
+						$movement_details = $post['partners_movement_action_extension'];
+						$movement_details['action_id'] = $this->action_id;
+						$movement_details['movement_id'] = $this->response->record_id;
+						$movement_details['end_date'] = date('Y-m-d', strtotime($movement_details['end_date']));
+						$movement_details_table = 'partners_movement_action_extension';
+					}
 					break;
 				case 17://Developmental Assignment
-					$movement_details = $post['partners_movement_action_extension'];
-					$movement_details['action_id'] = $this->action_id;
-					$movement_details['movement_id'] = $this->response->record_id;
-					$movement_details['end_date'] = date('Y-m-d', strtotime($movement_details['end_date']));
-					$movement_details_table = 'partners_movement_action_extension';
+					if (isset($post['partners_movement_action_extension'])) {
+						$movement_details = $post['partners_movement_action_extension'];
+						$movement_details['action_id'] = $this->action_id;
+						$movement_details['movement_id'] = $this->response->record_id;
+						$movement_details['end_date'] = date('Y-m-d', strtotime($movement_details['end_date']));
+						$movement_details_table = 'partners_movement_action_extension';
+					}
 					break;
 				case 19://Temporary Assignment
 					$movement_details = $post['partners_movement_action_additional_allowance'];
@@ -1121,17 +1138,19 @@ class Movement_manage extends MY_PrivateController
 				break;
 				case 6://Resignation
 				case 7://Termination
-				$movement_type_details = $this->mod->get_moving_movement($action_id);
-					$data['record']['partners_movement_action_moving.id'] = $movement_type_details['id'];//id
-					$data['record']['partners_movement_action_moving.blacklisted'] = $movement_type_details['blacklisted'];//blacklisted
-					$data['record']['partners_movement_action_moving.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
-					$data['record']['partners_movement_action_moving.reason_id'] = $movement_type_details['reason_id'];//reason_id
-					$data['record']['partners_movement_action_moving.further_reason'] = $movement_type_details['further_reason'];//further_reason
+					$movement_type_details = $this->mod->get_moving_movement($action_id);
+					if (!empty($movement_type_details)) {
+						$data['record']['partners_movement_action_moving.id'] = $movement_type_details['id'];//id
+						$data['record']['partners_movement_action_moving.blacklisted'] = $movement_type_details['blacklisted'];//blacklisted
+						$data['record']['partners_movement_action_moving.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
+						$data['record']['partners_movement_action_moving.reason_id'] = $movement_type_details['reason_id'];//reason_id
+						$data['record']['partners_movement_action_moving.further_reason'] = $movement_type_details['further_reason'];//further_reason
+					}
 					$data['movement_file'] = 'endservice.blade.php';
 				break;
 				case 10://End Contract
 				case 11://Retirement
-				$movement_type_details = $this->mod->get_moving_movement($action_id);
+					$movement_type_details = $this->mod->get_moving_movement($action_id);
 					$data['record']['partners_movement_action_moving.id'] = $movement_type_details['id'];//id
 					$data['record']['partners_movement_action_moving.blacklisted'] = $movement_type_details['blacklisted'];//blacklisted
 					$data['record']['partners_movement_action_moving.eligible_for_rehire'] = $movement_type_details['eligible_for_rehire'];//blacklisted
@@ -1141,14 +1160,14 @@ class Movement_manage extends MY_PrivateController
 					$data['movement_file'] = 'retire_endo.blade.php';
 				break;
 				case 15://Extension
-				$movement_type_details = $this->mod->get_extension_movement($action_id);
+					$movement_type_details = $this->mod->get_extension_movement($action_id);
 					$data['record']['partners_movement_action_extension.id'] = $movement_type_details['id'];//id
 					$data['record']['partners_movement_action_extension.no_of_months'] = $movement_type_details['no_of_months'];//no_of_months
 					$data['record']['partners_movement_action_extension.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
 					$data['movement_file'] = 'extension.blade.php';
 				break;
 				case 17://Extension
-				$movement_type_details = $this->mod->get_extension_movement($action_id);
+					$movement_type_details = $this->mod->get_extension_movement($action_id);
 					$data['record']['partners_movement_action_extension.id'] = $movement_type_details['id'];//id
 					$data['record']['partners_movement_action_extension.no_of_months'] = $movement_type_details['no_of_months'];//no_of_months
 					$data['record']['partners_movement_action_extension.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
@@ -1288,37 +1307,37 @@ class Movement_manage extends MY_PrivateController
 				case 8://Transfer
 				case 9://Employment Status
 				case 12://Temporary Assignment
-				$end_date = $this->mod->get_transfer_movement($action_id, 11);
-				$data['end_date'] = (count($end_date) > 0) ? $end_date[0]['to_name'] : '' ;
+					$end_date = $this->mod->get_transfer_movement($action_id, 11);
+					$data['end_date'] = (count($end_date) > 0) ? $end_date[0]['to_name'] : '' ;
 
-				$data['transfer_fields'] = $this->mod->getTransferFields();
-				$data['partner_info'] = $this->mod->get_employee_details($action_details['user_id']);
-				foreach($data['transfer_fields'] as $index => $field){
-					$movement_type_details = $this->mod->get_transfer_movement($action_id, $field['field_id']);
-					if(count($movement_type_details) > 0){
-						$data['transfer_fields'][$index]['from_id'] = $movement_type_details[0]['from_id'];
-						$data['transfer_fields'][$index]['to_id'] = $movement_type_details[0]['to_id'];
-						$data['transfer_fields'][$index]['from_name'] = $movement_type_details[0]['from_name'];
-						$data['transfer_fields'][$index]['to_name'] = $movement_type_details[0]['to_name'];
-					}else{
-						$data['transfer_fields'][$index]['from_id'] = (isset($data['partner_info'][0][$field['field_name'].'_id']) ? $data['partner_info'][0][$field['field_name'].'_id'] : '');
-						$data['transfer_fields'][$index]['from_name'] = (isset($data['partner_info'][0][$field['field_name']]) ? $data['partner_info'][0][$field['field_name']] : '');
-						$data['transfer_fields'][$index]['to_id'] = '';
-						$data['transfer_fields'][$index]['to_name'] = '';
+					$data['transfer_fields'] = $this->mod->getTransferFields();
+					$data['partner_info'] = $this->mod->get_employee_details($action_details['user_id']);
+					foreach($data['transfer_fields'] as $index => $field){
+						$movement_type_details = $this->mod->get_transfer_movement($action_id, $field['field_id']);
+						if(count($movement_type_details) > 0){
+							$data['transfer_fields'][$index]['from_id'] = $movement_type_details[0]['from_id'];
+							$data['transfer_fields'][$index]['to_id'] = $movement_type_details[0]['to_id'];
+							$data['transfer_fields'][$index]['from_name'] = $movement_type_details[0]['from_name'];
+							$data['transfer_fields'][$index]['to_name'] = $movement_type_details[0]['to_name'];
+						}else{
+							$data['transfer_fields'][$index]['from_id'] = (isset($data['partner_info'][0][$field['field_name'].'_id']) ? $data['partner_info'][0][$field['field_name'].'_id'] : '');
+							$data['transfer_fields'][$index]['from_name'] = (isset($data['partner_info'][0][$field['field_name']]) ? $data['partner_info'][0][$field['field_name']] : '');
+							$data['transfer_fields'][$index]['to_id'] = '';
+							$data['transfer_fields'][$index]['to_name'] = '';
+						}
 					}
-				}
 					$data['movement_file'] = 'transfer.blade.php';
 				break;
 				case 2://Salary Increase
 				case 18://Salary Alignment
-				$movement_type_details = $this->mod->get_compensation_movement($action_id);
+					$movement_type_details = $this->mod->get_compensation_movement($action_id);
 					$data['record']['partners_movement_action_compensation.id'] = $movement_type_details['id'];//id
 					$data['record']['partners_movement_action_compensation.current_salary'] = ($movement_type_details['current_salary'] != '' && $movement_type_details['current_salary'] > 0 ? number_format($movement_type_details['current_salary'], 2, '.', ',') : '');//current_salary
 					$data['record']['partners_movement_action_compensation.to_salary'] = ($movement_type_details['to_salary'] != '' && $movement_type_details['to_salary'] > 0 ? number_format($movement_type_details['to_salary'], 2, '.', ',') : '');//to_salary
 					$data['movement_file'] = 'compensation.blade.php';
 				break;
 				case 4://Wage Order
-				$movement_type_details = $this->mod->get_compensation_movement($action_id);
+					$movement_type_details = $this->mod->get_compensation_movement($action_id);
 					$data['record']['partners_movement_action_compensation.id'] = $movement_type_details['id'];//id
 					$data['record']['partners_movement_action_compensation.current_salary'] = $movement_type_details['current_salary'];//current_salary
 					$data['record']['partners_movement_action_compensation.to_salary'] = $movement_type_details['to_salary'];//to_salary
@@ -1326,18 +1345,20 @@ class Movement_manage extends MY_PrivateController
 				break;
 				case 6://Resignation
 				case 7://Termination
-				$movement_type_details = $this->mod->get_moving_movement($action_id);
-					$data['record']['partners_movement_action_moving.id'] = $movement_type_details['id'];//id
-					$data['record']['partners_movement_action_moving.blacklisted'] = $movement_type_details['blacklisted'];//blacklisted
-					$data['record']['partners_movement_action_moving.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
-					$data['record']['partners_movement_action_moving.reason'] = $movement_type_details['reason'];//reason_id
-					$data['record']['partners_movement_action_moving.reason_id'] = $movement_type_details['reason_id'];//reason_id
-					$data['record']['partners_movement_action_moving.further_reason'] = $movement_type_details['further_reason'];//further_reason
+					$movement_type_details = $this->mod->get_moving_movement($action_id);
+					if (!empty($movement_type_details)) {
+						$data['record']['partners_movement_action_moving.id'] = $movement_type_details['id'];//id
+						$data['record']['partners_movement_action_moving.blacklisted'] = $movement_type_details['blacklisted'];//blacklisted
+						$data['record']['partners_movement_action_moving.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
+						$data['record']['partners_movement_action_moving.reason'] = $movement_type_details['reason'];//reason_id
+						$data['record']['partners_movement_action_moving.reason_id'] = $movement_type_details['reason_id'];//reason_id
+						$data['record']['partners_movement_action_moving.further_reason'] = $movement_type_details['further_reason'];//further_reason
+					}
 					$data['movement_file'] = 'endservice.blade.php';
 				break;
 				case 10://End Contract
 				case 11://Retirement
-				$movement_type_details = $this->mod->get_moving_movement($action_id);
+					$movement_type_details = $this->mod->get_moving_movement($action_id);
 					$data['record']['partners_movement_action_moving.id'] = $movement_type_details['id'];//id
 					$data['record']['partners_movement_action_moving.blacklisted'] = $movement_type_details['blacklisted'];//blacklisted
 					$data['record']['partners_movement_action_moving.eligible_for_rehire'] = $movement_type_details['eligible_for_rehire'];//blacklisted
@@ -1347,14 +1368,14 @@ class Movement_manage extends MY_PrivateController
 					$data['movement_file'] = 'retire_endo.blade.php';
 				break;
 				case 15://Extension
-				$movement_type_details = $this->mod->get_extension_movement($action_id);
+					$movement_type_details = $this->mod->get_extension_movement($action_id);
 					$data['record']['partners_movement_action_extension.id'] = $movement_type_details['id'];//id
 					$data['record']['partners_movement_action_extension.no_of_months'] = $movement_type_details['no_of_months'];//no_of_months
 					$data['record']['partners_movement_action_extension.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
 					$data['movement_file'] = 'extension.blade.php';
 				break;
 				case 17://Extension
-				$movement_type_details = $this->mod->get_extension_movement($action_id);
+					$movement_type_details = $this->mod->get_extension_movement($action_id);
 					$data['record']['partners_movement_action_extension.id'] = $movement_type_details['id'];//id
 					$data['record']['partners_movement_action_extension.no_of_months'] = $movement_type_details['no_of_months'];//no_of_months
 					$data['record']['partners_movement_action_extension.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date

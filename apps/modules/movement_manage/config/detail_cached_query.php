@@ -30,6 +30,9 @@ $config["detail_cached_query"] = 'SELECT `ww_partners_movement`.`movement_id` as
 	MAX(CASE WHEN `ww_partners_movement_approver_hr`.`sequence` = 1 THEN `ww_partners_movement_approver_hr`.`comment_date` END) AS "partners_movement_reviewed_by_approved_date",
 	MAX(CASE WHEN `ww_partners_movement_approver_hr`.`sequence` = 2 THEN `ww_partners_movement_approver_hr`.`comment_date` END) AS "partners_movement_approver1_approved_date",
 	MAX(CASE WHEN `ww_partners_movement_approver_hr`.`sequence` = 3 THEN `ww_partners_movement_approver_hr`.`comment_date` END) AS "partners_movement_approver2_approved_date",
+	MAX(CASE WHEN `ww_partners_movement_approver_hr`.`sequence` = 1 THEN `ww_partners_movement_approver_hr`.`comment` END) AS "partners_movement_reviewed_by_comment",
+	MAX(CASE WHEN `ww_partners_movement_approver_hr`.`sequence` = 2 THEN `ww_partners_movement_approver_hr`.`comment` END) AS "partners_movement_approver1_comment",
+	MAX(CASE WHEN `ww_partners_movement_approver_hr`.`sequence` = 3 THEN `ww_partners_movement_approver_hr`.`comment` END) AS "partners_movement_approver2_comment",		
 	`ww_partners_movement_action`.`user_id` as "partners_movement_action.user_id",
 	`ww_partners_movement_action`.`created_by` as "partners_movement_action.created_by",
 	`ww_partners_movement_action`.`action_id` as "partners_movement_action.action_id"	

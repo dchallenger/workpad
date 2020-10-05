@@ -141,8 +141,6 @@
 				 
 					<li ><a rel="<?php echo site_url('admin/training_master');?>" href="<?php echo site_url('admin/training_master');?>" menu_id="69" parent="9">Training Manager</a></li>
 				 
-					<li ><a rel="<?php echo site_url('admin/clearance_sign');?>" href="<?php echo site_url('admin/clearance_sign');?>" menu_id="108" parent="9">Clearance Signatory</a></li>
-				 
 					<li ><a rel="<?php echo site_url('admin/report_generator');?>" href="<?php echo site_url('admin/report_generator');?>" menu_id="87" parent="9">Report Generator</a></li>
 							</ul>
 			</li>

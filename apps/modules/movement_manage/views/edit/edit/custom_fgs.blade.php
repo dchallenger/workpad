@@ -3,7 +3,8 @@
 		<div class="caption">Employee Movement</div>
 		<div class="tools"><a class="collapse" href="javascript:;"></a></div>
 	</div>
-	<div class="portlet-body form">		
+	<div class="portlet-body form">
+		<input type="hidden" name="partners_movement[movement_from]" id="" value="2" />
 		<div class="form-group">
 			<label class="control-label col-md-3">
 				<span class="required">* </span>Due To

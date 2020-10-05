@@ -52,7 +52,7 @@ class movement_manage_ver_model extends Record
 			$qry .= " AND {$this->db->dbprefix}partners_movement.deleted = 0";	
 		}
 		
-		$qry .= " AND (T6.user_id = " . $this->user->user_id . " AND T6.movement_status_id >= 2) OR ({$this->db->dbprefix}partners_movement.created_by = " . $this->user->user_id ." AND {$this->db->dbprefix}partners_movement_action.created_by <> {$this->db->dbprefix}partners_movement_action.user_id)";
+		$qry .= " AND ((T6.user_id = " . $this->user->user_id . " AND T6.movement_status_id >= 2) OR ({$this->db->dbprefix}partners_movement.created_by = " . $this->user->user_id ." AND {$this->db->dbprefix}partners_movement_action.created_by <> {$this->db->dbprefix}partners_movement_action.user_id))";
 		//$qry .= " AND (T6.user_id = " . $this->user->user_id . " AND T6.movement_status_id >= 2)";
 
 		$filter .= " GROUP BY record_id ORDER BY {$this->db->dbprefix}partners_movement.created_on DESC";
@@ -65,10 +65,9 @@ class movement_manage_ver_model extends Record
 		$qry = $this->parser->parse_string($qry, array('search' => $search), TRUE);
 
 		$result = $this->db->query( $qry );
-
 		if($result && $result->num_rows() > 0){			
 			foreach($result->result_array() as $row) {
-				if ($row['partners_movement_movement_from'] == 2)
+				if ($row['partners_movement_movement_from'] == 2 || ($row['partners_movement_movement_from'] == 1 && $this->user->user_id == $row['approver_user_id']))
 					$data[] = $row;
 			}
 		}

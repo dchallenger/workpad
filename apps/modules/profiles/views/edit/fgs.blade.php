@@ -60,7 +60,7 @@
 				<tr>
 					<th class="text-center" style="width:50%">{{ lang('permissions.module') }}</th>
 					@foreach( $actions as $action_id => $action )
-					<th class="text-center" style="width:10%">{{ $action->action }}</th>
+					<th class="text-center" style="width:10%;border-bottom:1px solid #ddd">{{ $action->action }}</th>
 					@endforeach
 				</tr>
 			</thead>

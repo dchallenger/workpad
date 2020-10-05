@@ -56,7 +56,7 @@
 						<li class=""><a href="{{ get_mod_route('leave_credit') }}">{{ lang('leave_balance.balance') }}</a></li>
 						@endif
 						@if ($addtl_leave_credit)
-						<li class=""><a href="{{ get_mod_route('addtl_leave_credit') }}">Extra Day Off</a></li>
+						<li class="hidden"><a href="{{ get_mod_route('addtl_leave_credit') }}">Extra Day Off</a></li>
 						@endif
 					</ul>
 				</div>

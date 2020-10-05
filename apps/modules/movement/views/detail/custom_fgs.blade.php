@@ -126,7 +126,7 @@
 												}											
 											?>											
 										</span><br />										
-										<?php echo $value['comment'] ?>			
+										<small class="text-muted"><?php echo $value['comment'] ?></small>
 									</div>	
 								</div>					
 				<?php
@@ -155,6 +155,10 @@
 								echo ' - ' . date('F d, Y h:i a',strtotime($record['partners_movement_reviewed_by_approved_date']));
 							}
 						?>
+						<br />
+						@if ($record['partners_movement_reviewed_by_comment'] != '')
+							<small class="text-muted">{{$record['partners_movement_reviewed_by_comment']}}</small>
+						@endif						
 					</div>	
 				</div>
 				<div class="form-group">
@@ -168,6 +172,10 @@
 								echo ' - ' . date('F d, Y h:i a',strtotime($record['partners_movement_approver1_approved_date']));
 							}						
 						?>
+						<br />
+						@if ($record['partners_movement_approver1_comment'] != '')
+							<small class="text-muted">{{$record['partners_movement_approver1_comment']}}</small>
+						@endif													
 					</div>	
 				</div>	
 				<div class="form-group">
@@ -181,6 +189,10 @@
 								echo ' - ' . date('F d, Y h:i a',strtotime($record['partners_movement_approver2_approved_date']));
 							}							
 						?>
+						<br />
+						@if ($record['partners_movement_approver2_comment'] != '')
+							<small class="text-muted">{{$record['partners_movement_approver2_comment']}}</small>
+						@endif							
 					</div>	
 				</div>																											
 			</div>
