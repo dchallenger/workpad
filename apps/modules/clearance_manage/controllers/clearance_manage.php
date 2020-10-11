@@ -256,7 +256,8 @@ class Clearance_manage extends MY_PrivateController
 										 );*/
 				//$this->db->insert('partners_clearance_signatories_attachment', $attachment_info);
 				
-				$pending = $this->mod->get_pending_status($record->row()->clearance_id);
+				$include_personal = ($main_record['status_id'] == 4 ? $this->user->user_id : 0);
+				$pending = $this->mod->get_pending_status($record->row()->clearance_id,$include_personal);
 
 				$this->db->where('clearance_id',$record->row()->clearance_id);
 				$clearance_record_result = $this->db->get('partners_clearance');
@@ -269,7 +270,7 @@ class Clearance_manage extends MY_PrivateController
 
 				$to_email = 0;
 
-				if($pending == 0 && $exit_interviewed){
+				if($pending == 0){
 					$this->db->where('clearance_id', $record->row()->clearance_id);
 					$this->db->update('partners_clearance', array('status_id' => 3, 'date_cleared' => date('Y-m-d')));
 					$to_email = 1;

@@ -35,7 +35,7 @@
             </div>	
 		</div>			
 		<div class="form-group">
-			<label class="control-label col-md-3">{{ lang('department.immediate_head') }}</label>
+			<label class="control-label col-md-3"><span class="required">* </span>{{ lang('department.immediate_head') }}</label>
 			<div class="col-md-7"><?php 
 										$db->select('user_id,display_name');
 	                            		$db->where('deleted', '0');

@@ -6,6 +6,7 @@ class Loan_application extends MY_PrivateController
 	{
 		$this->load->model('loan_application_model', 'mod');
         $this->load->model('loan_application_manage_model', 'app_manage');
+        $this->load->model('loan_application_admin_model', 'app_admin');
 		$this->lang->load( 'loan_application' );		
 		parent::__construct();
 
@@ -28,7 +29,7 @@ class Loan_application extends MY_PrivateController
         $permission = $this->config->item('permission');
         $data['permission_app_manage'] = isset($permission[$this->app_manage->mod_code]['list']);
 
-        $data['permission_app_admin'] = 0;
+        $data['permission_app_admin'] = isset($permission[$this->app_admin->mod_code]['list']);
         $data['permission_app_personal'] = isset($this->permission['list']) ? $this->permission['list'] : 0;
 
         $data['loan_status'] = $this->mod->get_loan_statuses();
@@ -176,7 +177,7 @@ class Loan_application extends MY_PrivateController
                 $rec['detail_url'] = $this->mod->url . '/detail/' . $record['record_id'];
             }
 
-            if( $record['loan_application_status_id'] == 1 || $record['loan_application_status_id'] == 2 ){
+            if( in_array($record['loan_application_status_id'],[1,2,4])) {
                 $rec['options'] .= '<li><a href="'.$rec['detail_url'].'"><i class="fa fa-info"></i> '.lang('loan_application.view').'</a></li>';
             }
         }

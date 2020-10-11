@@ -13,6 +13,7 @@
 				<li><a data-toggle="tab" href="#historical_tab16"><i class="fa fa-list"></i>{{ lang('partners.test_profile') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab6"><i class="fa fa-list"></i>{{ lang('my201.skills') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab7"><i class="fa fa-list"></i>{{ lang('my201.affiliation') }}</a></li>
+				<li><a data-toggle="tab" href="#historical_tab10"><i class="fa fa-list"></i>{{ lang('partners.medical_records') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab8"><i class="fa fa-list"></i>{{ lang('my201.accountabilities') }}</a></li>
 				<li class="hidden"><a data-toggle="tab" href="#historical_tab9"><i class="fa fa-files-o"></i>{{ lang('my201.attachments') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab17"><i class="fa fa-list"></i>Movement</a></li>
@@ -441,13 +442,72 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.remarks') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('common.remarks') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="licensure-remarks[1]"><?php echo (isset($licensure['licensure-remarks']) ? nl2br($licensure['licensure-remarks']) : ""); ?></span>
 									</div>
 								</div>
 							</div>
 						</div>
+						<div class="row hidden">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.attachment') }} :</label>
+									<div class="col-md-7 col-sm-7">
+                                        <ul class="padding-none margin-top-11">
+                                            <?php 
+                                                if( isset($licensure['licensure-attach'])) {
+                                                    $file = FCPATH . urldecode($licensure['licensure-attach']);
+                                                    if( file_exists( $file ) )
+                                                    {
+                                                        $f_info = get_file_info( $file );
+                                                        $f_type = filetype( $file );
+
+/*                                                        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                                                        $f_type = finfo_file($finfo, $file);*/
+                                                        $is_image = false;
+                                                        switch( $f_type )
+                                                        {
+                                                            case 'image/jpeg':
+                                                            case 'image/jpg':
+                                                            case 'image/bmp':
+                                                            case 'image/png':
+                                                            case 'image/gif':
+                                                                $icon = 'fa-picture-o';
+                                                                $is_image = true;
+                                                                break;
+                                                            case 'video/mp4':
+                                                                $icon = 'fa-film';
+                                                                break;
+                                                            case 'audio/mpeg':
+                                                                $icon = 'fa-volume-up';
+                                                                break;
+                                                            default:
+                                                                $icon = 'fa-file-text-o';
+                                                        }
+
+                                                        $filepath = base_url()."partners/download_file_directly/".urlencode(base64_encode($licensure['licensure-attach']));
+                                                        $file_view = base_url().$licensure['licensure-attach'];
+                                                        // $path = site_url() . 'uploads/' . $this->module_link . '/' . $file;
+                                                        echo '<li class="padding-3 fileupload-delete-'.$licensure['licensure-attach'].'" style="list-style:none;">';
+                                                        if($is_image){
+                                                            echo '<img src="'.$file_view.'" class="img-responsive" alt="" />';
+                                                        }
+                                                        echo '<a href="'.$filepath.'">
+                                                            <span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
+                                                            <span>'. basename($f_info['name']) .'</span>
+                                                            </a>
+                                                        </li>'
+                                                        // <span class="padding-left-10"><a style="float: none;" data-dismiss="fileupload" class="close fileupload-delete" upload_id="'.$details['attachment-file'].'" href="javascript:void(0)"></a></span>
+                                                        ;
+                                                    }
+                                                }
+                                            ?>
+                                        </ul>
+									</div>
+								</div>
+							</div>
+						</div>							
 						<!-- <div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -709,6 +769,100 @@
 				</div>
 				<?php } ?>
 			</div>
+			<div class="tab-pane" id="historical_tab10">
+				@if(sizeof($medical_tab) == 0)
+					<div class="portlet">
+						<div class="portlet-title">
+							<div id="employment-company[1]" class="caption">{{ lang('partners.medical_records') }}</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse"></a>
+							</div>
+						</div>
+						<div class="portlet-body form">
+							<!-- START FORM -->
+							<div id="no_record" class="well" style="">
+								<p class="bold"><i class="fa fa-exclamation-triangle"></i> {{ lang('common.no_record_found') }} </p>
+								<span><p class="small margin-bottom-0">{{ lang('partners.no_info_medical') }}</p></span>
+							</div>
+						</div>
+					</div>
+				@endif
+				<!-- Previous Trainings : start doing the loop-->
+				<?php foreach($medical_tab as $index => $medical){ 
+					?>
+				<div class="portlet">
+					<div class="portlet-title">
+						<div class="caption" id="skill-name[1]"><?php echo (isset($medical['medical-exam-type']) ? $medical['medical-exam-type'] : ""); ?></div>
+						<div class="tools">
+							<a class="collapse" href="javascript:;"></a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<!-- START FORM -->
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.medical_date_exam') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="medical-date-exam[1]"><?php echo (isset($medical['medical-date-exam']) ? $medical['medical-date-exam'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.medical_clinic_hospital') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="medical-clinic-hospital[1]"><?php echo (isset($medical['medical-clinic-hospital']) ? $medical['medical-clinic-hospital'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.medical_pre_existing') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="medical-pre-existing[1]"><?php echo (isset($medical['medical-pre-existing']) ? nl2br($medical['medical-pre-existing']) : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.medical_findings') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="medical-findings[1]"><?php echo (isset($medical['medical-findings']) ? nl2br($medical['medical-findings']) : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.medical_status') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="medical-status[1]"><?php echo (isset($medical['medical-status']) ? nl2br($medical['medical-status']) : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.medical_cost') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="medical-cost[1]"><?php echo (isset($medical['medical-cost']) ? nl2br($medical['medical-cost']) : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<?php } ?>
+			</div>				
 			<div class="tab-pane" id="historical_tab7">
 				@if(sizeof($affiliation_tab) == 0)
 					<div class="portlet">

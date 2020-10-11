@@ -621,19 +621,25 @@ class movement_admin_model extends Record
 			$print_remarks = $movement_info_remarks->remarks_print_report;
 		}
 
-		$query = "SELECT CONCAT(up.lastname,', ',up.firstname,' ',SUBSTRING(up.middlename, 1, 1),'.') as fullname,pm.hrd_remarks,uc.company,uc.company_code,ub.branch,pma.user_id,p.status,upos.position,udep.department,jgl.job_level,pma.display_name,u.full_name as reports_to,pma.effectivity_date,pmr.remarks_print_report,pm.remarks as reason,p.effectivity_date as date_hired,id_number,sss_no,pp.tin FROM {$this->db->dbprefix}partners_movement pm
-				  LEFT JOIN {$this->db->dbprefix}partners_movement_action pma ON pm.movement_id = pma.movement_id
-				  LEFT JOIN {$this->db->dbprefix}partners_movement_remarks pmr ON pm.remarks_print_report_id = pmr.remarks_print_report_id
-				  LEFT JOIN {$this->db->dbprefix}partners p ON p.user_id = pma.user_id
-				  LEFT JOIN {$this->db->dbprefix}users_job_grade_level jgl ON p.job_grade_id = jgl.job_grade_id
-				  LEFT JOIN {$this->db->dbprefix}payroll_partners pp ON p.user_id = pp.user_id
-				  LEFT JOIN {$this->db->dbprefix}users_profile up ON p.user_id = up.user_id
-				  LEFT JOIN {$this->db->dbprefix}users_position upos ON upos.position_id = up.position_id
-				  LEFT JOIN {$this->db->dbprefix}users_department udep ON udep.department_id = up.department_id
-				  LEFT JOIN {$this->db->dbprefix}users_branch ub ON ub.branch_id = up.branch_id
-				  LEFT JOIN {$this->db->dbprefix}users_company uc ON uc.company_id = up.company_id
-				  LEFT JOIN {$this->db->dbprefix}users u ON up.reports_to_id = u.user_id
-				  WHERE pm.movement_id = {$movement_id}
+		$query = "SELECT 
+					CONCAT(up.lastname,', ',up.firstname,' ',SUBSTRING(up.middlename, 1, 1),'.') as fullname,p.id_number,
+					pm.hrd_remarks,uc.company,uc.company_code,ub.branch,pma.user_id,p.status,upos.position,
+					uc.print_logo, udep.department,jgl.job_level,pma.display_name,u.full_name as reports_to,pma.effectivity_date,
+					pmr.remarks_print_report,pm.remarks as reason,p.effectivity_date as date_hired,sss_no,
+					pp.tin,pp.hdmf_no,pm.created_on,up.v_location as location,up.v_division as division,up.v_section as section
+					FROM {$this->db->dbprefix}partners_movement pm
+					LEFT JOIN {$this->db->dbprefix}partners_movement_action pma ON pm.movement_id = pma.movement_id
+					LEFT JOIN {$this->db->dbprefix}partners_movement_remarks pmr ON pm.remarks_print_report_id = pmr.remarks_print_report_id
+					LEFT JOIN {$this->db->dbprefix}partners p ON p.user_id = pma.user_id
+					LEFT JOIN {$this->db->dbprefix}users_job_grade_level jgl ON p.job_grade_id = jgl.job_grade_id
+					LEFT JOIN {$this->db->dbprefix}payroll_partners pp ON p.user_id = pp.user_id
+					LEFT JOIN {$this->db->dbprefix}users_profile up ON p.user_id = up.user_id
+					LEFT JOIN {$this->db->dbprefix}users_position upos ON upos.position_id = up.position_id
+					LEFT JOIN {$this->db->dbprefix}users_department udep ON udep.department_id = up.department_id
+					LEFT JOIN {$this->db->dbprefix}users_branch ub ON ub.branch_id = up.branch_id
+					LEFT JOIN {$this->db->dbprefix}users_company uc ON uc.company_id = up.company_id
+					LEFT JOIN {$this->db->dbprefix}users u ON up.reports_to_id = u.user_id
+					WHERE pm.movement_id = {$movement_id}
 				 ";
 		$result = $this->db->query($query);
 
@@ -656,75 +662,85 @@ class movement_admin_model extends Record
 			$reviewed_by = $signatory[1]['full_name'];
 		}
 
-		$html = '<h4 align="center" style="border-top:1px solid black; border-bottom: 1px solid black;margin:0;font-size:11;">Employee Movement Report</h3>';
+		$b_rb = 'border-right:1px solid black;border-bottom:1px solid black;';
+		$b_r = 'border-right:1px solid black;';
+		$b_b = 'border-bottom:1px solid black;';
 
-		$html .= '<table width="100%">
+		$html = '<div style="font-size:10px;line-height: 18px;"><div align="center"><img src="'.base_url().$movement_info->print_logo.'"></div>';
+		$html .= '<h3 align="center">NOTICE OF PERSONNEL ACTION</h3>';
+
+		$html .= '<table width="100%" style="border:1px solid black;border-collapse:collapse;font-size:10px;">
 					<tbody>
 						<tr>
-							<td width="15%" style="font-size:10;">Name</td>
-							<td width="35%" style="text-align:left;font-size:10;">'.$movement_info->fullname.'</td>
-							<td width="15%" style="text-align:right;font-size:10;font-size:10;">Effective Date</td>
-							<td width="35%" style="text-align:left;font-size:10;padding-left:60px;">'.date('M d, Y',strtotime($movement_info->effectivity_date)).'</td>							
+							<td width="33%" style="'.$b_rb.'">NAME <br/>'.$movement_info->fullname.'</td>
+							<td width="33%" style="'.$b_rb.'">EMPLOYEE NO. <br/>'.$movement_info->id_number.'</td>
+							<td width="33%" style="'.$b_b.'">DATE PREPARED <br/>'.general_date($movement_info->created_on).'</td>
 						</tr>
 						<tr>
-							<td style="font-size:10;">Reason</td>
-							<td style="font-size:10;">'.$print_remarks.'</td>
-							<td style="font-size:10;text-align:right;">&nbsp;</td>
-							<td style="font-size:10;text-align:left;padding-left:60px">&nbsp;</td>							
+							<td width="33%" style="'.$b_rb.'">POSITION <br/>'.$movement_info->position.'</td>
+							<td width="33%" style="'.$b_rb.'">DATE HIRED <br/>'.general_date($movement_info->date_hired).'</td>
+							<td width="33%" style="'.$b_b.'">AREA / LOCATION <br/>'.$movement_info->location.'</td>
+						</tr>
+						<tr>
+							<td width="33%" style="'.$b_rb.'">GROUP / DIVISION <br/>'.ucwords(strtolower($movement_info->division)).'</td>
+							<td width="33%" style="'.$b_rb.'">DEPARTMENT <br/>'.ucwords(strtolower($movement_info->department)).'</td>
+							<td width="33%" style="'.$b_b.'">SECTION <br/>'.($movement_info->section ? $movement_info->section : "&nbsp;").'</td>
+						</tr>
+						<tr>
+							<td width="33%" style="'.$b_rb.'">TIN / TAXCODE <br/>'.($movement_info->tin ? $movement_info->tin : "&nbsp;").'</td>
+							<td width="33%" style="'.$b_rb.'">SSS # <br/>'.($movement_info->sss_no ? $movement_info->sss_no : "&nbsp;").'</td>
+							<td width="33%" style="'.$b_b.'">PAG-IBIG NO. <br/>'.($movement_info->hdmf_no ? $movement_info->hdmf_no : "&nbsp;").'</td>
+						</tr>
+						<tr>
+							<td width="100%" style="'.$b_b.'" colspan="3">&nbsp;</td>
+						</tr>
+						<tr>
+							<td width="100%" style="'.$b_b.' text-align:center" colspan="3"><b>NATURE OF ACTION / CHANGE</b></td>
 						</tr>						
 					</tbody>
 				</table>';
 
-		$html .= '<table width="100%" style="border-top:1px solid black; border-bottom: 1px solid black;">
-					<tbody>
-						<tr>
-							<td width="15%" style="font-size:10;">Date Printed</td>
-							<td width="35%" style="text-align:left;font-size:10;">'.date('m/d/Y').'</td>
-							<td width="15%" style="font-size:10;text-align:right;">< FROM ></td>
-							<td width="35%" style="text-align:right;font-size:10;padding-right:10px">< TO ></td>							
-						</tr>					
-					</tbody>
-				</table>';
+		$query = "SELECT *,pmf.field_name AS pmf_field_name FROM {$this->db->dbprefix}partners_movement_action_transfer pmat
+				  LEFT JOIN {$this->db->dbprefix}partners_movement_action pma ON pmat.action_id = pma.action_id
+				  LEFT JOIN {$this->db->dbprefix}partners_movement_fields pmf ON pmat.field_id = pmf.field_id				  
+				  WHERE pma.movement_id = {$movement_id} GROUP BY pmf.field_id ORDER BY orderby";
 
-		$query = "SELECT *,pmf.field_name AS pmf_field_name FROM {$this->db->dbprefix}partners_movement_fields pmf
-				  LEFT JOIN (SELECT * FROM {$this->db->dbprefix}partners_movement_action_transfer WHERE movement_id = {$movement_id}) AS pmat ON pmf.field_id = pmat.field_id
-				  WHERE pmf.field_name IN ('company','branch','employment_status','position','job_level','department') GROUP BY pmf.field_id ORDER BY orderby
-				 ";
 		$result = $this->db->query($query);
 
-		$query2 = "SELECT * FROM {$this->db->dbprefix}partners_movement_action_compensation
-				  WHERE movement_id = {$movement_id}
-				 ";
+		$query2 = "SELECT * FROM {$this->db->dbprefix}partners_movement_action_compensation pmac
+				   LEFT JOIN {$this->db->dbprefix}partners_movement_action pma ON pmac.action_id = pma.action_id
+				   WHERE pma.movement_id = {$movement_id}";
 		$result2 = $this->db->query($query2);
 
+		$query3 = "SELECT * FROM {$this->db->dbprefix}partners_movement_action_moving pmam
+				   LEFT JOIN {$this->db->dbprefix}partners_movement_action pma ON pmam.action_id = pma.action_id
+				   WHERE pma.movement_id = {$movement_id} GROUP BY pma.action_id";
+		$result3 = $this->db->query($query3);
+
+		$with_compensation = 0;
 		$total_pay_from  = 0;
 		$total_pay_to  = 0;
 		$from_salary = 0;
 		$to_salary = 0;
 		if ($result2 && $result2->num_rows() > 0){
+			$with_compensation = 1;
 			$row2 = $result2->row();
 			$from_salary = $row2->current_salary;
 			$to_salary = $row2->to_salary;	
 			$total_pay_from  += $from_salary;
-			$total_pay_to += $to_salary;					
-		}
-		else{
-			$salary_qry = "SELECT CAST( AES_DECRYPT( `ww_payroll_partners`.`salary`, encryption_key()) AS CHAR) as salary FROM {$this->db->dbprefix}payroll_partners
-					  WHERE user_id = {$movement_info->user_id}
-					 ";
-			$salary_result = $this->db->query($salary_qry);	
-			if ($salary_result && $salary_result->num_rows() > 0){
-				$salary_row = $salary_result->row();
-				$from_salary = ($salary_row->salary != NULL ? $salary_row->salary : 0);
-				$to_salary = ($salary_row->salary != NULL ? $salary_row->salary : 0);
-
-				$total_pay_from  += $from_salary;
-				$total_pay_to += $to_salary;					
-			}		
+			$total_pay_to += $to_salary;
+			$comp_effectivity_date = $row2->effectivity_date;
 		}
 
-		$html .= '<table width="100%" style="border-bottom: 1px solid black;">
-					<tbody>';
+		$html .= '<table width="100%" style="border:1px solid black;border-top:none;border-collapse:collapse;font-size:10px;">
+					<tbody>
+						<tr>
+							<td width="25%" style="'.$b_rb.'"><b>PARTICULARS</b></td>
+							<td width="25%" style="'.$b_rb.'"><b>FROM</b></td>
+							<td width="25%" style="'.$b_rb.'"><b>TO</b></td>
+							<td width="25%" style="'.$b_b.'"><b>EFFECTIVITY</b></td>							
+						</tr>					
+				';
 
 		if ($result && $result->num_rows() > 0){
 			foreach ($result->result() as $row) {
@@ -760,24 +776,38 @@ class movement_admin_model extends Record
 				}
 
 				$html .= '<tr>
-							<td width="25%" style="font-size:10;padding-left:20px">'.$row->field_label.'</td>
-							<td width="40%" style="font-size:10;font-weight:bold;text-align:right;">'.($from_name != NULL ? $from_name : '').'</td>
-							<td width="35%" style="font-size:10;font-weight:bold;text-align:right;padding-right:10px;">'.($to_name != NULL ? $to_name : '').'</td>						
+							<td width="25%" style="'.$b_rb.'">'.$row->field_label.'</td>
+							<td width="25%" style="'.$b_rb.'">'.($from_name != NULL ? $from_name : '').'</td>
+							<td width="25%" style="'.$b_rb.'">'.($to_name != NULL ? $to_name : '').'</td>						
+							<td width="25%" style="'.$b_b.'">'.general_date($row->effectivity_date).'</td>
 						</tr>';					
 			}
 		}
 
-		$html .= '<tr>
-					<td width="25%" style="font-size:10;padding-left:20px">Basic Pay</td>
-					<td width="40%" style="font-size:10;font-weight:bold;text-align:right;">'.number_format($from_salary, 2, '.', ',').'</td>
-					<td width="35%" style="font-size:10;font-weight:bold;text-align:right;padding-right:10px;">'.number_format($to_salary, 2, '.', ',').'</td>						
-				</tr>';	
+		if ($result3 && $result3->num_rows() > 0){
+			foreach ($result3->result() as $row3) {
+				$html .= '<tr>
+							<td width="25%" style="'.$b_rb.'">'.$row3->type.'</td>
+							<td width="25%" style="'.$b_rb.'"></td>
+							<td width="25%" style="'.$b_rb.'"></td>						
+							<td width="25%" style="'.$b_b.'">'.general_date($row3->effectivity_date).'</td>
+						</tr>';					
+			}
+		}
 
+		if ($with_compensation) {
+			$html .= '<tr>
+						<td width="25%" style="'.$b_rb.'">Salary</td>
+						<td width="25%" style="'.$b_rb.'">'.number_format($from_salary, 2, '.', ',').'</td>
+						<td width="25%" style="'.$b_rb.'">'.number_format($to_salary, 2, '.', ',').'</td>						
+						<td width="25%" style="'.$b_b.'">'.general_date($comp_effectivity_date).'</td>
+					</tr>';	
+		}
 
-		$query1 = "SELECT pt.transaction_label,pmaaa.from_allowance,pmaaa.to_allowance,pt.transaction_id FROM {$this->db->dbprefix}payroll_transaction pt
-				  LEFT JOIN (SELECT * FROM {$this->db->dbprefix}partners_movement_action_additional_allowance WHERE movement_id = {$movement_id}) AS pmaaa ON pt.transaction_id = pmaaa.transaction_id
-				  WHERE pt.show_in_movement = 1
-				 ";
+		$query1 = "SELECT pt.transaction_label,pmaaa.from_allowance,pmaaa.to_allowance,pt.transaction_id FROM {$this->db->dbprefix}partners_movement_action_additional_allowance pmaaa
+				  LEFT JOIN {$this->db->dbprefix}partners_movement_action pma ON pmaaa.action_id = pma.action_id
+				  LEFT JOIN {$this->db->dbprefix}payroll_transaction pt on pt.transaction_id = pmaaa.transaction_id
+				  pma.movement_id = {$movement_id}) AND  pt.show_in_movement = 1";
 		$result1 = $this->db->query($query1);
 
 		if ($result1 && $result1->num_rows() > 0){
@@ -805,65 +835,97 @@ class movement_admin_model extends Record
 				}
 
 				$html .= '<tr>
-							<td width="25%" style="font-size:10;padding-left:20px">'.$row1->transaction_label.'</td>
-							<td width="40%" style="font-size:10;font-weight:bold;text-align:right;">'.number_format($from_allowance, 2, '.', ',').'</td>
-							<td width="35%" style="font-size:10;font-weight:bold;text-align:right;padding-right:10px;">'.number_format($to_allowance, 2, '.', ',').'</td>						
+							<td width="25%" style="'.$b_rb.'">'.$row1->transaction_label.'</td>
+							<td width="25%" style="'.$b_rb.'">'.number_format($from_allowance, 2, '.', ',').'</td>
+							<td width="25%" style="'.$b_rb.'">'.number_format($to_allowance, 2, '.', ',').'</td>						
+							<td width="25%" style="'.$b_b.'">'.general_date($comp_effectivity_date).'</td>
 						</tr>';					
 			}
-		}		
-
-		$html .= '<tr>
-					<td width="25%" style="font-size:10;padding-left:20px">Total Pay</td>
-					<td width="40%" style="font-size:10;font-weight:bold;text-align:right;border-top: 1px solid black;">'.number_format($total_pay_from, 2, '.', ',').'</td>
-					<td width="35%" style="font-size:10;font-weight:bold;text-align:right;padding-right:10px;border-top: 1px solid black;">'.number_format($total_pay_to, 2, '.', ',').'</td>						
-				</tr>';		
+		}			
 
 		$html .= '</tbody>
 			</table>';
 
-		$html .= '<table width="100%">
+		$html .= '
+					<table width="100%" style="border:1px solid black;border-top:none;border-collapse:collapse;font-size:10px;">
+						<tr>
+							<td width="25%" style="'.$b_rb.'">&nbsp;</td>
+							<td width="25%" style="'.$b_rb.'">&nbsp;</td>
+							<td width="25%" style="'.$b_rb.'">&nbsp;</td>						
+							<td width="25%" style="'.$b_b.'">&nbsp;</td>
+						</tr>
+						<tr>
+							<td width="25%" style="'.$b_rb.'">&nbsp;</td>
+							<td width="25%" style="'.$b_rb.'">&nbsp;</td>
+							<td width="25%" style="'.$b_rb.'">&nbsp;</td>						
+							<td width="25%" style="'.$b_b.'">&nbsp;</td>
+						</tr>
+						<tr>
+							<td width="25%" style="'.$b_rb.'">&nbsp;</td>
+							<td width="25%" style="'.$b_rb.'">&nbsp;</td>
+							<td width="25%" style="'.$b_rb.'">&nbsp;</td>						
+							<td width="25%" style="'.$b_b.'">&nbsp;</td>
+						</tr>
+						<tr>
+							<td width="25%" style="'.$b_rb.'">&nbsp;</td>
+							<td width="25%" style="'.$b_rb.'">&nbsp;</td>
+							<td width="25%" style="'.$b_rb.'">&nbsp;</td>						
+							<td width="25%" style="'.$b_b.'">&nbsp;</td>
+						</tr>																		
+					</table>
+				 ';
+
+		$html .= '<table width="100%" style="border:1px solid black;border-top:none;border-collapse:collapse;font-size:10px;">
 					<tbody>
 						<tr>
-							<td width="12%" style="font-size:10;">Personnel ID NO:</td>
-							<td width="12%" style="text-align:left;font-size:10;">'.$movement_info->id_number.'</td>
-							<td width="12%" style="font-size:10;text-align:right;">Date Hired:</td>
-							<td width="12%" style="text-align:right;font-size:10;padding-right:10px">'.date('m/d/Y',strtotime($movement_info->date_hired)).'</td>	
-							<td width="12%" style="font-size:10;text-align:right;">TIN:</td>
-							<td width="12%" style="text-align:right;font-size:10;padding-right:10px">'.$movement_info->tin.'</td>	
-							<td width="12%" style="font-size:10;text-align:right;">SSS #:</td>
-							<td width="12%" style="text-align:right;font-size:10;">'.$movement_info->sss_no.'</td>																					
+							<td width="33%" style="border-right:1px solid black">Initiated by:</td>
+							<td width="33%" style="border-right:1px solid black">Endorsed by:</td>
+							<td width="33%" >Checked & Reviewed by:</td>
 						</tr>		
 						<tr>
-							<td width="15%" style="font-size:10;">Remarks</td>	
-							<td width="85%" style="font-size:10;" colspan="7">'.$movement_info->hrd_remarks.'</td>																		
-						</tr>										
+							<td width="33%" style="border-right:1px solid black">&nbsp;</td>	
+							<td width="33%" style="border-right:1px solid black">&nbsp;</td>
+							<td width="33%" >&nbsp;</td>
+						</tr>
+						<tr>
+							<td width="33%" style="'.$b_rb.'">Immediate Superior/ Date</td>	
+							<td width="33%" style="'.$b_rb.'">Department Head / Date</td>
+							<td width="33%" style="'.$b_b.'">Human Resources Head / Date</td>
+						</tr>
+						<tr>
+							<td width="33%" style="border-right:1px solid black">Approved by:</td>
+							<td width="33%" style="border-right:1px solid black">&nbsp;</td>
+							<td width="33%" >Accepted by:</td>
+						</tr>
+						<tr>
+							<td width="33%" style="border-right:1px solid black">&nbsp;</td>	
+							<td width="33%" style="border-right:1px solid black">&nbsp;</td>
+							<td width="33%" >&nbsp;</td>
+						</tr>
+						<tr>
+							<td width="33%" style="'.$b_rb.'">&nbsp;</td>	
+							<td width="33%" style="'.$b_rb.'">&nbsp;</td>
+							<td width="33%" style="'.$b_b.'">&nbsp;</td>
+						</tr>
+						<tr>
+							<td width="33%" style="border-right:1px solid black">Division Head / Date</td>
+							<td width="33%" style="border-right:1px solid black">&nbsp;</td>
+							<td width="33%" >Employee / Date</td>
+						</tr>		
+						<tr>
+							<td width="33%" style="'.$b_rb.'">&nbsp;</td>	
+							<td width="33%" style="'.$b_rb.'">&nbsp;</td>
+							<td width="33%" style="'.$b_b.'">&nbsp;</td>
+						</tr>
+						<tr>
+							<td width="33%" style="border-right:1px solid black">DISTRIBUTION:</td>
+							<td width="33%" style="border-right:1px solid black">1 - Employee</td>
+							<td width="33%" >2- 201 file</td>
+						</tr>
 					</tbody>
 				</table><br /><br />';
 
-		$html .= '<table width="100%">
-					<tbody>
-						<tr>
-							<td width="25%" style="text-align:center;font-size:10;">Recommended By</td>
-							<td width="25%" style="text-align:center;font-size:10;">Reviewed By</td>
-							<td width="25%" style="text-align:center;font-size:10;">Approved By</td>
-							<td width="25%" style="text-align:center;font-size:10">Received By</td>																					
-						</tr>						
-						<tr>
-							<td width="25%" style="text-align:center;font-size:10;">&nbsp;</td>
-							<td width="25%" style="text-align:center;font-size:10;">'.$reviewed_by.'</td>
-							<td width="25%" style="text-align:center;font-size:10;">'.$approved_by.'</td>
-							<td width="25%" style="text-align:center;font-size:10">'.$movement_info->fullname.'</td>																					
-						</tr>																
-					</tbody>
-				</table>';
-
-		$html .= '<br /><br /><table width="100%">
-					<tbody>
-						<tr>
-							<td style="text-align:left;font-size:10;">"Honor the Lord with your wealth, with the firstfruits of all your crops" <i>- Proverbs 3:9 (NIV) </i></td>
-						</tr>																					
-					</tbody>
-				</table>';
+		$html .= '</div>';
 
         $path = 'uploads/templates/movement/pdf/';
         $this->check_path( $path );

@@ -477,6 +477,11 @@ function date_local_timezone($date, $timezone)
 	return $datetime->format('Y-m-d H:i:s');
 }
 
+function general_date($date) {
+	if ($date)
+		return date('M d, Y',strtotime($date));
+}
+
 function localize_timeline($datetime, $timezone)
 {
 	$localdatetime = date_local_timezone( $datetime, $timezone );

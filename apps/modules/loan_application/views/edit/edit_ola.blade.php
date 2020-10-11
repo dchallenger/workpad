@@ -73,16 +73,28 @@
 						<div class="form-group">
 							<label class="control-label col-md-4">{{ lang('loan_application.terms') }}<span class="required">* </span></label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="loan_application[loan_terms]" id="loan_application_loan_terms" value="{{ $record['partners_loan_application_omnibus.loan_terms'] }}" placeholder=""/>		
+								<?php
+									$terms_options = array();
+									for ($i=1; $i < 13; $i++) { 
+										$terms_options[$i] = $i;
+									}
+								?>							
+								<div class="input-group">
+									<!-- <input type="hidden" size="16" class="form-control" readonly id="loan_application_mobile_enrollment_type_id" name="loan_application_mobile_enrollment_type_id" value="">  -->
+									<span class="input-group-addon">
+										<i class="fa fa-list-ul"></i>
+									</span>
+									{{ form_dropdown('loan_application[loan_terms]',$terms_options, $record['partners_loan_application_omnibus.loan_terms'],'id="loan_application_mobile_enrollment_type_id" class="form-control select2me" data-placeholder="Select..."') }}
+								</div> 									
 							</div>	
 						</div>
-						<div class="form-group">
-							<label class="control-label col-md-4">{{ lang('loan_application.start_amortization') }}<span class="required">* </span></label>
+						<div class="form-group hidden">
+							<label class="control-label col-md-4">{{ lang('loan_application.amortization_amount') }}<span class="required">* </span></label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="loan_application[loan_start_amortization]" id="loan_application_loan_start_amortization" value="{{ $record['partners_loan_application_omnibus.loan_start_amortization'] }}" placeholder="" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>		
 							</div>	
 						</div>	
-						<div class="form-group">
+						<div class="form-group hidden">
 							<label class="control-label col-md-4">{{ lang('loan_application.deduction_start') }}<span class="required">* </span></label>
 							<div class="col-md-6">							
 								<div class="input-group date date-picker" data-date-format="MM dd, yyyy">                                       
@@ -93,7 +105,7 @@
 								</div> 				
 							</div>	
 						</div>
-						<div class="form-group">
+						<div class="form-group hidden">
 							<label class="control-label col-md-4">{{ lang('loan_application.deduction_end') }}<span class="required">* </span></label>
 							<div class="col-md-6">							
 								<div class="input-group date date-picker" data-date-format="MM dd, yyyy">                                       
@@ -104,13 +116,13 @@
 								</div> 				
 							</div>	
 						</div>
-						<div class="form-group">
+						<div class="form-group hidden">
 							<label class="control-label col-md-4">{{ lang('loan_application.amount_to_deduct') }}<span class="required">* </span></label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="loan_application[loan_amount_to_deduct]" id="loan_application_loan_amount_to_deduct" value="{{ $record['partners_loan_application_omnibus.loan_amount_to_deduct'] }}" placeholder="" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>		
 							</div>	
 						</div>
-						<div class="form-group">
+						<div class="form-group hidden">
 							<label class="control-label col-md-4">{{ lang('loan_application.amount_to_deduct_per_day') }}<span class="required">* </span></label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="loan_application[loan_amount_to_deduct_per_day]" id="loan_application_loan_amount_to_deduct_per_day" value="{{ $record['partners_loan_application_omnibus.loan_amount_to_deduct_per_day'] }}" placeholder="" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>		
@@ -127,14 +139,14 @@
 							if( $loan_application_status_id['val'] < 7 || empty($loan_application_status_id['val']) ){ 
 								if($loan_application_status_id['val'] == 1 || empty($loan_application_status_id['val'])){ ?>
 									<button type="button" class="btn blue btn-sm" onclick="save_form( $(this).parents('form'), 1 )">{{ lang('loan_application.save_draft') }}</button>
-									<button type="button" class="btn green btn-sm" onclick="save_form( $(this).parents('form'), 2 )">{{ lang('loan_application.submit') }}</button>
+									<button type="button" class="btn green btn-sm" onclick="save_form( $(this).parents('form'), 4 )">{{ lang('loan_application.submit') }}</button>
 						<?php 	
-								}elseif($loan_application_status_id['val'] < 3 ){ 
+								} elseif ($loan_application_status_id['val'] < 3 ){ 
 						?>
-									<button type="button" class="btn green btn-sm" onclick="save_form( $(this).parents('form'), 2 )">{{ lang('loan_application.submit') }}</button>
+									<!-- <button type="button" class="btn green btn-sm" onclick="save_form( $(this).parents('form'), 2 )">{{ lang('loan_application.submit') }}</button> -->
 									<!-- <button type="button" class="btn red btn-sm" onclick="save_form( $(this).parents('form'), 8 )">{{ lang('loan_application.cancel_app') }}</button>	 -->
 							<?php 
-								}elseif(in_array($loan_application_status_id['val'], array(2,3,6)) && $within_cutoff){
+								} elseif (in_array($loan_application_status_id['val'], array(2,3,6)) && $within_cutoff){
 						?>
 									<!-- <button type="button" class="btn red btn-sm" onclick="save_form( $(this).parents('form'), 8 )">{{ lang('loan_application.cancel_app') }}</button>	 -->
 						<?php 

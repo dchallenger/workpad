@@ -200,4 +200,13 @@ $lang['partners'] = array(
     'validity_until' => 'Validity Until',
     'budgeted' => 'Budgeted',
     'test_profile' => 'Test Profile',
+    'medical_records' => 'Medical Records',
+    'medical_exam_type' => 'Medical Exam Type',
+    'medical_date_exam' => 'Date of Exam',
+    'medical_clinic_hospital' => 'Clinic/Hospital',
+    'medical_pre_existing' => 'Pre-Existing Conditions',
+    'medical_findings' => 'Medical Findings',
+    'medical_status' => 'Status',
+    'medical_cost' => 'Cost',
+    'no_info_medical' => 'No available information about medical records. ',
 );

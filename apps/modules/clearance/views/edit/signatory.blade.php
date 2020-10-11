@@ -439,12 +439,14 @@
 																							}																							
 																						?>
 																						</div>
-																						<div class="col-md-4">
-																							<button type="button" class="btn red btn-sm delete-attachement">
-																			                    <i class="fa fa-ban"></i>
-																			                    <span>Delete</span>
-																			                </button>
-																						</div>
+																						@if(!$disabled)
+																							<div class="col-md-4">
+																								<button type="button" class="btn red btn-sm delete-attachement">
+																				                    <i class="fa fa-ban"></i>
+																				                    <span>Delete</span>
+																				                </button>
+																							</div>
+																						@endif
 																					</div>
 																				</div>
 																			</div>																				

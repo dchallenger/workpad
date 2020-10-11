@@ -398,8 +398,9 @@ class Partners_immediate extends MY_PrivateController
 		foreach($education_tab as $educ){
 			if ($educ['key'] == 'education-school') {
 				$educational_tab[$educ['sequence']][$educ['key']] = $this->profile_mod->get_school($educ['key_value']);
-			}
-			else
+			} elseif ($educ['key'] == 'education-degree') {
+				$educational_tab[$educ['sequence']][$educ['key']] = $this->profile_mod->get_degree_obtained($educ['key_value']);
+			} else
 				$educational_tab[$educ['sequence']][$educ['key']] = $educ['key_value'];
 		}		
 		$data['education_tab'] = $educational_tab;
@@ -495,6 +496,17 @@ class Partners_immediate extends MY_PrivateController
 			$skills_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
 		}
 		$data['skill_tab'] = $skills_tab;
+		//medical records
+		$medical_tab = array();
+		$medicals_tab = array();
+		$medical_tab = $this->profile_mod->get_partners_personal_history($user_id, 'medical');
+		foreach($medical_tab as $emp){
+			if ($emp['key'] == 'medical-exam-type') {
+				$medicals_tab[$emp['sequence']][$emp['key']] = $this->profile_mod->get_medical_exam_type($emp['key_value']);
+			} else
+				$medicals_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+		}
+		$data['medical_tab'] = $medicals_tab;			
 		//Affiliation
 		$affiliation_tab = array();
 		$affiliations_tab = array();

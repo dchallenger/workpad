@@ -123,6 +123,26 @@ class Record extends MY_Model
 		return $city_val;
 	}
 
+	public function get_medical_exam_type($medical_exam_type_id = 0){
+		$medical_exam_type_val = '';
+		$this->db->where('medical_exam_type_id',$medical_exam_type_id);
+		$medical_exam_type = $this->db->get('partners_medical_exam_type');
+		if ($medical_exam_type && $medical_exam_type->num_rows() > 0) {
+			$medical_exam_type_val = $medical_exam_type->row()->medical_exam_type;
+		}		
+		return $medical_exam_type_val;
+	}	
+
+	public function get_degree_obtained($education_degree_obtained_id = 0){
+		$degree_obtained_val = '';
+		$this->db->where('education_degree_obtained_id',$education_degree_obtained_id);
+		$degree_obtained = $this->db->get('users_education_degree_obtained');
+		if ($degree_obtained && $degree_obtained->num_rows() > 0) {
+			$degree_obtained_val = $degree_obtained->row()->education_degree_obtained;
+		}		
+		return $degree_obtained_val;
+	}
+
 	function db_which()
 	{
 		if( $this->session->userdata('current_db') && $this->session->userdata('current_db') != "default" )

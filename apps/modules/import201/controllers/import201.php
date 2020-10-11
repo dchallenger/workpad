@@ -7,7 +7,7 @@ class Import201 extends MY_PrivateController
 		$this->load->model('import201_model', 'mod');
 		parent::__construct();
 		//$this->filename = 'D:\oclp new version\employee 201 master file from oclp.xls';
-		$this->filename = 'D:\oclp new version\employee 201 record 08122020.xls';
+		$this->filename = 'D:\oclp new version\employee 201 record 10072020.xls';
 	}
 
 	function import_payroll_summary(){
@@ -1666,7 +1666,11 @@ class Import201 extends MY_PrivateController
 		$this->db->delete('users_profile');
 		$this->db->query("ALTER TABLE ww_users_profile AUTO_INCREMENT = 2");	
 
-		$this->db->truncate('partners');
+		$this->db->where('partner_id >',1);
+		$this->db->delete('partners');
+		$this->db->query("ALTER TABLE ww_partners AUTO_INCREMENT = 2");	
+		
+		//$this->db->truncate('partners');
 
 		//$this->db->truncate('employee_dtr_setup');
 
@@ -1809,14 +1813,15 @@ class Import201 extends MY_PrivateController
 			foreach ($valid_cells_users as $key => $value) {
 				switch ($value) {				
 					case 'company_id':
-						$result = $this->db->get_where('users_company',array('company_initial' => $row[$key]));
+						$result = $this->db->get_where('users_company',array('company' => $row[$key]));
 						if ($result && $result->num_rows() > 0){
 							$company = $result->row();
 							$row[$key] = $company->company_id;						
 							$company_id_gen = $company->company_id;
 						}
 						else{
-							$row[$key] = '';
+							$this->db->insert('users_company',array('company' => $row[$key]));
+							$row[$key] = $this->db->insert_id();
 						}
 						break;					
 					case 'role_id':
@@ -1960,7 +1965,7 @@ class Import201 extends MY_PrivateController
 						}
 						break;	
 					case 'reports_to_id':
-						$result = $this->db->get_where('partners',array('id_number' => $row[$key]));
+						$result = $this->db->get_where('partners',array('id_number' => trim($row[$key])));
 						if ($result && $result->num_rows() > 0){
 							$row_partners = $result->row();
 							$row[$key] = $row_partners->user_id;						
@@ -1992,7 +1997,7 @@ class Import201 extends MY_PrivateController
 						}
 						break;		
 					case 'sbu_unit_id':
-						$result = $this->db->get_where('sbu_unit',array('sbu_unit_id' => $row[$key]));
+						$result = $this->db->get_where('sbu_unit',array('sbu_unit' => $row[$key]));
 						if ($result && $result->num_rows() > 0){
 							$row_sbu_unit = $result->row();
 							$row[$key] = $row_sbu_unit->sbu_unit_id;						
@@ -2022,6 +2027,168 @@ class Import201 extends MY_PrivateController
 			$arr_field_val['partner_id'] = $partners_id;
 
 			$this->db->insert('users_profile',$arr_field_val);		
+		}
+
+		echo "Done.";	
+	}
+
+	function import_reports_to(){
+		$this->load->library('excel');
+
+		$objReader = new PHPExcel_Reader_Excel5;
+
+		if (!$objReader) {
+			show_error('Could not get reader.');
+		}
+
+		$objReader->setReadDataOnly(true);
+		$objPHPExcel = $objReader->load($this->filename);
+		$rowIterator = $objPHPExcel->getActiveSheet()->getRowIterator();
+	
+		$ctr = 0;	
+		$import_data = array();
+
+		foreach($rowIterator as $row){
+			$cellIterator = $row->getCellIterator();
+			$cellIterator->setIterateOnlyExistingCells(false); // Loop all cells, even if it is not set
+			
+			$rowIndex = $row->getRowIndex();
+			
+			// Build the array to insert and check for validation errors as well.
+			foreach ($cellIterator as $cell) {
+				$import_data[$ctr][] = $cell->getCalculatedValue();
+			}
+
+			if ($rowIndex == 1) {
+
+				foreach ($import_data as $row) {
+					foreach ($row as $cell => $value) {
+						switch ($value) {
+							case 'ID Number':
+								$valid_cells[] = 'id_number';
+								break;
+							case 'Immediate Superior ID Number':
+								$valid_cells[] = 'reports_to_id';
+								break;									
+						}
+					}
+				}
+
+				unset($import_data[$ctr]);
+			}
+
+			$ctr++;
+		}
+
+		$ctr = 0;
+		foreach ($import_data as $row) {	
+			$partner_result = $this->db->get_where('partners',array('id_number' => $row[0]));
+			if ($partner_result && $partner_result->num_rows() > 0){
+				$partner = $partner_result->row();
+				$partner_id = $partner->partner_id;
+				$user_id = $partner->user_id;
+			}
+
+			$arr_field_val = array();
+			foreach ($valid_cells as $key => $value) {
+					if ($row[$key] != '' && $value != 'id_number'){
+						$result = $this->db->get_where('partners',array('id_number' => trim($row[$key])));
+						if ($result && $result->num_rows() > 0){
+							$row_partners = $result->row();
+							$row[$key] = $row_partners->user_id;						
+						}
+						else{
+							$row[$key] = '';
+						}
+
+						$arr_field_val[$value] = $row[$key];			
+					}
+			}
+
+			$this->db->where('user_id',$user_id);
+			$this->db->update('users_profile',$arr_field_val);
+
+		}
+
+		echo "Done.";	
+	}	
+
+	function import_sbu_unit(){
+		$this->load->library('excel');
+
+		$objReader = new PHPExcel_Reader_Excel5;
+
+		if (!$objReader) {
+			show_error('Could not get reader.');
+		}
+
+		$objReader->setReadDataOnly(true);
+		$objPHPExcel = $objReader->load($this->filename);
+		$rowIterator = $objPHPExcel->getActiveSheet()->getRowIterator();
+	
+		$ctr = 0;	
+		$import_data = array();
+
+		foreach($rowIterator as $row){
+			$cellIterator = $row->getCellIterator();
+			$cellIterator->setIterateOnlyExistingCells(false); // Loop all cells, even if it is not set
+			
+			$rowIndex = $row->getRowIndex();
+			
+			// Build the array to insert and check for validation errors as well.
+			foreach ($cellIterator as $cell) {
+				$import_data[$ctr][] = $cell->getCalculatedValue();
+			}
+
+			if ($rowIndex == 1) {
+
+				foreach ($import_data as $row) {
+					foreach ($row as $cell => $value) {
+						switch ($value) {
+							case 'ID Number':
+								$valid_cells[] = 'id_number';
+								break;
+							case 'SBU Unit':
+								$valid_cells[] = 'sbu_unit_id';
+								break;									
+						}
+					}
+				}
+
+				unset($import_data[$ctr]);
+			}
+
+			$ctr++;
+		}
+
+		$ctr = 0;
+		foreach ($import_data as $row) {	
+			$partner_result = $this->db->get_where('partners',array('id_number' => $row[0]));
+			if ($partner_result && $partner_result->num_rows() > 0){
+				$partner = $partner_result->row();
+				$partner_id = $partner->partner_id;
+				$user_id = $partner->user_id;
+			}
+
+			$arr_field_val = array();
+			foreach ($valid_cells as $key => $value) {
+				if ($row[$key] != '' && $value != 'id_number'){
+					$result = $this->db->get_where('users_sbu_unit',array('sbu_unit' => $row[$key]));
+					if ($result && $result->num_rows() > 0){
+						$row_sbu_unit = $result->row();
+						$row[$key] = $row_sbu_unit->sbu_unit_id;						
+					}
+					else{
+						$this->db->insert('users_sbu_unit',array('sbu_unit' => $row[$key]));
+						$row[$key] = $this->db->insert_id();
+					}
+
+					$arr_field_val[$value] = $row[$key];				
+				}
+			}
+
+			$this->db->where('user_id',$user_id);
+			$this->db->update('users_profile',$arr_field_val);
 		}
 
 		echo "Done.";	
@@ -2071,7 +2238,7 @@ class Import201 extends MY_PrivateController
 							case 'Present Country':
 								$valid_cells[] = 'country';
 								break;
-							case 'Present Zip Code ':
+							case 'Present Zip Code':
 								$valid_cells[] = 'zip_code';
 								break;
 							case 'Permanent Address':
@@ -2083,7 +2250,7 @@ class Import201 extends MY_PrivateController
 							case 'Permanent Country':
 								$valid_cells[] = 'permanent_country';
 								break;
-							case 'Permanent Zip Code ':
+							case 'Permanent Zip Code':
 								$valid_cells[] = 'permanent_zipcode';
 								break;								
 							case 'Office Phone':
@@ -2126,6 +2293,33 @@ class Import201 extends MY_PrivateController
 			$arr_field_val = array();
 			foreach ($valid_cells as $key => $value) {
 				if ($row[$key] != '' && $value != 'id_number' && $value != 'email'){
+					switch ($value) {
+						case 'city_town':
+						case 'permanent_city_town':
+							$result = $this->db->get_where('cities',array('city' => $row[$key]));
+							if ($result && $result->num_rows() > 0){
+								$cities = $result->row();
+								$row[$key] = $cities->city_id;						
+							}
+							else{
+								$this->db->insert('cities',array('city' => $row[$key]));
+								$row[$key] = $this->db->insert_id();
+							}
+							break;	
+						case 'country':
+						case 'permanent_country':
+							$result = $this->db->get_where('countries',array('short_name' => $row[$key]));
+							if ($result && $result->num_rows() > 0){
+								$row_countries = $result->row();
+								$row[$key] = $row_countries->country_id;						
+							}
+							else{
+								$this->db->insert('countries',array('short_name' => $row[$key]));
+								$row[$key] = $this->db->insert_id();
+							}
+							break;
+					}
+
 					$result = $this->db->get_where('partners_key',array('key_code' => $value));
 					if ($result && $result->num_rows() > 0){
 						$row_key = $result->row();
@@ -2143,11 +2337,13 @@ class Import201 extends MY_PrivateController
 					$this->db->insert('partners_personal',$arr_field_val);					
 				}
 
+
+
 				if ($row[$key] != '' && $value == 'email'){
 					$this->db->where('user_id',$user_id);
 					$this->db->update('users',array('email' => $row[$key]));
 				}
-			}
+			}		
 		}
 
 		echo "Done.";	
@@ -2233,6 +2429,31 @@ class Import201 extends MY_PrivateController
 			$arr_field_val = array();
 			foreach ($valid_cells as $key => $value) {
 				if ($row[$key] != '' && $value != 'id_number'){
+					switch ($value) {
+						case 'emergency_city':
+							$result = $this->db->get_where('cities',array('city' => $row[$key]));
+							if ($result && $result->num_rows() > 0){
+								$cities = $result->row();
+								$row[$key] = $cities->city_id;						
+							}
+							else{
+								$this->db->insert('cities',array('city' => $row[$key]));
+								$row[$key] = $this->db->insert_id();
+							}
+							break;	
+						case 'emergency_country':
+							$result = $this->db->get_where('countries',array('short_name' => $row[$key]));
+							if ($result && $result->num_rows() > 0){
+								$row_countries = $result->row();
+								$row[$key] = $row_countries->country_id;						
+							}
+							else{
+								$this->db->insert('countries',array('short_name' => $row[$key]));
+								$row[$key] = $this->db->insert_id();
+							}
+							break;
+					}
+
 					$result = $this->db->get_where('partners_key',array('key_code' => $value));
 					if ($result && $result->num_rows() > 0){
 						$row_key = $result->row();
@@ -2598,7 +2819,8 @@ class Import201 extends MY_PrivateController
 							$row[$key] = (strtolower($row[$key]) == 'yes' ? 1 : 0);
 							break;
 						case 'family-birthdate':
-							$row[$key] = date ( 'Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($row[$key]));
+							//$row[$key] = date ( 'Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($row[$key]));
+							$row[$key] = date ('F d, Y', strtotime($row[$key]));
 							break;									
 					}
 
@@ -2727,8 +2949,27 @@ class Import201 extends MY_PrivateController
 							elseif (strtolower($row[$key]) == 'undergraduate')
 								$row[$key] = 'Undergrad';
 							break;								
+						case 'education-degree':
+							$result = $this->db->get_where('users_education_degree_obtained',array('education_degree_obtained' => $row[$key]));
+							if ($result && $result->num_rows() > 0){
+								$education_degree_obtained = $result->row();
+								$row[$key] = $education_degree_obtained->education_degree_obtained_id;						
+							}
+							else{
+								$row[$key] = '';
+							}
+							break;
+						case 'education-school':
+							$result = $this->db->get_where('users_education_school',array('education_school' => $row[$key]));
+							if ($result && $result->num_rows() > 0){
+								$education_school = $result->row();
+								$row[$key] = $education_school->education_school_id;						
+							}
+							else{
+								$row[$key] = '';
+							}
+							break;							
 					}
-
 					$result = $this->db->get_where('partners_key',array('key_code' => $value));
 					if ($result && $result->num_rows() > 0){
 						$row_key = $result->row();
@@ -4266,7 +4507,7 @@ class Import201 extends MY_PrivateController
 	}		
 
 	public function truncate_transaction() {
-		TRUNCATE `ww_partners_clearance`;
+/*		TRUNCATE `ww_partners_clearance`;
 		TRUNCATE `ww_partners_clearance_exit_interview_answers`;
 		TRUNCATE `ww_partners_clearance_signatories`;
 		TRUNCATE `ww_partners_clearance_signatories_accountabilities`;
@@ -4283,6 +4524,6 @@ class Import201 extends MY_PrivateController
 
 		TRUNCATE `ww_system_email_queue`;
 		TRUNCATE `ww_system_feeds`;
-		TRUNCATE `ww_system_feeds_recipient`;		
+		TRUNCATE `ww_system_feeds_recipient`;		*/
 	}
 }

@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3">City</label>
+                    <label class="control-label col-md-3">City/Town</label>
                     <div class="col-md-6">
                         <div class="input-group">
                             <span class="input-group-addon">

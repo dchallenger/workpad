@@ -102,17 +102,17 @@
 											</div>
 										</div>
 									</div>
-	                                <div class="row">
+	                                <div class="row hidden">
 										<div class="col-md-12">
 											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.start_amortization') }} :</label>
+												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.amortization_amount') }} :</label>
 												<div class="col-md-7 col-sm-7">
 													<span>{{ $record['partners_loan_application_omnibus_loan_start_amortization'] }}</span>
 												</div>
 											</div>
 										</div>
 									</div>
-	                                <div class="row">
+	                                <div class="row hidden">
 										<div class="col-md-12">
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.deduction_start') }} :</label>
@@ -122,7 +122,7 @@
 											</div>
 										</div>
 									</div>
-	                                <div class="row">
+	                                <div class="row hidden">
 										<div class="col-md-12">
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.deduction_end') }} :</label>
@@ -132,7 +132,7 @@
 											</div>
 										</div>
 									</div>
-	                                <div class="row">
+	                                <div class="row hidden">
 										<div class="col-md-12">
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.amount_to_deduct') }} :</label>
@@ -142,7 +142,7 @@
 											</div>
 										</div>
 									</div>
-	                                <div class="row">
+	                                <div class="row hidden">
 										<div class="col-md-12">
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.amount_to_deduct_per_day') }} :</label>

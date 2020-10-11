@@ -77,7 +77,7 @@
 							</div>	
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4">{{ lang('loan_application.start_amortization') }}<span class="required">* </span></label>
+							<label class="control-label col-md-4">{{ lang('loan_application.amortization_amount') }}<span class="required">* </span></label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="loan_application[loan_start_amortization]" id="loan_application_loan_start_amortization" value="{{ $record['partners_loan_application_omnibus.loan_start_amortization'] }}" placeholder="" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>		
 							</div>	
@@ -104,13 +104,13 @@
 								</div> 				
 							</div>	
 						</div>
-						<div class="form-group">
+						<div class="form-group hidden">
 							<label class="control-label col-md-4">{{ lang('loan_application.amount_to_deduct') }}<span class="required">* </span></label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="loan_application[loan_amount_to_deduct]" id="loan_application_loan_amount_to_deduct" value="{{ $record['partners_loan_application_omnibus.loan_amount_to_deduct'] }}" placeholder="" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>		
 							</div>	
 						</div>
-						<div class="form-group">
+						<div class="form-group hidden">
 							<label class="control-label col-md-4">{{ lang('loan_application.amount_to_deduct_per_day') }}<span class="required">* </span></label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="loan_application[loan_amount_to_deduct_per_day]" id="loan_application_loan_amount_to_deduct_per_day" value="{{ $record['partners_loan_application_omnibus.loan_amount_to_deduct_per_day'] }}" placeholder="" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>		

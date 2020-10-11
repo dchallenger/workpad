@@ -6,7 +6,8 @@ class Loan_application_manage extends MY_PrivateController
 	{
 		$this->load->model('loan_application_manage_model', 'mod');
 		$this->load->model('loan_application_model', 'app_personal');
-		$this->lang->load( 'loan_application' );
+		$this->load->model('loan_application_admin_model', 'app_admin');
+        $this->lang->load( 'loan_application' );        
 		parent::__construct();
 
 		$this->loan_type = $this->app_personal->get_loan_type();
@@ -28,7 +29,7 @@ class Loan_application_manage extends MY_PrivateController
         $permission = $this->config->item('permission');
         $data['permission_app_manage'] = isset($this->permission['list']) ? $this->permission['list'] : 0;
 
-        $data['permission_app_admin'] = 0;
+        $data['permission_app_admin'] = isset($permission[$this->app_admin->mod_code]['list']);
         $data['permission_app_personal'] = isset($permission[$this->app_personal->mod_code]['list']);
 
         $data['loan_status'] = $this->app_personal->get_loan_statuses();

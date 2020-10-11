@@ -16,6 +16,9 @@
 								@if ($permission_app_manage)
 									<li class=""><a href="{{ get_mod_route('loan_application_manage') }}">{{ lang('common.manage') }}</a></li>
 								@endif
+								@if ($permission_app_admin)
+									<li class=""><a href="{{ get_mod_route('loan_application_admin') }}">{{ lang('common.admin') }}</a></li>
+								@endif								
 								</ul>
 								<div class="tab-content" style="min-height: 500px;">
 									<div id="tab_5_1" class="tab-pane active">

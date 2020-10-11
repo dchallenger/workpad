@@ -12,6 +12,7 @@
 				<li><a data-toggle="tab" href="#historical_tab16"><i class="fa fa-list"></i>{{ lang('partners.test_profile') }}</a></li>				
 				<li><a data-toggle="tab" href="#historical_tab6"><i class="fa fa-list"></i>{{ lang('partners.skills') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab7"><i class="fa fa-list"></i>{{ lang('partners.affiliation') }}</a></li>
+				<li><a data-toggle="tab" href="#historical_tab10"><i class="fa fa-list"></i>{{ lang('partners.medical_records') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab8"><i class="fa fa-list"></i>{{ lang('partners.accountabilities') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab9"><i class="fa fa-files-o"></i>{{ lang('partners.attachment') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab17"><i class="fa fa-list"></i>{{ lang('partners.movement') }}</a></li>
@@ -768,6 +769,100 @@
 				</div>
 				<?php } ?>
 			</div>
+			<div class="tab-pane" id="historical_tab10">
+				@if(sizeof($medical_tab) == 0)
+					<div class="portlet">
+						<div class="portlet-title">
+							<div id="employment-company[1]" class="caption">{{ lang('partners.medical_records') }}</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse"></a>
+							</div>
+						</div>
+						<div class="portlet-body form">
+							<!-- START FORM -->
+							<div id="no_record" class="well" style="">
+								<p class="bold"><i class="fa fa-exclamation-triangle"></i> {{ lang('common.no_record_found') }} </p>
+								<span><p class="small margin-bottom-0">{{ lang('partners.no_info_medical') }}</p></span>
+							</div>
+						</div>
+					</div>
+				@endif
+				<!-- Previous Trainings : start doing the loop-->
+				<?php foreach($medical_tab as $index => $medical){ 
+					?>
+				<div class="portlet">
+					<div class="portlet-title">
+						<div class="caption" id="skill-name[1]"><?php echo (isset($medical['medical-exam-type']) ? $medical['medical-exam-type'] : ""); ?></div>
+						<div class="tools">
+							<a class="collapse" href="javascript:;"></a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<!-- START FORM -->
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.medical_date_exam') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="medical-date-exam[1]"><?php echo (isset($medical['medical-date-exam']) ? $medical['medical-date-exam'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.medical_clinic_hospital') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="medical-clinic-hospital[1]"><?php echo (isset($medical['medical-clinic-hospital']) ? $medical['medical-clinic-hospital'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.medical_pre_existing') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="medical-pre-existing[1]"><?php echo (isset($medical['medical-pre-existing']) ? nl2br($medical['medical-pre-existing']) : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.medical_findings') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="medical-findings[1]"><?php echo (isset($medical['medical-findings']) ? nl2br($medical['medical-findings']) : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.medical_status') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="medical-status[1]"><?php echo (isset($medical['medical-status']) ? nl2br($medical['medical-status']) : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.medical_cost') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="medical-cost[1]"><?php echo (isset($medical['medical-cost']) ? nl2br($medical['medical-cost']) : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<?php } ?>
+			</div>			
 			<div class="tab-pane" id="historical_tab8">
                 <div class="portlet">
                 	<div class="portlet-title">

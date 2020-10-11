@@ -4,6 +4,11 @@
     $db->where('deleted', '0');
     $db->order_by('education_school');
     $education_school = $db->get('users_education_school');
+
+    $db->select('education_degree_obtained_id,education_degree_obtained');
+    $db->where('deleted', '0');
+    $db->order_by('education_degree_obtained');
+    $degree_obtained = $db->get('users_education_degree_obtained');      
 ?>
 <div class="portlet">
 	<div class="portlet-title">
@@ -22,7 +27,7 @@
             <div class="form-body">
               <!-- START FORM -->
                 <div class="form-group">
-                    <label class="control-label col-md-3">School</label>
+                    <label class="control-label col-md-3">School<span class="required">*</span></label>
                     <div class="col-md-6">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -39,7 +44,6 @@
                             ?>                                
                             </select>                            
                         </div>                        
-                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -63,8 +67,21 @@
                     <div class="form-group">
                         <label class="control-label col-md-3">Degree</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="partners_personal_history[education-degree][]" id="partners_personal_history-education-degree" 
-                            value="" placeholder="Enter Degree"/>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-list-ul"></i>
+                                </span>
+                                <select  class="form-control form-select" data-placeholder="Select..." name="partners_personal_history[education-degree][]" id="partners_personal_history-reference-country">
+                                    <option value=""></option>
+                                <?php
+                                    foreach($degree_obtained->result() as $option) {
+                                ?>
+                                        <option value="<?php echo $option->education_degree_obtained_id ?>"><?php echo $option->education_degree_obtained ?></option>
+                                <?php
+                                    }
+                                ?>                                
+                                </select>                            
+                            </div> 
                         </div>
                     </div>
                     <?php 

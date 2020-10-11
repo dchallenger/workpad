@@ -135,7 +135,7 @@ $config['fields'][2]['partners_loan_application_omnibus.loan_amount_to_deduct_pe
 	'display_id' => 3,
 	'quick_edit' => 1,
 	'sequence' => 6,
-	'datatype' => 'required',
+	'datatype' => '',
 	'active' => '1',
 	'encrypt' => 1
 );
@@ -150,7 +150,7 @@ $config['fields'][2]['partners_loan_application_omnibus.loan_amount_to_deduct'] 
 	'display_id' => 3,
 	'quick_edit' => 1,
 	'sequence' => 6,
-	'datatype' => 'required',
+	'datatype' => '',
 	'active' => '1',
 	'encrypt' => 1
 );
@@ -165,7 +165,7 @@ $config['fields'][2]['partners_loan_application_omnibus.loan_deduction_start'] =
 	'display_id' => 3,
 	'quick_edit' => 1,
 	'sequence' => 4,
-	'datatype' => 'required',
+	'datatype' => '',
 	'active' => '1',
 	'encrypt' => 0
 );
@@ -180,7 +180,7 @@ $config['fields'][2]['partners_loan_application_omnibus.loan_deduction_end'] = a
 	'display_id' => 3,
 	'quick_edit' => 1,
 	'sequence' => 5,
-	'datatype' => 'required',
+	'datatype' => '',
 	'active' => '1',
 	'encrypt' => 0
 );
@@ -195,7 +195,7 @@ $config['fields'][2]['partners_loan_application_omnibus.loan_start_amortization'
 	'display_id' => 3,
 	'quick_edit' => 1,
 	'sequence' => 3,
-	'datatype' => 'required',
+	'datatype' => '',
 	'active' => '1',
 	'encrypt' => 1
 );

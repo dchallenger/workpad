@@ -817,8 +817,9 @@ class Partners extends MY_PrivateController
 		foreach($education_tab as $educ){
 			if ($educ['key'] == 'education-school') {
 				$educational_tab[$educ['sequence']][$educ['key']] = $this->profile_mod->get_school($educ['key_value']);
-			}
-			else
+			} elseif ($educ['key'] == 'education-degree') {
+				$educational_tab[$educ['sequence']][$educ['key']] = $this->profile_mod->get_degree_obtained($educ['key_value']);
+			} else
 				$educational_tab[$educ['sequence']][$educ['key']] = $educ['key_value'];
 		}
 
@@ -915,6 +916,17 @@ class Partners extends MY_PrivateController
 			$skills_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
 		}
 		$data['skill_tab'] = $skills_tab;
+		//medical records
+		$medical_tab = array();
+		$medicals_tab = array();
+		$medical_tab = $this->profile_mod->get_partners_personal_history($user_id, 'medical');
+		foreach($medical_tab as $emp){
+			if ($emp['key'] == 'medical-exam-type') {
+				$medicals_tab[$emp['sequence']][$emp['key']] = $this->profile_mod->get_medical_exam_type($emp['key_value']);
+			} else
+				$medicals_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+		}
+		$data['medical_tab'] = $medicals_tab;		
 		//Affiliation
 		$affiliation_tab = array();
 		$affiliations_tab = array();
@@ -1353,6 +1365,14 @@ class Partners extends MY_PrivateController
 				$skills_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
 			}
 			$data['skill_tab'] = $skills_tab;
+		//medical
+			$medical_tab = array();
+			$medicals_tab = array();
+			$medical_tab = $this->profile_mod->get_partners_personal_history($user_id, 'medical');
+			foreach($medical_tab as $emp){
+				$medicals_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			}
+			$data['medical_tab'] = $medicals_tab;		
 		//Cost Center
 			$cost_center_tab = array();
 			$cost_centers_tab = array();
@@ -2067,7 +2087,7 @@ class Partners extends MY_PrivateController
 				$other_tables['users_profile'] = $post['users_profile'];
 				$other_tables['users_profile']['birth_date'] = date('Y-m-d', strtotime($post['users_profile']['birth_date']));
 				$partners_personal_key = array('gender', 'birth_place', 'religion', 'nationality', 'civil_status', 'height', 'weight', 'interests_hobbies', 'language', 'dialect', 'dependents_count', 'solo_parent', 'with_parking');
-				$partners_personal = $post['partners_personal'];
+				$partners_personal = (isset($post['partners_personal']) ? $post['partners_personal'] : array());
 				break;
 			case 5:
 				if (count($_POST['partners_personal_history']['education-status']) < count($_POST['partners_personal_history']['education-school'])) {
@@ -2104,7 +2124,7 @@ class Partners extends MY_PrivateController
 					);
 				$partners_personal_table = "partners_personal_history";
 				$partners_personal_key = array('education-type', 'education-school', 'education-year-from', 'education-year-to', 'education-degree', 'education-honors_awards', 'education-status');
-				$partners_personal = $post['partners_personal_history'];
+				$partners_personal = (isset($post['partners_personal_history']) ? $post['partners_personal_history'] : array());
 				break;
 			case 6:
 				//Employment History Tab
@@ -2134,7 +2154,7 @@ class Partners extends MY_PrivateController
 					);
 				$partners_personal_table = "partners_personal_history";
 				$partners_personal_key = array('employment-company', 'employment-position-title', 'employment-location', 'employment-duties', 'employment-month-hired', 'employment-month-end', 'employment-year-hired', 'employment-year-end', 'employment-reason-for-leaving', 'employment-latest-salary', 'employment-supervisor');
-				$partners_personal = $post['partners_personal_history'];
+				$partners_personal = (isset($post['partners_personal_history']) ? $post['partners_personal_history'] : array());
 				break;
 			case 7:
 				//Character Reference tab
@@ -2152,7 +2172,7 @@ class Partners extends MY_PrivateController
 					);
 				$partners_personal_table = "partners_personal_history";
 				$partners_personal_key = array('reference-name', 'reference-occupation', 'reference-years-known', 'reference-phone', 'reference-mobile', 'reference-address', 'reference-city', 'reference-country', 'reference-zipcode');
-				$partners_personal = $post['partners_personal_history'];
+				$partners_personal = (isset($post['partners_personal_history']) ? $post['partners_personal_history'] : array());
 				break;
 			case 8:
 				//Licensure tab
@@ -2170,7 +2190,7 @@ class Partners extends MY_PrivateController
 					);
 				$partners_personal_table = "partners_personal_history";
 				$partners_personal_key = array('licensure-title', 'licensure-number', 'licensure-remarks', 'licensure-month-taken', 'licensure-year-taken', 'licensure-month-validity-until', 'licensure-year-validity-until', 'licensure-attach');
-				$partners_personal = $post['partners_personal_history'];
+				$partners_personal = (isset($post['partners_personal_history']) ? $post['partners_personal_history'] : array());
 				break;
 			case 9:
 				//Trainings and Seminars tab
@@ -2200,7 +2220,7 @@ class Partners extends MY_PrivateController
 					);
 				$partners_personal_table = "partners_personal_history";
 				$partners_personal_key = array('training-category', 'training-title', 'training-venue', 'training-start-month', 'training-start-year', 'training-end-month', 'training-end-year', 'training-remarks', 'training-provider', 'training-cost', 'training-budgeted');
-				$partners_personal = $post['partners_personal_history'];
+				$partners_personal = (isset($post['partners_personal_history']) ? $post['partners_personal_history'] : array());
 				break;
 			case 10:
 				//Skills tab
@@ -2224,7 +2244,7 @@ class Partners extends MY_PrivateController
 				// 	);
 				$partners_personal_table = "partners_personal_history";
 				$partners_personal_key = array('skill-type', 'skill-name', 'skill-level', 'skill-remarks');
-				$partners_personal = $post['partners_personal_history'];
+				$partners_personal = (isset($post['partners_personal_history']) ? $post['partners_personal_history'] : array());
 			break;
 			case 11:
 			//Affiliation tab
@@ -2254,7 +2274,7 @@ class Partners extends MY_PrivateController
 				);
 			$partners_personal_table = "partners_personal_history";
 			$partners_personal_key = array('affiliation-name', 'affiliation-position', 'affiliation-month-start', 'affiliation-month-end', 'affiliation-year-start', 'affiliation-year-end');
-			$partners_personal = $post['partners_personal_history'];
+			$partners_personal = (isset($post['partners_personal_history']) ? $post['partners_personal_history'] : array());
 			break;
 			case 12:
 			//Accountabilities tab
@@ -2284,7 +2304,7 @@ class Partners extends MY_PrivateController
 			// 	);
 			$partners_personal_table = "partners_personal_history";
 			$partners_personal_key = array('accountabilities-name', 'accountabilities-code', 'accountabilities-quantity', 'accountabilities-date-issued', 'accountabilities-date-returned', 'accountabilities-remarks', 'accountabilities-attachment', 'accountabilities-asset-type', 'accountabilities-asset-number', 'accountabilities-serial-number');
-			$partners_personal = $post['partners_personal_history'];
+			$partners_personal = (isset($post['partners_personal_history']) ? $post['partners_personal_history'] : array());
 			break;
 			case 13:
 			//Accountabilities tab
@@ -2308,7 +2328,7 @@ class Partners extends MY_PrivateController
 				);
 			$partners_personal_table = "partners_personal_history";
 			$partners_personal_key = array('attachment-name', 'attachment-file');
-			$partners_personal = $post['partners_personal_history'];
+			$partners_personal = (isset($post['partners_personal_history']) ? $post['partners_personal_history'] : array());
 			break;
 			case 14:
 			//Family tab
@@ -2388,13 +2408,19 @@ class Partners extends MY_PrivateController
 				);*/
 			$partners_personal_table = "partners_personal_history";
 			$partners_personal_key = array('test-category', 'test-date-taken', 'test-location', 'test-score', 'test-result', 'test-remarks', 'test-attachments', 'test-title');
-			$partners_personal = $post['partners_personal_history'];
+			$partners_personal = (isset($post['partners_personal_history']) ? $post['partners_personal_history'] : array());
 			break;
 			case 17:
 				$partners_personal_table = "partners_personal_history";
 				$partners_personal_key = array('cost_center-cost_center', 'cost_center-code', 'cost_center-percentage');
-				$partners_personal = $post['partners_personal_history'];
+				$partners_personal = (isset($post['partners_personal_history']) ? $post['partners_personal_history'] : array());
 			break;
+			//medical records
+			case 18:
+				$partners_personal_table = "partners_personal_history";
+				$partners_personal_key = array('medical-exam-type', 'medical-date-exam', 'medical-clinic-hospital', 'medical-pre-existing', 'medical-findings', 'medical-status', 'medical-cost');
+				$partners_personal = (isset($post['partners_personal_history']) ? $post['partners_personal_history'] : array());
+			break;			
 		}
 
 		$partner_details = false;

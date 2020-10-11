@@ -3,7 +3,7 @@
         <span class="text-info">{{ $partners_loan_type }}</span><br>
     </td>
     <td class="hidden-xs">
-        <span class="text-muted small"><?php echo date("F d, Y",strtotime($partners_loan_application_created_on)); ?></span>
+        <span><?php echo date("F d, Y",strtotime($partners_loan_application_created_on)); ?></span>
     </td>
     <td class="hidden-xs">
         <?php 

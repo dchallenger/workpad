@@ -79,7 +79,7 @@
 					<li><a href="{{$edit_url}}"><i class="fa fa-search"></i> View</a></li>
 				@endif
 
-				@if($clearance_status == "Pending")
+				@if($clearance_status == "Pending" && $exit_interviewed)
 					<form>
 	        		<li><a href="#" onclick="send_sign( $(this).closest('form'), 4 , {{ $record_id }} )"><i class="fa fa-check text-success"></i> Cleared</a></li>
 	        		</form>

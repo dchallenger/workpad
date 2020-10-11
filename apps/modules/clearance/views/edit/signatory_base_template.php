@@ -59,6 +59,7 @@
 					<td class="active"><span class="bold">Accountabilities </span></td>
 					<td>
 						<div class="form-group">
+							<span class="clearance_layout_sign_id hidden"><?php echo $value['clearance_layout_sign_id'] ?></span>
 							<label class="control-label col-md-3 hidden">
 								<span>
 				                	<button type="button" class="btn btn-success btn-xs" data-toggle="modal" href="#temp_section" onclick="add_account($(this),<?php echo $value["clearance_layout_sign_id"] ?>)">Add Item</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -178,6 +179,7 @@
 					<td class="active"><span class="bold">Accountabilities </span></td>
 					<td>
 						<div class="form-group">
+							<span class="clearance_layout_sign_id hidden"><?php echo $value['clearance_layout_sign_id'] ?></span>
 							<label class="control-label col-md-3 hidden">
 								<span>
 				                	<button type="button" class="btn btn-success btn-xs" data-toggle="modal" href="#temp_section" onclick="add_account($(this),<?php echo $value["clearance_layout_sign_id"] ?>)">Add Item</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
