@@ -44,6 +44,12 @@
 				</div>	
 		</div>			
 		<div class="form-group">
+			<label class="control-label col-md-3"><span class="required">* </span>{{ lang('division.cost_center_code') }}</label>
+				<div class="col-md-7">							
+					<input type="text" disabled="disabled" class="form-control" name="users_division[cost_center_code]" id="users_division-cost_center_code" value="{{ $record['users_division.cost_center_code'] }}" placeholder="{{ lang('division.p_cost_center_code') }}"/> 				
+				</div>	
+		</div>			
+		<div class="form-group">
 				<label class="control-label col-md-3">{{ lang('division.active') }}</label>
 				<div class="col-md-7">
 					<div class="make-switch" data-on-label="&nbsp;{{ lang('division.option_yes') }}&nbsp;" data-off-label="&nbsp;{{ lang('division.option_no') }}&nbsp;">

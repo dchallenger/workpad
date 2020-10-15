@@ -3,6 +3,7 @@ $config["list_cached_query"] = 'SELECT
 `ww_users_division`.`division_id` as record_id, 
 ww_users_division.division as "users_division_division", 
 ww_users_division.division_code as "users_division_division_code", 
+ww_users_division.cost_center_code as "users_division_cost_center_code", 
 ww_users.display_name as "users_division_immediate_id", 
 ww_users_division.position as "users_division_position", 
 IF(ww_users_division.status_id = 1, "Active", "Inactive") as "users_division_status_id", 

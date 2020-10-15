@@ -43,7 +43,12 @@
 				<input type="text" readonly class="form-control" name="users_division[position]" id="users_division-position" value="{{ $record['users_division.position'] }}" placeholder="{{ lang('division.p_immediate_position') }}"/> 				
 			</div>				
 		</div>			
-
+		<div class="form-group">
+			<label class="control-label col-md-3"><span class="required">* </span>{{ lang('division.cost_center_code') }}</label>
+			<div class="col-md-7">							
+				<input type="text" class="form-control" name="users_division[cost_center_code]" id="users_division-cost_center_code" value="{{ $record['users_division.cost_center_code'] }}" placeholder="{{ lang('division.p_cost_center_code') }}"/> 				
+			</div>				
+		</div>	
 		<div class="form-group">
 				<label class="control-label col-md-3">{{ lang('division.active') }}</label>
 				<div class="col-md-7">							

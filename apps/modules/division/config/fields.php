@@ -85,3 +85,18 @@ $config['fields'][1]['users_division.status_id'] = array(
 	'active' => '1',
 	'encrypt' => 0
 );
+$config['fields'][2]['users_division.cost_center_code'] = array(
+	'f_id' => 7,
+	'fg_id' => 1,
+	'label' => 'Cost Center Code',
+	'description' => '',
+	'table' => 'users_division',
+	'column' => 'cost_center_code',
+	'uitype_id' => 1,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 5,
+	'datatype' => 'V',
+	'active' => '1',
+	'encrypt' => 0
+);

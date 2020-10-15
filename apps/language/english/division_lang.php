@@ -14,5 +14,7 @@ $lang['division'] = array(
 	'option_no' => 'No',
 	'edit' => 'Edit',
 	'options' => 'Options',
-	'status' => 'Status'
+	'status' => 'Status',
+	'cost_center_code' => 'Cost Center Code',
+	'p_cost_center_code' => 'Enter Cost Center Code',
 );

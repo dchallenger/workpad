@@ -26,3 +26,8 @@ $config['field_validations']['users_division.status_id'][] = array(
 	'label'   => 'Active',
 	'rules'   => 'V'
 );
+$config['field_validations']['users_division.cost_center_code'][] = array(
+	'field'   => 'users_division[cost_center_code]',
+	'label'   => 'Cost Center Code',
+	'rules'   => 'required'
+);
