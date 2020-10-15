@@ -35,11 +35,11 @@
 				 
 					<li ><a rel="<?php echo site_url('partner/code_of_conduct');?>" href="<?php echo site_url('partner/code_of_conduct');?>" menu_id="106" parent="3">Code of Conduct</a></li>
 				 
-					<li ><a rel="<?php echo site_url('partner/clearance_manage');?>" href="<?php echo site_url('partner/clearance_manage');?>" menu_id="116" parent="3">Clearance Manage</a></li>
+					<li ><a rel="<?php echo site_url('partner/clearance_manage');?>" href="<?php echo site_url('partner/clearance_manage');?>" menu_id="116" parent="3">Manage Clearance</a></li>
 				 
 					<li ><a rel="<?php echo site_url('partner/resources');?>" href="<?php echo site_url('partner/resources');?>" menu_id="107" parent="3">Resources</a></li>
 				 
-					<li ><a rel="<?php echo site_url('partners/loan_application');?>" href="<?php echo site_url('partners/loan_application');?>" menu_id="130" parent="3">Loan Application</a></li>
+					<li ><a rel="<?php echo site_url('partners/loan_application');?>" href="<?php echo site_url('partners/loan_application');?>" menu_id="130" parent="3">Automated Process Workflow</a></li>
 							</ul>
 			</li>
 	<li>

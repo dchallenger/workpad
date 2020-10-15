@@ -152,7 +152,17 @@
 									</div>
 								</div>
 							</div>
-							<?php if( count($remarks) > 0 && $loan_application_status_id['val'] == 6){
+	                        <div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">HR Remarks :</label>
+										<div class="col-md-7 col-sm-7">
+											<span>{{ ($record['partners_loan_comment'] == '') ? '' : $record['partners_loan_comment'] }}</span>
+										</div>
+									</div>
+								</div>
+							</div>							
+							<?php if( count($remarks) > 0){
 								?>
 
 							<hr />

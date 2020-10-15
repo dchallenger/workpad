@@ -49,6 +49,7 @@
 				<input type="hidden" id="loan_type_id" name="loan_type_id" value="{{ $loan_type_id }}">
 				<input type="hidden" name="loan_type" id="loan_type" value="{{ $loan_type }}">
 				<input type="hidden" name="loan_type_code" id="loan_type_code" value="{{ $loan_type_code }}">
+				<input type="hidden" name="user_id" value="{{ $user_id }}">				
 				<input type="hidden" name="view" id="view" value="edit" >
 
 				
@@ -59,6 +60,7 @@
 					</div>
 					<div class="portlet-body form">
 						<div class="form-group">
+							<input type="hidden" name="loan_application[loan_application_car_entitlement_id]" value="{{$loan_application_car_entitlement_id['val']}}" >
 							<label class="control-label col-md-4">{{ lang('loan_application.entitlement') }}<span class="required">* </span></label>
 							<div class="col-md-6">
 								<?php	                        
@@ -75,29 +77,53 @@
 									<span class="input-group-addon">
 										<i class="fa fa-list-ul"></i>
 									</span>
-									{{ form_dropdown('loan_application[loan_application_car_entitlement_id]',$entitlement_options, $loan_application_car_entitlement_id['val'],'id="loan_application_car_entitlement_id" class="form-control select2me" data-placeholder="Select..."') }}
+									{{ form_dropdown('loan_application[loan_application_car_entitlement_id]',$entitlement_options, $loan_application_car_entitlement_id['val'],'id="loan_application_car_entitlement_id" class="form-control select2me" data-placeholder="Select..." disabled') }}
 								</div> 				
 							</div>	
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-4">{{ lang('loan_application.year_model') }}<span class="required">* </span></label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="loan_application[year_model]" id="loan_application_year_model" value="{{ $record['partners_loan_application_car.year_model'] }}" placeholder=""/>		
+								<input readonly type="text" class="form-control" name="loan_application[year_model]" id="loan_application_year_model" value="{{ $record['partners_loan_application_car.year_model'] }}" placeholder=""/>		
 							</div>	
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-4">{{ lang('loan_application.car_type') }}<span class="required">* </span></label>
 							<div class="col-md-6">							
-								<input type="text" class="form-control" name="loan_application[car_type]" id="loan_application_car_type" value="{{ $record['partners_loan_application_car.car_type'] }}" placeholder=""/>		
+								<input readonly type="text" class="form-control" name="loan_application[car_type]" id="loan_application_car_type" value="{{ $record['partners_loan_application_car.car_type'] }}" placeholder=""/>		
 							</div>	
-						</div>
+						</div>							
 						<div class="form-group">
 							<label class="control-label col-md-4">{{ lang('loan_application.amount_loan') }}<span class="required">* </span></label>
 							<div class="col-md-6">
-								<input type="text" class="form-control" name="loan_application[loan_amount]" id="loan_application_loan_amount" value="{{ $record['partners_loan_application_car.loan_amount'] }}" placeholder="" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>		
+								<input readonly type="text" class="form-control" name="loan_application[loan_amount]" id="loan_application_loan_amount" value="{{ $record['partners_loan_application_car.loan_amount'] }}" placeholder="" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>		
 							</div>	
-						</div>	
+						</div>
 						<div class="form-group">
+							<label class="control-label col-md-4">{{ lang('loan_application.car_loan_application') }}<span class="required">* </span></label>
+							<div class="col-md-6">
+								<?php	                        
+
+								$car_loan_app_options['Brand New'] = 'Brand New';
+								$car_loan_app_options['Previously Owned Vehicle'] = 'Previously Owned Vehicle';
+
+								?>							
+								<div class="input-group">
+									<!-- <input type="hidden" size="16" class="form-control" readonly id="loan_application_mobile_enrollment_type_id" name="loan_application_mobile_enrollment_type_id" value="">  -->
+									<span class="input-group-addon">
+										<i class="fa fa-list-ul"></i>
+									</span>
+									{{ form_dropdown('loan_application[car_loan_application]',$car_loan_app_options, $car_loan_application['val'],'id="loan_application_car_amortization" class="form-control select2me" data-placeholder="Select..."') }}
+								</div> 				
+							</div>	
+						</div>							
+						<div class="form-group">
+							<label class="control-label col-md-4">{{ lang('loan_application.amortization_amount') }}<span class="required">* </span></label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="loan_application[amount_amortization]" id="loan_application_loan_amount" value="{{ $record['partners_loan_application_car.amount_amortization'] }}" placeholder="" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>		
+							</div>	
+						</div>								
+						<div class="form-group hidden">
 							<label class="control-label col-md-4">{{ lang('loan_application.amortization') }}<span class="required">* </span></label>
 							<div class="col-md-6">
 								<?php	                        
@@ -116,7 +142,7 @@
 							</div>	
 						</div>												
 						<div class="form-group">
-							<label class="control-label col-md-4">{{ lang('loan_application.pay_period_from') }}<span class="required">* </span></label>
+							<label class="control-label col-md-4">{{ lang('loan_application.deduction_start') }}<span class="required">* </span></label>
 							<div class="col-md-6">							
 								<div class="input-group date date-picker" data-date-format="MM dd, yyyy">                                       
 										<input type="text" size="16" class="form-control" name="loan_application[pay_period_from]" id="loan_application_pay_period_from" value="{{ $record['partners_loan_application_car.pay_period_from'] }}" />
@@ -127,7 +153,7 @@
 							</div>	
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4">{{ lang('loan_application.pay_period_to') }}<span class="required">* </span></label>
+							<label class="control-label col-md-4">{{ lang('loan_application.deduction_end') }}<span class="required">* </span></label>
 							<div class="col-md-6">							
 								<div class="input-group date date-picker" data-date-format="MM dd, yyyy">                                       
 										<input type="text" size="16" class="form-control" name="loan_application[pay_period_to]" id="loan_application_pay_period_to" value="{{ $record['partners_loan_application_car.pay_period_to'] }}" />
@@ -137,6 +163,69 @@
 								</div> 				
 							</div>	
 						</div>
+						<?php if ($loan_application_status_id['val'] == 4){ ?>
+						<div class="form-group">
+							<label class="col-md-4 text-right control-label">
+								<span class="required">* </span>HR Remarks (Required if you choose to decline):
+							</label>
+					        <div class='col-md-7'>
+					            <textarea rows='4' id='comment' class='form-control' name="loan_application[comment]"></textarea>
+					        </div>	
+						</div>
+						<?php } ?>	
+						<div class="form-group">
+							<label class="col-md-4 text-muted text-right">
+								Attachments:
+							</label>
+							<div class="col-md-7">
+								<?php
+									if (!empty($attachement)){
+										foreach ($attachement as $key => $value) {
+											if ( !empty($value->photo)) {
+												$file = FCPATH . urldecode( $value->photo );
+												if( file_exists( $file ) )
+												{
+													$f_type = '';
+
+													if (function_exists('get_file_info')) {
+														$f_info = get_file_info( $file );
+														$f_type = filetype( $file );
+													}
+
+													if (function_exists('finfo_open')) {
+														$finfo = finfo_open(FILEINFO_MIME_TYPE);
+														$f_type = finfo_file($finfo, $file);
+													}
+
+													switch( $f_type )
+													{
+														case 'image/jpeg':
+															$icon = 'fa-picture-o';
+															break;
+														case 'video/mp4':
+															$icon = 'fa-film';
+															break;
+														case 'audio/mpeg':
+															$icon = 'fa-volume-up';
+															break;
+														default:
+															$icon = 'fa-file-text-o';
+													}
+													
+													$filepath = base_url()."partners/loan_application/download_file/".$value->loan_application_attachment_id;
+													echo '<li class="padding-3 fileupload-delete-'.$value->loan_application_attachment_id.'" style="list-style:none;">
+											            <a href="'.$filepath.'">
+											            <span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
+											            <span>'. basename($f_info['name']) .'</span>
+											            <span class="padding-left-10"></span>
+											        </a></li>';	
+												}
+											}
+										}
+									} 
+								?>
+							</div>	
+						</div>													
 					</div>
 				</div>
 
@@ -145,23 +234,13 @@
 				    <div class="col-md-12">
 				      <div>
 						<?php 
-							if( $loan_application_status_id['val'] < 7 || empty($loan_application_status_id['val']) ){ 
-								if($loan_application_status_id['val'] == 1 || empty($loan_application_status_id['val'])){ ?>
-									<button type="button" class="btn blue btn-sm" onclick="save_form( $(this).parents('form'), 1 )">{{ lang('loan_application.save_draft') }}</button>
-									<button type="button" class="btn green btn-sm" onclick="save_form( $(this).parents('form'), 2 )">{{ lang('loan_application.submit') }}</button>
-						<?php 	
-								}elseif($loan_application_status_id['val'] < 3 ){ 
-						?>
-									<button type="button" class="btn green btn-sm" onclick="save_form( $(this).parents('form'), 2 )">{{ lang('loan_application.submit') }}</button>
-									<button type="button" class="btn red btn-sm" onclick="save_form( $(this).parents('form'), 8 )">{{ lang('loan_application.cancel_app') }}</button>	
-							<?php 
-								}elseif(in_array($loan_application_status_id['val'], array(2,3,6)) && $within_cutoff){
-						?>
-									<button type="button" class="btn red btn-sm" onclick="save_form( $(this).parents('form'), 8 )">{{ lang('loan_application.cancel_app') }}</button>	
+							if( $loan_application_status_id['val'] == 4 ){ ?>
+								<button type="button" class="btn blue btn-sm" onclick="save_form( $(this).parents('form'), 4 )">{{ lang('loan_application.save_draft') }}</button>
+								<button type="button" class="btn green btn-sm" onclick="save_form( $(this).parents('form'), 2 )">{{ lang('loan_application.approved') }}</button>
+								<button type="button" class="btn red btn-sm" onclick="save_form( $(this).parents('form'), 8 )">{{ lang('loan_application.decline') }}</button>
 						<?php 
-								} 
 							}
-						?>
+						?>				      	
 				        <a href="<?php echo $back_url;?>" class="btn default btn-sm">{{ lang('loan_application.back') }}</a>
 				      </div>
 				    </div>

@@ -1,6 +1,30 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 $config['fields'] = array();
+$config['fields'][3]['partners_loan_application_car.car_loan_application'] = array(
+	'f_id' => 16,
+	'fg_id' => 3,
+	'label' => 'Car Loan Application',
+	'description' => '',
+	'table' => 'partners_loan_application_car',
+	'column' => 'car_loan_application',
+	'uitype_id' => 4,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 7,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 0,
+	'searchable' => array(
+		'type_id' => '1',
+		'table' => 'partners_loan_application_car_amortization',
+		'multiple' => 0,
+		'group_by' => '',
+		'label' => 'loan_application_car_amortization',
+		'value' => 'loan_application_car_amortization',
+		'textual_value_column' => ''
+	)
+);
 $config['fields'][3]['partners_loan_application_car.amortization'] = array(
 	'f_id' => 16,
 	'fg_id' => 3,
@@ -43,7 +67,7 @@ $config['fields'][3]['partners_loan_application_car.car_type'] = array(
 $config['fields'][3]['partners_loan_application_car.pay_period_to'] = array(
 	'f_id' => 14,
 	'fg_id' => 3,
-	'label' => 'Pay Period To',
+	'label' => 'End of Deduction',
 	'description' => 'End of monthly deduction',
 	'table' => 'partners_loan_application_car',
 	'column' => 'pay_period_to',
@@ -58,7 +82,7 @@ $config['fields'][3]['partners_loan_application_car.pay_period_to'] = array(
 $config['fields'][3]['partners_loan_application_car.pay_period_from'] = array(
 	'f_id' => 13,
 	'fg_id' => 3,
-	'label' => 'Pay Period From',
+	'label' => 'Start of Deduction',
 	'description' => 'Start date of deduction',
 	'table' => 'partners_loan_application_car',
 	'column' => 'pay_period_from',
@@ -69,6 +93,21 @@ $config['fields'][3]['partners_loan_application_car.pay_period_from'] = array(
 	'datatype' => 'required',
 	'active' => '1',
 	'encrypt' => 0
+);
+$config['fields'][3]['partners_loan_application_car.amount_amortization'] = array(
+	'f_id' => 12,
+	'fg_id' => 3,
+	'label' => 'Amount of Amortization',
+	'description' => '',
+	'table' => 'partners_loan_application_car',
+	'column' => 'amount_amortization',
+	'uitype_id' => 1,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 3,
+	'datatype' => 'required',
+	'active' => '1',
+	'encrypt' => 1
 );
 $config['fields'][3]['partners_loan_application_car.loan_amount'] = array(
 	'f_id' => 12,

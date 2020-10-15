@@ -6,6 +6,8 @@ class Erequest_admin extends MY_PrivateController
 	{
 		$this->load->model('erequest_admin_model', 'mod');
 		parent::__construct();
+		$this->lang->load('erequest');
+		$this->lang->load('erequest_admin');
 	}
 	
     public function index()
@@ -306,8 +308,7 @@ class Erequest_admin extends MY_PrivateController
             'request_id' => $this->input->post('request_id'),
             'user_id' => $this->input->post('user_id'),
             'notes' => $this->input->post('discussion_notes'),
-            'created_by' => $this->user->user_id,
-            'created_on' => date('Y-m-d H:i:s')
+            'created_by' => $this->user->user_id
         );
 
         $this->db->insert('resources_request_notes', $insert);

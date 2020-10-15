@@ -37,7 +37,7 @@
 				 
 					<li ><a rel="<?php echo site_url('partner/resources');?>" href="<?php echo site_url('partner/resources');?>" menu_id="107" parent="3">Resources</a></li>
 				 
-					<li ><a rel="<?php echo site_url('partners/loan_application');?>" href="<?php echo site_url('partners/loan_application');?>" menu_id="130" parent="3">Loan Application</a></li>
+					<li ><a rel="<?php echo site_url('partners/loan_application');?>" href="<?php echo site_url('partners/loan_application');?>" menu_id="130" parent="3">Automated Process Workflow</a></li>
 							</ul>
 			</li>
 	<li>

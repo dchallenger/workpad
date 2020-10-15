@@ -53,7 +53,7 @@ class loan_application_admin_model extends Record
         if($filters != "" & $filters != "loan_type_id=0")
 			$qry .= $filters;
 
-        $qry .= " AND {$this->db->dbprefix}partners_loan_application.loan_application_status_id = 4";
+        $qry .= " AND {$this->db->dbprefix}partners_loan_application.loan_application_status_id > 1";
 
         $qry .= " GROUP BY record_id";
         $qry .= " ORDER BY {$this->db->dbprefix}{$this->table}.created_on DESC ";
@@ -79,6 +79,38 @@ class loan_application_admin_model extends Record
 		$loan_application = $this->db->query("SELECT * FROM loan_application_manage WHERE loan_application_id=".$loan_application_id." AND approver_id=".$user_id);
 		return $loan_application->row_array();
 	}   
+
+	function notify_filer( $loan_application_id=0, $loan_application=array())
+	{
+		$notified = array();
+
+        $this->lang->load( 'loan_application' );
+		$loan_application_status = $loan_application['loan_application_status_id'] == 2 ? "Filed" : "Cancelled";
+
+		$this->db->where('loan_type_code',$loan_application['loan_type_code']);
+		$this->db->where('deleted',0);
+		$form_type = $this->db->get('partners_loan_type');
+		$form_type = $form_type->row_array();
+
+		$this->load->model('loan_application_model', 'loanApplicationPersonal');
+
+		//insert notification
+		$insert = array(
+			'status' => 'info',
+			'message_type' => 'Loan Application Record',
+			'user_id' => $loan_application['user_id'],
+			'feed_content' => $loan_application_status.': '.$form_type['loan_type'].' for Approval',//.'.<br><br>Reason: '.$form['reason'],
+			'recipient_id' => $loan_application['user_id'],
+			'uri' => str_replace(base_url(), '', $this->loanApplicationPersonal->url).'/detail/'.$loan_application['loan_application_id']
+		);
+
+		$this->db->insert('system_feeds', $insert);
+		$id = $this->db->insert_id();
+		$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $loan_application['user_id']));
+		$notified[] = $loan_application['user_id'];
+
+		return $notified;
+	}
 
 	function newPostData($data)
 	{

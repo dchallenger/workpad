@@ -7,7 +7,7 @@ $lang['resources'] = array(
 	'pol_proc_desc' => 'View and download company policies and procedures.',
 	'down_forms' => 'Downloadable Forms',
 	'down_forms_desc' => 'Allow download of uploaded forms  for easy access.',
-	'certificate' => 'Certificate of employment',
-	'certificate_desc' => 'Allow certificate of employment.'
+	'certificate' => 'Certificate',
+	'certificate_desc' => 'Allow certificate Generation.'
 );
 ?>

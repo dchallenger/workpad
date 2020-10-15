@@ -41,6 +41,8 @@ $config['fieldgroups'][3] = array(
 	'active' => 1,
 	'fields' => array(
 		'partners_loan_application_car.amortization',
+		'partners_loan_application_car.amount_amortization',
+		'partners_loan_application_car.car_loan_application',
 		'partners_loan_application_car.car_type',
 		'partners_loan_application_car.pay_period_to',
 		'partners_loan_application_car.pay_period_from',

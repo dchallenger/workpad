@@ -101,8 +101,18 @@
 										</div>
 									</div>
 								</div>
-							</div>										
-							<?php if( count($remarks) > 0 && $loan_application_status_id['val'] == 6){
+							</div>
+	                        <div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">HR Remarks :</label>
+										<div class="col-md-7 col-sm-7">
+											<span>{{ ($record['partners_loan_comment'] == '') ? '' : $record['partners_loan_comment'] }}</span>
+										</div>
+									</div>
+								</div>
+							</div>							
+							<?php if( count($remarks) > 0){
 								?>
 
 							<hr />
@@ -212,7 +222,7 @@
 
 							<hr />
 
-	                  	 	<?php if( $loan_application_approver_details['approver_status_id'] < 8 && in_array($loan_application_approver_details['loan_application_status_id'], array(2,4,5,6))){ ?>
+	                  	 	<?php if( isset($loan_application_approver_details['approver_status_id']) && $loan_application_approver_details['approver_status_id'] < 8 && in_array($loan_application_approver_details['loan_application_status_id'], array(2,4,5,6))){ ?>
 
 								<div class="row">
 									<div class="col-md-12">
@@ -232,11 +242,11 @@
                             <div class="row">
                                 <div class="col-md-12">
 	                                <div>
-	                                	<?php if( $loan_application_approver_details['approver_status_id'] < 6 && in_array($loan_application_approver_details['loan_application_status_id'], array(2,4,5)) && $record['partners_loan_application_status_id'] != 8 && $record['partners_loan_application_status_id'] != 6){ ?>
+	                                	<?php if( isset($loan_application_approver_details['approver_status_id']) && $loan_application_approver_details['approver_status_id'] < 6 && in_array($loan_application_approver_details['loan_application_status_id'], array(2,4,5)) && $record['partners_loan_application_status_id'] != 8 && $record['partners_loan_application_status_id'] != 6){ ?>
 	                                		<a href="#" class="approve_view btn btn-default btn-sm btn-success" data-loan-type="{{ $loan_application_approver_details['loan_type'] }}" data-loan-application-id="{{ $loan_application_approver_details['loan_application_id'] }}" data-loan-application-owner="{{ $loan_application_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $loan_application_approver_details['approver_id'] }}" data-decission="1" >{{ lang('loan_application.approved') }}</a>
 	                                		<a href="#" class="disapprove_view btn btn-sm btn-danger" data-loan-type="{{ $loan_application_approver_details['loan_type'] }}" data-loan-application-id="{{ $loan_application_approver_details['loan_application_id'] }}" data-loan-application-owner="{{ $loan_application_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $loan_application_approver_details['approver_id'] }}" data-decission="0" >{{ lang('loan_application.decline') }}</a>
 	                                	<?php }
-	                                		else if ($loan_application_approver_details['approver_status_id'] == 6 ){
+	                                		else if (isset($loan_application_approver_details['approver_status_id']) && $loan_application_approver_details['approver_status_id'] == 6 ){
 	                                	?>
 	                                		<a href="#" class="disapprove_view btn btn-sm btn-danger" data-loan-type="{{ $loan_application_approver_details['loan_type'] }}" data-loan-application-id="{{ $loan_application_approver_details['loan_application_id'] }}" data-loan-application-owner="{{ $loan_application_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $loan_application_approver_details['approver_id'] }}" data-decission="0" >{{ lang('loan_application.disapproved') }}</a>
 

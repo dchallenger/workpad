@@ -1,5 +1,5 @@
 $(document).ready(function(){
-$('#resources_request-user_id').select2({
+$('.select2me').select2({
     placeholder: "Select an option",
     allowClear: true
 });

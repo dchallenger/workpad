@@ -142,6 +142,16 @@
 									</div>
 								</div>
 							</div>
+                            <div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">HR Remarks :</label>
+										<div class="col-md-7 col-sm-7">
+											<span>{{ ($record['partners_loan_comment'] == '') ? '' : $record['partners_loan_comment'] }}</span>
+										</div>
+									</div>
+								</div>
+							</div>							
                             <div class="row hidden">
 								<div class="col-md-12">
 									<div class="form-group">
@@ -152,7 +162,7 @@
 									</div>
 								</div>
 							</div>
-							<?php if( count($remarks) > 0 && $loan_application_status_id['val'] == 6){
+							<?php if( count($remarks) > 0){
 								?>
 
 							<hr />
@@ -195,69 +205,70 @@
 							</div>
 							<?php } ?>
 							
-							<?php if($loan_application_status_id['val'] == 7 || $loan_application_status_id['val'] == 8){
-								?>
-							<hr />
                             <?php 
-								foreach ($disapproved_cancelled_remarks as $key => $value) :
-									$dis_cancel_by = '';
-									$title = '';
-									if ($loan_application_status_id['val'] == 7){
-										$title = lang('form_application.disaproved');
-										$dis_cancel_by = $value['approver_name'];
-									}
-									elseif ($loan_application_status_id['val'] == 8){
-										$title = lang('form_application.cancel_by');
-										$dis_cancel_by = $value['employee_name'];
-									}											
+                            	if (isset($disapproved_cancelled_remarks) && $disapproved_cancelled_remarks && ($loan_application_status_id['val'] == 7 || $loan_application_status_id['val'] == 8)) {
+                            ?>
+                            		<hr />
+                            <?php
+									foreach ($disapproved_cancelled_remarks as $key => $value) :
+										$dis_cancel_by = '';
+										$title = '';
+										if ($loan_application_status_id['val'] == 7){
+											$title = lang('form_application.disaproved');
+											$dis_cancel_by = $value['approver_name'];
+										}
+										elseif ($loan_application_status_id['val'] == 8){
+											$title = lang('form_application.cancel_by');
+											$dis_cancel_by = $value['employee_name'];
+										}											
 							?>
-                            <div class="row">
-								<div class="col-md-12">
-									<div class="form-group">
-										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ $loan_type }} :</label>
-										<div class="col-md-7 col-sm-7">
-											<span>{{ $dis_cancel_by }}</span>
-											<br />
-											<?php 
-											$date = date("F d, Y H:i:s", strtotime($value['date']));
-										    if(date("H:i:s", strtotime($date)) == "00:00:00"){
-										       $comment_date = 'on '.date("F d, Y", strtotime($date));
-										    }else{
-										    	if($value['date'] == '0000-00-00 00:00:00'){
-										    		$comment_date = '';
-										    	} else {
-										    		$comment_date = 'on '.date("F d, Y g:ia", strtotime($date));
-										    	}
-										    } 
-											?>
-											<span class="help-block small">{{ $value['loan_application_status'] }} {{ $comment_date }}</span>
+			                            <div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ $loan_type }} :</label>
+													<div class="col-md-7 col-sm-7">
+														<span>{{ $dis_cancel_by }}</span>
+														<br />
+														<?php 
+														$date = date("F d, Y H:i:s", strtotime($value['date']));
+													    if(date("H:i:s", strtotime($date)) == "00:00:00"){
+													       $comment_date = 'on '.date("F d, Y", strtotime($date));
+													    }else{
+													    	if($value['date'] == '0000-00-00 00:00:00'){
+													    		$comment_date = '';
+													    	} else {
+													    		$comment_date = 'on '.date("F d, Y g:ia", strtotime($date));
+													    	}
+													    } 
+														?>
+														<span class="help-block small">{{ $value['loan_application_status'] }} {{ $comment_date }}</span>
+													</div>
+												</div>
+											</div>
 										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row hidden">
-								<div class="col-md-12">
-									<div class="form-group">
-										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ $value['loan_application_status'] }}date :</label>
-										<div class="col-md-7 col-sm-7">
-											<span>{{ date('F d, Y g:ia', strtotime($value['date'])) }}</span>
+										<div class="row hidden">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ $value['loan_application_status'] }}date :</label>
+													<div class="col-md-7 col-sm-7">
+														<span>{{ date('F d, Y g:ia', strtotime($value['date'])) }}</span>
+													</div>
+												</div>
+											</div>
 										</div>
-									</div>
-								</div>
-							</div>
-                            <div class="row">
-								<div class="col-md-12">
-									<div class="form-group">
-										<label class="control-label col-md-4 col-sm-4 text-right text-muted">&nbsp;</label>
-										<div class="col-md-7 col-sm-7">
-											<span>{{ ($value['comment'] == '') ? '' : $value['comment'] }}</span>
+			                            <div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="control-label col-md-4 col-sm-4 text-right text-muted">&nbsp;</label>
+													<div class="col-md-7 col-sm-7">
+														<span>{{ ($value['comment'] == '') ? '' : $value['comment'] }}</span>
+													</div>
+												</div>
+											</div>
 										</div>
-									</div>
-								</div>
-							</div>
 							<?php
-								endforeach;
-							}
+									endforeach;
+								}
 							?>
 
 							<hr />

@@ -101,7 +101,7 @@
 												</div>
 											</div>
 										</div>
-									</div>	
+									</div>										
 	                                <div class="row">
 										<div class="col-md-12">
 											<div class="form-group">
@@ -112,7 +112,27 @@
 											</div>
 										</div>
 									</div>
-	                                <div class="row">
+	                                <div class="row hidden">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.car_loan_application') }} :</label>
+												<div class="col-md-7 col-sm-7">
+													<span>{{ $record['partners_loan_application_car_car_loan_application'] }}</span>
+												</div>
+											</div>
+										</div>
+									</div>										
+	                                <div class="row hidden">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.amortization_amount') }} :</label>
+												<div class="col-md-7 col-sm-7">
+													<span>{{ $record['partners_loan_application_car_amount_amortization'] }}</span>
+												</div>
+											</div>
+										</div>
+									</div>									
+	                                <div class="row hidden">
 										<div class="col-md-12">
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.amortization') }} :</label>
@@ -122,27 +142,96 @@
 											</div>
 										</div>
 									</div>		
-	                                <div class="row">
+	                                <div class="row hidden">
 										<div class="col-md-12">
 											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.pay_period_from') }} :</label>
+												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.deduction_start') }} :</label>
 												<div class="col-md-7 col-sm-7">
 													<span>{{ $record['partners_loan_application_car_pay_period_from'] }}</span>
 												</div>
 											</div>
 										</div>
 									</div>
-	                                <div class="row">
+	                                <div class="row hidden">
 										<div class="col-md-12">
 											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.pay_period_to') }} :</label>
+												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.deduction_end') }} :</label>
 												<div class="col-md-7 col-sm-7">
 													<span>{{ $record['partners_loan_application_car_pay_period_to'] }}</span>
 												</div>
 											</div>
 										</div>
 									</div>
-									<?php if( count($remarks) > 0 && $loan_application_status_id['val'] == 6){
+									@if ($loan_application_status_id['val'] > 4)
+                        			<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="control-label col-md-4 col-sm-4 text-right text-muted">HR Remarks :</label>
+												<div class="col-md-7 col-sm-7">
+													<span>{{ ($record['partners_loan_comment'] == '') ? '' : $record['partners_loan_comment'] }}</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									@endif									
+									<div class="row">			
+										<div class="col-md-12">						
+											<div class="form-group">
+												<label class="col-md-4 text-muted text-right">
+													Attachments:
+												</label>
+												<div class="col-md-7">
+													<?php
+														if (!empty($attachement)){
+															foreach ($attachement as $key => $value) {
+																if ( !empty($value->photo)) {
+																	$file = FCPATH . urldecode( $value->photo );
+																	if( file_exists( $file ) )
+																	{
+																		$f_type = '';
+
+																		if (function_exists('get_file_info')) {
+																			$f_info = get_file_info( $file );
+																			$f_type = filetype( $file );
+																		}
+
+																		if (function_exists('finfo_open')) {
+																			$finfo = finfo_open(FILEINFO_MIME_TYPE);
+																			$f_type = finfo_file($finfo, $file);
+																		}
+
+																		switch( $f_type )
+																		{
+																			case 'image/jpeg':
+																				$icon = 'fa-picture-o';
+																				break;
+																			case 'video/mp4':
+																				$icon = 'fa-film';
+																				break;
+																			case 'audio/mpeg':
+																				$icon = 'fa-volume-up';
+																				break;
+																			default:
+																				$icon = 'fa-file-text-o';
+																		}
+																		
+																		$filepath = base_url()."partners/loan_application/download_file/".$value->loan_application_attachment_id;
+																		echo '<li class="padding-3 fileupload-delete-'.$value->loan_application_attachment_id.'" style="list-style:none;">
+																            <a href="'.$filepath.'">
+																            <span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
+																            <span>'. basename($f_info['name']) .'</span>
+																            <span class="padding-left-10"></span>
+																        </a></li>';	
+																	}
+																}
+															}
+														} 
+													?>
+												</div>	
+											</div>	
+										</div>
+									</div>									
+									<?php if( count($remarks) > 0){
 										?>
 
 									<hr />

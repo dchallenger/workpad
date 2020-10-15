@@ -50,11 +50,6 @@ class erequest_admin_model extends Record
 			$qry .= " AND {$this->db->dbprefix}{$this->table}.deleted = 0";	
 		}
 
-		if( $this->user->user_id != 1 )
-		{
-			$qry .= " AND appr.user_id = {$this->user->user_id}";
-		}
-		
 		$qry .= ' '. $filter;
 		$qry .= " GROUP BY {$this->db->dbprefix}{$this->table}.{$this->primary_key} ";
 		$qry .= " LIMIT $limit OFFSET $start";
@@ -76,7 +71,7 @@ class erequest_admin_model extends Record
 
 	function get_notes( $request_id, $user_id )
 	{
-		$qry = "select a.*, b.full_name, c.photo, gettimeline(a.created_on) as timeline, d.department
+		$qry = "select a.*, b.full_name, IF(c.photo != '',c.photo,'uploads/users/avatar.png') as photo, gettimeline(a.created_on) as timeline, d.department
 		FROM {$this->db->dbprefix}resources_request_notes a
 		LEFT JOIN {$this->db->dbprefix}users b on b.user_id = a.created_by
 		LEFT JOIN {$this->db->dbprefix}users_profile c on c.user_id = a.created_by

@@ -1,10 +1,10 @@
 <tr class="record">
 	<!-- this first column shows the year of this holiday item -->
 	<td>
-		<a href="{{$edit_url}}" class="text-success">{{$resources_request_user_id}}</a>
+		{{$resources_request_user_id}}
 	</td>
 	<td>
-		<a href="{{$edit_url}}" class="text-success">{{$resources_request_request}}</a>
+		{{$resources_request_online_request_type}}
 	</td>
     <td class="hidden-xs"><?php echo date("M-d",strtotime($resources_request_created_on)); ?> <span class="text-muted small"><?php echo date("D",strtotime($resources_request_created_on)); ?></span><br>
         <span class="text-muted small"><?php echo date("Y",strtotime($resources_request_created_on)); ?></span>
@@ -13,22 +13,7 @@
         <span class="text-muted small"><?php echo date("Y",strtotime($resources_request_date_needed)); ?></span>
     </td>
 	<td class="hidden-xs">
-		@if($status == 'Open')
-		<span class="badge badge-warning">{{$status}}</span><br>
-		@elseif($status == 'Close')
-		<span class="badge badge-success">{{$status}}</span><br>
-		@else
-		<span class="badge badge-danger">{{$status}}</span><br>
-		@endif
-
 		<span class="text-muted small">{{$request_status}}</span>
-
-		@if($status == 'Open' AND $discussion_count > 0)
-		<br>
-		<span class="text-muted small">Discussion 
-			<span class="badge badge-info">{{$discussion_count}}</span>
-		</span>
-		@endif
 	</td>
 	<td>
 	    <div class="btn-group">

@@ -53,6 +53,8 @@ class loan_application_manage_model extends Record
         if($filters != "" & $filters != "loan_type_id=0")
 			$qry .= $filters;
 
+		$qry .= " AND {$this->db->dbprefix}partners_loan_application.loan_application_status_id IN (2,3,6,7)";			     
+
         $qry .= " AND {$this->db->dbprefix}partners_loan_application_approver.user_id = {$this->user->user_id}";			     
         //$qry .= " AND {$this->db->dbprefix}{$this->table}.form_code <> 'DTRU'"; // exclude DTRU
         $qry .= " GROUP BY record_id";

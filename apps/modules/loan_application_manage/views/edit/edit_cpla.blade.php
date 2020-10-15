@@ -90,14 +90,38 @@
 							<div class="col-md-6">							
 								<input type="text" class="form-control" name="loan_application[car_type]" id="loan_application_car_type" value="{{ $record['partners_loan_application_car.car_type'] }}" placeholder=""/>		
 							</div>	
-						</div>
+						</div>						
 						<div class="form-group">
 							<label class="control-label col-md-4">{{ lang('loan_application.amount_loan') }}<span class="required">* </span></label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="loan_application[loan_amount]" id="loan_application_loan_amount" value="{{ $record['partners_loan_application_car.loan_amount'] }}" placeholder="" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>		
 							</div>	
-						</div>	
+						</div>
 						<div class="form-group">
+							<label class="control-label col-md-4">{{ lang('loan_application.car_loan_application') }}<span class="required">* </span></label>
+							<div class="col-md-6">
+								<?php	                        
+
+								$car_loan_app_options['Brand New'] = 'Brand New';
+								$car_loan_app_options['Previously Owned Vehicle'] = 'Previously Owned Vehicle';
+
+								?>							
+								<div class="input-group">
+									<!-- <input type="hidden" size="16" class="form-control" readonly id="loan_application_mobile_enrollment_type_id" name="loan_application_mobile_enrollment_type_id" value="">  -->
+									<span class="input-group-addon">
+										<i class="fa fa-list-ul"></i>
+									</span>
+									{{ form_dropdown('loan_application[car_loan_application]',$car_loan_app_options, $car_loan_application['val'],'id="loan_application_car_amortization" class="form-control select2me" data-placeholder="Select..."') }}
+								</div> 				
+							</div>	
+						</div>							
+						<div class="form-group">
+							<label class="control-label col-md-4">{{ lang('loan_application.amortization_amount') }}<span class="required">* </span></label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="loan_application[amount_amortization]" id="loan_application_loan_amount" value="{{ $record['partners_loan_application_car.amount_amortization'] }}" placeholder="" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>		
+							</div>	
+						</div>								
+						<div class="form-group hidden">
 							<label class="control-label col-md-4">{{ lang('loan_application.amortization') }}<span class="required">* </span></label>
 							<div class="col-md-6">
 								<?php	                        

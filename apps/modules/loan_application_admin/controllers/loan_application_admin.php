@@ -230,29 +230,9 @@ class Loan_application_admin extends MY_PrivateController
 
         /*******START Filed FORM validation********/
 
-        //check if loan application is still draft/for approval
-        if(!empty($loan_application_id)){
-            $loan_application_details = $this->app_personal->get_loan_application_details($loan_application_id);
-            
-/*            if($loan_application_details['loan_application_status_id'] > 2 && $this->input->post('loan_application_status_id') != 8){
-                $this->response->message[] = array(
-                    'message' => lang('loan_application.cant_update'),
-                    'type' => 'warning'
-                );  
-                $this->_ajax_return();            
-            }*/
-
-
-            if($loan_application_details['loan_application_status_id'] == 4){
-                //INSERT NOTIFICATIONS FOR APPROVERS
-                $this->response->notified = $this->app_personal->notify_approvers( $loan_application_id, $loan_application_details );
-                $this->response->notified = $this->app_personal->notify_filer( $loan_application_id, $loan_application_details );
-            }
-        }
-
         //check if loan application is for cancellation
         if($this->input->post('loan_application_status_id') == 8){
-            if(trim($this->input->post('cancelled_comment')) == ""){
+            if(trim($this->input->post('comment')) == ""){
                 $this->response->message[] = array(
                     'message' => lang('loan_application.remarks_required'),
                     'type' => 'warning'
@@ -388,8 +368,9 @@ class Loan_application_admin extends MY_PrivateController
         $main_record[$this->mod->table]['loan_application_status_id'] = $this->input->post('loan_application_status_id');
         $main_record[$this->mod->table]['loan_type_id'] = $this->input->post('loan_type_id');
         $main_record[$this->mod->table]['loan_type_code'] = strtoupper($this->input->post('loan_type_code'));
-        $main_record[$this->mod->table]['user_id'] = $this->user->user_id;
-        $main_record[$this->mod->table]['display_name'] = $this->mod->get_display_name($this->user->user_id);
+        $main_record[$this->mod->table]['user_id'] = $this->input->post('user_id');
+        $main_record[$this->mod->table]['display_name'] = $this->app_personal->get_display_name($this->input->post('user_id'));
+        $main_record[$this->mod->table]['comment'] = $this->input->post('comment');
 
         if($this->input->post('loan_application_status_id') == 8){ //add cancelled date
             $main_record[$this->mod->table]['date_cancelled'] = date('Y-m-d H:i:s');
@@ -450,6 +431,10 @@ class Loan_application_admin extends MY_PrivateController
             goto stop;
         }
         
+        // remove main table since it was updated already above.
+        
+        unset($main_record[$this->mod->table]);
+
         //start saving with sub table
         foreach( $main_record as $table => $data )
         {
@@ -496,9 +481,11 @@ class Loan_application_admin extends MY_PrivateController
         if(!empty($loan_application_id)){
             $loan_application_details = $this->mod->get_loan_application_details($loan_application_id);
 
-            if($loan_application_details['loan_application_status_id'] == 2 || $loan_application_details['loan_application_status_id'] == 8){
+            //if($loan_application_details['loan_application_status_id'] == 2 || $loan_application_details['loan_application_status_id'] == 8){
+            if($loan_application_details['loan_application_status_id'] == 2){
+
                 //INSERT NOTIFICATIONS FOR APPROVERS
-                $this->response->notified = $this->mod->notify_approvers( $loan_application_id, $loan_application_details );
+                $this->response->notified = $this->app_personal->notify_approvers( $loan_application_id, $loan_application_details );
                 $this->response->notified = $this->mod->notify_filer( $loan_application_id, $loan_application_details );
             }
         }
@@ -542,10 +529,14 @@ class Loan_application_admin extends MY_PrivateController
         $data['loan_application_approver_details'] = $this->mod->get_loan_application_approver_info($this->record_id,$this->user->user_id);
         $data['upload_id']["val"] = array();
 
+        $loan_application_attachment = array();
         if( $record_id ){
              $loan_application_data = $this->app_personal->edit_cached_query( $record_id );
+             $loan_application_attachment = $this->app_personal->get_loan_application_attachment($record_id);
         }
 
+        $data['attachement'] = $loan_application_attachment;   
+        
         foreach($fg_fields_array as $index => $field )
         {
             $data[$fields[$data['loan_type_id']][$field]['column']]["label"] = $fields[$data['loan_type_id']][$field]['label'];
@@ -669,6 +660,7 @@ class Loan_application_admin extends MY_PrivateController
 
         $data['url'] = $this->mod->url;
         $data['loan_application_status_id']["val"] = $loan_application_info['loan_application_status_id'];
+        $data['user_id'] = $loan_application_info['user_id'];
         $data['loan_type_id'] = $loan_type_info['loan_type_id'];
         $data['loan_type_code'] = $loan_type_info['loan_type_code'];
         $data['loan_type'] = $loan_type_info['loan_type'];
@@ -680,9 +672,13 @@ class Loan_application_admin extends MY_PrivateController
         $data['plan_limit'] = $this->app_personal->get_plan_limit();
         $data['special_features'] = $this->app_personal->get_special_features();
 
+        $loan_application_attachment = array();
         if( $record_id ){
              $loan_application_data = $this->app_personal->edit_cached_query( $record_id );
+             $loan_application_attachment = $this->app_personal->get_loan_application_attachment($record_id);
         }
+
+        $data['attachement'] = $loan_application_attachment;  
 
         foreach($fg_fields_array as $index => $field )
         {

@@ -186,7 +186,7 @@ class loan_application_model extends Record
 				'message_type' => 'Loan Application Record',
 				'user_id' => $loan_application['user_id'],
 				'display_name' => $this->get_display_name($loan_application['user_id']),
-				'feed_content' => $loan_application_status.': '.$form_type['loan_type'].' for '.date('F d, Y', strtotime($loan_application['created_on'])),//.'.<br><br>Reason: '.$form['reason'],
+				'feed_content' => $loan_application_status.': '.$form_type['loan_type'].' for Approval',//.'.<br><br>Reason: '.$form['reason'],
 				'recipient_id' => $approver->user_id,
 				'uri' => str_replace(base_url(), '', $this->loanApplicationManage->url).'/detail/'.$loan_application['loan_application_id']
 			);
@@ -210,6 +210,11 @@ class loan_application_model extends Record
         $this->lang->load( 'loan_application' );
 		$loan_application_status = $loan_application['loan_application_status_id'] == 2 ? $this->lang->line('loan_application.applied_for') : "Cancelled";
 
+		$this->db->where('loan_type_code',$loan_application['loan_type_code']);
+		$this->db->where('deleted',0);
+		$form_type = $this->db->get('partners_loan_type');
+		$form_type = $form_type->row_array();
+
 		//insert notification
 		$insert = array(
 			'status' => 'info',
@@ -224,6 +229,57 @@ class loan_application_model extends Record
 		$id = $this->db->insert_id();
 		$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $loan_application['user_id']));
 		$notified[] = $loan_application['user_id'];
+
+		return $notified;
+	}
+
+	function notify_hr( $loan_application_id=0, $loan_application=array())
+	{	
+		$this->load->model('loan_application_admin_model', 'loanApplicationAdmin');
+
+		$qry = "SELECT  *
+				FROM {$this->db->dbprefix}roles r 
+				WHERE FIND_IN_SET(2,profile_id)";
+
+		$roles_result = $this->db->query($qry);
+
+		if ($roles_result && $roles_result->num_rows() > 0) {
+			$role_id = $roles_result->row()->role_id;
+
+			$this->db->where('role_id',$role_id);
+			$users = $this->db->get('users');
+
+			if ($users && $users->num_rows() > 0) {
+				$notified = array();		
+		        $this->lang->load( 'loan_application' );
+				$loan_application_status = $loan_application['loan_application_status_id'] == 4 ? 'Filed' : "";
+
+				$this->db->where('loan_type_code',$loan_application['loan_type_code']);
+				$this->db->where('deleted',0);
+				$form_type = $this->db->get('partners_loan_type');
+				$form_type = $form_type->row_array();
+
+				foreach ($users->result() as $row) {
+					//insert notification
+					$insert = array(
+						'status' => 'info',
+						'message_type' => 'Loan Application Record',
+						'user_id' => $loan_application['user_id'],
+						'feed_content' => $loan_application_status.': '.$form_type['loan_type'].' for Validation',//.'.<br><br>Reason: '.$form['reason'],
+						'recipient_id' => $row->user_id,
+						'uri' => str_replace(base_url(), '', $this->loanApplicationAdmin->url).'/edit/'.$loan_application['loan_application_id']
+					);
+
+					$this->db->insert('system_feeds', $insert);
+					$id = $this->db->insert_id();
+					$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $row->user_id));
+					$notified[] = $row->user_id;
+
+					$qry = "CALL sp_partners_loan_application_email_to_hr('".$loan_application_id."', '".$row->user_id."')";
+					$result = $this->db->query( $qry );
+				}
+			}
+		}
 
 		return $notified;
 	}
@@ -303,5 +359,25 @@ class loan_application_model extends Record
 		$entitlement_details = $this->db->get_where('partners_loan_application_car_entitlement', $where);
 
 		return $entitlement_details->result_array();		 
-	}		
+	}
+
+	public function get_loan_application_attachment($loan_application_id=0){ 
+		
+		// should this display all employee's birthday? 
+		// or should birthday feeds be filtered via company, division, etc?
+
+		$data = array();
+
+		$qry = "SELECT * FROM {$this->db->dbprefix}partners_loan_application_attachment plaa
+				WHERE plaa.loan_application_id = {$loan_application_id} AND deleted = 0";
+		$result = $this->db->query($qry);
+		
+		if($result && $result->num_rows() > 0){
+			$data = $result->result();		
+
+			$result->free_result();			
+		}
+			
+		return $data;	
+	}	
 }

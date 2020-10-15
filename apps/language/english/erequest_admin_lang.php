@@ -1,5 +1,5 @@
 <?php
-$lang['erequest'] = array(
+$lang['erequest_admin'] = array(
 	'reference' => 'References',
 	'partner_resource' => 'Partners Resources',
 	'listing_requisition' => 'Listing and Requisition',

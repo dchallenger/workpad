@@ -62,7 +62,7 @@ class Erequest extends MY_PrivateController
 			);
 			$this->db->delete('resources_request_upload', $where);
 
-			if( count($uploads['upload_id']) > 0 )
+			if( isset($uploads['upload_id']) && $uploads['upload_id'] != '')
 			{
 				$uploads = explode(',', $uploads['upload_id']);
 				foreach( $uploads as $upload_id )
@@ -81,10 +81,12 @@ class Erequest extends MY_PrivateController
 			}
 
             $erequest_details = $this->mod->get_erequest_details($this->record_id);
-            if(in_array($_POST['resources_request']['request_status_id'], array(2,6))){
+
+            if(in_array($_POST['resources_request']['request_status_id'], array(2))){
                 //INSERT NOTIFICATIONS FOR APPROVERS
-                $this->response->notified = $this->mod->notify_approvers( $this->record_id, $erequest_details );
-                $this->response->notified = $this->mod->notify_filer( $this->record_id, $erequest_details );
+                //$this->response->notified = $this->mod->notify_approvers( $this->record_id, $erequest_details );
+                //$this->response->notified = $this->mod->notify_filer( $this->record_id, $erequest_details );
+                $this->response->notified = $this->mod->notify_hr( $this->record_id, $erequest_details );
             }
 		}
 
@@ -273,8 +275,7 @@ class Erequest extends MY_PrivateController
             'request_id' => $this->input->post('request_id'),
             'user_id' => $this->input->post('user_id'),
             'notes' => $this->input->post('discussion_notes'),
-            'created_by' => $this->user->user_id,
-            'created_on' => date('Y-m-d H:i:s')
+            'created_by' => $this->user->user_id
         );
 
         $this->db->insert('resources_request_notes', $insert);
@@ -299,4 +300,17 @@ class Erequest extends MY_PrivateController
         $this->_ajax_return();  
     }
 
+    function download_file($upload_id){   
+        $this->db->select("upload_path")
+        ->from("system_uploads")
+        ->where("upload_id = {$upload_id}");
+
+        $image_details = $this->db->get()->row_array();   
+
+        $path = base_url() . $image_details['upload_path'];
+
+        header('Content-disposition: attachment; filename='.substr( $image_details['upload_path'], strrpos( $image_details['upload_path'], '/' )+1 ).'');
+        header('Content-type: txt/pdf');
+        readfile($path);
+    }  
 }

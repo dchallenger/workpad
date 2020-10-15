@@ -33,7 +33,7 @@ $lang['loan_application'] = array(
 	'back_tolist' => 'Back to list',
 	'loan_amount' => 'Loan Amount',
 	'loan_purposes' => 'Loan Purpose(s)',
-	'terms' => 'Terms',
+	'terms' => 'Terms (in month)',
 	'start_amortization' => 'Start of Amortization',
 	'amortization_amount' => 'Amount of Amortization',
 	'deduction_start' => 'Start of Deduction',
@@ -58,4 +58,5 @@ $lang['loan_application'] = array(
 	'required_decline' => 'required if you choose to decline/disapprove',
 	'required_disapp' => 'Required if you choose to disapprove',
 	'recent_note' => 'Recent Note',
+	'car_loan_application' => 'Car Loan Application',
 );

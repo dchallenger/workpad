@@ -49,6 +49,7 @@
 				<input type="hidden" id="loan_type_id" name="loan_type_id" value="{{ $loan_type_id }}">
 				<input type="hidden" name="loan_type" id="loan_type" value="{{ $loan_type }}">
 				<input type="hidden" name="loan_type_code" id="loan_type_code" value="{{ $loan_type_code }}">
+				<input type="hidden" name="user_id" value="{{ $user_id }}">				
 				<input type="hidden" name="view" id="view" value="edit" >
 
 				
@@ -59,6 +60,7 @@
 					</div>
 					<div class="portlet-body form">						
 						<div class="form-group">
+							<input type="hidden" name="loan_application[loan_application_mobile_enrollment_type_id]" value="{{$loan_application_mobile_enrollment_type_id['val']}}" >
 							<label class="control-label col-md-4">{{ lang('loan_application.type_enrollment') }}<span class="required">* </span></label>
 							<div class="col-md-6">
 								<?php	                        
@@ -75,7 +77,7 @@
 									<span class="input-group-addon">
 										<i class="fa fa-list-ul"></i>
 									</span>
-									{{ form_dropdown('loan_application[loan_application_mobile_enrollment_type_id]',$enrollment_type_options, $loan_application_mobile_enrollment_type_id['val'],'id="loan_application_mobile_enrollment_type_id" class="form-control select2me" data-placeholder="Select..."') }}
+									{{ form_dropdown('loan_application[loan_application_mobile_enrollment_type_id]',$enrollment_type_options, $loan_application_mobile_enrollment_type_id['val'],'id="loan_application_mobile_enrollment_type_id" class="form-control select2me" data-placeholder="Select..." disabled') }}
 								</div> 				
 							</div>	
 						</div>
@@ -101,6 +103,7 @@
 							</div>	
 						</div>
 						<div class="form-group">
+							<input type="hidden" name="loan_application[loan_application_mobile_special_feature_id]" value="{{$loan_application_mobile_special_feature_id['val']}}" >
 							<label class="control-label col-md-4">{{ lang('loan_application.special_features') }}<span class="required">* </span></label>
 							<div class="col-md-6">
 								<?php	                        
@@ -117,10 +120,20 @@
 									<span class="input-group-addon">
 										<i class="fa fa-list-ul"></i>
 									</span>
-									{{ form_dropdown('loan_application[loan_application_mobile_special_feature_id]',$special_features_options, $loan_application_mobile_special_feature_id['val'],'id="loan_application_mobile_special_feature_id" class="form-control select2me" data-placeholder="Select..."') }}
+									{{ form_dropdown('loan_application[loan_application_mobile_special_feature_id]',$special_features_options, $loan_application_mobile_special_feature_id['val'],'id="loan_application_mobile_special_feature_id" class="form-control select2me" data-placeholder="Select..." disabled') }}
 								</div> 				
 							</div>	
 						</div>
+						<?php if ($loan_application_status_id['val'] == 4){ ?>
+						<div class="form-group">
+							<label class="col-md-4 text-right control-label">
+								<span class="required">* </span>HR Remarks (Required if you choose to decline):
+							</label>
+					        <div class='col-md-7'>
+					            <textarea rows='4' id='comment' class='form-control' name="loan_application[comment]"></textarea>
+					        </div>	
+						</div>
+						<?php } ?>							
 					</div>
 				</div>
 
@@ -129,21 +142,11 @@
 				    <div class="col-md-12">
 				      <div>
 						<?php 
-							if( $loan_application_status_id['val'] < 7 || empty($loan_application_status_id['val']) ){ 
-								if($loan_application_status_id['val'] == 1 || empty($loan_application_status_id['val'])){ ?>
-									<button type="button" class="btn blue btn-sm" onclick="save_form( $(this).parents('form'), 1 )">{{ lang('loan_application.save_draft') }}</button>
-									<button type="button" class="btn green btn-sm" onclick="save_form( $(this).parents('form'), 2 )">{{ lang('loan_application.submit') }}</button>
-						<?php 	
-								}elseif($loan_application_status_id['val'] < 3 ){ 
-						?>
-									<button type="button" class="btn green btn-sm" onclick="save_form( $(this).parents('form'), 2 )">{{ lang('loan_application.submit') }}</button>
-									<button type="button" class="btn red btn-sm" onclick="save_form( $(this).parents('form'), 8 )">{{ lang('loan_application.cancel_app') }}</button>	
-							<?php 
-								}elseif(in_array($loan_application_status_id['val'], array(2,3,6)) && $within_cutoff){
-						?>
-									<button type="button" class="btn red btn-sm" onclick="save_form( $(this).parents('form'), 8 )">{{ lang('loan_application.cancel_app') }}</button>	
+							if( $loan_application_status_id['val'] == 4 ){ ?>
+								<button type="button" class="btn blue btn-sm" onclick="save_form( $(this).parents('form'), 4 )">{{ lang('loan_application.save_draft') }}</button>
+								<button type="button" class="btn green btn-sm" onclick="save_form( $(this).parents('form'), 2 )">{{ lang('loan_application.approved') }}</button>
+								<button type="button" class="btn red btn-sm" onclick="save_form( $(this).parents('form'), 8 )">{{ lang('loan_application.decline') }}</button>
 						<?php 
-								} 
 							}
 						?>
 				        <a href="<?php echo $back_url;?>" class="btn default btn-sm">{{ lang('loan_application.back') }}</a>

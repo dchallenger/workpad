@@ -132,11 +132,11 @@
 							if( $loan_application_status_id['val'] < 7 || empty($loan_application_status_id['val']) ){ 
 								if($loan_application_status_id['val'] == 1 || empty($loan_application_status_id['val'])){ ?>
 									<button type="button" class="btn blue btn-sm" onclick="save_form( $(this).parents('form'), 1 )">{{ lang('loan_application.save_draft') }}</button>
-									<button type="button" class="btn green btn-sm" onclick="save_form( $(this).parents('form'), 2 )">{{ lang('loan_application.submit') }}</button>
+									<button type="button" class="btn green btn-sm" onclick="save_form( $(this).parents('form'), 4 )">{{ lang('loan_application.submit') }}</button>
 						<?php 	
 								}elseif($loan_application_status_id['val'] < 3 ){ 
 						?>
-									<button type="button" class="btn green btn-sm" onclick="save_form( $(this).parents('form'), 2 )">{{ lang('loan_application.submit') }}</button>
+									<!-- <button type="button" class="btn green btn-sm" onclick="save_form( $(this).parents('form'), 2 )">{{ lang('loan_application.submit') }}</button> -->
 									<!-- <button type="button" class="btn red btn-sm" onclick="save_form( $(this).parents('form'), 8 )">{{ lang('loan_application.cancel_app') }}</button> -->	
 							<?php 
 								}elseif(in_array($loan_application_status_id['val'], array(2,3,6)) && $within_cutoff){

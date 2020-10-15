@@ -101,7 +101,7 @@
 									</div>
 								</div>
 							</div>
-						</div>	
+						</div>						
                         <div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -115,6 +115,26 @@
                         <div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
+									<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.car_loan_application') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span>{{ $record['partners_loan_application_car_car_loan_application'] }}</span>
+									</div>
+								</div>
+							</div>
+						</div>							
+                        <div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.amortization_amount') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span>{{ $record['partners_loan_application_car_amount_amortization'] }}</span>
+									</div>
+								</div>
+							</div>
+						</div>							
+                        <div class="row hidden">
+							<div class="col-md-12">
+								<div class="form-group">
 									<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.amortization') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span>{{ $record['partners_loan_application_car_amortization'] }}</span>
@@ -125,7 +145,7 @@
                         <div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.pay_period_from') }} :</label>
+									<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.deduction_start') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span>{{ $record['partners_loan_application_car_pay_period_from'] }}</span>
 									</div>
@@ -135,14 +155,81 @@
                         <div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.pay_period_to') }} :</label>
+									<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.deduction_end') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span>{{ $record['partners_loan_application_car_pay_period_to'] }}</span>
 									</div>
 								</div>
 							</div>
 						</div>
-						<?php if( count($remarks) > 0 && $loan_application_status_id['val'] == 6){
+                        <div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-4 col-sm-4 text-right text-muted">HR Remarks :</label>
+									<div class="col-md-7 col-sm-7">
+										<span>{{ ($record['partners_loan_comment'] == '') ? '' : $record['partners_loan_comment'] }}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">			
+							<div class="col-md-12">						
+								<div class="form-group">
+									<label class="col-md-4 text-muted text-right">
+										Attachments:
+									</label>
+									<div class="col-md-7">
+										<?php
+											if (!empty($attachement)){
+												foreach ($attachement as $key => $value) {
+													if ( !empty($value->photo)) {
+														$file = FCPATH . urldecode( $value->photo );
+														if( file_exists( $file ) )
+														{
+															$f_type = '';
+
+															if (function_exists('get_file_info')) {
+																$f_info = get_file_info( $file );
+																$f_type = filetype( $file );
+															}
+
+															if (function_exists('finfo_open')) {
+																$finfo = finfo_open(FILEINFO_MIME_TYPE);
+																$f_type = finfo_file($finfo, $file);
+															}
+
+															switch( $f_type )
+															{
+																case 'image/jpeg':
+																	$icon = 'fa-picture-o';
+																	break;
+																case 'video/mp4':
+																	$icon = 'fa-film';
+																	break;
+																case 'audio/mpeg':
+																	$icon = 'fa-volume-up';
+																	break;
+																default:
+																	$icon = 'fa-file-text-o';
+															}
+															
+															$filepath = base_url()."partners/loan_application/download_file/".$value->loan_application_attachment_id;
+															echo '<li class="padding-3 fileupload-delete-'.$value->loan_application_attachment_id.'" style="list-style:none;">
+													            <a href="'.$filepath.'">
+													            <span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
+													            <span>'. basename($f_info['name']) .'</span>
+													            <span class="padding-left-10"></span>
+													        </a></li>';	
+														}
+													}
+												}
+											} 
+										?>
+									</div>	
+								</div>	
+							</div>
+						</div>						
+						<?php if( count($remarks) > 0){
 							?>
 
 						<hr />
@@ -252,7 +339,7 @@
 
 						<hr />
 
-                  	 	<?php if( $loan_application_approver_details['approver_status_id'] < 8 && in_array($loan_application_approver_details['loan_application_status_id'], array(2,4,5,6))){ ?>
+                  	 	<?php if( isset($loan_application_approver_details['approver_status_id']) && $loan_application_approver_details['approver_status_id'] < 8 && in_array($loan_application_approver_details['loan_application_status_id'], array(2,4,5,6))){ ?>
 
 							<div class="row">
 								<div class="col-md-12">
@@ -273,11 +360,11 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div>
-                                	<?php if( $loan_application_approver_details['approver_status_id'] < 6 && in_array($loan_application_approver_details['loan_application_status_id'], array(2,4,5)) && $record['partners_loan_application_status_id'] != 8 && $record['partners_loan_application_status_id'] != 6){ ?>
+                                	<?php if( isset($loan_application_approver_details['approver_status_id']) && $loan_application_approver_details['approver_status_id'] < 6 && in_array($loan_application_approver_details['loan_application_status_id'], array(2,4,5)) && $record['partners_loan_application_status_id'] != 8 && $record['partners_loan_application_status_id'] != 6){ ?>
                                 		<a href="#" class="approve_view btn btn-default btn-sm btn-success" data-loan-type="{{ $loan_application_approver_details['loan_type'] }}" data-loan-application-id="{{ $loan_application_approver_details['loan_application_id'] }}" data-loan-application-owner="{{ $loan_application_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $loan_application_approver_details['approver_id'] }}" data-decission="1" >{{ lang('loan_application.approved') }}</a>
                                 		<a href="#" class="disapprove_view btn btn-sm btn-danger" data-loan-type="{{ $loan_application_approver_details['loan_type'] }}" data-loan-application-id="{{ $loan_application_approver_details['loan_application_id'] }}" data-loan-application-owner="{{ $loan_application_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $loan_application_approver_details['approver_id'] }}" data-decission="0" >{{ lang('loan_application.decline') }}</a>
                                 	<?php }
-                                		else if ($loan_application_approver_details['approver_status_id'] == 6 ){
+                                		else if (isset($loan_application_approver_details['approver_status_id']) && $loan_application_approver_details['approver_status_id'] == 6 ){
                                 	?>
                                 		<a href="#" class="disapprove_view btn btn-sm btn-danger" data-loan-type="{{ $loan_application_approver_details['loan_type'] }}" data-loan-application-id="{{ $loan_application_approver_details['loan_application_id'] }}" data-loan-application-owner="{{ $loan_application_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $loan_application_approver_details['approver_id'] }}" data-decission="0" >{{ lang('loan_application.disapproved') }}</a>
 

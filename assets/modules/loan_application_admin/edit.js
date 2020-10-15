@@ -9,7 +9,7 @@ function init_form()
     var enableDays = ['15', '30'];
 
     if (jQuery().datepicker) {
-        $('#loan_application_loan_deduction_start').parent('.date-picker').datepicker({
+        $('#loan_application_loan_deduction_start,#loan_application_pay_period_from').parent('.date-picker').datepicker({
             autoclose: true,
             beforeShowDay: function(date){
                 var day = String(date.getDate());
@@ -23,7 +23,7 @@ function init_form()
     }
 
     if (jQuery().datepicker) {
-        $('#loan_application_loan_deduction_end').parent('.date-picker').datepicker({
+        $('#loan_application_loan_deduction_end,#loan_application_pay_period_to').parent('.date-picker').datepicker({
             autoclose: true,
             beforeShowDay: function(date){
                 var day = String(date.getDate());

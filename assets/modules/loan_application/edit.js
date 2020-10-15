@@ -2,6 +2,31 @@ $(document).ready(function(){
     init_form();
     $(":input").inputmask();
     //$("#decimal_val").inputmask({ 'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false });
+    $('#loan_application-photo-fileupload').fileupload({ 
+        url: base_url + module.get('route') + '/single_upload',
+        autoUpload: true,
+        contentType: false,
+    }).bind('fileuploadadd', function (e, data) {
+        $.blockUI({ message: '<div>Attaching file, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />' });
+    }).bind('fileuploaddone', function (e, data) { 
+
+        $.unblockUI();
+        var file = data.result.file;
+        if(file.error != undefined && file.error != "")
+        {
+            notify('error', file.error);
+        }
+        else{
+            $('.files').append(data.result.html);
+        }
+    }).bind('fileuploadfail', function (e, data) { 
+        $.unblockUI();
+        notify('error', data.errorThrown);
+    });
+
+    $('.delete_attachment').live('click', function(){
+        $(this).closest('tr').remove();
+    });     
 });
 
 function init_form()

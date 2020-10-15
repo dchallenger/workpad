@@ -77,7 +77,7 @@ class erequest_model extends Record
 
 	function get_notes( $request_id, $user_id )
 	{
-		$qry = "select a.*, b.full_name, c.photo, gettimeline(a.created_on) as timeline, d.department
+		$qry = "select a.*, b.full_name, IF(c.photo != '',c.photo,'uploads/users/avatar.png') as photo, gettimeline(a.created_on) as timeline, d.department
 		FROM {$this->db->dbprefix}resources_request_notes a
 		LEFT JOIN {$this->db->dbprefix}users b on b.user_id = a.created_by
 		LEFT JOIN {$this->db->dbprefix}users_profile c on c.user_id = a.created_by
@@ -90,7 +90,8 @@ class erequest_model extends Record
 	}
 
 	public function get_erequest_details($record_id=0){		
-		$where = array('deleted' => 0, $this->primary_key => $record_id);
+		$where = array(''.$this->table.'.deleted' => 0, $this->primary_key => $record_id);
+		$this->db->join('partners_online_request_type',''.$this->table.'.request = partners_online_request_type.online_request_type_id');
 		$erequest_details = $this->db->get_where($this->table, $where);
 		
 		return $erequest_details->row_array();
@@ -161,6 +162,50 @@ class erequest_model extends Record
 			$id = $this->db->insert_id();
 			$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $form['user_id']));
 			$notified[] = $form['user_id'];
+
+		return $notified;
+	}
+
+	function notify_hr( $request_id=0, $erequest_details=array())
+	{	
+		$this->load->model('erequest_admin_model', 'erequestAdmin');
+
+		$qry = "SELECT  *
+				FROM {$this->db->dbprefix}roles r 
+				WHERE FIND_IN_SET(2,profile_id)";
+
+		$roles_result = $this->db->query($qry);
+
+		if ($roles_result && $roles_result->num_rows() > 0) {
+			$role_id = $roles_result->row()->role_id;
+
+			$this->db->where('role_id',$role_id);
+			$users = $this->db->get('users');
+
+			if ($users && $users->num_rows() > 0) {
+				$notified = array();		
+
+				foreach ($users->result() as $row) {
+					//insert notification
+					$insert = array(
+						'status' => 'info',
+						'message_type' => 'Online Request',
+						'user_id' => $erequest_details['user_id'],
+						'feed_content' => 'Filed : ' . $erequest_details['online_request_type'].' for Validation',//.'.<br><br>Reason: '.$form['reason'],
+						'recipient_id' => $row->user_id,
+						'uri' => str_replace(base_url(), '', $this->erequestAdmin->url).'/detail/'.$erequest_details['request_id']
+					);
+
+					$this->db->insert('system_feeds', $insert);
+					$id = $this->db->insert_id();
+					$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $row->user_id));
+					$notified[] = $row->user_id;
+
+					$qry = "CALL sp_online_request_email_to_hr('".$request_id."', '".$row->user_id."')";
+					$result = $this->db->query( $qry );
+				}
+			}
+		}
 
 		return $notified;
 	}

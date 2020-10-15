@@ -20,5 +20,7 @@ $lang['erequest'] = array(
 	'select_file' => 'Select File',
 	'file_upload' => 'Files Upload',
 	'discussion_log' => 'Discussion Logs',
-	'write_comments' => 'Write your comments here'
+	'write_comments' => 'Write your comments here',
+	'admin_sec' => 'Admin Section',
+	'note_admin_sec' => 'This section was filled-up by HR.',	
 );

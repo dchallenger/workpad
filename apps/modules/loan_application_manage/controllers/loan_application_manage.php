@@ -218,9 +218,13 @@ class Loan_application_manage extends MY_PrivateController
         $data['loan_application_approver_details'] = $this->mod->get_loan_application_approver_info($this->record_id,$this->user->user_id);
         $data['upload_id']["val"] = array();
 
+        $loan_application_attachment = array();
         if( $record_id ){
              $loan_application_data = $this->app_personal->edit_cached_query( $record_id );
-        }
+             $loan_application_attachment = $this->app_personal->get_loan_application_attachment($record_id);
+        }  
+
+        $data['attachement'] = $loan_application_attachment;   
 
         foreach($fg_fields_array as $index => $field )
         {

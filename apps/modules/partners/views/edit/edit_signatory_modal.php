@@ -110,11 +110,6 @@
                         </div>
                     </div>
                 </form>
-                <!-- END FORM--> 
-                <div class="form-group">
-                    <label class="control-label col-md-4"></label>
-                        <button type="button" class="btn green btn-sm" onclick="save_signatory()">Save</button>
-                </div>
             </div>
         </div>
         <div class="col-md-5 padding-left-5">
@@ -142,6 +137,7 @@
     </div>
 </div> 
 <div class="modal-footer margin-top-0">
+    <button type="button" class="btn green btn-sm" onclick="save_signatory()">Save</button>
     <button type="button" data-dismiss="modal" class="btn btn-default btn-sm">Close</button>
 </div>
 <script>

@@ -177,9 +177,10 @@ class Loan_application extends MY_PrivateController
                 $rec['detail_url'] = $this->mod->url . '/detail/' . $record['record_id'];
             }
 
-            if( in_array($record['loan_application_status_id'],[1,2,4])) {
+/*            if( in_array($record['loan_application_status_id'],[1,2,4])) {
                 $rec['options'] .= '<li><a href="'.$rec['detail_url'].'"><i class="fa fa-info"></i> '.lang('loan_application.view').'</a></li>';
-            }
+            }*/
+            $rec['options'] .= '<li><a href="'.$rec['detail_url'].'"><i class="fa fa-info"></i> '.lang('loan_application.view').'</a></li>';            
         }
 
         if( $this->permission['delete'] )
@@ -570,6 +571,37 @@ class Loan_application extends MY_PrivateController
             goto stop;
         }
         
+        $attachement = (isset($this->input->post('loan_application')['photo']) ? $this->input->post('loan_application')['photo'] : []);
+        $filename = (isset($this->input->post('loan_application')['filename']) ? $this->input->post('loan_application')['filename'] : []);
+        $type = (isset($this->input->post('loan_application')['type']) ? $this->input->post('loan_application')['type'] : []);
+        $size = (isset($this->input->post('loan_application')['size']) ? $this->input->post('loan_application')['size'] : []);
+        // save movement attachement multiple
+        if (!empty($attachement)){
+            $this->db->where('loan_application_id',$loan_application_id);
+            $this->db->delete('partners_loan_application_attachment');
+            
+            foreach ($attachement as $key => $value) {
+                $info = array(
+                            'loan_application_id' => $loan_application_id,
+                            'photo' => $value,
+                            'type' => $type[$key],
+                            'filename' => $filename[$key],
+                            'size' => $size[$key]
+                        );
+
+                $this->db->insert('partners_loan_application_attachment',$info);
+            }
+        }
+
+        if( $this->db->_error_message() != "" ){
+            $this->response->message[] = array(
+                'message' => $this->db->_error_message(),
+                'type' => 'error'
+            );
+            $error = true;
+            goto stop;
+        }
+
         //start saving with sub table
         foreach( $main_record as $table => $data )
         {
@@ -616,11 +648,17 @@ class Loan_application extends MY_PrivateController
         if(!empty($loan_application_id)){
             $loan_application_details = $this->mod->get_loan_application_details($loan_application_id);
 
-            if($loan_application_details['loan_application_status_id'] == 2 || $loan_application_details['loan_application_status_id'] == 8){
+            //if($loan_application_details['loan_application_status_id'] == 2 || $loan_application_details['loan_application_status_id'] == 8){
+            if($loan_application_details['loan_application_status_id'] == 2){
                 //INSERT NOTIFICATIONS FOR APPROVERS
                 $this->response->notified = $this->mod->notify_approvers( $loan_application_id, $loan_application_details );
                 $this->response->notified = $this->mod->notify_filer( $loan_application_id, $loan_application_details );
             }
+
+            if($loan_application_details['loan_application_status_id'] == 4){
+                //INSERT NOTIFICATIONS FOR APPROVERS
+                $this->response->notified = $this->mod->notify_hr( $loan_application_id, $loan_application_details );
+            }            
         }
 
         if( !$error )
@@ -665,9 +703,13 @@ class Loan_application extends MY_PrivateController
         $data['plan_limit'] = $this->mod->get_plan_limit();
         $data['special_features'] = $this->mod->get_special_features();
 
+        $loan_application_attachment = array();
         if( $record_id ){
              $loan_application_data = $this->mod->edit_cached_query( $record_id );
+             $loan_application_attachment = $this->mod->get_loan_application_attachment($record_id);
         }
+
+        $data['attachement'] = $loan_application_attachment;   
 
         foreach($fg_fields_array as $index => $field )
         {
@@ -769,9 +811,13 @@ class Loan_application extends MY_PrivateController
         $data['loan_type'] = $loan_type_info['loan_type'];
         $data['upload_id']["val"] = array();
 
+        $loan_application_attachment = array();
         if( $record_id ){
              $loan_application_data = $this->mod->edit_cached_query( $record_id );
+             $loan_application_attachment = $this->mod->get_loan_application_attachment($record_id);             
         }
+
+        $data['attachement'] = $loan_application_attachment; 
 
         foreach($fg_fields_array as $index => $field )
         {
@@ -876,5 +922,63 @@ class Loan_application extends MY_PrivateController
         else
             echo $this->load->blade('detail.detail_'.strtolower($loan_application_info['loan_type_code']))->with( $this->load->get_cached_vars() );
 
-    }           
+    }
+
+    public function single_upload()
+    {
+        $this->_ajax_only();
+        define('UPLOAD_DIR', 'uploads/loan_application/');
+        $this->load->library("UploadHandler");
+        $files = $this->uploadhandler->post();
+        $file = $files[0];
+        $file->clas = date('hhmmss');       
+        if( isset($file->error) && $file->error != "" )
+        {
+            $this->response->message[] = array(
+                'message' => $file->error,
+                'type' => 'error'
+            );  
+        }
+
+        $html = '<tr class="template-download">
+            <input type="hidden" name="loan_application[photo][]" value="'.$file->url.'"/>
+            <input type="hidden" name="loan_application[type][]" value="'.(isset($file->thumbnailUrl) ? 'img' : 'file').'"/>
+            <input type="hidden" name="loan_application[filename][]" value="'.$file->name.'"/>
+            <input type="hidden" name="loan_application[size][]" value="'.$file->size.'"/>
+            <td>
+                <p class="name">
+                <span>'.$file->name.'</span>';
+                $html .= '</p>';
+                if (isset($file->error)) {
+                    $html .= '<div><span class="label label-danger">Error</span>'.$file->error.'</div>';
+                }
+            $html .= '</td>
+            <td>
+                <span class="size">'.$file->size.'</span>
+            </td>
+            <td>
+                <a data-dismiss="fileupload" class="btn red delete_attachment">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Delete</span>
+                </a>
+            </td>
+        </tr>';
+
+        $this->response->file = $file;
+        $this->response->html = $html;
+        $this->_ajax_return();
+    } 
+
+    function download_file($upload_id){   
+        $this->db->select("photo")
+        ->from("partners_loan_application_attachment")
+        ->where("loan_application_attachment_id = {$upload_id}");
+
+        $image_details = $this->db->get()->row_array();   
+        $path = base_url() . $image_details['photo'];
+        
+        header('Content-disposition: attachment; filename='.substr( $image_details['photo'], strrpos( $image_details['photo'], '/' )+1 ).'');
+        header('Content-type: txt/pdf');
+        readfile($path);
+    }         
 }

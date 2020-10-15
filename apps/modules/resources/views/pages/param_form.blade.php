@@ -4,15 +4,20 @@
 				<div class="portlet">
 					<div class="portlet-body form">
     					<div class="form-body">
-    						<h3>Certificate of Employment</h3>
+    						<h3>Certificate</h3>
     						<table class="table">
 								<tbody>
 									<tr>
 										<td>Type of Certificate</td>
 										<td>
 											<select name="coe" class="form-control select2me department" data-placeholder="Select...">
-												<option value="coe_compensation">COE Compensation</option>
-												<option value="coe_tenure">COE Tenure</option>
+												<option value="coe_w_compensation">COE with Compensation</option>
+												<option value="coe_wo_compensation">COE without Compensation</option>
+												<option value="cfr">COE for Resigned</option>
+												<option value="cov">Certificate of Vehicle Assignment</option>
+												<option value="cmb">Certificate of Maternity Benefit</option>
+												<option value="cea">Certificate with Employee Address</option>
+												<!-- <option value="coe_tenure">COE Tenure</option> -->
 											</select>								
 										</td>
 									</tr>

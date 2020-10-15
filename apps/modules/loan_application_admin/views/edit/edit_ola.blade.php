@@ -49,6 +49,7 @@
 				<input type="hidden" id="loan_type_id" name="loan_type_id" value="{{ $loan_type_id }}">
 				<input type="hidden" name="loan_type" id="loan_type" value="{{ $loan_type }}">
 				<input type="hidden" name="loan_type_code" id="loan_type_code" value="{{ $loan_type_code }}">
+				<input type="hidden" name="user_id" id="loan_type" value="{{ $user_id }}">
 				<input type="hidden" name="view" id="view" value="edit" >
 
 				
@@ -116,6 +117,16 @@
 								<input type="text" class="form-control" name="loan_application[loan_amount_to_deduct_per_day]" id="loan_application_loan_amount_to_deduct_per_day" value="{{ $record['partners_loan_application_omnibus.loan_amount_to_deduct_per_day'] }}" placeholder="" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>		
 							</div>	
 						</div>
+						<?php if ($loan_application_status_id['val'] == 4){ ?>
+						<div class="form-group">
+							<label class="col-md-4 text-right control-label">
+								<span class="required">* </span>HR Remarks (Required if you choose to decline):
+							</label>
+					        <div class='col-md-7'>
+					            <textarea rows='4' id='comment' class='form-control' name="loan_application[comment]"></textarea>
+					        </div>	
+						</div>
+						<?php } ?>						
 					</div>
 				</div>
 
@@ -127,7 +138,7 @@
 							if( $loan_application_status_id['val'] == 4 ){ ?>
 								<button type="button" class="btn blue btn-sm" onclick="save_form( $(this).parents('form'), 4 )">{{ lang('loan_application.save_draft') }}</button>
 								<button type="button" class="btn green btn-sm" onclick="save_form( $(this).parents('form'), 2 )">{{ lang('loan_application.approved') }}</button>
-								<button type="button" class="btn red btn-sm" onclick="save_form( $(this).parents('form'), 7 )">{{ lang('loan_application.disapproved') }}</button>
+								<button type="button" class="btn red btn-sm" onclick="save_form( $(this).parents('form'), 8 )">{{ lang('loan_application.decline') }}</button>
 						<?php 
 							}
 						?>
