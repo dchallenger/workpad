@@ -492,7 +492,7 @@
 					                    		</a>
 					                    	<?php else: ?>
 
-					                    		<span class="datetime pull-right"><small class="text-muted"><?php echo $birthdays[$i]['time_line']; ?></small></span>
+					                    		<span class="datetime pull-right"><small class="text-muted"><?php echo date('M d, Y',strtotime($birthdays[$i]['birth_date'])); ?></small></span>
 					                    	<?php endif; ?>
 
 					                        <span class="body" id="pulsate-regular">

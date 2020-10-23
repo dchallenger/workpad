@@ -17,6 +17,15 @@
     foreach($options->result() as $option) {
         $partners_country_options[$option->country_id] = $option->short_name;
     }    
+
+    $db->select('relationship_id,relationship');
+    $db->where('deleted', '0');
+    $db->order_by('relationship');
+    $options = $db->get('relationship');
+    $relationship_options = array('' => '');
+    foreach($options->result() as $option) {
+        $relationship_options[$option->relationship] = $option->relationship;
+    }    
 ?>
 <div class="portlet">
 	<div class="portlet-title">
@@ -41,11 +50,11 @@
                     <div class="form-group">
                         <label class="control-label col-md-3"><?php echo lang('partners.relationship'); ?></label>
                         <div class="col-md-5">
-                           <div class="input-group">
+                            <div class="input-group">
                                 <span class="input-group-addon">
-                                   <i class="fa fa-group"></i>
-                                 </span>
-                            <input type="text" class="form-control" name="partners_personal[emergency_relationship]" id="partners_personal-emergency_relationship" value="<?php echo $emergency_relationship; ?>" placeholder="<?php echo lang('common.enter'); ?> <?php echo lang('partners.relationship'); ?>"/>
+                                    <i class="fa fa-list-ul"></i>
+                                </span>
+                                <?php echo form_dropdown('partners_personal[emergency_relationship]',$relationship_options, $emergency_relationship, 'class="form-control select2me" data-placeholder="Select..."'); ?>
                             </div>
                         </div>
                     </div>
@@ -122,12 +131,11 @@
                 
             </div>
             <div class="form-actions fluid">
-                <div class="row">
+                <div class="row" align="center">
                     <div class="col-md-12">
-                        <div class="col-md-offset-3 col-md-8">
-                            <button class="btn green btn-sm" type="button" onclick="save_partner( $(this).parents('form') )"><i class="fa fa-check"></i> <?php echo lang('common.save'); ?></button>
-                            <button class="btn blue btn-sm form-undo" type="submit"><i class="fa fa-undo"></i> <?php echo lang('common.reset'); ?></button>                               
-                        </div>
+                        <button class="btn green btn-sm" type="button" onclick="save_partner( $(this).parents('form') )"><i class="fa fa-check"></i> <?php echo lang('common.save'); ?></button>
+                        <button class="btn blue btn-sm form-undo" type="submit"><i class="fa fa-undo"></i> <?php echo lang('common.reset'); ?></button>                               
+                        <a href="<?php echo $back_url;?>" class="btn default btn-sm"><?php echo lang('common.back_to_list'); ?></a>
                     </div>
                 </div>
             </div>

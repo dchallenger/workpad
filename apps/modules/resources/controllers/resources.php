@@ -38,6 +38,16 @@ class Resources extends MY_PrivateController
 
 		$data['list_employee'] = $users;
 
+		$this->db->where('users.deleted',0);
+		$this->db->where('users.active',0);
+		$this->db->where('users.user_id !=',1);
+		$this->db->where('partners.status_id',8);
+		$this->db->order_by('users.full_name');
+		$this->db->join('partners','users.user_id = partners.user_id');
+		$users = $this->db->get('users');
+
+		$data['list_employee_resigned'] = $users;
+
 		$this->response->quick_edit_form = $this->load->view('pages/param_form.blade.php', $data, true);
         $this->response->user_id = $this->user->user_id;
 
@@ -70,10 +80,36 @@ class Resources extends MY_PrivateController
         $pdf->SetPrintFooter(false);
 		
 		$user_id = $this->input->post('user_id');
-		$coe_type = $this->input->post('coe');
-		$coe_purpose = $this->input->post('purpose');
+		$coe_type = $this->input->post('coe') ?? '';
+		$reason_for_leaving = $this->input->post('reason_for_leaving') ?? '';
+		$coe_type_description = $this->input->post('coe_description') ?? '';
+		$unit = $this->input->post('unit') ?? '';
+		$sticker_no = $this->input->post('sticker_no') ?? '';
+		$coe_purpose = $this->input->post('purpose') ?? '';
+		$display_name = $this->input->post('display_name') ?? '';
 
-        $partner_record = "SELECT up.*, ud.department as dept, u.login, upos.position, p.effectivity_date as date_hired, p.resigned_date, uc.company as comp, (aes_decrypt(`pp`.`salary`, encryption_key()) * 1) as 'basic', IF(`ub`.`company_coe` IS NOT NULL,`ub`.`company_coe`,`uc`.`company`) AS company_coe, uc.print_logo FROM {$this->db->dbprefix}users_profile up
+		if ($coe_type == '') {
+	        $this->response->message[] = array(
+	            'message' => 'Please select Type of Certificate',
+	            'type' => 'error'
+	        );			
+
+	        $this->_ajax_return();
+		}
+
+		if ($user_id == '') {
+	        $this->response->message[] = array(
+	            'message' => 'Please select Employee.',
+	            'type' => 'error'
+	        );			
+	        $this->_ajax_return();
+		}
+
+        $partner_record = "SELECT up.*, ud.department as dept, u.login, upos.position, p.effectivity_date as date_hired, 
+        				p.employment_type,
+        				p.resigned_date, uc.company as comp, (aes_decrypt(`pp`.`salary`, encryption_key()) * 1) as 'basic', 
+        				IF(`ub`.`company_coe` IS NOT NULL,`ub`.`company_coe`,`uc`.`company`) AS company_coe, uc.print_logo 
+        				FROM {$this->db->dbprefix}users_profile up
                         INNER JOIN {$this->db->dbprefix}users_company uc ON up.company_id = uc.company_id
                         LEFT JOIN {$this->db->dbprefix}users_department ud ON up.department_id = ud.department_id
                         LEFT JOIN {$this->db->dbprefix}users u ON up.user_id = u.user_id
@@ -94,10 +130,13 @@ class Resources extends MY_PrivateController
 				}
 			}
 
+			$hrd = get_hr_head();
 
-	        $pdata['title'] = $partner_record['firstname']." ".$partner_record['middlename']." ".$partner_record['lastname'];
+	        $pdata['title'] = $partner_record['title'];
 	        $pdata['employee_name'] = $partner_record['firstname']." ".substr($partner_record['middlename'],0, 1).". ".$partner_record['lastname'];
 	        $pdata['position'] = $partner_record['position'] ?? '';
+	        $pdata['division'] = $partner_record['v_division'] ?? '';
+	        $pdata['employment_type'] = $partner_record['employment_type'] ?? '';
 	        $pdata['date_hired'] =  ($partner_record['date_hired'] && $partner_record['date_hired'] != '0000-00-00' && $partner_record['date_hired'] != 'January 01, 1970' && $partner_record['date_hired'] != '1970-01-01') ? date('F d, Y', strtotime($partner_record['date_hired'])) : '';
 	        $pdata['resigned_date'] = ($partner_record['resigned_date'] && $partner_record['resigned_date'] != '0000-00-00' && $partner_record['resigned_date'] != 'January 01, 1970' && $partner_record['resigned_date'] != '1970-01-01') ? date('F d, Y', strtotime($partner_record['resigned_date'])) : '';
 	        $pdata['gender'] = $partner_record['title'];
@@ -109,10 +148,19 @@ class Resources extends MY_PrivateController
 	        $pdata['day'] = date('j\<\s\u\p\>S\<\/\s\u\p\>');
 	        $pdata['month_year'] = date('F Y');
 	        $pdata['her_his_caps'] = ($partner_record['title'] == 'Mr.') ? 'His' : 'Her';
+	        $pdata['she_he_caps'] = ($partner_record['title'] == 'Mr.') ? 'He' : 'She';
 	        $pdata['she_he'] = ($partner_record['title'] == 'Mr.') ? 'he' : 'she';
 	        $pdata['his_her'] = ($partner_record['title'] == 'Mr.') ? 'his' : 'her';
-	        $pdata['firstname'] = $partner_record['title'] ." ". $partner_record['lastname'] ?? '';
+	        $pdata['title_lastname'] = $partner_record['title'] ." ". $partner_record['lastname'] ?? '';
 	        $pdata['purpose'] = $coe_purpose;
+	        $pdata['reason_for_leaving'] = $reason_for_leaving;
+	        $pdata['benefits'] = ''; // for clarrification
+	        $pdata['annual_gross'] = convert_number_to_words(256120); // after payroll done, should remove comma and period
+	        $pdata['annual_gross_amount'] = currency_format(256120); // after payroll done, should remove comma and period
+	        $pdata['hrd'] = $hrd['full_name'];
+	        $pdata['hrd_position'] = $hrd['position'];
+	        $pdata['unit'] = $unit;
+	        $pdata['stikcer_number'] = $sticker_no;
 
 	        $allowances = "SELECT SUM(aes_decrypt(`pere`.`amount`, encryption_key()) * 1) AS total_alowance FROM {$this->db->dbprefix}payroll_entry_recurring per
 	        			   LEFT JOIN {$this->db->dbprefix}payroll_entry_recurring_employee pere ON per.recurring_id = pere.recurring_id
@@ -130,17 +178,23 @@ class Resources extends MY_PrivateController
 	        $pdata['gross'] = $partner_record['basic'] + $total_alowance;
 
 	        switch ($coe_type) {
-	        	case 'coe_tenure':
-	        		$html = $this->load->view("templates/coe_tenure", $pdata, true);
+	        	case 'coe_w_compensation':
+	        		$html = $this->load->view("templates/coe_w_compensation", $pdata, true);
 	        		break;
-	        	case 'coe_compensation':
-	        		$html = $this->load->view("templates/coe_compensation", $pdata, true);
+	        	case 'coe_wo_compensation':
+	        		$html = $this->load->view("templates/coe_wo_compensation", $pdata, true);
 	        		break;
+	        	case 'cov':
+	        		$html = $this->load->view("templates/co_vehicle_assignment", $pdata, true);
+	        		break;
+	        	case 'cfr':
+	        		$html = $this->load->view("templates/co_resigned", $pdata, true);
+	        		break;	        		
 	        	default:
 	        		$html = '';
 	        		break;        		
 	        }
-	        
+
 	        $pdf->AddPage('P','A4',true);
 	        $this->load->helper('file');
 	        
@@ -162,6 +216,22 @@ class Resources extends MY_PrivateController
 	            'message' => 'Download file ready.',
 	            'type' => 'success'
 	        );
+
+
+            $insert = array(
+            	'user_id' => $user_id,
+            	'display_name' => $display_name,
+            	'coe_type_code' => $coe_type,
+            	'coe_type' => $coe_type_description,
+            	'purpose' => $coe_purpose,
+            	'unit' => $unit,
+            	'sticker_no' => $sticker_no,
+                'filename' => $filename,
+                'created_by' => $this->user->user_id
+            );
+
+            $this->db->insert('certificate_of_employment', $insert);
+            $insert_id = $this->db->insert_id();
 
 	        $this->response->filename = $filename;
 

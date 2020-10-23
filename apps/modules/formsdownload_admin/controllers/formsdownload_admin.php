@@ -147,6 +147,8 @@ class Formsdownload_admin extends MY_PrivateController
 		}	
 		
 		$rec['export_url'] = $this->mod->url . '/download_file/' . $record['record_id'];
+		
+		$rec['delete_url_javascript'] = '<a href="javascript: delete_record('.$record['record_id'].')"><i class="fa fa-trash-o"></i> Delete</a>';
 		// $rec['options'] .= '<li><a href="'.$rec['detail_url'].'"><i class="fa fa-search"></i> View</a></li>';
 		// $rec['options'] .= '<li><a href="'.$rec['detail_url'].'"><i class="fa fa-search"></i> View</a></li>';
 		// if( isset($this->permission['delete']) && $this->permission['delete'] )

@@ -80,9 +80,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 
 
 	<!-- BEGIN FOOTER -->
-	<div class="footer">
+	<div class="footer hidden">
 		<div class="footer-inner">
-			<span style="color:#fff">{{ date('Y') }} {{ $system['copyright_details'] }}</span> by <a class="text-muted" href="http://www.hdisystech.com" target="_blank">{{ $system['author'] }}</a>
+			<span style="color:#fff">{{ date('Y') }} {{ $system['copyright_details'] }}</span> by <a class="text-muted" href="" target="_blank">{{ $system['author'] }}</a>
 		</div>
 		<div class="footer-tools">
 			<span class="go-top">

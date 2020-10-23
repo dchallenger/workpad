@@ -1,3 +1,3 @@
-<th width="20%">Created by</th>
-<th width="22%">Title</th>
-<th width="17%" class="hidden-xs">Date Created</th>
+<th width="30%">Certificate</th>
+<th width="25%">Employee</th>
+<th width="20%" class="hidden-xs">Date Created</th>

@@ -6,7 +6,7 @@
 					<span class="after"></span>
 				</li>
 				<li><a data-toggle="tab" href="#overview_tab2"><i class="fa fa-phone"></i><?php echo lang('my201.contacts'); ?></a></li>
-				<li><a data-toggle="tab" href="#overview_tab17"><i class="fa fa-money"></i><?php echo lang('partners.cost_center'); ?></a></li>
+				<li class="hidden"><a data-toggle="tab" href="#overview_tab17"><i class="fa fa-money"></i><?php echo lang('partners.cost_center'); ?></a></li>
 				<li><a data-toggle="tab" href="#overview_tab15"><i class="fa fa-user"></i><?php echo lang('my201.id_no'); ?></a></li>
 				<li><a data-toggle="tab" href="#overview_tab3"><i class="fa fa-user"></i><?php echo lang('my201.personal'); ?></a></li>
 				<li><a data-toggle="tab" href="#overview_tab14"><i class="fa fa-group"></i><?php echo lang('my201.family'); ?></a></li
@@ -259,9 +259,12 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
+									<input type="hidden" value="<?php echo $date_hired; ?>" id="partners-effectivity_date">
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('my201.hire_date'); ?> :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="date-hired"><?php echo $date_hired; ?></span>
+										<br>
+										<span class="text-muted small calculatedservice"></span>										
 									</div>
 								</div>
 							</div>
@@ -295,8 +298,6 @@
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo $partners_labels['probationary_date']; ?> :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="lastname"><?php echo $probationary_date; ?></span>
-									<br>
-	                        		<span class="text-muted small">End date of employment/contract service</span>
 									</div>
 								</div>
 							</div>
@@ -348,7 +349,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row hidden">
 							<div class="col-md-12">
 								<div class="form-group">
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('my201.project_hr'); ?> :</label>
@@ -377,12 +378,20 @@
 										<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('my201.div'); ?> :</label>
 										<div class="col-md-7 col-sm-7">
 											<span id="position-title"><?php echo $division; ?></span>
-	                        				<br>
-											<span class="text-muted small">Cost Center Code : <?php echo $cost_center_code; ?></span>																					
 										</div>
 									</div>
 								</div>
 							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">Cost Center Code :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="position-title"><?php echo $cost_center_code; ?></span>																				
+										</div>
+									</div>
+								</div>
+							</div>							
 						<?php endif; ?>
 	                	<?php if(in_array('department', $partners_keys)): ?>
 							<div class="row">
@@ -487,7 +496,7 @@
 							</div>
 						<?php endif; ?>     
 						<?php if(in_array('credit_setup', $partners_keys)): ?>
-							<div class="row">
+							<div class="row hidden">
 								<div class="col-md-12">
 									<div class="form-group">
 										<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo $partners_labels['credit_setup']; ?> :</label>
@@ -871,7 +880,7 @@
 					</div>
 					<div class="portlet-body form">
 						<!-- START FORM -->
-                <?php if(in_array('taxcode', $partners_keys)): ?>
+                	<?php if(in_array('taxcode', $partners_keys)): ?>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -882,8 +891,8 @@
                                 </div>
                             </div>
                         </div>
-                <?php endif; ?>
-                <?php if(in_array('sss_number', $partners_keys)): ?>
+                	<?php endif; ?>
+                	<?php if(in_array('sss_number', $partners_keys)): ?>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -894,8 +903,8 @@
 								</div>
 							</div>
 						</div>
-                <?php endif; ?>
-                <?php if(in_array('pagibig_number', $partners_keys)): ?>
+                	<?php endif; ?>
+                	<?php if(in_array('pagibig_number', $partners_keys)): ?>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -906,8 +915,8 @@
 								</div>
 							</div>
 						</div>
-                <?php endif; ?>
-                <?php if(in_array('philhealth_number', $partners_keys)): ?>
+                	<?php endif; ?>
+                	<?php if(in_array('philhealth_number', $partners_keys)): ?>
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
@@ -918,8 +927,8 @@
 									</div>
 								</div>
 							</div>
-                <?php endif; ?>
-                <?php if(in_array('tin_number', $partners_keys)): ?>
+                	<?php endif; ?>
+                	<?php if(in_array('tin_number', $partners_keys)): ?>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -930,8 +939,8 @@
 								</div>
 							</div>
 						</div>
-                <?php endif; ?> 
-                <?php if(in_array('bank_account_number', $partners_keys)): ?>
+                	<?php endif; ?> 
+                	<?php if(in_array('bank_account_number', $partners_keys)): ?>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -942,9 +951,9 @@
 								</div>
 							</div>
 						</div>
-                <?php endif; ?>
+                	<?php endif; ?>
 
-                <?php if(in_array('bank_account_number_savings', $partners_keys)): ?>
+                	<?php if(in_array('bank_account_number_savings', $partners_keys)): ?>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -955,8 +964,8 @@
 								</div>
 							</div>
 						</div>
-                <?php endif; ?>
-                <?php if(in_array('bank_account_number_current', $partners_keys)): ?>
+                	<?php endif; ?>
+                	<?php if(in_array('bank_account_number_current', $partners_keys)): ?>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -967,8 +976,8 @@
 								</div>
 							</div>
 						</div>
-                <?php endif; ?>
-                <?php if(in_array('bank_account_number_current', $partners_keys)): ?>
+                	<?php endif; ?>
+                	<?php if(in_array('bank_account_number_current', $partners_keys)): ?>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -979,8 +988,8 @@
 								</div>
 							</div>
 						</div>
-                <?php endif; ?>
-                <?php if(in_array('payroll_bank_account_number', $partners_keys)): ?>
+                	<?php endif; ?>
+                	<?php if(in_array('payroll_bank_account_number', $partners_keys)): ?>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -991,8 +1000,8 @@
 								</div>
 							</div>
 						</div>
-                <?php endif; ?>    
-                <?php if(in_array('payroll_bank_name', $partners_keys)): ?>
+                	<?php endif; ?>    
+                	<?php if(in_array('payroll_bank_name', $partners_keys)): ?>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -1003,8 +1012,8 @@
 								</div>
 							</div>
 						</div>
-                <?php endif; ?> 
-                <?php if(in_array('bank_account_name', $partners_keys)): ?>
+                	<?php endif; ?> 
+                	<?php if(in_array('bank_account_name', $partners_keys)): ?>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -1015,8 +1024,8 @@
 								</div>
 							</div>
 						</div>
-                <?php endif; ?>
-                <?php if(in_array('health_care', $partners_keys)): ?>
+                	<?php endif; ?>
+                	<?php if(in_array('health_care', $partners_keys)): ?>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -1027,7 +1036,31 @@
 								</div>
 							</div>
 						</div>
-                <?php endif; ?>
+                	<?php endif; ?>
+                	<?php if(in_array('drivers_license_no', $partners_keys)): ?>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-5 col-sm-5 text-right text-muted"><?php echo $partners_labels['drivers_license_no']; ?> :</label>
+									<div class="col-md-6 col-sm-6">
+										<span id="emergency-name"><?php echo $record['drivers_license_no']; ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+                	<?php endif; ?>
+                	<?php if(in_array('passport_no', $partners_keys)): ?>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-5 col-sm-5 text-right text-muted"><?php echo $partners_labels['passport_no']; ?> :</label>
+									<div class="col-md-6 col-sm-6">
+										<span id="emergency-name"><?php echo $record['passport_no']; ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+                	<?php endif; ?>                	
 					</div>
 				</div>
 			</div>
@@ -1112,6 +1145,18 @@
 							</div>
 						</div>
                 <?php endif; ?>
+                <?php if(in_array('marriage_date', $partners_keys)): ?>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('partners.date_marriage'); ?> :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="civil-status"><?php echo $marriage_date; ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+                <?php endif; ?>                 
                 <?php if(in_array('solo_parent', $partners_keys)): ?>
 						<div class="row">
 							<div class="col-md-12">
@@ -1152,7 +1197,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('my201.height'); ?> :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('my201.height'); ?> (in cm) :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="height"><?php echo $height; ?></span>
 									</div>
@@ -1164,7 +1209,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('my201.weight'); ?> :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('my201.weight'); ?> (in kgs) :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="weight"><?php echo $weight; ?></span>
 									</div>
@@ -1172,6 +1217,18 @@
 							</div>
 						</div>
                 		<?php endif; ?>
+                		<?php if(in_array('blood_type', $partners_keys)): ?>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted"><?php echo lang('partners.blood_type'); ?> :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="blood_type"><?php echo $blood_type; ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+                		<?php endif; ?>                  		
                 		<?php if(in_array('interests_hobbies', $partners_keys)): ?>
 						<div class="row">
 							<div class="col-md-12">

@@ -1,5 +1,13 @@
 
 $(document).ready(function(){
+    var service = get_service(  $('#partners-effectivity_date').val() );
+    $('span.calculatedservice').html(service+"&nbsp;&nbsp;years of service")  	
+
+    $('#partners-effectivity_date').live('change', function(){
+        var service = get_service(  $(this).val() );
+        $('span.calculatedservice').html(service+"&nbsp;</u>&nbsp;years of service")                      
+    });
+
 	$('.form-undo').click(function() {
 	    $('form').submit();
 	});
@@ -35,6 +43,29 @@ $(document).ready(function(){
 	    placeholder: "Select an option",
 	    allowClear: true
 	});*/
+
+	$('#same_present').live('click', function() {
+		var pres_address = $('#partners_personal-address_1').val();
+		var pres_city = $('#partners_personal-present_city').val();
+		var pres_country = $('#partners_personal-present_country').val();
+		var pres_zipcode = $('#partners_personal-zip_code').val();
+
+		if ($('#same_present').is(':checked')) {
+			$('#partners_personal-permanent_address').val(pres_address);
+			$('#partners_personal-permanent_city').val(pres_city);
+			$('#partners_personal-permanent_country').val(pres_country);
+			$('#partners_personal-permanent_zipcode').val(pres_zipcode);
+
+			$('#partners_personal-permanent_city').select2().trigger('change');
+			$('#partners_personal-permanent_zipcode').select2().trigger('change');
+		}
+		else {
+			$('#partners_personal-permanent_address').val('');
+			$("#partners_personal-permanent_city").select2("val", "");
+			$("#partners_personal-permanent_country").select2("val", "");
+			$('#partners_personal-permanent_zipcode').val('');			
+		}
+	});
 
 	if (jQuery().datepicker) {
 		$('.date-picker').datepicker({

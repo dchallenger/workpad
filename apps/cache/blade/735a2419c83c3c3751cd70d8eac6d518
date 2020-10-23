@@ -1,4 +1,14 @@
 
+<?php
+    $db->select('religion_id,religion');
+    $db->where('deleted', '0');
+    $db->order_by('religion');
+    $options = $db->get('religion');
+    $partners_religion_options = array('' => '');
+    foreach($options->result() as $option) {
+        $partners_religion_options[$option->religion_id] = $option->religion;
+    }   
+?>
 <div class="portlet">
 	<div class="portlet-title">
 		<div class="caption"><?php echo lang('partners.personal'); ?></div>
@@ -49,7 +59,12 @@
                 <div class="form-group">
                     <label class="control-label col-md-3"><?php echo lang('partners.religion'); ?></label>
                     <div class="col-md-5">
-                        <input type="text" class="form-control" name="partners_personal[religion]" id="partners_personal-religion" value="<?php echo $religion; ?>" placeholder="Enter Religion"/>
+                       <div class="input-group">
+                            <span class="input-group-addon">
+                               <i class="fa fa-user"></i>
+                             </span>
+                        <?php echo form_dropdown('partners_personal[religion]',$partners_religion_options, $religion, 'class="form-control select2me" data-placeholder="Select..."'); ?>
+                        </div>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -80,6 +95,19 @@
                             //$users_profile_civil_status_options = array('Single' => 'Single', 'Married' => 'Married', 'Divorced' => 'Divorced');
                         ?>
                         <?php echo form_dropdown('partners_personal[civil_status]',$users_profile_civil_status_options, $profile_civil_status, 'class="form-control select2me" data-placeholder="Select..."'); ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+                <?php if(in_array('marriage_date', $partners_keys)): ?>
+                <div class="form-group">
+                    <label class="control-label col-md-3"><?php echo lang('partners.date_marriage'); ?></label>
+                    <div class="col-md-5">
+                        <div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
+                            <input type="text" class="form-control" name="partners_personal[marriage_date]" id="partners_personal-birth_date" value="<?php echo $marriage_date; ?>" placeholder="Enter <?php echo lang('partners.date_marriage'); ?>" >
+                            <span class="input-group-btn">
+                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <?php endif; ?>

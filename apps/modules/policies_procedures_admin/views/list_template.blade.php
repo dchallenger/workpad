@@ -12,46 +12,27 @@
     </td>
 	<td>
 		<div class="btn-group">
-			<a class="btn btn-xs text-muted" href="{{$quickedit_url}}"><i class="fa fa-pencil"></i> {{ lang('common.edit') }}</a>
-		</div>
-			<?php 
-				$file = FCPATH . urldecode( $resources_policies_attachments);
-				if( file_exists( $file ) )
-				{
-					$f_info = get_file_info( $file );
-					$f_type = filetype( $file );
+			<a href="{{$edit_url}}"><i class="fa fa-pencil"></i> {{ lang('common.edit') }}</a>
+		</div>		
+		<div class="btn-group">
+            <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> Options</a>
+            <ul class="dropdown-menu pull-right">
+            	<li>
+					<?php 
+						$file = FCPATH . urldecode( $resources_policies_attachments);
+						if( file_exists( $file ) )
+						{
+							$f_info = get_file_info( $file );
+							$f_type = filetype( $file );
 
-					$finfo = finfo_open(FILEINFO_MIME_TYPE);
-					$f_type = finfo_file($finfo, $file);
-				
-			?>
-			<a href="{{ base_url($resources_policies_attachments) }}" target="_blank" class="btn btn-xs text-muted">
-				<span class="padding-right-5">
-				    <i class="fa fa-search"></i>
-				</span> 
-				{{ lang('common.view') }}
-			</a>
-			<?php
-				}
-			?>
-       <!--  @if( $options != "" )
-	        <div class="btn-group">
-	            <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> Options</a>
-	            <ul class="dropdown-menu pull-right">
-		    		<li><a href="javascript: ajax_export({{$record_id}})" ><i class="fa fa-search"></i> View</a></li>
-		    		<li><a href="{{$export_url}}"><i class="fa fa-print"></i> Export</a></li>
-	            </ul>
-	        </div>
-        @endif -->
-		<!-- <div class="btn-group">
-			<a class="btn btn-xs text-muted" href="#" data-close-others="true" data-hover="dropdown" data-toggle="dropdown-toggle"><i class="fa fa-gear"></i> Options</a>
-			<ul class="dropdown-menu pull-right">
-			</ul>
-		</div> -->
-        @if( $permission['delete'] == 1 )
-            <div class="btn-group">
-            {{ $delete_url_javascript }}
-            </div>
-        @endif
+							$finfo = finfo_open(FILEINFO_MIME_TYPE);
+							$f_type = finfo_file($finfo, $file);
+						}
+					?>     
+					<a href="{{base_url($resources_policies_attachments)}}" target="_blank"><i class="fa fa-search"></i> {{ lang('common.view') }}</a>
+            	</li>
+                <li>{{$delete_url_javascript}}</li>                    
+            </ul>
+        </div>
 	</td>
 </tr>

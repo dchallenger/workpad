@@ -30,7 +30,7 @@
 	                            {{ form_dropdown('users_profile[reports_to_id]',$users_department_immediate_id_options, $record['users_profile.reports_to_id'], 'class="form-control select2me" id="users_profile-reports_to_id" data-placeholder="Select..."') }}
 	                        </div> 				</div>	
                 </div>
-                <div class="form-group">
+                <div class="form-group hidden">
                     <label class="control-label col-md-3">{{ lang('partners.project_hr') }}</label>
                     <div class="col-md-5">
                         <?php   $db->select('user_id,display_name');
@@ -305,7 +305,7 @@
                 </div>
                 @endif 
                 @if(in_array('credit_setup', $partners_keys))
-                <div class="form-group">
+                <div class="form-group hidden">
                     <label class="control-label col-md-3">{{ lang('partners.credit_setup') }}</label>
                     <div class="col-md-5">
                         <?php   
@@ -342,12 +342,11 @@
                 @endif                                                               
             </div>
             <div class="form-actions fluid">
-                <div class="row">
+                <div class="row" align="center">
                     <div class="col-md-12">
-                        <div class="col-md-offset-3 col-md-8">
-                            <button class="btn green btn-sm" type="button" onclick="save_partner( $(this).parents('form') )"><i class="fa fa-check"></i> {{ lang('common.save') }}</button>
-                            <button class="btn blue btn-sm form-undo" type="submit"><i class="fa fa-undo"></i> {{ lang('common.reset') }}</button>                               
-                        </div>
+                        <button class="btn green btn-sm" type="button" onclick="save_partner( $(this).parents('form') )"><i class="fa fa-check"></i> {{ lang('common.save') }}</button>
+                        <button class="btn blue btn-sm form-undo" type="submit"><i class="fa fa-undo"></i> {{ lang('common.reset') }}</button>                               
+                        <a href="<?php echo $back_url;?>" class="btn default btn-sm">{{ lang('common.back_to_list') }}</a>
                     </div>
                 </div>
             </div>

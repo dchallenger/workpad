@@ -694,6 +694,10 @@ class Partners extends MY_PrivateController
 		$emergency_zip_code = $this->profile_mod->get_partners_personal($user_id, 'emergency_zip_code');
 		$data['emergency_zip_code'] = (count($emergency_zip_code) > 0 ? $emergency_zip_code[0]['key_value'] : " ");
 
+		$drivers_license_no = $this->profile_mod->get_partners_personal($user_id, 'drivers_license_no');
+		$data['record']['drivers_license_no'] = get_valid_key_value($drivers_license_no);
+		$passport_no = $this->profile_mod->get_partners_personal($user_id, 'passport_no');
+		$data['record']['passport_no'] = get_valid_key_value($passport_no);
         $taxcode = $this->profile_mod->get_partners_personal($user_id, 'taxcode');
         $taxcode_result =  $this->profile_mod->get_taxcode($taxcode);
         $data['record']['taxcode'] = ($taxcode_result == "" ? " " : $taxcode_result['taxcode']);
@@ -740,14 +744,18 @@ class Partners extends MY_PrivateController
 		$birth_place = $this->profile_mod->get_partners_personal($user_id, 'birth_place');
 		$data['birth_place'] = (count($birth_place) > 0 ? $birth_place[0]['key_value'] : " ");
 		$religion = $this->profile_mod->get_partners_personal($user_id, 'religion');
-		$data['religion'] = (count($religion) > 0 ? $religion[0]['key_value'] : " ");
+		$data['religion'] = (count($religion) > 0 ? $this->profile_mod->get_religion($religion[0]['key_value']) : " ");
 		$nationality = $this->profile_mod->get_partners_personal($user_id, 'nationality');
 		$data['nationality'] = (count($nationality) > 0 ? $nationality[0]['key_value'] : " ");
+		$marriage_date = $this->profile_mod->get_partners_personal($user_id, 'marriage_date');
+		$data['marriage_date'] = (count($marriage_date) > 0 ? $marriage_date[0]['key_value'] : " ");
 		//Other Information
 		$height = $this->profile_mod->get_partners_personal($user_id, 'height');
 		$data['height'] = (count($height) > 0 ? $height[0]['key_value'] : " ");
 		$weight = $this->profile_mod->get_partners_personal($user_id, 'weight');
 		$data['weight'] = (count($weight) > 0 ? $weight[0]['key_value'] : " ");
+		$blood_type = $this->profile_mod->get_partners_personal($user_id, 'blood_type');
+		$data['blood_type'] = (count($blood_type) > 0 ? $blood_type[0]['key_value'] : " ");		
 		$interests_hobbies = $this->profile_mod->get_partners_personal($user_id, 'interests_hobbies');
 		$data['interests_hobbies'] = (count($interests_hobbies) > 0 ? $interests_hobbies[0]['key_value'] : " ");
 		$language = $this->profile_mod->get_partners_personal($user_id, 'language');
@@ -774,7 +782,7 @@ class Partners extends MY_PrivateController
 		/***** Header Details *****/
 		$data['profile_live_in'] = $city_town;
 		$countries = $this->profile_mod->get_partners_personal($user_id, 'country');
-		$data['profile_country'] = (count($countries) > 0 ? $countries[0]['key_value'] : " ");
+		$data['profile_country'] = $data['country'];
 		$telephones = array();
 		$phone_numbers = $this->profile_mod->get_partners_personal($user_id, 'phone');
 		foreach($phone_numbers as $phone){
@@ -801,8 +809,18 @@ class Partners extends MY_PrivateController
 		$data['profile_mobiles'] = $mobiles;
 		$civil_status = $this->profile_mod->get_partners_personal($user_id, 'civil_status');
 		$data['profile_civil_status'] = (count($civil_status) > 0 ? $civil_status[0]['key_value'] : " ");
-		$spouse = $this->profile_mod->get_partners_personal($user_id, 'spouse');
-		$data['profile_spouse'] = (count($spouse) > 0 ? $spouse[0]['key_value'] : " ");
+
+		$family_tab = $this->profile_mod->get_partners_personal_history($user_id, 'family');
+		foreach($family_tab as $emp){
+			$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+		}
+		$spouse_name = '';
+		foreach ($families_tab as $key => $value) {
+			if ($value['family-relationship'] == 'Spouse')
+				$spouse_name = $value['family-name'];
+		}
+
+		$data['profile_spouse'] = $spouse_name;
 
 		$solo_parent = $this->profile_mod->get_partners_personal($user_id, 'solo_parent');
 		$data['personal_solo_parent'] = (count($solo_parent) == 0 ? " " : ($solo_parent[0]['key_value'] == 0 ? "No" : "Yes"));
@@ -1184,12 +1202,15 @@ class Partners extends MY_PrivateController
 			$data['personal_email'] = $personal_email = (count($personal_email) == 0 ? " " : ($personal_email[0]['key_value'] == "" ? "" : $personal_email[0]['key_value']));
 
 			$city_town = $this->profile_mod->get_partners_personal($user_id, 'city_town');
-			$city_town = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $city_town[0]['key_value']));
-			$data['profile_live_in'] = $city_town;
+			$data['city'] = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $city_town[0]['key_value']));
+			$data['profile_live_in'] = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $this->profile_mod->get_city($city_town[0]['key_value'])));;
 			$countries = $this->profile_mod->get_partners_personal($user_id, 'country');
-			$data['profile_country'] = (count($countries) == 0 ? " " : ($countries[0]['key_value'] == "" ? "" : $countries[0]['key_value']));
+			$data['country'] = (count($countries) == 0 ? " " : ($countries[0]['key_value'] == "" ? "" : $countries[0]['key_value']));			
+			$data['profile_country'] = (count($countries) == 0 ? " " : ($countries[0]['key_value'] == "" ? "" : $this->profile_mod->get_country($countries[0]['key_value'])));
 			$civil_status = $this->profile_mod->get_partners_personal($user_id, 'civil_status');
 			$data['profile_civil_status'] = (count($civil_status) == 0 ? " " : ($civil_status[0]['key_value'] == "" ? "" : $civil_status[0]['key_value']));
+			$marriage_date = $this->profile_mod->get_partners_personal($user_id, 'marriage_date');
+			$data['marriage_date'] = (count($marriage_date) == 0 ? " " : ($marriage_date[0]['key_value'] == "" ? "" : $marriage_date[0]['key_value']));
 			$spouse = $this->profile_mod->get_partners_personal($user_id, 'spouse');
 			$data['profile_spouse'] = (count($spouse) == 0 ? " " : ($spouse[0]['key_value'] == "" ? "" : $spouse[0]['key_value']));
 
@@ -1248,6 +1269,10 @@ class Partners extends MY_PrivateController
 			$emergency_zip_code = $this->profile_mod->get_partners_personal($user_id, 'emergency_zip_code');
 			$data['emergency_zip_code'] = (count($emergency_zip_code) == 0 ? " " : ($emergency_zip_code[0]['key_value'] == "" ? "" : $emergency_zip_code[0]['key_value']));
 
+			$drivers_license_no = $this->profile_mod->get_partners_personal($user_id, 'drivers_license_no');
+			$data['record']['drivers_license_no'] = get_valid_key_value($drivers_license_no);
+			$passport_no = $this->profile_mod->get_partners_personal($user_id, 'passport_no');
+			$data['record']['passport_no'] = get_valid_key_value($passport_no);			
             $taxcode = $this->profile_mod->get_partners_personal($user_id, 'taxcode');
             $data['record']['taxcode'] = (count($taxcode) == 0 ? " " : ($taxcode[0]['key_value'] == "" ? "" : $taxcode[0]['key_value']));
 			$tin_number = $this->profile_mod->get_partners_personal($user_id, 'tin_number');
@@ -1305,6 +1330,8 @@ class Partners extends MY_PrivateController
 			$data['height'] =(count($height) == 0 ? " " : ($height[0]['key_value'] == "" ? "" : $height[0]['key_value']));
 			$weight = $this->profile_mod->get_partners_personal($user_id, 'weight');
 			$data['weight'] =(count($weight) == 0 ? " " : ($weight[0]['key_value'] == "" ? "" : $weight[0]['key_value']));
+			$blood_type = $this->profile_mod->get_partners_personal($user_id, 'blood_type');
+			$data['blood_type'] =(count($blood_type) == 0 ? " " : ($blood_type[0]['key_value'] == "" ? "" : $blood_type[0]['key_value']));			
 			$interests_hobbies = $this->profile_mod->get_partners_personal($user_id, 'interests_hobbies');
 			$data['interests_hobbies'] =(count($interests_hobbies) == 0 ? " " : ($interests_hobbies[0]['key_value'] == "" ? "" : $interests_hobbies[0]['key_value']));
 			$language = $this->profile_mod->get_partners_personal($user_id, 'language');
@@ -1494,7 +1521,7 @@ class Partners extends MY_PrivateController
 		$this->load->model('signatories_model', 'signatory');
 		$data['signatory_model'] = $this->signatory; //->get_position_signatories( $class_id, $position_id, $department_id, $company_id );
 		$data['signatory'] = $this->mod->get_signatories($user_id);
-
+		$data['back_url'] = $this->mod->url;
 
 		$this->load->vars( $data );
 
@@ -2086,7 +2113,7 @@ class Partners extends MY_PrivateController
 				$partners_personal_table = "partners_personal";
 				$other_tables['users_profile'] = $post['users_profile'];
 				$other_tables['users_profile']['birth_date'] = date('Y-m-d', strtotime($post['users_profile']['birth_date']));
-				$partners_personal_key = array('gender', 'birth_place', 'religion', 'nationality', 'civil_status', 'height', 'weight', 'interests_hobbies', 'language', 'dialect', 'dependents_count', 'solo_parent', 'with_parking');
+				$partners_personal_key = array('gender', 'birth_place', 'religion', 'nationality', 'civil_status', 'height', 'weight', 'interests_hobbies', 'language', 'dialect', 'dependents_count', 'solo_parent', 'with_parking', 'marriage_date', 'blood_type');
 				$partners_personal = (isset($post['partners_personal']) ? $post['partners_personal'] : array());
 				break;
 			case 5:
@@ -2378,7 +2405,68 @@ class Partners extends MY_PrivateController
 			}
 
 			$other_tables['payroll_partners'] = $partners_personal_key;
-			$partners_personal_key = array('taxcode', 'sss_number', 'pagibig_number', 'philhealth_number', 'tin_number', 'bank_account_number_savings', 'bank_account_number_current', 'payroll_bank_account_number', 'payroll_bank_name', 'bank_account_name', 'health_care');
+			$partners_personal_key = array('taxcode', 'sss_number', 'pagibig_number', 'philhealth_number', 'tin_number', 'bank_account_number_savings', 'bank_account_number_current', 'payroll_bank_account_number', 'payroll_bank_name', 'bank_account_name', 'health_care', 'drivers_license_no', 'passport_no');
+
+			if(!empty($partners_personal['sss_number'])){
+				$mobile = $this->mod->check_id_number('sss_number',$partners_personal['sss_number'],$this->record_id);
+				if($mobile){
+					$this->response->invalid=true;
+					$this->response->invalid_message='SSS Number already Exists...';
+					$this->response->message[] = array(
+				    	'message' => 'SSS Number already Exists...',
+				    	'type' => 'error'
+					);
+	        		$this->_ajax_return();
+	        	}
+			}
+			if(!empty($partners_personal['pagibig_number'])){
+				$mobile = $this->mod->check_id_number('pagibig_number',$partners_personal['pagibig_number'],$this->record_id);
+				if($mobile){
+					$this->response->invalid=true;
+					$this->response->invalid_message='Pagibig Number already Exists...';
+					$this->response->message[] = array(
+				    	'message' => 'Pagibig Number already Exists...',
+				    	'type' => 'error'
+					);
+	        		$this->_ajax_return();
+	        	}
+			}
+			if(!empty($partners_personal['philhealth_number'])){
+				$mobile = $this->mod->check_id_number('philhealth_number',$partners_personal['philhealth_number'],$this->record_id);
+				if($mobile){
+					$this->response->invalid=true;
+					$this->response->invalid_message='Philhealth Number already Exists...';
+					$this->response->message[] = array(
+				    	'message' => 'Philhealth Number already Exists...',
+				    	'type' => 'error'
+					);
+	        		$this->_ajax_return();
+	        	}
+			}
+			if(!empty($partners_personal['tin_number'])){
+				$mobile = $this->mod->check_id_number('tin_number',$partners_personal['tin_number'],$this->record_id);
+				if($mobile){
+					$this->response->invalid=true;
+					$this->response->invalid_message='TIN already Exists...';
+					$this->response->message[] = array(
+				    	'message' => 'TIN already Exists...',
+				    	'type' => 'error'
+					);
+	        		$this->_ajax_return();
+	        	}
+			}
+			if(!empty($partners_personal['payroll_bank_account_number'])){
+				$mobile = $this->mod->check_id_number('payroll_bank_account_number',$partners_personal['payroll_bank_account_number'],$this->record_id);
+				if($mobile){
+					$this->response->invalid=true;
+					$this->response->invalid_message='Payroll Bank Account Number already Exists...';
+					$this->response->message[] = array(
+				    	'message' => 'Payroll Bank Account Number already Exists...',
+				    	'type' => 'error'
+					);
+	        		$this->_ajax_return();
+	        	}
+			}
 			break;
 			case 16:
 			//Test Profile tab
@@ -3013,14 +3101,24 @@ class Partners extends MY_PrivateController
 			}
 			$data['profile_mobiles'] = $mobiles;
 			$city_town = $this->profile_mod->get_partners_personal($user_id, 'city_town');
-			$city_town = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $city_town[0]['key_value']));
+			$city_town = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $this->profile_mod->get_city($city_town[0]['key_value'])));
 			$data['profile_live_in'] = $city_town;
 			$countries = $this->profile_mod->get_partners_personal($user_id, 'country');
-			$data['profile_country'] = (count($countries) == 0 ? " " : ($countries[0]['key_value'] == "" ? "" : $countries[0]['key_value']));
+			$data['profile_country'] = (count($countries) == 0 ? " " : ($countries[0]['key_value'] == "" ? "" : $this->profile_mod->get_country($countries[0]['key_value'])));
 			$civil_status = $this->profile_mod->get_partners_personal($user_id, 'civil_status');
 			$data['profile_civil_status'] = (count($civil_status) == 0 ? " " : ($civil_status[0]['key_value'] == "" ? "" : $civil_status[0]['key_value']));
-			$spouse = $this->profile_mod->get_partners_personal($user_id, 'spouse');
-			$data['profile_spouse'] = (count($spouse) == 0 ? " " : ($spouse[0]['key_value'] == "" ? "" : $spouse[0]['key_value']));
+
+			$family_tab = $this->profile_mod->get_partners_personal_history($user_id, 'family');
+			foreach($family_tab as $emp){
+				$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			}
+			$spouse_name = '';
+			foreach ($families_tab as $key => $value) {
+				if ($value['family-relationship'] == 'Spouse')
+					$spouse_name = $value['family-name'];
+			}
+
+			$data['profile_spouse'] = $spouse_name;
 
 		// $data['attachment_tab'] = $attachments_tab;
 	    $view['content'] = $this->load->view('edit/forms/profile_header_overview', $data, true);

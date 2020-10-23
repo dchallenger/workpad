@@ -8,6 +8,8 @@ $lang['resources'] = array(
 	'down_forms' => 'Downloadable Forms',
 	'down_forms_desc' => 'Allow download of uploaded forms  for easy access.',
 	'certificate' => 'Certificate',
-	'certificate_desc' => 'Allow certificate Generation.'
+	'certificate_desc' => 'Allow certificate Generation.',
+	'table_organization' => 'Table of Organization',
+	'table_organization_desc' => 'Generation of table of organization',
 );
 ?>

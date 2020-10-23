@@ -176,6 +176,8 @@ class erequest_model extends Record
 
 		$roles_result = $this->db->query($qry);
 
+		$notified = array();		
+		
 		if ($roles_result && $roles_result->num_rows() > 0) {
 			$role_id = $roles_result->row()->role_id;
 
@@ -183,7 +185,6 @@ class erequest_model extends Record
 			$users = $this->db->get('users');
 
 			if ($users && $users->num_rows() > 0) {
-				$notified = array();		
 
 				foreach ($users->result() as $row) {
 					//insert notification

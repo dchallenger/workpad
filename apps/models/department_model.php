@@ -51,4 +51,17 @@ class department_model extends Record
 		$dept = $this->db->get_where( $this->table, array( $this->primary_key => $department_id ) )->row();
 		return $dept->immediate;
 	}
+
+	public function get_department() {
+		$this->db->where('deleted',0);
+		$result = $this->db->get('users_department');
+		$department_option = array();
+		if ($result && $result->num_rows() > 0) {
+			foreach ($result->result() as $row) {
+				$department_option[$row->department_id] = $row->department;
+			}
+		}
+
+		return $department_option;
+	}	
 }

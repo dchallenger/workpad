@@ -14,7 +14,28 @@ function get_param_form()
 					{
 						$('.modal-container').html(response.quick_edit_form);
 						$('.modal-container').modal();
-/*
+
+						$('.coe').live('change', function () {
+							var desc = $('.coe option:selected').text();
+							var coe = $(this).val();
+							$('#coe_description').val(desc);
+							if (coe == 'cov') {
+								$('.cov_dependencies').show();
+								$('.cfr_dependencies').hide();
+							} else if (coe == 'cfr') {
+								$('.cfr_dependencies').show();
+								$('.cov_dependencies').hide();
+							} else {
+								$('.cov_dependencies').hide();
+								$('.cfr_dependencies').hide();
+							}
+						});
+
+						$('.user').live('change', function () {
+							var display_name = $('.user option:selected').text();
+							$('#display_name').val(display_name);
+						});						
+/*						
 						if (report_id == 92){
 							$("#full_name").select2("val", response.user_id);
 						}*/

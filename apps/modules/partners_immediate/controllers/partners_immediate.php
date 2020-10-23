@@ -242,7 +242,7 @@ class Partners_immediate extends MY_PrivateController
 		$address_2 = $this->profile_mod->get_partners_personal($user_id, 'address_2');
 		$address_2 = (count($address_2) == 0 ? " " : ($address_2[0]['key_value'] == "" ? "" : $address_2[0]['key_value']));
 		$city_town = $this->profile_mod->get_partners_personal($user_id, 'city_town');
-		$city_town = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $city_town[0]['key_value']));
+		$city_town = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $this->profile_mod->get_city($city_town[0]['key_value'])));
 		$data['complete_address'] = $address_1." ".$address_2;		
 		$zip_code = $this->profile_mod->get_partners_personal($user_id, 'zip_code');
 		$data['zip_code'] = (count($zip_code) == 0 ? " " : ($zip_code[0]['key_value'] == "" ? "" : $zip_code[0]['key_value']));
@@ -293,14 +293,18 @@ class Partners_immediate extends MY_PrivateController
 		$birth_place = $this->profile_mod->get_partners_personal($user_id, 'birth_place');
 		$data['birth_place'] = (count($birth_place) == 0 ? " " : ($birth_place[0]['key_value'] == "" ? "" : $birth_place[0]['key_value']));
 		$religion = $this->profile_mod->get_partners_personal($user_id, 'religion');
-		$data['religion'] = (count($religion) == 0 ? " " : ($religion[0]['key_value'] == "" ? "" : $religion[0]['key_value']));
+		$data['religion'] = (count($religion) == 0 ? " " : ($religion[0]['key_value'] == "" ? "" : $this->profile_mod->get_religion($religion[0]['key_value'])));
 		$nationality = $this->profile_mod->get_partners_personal($user_id, 'nationality');
 		$data['nationality'] = (count($nationality) == 0 ? " " : ($nationality[0]['key_value'] == "" ? "" : $nationality[0]['key_value']));
+		$marriage_date = $this->profile_mod->get_partners_personal($user_id, 'marriage_date');
+		$data['marriage_date'] = (count($marriage_date) > 0 ? $marriage_date[0]['key_value'] : " ");		
 		//Other Information
 		$height = $this->profile_mod->get_partners_personal($user_id, 'height');
 		$data['height'] = (count($height) == 0 ? " " : ($height[0]['key_value'] == "" ? "" : $height[0]['key_value']));
 		$weight = $this->profile_mod->get_partners_personal($user_id, 'weight');
 		$data['weight'] = (count($weight) == 0 ? " " : ($weight[0]['key_value'] == "" ? "" : $weight[0]['key_value']));
+		$blood_type = $this->profile_mod->get_partners_personal($user_id, 'blood_type');
+		$data['blood_type'] = (count($blood_type) > 0 ? $blood_type[0]['key_value'] : " ");			
 		$interests_hobbies = $this->profile_mod->get_partners_personal($user_id, 'interests_hobbies');
 		$data['interests_hobbies'] = (count($interests_hobbies) == 0 ? " " : ($interests_hobbies[0]['key_value'] == "" ? "" : $interests_hobbies[0]['key_value']));
 		$language = $this->profile_mod->get_partners_personal($user_id, 'language');
@@ -325,6 +329,10 @@ class Partners_immediate extends MY_PrivateController
 		$data['number_children'] = ($number_children == 0 ? '' : $number_children);
 
         // Employment Information
+		$drivers_license_no = $this->profile_mod->get_partners_personal($user_id, 'drivers_license_no');
+		$data['record']['drivers_license_no'] = get_valid_key_value($drivers_license_no);
+		$passport_no = $this->profile_mod->get_partners_personal($user_id, 'passport_no');
+		$data['record']['passport_no'] = get_valid_key_value($passport_no);        
         $taxcode = $this->profile_mod->get_partners_personal($user_id, 'taxcode');
         $taxcode_result =  $this->profile_mod->get_taxcode($taxcode);
         $data['record']['taxcode'] = ($taxcode_result == "" ? " " : ($taxcode_result['taxcode'] == "" ? "" : $taxcode_result['taxcode']));
@@ -364,7 +372,7 @@ class Partners_immediate extends MY_PrivateController
 		/***** Header Details *****/
 		$data['profile_live_in'] = $city_town;
 		$countries = $this->profile_mod->get_partners_personal($user_id, 'country');
-		$data['profile_country'] = (count($countries) == 0 ? " " : ($countries[0]['key_value'] == "" ? "" : $countries[0]['key_value']));
+		$data['profile_country'] = (count($countries) == 0 ? " " : ($countries[0]['key_value'] == "" ? "" : $this->profile_mod->get_country($countries[0]['key_value'])));
 		$telephones = array();
 		$phone_numbers = $this->profile_mod->get_partners_personal($user_id, 'phone');
 		foreach($phone_numbers as $phone){
@@ -385,8 +393,18 @@ class Partners_immediate extends MY_PrivateController
 		$data['profile_mobiles'] = $mobiles;
 		$civil_status = $this->profile_mod->get_partners_personal($user_id, 'civil_status');
 		$data['profile_civil_status'] = (count($civil_status) == 0 ? " " : ($civil_status[0]['key_value'] == "" ? "" : $civil_status[0]['key_value']));
-		$spouse = $this->profile_mod->get_partners_personal($user_id, 'spouse');
-		$data['profile_spouse'] = (count($spouse) == 0 ? " " : ($spouse[0]['key_value'] == "" ? "" : $spouse[0]['key_value']));
+
+		$family_tab = $this->profile_mod->get_partners_personal_history($user_id, 'family');
+		foreach($family_tab as $emp){
+			$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+		}
+		$spouse_name = '';
+		foreach ($families_tab as $key => $value) {
+			if ($value['family-relationship'] == 'Spouse')
+				$spouse_name = $value['family-name'];
+		}
+
+		$data['profile_spouse'] = $spouse_name;
 
 		$solo_parent = $this->profile_mod->get_partners_personal($user_id, 'solo_parent');
 		$data['personal_solo_parent'] = (count($solo_parent) == 0 ? " " : ($solo_parent[0]['key_value'] == 0 ? "No" : "Yes"));
@@ -1795,10 +1813,10 @@ class Partners_immediate extends MY_PrivateController
 			}
 			$data['profile_mobiles'] = $mobiles;
 			$city_town = $this->profile_mod->get_partners_personal($user_id, 'city_town');
-			$city_town = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $city_town[0]['key_value']));
+			$city_town = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $this->profile_mod->get_city($city_town[0]['key_value'])));
 			$data['profile_live_in'] = $city_town;
 			$countries = $this->profile_mod->get_partners_personal($user_id, 'country');
-			$data['profile_country'] = (count($countries) == 0 ? " " : ($countries[0]['key_value'] == "" ? "" : $countries[0]['key_value']));
+			$data['profile_country'] = (count($countries) == 0 ? " " : ($countries[0]['key_value'] == "" ? "" : $this->profile_mod->get_country($countries[0]['key_value'])));
 			$civil_status = $this->profile_mod->get_partners_personal($user_id, 'civil_status');
 			$data['profile_civil_status'] = (count($civil_status) == 0 ? " " : ($civil_status[0]['key_value'] == "" ? "" : $civil_status[0]['key_value']));
 			$spouse = $this->profile_mod->get_partners_personal($user_id, 'spouse');

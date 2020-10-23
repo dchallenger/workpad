@@ -1,3 +1,8 @@
+$(document).ready(function() {
+    var service = get_service(  $('#partners-effectivity_date').val() );
+    $('span.calculatedservice').html(service+"&nbsp;&nbsp;years of service")    
+});
+
 function show_cr_form()
 {
 	$.blockUI({ message: loading_message(), 

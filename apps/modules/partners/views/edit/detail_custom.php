@@ -128,7 +128,7 @@
 										<span class="text-muted"><i class="fa fa-user"></i>&nbsp; {{ lang('partners.civil_status') }}</span> 
 										<span class="pull-right" id="civilstatus"> {{$profile_civil_status}}</span>
 										<br />
-										<span class="pull-right small text-muted"> <?php echo strtolower($profile_civil_status) == "married" ? "Spouse ".$profile_spouse : "" ?></span>
+										<span class="pull-right small text-muted"> <?php echo strtolower($profile_civil_status) == "married" && $profile_spouse != " " ? "Spouse : ".$profile_spouse : "" ?></span>
 									</li>
 									<!-- <li>
                                         <a class="btn icn-only green" onclick="javascipt:edit_profile();">Change Request <i class="m-icon-swapright m-icon-white"></i></a>

@@ -1,5 +1,26 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+function get_hr_head () {
+	$ci=& MY_Controller::$instance; 
+
+	$ci->db->select('CONCAT(firstname," ",middleinitial," ",lastname) as f_name',false);
+	$ci->db->where('position','AVP, Head of Human Resources');
+	$ci->db->join('users_position','users_position.position_id = users_profile.position_id');
+	$ci->db->join('users','users_profile.user_id = users.user_id');
+	$result = $ci->db->get('users_profile');
+	
+	$head_human_resource = '';
+	if ($result && $result->num_rows() > 0) {
+		$head_human_resource = $result->row()->f_name;
+	}
+
+	$hr_head['position'] = 'Head of Human Resources';
+	$hr_head['full_name'] = $head_human_resource;
+
+
+	return $hr_head;
+}
+
 function debug( $var, $return = false )
 {
 	$debug = "<pre>";
@@ -809,4 +830,12 @@ function valid_date($date_val) {
 		else
 			return date('F d, Y',strtotime($date_val));
 	}
+}
+
+function get_valid_key_value($item_key_name = []) {
+	$value = "";
+	if (count($item_key_name) > 0 && $item_key_name[0]['key_value'] != "")
+		$value = $item_key_name[0]['key_value'];
+
+	return $value;
 }

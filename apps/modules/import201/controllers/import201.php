@@ -7,7 +7,7 @@ class Import201 extends MY_PrivateController
 		$this->load->model('import201_model', 'mod');
 		parent::__construct();
 		//$this->filename = 'D:\oclp new version\employee 201 master file from oclp.xls';
-		$this->filename = 'D:\oclp new version\employee 201 record 10072020.xls';
+		$this->filename = 'D:\oclp new version\employee 201 record 10052020_updated.xls';
 	}
 
 	function import_payroll_summary(){
@@ -2581,7 +2581,18 @@ class Import201 extends MY_PrivateController
 						switch ($value) {
 							case 'solo_parent':
 								$row[$key] = (strtolower($row[$key]) == 'yes' ? 1 : 0);
-								break;	
+								break;
+							case 'religion':
+								$result = $this->db->get_where('religion',array('religion' => $row[$key]));
+								if ($result && $result->num_rows() > 0){
+									$row_religion = $result->row();
+									$row[$key] = $row_religion->religion_id;						
+								}
+								else{
+									$this->db->insert('religion',array('religion' => $row[$key]));
+									$row[$key] = $this->db->insert_id();
+								}
+								break;									
 						}
 
 						$result = $this->db->get_where('partners_key',array('key_code' => $value));

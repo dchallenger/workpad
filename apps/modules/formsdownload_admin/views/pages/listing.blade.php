@@ -33,7 +33,7 @@
 				<div class="caption" id="head-caption">&nbsp;</div>
 				<div class="actions">
 					@if( isset( $permission['add']) && $permission['add'] )
-					<a id="goadd" href="javascript:quick_add();" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
+					<a id="goadd" href="{{ $mod->url }}/add" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
 					@endif
 					@if( isset( $permission['delete']) && $permission['delete'] )
 					<!-- <a href="javascript:delete_records()" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></a> -->

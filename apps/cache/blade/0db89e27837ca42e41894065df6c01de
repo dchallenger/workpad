@@ -52,7 +52,7 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-list-ul"></i>
                             </span>
-                            <?php echo form_dropdown('partners_personal[city_town]',$partners_city_options, $profile_live_in, 'class="form-control select2me" data-placeholder="Select..."'); ?>
+                            <?php echo form_dropdown('partners_personal[city_town]',$partners_city_options, $city, 'class="form-control select2me" data-placeholder="Select..." id="partners_personal-present_city"'); ?>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-list-ul"></i>
                             </span>
-                            <?php echo form_dropdown('partners_personal[country]',$partners_country_options, $profile_country, 'class="form-control select2me" data-placeholder="Select..."'); ?>
+                            <?php echo form_dropdown('partners_personal[country]',$partners_country_options, $country, 'class="form-control select2me" data-placeholder="Select..." id="partners_personal-present_country"'); ?>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                 </div>
                 <?php endif; ?>
 
-                <div>Permanent Address:</div>
+                <div>Permanent Address: <span>&nbsp;&nbsp;<input type="checkbox" id="same_present" value="1">Same as Present Address</span></div>
                 <br>
                 <?php if(in_array('permanent_address', $partners_keys)): ?>
                 <div class="form-group">
@@ -102,7 +102,7 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-list-ul"></i>
                             </span>
-                            <?php echo form_dropdown('partners_personal[permanent_city_town]',$partners_city_options, $permanent_city_town, 'class="form-control select2me" data-placeholder="Select..."'); ?>
+                            <?php echo form_dropdown('partners_personal[permanent_city_town]',$partners_city_options, $permanent_city_town, 'class="form-control select2me" data-placeholder="Select..." id="partners_personal-permanent_city"'); ?>
                         </div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-list-ul"></i>
                             </span>
-                            <?php echo form_dropdown('partners_personal[permanent_country]',$partners_country_options, $permanent_country, 'class="form-control select2me" data-placeholder="Select..."'); ?>
+                            <?php echo form_dropdown('partners_personal[permanent_country]',$partners_country_options, $permanent_country, 'class="form-control select2me" data-placeholder="Select..." id="partners_personal-permanent_country"'); ?>
                         </div>
                     </div>
                 </div>

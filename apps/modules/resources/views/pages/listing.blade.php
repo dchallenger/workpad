@@ -65,12 +65,12 @@
 											<div class="text-muted small">{{ lang('resources.certificate_desc')}}</div>
 										</div>
 										<div class="col-md-3 margin-bottom-25">
-											<!-- <a class="btn btn-default" type="button" href="{{ get_mod_route('coe') }}" rel="{{ get_mod_route('coe') }}">{{ lang('common.view_list_button') }}</a> -->
+											<a class="btn btn-default hidden" type="button" href="{{ get_mod_route('coe') }}" rel="{{ get_mod_route('coe') }}">{{ lang('common.view_list_button') }}</a>
 											<a class="btn btn-success" type="button" href="javascript:get_param_form()">Generate</a>
 										</div>
 										<div class="clearfix"></div>
 									</div>					
-									@endif				
+									@endif								
 								</div>
 							</div>
                         </form>

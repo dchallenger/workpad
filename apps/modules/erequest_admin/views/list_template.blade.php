@@ -16,9 +16,15 @@
 		<span class="text-muted small">{{$request_status}}</span>
 	</td>
 	<td>
-	    <div class="btn-group">
-			<a class="btn btn-xs text-muted" href="{{ $edit_url }}"><i class="fa fa-search"></i> {{ lang('common.view') }}</a>
-		</div>
+		@if ($request_status_id == 2)
+		    <div class="btn-group">
+				<a class="btn btn-xs text-muted" href="{{ $edit_url }}"><i class="fa fa-pencil"></i>{{ lang('common.edit') }}</a>
+			</div>
+		@elseif (in_array($request_status_id,[1,3,4,5,6]))
+			<div class="btn-group">
+				<a class="btn btn-xs text-muted" href="{{ $detail_url }}"><i class="fa fa-search"></i>{{ lang('common.view') }}</a>
+			</div>			
+		@endif
 		<!-- @if(in_array($request_status_id, array(1,2,3,5)))
 	        <div class="btn-group">
 	            <a class="btn btn-xs text-muted" href="{{ $edit_url }}"><i class="fa fa-pencil"></i> Edit</a>

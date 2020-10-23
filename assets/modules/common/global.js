@@ -94,6 +94,18 @@ function dateDiff(date1,date2,interval) {
     }
 }
 
+function get_service(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+
+    var m = today.getMonth() - birthDate.getMonth();
+
+    age = ( ( age * 12 ) + m ) / 12;
+
+    return age.toFixed(2);
+}
+
 function handle_ajax_message( message )
 {
 	for( var i in message ){

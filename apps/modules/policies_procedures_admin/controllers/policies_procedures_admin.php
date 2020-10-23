@@ -152,7 +152,7 @@ class Policies_procedures_admin extends MY_PrivateController
 		// if( isset($this->permission['delete']) && $this->permission['delete'] )
 		// {
 		// 	$rec['delete_url'] = $this->mod->url . '/delete/' . $record['record_id'];
-			$rec['delete_url_javascript'] = '<a href="javascript: delete_record('.$record['record_id'].')" class="btn btn-xs text-muted"><i class="fa fa-trash-o"></i> Delete</a>';
+			$rec['delete_url_javascript'] = '<a href="javascript: delete_record('.$record['record_id'].')"><i class="fa fa-trash-o"></i> Delete</a>';
 		// }
 	}
 

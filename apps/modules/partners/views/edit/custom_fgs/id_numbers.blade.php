@@ -111,15 +111,29 @@
                     </div>
                 </div>
                 @endif
-                
+                @if(in_array('drivers_license_no', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-5">{{ $partners_labels['drivers_license_no'] }}</label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="partners_personal[drivers_license_no]" id="partners_personal-bank_account_number_savings" value="{{ $record['drivers_license_no'] }}" placeholder="Enter {{ $partners_labels['drivers_license_no'] }}"/>
+                    </div>
+                </div>
+                @endif
+                @if(in_array('passport_no', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-5">{{ $partners_labels['passport_no'] }}</label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="partners_personal[passport_no]" id="partners_personal-bank_account_number_savings" value="{{ $record['passport_no'] }}" placeholder="Enter {{ $partners_labels['passport_no'] }}"/>
+                    </div>
+                </div>
+                @endif                 
             </div>     
             <div class="form-actions fluid">
-                <div class="row">
+                <div class="row" align="center">
                     <div class="col-md-12">
-                        <div class="col-md-offset-3 col-md-8">
-                            <button class="btn green btn-sm" type="button" onclick="save_partner( $(this).parents('form') )"><i class="fa fa-check"></i> {{ lang('common.save') }} @if (empty($record['record_id'])) and {{ lang('common.next') }} @endif</button>
-                            <button class="btn blue btn-sm form-undo" type="submit"><i class="fa fa-undo"></i> {{ lang('common.reset') }}</button>                               
-                        </div>
+                        <button class="btn green btn-sm" type="button" onclick="save_partner( $(this).parents('form') )"><i class="fa fa-check"></i> {{ lang('common.save') }} @if (empty($record['record_id'])) and {{ lang('common.next') }} @endif</button>
+                        <button class="btn blue btn-sm form-undo" type="submit"><i class="fa fa-undo"></i> {{ lang('common.reset') }}</button>                               
+                        <a href="<?php echo $back_url;?>" class="btn default btn-sm">{{ lang('common.back_to_list') }}</a>
                     </div>
                 </div>
             </div>

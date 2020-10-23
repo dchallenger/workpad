@@ -44,4 +44,17 @@ class division_model extends Record
 		$user_details = $this->db->get('users');
 	    return $user_details->row();
 	}
+
+	public function get_division() {
+		$this->db->where('deleted',0);
+		$result = $this->db->get('users_division');
+		$division_option = array();
+		if ($result && $result->num_rows() > 0) {
+			foreach ($result->result() as $row) {
+				$division_option[$row->division_id] = $row->division;
+			}
+		}
+
+		return $division_option;
+	}
 }

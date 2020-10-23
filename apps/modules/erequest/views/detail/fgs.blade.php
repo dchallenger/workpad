@@ -109,7 +109,7 @@
 					<div class="form-group">
 						<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('common.remarks') }} :</label>
 						<div class="col-md-7 col-sm-7">
-							<textarea class="form-control" rows="4" name="resources_request[remarks]" id="resources_request-remarks" >&nbsp;</textarea>
+							<textarea readonly class="form-control" rows="4" name="resources_request[remarks]" id="resources_request-remarks" >{{$record['resources_request.remarks']}}</textarea>
 						</div>
 					</div>
 				</div>
@@ -120,9 +120,9 @@
 						<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('erequest.attachments') }} :</label>
 						<div class="controls col-md-7">							
                             <ul class="padding-none">
-                            @if( !empty($record['resources_request_upload.upload_id']) )
+                            @if( !empty($record['resources_request_upload_hr.upload_id']) )
 								<?php 
-									$upload_ids = explode( ',', $record['resources_request_upload.upload_id'] );
+									$upload_ids = explode( ',', $record['resources_request_upload_hr.upload_id'] );
 									foreach( $upload_ids as $upload_id )
 									{
 										$upload = $db->get_where('system_uploads', array('upload_id' => $upload_id))->row();

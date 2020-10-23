@@ -123,6 +123,16 @@ class Record extends MY_Model
 		return $city_val;
 	}
 
+	public function get_religion($religion_id = 0){
+		$religion_val = '';
+		$this->db->where('religion_id',$religion_id);
+		$religion = $this->db->get('religion');
+		if ($religion && $religion->num_rows() > 0) {
+			$religion_val = $religion->row()->religion;
+		}		
+		return $religion_val;
+	}
+
 	public function get_medical_exam_type($medical_exam_type_id = 0){
 		$medical_exam_type_val = '';
 		$this->db->where('medical_exam_type_id',$medical_exam_type_id);
@@ -142,6 +152,36 @@ class Record extends MY_Model
 		}		
 		return $degree_obtained_val;
 	}
+
+	public function get_human_resource_head($position = '') {
+		$this->db->where('position',$position);
+		$this->db->join('users_position','users_position.position_id = users_profile.position_id');
+		$this->db->join('users','users_profile.user_id = users.user_id');
+		$result = $this->db->get('users_profile');
+
+		$head_human_resource = '';
+		if ($result && $result->num_rows() > 0) {
+			$head_human_resource = $result->row()->full_name;
+		}
+	}
+
+	public function check_id_number($field_name = '',$value = '',$user_id = 0) {
+        $qry = "SELECT {$field_name}
+			        FROM partners_personal
+			        WHERE {$field_name}='{$value}' AND deleted=0";
+
+		if ($user_id > 0)
+			$qry .= " AND user_id <> $user_id";
+
+        $result = $this->db->query( $qry );
+
+        $id_number = 0;
+        if ($result && $result->num_rows() > 0) {
+        	$id_number =  $result->row()->$field_name;
+        }
+        
+        return $id_number;
+	}	
 
 	function db_which()
 	{

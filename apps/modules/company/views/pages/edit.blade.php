@@ -194,6 +194,7 @@
 
                                     $db->select('contacts_id, contact_type, contact_no'); 
                                     $db->where('company_id', $record_id);
+                                    $db->where('contact_type', 'Phone');
                                     $db->where('deleted', '0'); 
                                     //$db->group_by('contact_type');
                                     $contacts = $db->get('ww_users_company_contact'); 
@@ -206,40 +207,37 @@
 
 
                                 <!-- PHONE NUMBERS -->
+                                @if(!empty($company_contacts))
+                                    @for($i=0; $i < count($company_contacts); $i++ )   
+                                        @if($company_contacts[$i]->contact_type === 'Phone')
+                                            <div id="phone-group-update-{{ $company_contacts[$i]->contacts_id }}" class="form-group hidden-sm hidden-xs">
 
-                                @for($i=0; $i < count($company_contacts); $i++ )   
-
-                                    
-                                    @if($company_contacts[$i]->contact_type === 'Phone')
-
-                                        <div id="phone-group-update-{{ $company_contacts[$i]->contacts_id }}" class="form-group hidden-sm hidden-xs">
-
-                                            <label class="control-label col-md-3">{{ lang('company.phone') }}</label>
-                                            <div class="col-md-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                                    <input 
-                                                        type="text" 
-                                                        class="form-control" 
-                                                        maxlength="16"
-                                                        name="users_company_contact[Phone][update][contact_no][{{ $company_contacts[$i]->contacts_id }}]"
-                                                        id="com_cm_phone_{{ $company_contacts[$i]->contacts_id }}"
-                                                        value="{{ $company_contacts[$i]->contact_no }}" 
-                                                        placeholder="{{ lang('company.p_phone') }}">
+                                                <label class="control-label col-md-3">{{ lang('company.phone') }}</label>
+                                                <div class="col-md-4">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                                        <input 
+                                                            type="text" 
+                                                            class="form-control" 
+                                                            maxlength="16"
+                                                            name="users_company_contact[Phone][update][contact_no][{{ $company_contacts[$i]->contacts_id }}]"
+                                                            id="com_cm_phone_{{ $company_contacts[$i]->contacts_id }}"
+                                                            value="{{ $company_contacts[$i]->contact_no }}" 
+                                                            placeholder="{{ lang('company.p_phone') }}">
+                                                    </div>
                                                 </div>
+                                                <span class="hidden-xs hidden-sm hidden">
+                                                    <a  
+                                                        data-target-id="phone-group-update-{{ $company_contacts[$i]->contacts_id }}" 
+                                                        data-item-id="{{ $company_contacts[$i]->contacts_id }}"
+                                                        class="btn btn-default btn-sm remove" 
+                                                        href="#"><i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </span>
                                             </div>
-                                            <span class="hidden-xs hidden-sm">
-                                                <a  
-                                                    data-target-id="phone-group-update-{{ $company_contacts[$i]->contacts_id }}" 
-                                                    data-item-id="{{ $company_contacts[$i]->contacts_id }}"
-                                                    class="btn btn-default btn-sm remove" 
-                                                    href="#"><i class="fa fa-trash-o"></i>
-                                                </a>
-                                            </span>
-                                        </div>
-                                    @endif
-                                @endfor  
-
+                                        @endif
+                                    @endfor
+                                @else
                                     <div id="phone-group-add-nw1" class="form-group hidden-sm hidden-xs phone">
                                         <label class="control-label col-md-3">{{ lang('company.phone') }}</label>
                                         <div class="col-md-4">
@@ -254,52 +252,65 @@
                                                     placeholder="{{ lang('company.p_phone') }}">
                                             </div>
                                         </div>
-                                        <span class="hidden-xs hidden-sm">
+                                        <span class="hidden-xs hidden-sm hidden">
                                             <a 
                                                 data-target-id="phone-group-add-nw1" 
                                                 data-contact-type="Phone" 
                                                 class="btn btn-default btn-sm create" 
                                                 href="#"><i class="fa fa-plus"></i></a>
                                         </span>
-                                    </div>
-
-
+                                    </div>                                    
+                                @endif
                                 <!-- MOBILE AND FAX NUMBERS TO FOLLOW -->
 
                                 <!-- MOBILE NUMBERS --> 
-                                @for($i=0; $i < count($company_contacts); $i++ )   
+                                <?php
 
-                                    
-                                    @if($company_contacts[$i]->contact_type === 'Mobile')
+                                    $db->select('contacts_id, contact_type, contact_no'); 
+                                    $db->where('company_id', $record_id);
+                                    $db->where('contact_type', 'Mobile');
+                                    $db->where('deleted', '0'); 
+                                    //$db->group_by('contact_type');
+                                    $contacts = $db->get('ww_users_company_contact'); 
+                                    $company_contacts = array(); 
 
-                                        <div id="mobile-group-update-{{ $company_contacts[$i]->contacts_id }}" class="form-group hidden-sm hidden-xs">
+                                    foreach($contacts->result() as $option) { 
+                                        $company_contacts[] = $option;
+                                    } 
+                                ?>   
 
-                                            <label class="control-label col-md-3">{{ lang('company.mobile') }}</label>
-                                            <div class="col-md-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                                    <input 
-                                                        type="text" 
-                                                        class="form-control" 
-                                                        maxlength="16"
-                                                        name="users_company_contact[Mobile][update][contact_no][{{ $company_contacts[$i]->contacts_id }}]"
-                                                        id="com_cm_mobile_{{ $company_contacts[$i]->contacts_id }}"
-                                                        value="{{ $company_contacts[$i]->contact_no }}" 
-                                                        placeholder="{{ lang('company.p_mobile') }}">
+                                @if(!empty($company_contacts))
+                                    @for($i=0; $i < count($company_contacts); $i++ )   
+                                        @if($company_contacts[$i]->contact_type === 'Mobile')
+
+                                            <div id="mobile-group-update-{{ $company_contacts[$i]->contacts_id }}" class="form-group hidden-sm hidden-xs">
+
+                                                <label class="control-label col-md-3">{{ lang('company.mobile') }}</label>
+                                                <div class="col-md-4">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                                        <input 
+                                                            type="text" 
+                                                            class="form-control" 
+                                                            maxlength="16"
+                                                            name="users_company_contact[Mobile][update][contact_no][{{ $company_contacts[$i]->contacts_id }}]"
+                                                            id="com_cm_mobile_{{ $company_contacts[$i]->contacts_id }}"
+                                                            value="{{ $company_contacts[$i]->contact_no }}" 
+                                                            placeholder="{{ lang('company.p_mobile') }}">
+                                                    </div>
                                                 </div>
+                                                <span class="hidden-xs hidden-sm hidden">
+                                                    <a  
+                                                        data-target-id="mobile-group-update-{{ $company_contacts[$i]->contacts_id }}" 
+                                                        data-item-id="{{ $company_contacts[$i]->contacts_id }}"
+                                                        class="btn btn-default btn-sm remove" 
+                                                        href="#"><i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </span>
                                             </div>
-                                            <span class="hidden-xs hidden-sm">
-                                                <a  
-                                                    data-target-id="mobile-group-update-{{ $company_contacts[$i]->contacts_id }}" 
-                                                    data-item-id="{{ $company_contacts[$i]->contacts_id }}"
-                                                    class="btn btn-default btn-sm remove" 
-                                                    href="#"><i class="fa fa-trash-o"></i>
-                                                </a>
-                                            </span>
-                                        </div>
-                                    @endif
-                                @endfor  
-
+                                        @endif
+                                    @endfor
+                                @else
                                     <div id="mobile-group-add-nw1" class="form-group hidden-sm hidden-xs mobile">
                                         <label class="control-label col-md-3">{{ lang('company.mobile') }}</label>
                                         <div class="col-md-4">
@@ -314,50 +325,62 @@
                                                     placeholder="{{ lang('company.p_mobile') }}">
                                             </div>
                                         </div>
-                                        <span class="hidden-xs hidden-sm">
+                                        <span class="hidden-xs hidden-sm hidden">
                                             <a 
                                                 data-target-id="mobile-group-add-nw1" 
                                                 data-contact-type="mobile" 
                                                 class="btn btn-default btn-sm create" 
                                                 href="#"><i class="fa fa-plus"></i></a>
                                         </span>
-                                    </div>  
-
-
+                                    </div>                                      
+                                @endif                                    
                                 <!-- FAX NUMBERS --> 
-                                @for($i=0; $i < count($company_contacts); $i++ )   
+                                <?php
 
-                                    
-                                    @if($company_contacts[$i]->contact_type === 'Fax')
+                                    $db->select('contacts_id, contact_type, contact_no'); 
+                                    $db->where('company_id', $record_id);
+                                    $db->where('contact_type', 'Fax');
+                                    $db->where('deleted', '0'); 
+                                    //$db->group_by('contact_type');
+                                    $contacts = $db->get('ww_users_company_contact'); 
+                                    $company_contacts = array(); 
 
-                                        <div id="fax-group-update-{{ $company_contacts[$i]->contacts_id }}" class="form-group hidden-sm hidden-xs">
+                                    foreach($contacts->result() as $option) { 
+                                        $company_contacts[] = $option;
+                                    } 
+                                ?>                                   
+                                @if(!empty($company_contacts))
+                                    @for($i=0; $i < count($company_contacts); $i++ )   
+                                        @if($company_contacts[$i]->contact_type === 'Fax')
 
-                                            <label class="control-label col-md-3">{{ lang('company.fax_no') }}</label>
-                                            <div class="col-md-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                                    <input 
-                                                        type="text" 
-                                                        class="form-control" 
-                                                        maxlength="16"
-                                                        name="users_company_contact[Fax][update][contact_no][{{ $company_contacts[$i]->contacts_id }}]"
-                                                        id="com_cm_fax_{{ $company_contacts[$i]->contacts_id }}"
-                                                        value="{{ $company_contacts[$i]->contact_no }}" 
-                                                        placeholder="{{ lang('company.p_fax_no') }}">
+                                            <div id="fax-group-update-{{ $company_contacts[$i]->contacts_id }}" class="form-group hidden-sm hidden-xs">
+
+                                                <label class="control-label col-md-3">{{ lang('company.fax_no') }}</label>
+                                                <div class="col-md-4">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                                        <input 
+                                                            type="text" 
+                                                            class="form-control" 
+                                                            maxlength="16"
+                                                            name="users_company_contact[Fax][update][contact_no][{{ $company_contacts[$i]->contacts_id }}]"
+                                                            id="com_cm_fax_{{ $company_contacts[$i]->contacts_id }}"
+                                                            value="{{ $company_contacts[$i]->contact_no }}" 
+                                                            placeholder="{{ lang('company.p_fax_no') }}">
+                                                    </div>
                                                 </div>
+                                                <span class="hidden-xs hidden-sm hidden">
+                                                    <a  
+                                                        data-target-id="fax-group-update-{{ $company_contacts[$i]->contacts_id }}" 
+                                                        data-item-id="{{ $company_contacts[$i]->contacts_id }}"
+                                                        class="btn btn-default btn-sm remove" 
+                                                        href="#"><i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </span>
                                             </div>
-                                            <span class="hidden-xs hidden-sm">
-                                                <a  
-                                                    data-target-id="fax-group-update-{{ $company_contacts[$i]->contacts_id }}" 
-                                                    data-item-id="{{ $company_contacts[$i]->contacts_id }}"
-                                                    class="btn btn-default btn-sm remove" 
-                                                    href="#"><i class="fa fa-trash-o"></i>
-                                                </a>
-                                            </span>
-                                        </div>
-                                    @endif
-                                @endfor  
-
+                                        @endif                              
+                                    @endfor
+                                @else
                                     <div id="fax-group-add-nw1" class="form-group hidden-sm hidden-xs fax">
                                         <label class="control-label col-md-3">{{ lang('company.fax_no') }}</label>
                                         <div class="col-md-4">
@@ -372,16 +395,15 @@
                                                     placeholder="{{ lang('company.p_fax_no') }}">
                                             </div>
                                         </div>
-                                        <span class="hidden-xs hidden-sm">
+                                        <span class="hidden-xs hidden-sm hidden">
                                             <a 
                                                 data-target-id="fax-group-add-nw1" 
                                                 data-contact-type="fax" 
                                                 class="btn btn-default btn-sm create" 
                                                 href="#"><i class="fa fa-plus"></i></a>
                                         </span>
-                                    </div>                                                                   
-
-
+                                    </div>                                         
+                                @endif                                                                  
                             @else
 
                                 {{-- die('NEW') --}}
@@ -401,7 +423,7 @@
                                                     placeholder="{{ lang('company.p_phone') }}">
                                             </div>
                                         </div>
-                                        <span class="hidden-xs hidden-sm">
+                                        <span class="hidden-xs hidden-sm hidden">
                                             <a 
                                                 data-target-id="phone-group-add-nw1" 
                                                 data-contact-type="Phone" 
@@ -425,7 +447,7 @@
                                                     placeholder="{{ lang('company.mobile') }}">
                                             </div>
                                         </div>
-                                        <span class="hidden-xs hidden-sm">
+                                        <span class="hidden-xs hidden-sm hidden">
                                             <a 
                                                 data-target-id="mobile-group-add-nw1" 
                                                 data-contact-type="mobile" 
@@ -449,7 +471,7 @@
                                                     placeholder="{{ lang('company.p_fax_no') }}">
                                             </div>
                                         </div>
-                                        <span class="hidden-xs hidden-sm">
+                                        <span class="hidden-xs hidden-sm hidden">
                                             <a 
                                                 data-target-id="fax-group-add-nw1" 
                                                 data-contact-type="fax" 

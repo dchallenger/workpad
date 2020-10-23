@@ -6,7 +6,7 @@
 					<span class="after"></span>
 				</li>
 				<li><a data-toggle="tab" href="#overview_tab2"><i class="fa fa-phone"></i>{{ lang('partners_immediate.contacts') }}</a></li>
-				<li><a data-toggle="tab" href="#overview_tab17"><i class="fa fa-money"></i>{{ lang('partners.cost_center') }}</a></li>				
+				<li class="hidden"><a data-toggle="tab" href="#overview_tab17"><i class="fa fa-money"></i>{{ lang('partners.cost_center') }}</a></li>				
 				<li><a data-toggle="tab" href="#overview_tab15"><i class="fa fa-list"></i>{{ lang('partners.id_nos') }}</a></li>
 				<li><a data-toggle="tab" href="#overview_tab3"><i class="fa fa-user"></i>{{ lang('partners_immediate.personal') }}</a></li>
 				<li><a data-toggle="tab" href="#overview_tab14"><i class="fa fa-group"></i>{{ lang('partners_immediate.family') }}</a></li>
@@ -233,9 +233,12 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
+									<input type="hidden" value="{{$date_hired}}" id="partners-effectivity_date">
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.hire_date') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="date-hired">{{$date_hired}}</span>
+										<br>
+										<span class="text-muted small calculatedservice"></span>										
 									</div>
 								</div>
 							</div>
@@ -268,8 +271,6 @@
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $partners_labels['probationary_date'] }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="lastname">{{$probationary_date}}</span>
-										<br>
-		                        		<span class="text-muted small">End date of employment/contract service</span>										
 									</div>
 								</div>
 							</div>
@@ -320,7 +321,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row hidden">
 							<div class="col-md-12">
 								<div class="form-group">
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.project_hr') }} :</label>
@@ -348,12 +349,20 @@
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.div') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="position-title">{{$division}}</span>
-                        				<br>
-										<span class="text-muted small">Cost Center Code : {{$cost_center_code}}</span>										
 									</div>
 								</div>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">Cost Center Code :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="position-title">{{$cost_center_code}}</span>
+									</div>
+								</div>
+							</div>
+						</div>						
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -455,7 +464,7 @@
 							</div>
 						@endif     
 						@if(in_array('credit_setup', $partners_keys))
-							<div class="row">
+							<div class="row hidden">
 								<div class="col-md-12">
 									<div class="form-group">
 										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $partners_labels['credit_setup'] }} :</label>
@@ -812,7 +821,7 @@
 					</div>
 					<div class="portlet-body form">
 						<!-- START FORM -->
-                @if(in_array('taxcode', $partners_keys))
+                	@if(in_array('taxcode', $partners_keys))
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -823,8 +832,8 @@
                                 </div>
                             </div>
                         </div>
-                @endif
-                @if(in_array('sss_number', $partners_keys))
+                	@endif
+                	@if(in_array('sss_number', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -835,8 +844,8 @@
 								</div>
 							</div>
 						</div>
-                @endif
-                @if(in_array('pagibig_number', $partners_keys))
+                	@endif
+                	@if(in_array('pagibig_number', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -847,8 +856,8 @@
 								</div>
 							</div>
 						</div>
-                @endif
-                @if(in_array('philhealth_number', $partners_keys))
+                	@endif
+                	@if(in_array('philhealth_number', $partners_keys))
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
@@ -859,8 +868,8 @@
 									</div>
 								</div>
 							</div>
-                @endif
-                @if(in_array('tin_number', $partners_keys))
+                	@endif
+                	@if(in_array('tin_number', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -871,8 +880,8 @@
 								</div>
 							</div>
 						</div>
-                @endif
-                @if(in_array('bank_account_number_savings', $partners_keys))
+                	@endif
+                	@if(in_array('bank_account_number_savings', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -883,8 +892,8 @@
 								</div>
 							</div>
 						</div>
-                @endif
-                @if(in_array('bank_account_number_current', $partners_keys))
+                	@endif
+                	@if(in_array('bank_account_number_current', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -895,8 +904,8 @@
 								</div>
 							</div>
 						</div>
-                @endif
-                @if(in_array('payroll_bank_account_number', $partners_keys))
+                	@endif
+                	@if(in_array('payroll_bank_account_number', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -907,8 +916,8 @@
 								</div>
 							</div>
 						</div>
-                @endif
-                @if(in_array('payroll_bank_name', $partners_keys))
+                	@endif
+                	@if(in_array('payroll_bank_name', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -919,8 +928,8 @@
 								</div>
 							</div>
 						</div>
-                @endif                
-                @if(in_array('bank_account_name', $partners_keys))
+                	@endif                
+                	@if(in_array('bank_account_name', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -931,8 +940,8 @@
 								</div>
 							</div>
 						</div>
-                @endif
-                @if(in_array('health_care', $partners_keys))
+                	@endif
+                	@if(in_array('health_care', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -943,7 +952,31 @@
 								</div>
 							</div>
 						</div>
-                @endif
+                	@endif
+                	@if(in_array('drivers_license_no', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-5 col-sm-5 text-right text-muted">{{ $partners_labels['drivers_license_no'] }} :</label>
+									<div class="col-md-6 col-sm-6">
+										<span id="emergency-name">{{$record['drivers_license_no']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                	@endif
+                	@if(in_array('passport_no', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-5 col-sm-5 text-right text-muted">{{ $partners_labels['passport_no'] }} :</label>
+									<div class="col-md-6 col-sm-6">
+										<span id="emergency-name">{{$record['passport_no']}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                	@endif                  	
 					</div>
 				</div>
 			</div>			
@@ -1021,6 +1054,16 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.date_marriage') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="civil-status">{{$marriage_date}}</span>
+									</div>
+								</div>
+							</div>
+						</div>					
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.solo_parent') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="civil-status">{{$personal_solo_parent}}</span>
@@ -1043,7 +1086,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.height') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.height') }} (in cm) :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="height">{{$height}}</span>
 									</div>
@@ -1053,13 +1096,25 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.weight') }} :</label>
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.weight') }} (in kgs) :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="weight">{{$weight}}</span>
 									</div>
 								</div>
 							</div>
 						</div>
+                		@if(in_array('blood_type', $partners_keys))
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.blood_type') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="blood_type">{{$blood_type}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                		@endif  						
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -1090,6 +1145,7 @@
 								</div>
 							</div>
 						</div>
+						@if(in_array('dependents_count', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -1100,6 +1156,7 @@
 								</div>
 							</div>
 						</div>
+						@endif
                 		@if(in_array('number_children', $partners_keys))
 						<div class="row">
 							<div class="col-md-12">
@@ -1111,7 +1168,7 @@
 								</div>
 							</div>
 						</div>
-                		@endif  						
+                		@endif
 					</div>
 				</div>
 			</div>

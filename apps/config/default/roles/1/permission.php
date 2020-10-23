@@ -1690,6 +1690,7 @@ $permission['late_exemption']['approve'] = 1;
 $permission['late_exemption']['decline'] = 1;
 $permission['late_exemption']['restore'] = 1;
 $permission['late_exemption']['generate'] = 1;
+$permission['table_organization']['list'] = 1;
 $permission['coe']['list'] = 1;
 $permission['coe']['process'] = 1;
 $permission['audit_log']['list'] = 1;

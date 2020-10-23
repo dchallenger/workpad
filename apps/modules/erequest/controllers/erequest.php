@@ -231,6 +231,17 @@ class Erequest extends MY_PrivateController
 			// echo "<pre>";
 			// print_r($data);
 			$data['record']['resources_request_upload.upload_id'] = implode(',', $uploads);
+
+			$uploads = array();
+        	$upload_sql = $this->db->get_where( 'resources_request_upload_hr', array( $this->mod->primary_key => $this->record_id ) )->result_array();
+			foreach( $upload_sql as $index => $value )
+			{
+				$uploads[] = $value['upload_id'];
+			}
+			// echo "<pre>";
+			// print_r($data);
+			$data['record']['resources_request_upload_hr.upload_id'] = implode(',', $uploads);
+						
 			$data['record']['view'] = 'detail';
 
         	$data['notes'] = $this->mod->get_notes($this->record_id, $this->user->user_id);

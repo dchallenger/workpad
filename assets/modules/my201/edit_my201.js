@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    var service = get_service(  $('#partners-effectivity_date').val() );
+    $('span.calculatedservice').html(service+"&nbsp;&nbsp;years of service")  	
+    	
 	$('.make-switch').not(".has-switch")['bootstrapSwitch']();
 	$('label[for="partners_personal_history-family-dependent-temp"]').css('margin-top', '0');
 	$('.dependent').change(function(){

@@ -493,7 +493,7 @@
 					                    		</a>
 					                    	@else
 
-					                    		<span class="datetime pull-right"><small class="text-muted">{{ $birthdays[$i]['time_line'] }}</small></span>
+					                    		<span class="datetime pull-right"><small class="text-muted">{{ date('M d, Y',strtotime($birthdays[$i]['birth_date'])) }}</small></span>
 					                    	@endif
 
 					                        <span class="body" id="pulsate-regular">

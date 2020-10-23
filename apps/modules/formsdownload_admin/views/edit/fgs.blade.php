@@ -1,6 +1,6 @@
 <div class="portlet">
 	<div class="portlet-title">
-		<div class="caption">{{ lang('formsdownload_admin.dl_forms') }}</div>
+		<div class="caption">{{ lang('formsdownload_admin.df_forms') }}</div>
 		<div class="tools"><a class="collapse" href="javascript:;"></a></div>
 	</div>
 		<div class="portlet-body form">			<div class="form-group">

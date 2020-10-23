@@ -81,7 +81,7 @@ class Erequest_admin extends MY_PrivateController
 			);
 			$this->db->delete('resources_request_upload_hr', $where);
 
-			if( count($uploads['upload_id']) > 0 )
+			if( isset($uploads['upload_id']) && $uploads['upload_id'] != '')
 			{
 				$uploads = explode(',', $uploads['upload_id']);
 				foreach( $uploads as $upload_id )

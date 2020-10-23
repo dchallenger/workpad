@@ -278,6 +278,7 @@
                             <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
                             </span>
                         </div>
+                        <span class="text-muted small calculatedservice"></span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -305,7 +306,6 @@
                             <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
                             </span>
                         </div>
-                        <span class="text-muted small">End date of employment/contract service</span>
                     </div>
                 </div>
                 @endif                
