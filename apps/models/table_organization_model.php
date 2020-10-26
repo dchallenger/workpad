@@ -92,10 +92,10 @@ class table_organization_model extends Record
 		$content = '';
 		foreach ($user_info as $key => $value) {
 			$content .= '<ul class="tree">';					
-			$content .= '<li> <span>'.$value['display_name'].' <br> '. $value['v_position'] .'</span>';
+			$content .= '<li><span><b>'.$value['display_name'].'</b> <br> '. $value['v_position'] .'</span>';
 
 			$user_id = $value['user_id'];
-			$this->db->select("{$user_id} as parent_id,users.display_name,users.user_id",false);
+			$this->db->select("{$user_id} as parent_id,v_position,users.display_name,users.user_id",false);
 			$this->db->where('reports_to_id',$user_id);
 			$this->db->where_in('v_job_grade',$rank);
 			$this->db->join('partners','users.user_id = partners.user_id');
@@ -105,7 +105,7 @@ class table_organization_model extends Record
 			if ($result && $result->num_rows() > 0) {
 				$content .= '<ul>';			
 				foreach ($result->result() as $row) {
-					$content .= '<li><span>'.$row->display_name.'</span>';
+					$content .= '<li><span><b>'.$row->display_name.'</b> <br> '. $row->v_position .'</span>';
 					$content .= $this->get_reports_to_1st($row->user_id,$rank);
 					$content .= '</li>';
 				}
@@ -122,7 +122,7 @@ class table_organization_model extends Record
 	public function get_reports_to_1st($user_id = 0,$rank = 0) {
 		$content = '';
 
-		$this->db->select("{$user_id} as parent_id,users.display_name,users.user_id",false);
+		$this->db->select("{$user_id} as parent_id,v_position,users.display_name,users.user_id",false);
 		$this->db->where('users.user_id <>',222);
 		$this->db->where('reports_to_id',$user_id);
 		$this->db->where_in('v_job_grade',$rank);
@@ -133,7 +133,7 @@ class table_organization_model extends Record
 		if ($result && $result->num_rows() > 0) {
 			$content .= '<ul>';			
 			foreach ($result->result() as $row) {
-				$content .= '<li><span>'.$row->display_name.'</span>';
+				$content .= '<li><span><b>'.$row->display_name.'</b> <br> '. $row->v_position .'</span>';
 				$content .= $this->get_reports_to_2nd($row->user_id,$rank,$content);
 				$content .= '</li>';
 			}
@@ -145,7 +145,7 @@ class table_organization_model extends Record
 
 	public function get_reports_to_2nd($user_id = 0,$rank = 0) {
 		$content = '';
-		$this->db->select("{$user_id} as parent_id,users.display_name,users.user_id",false);
+		$this->db->select("{$user_id} as parent_id,v_position,users.display_name,users.user_id",false);
 		$this->db->where('users.user_id <>',222);
 		$this->db->where('reports_to_id',$user_id);
 		$this->db->where_in('v_job_grade',$rank);
@@ -156,7 +156,7 @@ class table_organization_model extends Record
 		if ($result && $result->num_rows() > 0) {
 			$content .= '<ul>';			
 			foreach ($result->result() as $row) {
-				$content .= '<li><span>'.$row->display_name.'</span>';
+				$content .= '<li><span><b>'.$row->display_name.'</b> <br> '. $row->v_position .'</span>';
 				$content .= $this->get_reports_to_3rd($row->user_id,$rank,$content);
 				$content .= '</li>';
 			}
@@ -168,7 +168,7 @@ class table_organization_model extends Record
 
 	public function get_reports_to_3rd($user_id = 0,$rank = 0) {
 		$content = '';
-		$this->db->select("{$user_id} as parent_id,users.display_name,users.user_id",false);
+		$this->db->select("{$user_id} as parent_id,v_position,users.display_name,users.user_id",false);
 		$this->db->where('users.user_id <>',222);
 		$this->db->where('reports_to_id',$user_id);
 		$this->db->where_in('v_job_grade',$rank);
@@ -179,7 +179,7 @@ class table_organization_model extends Record
 		if ($result && $result->num_rows() > 0) {
 			$content .= '<ul>';			
 			foreach ($result->result() as $row) {
-				$content .= '<li><span>'.$row->display_name.'</span>';
+				$content .= '<li><span><b>'.$row->display_name.'</b> <br> '. $row->v_position .'</span>';
 				$content .= $this->get_reports_to_4th($row->user_id,$rank,$content);
 				$content .= '</li>';
 			}
@@ -191,7 +191,7 @@ class table_organization_model extends Record
 
 	public function get_reports_to_4th($user_id = 0,$rank = 0) {
 		$content = '';
-		$this->db->select("{$user_id} as parent_id,users.display_name,users.user_id",false);
+		$this->db->select("{$user_id} as parent_id,v_position,users.display_name,users.user_id",false);
 		$this->db->where('users.user_id <>',222);
 		$this->db->where('reports_to_id',$user_id);
 		$this->db->where_in('v_job_grade',$rank);
@@ -202,7 +202,7 @@ class table_organization_model extends Record
 		if ($result && $result->num_rows() > 0) {
 			$content .= '<ul>';			
 			foreach ($result->result() as $row) {
-				$content .= '<li><span>'.$row->display_name.'</span>';
+				$content .= '<li><span><b>'.$row->display_name.'</b> <br> '. $row->v_position .'</span>';
 				//$content .= $this->get_reports_to_4th($row->user_id,$rank,$content);
 				$content .= '</li>';
 			}

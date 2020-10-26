@@ -26,6 +26,7 @@
     display: table-cell;
     padding: .5em 0;
     vertical-align: top;
+    min-width: 150px;
 }
 
 .tree li:before {
