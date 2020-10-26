@@ -395,13 +395,17 @@ class Partners_immediate extends MY_PrivateController
 		$data['profile_civil_status'] = (count($civil_status) == 0 ? " " : ($civil_status[0]['key_value'] == "" ? "" : $civil_status[0]['key_value']));
 
 		$family_tab = $this->profile_mod->get_partners_personal_history($user_id, 'family');
-		foreach($family_tab as $emp){
-			$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
-		}
+		
 		$spouse_name = '';
-		foreach ($families_tab as $key => $value) {
-			if ($value['family-relationship'] == 'Spouse')
-				$spouse_name = $value['family-name'];
+		if (!empty($family_tab)) {
+			foreach($family_tab as $emp){
+				$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			}
+
+			foreach ($families_tab as $key => $value) {
+				if ($value['family-relationship'] == 'Spouse')
+					$spouse_name = $value['family-name'];
+			}
 		}
 
 		$data['profile_spouse'] = $spouse_name;

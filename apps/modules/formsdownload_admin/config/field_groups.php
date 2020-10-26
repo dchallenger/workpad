@@ -9,6 +9,7 @@ $config['fieldgroups'][1] = array(
 	'sequence' => 1,
 	'active' => 1,
 	'fields' => array(
+		'resources_policies.company_id',
 		'resources_downloadable.title',
 		'resources_downloadable.category',
 		'resources_downloadable.description',

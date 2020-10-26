@@ -37,7 +37,8 @@ $(document).ready(function(){
 		$('#resources_policies-attachments-container .fileupload-new').each(function(){ $(this).css('display', 'none') });
 		$('#resources_policies-attachments-container .fileupload-exists').each(function(){ $(this).css('display', 'inline-block') });
 	}
-	$('#resources_policies-category').select2({
+
+	$('.select2me').select2({
 	    placeholder: "Select an option",
 	    allowClear: true
 	});

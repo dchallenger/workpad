@@ -929,7 +929,7 @@ class movement_admin_model extends Record
 
         $path = 'uploads/templates/movement/pdf/';
         $this->check_path( $path );
-        $filename = $path . "movement_info.pdf";
+        $filename = $path . $movement_info->fullname. "-movement_info.pdf";
 
         $mpdf->WriteHTML($html);
         $mpdf->Output($filename, 'F');

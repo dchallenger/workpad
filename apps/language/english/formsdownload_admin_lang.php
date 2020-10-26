@@ -10,5 +10,6 @@ $lang['formsdownload_admin'] = array(
 	'attachments' => 'Attachments',
 	'created_by' => 'Created By',
 	'df_forms' => 'Downloadable Forms',
-	'select_file' => 'Select File'
+	'select_file' => 'Select File',
+	'company' => 'Company',
 );

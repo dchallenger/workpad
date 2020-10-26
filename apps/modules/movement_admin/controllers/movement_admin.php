@@ -763,7 +763,6 @@ class Movement_admin extends MY_PrivateController
 				case 9://Employment Status
 				case 12://Temporary Assignment
 					$movement_details = $post['partners_movement_action_transfer'];
-
 					$transfer_record['action_id'] = $this->action_id;
 					$transfer_record['movement_id'] = $this->response->record_id;
 					//delete transfer details
@@ -1092,6 +1091,7 @@ class Movement_admin extends MY_PrivateController
 				else{
 					if ($to_change_movement_status_id){
 						$this->db->update('partners_movement_approver_hr', array('movement_status_id' => 11, 'comment' => $approver_hr_remarks, 'comment_date' => $now), array( 'movement_id' => $this->record_id, 'user_id' => $this->user->user_id ) );
+						$this->db->update('partners_movement_action', array('status_id' => 11), array( 'action_id' => $this->response->action_id) );
 
 						$current_user = $this->db->get_where('users',array('user_id' => $this->session->userdata['user']->user_id))->row();
 

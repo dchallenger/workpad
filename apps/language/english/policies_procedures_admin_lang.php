@@ -10,5 +10,6 @@ $lang['policies_procedures_admin'] = array(
 	'attachments' => 'Attachments',
 	'created_by' => 'Created By',
 	'pol_proc' => 'Policies and Procedure',
-	'select_file' => 'Select File'
+	'select_file' => 'Select File',
+	'company' => 'Company'
 );

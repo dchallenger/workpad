@@ -10,7 +10,7 @@
 				<input type="text" class="form-control" name="resources_policies[title]" id="resources_policies-title" value="{{ $record['resources_policies.title'] }}" placeholder="Enter Title" />
 			</div>	
 		</div>
-		<div class="form-group">
+		<div class="form-group hidden">
 			<label class="control-label col-md-3">{{ lang('policies_procedures_admin.category') }}</label>
 				<div class="col-md-7">
 					<?php $db->select('category,category');
@@ -27,6 +27,23 @@
 	                </div>
 	            </div>	
 		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3">{{ lang('policies_procedures_admin.company') }}</label>
+				<div class="col-md-7">
+					<?php $db->select('company_id,company');
+	                      $db->order_by('company', '0');
+	                      $db->where('deleted', '0');
+	                      $options = $db->get('users_company');
+	                      $resources_policies_company_options = array();
+	                      foreach($options->result() as $option){
+	                      	$resources_policies_company_options[$option->company_id] = $option->company;
+                    } ?>
+                    <div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
+	                        {{ form_dropdown('resources_policies[company_id][]',$resources_policies_company_options, explode(',',$record['resources_policies.company_id']), 'class="form-control select2me" multiple="multiple" data-placeholder="Select..." id="resources_policies-company_id"') }}
+	                </div>
+	            </div>	
+		</div>		
 		<div class="form-group">
 			<label class="control-label col-md-3">{{ lang('policies_procedures_admin.description') }}</label>
 			<div class="col-md-7">

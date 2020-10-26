@@ -69,7 +69,7 @@ class clearance_manage_model extends Record
 		return $data;
 	}
 
-	function get_pending_status($clearance_id,$personal_user_id)
+	function get_pending_status($clearance_id,$personal_user_id = 0)
 	{
 		if ($personal_user_id)
 			$this->db->where('partners_clearance_signatories.user_id <>',$personal_user_id);	

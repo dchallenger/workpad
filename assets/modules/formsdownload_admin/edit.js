@@ -34,7 +34,7 @@ if( $('#resources_downloadable-attachments').val() != "" )
 	$('#resources_downloadable-attachments-container .fileupload-new').each(function(){ $(this).css('display', 'none') });
 	$('#resources_downloadable-attachments-container .fileupload-exists').each(function(){ $(this).css('display', 'inline-block') });
 }
-$('#resources_downloadable-category').select2({
+$('.select2me').select2({
     placeholder: "Select an option",
     allowClear: true
 });});

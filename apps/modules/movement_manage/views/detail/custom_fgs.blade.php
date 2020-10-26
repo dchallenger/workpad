@@ -152,7 +152,7 @@
 			<?php if ($record['approver_movement_status_id'] == 2 && $record['partners_movement_created_by'] != $user_id){ ?>
 			<div class="form-group">
 				<label class="col-md-4 text-right control-label">
-					<span class="required">* </span>Remarks (Required if you choose to decline):
+					<span class="required">* </span>Remarks:
 				</label>
 		        <div class='col-md-7'>
 		            <textarea rows='4' id='comment' class='form-control' name="comment"></textarea>
@@ -177,7 +177,7 @@
 					@endif					
 				</div>	
 			</div>
-			<div class="form-group">
+			<div class="form-group hidden">
 				<label class="col-md-4 text-muted text-right">
 					HR Approver 1:
 				</label>
@@ -194,7 +194,7 @@
 					@endif												
 				</div>	
 			</div>	
-			<div class="form-group">
+			<div class="form-group hidden">
 				<label class="col-md-4 text-muted text-right">
 					HR Approver 2:
 				</label>

@@ -41,10 +41,10 @@ function save_movement( form, action, callback )
 			return false;
 		}
 
-		if ($('#approver_hr_1').val() == ''){
+/*		if ($('#approver_hr_1').val() == ''){
 			notify('error', 'Please select approver 1.');
 			return false;
-		}
+		}*/
 	}
 
 	$.blockUI({ message: saving_message(),

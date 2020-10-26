@@ -253,7 +253,7 @@
 				</div> 				
 			</div>	
 		</div>	
-		<div class="form-group">
+		<div class="form-group hidden">
 			<label class="control-label col-md-3">
 				Approver 1 <span class="required"> *</span>
 			</label>
@@ -289,7 +289,7 @@
 				</div> 				
 			</div>	
 		</div>	
-		<div class="form-group">
+		<div class="form-group hidden">
 			<label class="control-label col-md-3">
 				Approver 2:
 			</label>

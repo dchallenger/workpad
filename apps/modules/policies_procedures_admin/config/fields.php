@@ -1,6 +1,30 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 $config['fields'] = array();
+$config['fields'][1]['resources_policies.company_id'] = array(
+	'f_id' => 6,
+	'fg_id' => 1,
+	'label' => 'Company',
+	'description' => '',
+	'table' => 'resources_policies',
+	'column' => 'company_id',
+	'uitype_id' => 4,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 2,
+	'datatype' => 'required',
+	'active' => '1',
+	'encrypt' => 0,
+	'searchable' => array(
+		'type_id' => '1',
+		'table' => 'users_company',
+		'multiple' => 1,
+		'group_by' => '',
+		'label' => 'company',
+		'value' => 'company_id',
+		'textual_value_column' => ''
+	)
+);
 $config['fields'][1]['resources_policies.attachments'] = array(
 	'f_id' => 5,
 	'fg_id' => 1,

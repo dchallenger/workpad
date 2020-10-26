@@ -166,7 +166,7 @@
 						<?php if ($loan_application_status_id['val'] == 4){ ?>
 						<div class="form-group">
 							<label class="col-md-4 text-right control-label">
-								<span class="required">* </span>HR Remarks (Required if you choose to decline):
+								<span class="required">* </span>HR Remarks
 							</label>
 					        <div class='col-md-7'>
 					            <textarea rows='4' id='comment' class='form-control' name="loan_application[comment]"></textarea>
@@ -175,7 +175,7 @@
 						<?php } ?>	
 						<div class="form-group">
 							<label class="col-md-4 text-muted text-right">
-								Attachments:
+								Attachments
 							</label>
 							<div class="col-md-7">
 								<?php
