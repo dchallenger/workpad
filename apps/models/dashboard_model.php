@@ -66,7 +66,8 @@ class dashboard_model extends Record
 		FROM dashboard_birthday a
 		LEFT JOIN {$this->db->dbprefix}users_profile b on b.user_id = a.celebrant_id
 		LEFT JOIN {$this->db->dbprefix}users_company c on c.company_id = b.company_id
-		LEFT JOIN {$this->db->dbprefix}business_group d on d.group_id = c.business_group_id"; // WHERE user_id = '$userID';
+		LEFT JOIN {$this->db->dbprefix}business_group d on d.group_id = c.business_group_id
+		ORDER BY birth_date"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
 		if($result->num_rows() > 0){

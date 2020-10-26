@@ -20,7 +20,6 @@
                         <?php
                         $db->select('users.user_id, users.full_name, ud.department');
                         $db->where('users.deleted', '0');
-                        $db->where('users.role_id > 1');
                         $db->join('users_profile up', 'up.user_id = users.user_id', 'left');
                         $db->join('users_department ud', 'ud.department_id = up.department_id', 'left');
                         $db->order_by('users.full_name');

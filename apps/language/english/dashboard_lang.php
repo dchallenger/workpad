@@ -5,6 +5,7 @@ $lang['dashboard'] = array(
 	'timekeeping_stat' => "Timekeeping Stats",
 	'bday_celebrants' => "Celebrants",
 	'todo' => "TODO",
+	'task' => "Task",
 	'feedback' => 'Feedback',
 	'post_status' => 'Post Status',
 	'filter_all' => 'All',

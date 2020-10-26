@@ -532,7 +532,7 @@
 				<div class="portlet tasks-widget hidden-xs">
 				    <div class="portlet-title" style="margin-bottom:3px;">
 				        <div class="caption">
-				        	{{ lang('dashboard.todo') }} 
+				        	{{ lang('dashboard.task') }} 
 				        	<span id="todo_badge" class="badge"></span>
 				        </div>
 				        <div class="tools">
