@@ -117,6 +117,27 @@
 								<input type="text" class="form-control" name="loan_application[loan_amount_to_deduct_per_day]" id="loan_application_loan_amount_to_deduct_per_day" value="{{ $record['partners_loan_application_omnibus.loan_amount_to_deduct_per_day'] }}" placeholder="" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>		
 							</div>	
 						</div>
+		                <div class="form-group">
+		                    <label class="control-label col-md-4">{{ lang('loan_application.with_outstanding_balance') }}</label>
+		                    <div class="col-md-6">
+		                        <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
+		                            <input type="checkbox" value="0" @if( $record['partners_loan_application_omnibus.loan_with_outstanding'] ) checked="checked" @endif name="loan_application[loan_with_outstanding][temp]" id="loan_with_outstanding-temp" class="toggle"/>
+		                            <input type="hidden" name="loan_application[loan_with_outstanding]" id="loan_with_outstanding" value="@if( $record['partners_loan_application_omnibus.loan_with_outstanding'] ) 1 else 0 @endif"/>
+		                        </div> 
+		                    </div>
+		                </div>
+						<div class="form-group amount_bal_loan" style="@if( !$record['partners_loan_application_omnibus.loan_with_outstanding'] ) display:none @endif">
+							<label class="control-label col-md-4">{{ lang('loan_application.amount_balance') }}</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="loan_application[loan_balance_amount]" id="loan_application_loan_balance_amount" value="{{ $record['partners_loan_application_omnibus.loan_balance_amount'] }}" placeholder="" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>		
+							</div>	
+						</div>
+						<div class="form-group amount_bal_loan" style="@if( !$record['partners_loan_application_omnibus.loan_with_outstanding'] ) display:none @endif">
+							<label class="control-label col-md-4">{{ lang('loan_application.amount_loanable') }} <br> <small class="text-muted">(loan amount less balance)</small></label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="loan_application[loan_loanable_amount]" id="loan_application_loan_loanable_amount" value="{{ $record['partners_loan_application_omnibus.loan_loanable_amount'] }}" placeholder="" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>		
+							</div>	
+						</div>							
 						<?php if ($loan_application_status_id['val'] == 4){ ?>
 						<div class="form-group">
 							<label class="col-md-4 text-right control-label">

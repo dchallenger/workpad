@@ -155,7 +155,7 @@
 							</div>
 							<?php } ?>
 							
-							<?php if($loan_application_status_id['val'] == 7 || $loan_application_status_id['val'] == 8){
+							<?php if($loan_application_status_id['val'] == 20 || $loan_application_status_id['val'] == 20){
 								?>
 							<hr />
                             <?php 

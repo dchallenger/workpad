@@ -22,6 +22,9 @@ $config['fieldgroups'][2] = array(
 	'sequence' => 2,
 	'active' => 1,
 	'fields' => array(
+		'partners_loan_application_omnibus.loan_loanable_amount',
+		'partners_loan_application_omnibus.loan_balance_amount',
+		'partners_loan_application_omnibus.loan_with_outstanding',		
 		'partners_loan_application_omnibus.loan_deduction_start',
 		'partners_loan_application_omnibus.loan_deduction_end',
 		'partners_loan_application_omnibus.loan_start_amortization',

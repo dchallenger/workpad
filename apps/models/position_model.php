@@ -51,7 +51,7 @@ class position_model extends Record
 		}
 		
 		$qry .= ' '. $filter;
-		$qry .= " ORDER BY {$this->db->dbprefix}{$this->table}.position_code DESC ";
+		$qry .= " ORDER BY {$this->db->dbprefix}{$this->table}.position ";
 		$qry .= " LIMIT $limit OFFSET $start";
 
 		$this->load->library('parser');

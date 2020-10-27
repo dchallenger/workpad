@@ -22,6 +22,9 @@ $config['fieldgroups'][2] = array(
 	'sequence' => 2,
 	'active' => 1,
 	'fields' => array(
+		'partners_loan_application_omnibus.loan_loanable_amount',
+		'partners_loan_application_omnibus.loan_balance_amount',
+		'partners_loan_application_omnibus.loan_with_outstanding',
 		'partners_loan_application_omnibus.loan_amount_to_deduct_per_day',
 		'partners_loan_application_omnibus.loan_amount_to_deduct',
 		'partners_loan_application_omnibus.loan_deduction_start',
@@ -40,6 +43,7 @@ $config['fieldgroups'][3] = array(
 	'sequence' => 3,
 	'active' => 1,
 	'fields' => array(
+		'partners_loan_application_car.loan_terms',
 		'partners_loan_application_car.amortization',
 		'partners_loan_application_car.amount_amortization',
 		'partners_loan_application_car.car_loan_application',

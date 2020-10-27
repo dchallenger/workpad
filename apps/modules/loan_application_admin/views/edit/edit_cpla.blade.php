@@ -100,6 +100,12 @@
 							</div>	
 						</div>
 						<div class="form-group">
+							<label class="control-label col-md-4">{{ lang('loan_application.terms') }}<span class="required">* </span></label>
+							<div class="col-md-6">
+								<input readonly type="text" class="form-control" name="loan_application[loan_terms]" id="loan_application_loan_terms" value="{{ $record['partners_loan_application_car.loan_terms'] }}" placeholder=""/>		
+							</div>	
+						</div>						
+						<div class="form-group">
 							<label class="control-label col-md-4">{{ lang('loan_application.car_loan_application') }}<span class="required">* </span></label>
 							<div class="col-md-6">
 								<?php	                        

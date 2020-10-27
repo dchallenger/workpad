@@ -1,6 +1,11 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 $config['field_validations'] = array();
+$config['field_validations']['partners_loan_application_car.loan_terms'][] = array(
+	'field'   => 'partners_loan_application_car[loan_terms]',
+	'label'   => 'Terms',
+	'rules'   => 'required'
+);
 $config['field_validations']['partners_loan_application_car.amortization'][] = array(
 	'field'   => 'partners_loan_application_car[amortization]',
 	'label'   => 'Amortization',

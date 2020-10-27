@@ -97,6 +97,24 @@
 								<input type="text" class="form-control" name="loan_application[loan_amount]" id="loan_application_loan_amount" value="{{ $record['partners_loan_application_car.loan_amount'] }}" placeholder="" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>		
 							</div>	
 						</div>
+						<div class="form-group">
+							<label class="control-label col-md-4">{{ lang('loan_application.terms') }}<span class="required">* </span></label>
+							<div class="col-md-6">
+								<?php
+									$terms_options = array();
+									for ($i=1; $i < 13; $i++) { 
+										$terms_options[$i] = $i;
+									}
+								?>							
+								<div class="input-group">
+									<!-- <input type="hidden" size="16" class="form-control" readonly id="loan_application_mobile_enrollment_type_id" name="loan_application_mobile_enrollment_type_id" value="">  -->
+									<span class="input-group-addon">
+										<i class="fa fa-list-ul"></i>
+									</span>
+									{{ form_dropdown('loan_application[loan_terms]',$terms_options, $record['partners_loan_application_car.loan_terms'],'id="loan_application_omnibus_enrollment_type_id" class="form-control select2me" data-placeholder="Select..."') }}
+								</div> 									
+							</div>	
+						</div>						
 						<div class="form-group hidden">
 							<label class="control-label col-md-4">{{ lang('loan_application.car_loan_application') }}<span class="required">* </span></label>
 							<div class="col-md-6">

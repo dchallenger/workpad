@@ -56,7 +56,11 @@ $lang['loan_application'] = array(
 	'close' => 'Close',
 	'remarks' => 'Remarks',
 	'required_decline' => 'required if you choose to decline/disapprove',
-	'required_disapp' => 'Required if you choose to disapprove',
+	//'required_disapp' => 'Required if you choose to disapprove',
+	'required_disapp' => '', // renove for oclp
 	'recent_note' => 'Recent Note',
 	'car_loan_application' => 'Car Loan Application',
+	'with_outstanding_balance' => 'With Outstanding Balance',
+	'amount_balance' => 'Amount Balance',
+	'amount_loanable' => 'Amount Loanable',
 );

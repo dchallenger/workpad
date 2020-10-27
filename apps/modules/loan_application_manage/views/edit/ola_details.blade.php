@@ -47,7 +47,7 @@
 
     <br>
     <div class='clearfix margin-top-10'>
-        <label class='control-label col-md-4 text-muted text-left small'>{{ lang('loan_application.remarks') }} ({{ lang('loan_application.required_decline') }}):<span class='required'>*</span></label>
+        <label class='control-label col-md-4 text-muted text-left small'>{{ lang('loan_application.remarks') }}:<span class='required'>*</span></label>
         <div class='col-md-8'>
             <textarea rows='4' id='comment-<?php echo $loan_application_id; ?>' class='form-control'></textarea>
         </div>

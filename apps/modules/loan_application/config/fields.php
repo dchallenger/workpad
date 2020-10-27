@@ -1,6 +1,21 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 $config['fields'] = array();
+$config['fields'][3]['partners_loan_application_car.loan_terms'] = array(
+	'f_id' => 5,
+	'fg_id' => 3,
+	'label' => 'Terms',
+	'description' => 'Terms of payment',
+	'table' => 'partners_loan_application_car',
+	'column' => 'loan_terms',
+	'uitype_id' => 1,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 2,
+	'datatype' => 'required',
+	'active' => '1',
+	'encrypt' => 0
+);
 $config['fields'][3]['partners_loan_application_car.car_loan_application'] = array(
 	'f_id' => 16,
 	'fg_id' => 3,
@@ -163,9 +178,54 @@ $config['fields'][3]['partners_loan_application_car.loan_application_car_entitle
 		'textual_value_column' => ''
 	)
 );
+$config['fields'][2]['partners_loan_application_omnibus.loan_loanable_amount'] = array(
+	'f_id' => 21,
+	'fg_id' => 2,
+	'label' => 'Amount Loanable',
+	'description' => 'Amount Loanable',
+	'table' => 'partners_loan_application_omnibus',
+	'column' => 'loan_loanable_amount',
+	'uitype_id' => 1,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 6,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 1
+);
+$config['fields'][2]['partners_loan_application_omnibus.loan_balance_amount'] = array(
+	'f_id' => 20,
+	'fg_id' => 2,
+	'label' => 'Amount Balance',
+	'description' => 'Amount Balance',
+	'table' => 'partners_loan_application_omnibus',
+	'column' => 'loan_balance_amount',
+	'uitype_id' => 1,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 6,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 1
+);
+$config['fields'][2]['partners_loan_application_omnibus.loan_with_outstanding'] = array(
+	'f_id' => 19,
+	'fg_id' => 2,
+	'label' => 'With Outstanding Balance',
+	'description' => 'With Outstanding Balance',
+	'table' => 'partners_loan_application_omnibus',
+	'column' => 'loan_with_outstanding',
+	'uitype_id' => 3,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 6,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 0
+);
 $config['fields'][2]['partners_loan_application_omnibus.loan_amount_to_deduct_per_day'] = array(
 	'f_id' => 18,
-	'fg_id' => 1,
+	'fg_id' => 2,
 	'label' => 'Loan Amount Deduction per Day',
 	'description' => 'Semi monthly amount deduction per day',
 	'table' => 'partners_loan_application_omnibus',
@@ -180,7 +240,7 @@ $config['fields'][2]['partners_loan_application_omnibus.loan_amount_to_deduct_pe
 );
 $config['fields'][2]['partners_loan_application_omnibus.loan_amount_to_deduct'] = array(
 	'f_id' => 9,
-	'fg_id' => 1,
+	'fg_id' => 2,
 	'label' => 'Loan Amount Deduction',
 	'description' => 'Semi monthly amount deduction',
 	'table' => 'partners_loan_application_omnibus',
@@ -195,7 +255,7 @@ $config['fields'][2]['partners_loan_application_omnibus.loan_amount_to_deduct'] 
 );
 $config['fields'][2]['partners_loan_application_omnibus.loan_deduction_start'] = array(
 	'f_id' => 7,
-	'fg_id' => 1,
+	'fg_id' => 2,
 	'label' => 'Deduction Start Date',
 	'description' => 'Deduction Start',
 	'table' => 'partners_loan_application_omnibus',
@@ -210,7 +270,7 @@ $config['fields'][2]['partners_loan_application_omnibus.loan_deduction_start'] =
 );
 $config['fields'][2]['partners_loan_application_omnibus.loan_deduction_end'] = array(
 	'f_id' => 8,
-	'fg_id' => 1,
+	'fg_id' => 2,
 	'label' => 'Deduction End Date',
 	'description' => 'Deduction End Date',
 	'table' => 'partners_loan_application_omnibus',

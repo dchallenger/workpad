@@ -1,6 +1,36 @@
 $(document).ready(function(){
     init_form();
     $(":input").inputmask();
+
+    $('#loan_with_outstanding-temp').change(function(){
+        if ($('#record_id').val() < 0) {
+            $('#loan_application_loan_balance_amount').val('');
+            $('#loan_application_loan_loanable_amount').val('');        
+        }
+        if( $(this).is(':checked') ) {
+            $('#loan_with_outstanding').val('1');
+            $('.amount_bal_loan').show();
+        } else {
+            $('#loan_with_outstanding').val('0');
+            $('.amount_bal_loan').hide();
+            $('#loan_application_loan_balance_amount').val('');
+            $('#loan_application_loan_loanable_amount').val('');                           
+        }
+    });
+
+    $('#loan_application_loan_balance_amount').live('keyup', function() {
+        var loan_amount = parseFloat($('#loan_application_loan_amount').val().replace(',',""));
+        var loanable_balance = parseFloat($(this).val().replace(',',""));
+        var loanable_amount = parseFloat(loan_amount - loanable_balance);
+        $('#loan_application_loan_loanable_amount').val(loanable_amount);
+    });
+
+    $('#loan_application_loan_amount').live('keyup', function() {
+        var loan_amount = parseFloat($(this).val().replace(',',""));
+        var loanable_balance = parseFloat($('#loan_application_loan_balance_amount').val().replace(',',""));
+        var loanable_amount = parseFloat(loan_amount - loanable_balance);
+        $('#loan_application_loan_loanable_amount').val(loanable_amount);
+    });     
     //$("#decimal_val").inputmask({ 'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false });
 });
 

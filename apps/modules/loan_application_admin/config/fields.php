@@ -163,9 +163,54 @@ $config['fields'][3]['partners_loan_application_car.loan_application_car_entitle
 		'textual_value_column' => ''
 	)
 );
+$config['fields'][2]['partners_loan_application_omnibus.loan_loanable_amount'] = array(
+	'f_id' => 21,
+	'fg_id' => 2,
+	'label' => 'Amount Loanable',
+	'description' => 'Amount Loanable',
+	'table' => 'partners_loan_application_omnibus',
+	'column' => 'loan_loanable_amount',
+	'uitype_id' => 1,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 6,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 1
+);
+$config['fields'][2]['partners_loan_application_omnibus.loan_balance_amount'] = array(
+	'f_id' => 20,
+	'fg_id' => 2,
+	'label' => 'Amount Balance',
+	'description' => 'Amount Balance',
+	'table' => 'partners_loan_application_omnibus',
+	'column' => 'loan_balance_amount',
+	'uitype_id' => 1,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 6,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 1
+);
+$config['fields'][2]['partners_loan_application_omnibus.loan_with_outstanding'] = array(
+	'f_id' => 19,
+	'fg_id' => 2,
+	'label' => 'With Outstanding Balance',
+	'description' => 'With Outstanding Balance',
+	'table' => 'partners_loan_application_omnibus',
+	'column' => 'loan_with_outstanding',
+	'uitype_id' => 3,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 6,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 0
+);
 $config['fields'][2]['partners_loan_application_omnibus.loan_deduction_start'] = array(
 	'f_id' => 7,
-	'fg_id' => 1,
+	'fg_id' => 2,
 	'label' => 'Start of Deduction',
 	'description' => 'Start of Deduction',
 	'table' => 'partners_loan_application_omnibus',
@@ -180,7 +225,7 @@ $config['fields'][2]['partners_loan_application_omnibus.loan_deduction_start'] =
 );
 $config['fields'][2]['partners_loan_application_omnibus.loan_deduction_end'] = array(
 	'f_id' => 8,
-	'fg_id' => 1,
+	'fg_id' => 2,
 	'label' => 'End of Deduction',
 	'description' => 'End of Deduction',
 	'table' => 'partners_loan_application_omnibus',

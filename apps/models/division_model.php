@@ -36,6 +36,40 @@ class division_model extends Record
 		parent::__construct();
 	}
 
+	function _get_list($start, $limit, $search, $filter, $trash = false)
+	{
+		$data = array();				
+		
+		$qry = $this->_get_list_cached_query();
+		
+		if( $trash )
+		{
+			$qry .= " AND {$this->db->dbprefix}{$this->table}.deleted = 1";
+		}
+		else{
+			$qry .= " AND {$this->db->dbprefix}{$this->table}.deleted = 0";	
+		}
+		
+		$qry .= ' '. $filter;
+
+		$qry .= " ORDER BY {$this->db->dbprefix}{$this->table}.division";
+
+		$qry .= " LIMIT $limit OFFSET $start";
+
+		$this->load->library('parser');
+		$this->parser->set_delimiters('{$', '}');
+		$qry = $this->parser->parse_string($qry, array('search' => $search), TRUE);
+
+		$result = $this->db->query( $qry );
+		if($result->num_rows() > 0)
+		{			
+			foreach($result->result_array() as $row){
+				$data[] = $row;
+			}
+		}
+		return $data;
+	}
+
 	public function get_user_details($user_id=0)
 	{
 		$this->db->join('users_profile','users_profile.user_id = users.user_id','left');

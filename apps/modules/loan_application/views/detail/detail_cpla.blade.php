@@ -112,6 +112,16 @@
 											</div>
 										</div>
 									</div>
+	                                <div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.terms') }} :</label>
+												<div class="col-md-7 col-sm-7">
+													<span>{{ $record['partners_loan_application_car_loan_terms'] }}</span>
+												</div>
+											</div>
+										</div>
+									</div>									
 	                                <div class="row hidden">
 										<div class="col-md-12">
 											<div class="form-group">
@@ -274,7 +284,7 @@
 									</div>
 									<?php } ?>
 									
-									<?php if($loan_application_status_id['val'] == 7 || $loan_application_status_id['val'] == 8){
+									<?php if($loan_application_status_id['val'] == 20 || $loan_application_status_id['val'] == 20){
 										?>
 									<hr />
 	                                <?php 

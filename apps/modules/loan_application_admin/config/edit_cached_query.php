@@ -23,7 +23,11 @@ ww_partners_loan_application_mobile.loan_application_mobile_plan_limit_id as "pa
 ww_partners_loan_application_mobile.loan_application_mobile_enrollment_type_id as "partners_loan_application_mobile.loan_application_mobile_enrollment_type_id", 
 CAST( AES_DECRYPT( ww_partners_loan_application_omnibus.loan_start_amortization, encryption_key()) AS CHAR) as "partners_loan_application_omnibus.loan_start_amortization", 
 ww_partners_loan_application_omnibus.loan_terms as "partners_loan_application_omnibus.loan_terms", 
+ww_partners_loan_application_car.loan_terms as "partners_loan_application_car.loan_terms", 
 ww_partners_loan_application_omnibus.loan_purposes as "partners_loan_application_omnibus.loan_purposes",
+ww_partners_loan_application_omnibus.loan_with_outstanding as "partners_loan_application_omnibus.loan_with_outstanding",
+CAST( AES_DECRYPT( ww_partners_loan_application_omnibus.loan_balance_amount, encryption_key()) AS CHAR) as "partners_loan_application_omnibus.loan_balance_amount", 
+CAST( AES_DECRYPT( ww_partners_loan_application_omnibus.loan_loanable_amount, encryption_key()) AS CHAR) as "partners_loan_application_omnibus.loan_loanable_amount", 
 CAST( AES_DECRYPT( ww_partners_loan_application_omnibus.loan_amount, encryption_key()) AS CHAR) as "partners_loan_application_omnibus.loan_amount"
 FROM (`ww_partners_loan_application`)
 LEFT JOIN `ww_partners_loan_application_car` ON `ww_partners_loan_application_car`.`loan_application_id` = `ww_partners_loan_application`.`loan_application_id`

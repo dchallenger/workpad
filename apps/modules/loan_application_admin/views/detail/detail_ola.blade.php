@@ -142,6 +142,36 @@
 									</div>
 								</div>
 							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.with_outstanding_balance') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span>{{ $record['partners_loan_application_omnibus_loan_with_outstanding'] }}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+                            <div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.amount_balance') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span>{{ $record['partners_loan_application_omnibus_loan_balance_amount'] }}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+                            <div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.amount_loanable') }} : <br> <small class="text-muted">(loan amount less balance)</small></label>
+										<div class="col-md-7 col-sm-7">
+											<span>{{ $record['partners_loan_application_omnibus_loan_loanable_amount'] }}</span>
+										</div>
+									</div>
+								</div>
+							</div>								
                             <div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
@@ -206,7 +236,7 @@
 							<?php } ?>
 							
                             <?php 
-                            	if (isset($disapproved_cancelled_remarks) && $disapproved_cancelled_remarks && ($loan_application_status_id['val'] == 7 || $loan_application_status_id['val'] == 8)) {
+                            	if (isset($disapproved_cancelled_remarks) && $disapproved_cancelled_remarks && ($loan_application_status_id['val'] == 20 || $loan_application_status_id['val'] == 20)) {
                             ?>
                             		<hr />
                             <?php

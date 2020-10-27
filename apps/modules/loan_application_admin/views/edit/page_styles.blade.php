@@ -3,3 +3,4 @@
 <link href="{{ theme_path() }}plugins/jquery-multicheckbox/jquery.multiselect.css" rel="stylesheet" type="text/css"/>
 <link type="text/css" rel="stylesheet" href="{{ theme_path() }}plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" />
 <link type="text/css" rel="stylesheet" href="{{ theme_path() }}plugins/bootstrap-tagsinput/app.css">
+<link rel="stylesheet" type="text/css" href="{{ theme_path() }}plugins/bootstrap-switch/static/stylesheets/bootstrap-switch-metro.css"/>

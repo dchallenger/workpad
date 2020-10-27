@@ -4199,8 +4199,6 @@ class Import201 extends MY_PrivateController
 	}		
 
 	function import_approver(){
-		$this->db->truncate('users_position');
-
 		$this->load->library('excel');
 
 		$objReader = new PHPExcel_Reader_Excel5;
@@ -4210,7 +4208,7 @@ class Import201 extends MY_PrivateController
 		}
 
 		$objReader->setReadDataOnly(true);
-		$objPHPExcel = $objReader->load($this->filename);
+		$objPHPExcel = $objReader->load('D:\oclp new version\employee 201 record 10052020_updated.xls');
 		$rowIterator = $objPHPExcel->getActiveSheet()->getRowIterator();
 	
 		$ctr = 0;	
@@ -4232,17 +4230,17 @@ class Import201 extends MY_PrivateController
 				foreach ($import_data as $row) {
 					foreach ($row as $cell => $value) {
 						switch ($value) {														
-							case 'Position':
-								$valid_cells[] = 'position';
+							case 'ID Number':
+								$valid_cells[] = 'user_id';
 								break;
-							case 'Position Code':
-								$valid_cells[] = 'position_code';
+							case 'Approver Id Number':
+								$valid_cells[] = 'approver_id';
 								break;
-							case 'Employee Type':
-								$valid_cells[] = 'employee_type_id';
+							case 'Condition':
+								$valid_cells[] = 'condition';
 								break;
-							case 'Immediate Head ID Number':
-								$valid_cells[] = 'immediate_id';
+							case 'Sequence':
+								$valid_cells[] = 'sequence';
 								break;																							
 						}
 					}
@@ -4258,21 +4256,23 @@ class Import201 extends MY_PrivateController
 		$ctr = 0;
 
 		// Remove non-matching cells.
-		foreach ($import_data as $row) {		
+		foreach ($import_data as $row) {
+			$user_id = '';
 			$arr_field_val = array();
 			foreach ($valid_cells as $key => $value) {
 				switch ($value) {
-					case 'employee_type_id':
-						$result = $this->db->get_where('partners_employment_type',array('employment_type' => $row[$key]));
+					case 'user_id':
+						$result = $this->db->get_where('partners',array('id_number' => $row[$key]));
 						if ($result && $result->num_rows() > 0){
-							$row_employment_type = $result->row();
-							$row[$key] = $row_employment_type->employment_type_id;						
+							$row_partners = $result->row();
+							$row[$key] = $row_partners->user_id;
+							$user_id = $row_partners->user_id;
 						}
 						else{
 							$row[$key] = '';
 						}
 						break;
-					case 'immediate_id':
+					case 'approver_id':
 						$result = $this->db->get_where('partners',array('id_number' => $row[$key]));
 						if ($result && $result->num_rows() > 0){
 							$row_partners = $result->row();
@@ -4291,9 +4291,14 @@ class Import201 extends MY_PrivateController
 			}
 
 			// fixed column to be inserted
-			$arr_field_val['status_id'] = 1;
+			$arr_field_val['email'] = 1;
 
-			$this->db->insert('users_position',$arr_field_val);
+			$this->db->insert('approver_class_users',$arr_field_val);
+
+			$update = "CALL `sp_approver_assign_all`($user_id)";
+
+			$result_update = $this->db->query( $update );
+			mysqli_next_result($this->db->conn_id);			
 		}
 
 		echo "Done.";	
