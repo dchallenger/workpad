@@ -43,9 +43,9 @@ class time_form_policies {
     				$late_filing_cutoff = $this->_check_late_filing_cutoff($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id']);
     				if($late_filing_cutoff == 'error'){
                         if($form_policy['severity'] == 'Warning'){
-                            $form_policy_error['warning'][] = "You exceeded the maximum allowable days to file as late filing.";
+                            $form_policy_error['warning'][] = "You exceeded the maximum allowable cutoff to file as late filing.";
                         }else{
-                            $form_policy_error['error'][] = "You exceeded the maximum allowable days to file as late filing.";
+                            $form_policy_error['error'][] = "You exceeded the maximum allowable cutoff to file as late filing.";
                         }
     				}elseif($late_filing_cutoff == 'invalid'){
                         if($form_policy['severity'] == 'Warning'){
@@ -107,11 +107,12 @@ class time_form_policies {
 				case $form_code.'-ADVANCE-FILING-CUTOFF':
                 if(strtotime($date_to) > strtotime($current_day)){
     				$advance_filing_cutoff = $this->_check_advance_filing_cutoff($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id']);
+                    
     				if($advance_filing_cutoff == 'error'){
                         if($form_policy['severity'] == 'Warning'){
-                            $form_policy_error['warning'][] = "You exceeded the maximum allowable days to file as advance filing.";
+                            $form_policy_error['warning'][] = "You exceeded the maximum allowable cutoff to file as advance filing.";
                         }else{
-                            $form_policy_error['error'][] = "You exceeded the maximum allowable days to file as advance filing.";
+                            $form_policy_error['error'][] = "You exceeded the maximum allowable cutoff to file as advance filing.";
                         }
     				}elseif($advance_filing_cutoff == 'invalid'){
                         if($form_policy['severity'] == 'Warning'){
@@ -499,7 +500,7 @@ class time_form_policies {
 
     function _check_advance_filing_not_allowed($value='', $date_from='', $date_to='', $company_id=''){     
         $current_day = date('Y-m-d');
-        if(strtotime($date_from) > strtotime($current_day) && strtolower($value) == 'yes'){
+        if(strtotime($date_from) > strtotime($current_day) && strtolower($value) == 'no'){
             return 'error';
         }
         return false;
@@ -518,7 +519,7 @@ class time_form_policies {
         return false;
     }
 
-    function _check_if_require_attachment($value='', $date_from='', $date_to='', $uploads=array(), $user_id=0){
+    function _check_if_require_attachment($value='', $date_from='', $date_to='', $uploads=0, $user_id=0){
         //START get days count
         $start = new DateTime($date_from);
         $end = new DateTime($date_to);      
@@ -550,22 +551,19 @@ class time_form_policies {
             }
         }
 
+        $count_uploads = ($uploads != '' ? $uploads : 0);
+        if($count_uploads > 0){
 
-        if (is_array($uploads)) {
-            $count_uploads = count($uploads);
-            if($count_uploads ==  1){
-
-                if (is_array($uploads)){
-                    $count_uploads = $uploads[0] == "" ? 0 : 1;
-                }else{
-                    $count_uploads = $uploads == "" ? 0 : 1;
-                }
+            if (is_array($uploads)){
+                $count_uploads = $uploads[0] == "" ? 0 : 1;
+            }else{
+                $count_uploads = $uploads == "" ? 0 : 1;
             }
+        }
 
 
-            if($days > $value && $count_uploads == 0){
-                return 'error';
-            }
+        if($days >= $value && $count_uploads == 0){
+            return 'error';
         }
         
         return false;
@@ -603,7 +601,7 @@ class time_form_policies {
             }
         }
 
-        if($days > $value){
+        if($days >= $value){
             return 'error';
         }
         return false;

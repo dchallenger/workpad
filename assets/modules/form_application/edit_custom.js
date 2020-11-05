@@ -123,16 +123,16 @@ function init_form()
         });
     }
 
-        //disabled datepicker
-        if($('#form_status_id').val()>2){
-            $('.date-picker').removeClass('date-picker');
-        }
+    //disabled datepicker
+    if($('#form_status_id').val()>2){
+        $('.date-picker').removeClass('date-picker');
+    }
 
-        $('#change_options').hide();
+    $('#change_options').hide();
 
-        if( $('#goto_vl_co').length > 0 ){
-            get_selected_dates($('#record_id').val(), $('#form_status_id').val(), $('#time_forms-date_from').val(), $('#time_forms-date_to').val());
-       }
+    if( $('#goto_vl_co').length > 0 ){
+        get_selected_dates($('#record_id').val(), $('#form_status_id').val(), $('#time_forms-date_from').val(), $('#time_forms-date_to').val());
+    }
 
 
     $('.maternity_date_from').change(function(){

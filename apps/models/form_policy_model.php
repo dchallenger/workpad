@@ -65,13 +65,13 @@ class form_policy_model extends Record
 		
 		if( $trash )
 		{
-			$qry .= " AND tf.`deleted` = '1' ";
+			$qry .= " AND tfcp.`deleted` = '1' ";
 		}
 		else{
-			$qry .= " AND tf.`deleted` = '0' ";	
+			$qry .= " AND tfcp.`deleted` = '0' ";	
 		}
 
-		$qry .= " AND tfcp.`deleted` = '0' ";
+		$qry .= " AND tf.`deleted` = '0' ";
 		
 		$qry .= ' '. $filter;
 		$qry .= " ORDER BY tfc.`class_code` ASC ";

@@ -442,7 +442,7 @@ class my_calendar_model extends Record
 							FROM ww_time_forms_approver tfa
 							JOIN ww_users_profile up ON tfa.user_id = up.user_id 
 							LEFT JOIN ww_users_position upos ON up.position_id = upos.position_id 
-							WHERE tfa.forms_id = {$forms_id}");
+							WHERE tfa.forms_id = {$forms_id} ORDER BY tfa.sequence");
 
 		return $time_forms_approvers->result_array();
 	}

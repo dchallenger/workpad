@@ -226,12 +226,12 @@ class Form_policy extends MY_PrivateController
 					$this->db->where('id', $_POST['record_id']);
 					$this->db->update('time_form_class_policy', $record);
 				}
-				else{
+				// else{
 
-					$record['created_on'] = date('Y-m-d H:i:s');
-					$record['created_by'] = $this->user->user_id;
-					$this->db->insert('time_form_class_policy', $record);
-				}
+				// 	$record['created_on'] = date('Y-m-d H:i:s');
+				// 	$record['created_by'] = $this->user->user_id;
+				// 	$this->db->insert('time_form_class_policy', $record);
+				// }
 
 				$this->response->message[] = array(
 					'message' => lang('common.save_success'),

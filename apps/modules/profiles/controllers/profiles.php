@@ -96,7 +96,7 @@ class Profiles extends MY_PrivateController
 		parent::add( '', true );
 
 		$this->db->order_by('parent_group, sub_group, long_name');
-		$modules = $this->db->get_where('modules', array('deleted' => 0));
+		$modules = $this->db->get_where('modules', array('deleted' => 0, 'active' => 1));
 		
 		foreach ($modules->result() as $module) {
 			$data['modules'][$module->mod_id] = $module;	

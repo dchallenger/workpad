@@ -779,6 +779,57 @@ public function call_sp_time_calendar($date_from='', $date_to='', $user_id=0){
 		return $notified;
 	}
 
+	function notify_hr( $forms_id=0, $form=array())
+	{
+		$qry = "SELECT  *
+				FROM {$this->db->dbprefix}roles r 
+				WHERE FIND_IN_SET(2,profile_id)";
+
+		$roles_result = $this->db->query($qry);
+
+		if ($roles_result && $roles_result->num_rows() > 0) {
+			$role_id = $roles_result->row()->role_id;
+
+			$this->db->where('role_id',$role_id);
+			$users = $this->db->get('users');
+
+			if ($users && $users->num_rows() > 0) {
+				$notified = array();		
+
+				$form_status = $form['form_status_id'] == 4 ? "Filed" : "Validation";
+				$this->load->model('hr_validation_model', 'hr_validation');
+
+				$this->db->where('form_code',$form['form_code']);
+				$this->db->where('deleted',0);
+				$form_type = $this->db->get('time_form');
+				$form_type = $form_type->row_array();
+
+				foreach ($users->result() as $row) {
+					//insert notification
+					$insert = array(
+						'status' => 'info',
+						'message_type' => 'Time Record',
+						'user_id' => $form['user_id'],
+						'display_name' => $this->get_display_name($form['user_id']),
+						'feed_content' => $form_status.': '.$form_type['form'].' for '.date('F d, Y', strtotime($form['date_from'])).'.<br><br>Reason: '.$form['reason'],
+						'recipient_id' =>  $row->user_id,
+						'uri' => str_replace(base_url(), '', $this->hr_validation->url).'/detail/'.$form['forms_id']
+					);
+
+					$this->db->insert('system_feeds', $insert);
+					$id = $this->db->insert_id();
+					$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $row->user_id));
+					$notified[] = $row->user_id;
+
+					//$qry = "CALL sp_partners_loan_application_email_to_hr('".$loan_application_id."', '".$row->user_id."')";
+					//$result = $this->db->query( $qry );
+				}
+			}
+		}
+
+		return $notified;
+	}
+
 	public function validate_ot_forms($date_from='', $date_to='', $user_id=0, $form_id=0, $forms_id=0){	                 
         $qry = "SELECT *
         FROM time_forms_date tfd

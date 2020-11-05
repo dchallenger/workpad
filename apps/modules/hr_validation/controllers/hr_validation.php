@@ -1950,6 +1950,68 @@ class Hr_validation extends MY_PrivateController
         $record_id = $this->input->post('record_id');
         $validate_remarks = $this->input->post('validate_remarks');
         if($_POST['action'] == 'approve'){
+            $status_update = 'succesfully validated.';
+
+            $approver_record['form_status_id'] = 2;
+            $approver_record['hr_remarks'] = $validate_remarks;        
+            $approver_record['date_invalid'] = date('Y-m-d H:i:s');         
+            $this->db->update('time_forms', $approver_record,array( $this->mod->primary_key => $record_id ) );
+        }else{
+            $status_update = 'set to invalid or disapprove.';
+            $approver_record['form_status_id'] = 9;
+            $approver_record['hr_remarks'] = $validate_remarks;   
+            $approver_record['date_invalid'] = date('Y-m-d H:i:s');         
+            $this->db->update('time_forms', $approver_record,array( $this->mod->primary_key => $record_id ));
+        }
+
+        $form_record['modified_by'] = $this->user->user_id;
+        $form_record['modified_on'] = date('Y-m-d H:i:s');
+        $this->db->update( 'time_forms', $form_record, array( $this->mod->primary_key => $record_id ) );
+        $this->response->action = 'update';
+
+        $this->response->saved = true;
+        $this->response->message[] = array(
+            'message' => "Record was {$status_update}",
+            'type' => 'success'
+        );
+
+        $this->_ajax_return();
+    }
+
+    // old function use in abraham
+    function update_request_abraham()
+    {
+        $this->current_user = $this->config->item('user');
+
+        $validation_rules_d[] = 
+        array(
+            'field' => 'validate_remarks',
+            'label' => 'Validation Remarks',
+            'rules' => 'required'
+            );
+        if( sizeof( $validation_rules_d ) > 0 )
+        {
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules( $validation_rules_d );
+            if ($this->form_validation->run() == false)
+            {
+                foreach( $this->form_validation->get_error_array() as $f => $f_error )
+                {
+                    $this->response->message[] = array(
+                        'message' => $f_error,
+                        'type' => 'warning'
+                        );  
+                }
+
+                $this->_ajax_return();
+            }
+
+            $this->form_validation->clear_field_data();
+        }
+       
+        $record_id = $this->input->post('record_id');
+        $validate_remarks = $this->input->post('validate_remarks');
+        if($_POST['action'] == 'approve'){
             $form_record['form_status_id'] = 6;
             $status_update = 'succesfully validated.';
             
@@ -1997,7 +2059,6 @@ class Hr_validation extends MY_PrivateController
 
         if($forms_details['is_leave'] == 1 && ($forms_details['with_credits'] == 1))
         {
-            debug('aaa');
             $balance_data = $this->fam->get_leave_balance($forms_details['user_id'], $forms_details['date_from'], $forms_details['form_id']);
             $leavebal = 0;
             $tfdatesbal = 0;

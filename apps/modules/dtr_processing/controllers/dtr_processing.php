@@ -163,7 +163,7 @@ class Dtr_processing extends MY_PrivateController
 
 				$this->db->trans_commit();
 			}
-			else{
+/*			else{
 				$this->db->trans_rollback();
 				$this->response->saved = false;
 				$this->response->message[] = array(
@@ -171,7 +171,7 @@ class Dtr_processing extends MY_PrivateController
 					'type' => 'warning'
 				);
 				$this->_ajax_return();
-			}
+			}*/
 
 			$this->db->where($this->mod->primary_key, $this->record_id);
         	$this->db->update($this->mod->table, array('cutoff_monthly' => date('Y-m',strtotime($_POST['time_period']['date_from']))));			

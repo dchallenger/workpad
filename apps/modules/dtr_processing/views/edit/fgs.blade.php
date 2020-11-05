@@ -47,7 +47,7 @@
 	    </div>	
 	</div>	
 	<div class="form-group">
-		<label class="control-label col-md-3"><span class="required">* </span>Apply To</label>
+		<label class="control-label col-md-3">Apply To</label>
 		<div class="col-md-7">
 			<?php
 				$db->select('apply_to_id,apply_to');

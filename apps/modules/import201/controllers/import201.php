@@ -4208,7 +4208,7 @@ class Import201 extends MY_PrivateController
 		}
 
 		$objReader->setReadDataOnly(true);
-		$objPHPExcel = $objReader->load('D:\oclp new version\employee 201 record 10052020_updated.xls');
+		$objPHPExcel = $objReader->load('D:\oclp new version\new HRIS Approver Set up.xls');
 		$rowIterator = $objPHPExcel->getActiveSheet()->getRowIterator();
 	
 		$ctr = 0;	
@@ -4299,6 +4299,25 @@ class Import201 extends MY_PrivateController
 
 			$result_update = $this->db->query( $update );
 			mysqli_next_result($this->db->conn_id);			
+		}
+
+		echo "Done.";	
+	}
+
+	function update_approver(){
+		$result = $this->db->get('approver_class_users');
+		foreach ($result->result() as $row) {
+			$result_user = $this->db->get_where('users_profile',array('user_id' => $row->user_id));
+			if ($result_user && $result_user->num_rows() > 0){
+				$row_users = $result_user->row();
+
+				$info['company_id'] = $row_users->company_id;
+				$info['department_id'] = $row_users->department_id;
+				$info['position_id'] = $row_users->position_id;
+
+				$this->db->where('user_id',$row->user_id);
+				$this->db->update('approver_class_users',$info);				
+			}
 		}
 
 		echo "Done.";	

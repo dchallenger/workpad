@@ -917,6 +917,9 @@ class Form_application_manage extends MY_PrivateController
                     $remarks['remarks'][] = $comment;
                 }
                 $form_details = array_merge($form_details, $remarks);
+                
+                $form_details['within_cutoff'] = $this->mod->check_within_cutoff('', $form_details['date_from'], $form_details['date_to'], $form_details['company_id']);
+
                 $this->response->form_details .= $this->load->blade('edit/leave_details', $form_details, true);
             break;
             case get_time_form_id('OBT')://obt

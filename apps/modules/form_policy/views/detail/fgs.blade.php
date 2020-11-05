@@ -105,8 +105,9 @@
 	                            </span>
 	                            {{ form_dropdown('time_form_class_policy[group_id][]',$time_form_class_policy_group_id_options, explode(',', $record['time_form_class_policy_group_id']), 'class="form-control" data-placeholder="Select..." multiple="multiple" id="time_form_class_policy-group_id" disabled') }}
 	                        </div> 				</div>	
-			</div>			<div class="form-group">
-				<label class="control-label col-md-3">Employment Status</label>
+			</div>			
+			<div class="form-group">
+				<label class="control-label col-md-3">Status</label>
 				<div class="col-md-7"><?php                                                        		$db->select('employment_status_id,employment_status');
                             		                            		$db->where('deleted', '0');
                             		$options = $db->get('partners_employment_status');
@@ -120,8 +121,25 @@
 	                            </span>
 	                            {{ form_dropdown('time_form_class_policy[employment_status_id][]',$time_form_class_policy_employment_status_id_options, explode(',', $record['time_form_class_policy_employment_status_id']), 'class="form-control" data-placeholder="Select..." multiple="multiple" id="time_form_class_policy-employment_status_id" disabled') }}
 	                        </div> 				</div>	
-			</div>			<div class="form-group">
-				<label class="control-label col-md-3">Employment Type</label>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-md-3">Rank</label>
+				<div class="col-md-7"><?php                                                        		$db->select('job_grade_id,job_level');
+                            		                            		$db->where('deleted', '0');
+                            		$options = $db->get('users_job_grade_level');
+									$time_form_class_policy_job_grade_id_options = array();
+                            		foreach($options->result() as $option)
+                            		{
+                            			                            				$time_form_class_policy_job_grade_id_options[$option->job_grade_id] = $option->job_level;
+                            			                            		} ?>							<div class="input-group">
+								<span class="input-group-addon">
+	                            <i class="fa fa-list-ul"></i>
+	                            </span>
+	                            {{ form_dropdown('time_form_class_policy[job_grade_id][]',$time_form_class_policy_job_grade_id_options, explode(',', $record['time_form_class_policy_job_grade_id']), 'class="form-control" data-placeholder="Select..." multiple="multiple" id="time_form_class_policy-job_grade_id" disabled') }}
+	                        </div> 				</div>	
+			</div>						
+			<div class="form-group">
+				<label class="control-label col-md-3">Level</label>
 				<div class="col-md-7"><?php                                                        		$db->select('employment_type_id,employment_type');
                             		                            		$db->where('deleted', '0');
                             		$options = $db->get('partners_employment_type');

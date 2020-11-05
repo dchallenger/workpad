@@ -106,7 +106,7 @@ class Resources extends MY_PrivateController
 		}
 
         $partner_record = "SELECT up.*, ud.department as dept, u.login, upos.position, p.effectivity_date as date_hired, 
-        				p.employment_type,
+        				p.employment_type,ppp.address,ppp.city_town,uc.address as company_address,
         				p.resigned_date, uc.company as comp, (aes_decrypt(`pp`.`salary`, encryption_key()) * 1) as 'basic', 
         				IF(`ub`.`company_coe` IS NOT NULL,`ub`.`company_coe`,`uc`.`company`) AS company_coe, uc.print_logo 
         				FROM {$this->db->dbprefix}users_profile up
@@ -117,6 +117,7 @@ class Resources extends MY_PrivateController
                         LEFT JOIN {$this->db->dbprefix}users_position upos ON up.position_id = upos.position_id
                         LEFT JOIN {$this->db->dbprefix}partners p ON up.partner_id = p.partner_id
                         LEFT JOIN {$this->db->dbprefix}payroll_partners pp ON u.user_id = pp.user_id
+                        LEFT JOIN partners_personal ppp on up.user_id = ppp.user_id
                         WHERE up.partner_id = {$user_id} ";
         $partner_record_result = $this->db->query($partner_record);
 
@@ -136,11 +137,13 @@ class Resources extends MY_PrivateController
 	        $pdata['employee_name'] = $partner_record['firstname']." ".substr($partner_record['middlename'],0, 1).". ".$partner_record['lastname'];
 	        $pdata['position'] = $partner_record['position'] ?? '';
 	        $pdata['division'] = $partner_record['v_division'] ?? '';
+	        $pdata['location'] = $partner_record['v_location'] ?? '';
 	        $pdata['employment_type'] = $partner_record['employment_type'] ?? '';
 	        $pdata['date_hired'] =  ($partner_record['date_hired'] && $partner_record['date_hired'] != '0000-00-00' && $partner_record['date_hired'] != 'January 01, 1970' && $partner_record['date_hired'] != '1970-01-01') ? date('F d, Y', strtotime($partner_record['date_hired'])) : '';
 	        $pdata['resigned_date'] = ($partner_record['resigned_date'] && $partner_record['resigned_date'] != '0000-00-00' && $partner_record['resigned_date'] != 'January 01, 1970' && $partner_record['resigned_date'] != '1970-01-01') ? date('F d, Y', strtotime($partner_record['resigned_date'])) : '';
 	        $pdata['gender'] = $partner_record['title'];
 	        $pdata['company'] = $partner_record['company_coe'] ?? '';
+	        $pdata['company_address'] = $partner_record['company_address'] ?? '';
 	        $pdata['basic'] = $partner_record['basic'];
 	        $pdata['logo'] = $logo;
 	        $pdata['basic_in_words'] = strtoupper(convert_number_to_words($partner_record['basic']));
@@ -161,6 +164,8 @@ class Resources extends MY_PrivateController
 	        $pdata['hrd_position'] = $hrd['position'];
 	        $pdata['unit'] = $unit;
 	        $pdata['stikcer_number'] = $sticker_no;
+	        $pdata['address'] = $partner_record['address'];
+	        $pdata['city'] = $partner_record['city_town'];
 
 	        $allowances = "SELECT SUM(aes_decrypt(`pere`.`amount`, encryption_key()) * 1) AS total_alowance FROM {$this->db->dbprefix}payroll_entry_recurring per
 	        			   LEFT JOIN {$this->db->dbprefix}payroll_entry_recurring_employee pere ON per.recurring_id = pere.recurring_id
@@ -189,7 +194,13 @@ class Resources extends MY_PrivateController
 	        		break;
 	        	case 'cfr':
 	        		$html = $this->load->view("templates/co_resigned", $pdata, true);
-	        		break;	        		
+	        		break;
+	        	case 'cmb':
+	        		$html = $this->load->view("templates/coe_maternity_benefit", $pdata, true);
+	        		break;
+	        	case 'cea':
+	        		$html = $this->load->view("templates/coe_employee_address", $pdata, true);
+	        		break;
 	        	default:
 	        		$html = '';
 	        		break;        		

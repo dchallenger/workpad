@@ -8,6 +8,7 @@ ww_time_form_class_policy.employment_type_id as "time_form_class_policy_employme
  ww_time_form_class_policy.department_id as "time_form_class_policy_department_id", 
  ww_time_form_class_policy.division_id as "time_form_class_policy_division_id", 
  ww_time_form_class_policy.company_id as "time_form_class_policy_company_id", 
+ ww_time_form_class_policy.job_grade_id as "time_form_class_policy_job_grade_id", 
  ww_time_form_class_policy.description as "time_form_class_policy_description", 
  ww_time_form_class_policy.class_value as "time_form_class_policy_class_value", 
  ww_time_form_class.class_id as "time_form_class_policy_class_id", 

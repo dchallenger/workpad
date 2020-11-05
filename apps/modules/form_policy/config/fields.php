@@ -51,6 +51,30 @@ $config['fields'][2]['time_form_class_policy.role_id'] = array(
 		'textual_value_column' => ''
 	)
 );
+$config['fields'][2]['time_form_class_policy.job_grade_id'] = array(
+	'f_id' => 19,
+	'fg_id' => 2,
+	'label' => 'Rank',
+	'description' => '',
+	'table' => 'time_form_class_policy',
+	'column' => 'job_grade_id',
+	'uitype_id' => 10,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 10,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 0,
+	'searchable' => array(
+		'type_id' => '1',
+		'table' => 'users_job_grade_level',
+		'multiple' => 1,
+		'group_by' => '',
+		'label' => 'job_level',
+		'value' => 'job_grade_id',
+		'textual_value_column' => ''
+	)
+);
 $config['fields'][2]['time_form_class_policy.employment_type_id'] = array(
 	'f_id' => 17,
 	'fg_id' => 2,

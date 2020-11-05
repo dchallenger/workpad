@@ -409,7 +409,7 @@
 								<?php foreach($approver_list as $index => $value){ ?>
 									<li class="list-group-item"><?=$value['lastname'].', '.$value['firstname']?>
 										<br><small class="text-muted"><?=$value['position']?></small>
-									<?php if($record['time_forms_form_status_id'] > 2 && $record['time_forms_form_status_id'] != 8){ 
+									<?php if($record['time_forms_form_status_id'] >= 2 && $record['time_forms_form_status_id'] != 8){ 
 								            $form_style = 'info';
 								            switch($value['form_status_id']){
 								                case 8:

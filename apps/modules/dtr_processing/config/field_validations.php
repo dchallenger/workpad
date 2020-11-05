@@ -16,11 +16,11 @@ $config['field_validations']['time_period.company_id'][] = array(
 	'label'   => 'Company',
 	'rules'   => 'required'
 );
-$config['field_validations']['time_period.apply_to_id'][] = array(
+/*$config['field_validations']['time_period.apply_to_id'][] = array(
 	'field'   => 'time_period[apply_to_id]',
 	'label'   => 'Apply To',
 	'rules'   => 'required'
-);
+);*/
 $config['field_validations']['time_period.cutoff'][] = array(
 	'field'   => 'time_period[cutoff]',
 	'label'   => 'Cut-Off Date',

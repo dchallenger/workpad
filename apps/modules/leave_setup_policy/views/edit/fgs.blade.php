@@ -50,7 +50,7 @@
 						<span class="input-group-addon">
 	                    <i class="fa fa-list-ul"></i>
 	                    </span>
-	                    {{ form_multiselect('time_form_balance_setup_policy[employment_type_ids][]',$employment_type, $employment_type_ids_val, 'multiple class="form-control select2me" data-placeholder="Select..." id="time_form_balance_setup_policy-company_id"') }}
+	                    {{ form_multiselect('time_form_balance_setup_policy[employment_type_ids][]',$employment_type, $employment_type_ids_val, 'multiple class="form-control select2me" data-placeholder="Select..." id="time_form_balance_setup_policy-employment_type"') }}
 	                </div>
 	            </div>	
 			</div>
@@ -75,7 +75,7 @@
 						<span class="input-group-addon">
 	                    <i class="fa fa-list-ul"></i>
 	                    </span>
-	                    {{ form_multiselect('time_form_balance_setup_policy[employment_status_ids][]',$employment_status, $employment_status_ids_val, 'multiple class="form-control select2me" data-placeholder="Select..." id="time_form_balance_setup_policy-company_id"') }}
+	                    {{ form_multiselect('time_form_balance_setup_policy[employment_status_ids][]',$employment_status, $employment_status_ids_val, 'multiple class="form-control select2me" data-placeholder="Select..." id="time_form_balance_setup_policy-employment_status"') }}
 	                </div>
 	            </div>	
 			</div>

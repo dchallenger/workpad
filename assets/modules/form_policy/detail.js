@@ -9,6 +9,8 @@ $(document).ready(function(){
 
 	$('#time_form_class_policy-employment_status_id').multiselect();
 
+	$('#time_form_class_policy-job_grade_id').multiselect();
+
 	$('#time_form_class_policy-group_id').multiselect();
 
 	$('#time_form_class_policy-department_id').multiselect();

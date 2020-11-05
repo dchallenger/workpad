@@ -166,12 +166,14 @@ function get_previous_cutoff()
         },
         success: function ( response ) {            
 
-            $("#time_period-previous_cutoff").parent().datepicker('setDate', new Date(response.previous_cutoff) );
-            
-            $("#time_period-previous_cutoff").parent().datepicker({
-                autoclose: true,
-                format : "MM dd, yyyy"
-            });
+            if (response.previous_cutoff != '') {
+                $("#time_period-previous_cutoff").parent().datepicker('setDate', new Date(response.previous_cutoff) );
+                
+                $("#time_period-previous_cutoff").parent().datepicker({
+                    autoclose: true,
+                    format : "MM dd, yyyy"
+                });
+            }
         }
     });
 }

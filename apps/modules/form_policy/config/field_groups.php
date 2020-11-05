@@ -19,6 +19,7 @@ $config['fieldgroups'][2] = array(
 		'time_form_class_policy.group_id',
 		'time_form_class_policy.employment_status_id',
 		'time_form_class_policy.employment_type_id',
-		'time_form_class_policy.role_id'
+		'time_form_class_policy.role_id',
+		'time_form_class_policy.job_grade_id'
 	)
 );

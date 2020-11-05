@@ -336,7 +336,7 @@
 								<?php foreach($approver_list as $index => $value){ ?>
 									<li class="list-group-item"><?=$value['lastname'].', '.$value['firstname']?>
 										<br><small class="text-muted"><?=$value['position']?></small>
-									<?php if($form_status_id['val'] > 2){ 
+									<?php if($form_status_id['val'] >= 2){ 
 								            $form_style = 'info';
 								            switch($value['form_status_id']){
 								                case 7:
@@ -383,6 +383,7 @@
 
 @section('view_js')
 	@parent
+	<script type="text/javascript" src="{{ theme_path() }}modules/form_application/detail.js"></script> 
 @stop
 
 

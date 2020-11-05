@@ -69,7 +69,9 @@
     <hr class='margin-top-10 margin-bottom-10'>
         <div class='clearfix padding-left-right-10'>
             <a href='#' class='approve-pop small text-success margin-right-10 margin-left-10' data-forms-id='{{ $forms_id }}' data-form-owner='{{ $user_id }}' data-user-name='' data-decission='1'><i class='fa fa-check'></i> Approve</a>
-            <a href='#' class='decline-pop small text-danger margin-right-10' data-forms-id='{{ $forms_id }}' data-form-owner='{{ $user_id }}' data-user-name='' data-decission='0'><i class='fa fa-pencil' ></i> Decline</a>
+            @if ($within_cutoff)
+                <a href='#' class='decline-pop small text-danger margin-right-10' data-forms-id='{{ $forms_id }}' data-form-owner='{{ $user_id }}' data-user-name='' data-decission='0'><i class='fa fa-pencil' ></i> Disapprove</a>
+            @endif
             <a href='#' class='close-pop small text-muted'><i class='fa fa-times'></i> Close</a>
         </div>
 </div>

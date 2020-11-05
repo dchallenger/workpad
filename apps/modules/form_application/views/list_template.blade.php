@@ -65,7 +65,7 @@
     </td>
     <td>
         <?php 
-        if( $time_forms_form_status_id < 7 && (!(count($error) > 0) || $time_forms_form_status_id!=6) && $time_form_form != 'Daily Time Record Updating' ){ // can cancel forms of any status except disapproved/cancelled ?>
+        if( $time_forms_form_status_id < 2 && (!(count($error) > 0) || $time_forms_form_status_id!=6) && $time_form_form != 'Daily Time Record Updating' ){ // can cancel forms of any status except disapproved/cancelled ?>
             @if ($blanket == '')
                 <div class="btn-group">
                     <a class="btn btn-xs text-muted" href="{{ $edit_url }}"><i class="fa fa-pencil"></i> {{ lang('form_application.edit') }}</a>

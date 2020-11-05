@@ -895,7 +895,7 @@ class Form_application extends MY_PrivateController
         
         $data['label_adc'] = $label;
         $data['date_adc'] = $date_adc;
-
+        
         $this->load->vars($data);
 
         $this->load->helper('form');
@@ -1174,7 +1174,7 @@ class Form_application extends MY_PrivateController
             foreach($period as $dt) {
                 if(in_array($form_id, $leaves_ids)){
                     $already_exist = $this->mod->get_approved_forms($dt->format('Y-m-d'), $this->user->user_id);
-                        $pending_already_exist = $this->mod->get_pending_forms($dt->format('Y-m-d'), $this->user->user_id, $forms_id);
+                    $pending_already_exist = $this->mod->get_pending_forms($dt->format('Y-m-d'), $this->user->user_id, $forms_id);
                     $total_filed_day = 0;
                     $total_filed_credit = 0;
                     $duration_day = 0;
@@ -1353,7 +1353,7 @@ class Form_application extends MY_PrivateController
             //START : validate forms with focus date and OT overlap
             //obt, overtime, undertime, dtrp, excuse tardiness
             $this->input->post('bt_type') == 1 ? $form_type_with_focus = array(get_time_form_id('OBT'), get_time_form_id('OT'), get_time_form_id('UT'), get_time_form_id('DTRP'), get_time_form_id('ET')) : $form_type_with_focus = array(get_time_form_id('OT'), get_time_form_id('UT'), get_time_form_id('DTRP'), get_time_form_id('ET')); 
-        if(in_array($form_id, $form_type_with_focus)){
+            if(in_array($form_id, $form_type_with_focus)){
                 switch($form_id){
                     case get_time_form_id('OBT')://obt
                         if(strtotime($this->input->post('focus_date')) > strtotime($date_from. ' +1 day') || strtotime($this->input->post('focus_date')) < strtotime($date_from. ' -1 day')
@@ -2238,13 +2238,13 @@ class Form_application extends MY_PrivateController
                     );  
                     $this->_ajax_return();
                 }
-            }elseif(empty($balance_data)){
+            }/*elseif(empty($balance_data)){
                     $this->response->message[] = array(
                         'message' => 'No Leave Credits to deduct on your application.',
                         'type' => 'warning'
                     );  
                     $this->_ajax_return();
-            }
+            }*/
         }
 
         //Validate additional leave
@@ -2519,6 +2519,8 @@ class Form_application extends MY_PrivateController
                 //INSERT NOTIFICATIONS FOR APPROVERS
                 $this->response->notified = $this->mod->notify_approvers( $form_id, $form_details );
                 $this->response->notified = $this->mod->notify_filer( $form_id, $form_details );
+            } elseif ($form_details['form_status_id'] == 4) {
+                $this->response->notified = $this->mod->notify_hr( $form_id, $form_details );
             }
 
             if($_POST['form_code'] == 'ML' && $this->input->post('return_date') != ''){
@@ -2850,7 +2852,7 @@ class Form_application extends MY_PrivateController
         {
             foreach( $filter_by as $filter_by_key => $filter_value )
             {
-                if( $filter_value != "" ) {
+                if( $filter_value != "" && $filter_value != 0 ) {
                     if($filter_by_key == "pay_date"){
                         if($filter_value > 0){
                             $fqry = "SELECT `record_id`,`period_id`,`period_year`,`payroll_date`,`from`,`to` 
