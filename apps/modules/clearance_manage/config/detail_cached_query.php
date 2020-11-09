@@ -4,8 +4,9 @@ $config["detail_cached_query"] = 'SELECT ww_partners_clearance.*,
 `ww_partners_clearance`.`created_on` as "partner_clearance_created_on", 
 `ww_partners_clearance`.`created_by` as "partner_clearance_created_by", 
 `ww_partners_clearance`.`modified_on` as "partner_clearance_modified_on", 
-`ww_partners_clearance`.`modified_by` as "partner_clearance_modified_by"
-, ww_partners_clearance_status.status as clearance_status, 
+`ww_partners_clearance`.`modified_by` as "partner_clearance_modified_by",
+ww_partners_clearance_status.status as clearance_status, 
+ww_partners_clearance_signatories.date_cleared as date_cleared, 
 ww_partners_clearance_signatories.status_id as clearance_status_id,
 users_profile.firstname, users_profile.lastname, 
 ww_users_company.company, ww_users_department.department 

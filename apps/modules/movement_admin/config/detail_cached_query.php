@@ -9,6 +9,8 @@ $config["detail_cached_query"] = 'SELECT `ww_partners_movement`.`movement_id` as
 	ww_partners_movement_action_extension.no_of_months as "partners_movement_action_extension_no_of_months", 
 	DATE_FORMAT(ww_partners_movement_action.effectivity_date, \'%M %d, %Y\') as "partners_movement_action_effectivity_date", 
 	ww_partners_movement_action.remarks as "partners_movement_action_remarks", 
+	ww_partners_movement_action.reason_leaving as "partners_movement_action_reason_leaving", 
+	ww_partners_movement_action.type_id as "partners_movement_action_type_id_id", 	
 	ww_partners_movement_action.action_id as "partners_movement_action.action_id", 
 	ww_partners_movement.remarks as "partners_movement_remarks", 
 	ww_partners_movement.hrd_remarks as "partners_movement_hrd_remarks", 

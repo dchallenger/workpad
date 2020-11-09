@@ -57,7 +57,7 @@
                         </div>
                     </div>                            
                     <div class="form-group">
-                        <label class="control-label col-md-3">Dependent on Life Insurance</label>
+                        <label class="control-label col-md-3">Beneficiary of Life Insurance</label>
                         <div class="col-md-5">
                             <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
                                 <input type="checkbox" value="0" name="partners_personal_history[family-dependent-insurance][temp][]" id="partners_personal_history-family-dependent-insurance-temp" class="dontserializeme toggle dependent"/>

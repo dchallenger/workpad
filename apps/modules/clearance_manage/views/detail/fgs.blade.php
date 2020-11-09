@@ -214,6 +214,12 @@
 						                </select>
 									</td>
 								</tr>
+								<tr>
+									<td class="active"><span class="bold">Date Approved</span></td>
+									<td>
+										{{ general_date($value['date_cleared']) }}
+									</td>
+								</tr>													
 							</table>
 						</div>   
 				<?php 

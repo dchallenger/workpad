@@ -48,6 +48,7 @@ class Clearance extends MY_PrivateController
 																				'user_id' => $row->user_id,
 																				'remarks' => $row->remarks,
 																				'attachments' => $row->attachments,
+																				'date_cleared' => $row->date_cleared,
 																				'status_id' => $row->status_id,
 																			);
 

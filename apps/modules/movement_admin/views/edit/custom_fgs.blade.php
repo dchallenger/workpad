@@ -141,6 +141,12 @@
 				<textarea <?php echo $disable ?> class="form-control" name="partners_movement[remarks]" id="partners_movement-remarks" placeholder="Enter Remarks" rows="4"><?php echo $record['partners_movement.remarks'] ?></textarea> 				
 			</div>	
 		</div>
+		<div class="form-group reason_leaving" style="<?php echo ($record['partners_movement_action.type_id'] != 6) ? 'display:none' : '' ?>">
+			<label class="control-label col-md-3">Reason for Leaving</label>
+			<div class="col-md-7">							
+				<textarea <?php echo $disable ?> class="form-control" name="partners_movement_action[reason_leaving]" id="partners_movement-reason_leaving" placeholder="Enter Reason for Leaving" rows="4"><?php echo $record['partners_movement_action.reason_leaving'] ?></textarea> 				
+			</div>	
+		</div>			
 		<div class="form-group">
 			<label class="control-label col-md-3">Attachments</label>
 			<div class="col-md-7">

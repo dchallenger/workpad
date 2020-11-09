@@ -399,6 +399,32 @@
                                                 </div>  
                                             </div>                                            
                                             <div class="form-group">
+                                                <label class="control-label col-md-3"><?php echo lang('partners.rank') ?></label>
+                                                <div class="col-md-8">
+                                                    <?php   $db->select('job_grade_id,job_level');
+                                                            $db->where('deleted', '0');
+                                                            $db->order_by('job_level');
+                                                            $options = $db->get('users_job_grade_level');
+                                                    ?>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-list-ul"></i>
+                                                        </span>
+                                                        <select name="partners[job_grade_id]" id="partners-job_grade_id" class="form-control select2me" data-placeholder="Select..." >
+                                                            <option value=""></option>
+                                                        <?php
+                                                            foreach($options->result() as $option)
+                                                            {
+                                                        ?>
+                                                            <option value="<?php echo $option->job_grade_id ?>"><?php echo $option->job_level ?></option>
+                                                        <?php
+                                                            }
+                                                        ?>
+                                                        </select>                                                        
+                                                    </div>
+                                                </div>  
+                                            </div>
+                                            <div class="form-group">
                                                 <label class="control-label col-md-3"><?php echo lang('partners.level') ?><span class="required">*</span></label>
                                                 <div class="col-md-8">
                                                     <?php   $db->select('employment_type_id,employment_type');

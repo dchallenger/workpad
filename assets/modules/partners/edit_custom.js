@@ -1,7 +1,8 @@
 
 $(document).ready(function(){
     var service = get_service(  $('#partners-effectivity_date').val() );
-    $('span.calculatedservice').html(service+"&nbsp;&nbsp;years of service")  	
+    if (service != '' && !isNaN(service))
+    	$('span.calculatedservice').html(service+"&nbsp;&nbsp;years of service")  	
 
     $('#partners-effectivity_date').live('change', function(){
         var service = get_service(  $(this).val() );

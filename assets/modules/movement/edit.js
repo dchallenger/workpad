@@ -24,6 +24,12 @@ $(document).ready(function(){
 		else{
 			$('.cat_type').hide();			
 		}
+
+		if (val == 6) {
+			$('.reason_leaving').show();
+		} else {
+			$('.reason_leaving').hide();
+		}
 	});
 
 	$('#partners_movement-photo-fileupload').fileupload({ 

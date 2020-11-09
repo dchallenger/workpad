@@ -624,7 +624,7 @@ class movement_admin_model extends Record
 		$query = "SELECT 
 					CONCAT(up.lastname,', ',up.firstname,' ',SUBSTRING(up.middlename, 1, 1),'.') as fullname,p.id_number,
 					pm.hrd_remarks,uc.company,uc.company_code,ub.branch,pma.user_id,p.status,upos.position,
-					uc.print_logo, udep.department,jgl.job_level,pma.display_name,u.full_name as reports_to,pma.effectivity_date,
+					uc.print_logo, udep.department,udep.immediate as dept_head,udiv.immediate as div_head,jgl.job_level,pma.display_name,u.full_name as reports_to,pma.effectivity_date,
 					pmr.remarks_print_report,pm.remarks as reason,p.effectivity_date as date_hired,sss_no,
 					pp.tin,pp.hdmf_no,pm.created_on,up.v_location as location,up.v_division as division,up.v_section as section
 					FROM {$this->db->dbprefix}partners_movement pm
@@ -636,6 +636,7 @@ class movement_admin_model extends Record
 					LEFT JOIN {$this->db->dbprefix}users_profile up ON p.user_id = up.user_id
 					LEFT JOIN {$this->db->dbprefix}users_position upos ON upos.position_id = up.position_id
 					LEFT JOIN {$this->db->dbprefix}users_department udep ON udep.department_id = up.department_id
+					LEFT JOIN {$this->db->dbprefix}users_division udiv ON udiv.division_id = up.division_id
 					LEFT JOIN {$this->db->dbprefix}users_branch ub ON ub.branch_id = up.branch_id
 					LEFT JOIN {$this->db->dbprefix}users_company uc ON uc.company_id = up.company_id
 					LEFT JOIN {$this->db->dbprefix}users u ON up.reports_to_id = u.user_id
@@ -662,6 +663,8 @@ class movement_admin_model extends Record
 			$reviewed_by = $signatory[1]['full_name'];
 		}
 
+		$hr_head = $this->mod->get_human_resource_head('AVP, Head of Human Resources');
+
 		$b_rb = 'border-right:1px solid black;border-bottom:1px solid black;';
 		$b_r = 'border-right:1px solid black;';
 		$b_b = 'border-bottom:1px solid black;';
@@ -672,24 +675,24 @@ class movement_admin_model extends Record
 		$html .= '<table width="100%" style="border:1px solid black;border-collapse:collapse;font-size:10px;">
 					<tbody>
 						<tr>
-							<td width="33%" style="'.$b_rb.'">NAME <br/>'.$movement_info->fullname.'</td>
-							<td width="33%" style="'.$b_rb.'">EMPLOYEE NO. <br/>'.$movement_info->id_number.'</td>
-							<td width="33%" style="'.$b_b.'">DATE PREPARED <br/>'.general_date($movement_info->created_on).'</td>
+							<td width="33%" style="'.$b_rb.'">NAME <br/>&nbsp;&nbsp;'.$movement_info->fullname.'</td>
+							<td width="33%" style="'.$b_rb.'">EMPLOYEE NO. <br/>&nbsp;&nbsp;'.$movement_info->id_number.'</td>
+							<td width="33%" style="'.$b_b.'">DATE PREPARED <br/>&nbsp;&nbsp;'.general_date($movement_info->created_on).'</td>
 						</tr>
 						<tr>
-							<td width="33%" style="'.$b_rb.'">POSITION <br/>'.$movement_info->position.'</td>
-							<td width="33%" style="'.$b_rb.'">DATE HIRED <br/>'.general_date($movement_info->date_hired).'</td>
-							<td width="33%" style="'.$b_b.'">AREA / LOCATION <br/>'.$movement_info->location.'</td>
+							<td width="33%" style="'.$b_rb.'">POSITION <br/>&nbsp;&nbsp;'.$movement_info->position.'</td>
+							<td width="33%" style="'.$b_rb.'">DATE HIRED <br/>&nbsp;&nbsp;'.general_date($movement_info->date_hired).'</td>
+							<td width="33%" style="'.$b_b.'">AREA / LOCATION <br/>&nbsp;&nbsp;'.$movement_info->location.'</td>
 						</tr>
 						<tr>
-							<td width="33%" style="'.$b_rb.'">GROUP / DIVISION <br/>'.ucwords(strtolower($movement_info->division)).'</td>
-							<td width="33%" style="'.$b_rb.'">DEPARTMENT <br/>'.ucwords(strtolower($movement_info->department)).'</td>
-							<td width="33%" style="'.$b_b.'">SECTION <br/>'.($movement_info->section ? $movement_info->section : "&nbsp;").'</td>
+							<td width="33%" style="'.$b_rb.'">GROUP / DIVISION <br/>&nbsp;&nbsp;'.ucwords(strtolower($movement_info->division)).'</td>
+							<td width="33%" style="'.$b_rb.'">DEPARTMENT <br/>&nbsp;&nbsp;'.ucwords(strtolower($movement_info->department)).'</td>
+							<td width="33%" style="'.$b_b.'">SECTION <br/>&nbsp;&nbsp;'.($movement_info->section ? $movement_info->section : "&nbsp;").'</td>
 						</tr>
 						<tr>
-							<td width="33%" style="'.$b_rb.'">TIN / TAXCODE <br/>'.($movement_info->tin ? $movement_info->tin : "&nbsp;").'</td>
-							<td width="33%" style="'.$b_rb.'">SSS # <br/>'.($movement_info->sss_no ? $movement_info->sss_no : "&nbsp;").'</td>
-							<td width="33%" style="'.$b_b.'">PAG-IBIG NO. <br/>'.($movement_info->hdmf_no ? $movement_info->hdmf_no : "&nbsp;").'</td>
+							<td width="33%" style="'.$b_rb.'">TIN / TAXCODE <br/>&nbsp;&nbsp;'.($movement_info->tin ? $movement_info->tin : "&nbsp;").'</td>
+							<td width="33%" style="'.$b_rb.'">SSS # <br/>&nbsp;&nbsp;'.($movement_info->sss_no ? $movement_info->sss_no : "&nbsp;").'</td>
+							<td width="33%" style="'.$b_b.'">PAG-IBIG NO. <br/>&nbsp;&nbsp;'.($movement_info->hdmf_no ? $movement_info->hdmf_no : "&nbsp;").'</td>
 						</tr>
 						<tr>
 							<td width="100%" style="'.$b_b.'" colspan="3">&nbsp;</td>
@@ -888,6 +891,11 @@ class movement_admin_model extends Record
 							<td width="33%" >&nbsp;</td>
 						</tr>
 						<tr>
+							<td width="33%" style="'.$b_r.'">'.$movement_info->reports_to.'</td>	
+							<td width="33%" style="'.$b_r.'">'.$movement_info->dept_head.'</td>
+							<td width="33%">'.$hr_head.'</td>
+						</tr>						
+						<tr>
 							<td width="33%" style="'.$b_rb.'">Immediate Superior/ Date</td>	
 							<td width="33%" style="'.$b_rb.'">Department Head / Date</td>
 							<td width="33%" style="'.$b_b.'">Human Resources Head / Date</td>
@@ -903,20 +911,15 @@ class movement_admin_model extends Record
 							<td width="33%" >&nbsp;</td>
 						</tr>
 						<tr>
-							<td width="33%" style="'.$b_rb.'">&nbsp;</td>	
-							<td width="33%" style="'.$b_rb.'">&nbsp;</td>
-							<td width="33%" style="'.$b_b.'">&nbsp;</td>
-						</tr>
+							<td width="33%" style="'.$b_r.'">'.$movement_info->div_head.'</td>	
+							<td width="33%" style="'.$b_r.'"></td>
+							<td width="33%">'.$movement_info->fullname.'</td>
+						</tr>						
 						<tr>
-							<td width="33%" style="border-right:1px solid black">Division Head / Date</td>
-							<td width="33%" style="border-right:1px solid black">&nbsp;</td>
-							<td width="33%" >Employee / Date</td>
+							<td width="33%" style="'.$b_rb.'">Division Head / Date</td>
+							<td width="33%" style="'.$b_rb.'">&nbsp;</td>
+							<td width="33%" style="'.$b_b.'">Employee / Date</td>
 						</tr>		
-						<tr>
-							<td width="33%" style="'.$b_rb.'">&nbsp;</td>	
-							<td width="33%" style="'.$b_rb.'">&nbsp;</td>
-							<td width="33%" style="'.$b_b.'">&nbsp;</td>
-						</tr>
 						<tr>
 							<td width="33%" style="border-right:1px solid black">DISTRIBUTION:</td>
 							<td width="33%" style="border-right:1px solid black">1 - Employee</td>

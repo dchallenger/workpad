@@ -13,6 +13,7 @@ $config["edit_cached_query"] = 'SELECT `ww_partners_movement`.`movement_id` as r
 	DATE_FORMAT(ww_partners_movement_action.effectivity_date, \'%M %d, %Y\') as "partners_movement_action.effectivity_date", 
 	ww_partners_movement_action.remarks as "partners_movement_action.remarks", 
 	ww_partners_movement.remarks as "partners_movement.remarks", 
+	ww_partners_movement_action.reason_leaving as "partners_movement_action.reason_leaving", 
 	ww_partners_movement_action.type_id as "partners_movement_action.type_id", 
 	ww_partners_movement.due_to_id as "partners_movement.due_to_id", 
 	ww_partners_movement.due_to_id as "partners_movement.remarks_print_report_id",

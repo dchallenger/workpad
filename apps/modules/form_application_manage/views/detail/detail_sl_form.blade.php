@@ -127,7 +127,7 @@
 			                                    <div class="col-md-6">
 											    <?php 
 											    if(count($selected_dates['dates']) > 0 ){
-											    $countSelectedDates = 0;
+											    	$countSelectedDates = 0;
 											    	foreach ($selected_dates['dates'] as $index => $value){
 
 											        $array_keys = array_keys($value);

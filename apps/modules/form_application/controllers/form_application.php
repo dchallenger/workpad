@@ -1614,7 +1614,11 @@ class Form_application extends MY_PrivateController
             $schedule = $this->input->post('scheduled');
             $addl_type = $this->input->post('addl_type');
 
-            $forms_validation = $this->time_form_policies->validate_form_filing($form_id, strtoupper($this->input->post('form_code')), $this->user->user_id, $date_from, $date_to, $uploads, $forms_id, $date_time_from, $date_time_to, $date_time, $shift_to, $schedule, $total_duration, $addl_type);
+            $forms_rest_day_focus_date = $this->mod->check_rest_day($this->user->user_id, $this->input->post('focus_date'));
+            $form_holiday_fd = $this->mod->check_if_holiday($this->input->post('focus_date'), $this->user->user_id);
+            $form_holiday_focus_date = ($form_holiday_fd ? count($form_holiday_fd) : 0);
+
+            $forms_validation = $this->time_form_policies->validate_form_filing($form_id, strtoupper($this->input->post('form_code')), $this->user->user_id, $date_from, $date_to, $uploads, $forms_id, $date_time_from, $date_time_to, $date_time, $shift_to, $schedule, $total_duration, $addl_type, $forms_rest_day_focus_date, $form_holiday_focus_date);
 
             if (isset($forms_validation['error'])) { 
                 if(count($forms_validation['error']) > 0 ){             

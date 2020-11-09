@@ -406,6 +406,8 @@ class report_generator_model extends Record
             }
         }
 
+		$auto_size = 0;
+		$w_border = 0;
         $reports = $this->get_report( $this->input->post( 'record_id' ) );
 		$query = $this->export_query( $reports, $filter );	
 		switch($report->report_code)
@@ -448,10 +450,6 @@ class report_generator_model extends Record
 				break;	
             case 'Manpower Movement Report':
                 $excel = $this->load->view("templates/partners_manpower_movement_report", array('result' => $result), true);
-                break;
-            case 'attrition_report':
-                $excel = $this->load->view("templates/partners_attrition_report", array('result' => $result), true);
-                $excelcolumn = 'BV';
                 break;
             case 'THIRTEEN_MONTH_BASIS':
                 $excel = $this->load->view("templates/payroll_thirteen_month_basis", array('result' => $result), true);
@@ -618,6 +616,13 @@ class report_generator_model extends Record
 				$header = 0;
         		$excel = $this->load->view("templates/sss_loan_excel", array('result' => $result), true);
                 break;
+            case 'ESR': //Pag-Ibig STLRF
+            case 'attrition_report':
+            case 'hr_headcount':
+				$auto_size = 1;
+				$w_border = 1;
+        		$excel = $this->load->view("templates/excel", array('result' => $result), true);
+                break;                
 			default:
 				$excel = $this->load->view("templates/excel", array('result' => $result), true);
 				break;
@@ -660,6 +665,31 @@ class report_generator_model extends Record
 					    )
 					  )
 					);
+
+		
+		if ($auto_size) {
+            $excelcolumn = ($excelcolumn == '') ? 'BZ' : $excelcolumn;
+			$letters = $this->createColumnsArray($excelcolumn);
+			$index = 0;
+
+			for ($index; $index <= count($columns) - 1; $index++) {
+				$row = $letters[$index]."1";
+				
+				$content->getActiveSheet()->getColumnDimension($letters[$index])->setAutoSize(true);
+			}
+		}
+
+		if ($w_border) {
+            $excelcolumn = ($excelcolumn == '') ? 'BZ' : $excelcolumn;
+			$letters = $this->createColumnsArray($excelcolumn);
+			$index = 0;
+
+			for ($index; $index <= count($columns) - 1; $index++) {
+				$row = $letters[$index]."1";
+				
+				$content->getActiveSheet()->getStyle("$letters[$index]"."1".":".$letters[$index].($result->num_rows()+1))->applyFromArray($border_style);
+			}
+		}
 
 		if($lmr_header == 1){
 

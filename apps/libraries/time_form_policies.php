@@ -8,7 +8,7 @@ class time_form_policies {
         $this->CI->load->model('form_application_model', 'formapp', TRUE);
 	}
 
-	function validate_form_filing($form_id=0, $form_code='', $user_id=0, $date_from='', $date_to='', $uploads=array(), $forms_id=0, $date_time_from='', $date_time_to='', $date_time='', $shift_to='', $scheduled='YES', $total_duration=0, $addl_type=''){
+	function validate_form_filing($form_id=0, $form_code='', $user_id=0, $date_from='', $date_to='', $uploads=array(), $forms_id=0, $date_time_from='', $date_time_to='', $date_time='', $shift_to='', $scheduled='YES', $total_duration=0, $addl_type='', $rest_day = 0, $holiday = 0){
 		$form_policy_error = array();
         $form_policy_error['error'] = array();
         $form_policy_error['warning'] = array();
@@ -215,6 +215,42 @@ class time_form_policies {
     				}
                 }
 				break;
+                case $form_code.'-MINIMUM-FILING-MINUTES-REG-DAY':
+                // echo "<pre>";
+                // var_dump( in_array($form_code, array('ADDL')) );
+                // echo "<br>";
+                // var_dump( !in_array($addl_type, array('Use')) );
+                if( ( !in_array($form_code, array('ADDL')) ) ||
+                    (( in_array($form_code, array('ADDL')) ) && ( !in_array($addl_type, array('Use')) )) ){
+                    // echo "here po";
+                    $min_file_month = $this->_check_min_minutes_file($form_policy['class_value'], $date_time_from, $date_time_to, $date_time, $form_id, $forms_id, $user_id, $rest_day, $holiday);
+                    if($min_file_month == 'error'){
+                        if($form_policy['severity'] == 'Warning'){
+                            $form_policy_error['warning'][] = "Minimum minutes to apply for regular day should be ".$form_policy['class_value']." minutes"; 
+                        }else{
+                            $form_policy_error['error'][] = "Minimum minutes to apply for regular day should be ".$form_policy['class_value']." minutes"; 
+                        }
+                    }
+                }
+                break;
+                case $form_code.'-MINIMUM-FILING-MINUTES-REST-HOL-DAY':
+                // echo "<pre>";
+                // var_dump( in_array($form_code, array('ADDL')) );
+                // echo "<br>";
+                // var_dump( !in_array($addl_type, array('Use')) );
+                if( ( !in_array($form_code, array('ADDL')) ) ||
+                    (( in_array($form_code, array('ADDL')) ) && ( !in_array($addl_type, array('Use')) )) ){
+                    // echo "here po";
+                    $min_file_month = $this->_check_min_minutes_file_rest_hol($form_policy['class_value'], $date_time_from, $date_time_to, $date_time, $form_id, $forms_id, $user_id, $rest_day, $holiday);
+                    if($min_file_month == 'error'){
+                        if($form_policy['severity'] == 'Warning'){
+                            $form_policy_error['warning'][] = "Minimum minutes to apply for rest day and holiday should be ".$form_policy['class_value']." minutes"; 
+                        }else{
+                            $form_policy_error['error'][] = "Minimum minutes to apply for rest day and holiday should be ".$form_policy['class_value']." minutes"; 
+                        }
+                    }
+                }
+                break;                  
 				case $form_code.'-MAXIMUM-FILING-MINUTES':
 				$max_file_month = $this->_check_max_minutes_file($form_policy['class_value'], $date_time_from, $date_time_to, $date_time, $form_id, $forms_id, $user_id);
 				if($max_file_month == 'error'){
@@ -727,7 +763,7 @@ class time_form_policies {
         return false;
     }
 
-    function _check_min_minutes_file($value='', $date_time_from='', $date_time_to='', $date_time='', $form_id=0, $forms_id=0, $user_id=0){
+    function _check_min_minutes_file($value='', $date_time_from='', $date_time_to='', $date_time='', $form_id=0, $forms_id=0, $user_id=0, $rest_day = 0, $holiday = 0){
         if($date_time != ''){//UT, ET
             $shift_schedule = $this->CI->time_form_policies_model->get_shift_details(date('Y-m-d', strtotime($date_time)), $user_id);
             $shift_schedule_start = strtotime($shift_schedule['shift_time_start']);
@@ -745,7 +781,31 @@ class time_form_policies {
             $minutes = ($datetime2 - $datetime1)/60;
         }
 
-        if($minutes < $value){
+        if($minutes < $value && (!$rest_day && !$holiday)) {
+            return 'error';
+        }
+        return false;
+    }
+
+    function _check_min_minutes_file_rest_hol($value='', $date_time_from='', $date_time_to='', $date_time='', $form_id=0, $forms_id=0, $user_id=0, $rest_day = 0, $holiday = 0){
+        if($date_time != ''){//UT, ET
+            $shift_schedule = $this->CI->time_form_policies_model->get_shift_details(date('Y-m-d', strtotime($date_time)), $user_id);
+            $shift_schedule_start = strtotime($shift_schedule['shift_time_start']);
+            $shift_schedule_end = strtotime($shift_schedule['shift_time_end']);
+            if($form_id == 10){ //UT
+                $datetime2 = $shift_schedule_end < $shift_schedule_start ? strtotime(date('Y-m-d', strtotime($date_time. "+1 days"))." ".$shift_schedule['shift_time_end']) : strtotime(date('Y-m-d', strtotime($date_time))." ".$shift_schedule['shift_time_end']);
+            }else{ //ET
+                $datetime2 = strtotime(date('Y-m-d', strtotime($date_time))." ".$shift_schedule['shift_time_start']);
+            }
+            $datetime1 = strtotime($date_time);    
+            $minutes = ($datetime2 - $datetime1)/60;
+        }else{//OT,OBT, DTRP
+            $datetime2 = strtotime($date_time_to);
+            $datetime1 = strtotime($date_time_from);        
+            $minutes = ($datetime2 - $datetime1)/60;
+        }
+
+        if($minutes < $value && ($rest_day && $holiday)) {
             return 'error';
         }
         return false;

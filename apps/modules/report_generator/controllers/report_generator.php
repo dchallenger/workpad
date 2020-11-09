@@ -440,7 +440,8 @@ class Report_generator extends MY_PrivateController
             case 'new_hires':
             case 'Manpower Movement Report':
             case 'attrition_report': //Attrition Report
-                $button = array('xls' => 0, 'csv' => 0, 'pdf' => 1, 'txt' => 0);
+            case 'hr_headcount':
+                $button = array('xls' => 0, 'csv' => 1, 'pdf' => 1, 'txt' => 0);
                 $data['content'] = $this->load->blade('pages.param_form_custom')->with( $this->load->get_cached_vars() )->with('button', $button);
                 break;
             case 'MANCOUNT': //Manpower Count
@@ -808,7 +809,7 @@ class Report_generator extends MY_PrivateController
                 $fixedfiltersdata = $_POST['report_generator_filters'];
                 $columns = $fixedfiltersdata['column'];
                 $operator = $fixedfiltersdata['operator'];
-                $filter = $fixedfiltersdata['filter'];
+                $filter = ($fixedfiltersdata['filter'] ?? '');
                 $type = $fixedfiltersdata['type'];
                 $logical_operator = $fixedfiltersdata['logical_operator'];
                 $bracket = $fixedfiltersdata['bracket'];

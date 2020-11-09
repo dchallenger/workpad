@@ -13,8 +13,11 @@ $config["list_cached_query"] = 'SELECT `ww_users`.`user_id` as record_id,
   `ww_users`.`modified_on` AS "users_modified_on",
   `ww_users`.`modified_by` AS "users_modified_by",
   `ww_users_position`.`position` as "users_profile_position_id", 
-  IF(`ww_users`.`active` = 1, "Yes", "No") as "users_active"
+  IF(`ww_users`.`active` = 1, "Yes", "No") as "users_active",
+  ww_partners.id_number as "partners_id_number",
+  ww_users_profile.company as "users_profile_company"  
 FROM (`ww_users`)
+LEFT JOIN `ww_partners` ON `ww_partners`.`user_id` = `ww_users`.`user_id`
 LEFT JOIN `ww_users_profile` ON `ww_users_profile`.`user_id` = `ww_users`.`user_id`
 LEFT JOIN `ww_users_position` ON `ww_users_position`.`position_id` = `ww_users_profile`.`position_id`
 WHERE (

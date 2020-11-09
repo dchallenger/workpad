@@ -306,6 +306,14 @@
 										                </select>
 													</td>
 												</tr>
+												@if (in_array($signatories[$value['clearance_layout_sign_id']]['status_id'],[3,4]))
+													<tr>
+														<td class="active"><span class="bold">Date Approved</span></td>
+														<td>
+															{{ general_date($signatories[$value['clearance_layout_sign_id']]['date_cleared']) }}
+														</td>
+													</tr>													
+												@endif
 											</table>
 										</div>   
 								<?php 
@@ -504,6 +512,12 @@
 										                </select>
 													</td>
 												</tr>
+												<tr>
+													<td class="active"><span class="bold">Date Approved</span></td>
+													<td>
+														{{ general_date($signatories[$value['clearance_layout_sign_id']]['date_cleared']) }}
+													</td>
+												</tr>													
 											</table>
 										</div>
 									<?php 

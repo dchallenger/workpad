@@ -14,6 +14,7 @@
 						@foreach( $fixed_filters->result() as $filter )
 							<?php switch( $filter->uitype_id ):
 			                	case 1:
+			                	case 9:
 			                		$label = explode( '_', $filter->label_column );
 			                		$label = ucwords( implode( ' ', $label ) );
 			                		$db->limit(1);
@@ -38,6 +39,7 @@
 		                @foreach( $editable_filters->result() as $filter )
 							<?php switch( $filter->uitype_id ):
 			                	case 1:
+			                	case 9:
 			                		$label = explode( '_', $filter->label_column );
 			                		$label = ucwords( implode( ' ', $label ) );
 			                		break;

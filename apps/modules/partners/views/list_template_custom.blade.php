@@ -10,8 +10,10 @@
         <a href="{{ $detail_url }}" id="date_name">{{ $users_profile_firstname }} {{ $users_profile_lastname }} {{ $users_profile_suffix or '' }}</a>
         <br>
         <span class="small" id="date_set">{{ $users_profile_position_id }}</span>
+        <br>
+        <span class="small" id="date_set">{{ $partners_id_number }}</span>
     </td>
-    <td class="hidden-xs">{{ $users_email }}</td>
+    <td class="hidden-xs">{{ $users_profile_company }}</td>
     <td class="hidden-xs">
         @if( $users_active == 'Yes' )
             <span class="badge badge-success">{{ lang('partners.active') }}</span>

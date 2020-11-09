@@ -498,6 +498,12 @@ $(document).ready(function(){
 			$('.cat_type').hide();			
 		}
 
+		if (val == 6) {
+			$('.reason_leaving').show();
+		} else {
+			$('.reason_leaving').hide();
+		}
+		
 		edit_movement_details($(this).val(),$('#partners_movement_action-action_id').val());		
 	});
 

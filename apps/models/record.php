@@ -93,6 +93,36 @@ class Record extends MY_Model
 		return $company;
 	}
 
+	public function get_dept_head($user_id = 0){
+		$this->db->select('immediate');
+		$this->db->where('user_id',$user_id);
+		$this->db->join('users_department','users_profile.department_id = users_department.department_id');
+		$info = $this->db->get('users_profile');
+
+		$dept_head = '';
+		if ($info && $info->num_rows() > 0){
+			$row = $info->row();
+			$dept_head = $row->immediate;
+		}
+
+    	return $dept_head;
+	}
+
+	public function get_div_head(){
+		$this->db->select('immediate');
+		$this->db->where('user_id',$user_id);
+		$this->db->join('users_division','users_profile.division_id = users_division.division_id');
+		$info = $this->db->get('users_profile');
+
+		$div_head = '';
+		if ($info && $info->num_rows() > 0){
+			$row = $info->row();
+			$div_head = $row->immediate;
+		}
+
+    	return $div_head;
+	}
+
 	public function get_country($country_id = 0){
 		$country_val = '';
 		$this->db->where('country_id',$country_id);
@@ -163,6 +193,8 @@ class Record extends MY_Model
 		if ($result && $result->num_rows() > 0) {
 			$head_human_resource = $result->row()->full_name;
 		}
+
+		return $head_human_resource;
 	}
 
 	public function check_id_number($field_name = '',$value = '',$user_id = 0) {

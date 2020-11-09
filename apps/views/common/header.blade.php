@@ -2,10 +2,10 @@
 	<!-- BEGIN TOP NAVIGATION BAR -->
 	<div class="header-inner">
 		@section('logo')
+			<div class="sidebar-toggler hidden-phone" style="float:left"></div>		
 			<a class="navbar-brand active-menu" href="{{ site_url('dashboard') }}" style="padding-top:7px;" menu_id="1">
 				<img src="<?php echo get_company_logo( $user ); ?>" alt="&nbsp;<?php echo get_system_config('system', 'application_title')?>" style="height:32px;top:0px;margin-left: 15px;" />
 			</a>
-			<div class="sidebar-toggler hidden-phone"></div>
 		@show
 
 		@if(isset($business_group) && sizeof($business_group) > 1)

@@ -67,8 +67,8 @@ class Uploader_portal extends MX_Controller
 
 		$ctr = 1;
 		foreach ($msdata as $row) {
-			$this->db->where('biometric_id', $row->Employee_Number);
-			$this->db->where('resigned', 0);
+			$this->db->where('biometric', $row->Employee_Number);
+			$this->db->where_not_in('status', array(8,9));
 			$this->db->where('deleted', 0);
 	
 			$employee = $this->db->get('partners');

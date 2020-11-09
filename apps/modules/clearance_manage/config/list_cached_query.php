@@ -16,10 +16,9 @@ $config["list_cached_query"] = 'SELECT ww_partners_clearance.*,
 								INNER JOIN ww_partners ON `ww_partners_clearance`.`partner_id` = `ww_partners`.`partner_id` 
 								INNER JOIN ww_users_profile ON `ww_partners`.`partner_id` = `ww_users_profile`.`partner_id` 
 								INNER JOIN ww_users_position ON `ww_users_position`.`position_id` = `ww_users_profile`.`position_id` 
-								INNER JOIN ww_partners_clearance_signatories ON ww_partners_clearance.clearance_id = ww_partners_clearance_signatories.clearance_id 
+								INNER JOIN ww_partners_clearance_signatories ON ww_partners_clearance.clearance_id = ww_partners_clearance_signatories.clearance_id AND ww_partners_clearance_signatories.user_id = {$user_id} 
 								INNER JOIN ww_partners_clearance_status ON ww_partners_clearance_signatories.status_id = ww_partners_clearance_status.status_id 	
-								INNER JOIN ww_partners_clearance_signatories_accountabilities ON ww_partners_clearance_signatories.clearance_signatories_id = ww_partners_clearance_signatories_accountabilities.clearance_signatories_id 							
-								AND ww_partners_clearance_signatories.user_id = {$user_id} 
+								LEFT JOIN ww_partners_clearance_signatories_accountabilities ON ww_partners_clearance_signatories.clearance_signatories_id = ww_partners_clearance_signatories_accountabilities.clearance_signatories_id
 								WHERE ( ww_partners_clearance_status.status like "%{$search}%" OR 
 										ww_users_position.position like "%{$search}%" OR 
 										ww_partners.alias like "%{$search}%" )';

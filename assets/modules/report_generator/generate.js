@@ -34,7 +34,7 @@ function init_filter_ui()
     });
 
 	$('.company').change(function(){
-		update_department( $(this).val() );
+		//update_department( $(this).val() );
 	});
     // $('.multiple_dropdown').multiselect();
     // $('.ui-multiselect').css('width', '280px');

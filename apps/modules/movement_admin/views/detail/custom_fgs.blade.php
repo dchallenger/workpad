@@ -47,6 +47,16 @@
 							<?php echo $record['partners_movement_remarks'] ?>					
 						</div>	
 					</div>
+					@if ($record['partners_movement_action_type_id_id'] == 6)
+					<div class="form-group">
+						<label class="col-md-4 text-muted text-right">
+							Rreason for Leaving:
+						</label>
+						<div class="col-md-7">							
+							<?php echo $record['partners_movement_action_reason_leaving'] ?>				
+						</div>	
+					</div>				
+					@endif					
 					<div class="form-group">
 						<label class="col-md-4 text-muted text-right">
 							Attachments:
