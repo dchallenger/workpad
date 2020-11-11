@@ -153,8 +153,8 @@ class Partners extends MY_PrivateController
 
 		if($this->permission['list']){
 
-			$rec['print_url'] = $this->mod->url . '/print_resume/' . $record['record_id'];
-			$rec['options'] .= '<li><a href="'.$rec['print_url'].'"><i class="fa fa-print"></i>Print</a></li>';
+			//$rec['print_url'] = $this->mod->url . '/print_resume/' . $record['record_id'];
+			//$rec['options'] .= '<li><a href="'.$rec['print_url'].'"><i class="fa fa-print"></i>Print</a></li>';
 		}
 
 		if( $this->permission['edit'] )

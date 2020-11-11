@@ -171,7 +171,7 @@
 						@endif						
 					</div>	
 				</div>
-				<div class="form-group">
+				<div class="form-group hidden">
 					<label class="col-md-4 text-muted text-right">
 						HR Approver 1:
 					</label>
@@ -188,7 +188,7 @@
 						@endif													
 					</div>	
 				</div>	
-				<div class="form-group">
+				<div class="form-group hidden">
 					<label class="col-md-4 text-muted text-right">
 						HR Approver 2:
 					</label>

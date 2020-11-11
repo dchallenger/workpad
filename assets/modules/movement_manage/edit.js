@@ -42,6 +42,12 @@ $(document).ready(function(){
 		else{
 			$('.cat_type').hide();			
 		}
+
+		if (val == 6) {
+			$('.reason_leaving').show();
+		} else {
+			$('.reason_leaving').hide();
+		}		
 	});	
 	
 	var movement_type_transfer = ["1","3","8","9"];

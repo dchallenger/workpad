@@ -6,6 +6,12 @@
 	<p>{{ lang('erequest_admin.online_request') }}</p>
 	<div class="portlet-body form">			
 		<div class="form-group">
+			<label class="control-label col-md-3"><span class="required">* </span>Employee</label>
+			<div class="col-md-7">							
+				<input type="text" disabled class="form-control" value="{{ $record['resources_request.full_name'] }}" /> 				
+			</div>	
+		</div>					
+		<div class="form-group">
 			<label class="control-label col-md-3"><span class="required">* </span>{{ lang('erequest_admin.request_item') }}</label>
 			<div class="col-md-7">							
 				<input type="text" disabled class="form-control" name="resources_request[request]" id="resources_request-request" value="{{ $record['resources_request.request'] }}" placeholder="{{ lang('common.enter') }} {{ lang('erequest_admin.request_item') }}" /> 				
