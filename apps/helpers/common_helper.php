@@ -528,7 +528,10 @@ function localize_timeline($datetime, $timezone)
 			return 'an hr ago';
 			break;
 		case $diff > 60 && $diff < 1440:
-			return floor( ($diff/60) ) .' hrs ago';
+			if (floor($diff/60) > 1)
+				return floor( ($diff/60) ) .' hrs ago';
+			else
+				return floor( ($diff/60) ) .' hr ago';
 			break;
 		case $diff == 1440:
 			return 'a day ago';

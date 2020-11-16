@@ -262,6 +262,7 @@ class Report_generator extends MY_PrivateController
                 $data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);
                 break;                
             case 'ESR': // Active Employee Summary Report
+            case 'ESHR': // Active Employee Summary Report
             case 'AUTHORITY TO DEBIT':
                 $button = array('xls' => 0, 'csv' => 1, 'pdf' => 1, 'txt' => 0);
                 $data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);
@@ -1038,9 +1039,51 @@ class Report_generator extends MY_PrivateController
             $this->_ajax_return();
         }
 
+        // this fix looking for report id due to historical employee information such as education,family, etc.... (oclp)
+        if(isset($post['filter']['4557'])) {
+            $record_id = $post['record_id'];
+            $record_id_filter = $post['record_id'];
+
+            switch ($post['filter']['4557']) {
+                case 'education':
+                    $record_id = 104;
+                    break;
+                case 'employment':
+                    $record_id = 105;
+                    break;
+                case 'character':
+                    $record_id = 106;                 
+                    break;
+                case 'licensure':
+                    $record_id = 107;                 
+                    break;
+                case 'training':
+                    $record_id = 108;                 
+                    break;
+                case 'test':
+                    $record_id = 109;                 
+                    break;
+                case 'skills':
+                    $record_id = 110;                 
+                    break; 
+                case 'affiliation':
+                    $record_id = 111;                 
+                    break;
+                case 'medical':
+                    $record_id = 112;                 
+                    break;
+                case 'accountabilities':
+                    $record_id = 113;                 
+                    break;                    
+                default:
+                    $record_id = $post['record_id'];
+                    break;
+            }
+        }
+
         ini_set('memory_limit', '1024M');   
         ini_set('max_execution_time', 1800);
-        $report = $this->mod->get_report( $post['record_id'] );
+        $report = $this->mod->get_report( $record_id, $record_id_filter ); //$record_id_filter is fix for employee historical info (oclp)
         $this->load->vars( $report );
         
         $filter_ctr = 1;

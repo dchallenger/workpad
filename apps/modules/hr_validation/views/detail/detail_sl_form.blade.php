@@ -234,7 +234,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
-	                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.valid_remarks') }} :</label>
+	                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted"><span class="required">* </span>{{ lang('form_application_admin.valid_remarks') }} :</label>
 	                                	<div class="col-md-5 col-sm-6">
                                     		<textarea rows="4" class="form-control" name="validate_remarks" id="validate_remarks"></textarea>
                                 		</div>

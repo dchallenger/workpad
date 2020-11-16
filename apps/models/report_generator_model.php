@@ -197,8 +197,11 @@ class report_generator_model extends Record
 		parent::__construct();
 	}
 
-	function get_report( $record_id )
+	function get_report( $record_id, $record_id_filter = 0 )
 	{
+		if ($record_id_filter == 0)
+			$record_id_filter = $record_id;
+
 		$data = array();
 		$this->db->limit(1);
 		$data['main'] = $this->db->get_where( $this->table, array( $this->primary_key => $record_id ) )->row();
@@ -212,7 +215,7 @@ class report_generator_model extends Record
 		$qry = "Select a.*, b.label
 		FROM {$this->db->dbprefix}report_generator_filters a
 		LEFT JOIN {$this->db->dbprefix}report_generator_filter_operators b ON b.operator = a.operator
-		WHERE a.report_id = {$record_id} AND a.type = 2 ORDER BY order_by";
+		WHERE a.report_id = {$record_id_filter} AND a.type = 2 ORDER BY order_by";
 		$data['editable_filters'] = $this->db->query( $qry );
 		$data['groups'] = $this->db->get_where( 'report_generator_grouping', array( $this->primary_key => $record_id ) );
 		$data['sorts'] = $this->db->get_where( 'report_generator_sorting', array( $this->primary_key => $record_id ) );
@@ -616,7 +619,8 @@ class report_generator_model extends Record
 				$header = 0;
         		$excel = $this->load->view("templates/sss_loan_excel", array('result' => $result), true);
                 break;
-            case 'ESR': //Pag-Ibig STLRF
+            case 'ESR':
+            case 'ESHR':
             case 'attrition_report':
             case 'hr_headcount':
 				$auto_size = 1;
