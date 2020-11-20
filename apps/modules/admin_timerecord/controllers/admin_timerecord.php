@@ -309,7 +309,7 @@ class Admin_timerecord extends MY_PrivateController
 	{
 		$this->_ajax_only();
 		$departments = $this->db->query('SELECT * FROM approver_class_department WHERE company_id='.$this->input->post('company_id'));
-		$this->response->departments = '<option value="" selected="selected">Select...</option>';
+		$this->response->departments = '<option value="" selected="selected">Select department...</option>';
 		foreach( $departments->result() as $department )
 		{
 			$this->response->departments .= '<option value="'.$department->department_id.'">'.$department->department.'</option>';
@@ -345,7 +345,7 @@ class Admin_timerecord extends MY_PrivateController
 
 		$this->response->last_db = $this->db->last_query();
 		// $employees = $this->db->get_where('users', array('deleted' => 0, 'company_id' => $this->input->post('company_id'), 'department_id' => $this->input->post('department_id')));
-		$this->response->employees = '<option value="">Select...</option>';
+		$this->response->employees = '<option value="">Select employee...</option>';
 		foreach( $employees->result() as $employee )
 		{
 			$this->response->employees .= '<option value="'.$employee->user_id.'">'.$employee->alias.'</option>';

@@ -189,6 +189,7 @@ class Admin_timerecord_model extends Record
                 FROM time_period_list  tpl 
                 JOIN users_profile up ON up.company_id =  tpl.`company_id`  
                 AND up.`user_id` = '".$user_id."'
+                WHERE tpl.from >= DATE_ADD(NOW(),INTERVAL -1 MONTH) 
                 LIMIT 5";
 		
 		$lists = $this->db->query( $qry );

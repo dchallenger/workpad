@@ -1142,25 +1142,26 @@ class Form_application extends MY_PrivateController
         }        
         /** END Validate Date From - Date To **/
 
-            //START get days count
-            $start = new DateTime($date_from);
-            $end = new DateTime($date_to);      
-            // otherwise the  end date is excluded (bug?)
-            $end->modify('+1 day');
+        //START get days count
+        $start = new DateTime($date_from);
+        $end = new DateTime($date_to);      
+        // otherwise the  end date is excluded (bug?)
+        $end->modify('+1 day');
 
-            $interval = $end->diff($start);
-            $days = $interval->days;
+        $interval = $end->diff($start);
+        $days = $interval->days;
 
-            // create an iterateable period of date (P1D equates to 1 day)
-            $period = new DatePeriod($start, new DateInterval('P1D'), $end);
-            $period = iterator_to_array($period);
+        // create an iterateable period of date (P1D equates to 1 day)
+        $period = new DatePeriod($start, new DateInterval('P1D'), $end);
+        $period = iterator_to_array($period);
+
         //validate if rest day/holiday
         $other_form_type = array(10, 15); //undertime and excused tardiness
         $not_allowed_rest_holidays = array_merge($leaves_ids, $other_form_type);
 
         //START Leave duration - whole or half day
-            $counter_duration = 0;
-            $duration_date = $this->input->post('duration');
+        $counter_duration = 0;
+        $duration_date = $this->input->post('duration');
         $duration_date = is_array($duration_date) ? $duration_date : array();
         $forms_rest_day = 0;
         foreach($period as $dt) {
@@ -2249,6 +2250,40 @@ class Form_application extends MY_PrivateController
                     );  
                     $this->_ajax_return();
             }*/
+        }
+
+        // validation for maternity leave
+        if($_POST['form_code'] == 'ML' && $this->input->post('form_status_id') != 8){
+            $delivery_id = $_POST['time_forms_maternity']['delivery_id'];
+            switch ($delivery_id) {
+                case 1:
+                    if ($days > 105) {
+                        $this->response->message[] = array(
+                        'message' => "Insufficient Leave Credits, you only have 105 days alotted",
+                        'type' => 'warning'
+                        );  
+                        $this->_ajax_return();                        
+                    }
+                    break;
+                case 3:
+                    if ($days > 60) {
+                        $this->response->message[] = array(
+                        'message' => "Insufficient Leave Credits, you only have 60 days alotted",
+                        'type' => 'warning'
+                        );  
+                        $this->_ajax_return();                        
+                    }
+                    break;                
+                default:
+                    if ($days > 105) {
+                        $this->response->message[] = array(
+                        'message' => "Insufficient Leave Credits, you only have 105 days alotted",
+                        'type' => 'warning'
+                        );  
+                        $this->_ajax_return();                        
+                    }
+                    break;
+            }
         }
 
         //Validate additional leave

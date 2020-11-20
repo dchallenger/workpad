@@ -61,7 +61,7 @@ class shift_model extends Record
 				ORDER BY full_name asc";
 				break;
 			case 2: //company
-				$qry = "SELECT company as label, company_id as value, company_code as code
+				$qry = "SELECT company as label, company_id as value, company_initial as code
 				FROM {$this->db->dbprefix}users_company
 				WHERE deleted = 0
 				ORDER BY company asc";
@@ -153,30 +153,34 @@ class shift_model extends Record
 	function _save_shift_class_company($class_id, $shift_id, $class_value, $company_details = false)
 	{
 		$companies = $this->_get_shift_options( $shift_id, true, false, 2 );
+
 		if($company_details !== false && is_array($company_details))
 		{
 			$companies = $company_details['company'];
 		}
-			foreach ($companies as $company_id => $company) {
-				$shift_class_company_record = $this->get_shift_class_company($company_id, $shift_id, $class_id);
-				if($shift_class_company_record && $shift_class_company_record->num_rows() > 0){
-					$shift_class_company_record = $shift_class_company_record->row_array();
-					$main_record = array('class_value' => $class_value);
-					if($company_details !== false){
-						$main_record = $company_details['main_record'];
-					}
-					
-					$this->db->update('time_shift_class_company', $main_record, array( 'id' => $shift_class_company_record['id'] ) );
-					$record_id = $shift_class_company_record['id'];
-				}else{
-					$main_record = array('shift_id' => $shift_id, 'class_id' => $class_id, 'company_id' => $company_id, 'class_value' => $class_value);
-					if($company_details !== false){
-						$main_record = $company_details['main_record'];
-					}
-					$this->db->insert('time_shift_class_company', $main_record);
-					$record_id = $this->db->insert_id();
+
+		$record_id = 0;
+		
+		foreach ($companies as $company_id => $company) {
+			$shift_class_company_record = $this->get_shift_class_company($company_id, $shift_id, $class_id);
+			if($shift_class_company_record && $shift_class_company_record->num_rows() > 0){
+				$shift_class_company_record = $shift_class_company_record->row_array();
+				$main_record = array('class_value' => $class_value);
+				if($company_details !== false){
+					$main_record = $company_details['main_record'];
 				}
+				
+				$this->db->update('time_shift_class_company', $main_record, array( 'id' => $shift_class_company_record['id'] ) );
+				$record_id = $shift_class_company_record['id'];
+			}else{
+				$main_record = array('shift_id' => $shift_id, 'class_id' => $class_id, 'company_id' => $company_id, 'class_value' => $class_value);
+				if($company_details !== false){
+					$main_record = $company_details['main_record'];
+				}
+				$this->db->insert('time_shift_class_company', $main_record);
+				$record_id = $this->db->insert_id();
 			}
+		}
 		
 		return $record_id;
 	}

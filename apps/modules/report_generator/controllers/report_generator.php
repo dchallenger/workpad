@@ -370,7 +370,8 @@ class Report_generator extends MY_PrivateController
                 $data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);
                 break;
             case 'DAILY TIME RECORD': //Bank Remittance
-                $button = array('xls' => 1, 'csv' => 0, 'pdf' => 0, 'txt' => 1);
+            case 'EXCEPTION_REPORT': //Bank Remittance
+                $button = array('xls' => 0, 'csv' => 1, 'pdf' => 1, 'txt' => 0);
                 $data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);
                 break;
             case 'DAILY TIME RECORD OPTIMUM': //Bank Remittance
@@ -515,7 +516,8 @@ class Report_generator extends MY_PrivateController
             case 'PAR': // Perfect Attendance Report
             case 'TARDY':                   
             case 'Time Record Schedule History':
-                $button = array('xls' => 1, 'csv' => 1, 'pdf' => 0, 'txt' => 1);
+            case 'LEAVE_REPORT':
+                $button = array('xls' => 0, 'csv' => 1, 'pdf' => 1, 'txt' => 0);
                 $data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);
                 break;                
 			default;                
@@ -1039,9 +1041,10 @@ class Report_generator extends MY_PrivateController
             $this->_ajax_return();
         }
 
+        $record_id = $post['record_id'];
+        $record_id_filter = 0;
         // this fix looking for report id due to historical employee information such as education,family, etc.... (oclp)
         if(isset($post['filter']['4557'])) {
-            $record_id = $post['record_id'];
             $record_id_filter = $post['record_id'];
 
             switch ($post['filter']['4557']) {

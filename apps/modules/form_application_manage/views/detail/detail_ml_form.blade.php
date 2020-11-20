@@ -282,7 +282,11 @@
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_manage.report_date') }} :</label>
 												<div class="col-md-7 col-sm-7">
-													<span>{{ $record['time_forms_maternity_return_date'] }} - <?php echo date('D',strtotime($record['time_forms_maternity_return_date'])); ?></span>
+													<span>
+														@if ($record['time_forms_maternity_return_date'] != '')
+															{{ $record['time_forms_maternity_return_date'] }} - {{ date('D',strtotime($record['time_forms_maternity_return_date'])) }}
+														@endif
+													</span>
 												</div>
 											</div>
 										</div>

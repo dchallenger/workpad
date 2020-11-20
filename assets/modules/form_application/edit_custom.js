@@ -508,7 +508,10 @@ function init_form()
                 data: 'date_from='+date_from+'&delivery_id='+delivery_id,
                 dataType: "json",
                 success: function ( response ) {
-                    
+                    $('#time_forms-date_to').val(response.date_to);
+                    $('#time_forms-date_from').val(response.date_from);
+                    $('#days').html(response.days);
+                    get_selected_dates($('#record_id').val(), $('#form_status_id').val(), $('#time_forms-date_from').val(), $('#time_forms-date_to').val());                    
                 }
             });
         }

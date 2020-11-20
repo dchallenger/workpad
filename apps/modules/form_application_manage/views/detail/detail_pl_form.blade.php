@@ -249,7 +249,11 @@
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_manage.actual_delivery') }} :</label>
 												<div class="col-md-7 col-sm-7">
-													<span>{{ $record['time_forms_maternity_actual_date'] }} - <?php echo date('D',strtotime($record['time_forms_maternity_actual_date'])); ?></span>
+													<span>
+														@if ($record['time_forms_maternity_actual_date'] != '')
+															{{ $record['time_forms_maternity_actual_date'] }} - {{ date('D',strtotime($record['time_forms_maternity_actual_date'])) }}
+														@endif
+													</span>	
 												</div>
 											</div>
 										</div>
@@ -370,7 +374,7 @@
 				                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_manage.remarks') }}<span class="required">* </span></label>
 				                                    <div class="col-md-5 col-sm-6">
 				                                        <textarea id="comment-{{ $form_approver_details['forms_id'] }}" class="form-control" rows="3"></textarea>
-				                                        <label class="control-label col-md-7 text-muted small"> {{ lang('form_application_manage.required_disapp') }}</label>
+				                                        <label class="control-label col-md-12 text-muted small"> {{ lang('form_application_manage.required_disapp') }}</label>
 				                                    </div>
 				                                </div>
 											</div>
@@ -383,7 +387,7 @@
 
 	                            </div>
 
-	                            <div class="form-actions fluid" align="center">>
+	                            <div class="form-actions fluid" align="center">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div>
