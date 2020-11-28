@@ -6,6 +6,7 @@ $config["edit_cached_query"] = 'SELECT `ww_time_form_balance_setup_policy`.`poli
 `ww_time_form_balance_setup_policy`.`modified_by` as "time_form_balance_setup_policy.modified_by", 
 ww_time_form_balance_setup_policy.company_ids as "time_form_balance_setup_policy.company_ids",
 ww_time_form_balance_setup_policy.employment_type_ids as "time_form_balance_setup_policy.employment_type_ids",
+ww_time_form_balance_setup_policy.job_grade_ids as "time_form_balance_setup_policy.job_grade_ids",
 ww_time_form_balance_setup_policy.employment_status_ids as "time_form_balance_setup_policy.employment_status_ids",
 ww_time_form_balance_setup_policy.description as "time_form_balance_setup_policy.description",
 ww_time_form_balance_setup_policy.form_id as "time_form_balance_setup_policy.form_id", 

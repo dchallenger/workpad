@@ -525,8 +525,8 @@ class time_form_policies {
 
     function _check_advance_filing_days($value='', $date_from='', $date_to='', $company_id='', $user_id=''){   
         $current_day = date('Y-m-d');
-        $no_working_days = $this->CI->time_form_policies_model->get_working_days($date_from, $current_day, $user_id);
-
+        $no_working_days = $this->CI->time_form_policies_model->get_working_days($current_day, $date_from, $user_id);
+        
         if($no_working_days > $value){
             return 'error';
         }
@@ -536,7 +536,7 @@ class time_form_policies {
 
     function _check_advance_filing_not_allowed($value='', $date_from='', $date_to='', $company_id=''){     
         $current_day = date('Y-m-d');
-        if(strtotime($date_from) > strtotime($current_day) && strtolower($value) == 'no'){
+        if(strtotime($date_from) > strtotime($current_day) && strtolower($value) == 'yes'){
             return 'error';
         }
         return false;

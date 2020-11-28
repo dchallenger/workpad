@@ -77,6 +77,7 @@ class My201 extends MY_PrivateController
 		$last_salary_adjustment = $this->mod->get_partners_personal($this->user->user_id, 'last_salary_adjustment');
 			$data['last_salary_adjustment'] = (count($last_salary_adjustment) == 0 ? "n/a" : ($last_salary_adjustment[0]['key_value'] == "" ? "n/a" : date("F d, Y", strtotime($last_salary_adjustment[0]['key_value']))));
 		$data['last_promotion_date'] = valid_date($profile_header_details['last_promotion_date']);
+		$data['old_new'] = ($profile_header_details['old_new'] == 0 ? "Old" : "New");
 		//Work Assignment
 		$reports_to = $profile_header_details['immediate'] == "" ? "n/a" : $this->mod->get_user_details($profile_header_details['immediate']);
 		if($reports_to == "n/a"){

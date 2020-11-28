@@ -175,5 +175,7 @@ $lang['dashboard'] = array(
 	'sss_table' => 'SSS Table',
 	'phic_table' => 'PhilHealth Table',
 	'annual_tax_rate' => ' Annual Tax Rate',
-	'previous_employer_alphalist' => 'Previous Employer Alphalist'
+	'previous_employer_alphalist' => 'Previous Employer Alphalist',
+	'timekeeping_application' => 'Timekeeping Application',
+	'automated_process_workflow' => 'Automated Process Workflow',
 );

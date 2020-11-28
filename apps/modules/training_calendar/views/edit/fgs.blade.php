@@ -30,15 +30,15 @@
 			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>Training Type</label>
 				<div class="col-md-7"><?php									                            		
-				$db->select('calendar_type_id,calendar_type');
-				$db->order_by('calendar_type', '0');
+				$db->select('type_id,training_type');
+				$db->order_by('training_type', '0');
 	            $db->where('deleted', '0');
-	            $options = $db->get('training_calendar_type'); 	                            
+	            $options = $db->get('training_type'); 	                            
 	            $training_calendar_calendar_type_id_options = array('' => 'Select...');
 
 	    		foreach($options->result() as $option)
 	    		{
-	    			$training_calendar_calendar_type_id_options[$option->calendar_type_id] = $option->calendar_type;
+	    			$training_calendar_calendar_type_id_options[$option->type_id] = $option->training_type;
 	    		} ?>							
 	        		<div class="input-group">
 						<span class="input-group-addon">
@@ -156,7 +156,7 @@
 	            </div>
 	        </div>
 
-	        <div class="form-group">
+	        <div class="form-group hidden">
 				<label class="control-label col-md-3"><span class="required">* </span>Evaluation Form</label>
 				<div class="col-md-7"><?php									                            		
 				$db->select('feedback_category_id,feedback_category');
@@ -190,7 +190,7 @@
 	            </div>
 	        </div>
 
-	        <div class="form-group">
+	        <div class="form-group hidden">
 				<label class="control-label col-md-3">Level 2 and 3 Evaluation</label>
 				<div class="col-md-7"><?php									                            		
 				$db->select('training_revalida_master_id,revalida_type');

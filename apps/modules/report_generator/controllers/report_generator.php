@@ -371,6 +371,8 @@ class Report_generator extends MY_PrivateController
                 break;
             case 'DAILY TIME RECORD': //Bank Remittance
             case 'EXCEPTION_REPORT': //Bank Remittance
+            case 'PENDING_TRANSACTIONS':
+            case 'TOTAL_HOURS_WORK_PER_LOCATION':
                 $button = array('xls' => 0, 'csv' => 1, 'pdf' => 1, 'txt' => 0);
                 $data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);
                 break;

@@ -10,7 +10,9 @@ ww_time_form_balance_fcc_setup.max_balance_carry_over as "time_form_balance_fcc_
 ww_time_form_balance_fcc_setup.form_id as "time_form_balance_fcc_setup.form_id", 
 ww_time_form_balance_fcc_setup.description as "time_form_balance_fcc_setup.description", 
 ww_time_form_balance_fcc_setup.employment_status_ids as "time_form_balance_fcc_setup.employment_status_ids", 
+ww_time_form_balance_fcc_setup.job_grade_ids as "time_form_balance_fcc_setup.job_grade_ids",
 ww_time_form_balance_fcc_setup.employment_type_ids as "time_form_balance_fcc_setup.employment_type_ids", 
-ww_time_form_balance_fcc_setup.company_ids as "time_form_balance_fcc_setup.company_ids"
+ww_time_form_balance_fcc_setup.company_ids as "time_form_balance_fcc_setup.company_ids",
+ww_time_form_balance_fcc_setup.old_new as "time_form_balance_fcc_setup.old_new"
 FROM (`ww_time_form_balance_fcc_setup`)
 WHERE `ww_time_form_balance_fcc_setup`.`fcc_setup_id` = "{$record_id}"';

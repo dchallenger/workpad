@@ -2,8 +2,8 @@
 $lang['leave_setup_policy'] = array(
 	'title' => 'Credit Setup',
 	'company' => 'Company',
-	'employment_type' => 'Employment Type',
-	'employment_status' => 'Employment Status',
+	'employment_type' => 'Level',
+	'employment_status' => 'Status',
 	'description' => 'Description',
 	'balance_setup' => 'Balance Setup',
 	'leave_type' => 'Leave Type',
@@ -14,5 +14,6 @@ $lang['leave_setup_policy'] = array(
 	'starting' => 'Starting',
 	'maximum' => 'Maximum',
 	'prorated' => 'Pro-rated',
-	'leave_reset_date' => 'Leave Reset Date'
+	'leave_reset_date' => 'Leave Reset Date',
+	'rank' => 'Rank'
 );

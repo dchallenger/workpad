@@ -483,6 +483,7 @@ $(document).ready(function (e) {
     });
 
     get_todos();
+    get_todos_loan();
     get_timekeeping_stats();
     get_gender_stats();
 });
@@ -628,6 +629,31 @@ function get_todos()
     });
 }
 
+function get_todos_loan()
+{
+    $('#todos-loan-list li:not(#todos-loan-loader)').remove();
+    $('#todos-loan-loader').show();
+    $.ajax({
+        url: base_url + module.get('route') + '/get_todos_loan_application',
+        type: "POST",
+        async: false,
+        dataType: "json",
+        success: function (response) {
+            $('#todos-loan-loader').hide();
+            if(response.count != 0)
+            {
+                $("#todo_loan_badge").html(response.count);
+            }   
+            else
+            {
+                $(".show_more_loan").hide();
+            } 
+            $('#todos-loan-list').append(response.todos);
+            init_popover();
+        }
+    });
+}
+
 function refresh_timekeeping_stats()
 {
     var el = $('a[portlet="time_stats"]').closest(".portlet").children(".portlet-body");
@@ -751,6 +777,19 @@ function get_form_details(form_id, forms_id){
     });
 }
 
+function get_loan_application_details(loan_type_code, loan_application_id){
+    $.ajax({
+        url: base_url + module.get('route') + '/get_loan_application_details',
+        type:"POST",
+        async: false,
+        data: 'loan_type_code='+loan_type_code+'&loan_application_id='+loan_application_id,
+        dataType: "json",
+        success: function ( response ) {
+            $('#manage_dialog-'+loan_application_id).attr('data-content', response.loan_application_details);
+        }
+    });
+}
+
 function init_popover()
 {
     $('.custom_popover')
@@ -816,7 +855,72 @@ function init_popover()
         };
 
         submitDecission(data);
-    });
+    })
+    // loan application 
+    .delegate('button.approve-pop-loan', 'click', function(e) {
+        e.preventDefault();
+        //$('.custom_popover').popover('hide');
+        //console.log('now update forms set selected item to approved!');
+
+        
+        var loan_application_id     = $(this).data('loan-application-id');
+        var user_id                 = $(this).data('user-id');
+        var user_name               = $(this).data('user-name');
+        var loan_application_owner  = $(this).data('loan-application');
+        var loan_type               = $(this).data('loan-type');
+        var decission               = $(this).data('decission');
+
+        // if (!$("#comment-" + form_id).val()) {
+        //     $("#comment-" + form_id).focus();
+        //     return false;
+        // } else {
+            comment = $("#comment-" + loan_application_id).val();
+        // }
+
+        var data = {
+            loan_application_id: loan_application_id,
+            user_id: user_id,
+            username: user_name,
+            decission: decission,
+            loan_application_owner_id: loan_application_owner,
+            loan_type: loan_type,
+            comment: comment
+        };
+
+        submitDecissionLoan(data,'index');
+    })
+    .delegate('button.decline-pop-loan', 'click', function(e) {
+        e.preventDefault();
+        //console.log('now update forms set selected item to declined!');
+
+        var loan_application_id     = $(this).data('loan-application-id');
+        var user_id                 = $(this).data('user-id');
+        var user_name               = $(this).data('user-name');
+        var loan_application_owner  = $(this).data('loan-application');
+        var loan_type               = $(this).data('loan-type');
+        var decission               = $(this).data('decission');
+        var comment = '';
+
+        if (!$("#comment-" + loan_application_id).val()) {
+            $("#comment-" + loan_application_id).focus();
+            notify("warning", "The Remarks field is required");
+            return false;
+        } else {
+            comment = $("#comment-" + loan_application_id).val();
+        }
+
+        var data = {
+            loan_application_id: loan_application_id,
+            user_id: user_id,
+            username: user_name,
+            decission: decission,
+            loan_application_owner_id: loan_application_owner,
+            loan_type: loan_type,
+            comment: comment
+        };
+
+        submitDecissionLoan(data,'index');
+    });    
 }
 
 var showTodoQuickView = function (e) {
@@ -870,6 +974,46 @@ var showTodoQuickView = function (e) {
         });
     };
 
+function submitDecissionLoan(data,view) {
+    $.blockUI({ message: saving_message(),
+        onBlock: function(){
+            $.ajax({
+                url: base_url + module.get('route') + '/loan_application_decission',
+                type: "POST",
+                async: false,
+                data: data,
+                dataType: "json",
+                beforeSend: function () {
+
+                    $('.popover-content').block();
+                },
+                success: function (response) {
+                    $('.popover-content').unblock();
+                    for (var i in response.message) {
+                        notify(response.message[i].type, response.message[i].message);
+                    }
+
+                    if (response.action == 'insert') {
+                        after_save(response);
+                        $('#todo-lst-loan-' + data.loan_application_id).fadeOut().hide();
+                    }
+                    $.ajax({
+                        url: base_url + module.get('route') + '/get_todos_loan_application',
+                        type: "POST",
+                        async: false,
+                        dataType: "json",
+                        success: function (response) {
+                            $("#todo_loan_badge").html(response.count);
+                        }
+                    });
+                }
+            });
+        },
+        baseZ: 300000000
+    });
+    setTimeout(function(){$.unblockUI()},2000);
+}
+
 function hbd_showmore( nxt, button )
 {
     for( var i = nxt; i < (nxt + 5); i++ )
@@ -885,6 +1029,12 @@ function todo_showmore()
 {
     $('li.todo_more').removeClass('hidden');
     $('.show_more').hide();
+}
+
+function todo_loan_showmore()
+{
+    $('li.todo_more_loan').removeClass('hidden');
+    $('.show_more_loan').hide();
 }
 
 function comments_showmore( nxt, button, feeds_id )

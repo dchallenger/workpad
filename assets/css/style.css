@@ -979,7 +979,7 @@ Page title
   color: #666;
   margin: 0px 0px 15px 0px;
   font-weight: 500;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'AzoSans-Regular';
 }
 
 .page-title small {
@@ -1756,7 +1756,7 @@ Custom icon buttons
 }
 
 .icon-btn div {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'AzoSans-Regular';
   margin-top: 5px;
   margin-bottom: 20px;  
   color: #000;
@@ -1766,7 +1766,7 @@ Custom icon buttons
 
 .icon-btn .badge {
   position: absolute;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'AzoSans-Regular';
   font-size: 11px !important;
   font-weight: 300;
   top: -5px;
@@ -1921,7 +1921,7 @@ Custom icon buttons
 .dropdown-menu.tasks .task .percent {
   font-size: 14px;
   font-weight: 600;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'AzoSans-Regular';
   float: right;
   display: inline-block;
 }

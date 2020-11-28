@@ -16,11 +16,11 @@ $config['field_validations']['training_calendar.training_revalida_master_id'][] 
 	'label'   => 'Level 2 and 3 Evaluation',
 	'rules'   => 'required'
 );
-$config['field_validations']['training_calendar.feedback_category_id'][] = array(
+/*$config['field_validations']['training_calendar.feedback_category_id'][] = array(
 	'field'   => 'training_calendar[feedback_category_id]',
 	'label'   => 'Evaluation Form',
 	'rules'   => 'required'
-);
+);*/
 $config['field_validations']['training_calendar.topic'][] = array(
 	'field'   => 'training_calendar[topic]',
 	'label'   => 'Training Course Description',

@@ -30,7 +30,7 @@
 			    </div>
 			    <div class="portlet-body" id="chats">
 
-					<div class="chat-form feeds_form" style="overflow: auto;">
+					<div class="chat-form feeds_form hidden" style="overflow: auto;">
 					    <div class="">
 					        <input id="input-post-update" style="overflow: visible;" class="form-control" type="text" placeholder="{{ lang('dashboard.something_to_say') }}..." />
 					        <input id="message_type" class="form-control" type="hidden" value="Comment" />
@@ -532,7 +532,7 @@
 				<div class="portlet tasks-widget hidden-xs">
 				    <div class="portlet-title" style="margin-bottom:3px;">
 				        <div class="caption">
-				        	{{ lang('dashboard.task') }} 
+				        	{{ lang('dashboard.timekeeping_application') }} 
 				        	<span id="todo_badge" class="badge"></span>
 				        </div>
 				        <div class="tools">
@@ -544,10 +544,10 @@
 				        <p class="text-muted">
 				        	<small>{{ lang('dashboard.todo_desc') }}  </small>
 				        	<div style="height:24px">
-							<a href="{{ site_url('time/applicationmanage') }}" class="btn btn-xs pull-right active-menu" menu_id="44">
-								<small>{{ lang('dashboard.todo_golist') }}  <i class="fa fa-arrow-circle-o-right"></i></small>
-							</a>
-						</div>
+								<a href="{{ site_url('time/applicationmanage') }}" class="btn btn-xs pull-right active-menu" menu_id="44">
+									<small>{{ lang('dashboard.todo_golist') }}  <i class="fa fa-arrow-circle-o-right"></i></small>
+								</a>
+							</div>
 				        </p>
 				        <div class="task-content">
 				            <div data-always-visible="1" data-rail-visible1="1">
@@ -567,6 +567,45 @@
 
 				    </div>
 				</div>
+
+				<div class="portlet tasks-widget hidden-xs">
+				    <div class="portlet-title" style="margin-bottom:3px;">
+				        <div class="caption">
+				        	{{ lang('dashboard.automated_process_workflow') }} 
+				        	<span id="todo_loan_badge" class="badge"></span>
+				        </div>
+				        <div class="tools">
+							<a href="" class="expand" portlet="todo"></a>
+							<a href="" class="reload" onclick="refresh_todos()"></a>
+						</div>
+					</div>
+					<div class="portlet-body" style="display: none;">
+				        <p class="text-muted">
+				        	<small>{{ lang('dashboard.todo_desc') }}  </small>
+				        	<div style="height:24px">
+								<a href="{{ site_url('partners/loan_application_manage') }}" class="btn btn-xs pull-right active-menu" menu_id="44">
+									<small>{{ lang('dashboard.todo_golist') }}  <i class="fa fa-arrow-circle-o-right"></i></small>
+								</a>
+							</div>
+				        </p>
+				        <div class="task-content">
+				            <div data-always-visible="1" data-rail-visible1="1">
+				                <ul id="todos-loan-list" class="task-list" style="font-size:12px;">
+									<li style="border: none" id="todos-loan-loader" >
+						                <div style="text-align: center;" class="col-md-12 col-sm-7 margin-bottom-25" id="ajax-loader">
+											<img src="{{ theme_path() }}img/ajax-loading.gif" alt="Loading...">
+										</div>
+						            </li>
+								</ul>
+				            </div>
+				             
+				            <br/>
+				            <span class="btn btn-xs blue btn-border-radius show_more_loan" onclick="todo_loan_showmore()"> {{ lang('dashboard.todo_more') }} <i class="fa fa-arrow-circle-o-right"></i> </span>
+				        	
+				        </div>
+
+				    </div>
+				</div>				
 			@endif			
 			<!-- END TODO PORTLET -->
 

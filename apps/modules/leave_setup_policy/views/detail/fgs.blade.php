@@ -9,19 +9,25 @@
 			<div class="col-md-7">							
 				<input type="text" disabled="disabled" class="form-control" name="leave_setup_policy[job_level]" id="leave_setup_policy-job_level" value="{{ $record['time_form_balance_setup_policy.company'] }}"/> 				
 			</div>	
-		</div>			
-		<div class="form-group">
-			<label class="control-label col-md-3">{{ lang('leave_setup_policy.employment_type') }}</label>
-			<div class="col-md-7">							
-				<input type="text" disabled="disabled" class="form-control" name="leave_setup_policy[job_grade_code]" id="leave_setup_policy-job_grade_code" value="{{ $record['time_form_balance_setup_policy.employment_type'] }}"/> 				
-			</div>	
-		</div>			
+		</div>
 		<div class="form-group">
 			<label class="control-label col-md-3">{{ lang('leave_setup_policy.employment_status') }}</label>
 			<div class="col-md-7">							
 				<input type="text" disabled="disabled" class="form-control" name="leave_setup_policy[job_grade_code]" id="leave_setup_policy-job_grade_code" value="{{ $record['time_form_balance_setup_policy.employment_status'] }}"/> 				
 			</div>	
+		</div>			
+		<div class="form-group">
+			<label class="control-label col-md-3">{{ lang('leave_setup_policy.rank') }}</label>
+			<div class="col-md-7">							
+				<input type="text" disabled="disabled" class="form-control" name="leave_setup_policy[job_grade_code]" id="leave_setup_policy-job_grade_code" value="{{ $record['time_form_balance_setup_policy.job_level'] }}"/> 				
+			</div>	
 		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3">{{ lang('leave_setup_policy.employment_type') }}</label>
+			<div class="col-md-7">							
+				<input type="text" disabled="disabled" class="form-control" name="leave_setup_policy[job_grade_code]" id="leave_setup_policy-job_grade_code" value="{{ $record['time_form_balance_setup_policy.employment_type'] }}"/> 				
+			</div>	
+		</div>		
 		<div class="form-group">
 			<label class="control-label col-md-3">{{ lang('leave_setup_policy.description') }}</label>
 			<div class="col-md-7">							

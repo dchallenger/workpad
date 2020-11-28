@@ -3,55 +3,71 @@
 		<div class="caption">Training Course</div>
 		<div class="tools"><a class="collapse" href="javascript:;"></a></div>
 	</div>
-		<div class="portlet-body form">			<div class="form-group">
+		<div class="portlet-body form">			
+			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>Course</label>
-				<div class="col-md-7">							<input type="text" class="form-control" name="training_course[course]" id="training_course-course" value="{{ $record['training_course.course'] }}" placeholder="Enter Course" /> 				</div>	
-			</div>			<div class="form-group">
+				<div class="col-md-7">							
+					<input type="text" class="form-control" name="training_course[course]" id="training_course-course" value="{{ $record['training_course.course'] }}" placeholder="Enter Course" />
+				</div>	
+			</div>			
+			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>Category</label>
-				<div class="col-md-7"><?php									                            		$db->select('category_id,category');
-	                            			                            		$db->order_by('category', '0');
-	                            		$db->where('deleted', '0');
-	                            		$options = $db->get('training_category'); 	                            $training_course_category_id_options = array('' => 'Select...');
-                        		foreach($options->result() as $option)
-                        		{
-                        			                        				$training_course_category_id_options[$option->category_id] = $option->category;
-                        			                        		} ?>							<div class="input-group">
-								<span class="input-group-addon">
-	                            <i class="fa fa-list-ul"></i>
-	                            </span>
-	                            {{ form_dropdown('training_course[category_id]',$training_course_category_id_options, $record['training_course.category_id'], 'class="form-control select2me" data-placeholder="Select..." id="training_course-category_id"') }}
-	                        </div> 				</div>	
-			</div>			<div class="form-group">
+				<div class="col-md-7">
+					<?php									                            		
+						$db->select('category_id,category');
+						$db->order_by('category', '0');
+		                $db->where('deleted', '0');
+		                $options = $db->get('training_category'); 	                            
+		                $training_course_category_id_options = array('' => 'Select...');
+	                    foreach($options->result() as $option) {
+							$training_course_category_id_options[$option->category_id] = $option->category;
+	                 	} 
+                 	?>							
+                    <div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
+	                    {{ form_dropdown('training_course[category_id]',$training_course_category_id_options, $record['training_course.category_id'], 'class="form-control select2me" data-placeholder="Select..." id="training_course-category_id"') }}
+	                </div>
+	            </div>	
+			</div>
+			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>Type</label>
-				<div class="col-md-7"><?php									                            		$db->select('type_id,training_type');
-	                            			                            		$db->order_by('training_type', '0');
-	                            		$db->where('deleted', '0');
-	                            		$options = $db->get('training_type'); 	                            $training_course_type_id_options = array('' => 'Select...');
-                        		foreach($options->result() as $option)
-                        		{
-                        			                        				$training_course_type_id_options[$option->type_id] = $option->training_type;
-                        			                        		} ?>							<div class="input-group">
-								<span class="input-group-addon">
-	                            <i class="fa fa-list-ul"></i>
-	                            </span>
-	                            {{ form_dropdown('training_course[type_id]',$training_course_type_id_options, $record['training_course.type_id'], 'class="form-control select2me" data-placeholder="Select..." id="training_course-type_id"') }}
-	                        </div> 				</div>	
-			</div>			<div class="form-group">
+				<div class="col-md-7">
+					<?php									                            		
+						$db->select('type_id,training_type');
+	                    $db->order_by('training_type', '0');
+	                    $db->where('deleted', '0');
+	                    $options = $db->get('training_type'); 	                            
+	                    $training_course_type_id_options = array('' => 'Select...');
+                        foreach($options->result() as $option) {
+                     		$training_course_type_id_options[$option->type_id] = $option->training_type;
+                       	} 
+                    ?>							
+                    <div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
+	                    {{ form_dropdown('training_course[type_id]',$training_course_type_id_options, $record['training_course.type_id'], 'class="form-control select2me" data-placeholder="Select..." id="training_course-type_id"') }}
+	                </div>
+	            </div>
+			</div>			
+			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>Provider</label>
-				<div class="col-md-7"><?php									                            		$db->select('provider_id,provider');
-	                            			                            		$db->order_by('provider', '0');
-	                            		$db->where('deleted', '0');
-	                            		$options = $db->get('training_provider'); 	                            $training_course_provider_id_options = array('' => 'Select...');
-                        		foreach($options->result() as $option)
-                        		{
-                        			                        				$training_course_provider_id_options[$option->provider_id] = $option->provider;
-                        			                        		} ?>							<div class="input-group">
-								<span class="input-group-addon">
-	                            <i class="fa fa-list-ul"></i>
-	                            </span>
-	                            {{ form_dropdown('training_course[provider_id]',$training_course_provider_id_options, $record['training_course.provider_id'], 'class="form-control select2me" data-placeholder="Select..." id="training_course-provider_id"') }}
-	                        </div> 				</div>	
-			</div>			<div class="form-group">
+				<div class="col-md-7">
+					<?php
+						$db->select('provider_id,provider');
+	                    $db->order_by('provider', '0');
+	                    $db->where('deleted', '0');
+	                    $options = $db->get('training_provider'); 	                            
+	                    $training_course_provider_id_options = array('' => 'Select...');
+                        foreach($options->result() as $option) {
+                 			$training_course_provider_id_options[$option->provider_id] = $option->provider;
+                     	} 
+                    ?>							
+                    <div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
+	                        {{ form_dropdown('training_course[provider_id]',$training_course_provider_id_options, $record['training_course.provider_id'], 'class="form-control select2me" data-placeholder="Select..." id="training_course-provider_id"') }}
+	                </div>
+	            </div>	
+			</div>			
+			<div class="form-group">
 				<label class="control-label col-md-3">Facilitator</label>
 				<div class="col-md-7">							<input type="text" class="form-control" name="training_course[facilitator]" id="training_course-facilitator" value="{{ $record['training_course.facilitator'] }}" placeholder="Enter Facilitator" /> 				</div>	
 			</div>			<div class="form-group">

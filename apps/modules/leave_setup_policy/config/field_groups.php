@@ -11,6 +11,7 @@ $config['fieldgroups'][2] = array(
 	'fields' => array(
 		'time_form_balance_setup_policy.company_ids',
 		'time_form_balance_setup_policy.employment_type_ids',
+		'time_form_balance_setup_policy.job_grade_ids',
 		'time_form_balance_setup_policy.employment_status_ids',
 		'time_form_balance_setup_policy.description',		
 		'time_form_balance_setup_policy.form_id',

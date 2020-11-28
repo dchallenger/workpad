@@ -40,7 +40,7 @@ class profile_model extends Record
 	function get_profile_header_details($user_id=0){
 		$this->db->select('title, lastname, firstname, middlename, suffix, users_position.position, users_profile.project_id as project_id, users_profile.v_project as project,
 			department, v_project_hr as project_hr, sbu_unit, v_coordinator as coordinator, v_credit_setup as credit_setup, branch, ww_users_company.company, email, birth_date, photo, job_level, 
-			location, id_number, biometric, shift, calendar, employment_status, effectivity_date, regularization_date,
+			location, id_number, biometric, shift, calendar, employment_status, effectivity_date, regularization_date,old_new,
 			original_hired_date,employment_end_date,last_promotion_date,users_division.division, users_division.cost_center_code, users_profile.reports_to_id as immediate, group, role,
 			maidenname, nickname, partners_employment_type.employment_type, partners_classification.classification, resigned_date, start_date, end_date')		
 	    ->from('users')

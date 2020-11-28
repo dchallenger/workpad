@@ -211,4 +211,5 @@ $lang['partners'] = array(
     'no_info_medical' => 'No available information about medical records. ',
     'date_marriage' => 'Date of Marriage',
     'blood_type' => 'Blood Type',
+    'benefit_package' => 'Benefit Package'
 );

@@ -162,7 +162,8 @@ class time_form_policies_model extends Record
 					$result_timekeeping_period_prev_row = $result_timekeeping_period_prev_result->row();
 			        return $result_timekeeping_period_prev_row->date_from;
 				}else{
-					return $row_period->date_from;
+					return false;
+					//return $row_period->date_from;
 				}
 			}
 		}
@@ -199,13 +200,13 @@ class time_form_policies_model extends Record
 				$result_timekeeping_period_prev_row = $result_timekeeping_period_prev_result->row();
 		        return $result_timekeeping_period_prev_row->cutoff;
 			}else{
-				$result_timekeeping_period_prev_result = $this->db->query("SELECT * FROM {$this->db->dbprefix}time_period WHERE deleted = 0 AND company_id IN ({$company_id}) AND date_from > '{$current_day}' ORDER BY date_from ASC ");		        		
-
+				$result_timekeeping_period_prev_result = $this->db->query("SELECT * FROM {$this->db->dbprefix}time_period WHERE deleted = 0 AND company_id IN ({$company_id}) AND date_from > '{$current_day}' ORDER BY date_from ASC ");
 				if ($result_timekeeping_period_prev_result && $result_timekeeping_period_prev_result->num_rows() > 0){
 					$result_timekeeping_period_prev_row = $result_timekeeping_period_prev_result->row();
 			        return $result_timekeeping_period_prev_row->cutoff;
 				}else{
-					return $row_period->cutoff;
+					return false;
+					//return $row_period->cutoff;
 				}
 			}
 		}
@@ -310,7 +311,8 @@ class time_form_policies_model extends Record
 					$result_timekeeping_period_prev_row = $result_timekeeping_period_prev_result->row();
 			        return $result_timekeeping_period_prev_row->date_from;
 				}else{
-					return $row_period->date_from;
+					return false;
+					//return $row_period->date_from;
 				}
 			}
 		}
@@ -354,7 +356,8 @@ class time_form_policies_model extends Record
 					$result_timekeeping_period_prev_row = $result_timekeeping_period_prev_result->row();
 			        return $result_timekeeping_period_prev_row->cutoff;
 				}else{
-					return date('Y-m-d', strtotime('+1 day'));
+					return false;
+					//return date('Y-m-d', strtotime('+1 day'));
 				}
 			}
 		}

@@ -259,7 +259,11 @@
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.expected_delivery') }} :</label>
 												<div class="col-md-7 col-sm-7">
-													<span>{{ $record['time_forms_maternity_expected_date'] }} - <?php if(strtotime($record['time_forms_maternity_expected_date'])) echo date('D',strtotime($record['time_forms_maternity_expected_date'])); ?></span>
+													<span>
+														@if ($record['time_forms_maternity_expected_date'] != '')
+															{{ $record['time_forms_maternity_expected_date'] }} - {{ date('D',strtotime($record['time_forms_maternity_expected_date'])) }}
+														@endif
+													</span>
 												</div>
 											</div>
 										</div>
@@ -270,7 +274,11 @@
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.actual_delivery') }} :</label>
 												<div class="col-md-7 col-sm-7">
-													<span>{{ $record['time_forms_maternity_actual_date'] }} - <?php if(strtotime($record['time_forms_maternity_actual_date'])) echo date('D',strtotime($record['time_forms_maternity_actual_date'])); ?></span>
+													<span>
+														@if ($record['time_forms_maternity_actual_date'] != '')
+															{{ $record['time_forms_maternity_actual_date'] }} - {{ date('D',strtotime($record['time_forms_maternity_actual_date'])) }}
+														@endif
+													</span>
 												</div>
 											</div>
 										</div>

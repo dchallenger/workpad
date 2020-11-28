@@ -13,6 +13,11 @@ $(document).ready(function(){
 
 function save_record( form, action, callback )
 {
+	if ($('#time_form_balance_setup_policy-company_id').val() == null) {
+		$('#time_form_balance_setup_policy-company_id').prepend(new Option("", ""));
+		$('#time_form_balance_setup_policy-company_id').select2("val", "").trigger('change');
+	}
+
 	if ($('#time_form_balance_setup_policy-employment_type').val() == null) {
 		$('#time_form_balance_setup_policy-employment_type').prepend(new Option("", ""));
 		$('#time_form_balance_setup_policy-employment_type').select2("val", "").trigger('change');
@@ -22,7 +27,12 @@ function save_record( form, action, callback )
 		$('#time_form_balance_setup_policy-employment_status').prepend(new Option("", ""));
 		$('#time_form_balance_setup_policy-employment_status').select2("val", "").trigger('change');
 	}
-	
+
+	if ($('#time_form_balance_fcc_setup-job_level').val() == null) {
+		$('#time_form_balance_fcc_setup-job_level').prepend(new Option("", ""));
+		$('#time_form_balance_fcc_setup-job_level').select2("val", "").trigger('change');
+	}	
+		
 	$.blockUI({ message: saving_message(),
 		onBlock: function(){
 

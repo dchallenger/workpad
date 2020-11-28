@@ -612,6 +612,7 @@ class Partners extends MY_PrivateController
 		$data['last_probationary'] = (count($last_probationary) > 0 ? date("F d, Y", strtotime($last_probationary[0]['key_value'])) : "n/a");
 		$last_salary_adjustment = $this->profile_mod->get_partners_personal($user_id, 'last_salary_adjustment');
 		$data['last_salary_adjustment'] = (count($last_salary_adjustment) > 0 ? date("F d, Y", strtotime($last_salary_adjustment[0]['key_value'])) : "n/a");
+		$data['old_new'] = ($profile_header_details['old_new'] == 0 ? "Old" : "New");
 		//Work Assignment
 		$reports_to = $profile_header_details['immediate'] == "" ? "n/a" : $this->profile_mod->get_user_details($profile_header_details['immediate']);
 		if($reports_to == "n/a"){

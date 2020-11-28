@@ -5,6 +5,8 @@
 
     <td>
         {{ $time_form_balance_setup_policy_form }}
+        <br>
+        <span class="small" id="date_set">@if($time_form_balance_setup_policy_accumulation_type == 1) Monthly @else Yearly @endif</span>
     </td>
 
     <td>

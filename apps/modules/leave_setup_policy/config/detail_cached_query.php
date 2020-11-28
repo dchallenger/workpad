@@ -3,6 +3,7 @@ $config["detail_cached_query"] = 'SELECT
 `ww_time_form_balance_setup_policy`.`policy_id` as record_id, 
 ww_time_form_balance_setup_policy.company as "time_form_balance_setup_policy.company",
 ww_time_form_balance_setup_policy.employment_status as "time_form_balance_setup_policy.employment_status",
+ww_time_form_balance_setup_policy.job_level as "time_form_balance_setup_policy.job_level",
 ww_time_form_balance_setup_policy.employment_type as "time_form_balance_setup_policy.employment_type",
 ww_time_form_balance_setup_policy.description as "time_form_balance_setup_policy.description",
 ww_time_form.form as "time_form_balance_setup_policy.form",

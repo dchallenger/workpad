@@ -34,6 +34,18 @@
 	<tr>
 		<td colspan="6">Tardiness Report</td>
 	</tr>
+	<tr>
+		<?php 
+			$date_range = array();
+			if (!empty($filter)) {
+				foreach ($filter as $key => $value) {
+					if(strtotime($value))
+						$date_range[] = $value;
+				}
+			}		
+		?>
+		<td><?php echo implode(' - ', $date_range) ?></td>
+	</tr>	
 	<?php
 	foreach( $com as $dept => $emp ): ?>
 		<tr>

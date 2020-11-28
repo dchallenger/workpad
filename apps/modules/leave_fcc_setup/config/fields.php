@@ -1,6 +1,21 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 $config['fields'] = array();
+$config['fields'][1]['time_form_balance_fcc_setup.old_new'] = array(
+	'f_id' => 9,
+	'fg_id' => 1,
+	'label' => 'Benefit Package',
+	'description' => '',
+	'table' => 'time_form_balance_fcc_setup',
+	'column' => 'old_new',
+	'uitype_id' => 3,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 1,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 0
+);
 $config['fields'][1]['time_form_balance_fcc_setup.in_excess_to_forfeit'] = array(
 	'f_id' => 8,
 	'fg_id' => 1,
@@ -84,6 +99,30 @@ $config['fields'][1]['time_form_balance_fcc_setup.description'] = array(
 	'datatype' => 'Required',
 	'active' => '1',
 	'encrypt' => 0
+);
+$config['fields'][2]['time_form_balance_fcc_setup.job_grade_ids'] = array(
+	'f_id' => 3,
+	'fg_id' => 2,
+	'label' => 'Rank',
+	'description' => '',
+	'table' => 'time_form_balance_fcc_setup',
+	'column' => 'job_grade_ids',
+	'uitype_id' => 4,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 1,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 0,
+	'searchable' => array(
+		'type_id' => '1',
+		'table' => 'users_job_grade_level',
+		'multiple' => 1,
+		'group_by' => '',
+		'label' => 'job_grade_id',
+		'value' => 'job_level',
+		'textual_value_column' => ''
+	)
 );
 $config['fields'][1]['time_form_balance_fcc_setup.employment_status_ids'] = array(
 	'f_id' => 3,

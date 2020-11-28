@@ -76,7 +76,7 @@
 					</div>
 
 					<div class="form-group">
-						<label class="control-label col-md-4">{{ lang('form_application.location') }}</label>
+						<label class="control-label col-md-4">{{ lang('form_application.location') }}<span class="required">* </span></label>
 						<div class="col-md-6">							
 							<input type="text" class="form-control" name="time_forms_obt[location]" id="time_forms_obt-location" value="{{ $record['time_forms_obt_location'] }}" placeholder=""/>
 						</div>

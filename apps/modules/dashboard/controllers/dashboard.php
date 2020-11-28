@@ -13,7 +13,9 @@ class Dashboard extends MY_PrivateController{
 		$this->current_user = $this->config->item('user');
 		$this->lang->load( 'dashboard' );
 		$this->lang->load( 'form_application_manage' );
+		$this->lang->load( 'loan_application' );
 		$this->lang->load( 'user_manager' );
+		$this->load->model('loan_application_manage_model', 'loan_app_manage');		
 	}
 
 	public function index(){ 
@@ -25,7 +27,7 @@ class Dashboard extends MY_PrivateController{
 			$data 					= array();
 			$data['current_user'] 	= $this->user->user_id;
 			$data['feeds'] 			= $this->mod->getDashboardFeeds($data['current_user'], $page, 10);
-			
+
 			$this->response->records_retrieve = count($data['feeds']);
 
 			if( $this->input->post('mobileapp') )
@@ -238,6 +240,26 @@ class Dashboard extends MY_PrivateController{
 			$this->response->todos 			= $this->load->view('customs/todos_mobile', $data, true);
 		else	
 			$this->response->todos 			= $this->load->view('customs/todos', $data, true);
+		$this->response->count 			= count($data['todos']);
+
+		$this->response->message[] 		= array(
+		    'message' 	=> '',
+		    'type' 		=> 'success'
+		);
+
+		$this->_ajax_return();
+	}
+
+	public function get_todos_loan_application(){
+
+		$this->_ajax_only();
+		$data = array();
+
+		$data['todos'] 					= $this->mod->getTodoFeedsLoan( $this->user->user_id );
+		if( $this->input->post('mobileapp') )
+			$this->response->todos 			= $this->load->view('customs/todos_loan_mobile', $data, true);
+		else	
+			$this->response->todos 			= $this->load->view('customs/todos_loan', $data, true);
 		$this->response->count 			= count($data['todos']);
 
 		$this->response->message[] 		= array(
@@ -487,6 +509,69 @@ class Dashboard extends MY_PrivateController{
         
 	}
 
+    public function loan_application_decission(){
+
+        $this->current_user = $this->session->userdata['user']->user_id;
+
+        $this->_ajax_only();
+        $data = array();
+        
+        // temporary remove forms validation
+        $forms_validation = array();
+        //$forms_validation = $this->time_form_policies->validate_form_change_status($this->input->post('formid'),$this->input->post('decission'));
+
+        if(isset($forms_validation['error']) && count($forms_validation['error']) > 0 ){    
+            $this->_ajax_return();          
+        }else{
+            // 1. set forms approver decision
+            $result = $this->loan_app_manage->setDecission($this->input->post());
+
+            // 2. build a notification message
+            //    designed to determine the type of form
+            //    the recipient has submitted.
+            $this->load->model('form_application_manage_model', 'dash_mod');
+
+            $approver       = $this->input->post('username');
+            $action         = $this->input->post('decission') == '1' ? ' approved ' : ' disapproved '; 
+            $loan_application_info      = $this->loan_app_manage->get_loan_application_details($this->input->post('loan_application_id')); 
+            // $loan_application_info       = $this->input->post('formname'); 
+            $recipient      = $this->input->post('loan_application_owner_id');
+            $notif_message  = 'Filed ' . $loan_application_info['loan_type'] . ' for ' . date('F j, Y', strtotime($loan_application_info['created_on'])) . ' has been '.$action.'.';
+            if(trim($this->input->post('comment')) != ""){
+                $notif_message  .= '<br><br>Remarks: '.$this->input->post('comment');
+            }
+
+            //Get current user fullname
+            $current_user = array();
+            $current_user = $this->db->get_where('users',array('user_id' => $this->session->userdata['user']->user_id))->row();
+
+            $data['user_id']        = $this->session->userdata['user']->user_id;                                // THE CURRENT LOGGED IN USER 
+            $data['display_name']   = $current_user->full_name;                                                 // THE CURRENT LOGGED IN USER'S DISPLAY NAME
+            $data['feed_content']   = $notif_message;                                                           // THE MAIN FEED BODY
+            $data['recipient_id']   = $recipient;                                                               // TO WHOM THIS POST IS INTENDED TO
+            $data['status']         = 'info';                                                                   // TO WHOM THIS POST IS INTENDED TO
+            $data['message_type']   = 'Loan Application';    
+            $data['loan_application_id'] = $this->input->post('loan_application_id');                                                               // DANGER, INFO, SUCCESS & WARNING
+
+            // ADD NEW DATA FEED ENTRY
+            $latest = $this->loan_app_manage->newPostData($data, 'appforms');
+            $this->response->target = $latest;
+
+            // determines to where the action was 
+            // performed and used by after_save to
+            // know which notification to broadcast
+            $this->response->type       = 'todo';
+            $this->response->action     = 'insert';
+
+            $this->response->message[]  = array(
+                'message'   => lang('common.save_successful'),
+                'type'      => 'success'
+            );
+            
+            $this->_ajax_return();
+        }
+    } 
+
 	function check_payroll_view_permission(){
 
 		$payroll_modules = array('transaction_class', 'payroll_transactions', 'transaction_method', 'transaction_mode', 'loan', 'loan_type','overtime_rates','overtime_rates_fixed_amount',
@@ -716,6 +801,48 @@ class Dashboard extends MY_PrivateController{
 
         $this->_ajax_return();
     }
+
+    function get_loan_application_details(){
+        $this->_ajax_only();
+        $loan_type_code = $this->input->post('loan_type_code');
+        $loan_application_id = $this->input->post('loan_application_id');
+
+        $this->response->loan_application_details = '';
+        switch($loan_type_code){
+            case ('CPLA')://Car Plan Loan Application
+                $loan_application_details = $this->loan_app_manage->get_cpla_details($loan_application_id, $this->user->user_id);
+                $remarks['remarks'] = array();
+                $comments = $this->loan_app_manage->get_approver_remarks($loan_application_id);
+                foreach ($comments as $comment){
+                    $remarks['remarks'][] = $comment;
+                }
+                $loan_application_details = array_merge($loan_application_details, $remarks);
+                $this->response->loan_application_details .= $this->load->blade('edit/'.$loan_type_code.'_details', $loan_application_details, true);  
+            break;
+            case ('OLA')://Omnibus Loan Application
+                $loan_application_details = $this->loan_app_manage->get_ola_details($loan_application_id, $this->user->user_id);
+                $remarks['remarks'] = array();
+                $comments = $this->loan_app_manage->get_approver_remarks($loan_application_id);
+                foreach ($comments as $comment){
+                    $remarks['remarks'][] = $comment;
+                }
+                $loan_application_details = array_merge($loan_application_details, $remarks);
+                $this->response->loan_application_details .= $this->load->blade('edit/'.$loan_type_code.'_details', $loan_application_details, true);              
+            break;
+            case ('MAP')://Mobile Application Plan
+                $loan_application_details = $this->loan_app_manage->get_map_details($loan_application_id, $this->user->user_id);
+                $remarks['remarks'] = array();
+                $comments = $this->loan_app_manage->get_approver_remarks($loan_application_id);
+                foreach ($comments as $comment){
+                    $remarks['remarks'][] = $comment;
+                }
+                $loan_application_details = array_merge($loan_application_details, $remarks);
+                $this->response->loan_application_details .= $this->load->blade('edit/'.$loan_type_code.'_details', $loan_application_details, true);             
+            break;
+        }
+
+        $this->_ajax_return();
+    } 
 
 	public function filter_feeds(){ 
 

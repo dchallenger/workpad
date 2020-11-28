@@ -335,7 +335,16 @@
                         <span class="help-block">{{ lang('partners.dt_sal_adjust') }}</span> 
                     </div>
                 </div>
-                @endif               
+                @endif
+                <div class="form-group">
+                    <label class="col-md-3 control-label">{{ lang('partners.benefit_package') }}</label>
+                    <div class="col-md-5">
+                        <div class="radio-list">
+                            <label class="radio-inline"><input class="form-filter option" type="radio" name="partners[old_new]" id="optionsRadios2" value="0" @if ($record['partners.old_new'] == 0) checked="" @endif >Old</label>
+                            <label class="radio-inline"><input class="form-filter option" type="radio" name="partners[old_new]" id="optionsRadios2" value="1" @if ($record['partners.old_new'] == 1) checked="" @endif >New</label>
+                        </div>                        
+                    </div>
+                </div>                               
             </div>
         </div>
 	</div>

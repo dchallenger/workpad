@@ -421,8 +421,12 @@ class report_generator_model extends Record
 			case 'TARDY':
 				$tardy_header = true;
 				//$excel = $this->load->view("templates/timekeeping_tardy", array('result' => $result, 'month' => $report_company_riofil), true);
-				$excel = $this->load->view("templates/timekeeping_tardy_oclp", array('result' => $result), true);
+				$excel = $this->load->view("templates/timekeeping_tardy_oclp", array('result' => $result,'filter' => $filter), true);
 				break;
+            case 'LEAVE_REPORT':
+            	$leave_report_header = true;
+            	$excel = $this->load->view("templates/leave_report_oclp", array('result' => $result,'filter' => $filter), true);
+            	break;				
 			case 'PAR': 
 				$excel = $this->load->view("templates/timekeeping_par", array('result' => $result, 'month' => $report_company_riofil), true);
 				break;					
@@ -629,12 +633,19 @@ class report_generator_model extends Record
 				$exc_report_header = 1;
         		$excel = $this->load->view("templates/exception_report", array('result' => $result,'filter' => $filter), true);
                 break;
+            case 'PENDING_TRANSACTIONS':
+				$pending_transaction_report_header = 1;
+        		$excel = $this->load->view("templates/pending_transaction_report", array('result' => $result,'filter' => $filter), true);
+                break;
+            case 'TOTAL_HOURS_WORK_PER_LOCATION':
+				$total_hours_work_per_location_header = 1;
+        		$excel = $this->load->view("templates/total_hours_work_per_location", array('result' => $result,'filter' => $filter), true);
+                break;                
             case 'ESR':
             case 'ESHR':
             case 'ESHR_EDU':
             case 'attrition_report':
             case 'hr_headcount':
-            case 'LEAVE_REPORT':
             case 'ESHR_EMPLOYMENT':
             case 'ESHR_CHARACTER':
             case 'ESHR_LICENSURE':
@@ -740,11 +751,15 @@ class report_generator_model extends Record
 			$department = "Department";
 			$user_id = "User Id";
 
+			$content->getActiveSheet()->mergeCells('A2:F2');
+			$content->getActiveSheet()->getStyle("A2:F2")->applyFromArray($style_center);
+			$content->getActiveSheet()->getStyle("A2:F2")->getFont()->setBold(true);	
+
 			foreach( $result->result() as $row )
 				$com[$row->$department][$row->$user_id][] = $row; 
 
 			foreach( $com as $dept => $emp ) {
-				$ctr = 2;
+				$ctr = 3;
 				
 				$content->getActiveSheet()->getStyle("A".$ctr.":F".$ctr."")->applyFromArray($style_center);
 				$content->getActiveSheet()->getStyle("A".$ctr.":F".$ctr."")->getFont()->setBold(true);
@@ -764,7 +779,26 @@ class report_generator_model extends Record
 				}
 			}
 
-			$content->getActiveSheet()->getStyle("A2:F".$ctr)->applyFromArray($border_style);			
+			$content->getActiveSheet()->getStyle("A3:F".$ctr)->applyFromArray($border_style);			
+		}
+
+		if (isset($leave_report_header)) {
+            $excelcolumn = ($excelcolumn == '') ? 'Z' : $excelcolumn;
+			$letters = $this->createColumnsArray($excelcolumn);
+			$index = 0;
+
+			for ($index; $index <= count($columns) - 1; $index++) {
+				$row = $letters[$index]."1";
+				
+				$content->getActiveSheet()->getColumnDimension($letters[$index])->setAutoSize(true);
+			}
+
+			$content->getActiveSheet()->getStyle("A1:A2")->applyFromArray($style_center);
+			$content->getActiveSheet()->getStyle("A1:Q3")->getFont()->setBold(true);			
+			$content->getActiveSheet()->mergeCells('A1:Q1');
+			$content->getActiveSheet()->mergeCells('A2:Q2');
+
+			$content->getActiveSheet()->getStyle("A3:Q".($result->num_rows()+3))->applyFromArray($border_style);			
 		}
 
 		if (isset($dtrs_header)) {
@@ -781,16 +815,35 @@ class report_generator_model extends Record
 			$content->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
 
 			$content->getActiveSheet()->getStyle("A1:A2")->applyFromArray($style_center);
-			$content->getActiveSheet()->getStyle("A1:A2")->getFont()->setBold(true);			
 			$content->getActiveSheet()->mergeCells('A1:K1');
 			$content->getActiveSheet()->mergeCells('A2:K2');
 
-			$content->getActiveSheet()->getStyle("A2:K2")->getFont()->setBold(true);
+			$content->getActiveSheet()->getStyle("A1:K3")->getFont()->setBold(true);
 
 			$content->getActiveSheet()->getStyle("A3:K".($result->num_rows()+3))->applyFromArray($border_style);			
 		}
 
 		if (isset($exc_report_header)) {
+			$content->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
+
+			$content->getActiveSheet()->getStyle("A1:A2")->applyFromArray($style_center);
+			$content->getActiveSheet()->getStyle("A1:A2")->getFont()->setBold(true);			
+			$content->getActiveSheet()->mergeCells('A1:H1');
+			$content->getActiveSheet()->mergeCells('A2:H2');
+
+			$content->getActiveSheet()->getStyle("A2:H2")->getFont()->setBold(true);
+
+			$content->getActiveSheet()->getStyle("A3:H".($result->num_rows()+3))->applyFromArray($border_style);			
+		}
+
+		if (isset($pending_transaction_report_header)) {
 			$content->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
 			$content->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
 			$content->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
@@ -807,6 +860,23 @@ class report_generator_model extends Record
 			$content->getActiveSheet()->getStyle("A2:G2")->getFont()->setBold(true);
 
 			$content->getActiveSheet()->getStyle("A3:G".($result->num_rows()+3))->applyFromArray($border_style);			
+		}
+
+		if (isset($total_hours_work_per_location_header)) {
+			$content->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+
+			$content->getActiveSheet()->getStyle("A1:A2")->applyFromArray($style_center);
+			$content->getActiveSheet()->mergeCells('A1:F1');
+			$content->getActiveSheet()->mergeCells('A2:F2');
+
+			$content->getActiveSheet()->getStyle("A1:F3")->getFont()->setBold(true);
+
+			$content->getActiveSheet()->getStyle("A3:F".($result->num_rows()))->applyFromArray($border_style);			
 		}
 
 		if($lmr_header == 1){

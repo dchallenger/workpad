@@ -109,7 +109,7 @@
 				if (val.trim() == ''){
 					msgarray.push({
 						type: 'error',
-						message: label + 'is required'
+						message: label + ' is required'
 					});
 				}
 			}

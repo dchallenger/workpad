@@ -46,12 +46,12 @@ class dashboard_model extends Record
 				LEFT JOIN {$this->db->dbprefix}users_profile b on b.user_id = a.user_id
 				LEFT JOIN {$this->db->dbprefix}users_company c on c.company_id = b.company_id
 				LEFT JOIN {$this->db->dbprefix}business_group d on d.group_id = c.business_group_id
-				WHERE recipient_id = '$userID' AND message_type <> 'Time Record' AND message_type <> 'Personnel' AND message_type <> 'Code of Conduct' AND message_type <> 'Movement' AND message_type <> 'Signatories' AND message_type <> 'Recruitment'
+				WHERE recipient_id = '$userID' AND message_type NOT IN ('Admin','Partners','Personnel','System','Time Record','Code of Conduct','Movement','Signatories','Clearance','Recruitment','Performance Appraisal','Loan Application Record')
 				LIMIT $limit OFFSET $start;";
 
 		$result = $this->db->query($qry);
-		
-		if($result->num_rows() > 0){
+
+		if($result && $result->num_rows() > 0){
 			return 	$result->result();			
 		}
 		
@@ -112,6 +112,31 @@ class dashboard_model extends Record
 		LEFT JOIN {$this->db->dbprefix}business_group d on d.group_id = c.business_group_id
 		WHERE approver_id = '$userID' 
 		AND approver_status_id = '2' AND form_status_id IN (2,3)
+		ORDER BY created_on DESC";
+		$result = $this->db->query($qry);
+		
+		if($result->num_rows() > 0){
+				
+			foreach($result->result_array() as $row){
+				$data[] = $row;
+			}			
+		}
+		
+		$result->free_result();
+		return $data;	
+	}
+
+	function getTodoFeedsLoan($userID){
+
+		$data = array();
+
+		$qry = "SELECT a.*, c.company, d.group
+		FROM dashboard_todos_loan a
+		LEFT JOIN {$this->db->dbprefix}users_profile b on b.user_id = a.user_id
+		LEFT JOIN {$this->db->dbprefix}users_company c on c.company_id = b.company_id
+		LEFT JOIN {$this->db->dbprefix}business_group d on d.group_id = c.business_group_id
+		WHERE approver_id = '$userID' 
+		AND approver_loan_application_status_id = '2'
 		ORDER BY created_on DESC";
 		$result = $this->db->query($qry);
 		

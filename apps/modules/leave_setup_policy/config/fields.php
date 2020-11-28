@@ -154,6 +154,30 @@ $config['fields'][2]['time_form_balance_setup_policy.description'] = array(
 	'active' => '1',
 	'encrypt' => 0
 );
+$config['fields'][2]['time_form_balance_setup_policy.job_grade_ids'] = array(
+	'f_id' => 3,
+	'fg_id' => 2,
+	'label' => 'Rank',
+	'description' => '',
+	'table' => 'time_form_balance_setup_policy',
+	'column' => 'job_grade_ids',
+	'uitype_id' => 4,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 1,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 0,
+	'searchable' => array(
+		'type_id' => '1',
+		'table' => 'users_job_grade_level',
+		'multiple' => 1,
+		'group_by' => '',
+		'label' => 'job_grade_id',
+		'value' => 'job_level',
+		'textual_value_column' => ''
+	)
+);
 $config['fields'][2]['time_form_balance_setup_policy.employment_status_ids'] = array(
 	'f_id' => 3,
 	'fg_id' => 2,

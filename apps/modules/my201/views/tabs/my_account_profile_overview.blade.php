@@ -327,6 +327,16 @@
 								</div>
 							</div>
 	                	@endif
+						<div class="row ">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.benefit_package') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="lastname">{{$old_new}}</span>
+									</div>
+								</div>
+							</div>
+						</div>		                	
 					</div>
 				</div>
 				<!-- Work Assignment Information -->

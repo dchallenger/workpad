@@ -12,9 +12,11 @@ $config['fieldgroups'][1] = array(
 		'time_form_balance_fcc_setup.in_excess_to_forfeit',
 		'time_form_balance_fcc_setup.in_excess_to_pay',
 		'time_form_balance_fcc_setup.max_balance_carry_over',
+		'time_form_balance_fcc_setup.old_new',
 		'time_form_balance_fcc_setup.form_id',
 		'time_form_balance_fcc_setup.description',
 		'time_form_balance_fcc_setup.employment_status_ids',
+		'time_form_balance_setup_policy.job_grade_ids',
 		'time_form_balance_fcc_setup.employment_type_ids',
 		'time_form_balance_fcc_setup.company_ids'
 	)

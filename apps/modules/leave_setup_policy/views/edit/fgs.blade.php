@@ -30,31 +30,6 @@
 	            </div>	
 			</div>
 			<div class="form-group">
-				<label class="control-label col-md-3">{{ lang('leave_setup_policy.employment_type') }}</label>
-				<div class="col-md-7">
-					<?php	
-						$db->select('*');
-                		$db->order_by('employment_type', '0');
-                		$db->where('deleted', '0');
-                		$options = $db->get('partners_employment_type'); 	                            
-                		$employment_type = array();
-	            		foreach($options->result() as $option) {
-	            			$employment_type[$option->employment_type_id] = $option->employment_type;
-	            		}
-
-                        $employment_type_ids_val = '';
-                        if (!empty($record['time_form_balance_setup_policy.employment_type_ids']))
-                            $employment_type_ids_val = explode(',', $record['time_form_balance_setup_policy.employment_type_ids']);	 	            		 
-	            	?>
-	            	<div class="input-group">
-						<span class="input-group-addon">
-	                    <i class="fa fa-list-ul"></i>
-	                    </span>
-	                    {{ form_multiselect('time_form_balance_setup_policy[employment_type_ids][]',$employment_type, $employment_type_ids_val, 'multiple class="form-control select2me" data-placeholder="Select..." id="time_form_balance_setup_policy-employment_type"') }}
-	                </div>
-	            </div>	
-			</div>
-			<div class="form-group">
 				<label class="control-label col-md-3">{{ lang('leave_setup_policy.employment_status') }}</label>
 				<div class="col-md-7">
 					<?php	
@@ -80,6 +55,55 @@
 	            </div>	
 			</div>
 			<div class="form-group">
+				<label class="control-label col-md-3">{{ lang('leave_setup_policy.rank') }}</label>
+				<div class="col-md-7">
+					<?php	
+						$db->select('*');
+                		$db->where('deleted', '0');
+                		$options = $db->get('users_job_grade_level'); 	                            
+                		$job_level = array();
+	            		foreach($options->result() as $option) {
+	            			$job_level[$option->job_grade_id] = $option->job_level;
+	            		}
+
+                        $job_grade_ids_val = '';
+                        if (!empty($record['time_form_balance_setup_policy.job_grade_ids']))
+                            $job_grade_ids_val = explode(',', $record['time_form_balance_setup_policy.job_grade_ids']);	 	            		 	            		 
+	            	?>
+	            	<div class="input-group">
+						<span class="input-group-addon">
+	                    <i class="fa fa-list-ul"></i>
+	                    </span>
+	                    {{ form_multiselect('time_form_balance_setup_policy[job_grade_ids][]',$job_level, $job_grade_ids_val, 'multiple class="form-control select2me" data-placeholder="Select..." id="time_form_balance_setup_policy-job_level"') }}
+	                </div>
+	            </div>	
+			</div>				
+			<div class="form-group">
+				<label class="control-label col-md-3">{{ lang('leave_setup_policy.employment_type') }}</label>
+				<div class="col-md-7">
+					<?php	
+						$db->select('*');
+                		$db->order_by('employment_type', '0');
+                		$db->where('deleted', '0');
+                		$options = $db->get('partners_employment_type'); 	                            
+                		$employment_type = array();
+	            		foreach($options->result() as $option) {
+	            			$employment_type[$option->employment_type_id] = $option->employment_type;
+	            		}
+
+                        $employment_type_ids_val = '';
+                        if (!empty($record['time_form_balance_setup_policy.employment_type_ids']))
+                            $employment_type_ids_val = explode(',', $record['time_form_balance_setup_policy.employment_type_ids']);	 	            		 
+	            	?>
+	            	<div class="input-group">
+						<span class="input-group-addon">
+	                    <i class="fa fa-list-ul"></i>
+	                    </span>
+	                    {{ form_multiselect('time_form_balance_setup_policy[employment_type_ids][]',$employment_type, $employment_type_ids_val, 'multiple class="form-control select2me" data-placeholder="Select..." id="time_form_balance_setup_policy-employment_type"') }}
+	                </div>
+	            </div>	
+			</div>
+			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>{{ lang('leave_setup_policy.description') }}</label>
 				<div class="col-md-7">
 					<input type="text" class="form-control" name="time_form_balance_setup_policy[description]" id="time_form_balance_setup_policy-starting_credit" value="{{ $record['time_form_balance_setup_policy.description'] }}" placeholder="Enter Description" />
@@ -93,6 +117,7 @@
 						$db->order_by('form', '0');
 						$db->where('deleted', '0');
 						$db->where('is_leave', '1');
+						$db->where_in('form_id', [1,2,3]);
 						$options = $db->get('time_form');
 						$time_form_balance_setup_policy_form_id_options = array('' => '');
                         foreach($options->result() as $option)

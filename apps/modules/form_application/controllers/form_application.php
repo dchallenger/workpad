@@ -2255,7 +2255,25 @@ class Form_application extends MY_PrivateController
         // validation for maternity leave
         if($_POST['form_code'] == 'ML' && $this->input->post('form_status_id') != 8){
             $delivery_id = $_POST['time_forms_maternity']['delivery_id'];
-            switch ($delivery_id) {
+
+            $this->db->where('deleted',0);
+            $this->db->where('delivery_id',$delivery_id);
+            $time_delivery = $this->db->get('time_delivery');
+
+            if ($time_delivery && $time_delivery->num_rows() > 0) {
+                $time_delivery_row = $time_delivery->row();
+                $days_alloted = $time_delivery_row->leave_days;
+
+                // deduct 1 day since date from was included on the counting
+                if (($days - 1) > $days_alloted) {
+                        $this->response->message[] = array(
+                        'message' => "Insufficient Leave Credits, you only have ".$days_alloted." days alotted",
+                        'type' => 'error'
+                        );  
+                        $this->_ajax_return();                        
+                }
+            }
+/*            switch ($delivery_id) {
                 case 1:
                     if ($days > 105) {
                         $this->response->message[] = array(
@@ -2283,7 +2301,7 @@ class Form_application extends MY_PrivateController
                         $this->_ajax_return();                        
                     }
                     break;
-            }
+            }*/
         }
 
         //Validate additional leave
