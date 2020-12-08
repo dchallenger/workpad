@@ -47,14 +47,14 @@ body {
   font-family: 'azo_sansregular';
   padding: 0px !important;
   margin: 0px !important;
-  font-size:12px; 
+  font-size:13px; 
   direction: ltr;
 }
 
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 /*
@@ -108,7 +108,7 @@ h5,
 h6 {
   font-family: 'azo_sansregular';
   font-weight: 350 !important;
-  font-size: 14px !important;
+  font-size: 15px !important;
 }
 
 h1.block, 
@@ -192,7 +192,7 @@ Font Awesome Icons
 [class*=" fa-"] {
   display: inline-block;
   margin-top: 1px;
-  font-size: 11px;
+  font-size: 12px;
   *margin-right: .3em;
   line-height: 14px;
 }
@@ -423,11 +423,11 @@ Header and header elements.
 }
 
 .header .navbar-nav > li.dropdown .dropdown-toggle > i {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .header .navbar-nav > li.dropdown .dropdown-menu > li > a > i {
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .header .navbar-nav > li.dropdown.user .dropdown-toggle {
@@ -446,7 +446,7 @@ Header and header elements.
   display: inline-block;
   margin-top: 5px;
   margin: 0;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .header .navbar-nav > li.dropdown.user .dropdown-menu i {
@@ -470,7 +470,7 @@ Header and header elements.
 
 .header .navbar-nav > li.dropdown.language > a {
   color: #ddd;
-  font-size: 10px;
+  font-size: 11px;
   padding: 10px 1px 12px 5px;
 }
 
@@ -479,7 +479,7 @@ Header and header elements.
 }
 
 .header .navbar-nav > li.dropdown.language > a > i {
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .header .navbar-nav > li.dropdown.language > .dropdown-menu > li > a > img {
@@ -547,7 +547,7 @@ Page sidebar
   border: 0px;
   padding: 10px 15px;
   text-decoration: none;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 300;
 }
 
@@ -559,7 +559,7 @@ Page sidebar
 }
 
 .page-sidebar-menu > li > a i {
-  font-size: 13px;
+  font-size: 14px;
   margin-right: 5px;
   text-shadow:none; 
 }
@@ -589,7 +589,7 @@ Page sidebar
    margin-top: 0px;
    margin-right: 5px;
    display: inline;
-   font-size: 13px;
+   font-size: 14px;
    font-family: FontAwesome;
    height: auto;
    content: "\f104";
@@ -604,7 +604,7 @@ Page sidebar
    display: inline;
    font-family: FontAwesome;
    height: auto;
-   font-size: 13px;
+   font-size: 14px;
    content: "\f107";
    font-weight: 300;
    text-shadow:none;
@@ -647,7 +647,7 @@ Page sidebar
   padding: 5px 0px;
   padding-left: 44px !important;
   text-decoration: none;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 300;
   background: none;
 }
@@ -665,7 +665,7 @@ Page sidebar
    margin-top: 1px;
    margin-right: 20px;
    display: inline;
-   font-size: 13px;
+   font-size: 14px;
    font-family: FontAwesome;
    height: auto;
    content: "\f104";
@@ -680,7 +680,7 @@ Page sidebar
    display: inline;
    font-family: FontAwesome;
    height: auto;
-   font-size: 13px;
+   font-size: 14px;
    content: "\f107";
    font-weight: 300;
    text-shadow:none;
@@ -702,7 +702,7 @@ Page sidebar
   margin: 0px 0px 0px 0px;
   padding: 5px 0px;
   text-decoration: none;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 300;
   background: none;
 }
@@ -721,7 +721,7 @@ Page sidebar
 
 
 .page-sidebar-menu > li > ul.sub-menu  li > ul.sub-menu > li > a > i {
-  font-size: 10px;
+  font-size: 11px;
 }
 
 /* sidebar search */
@@ -754,9 +754,9 @@ Page sidebar
   width: 165px;
   border: 0px;
   padding: 0 !important;
-  font-size: 11px !important;
+  font-size: 12px !important;
   box-shadow: none !important;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: normal;
 }
 
@@ -979,7 +979,7 @@ Page title
 ***/
 .page-title {
   padding: 0px;
-  font-size: 17px !important;
+  font-size: 18px !important;
   letter-spacing: -1px;
   display: block;
   color: #666;
@@ -989,7 +989,7 @@ Page title
 }
 
 .page-title small {
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0px;
   font-weight: 300;
   color: #888;
@@ -1020,7 +1020,7 @@ Page breadcrumb
 .page-content .page-breadcrumb.breadcrumb > li > i, 
 .page-content .page-breadcrumb.breadcrumb > li > span {
   color: #333;
-  font-size: 10px;
+  font-size: 11px;
   text-shadow:none;
 }
 
@@ -1064,7 +1064,7 @@ Page breadcrumb
 }
 
 .page-content .page-breadcrumb.breadcrumb .dashboard-date-range > span {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 300; 
   color: #fff;
   text-transform: uppercase;
@@ -1074,12 +1074,12 @@ Page breadcrumb
   text-transform: none;
   color: #fff;
   margin-top: 0px;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .page-content .page-breadcrumb.breadcrumb .dashboard-date-range > .fa-angle-down {
   color:#fff;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 /***
@@ -1088,7 +1088,7 @@ Footer
 
 .footer {
   padding: 8px 20px 5px 20px; 
-  font-size: 9px;
+  font-size: 10px;
 }
 
 .footer:after,
@@ -1119,12 +1119,12 @@ Footer
   margin-top: -2px;
   margin-right: 0px;
   margin-bottom: 0px;
-  font-size: 13px;
+  font-size: 14px;
   padding: 0px 6px 0px 6px;
 }
 
 .footer .footer-tools .go-top i {
-  font-size: 19px;
+  font-size: 20px;
   margin-bottom: 5px; 
 }
 
@@ -1140,7 +1140,7 @@ i.icon, a.icon {
   color: #999;
   margin-right: 5px;
   font-weight: normal;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 i.icon-black {
@@ -1159,11 +1159,11 @@ a.icon:hover {
 }
 
 a.icon.huge i{
-  font-size: 13px !important;
+  font-size: 14px !important;
 }
 
 i.big {
-  font-size: 17px;
+  font-size: 18px;
 }
 
 i.warning {
@@ -1228,7 +1228,7 @@ Input icons
   margin: 11px 2px 4px 10px;
   width: 16px;
   height: 16px;
-  font-size: 13px;
+  font-size: 14px;
   text-align: center;
 }
 
@@ -1283,7 +1283,7 @@ Portlets
 .portlet > .portlet-title > .caption {
   float: left;
   display: inline-block;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 18px;
   font-weight: 400;
   margin: 0;
@@ -1295,7 +1295,7 @@ Portlets
   float: left;
   margin-top: 4px;
   display: inline-block !important;
-  font-size: 10px;
+  font-size: 11px;
   margin-right: 5px;
   color: #666;
 }
@@ -1728,7 +1728,7 @@ Custom icon buttons
 }
 
 .icon-btn i {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .ie8 .icon-btn:hover {
@@ -1766,14 +1766,14 @@ Custom icon buttons
   margin-top: 5px;
   margin-bottom: 20px;  
   color: #000;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 300;
 }
 
 .icon-btn .badge {
   position: absolute;
   font-family: 'azo_sansregular';
-  font-size: 8px !important;
+  font-size: 9px !important;
   font-weight: 300;
   top: -5px;
   right: -5px;
@@ -1817,7 +1817,7 @@ Custom icon buttons
 }
 
 .dropdown-menu.extended li a{
-   font-size: 10px;
+   font-size: 11px;
    padding: 10px !important;
    background-color: #ffffff;
 }
@@ -1833,7 +1833,7 @@ Custom icon buttons
   padding: 10px;
   background-color: #eee;
   margin: 0px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 300;
   color: #000;
 }
@@ -1842,7 +1842,7 @@ Custom icon buttons
   padding: 7px 0 5px 0px;
   list-style: none;
   border-bottom: 1px solid #f4f4f4 !important;
-  font-size: 9px;
+  font-size: 10px;
   text-shadow: none;
 }
 
@@ -1857,7 +1857,7 @@ Custom icon buttons
 }
 
 .dropdown-menu.extended li.external > a {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 400;  
 }
 
@@ -1874,7 +1874,7 @@ Custom icon buttons
 }
 
 .dropdown-menu.notification li > a .time {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   text-align: right;
   font-style: italic;
@@ -1896,13 +1896,13 @@ Custom icon buttons
 }
 
 .dropdown-menu.inbox li > a .subject .from {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 400;
   color: #02689b;
 }
 
 .dropdown-menu.inbox li > a .subject .time {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   font-style: italic;
   position: relative;
@@ -1911,7 +1911,7 @@ Custom icon buttons
 
 .dropdown-menu.inbox li > a .message {
   display: block !important;
-  font-size: 9px;
+  font-size: 10px;
 }
 
 /* header tasks */
@@ -1920,12 +1920,12 @@ Custom icon buttons
 }
 
 .dropdown-menu.tasks .task .desc {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 300;
 }
 
 .dropdown-menu.tasks .task .percent {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   font-family: 'azo_sansregular';
   float: right;
@@ -1959,7 +1959,7 @@ General list for item with image
   list-style: none;
   border-top: 1px solid white;
   border-bottom: 1px solid #EBEBEB;
-  font-size: 9px;
+  font-size: 10px;
 }
 
 .item-list li:first-child {
@@ -2004,7 +2004,7 @@ Custom tables
 }
 
 .table thead tr th {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   font-weight: 500;
 }
@@ -2019,7 +2019,7 @@ Custom tables
 
 .table-advance thead tr th{
   background-color: #DDD; 
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 400; 
   color: #666;
 }
@@ -2075,7 +2075,7 @@ Star rating
 .rating {
   unicode-bidi: bidi-override;
   direction: rtl;
-  font-size: 27px;
+  font-size: 28px;
 }
 
 .rating span.star {
@@ -2174,7 +2174,7 @@ Chats
   list-style: none;
   padding: 5px 0;
   margin: 10px auto;
-  font-size: 9px;
+  font-size: 10px;
 }
 
 .chats li img.avatar {
@@ -2192,13 +2192,13 @@ Chats
 
 .chats li .name {
   color:#3590c1;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 400;
 }
 
 .chats li .datetime {
   color:#333;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 400;
 }
 
@@ -2381,7 +2381,7 @@ System feeds
 }
 .feeds .col1 .cont  .cont-col1 .label > i {
   text-align: center;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .feeds .col1 .cont .cont-col2 {
@@ -2421,7 +2421,7 @@ Users
 
 .user-info .label {
   font-weight: 300;
-  font-size: 8px;
+  font-size: 9px;
 }
 
 /***
@@ -2458,7 +2458,7 @@ Vertical inline menu
   height: 37px;
   display: inline-block;
   color:#b9cbd5;
-  font-size:12px;
+  font-size:13px;
   padding:12px 10px 10px 8px;
   margin:0 8px 0 0;
   text-align: center;
@@ -2466,7 +2466,7 @@ Vertical inline menu
 }
 
 .ver-inline-menu li a {
-  font-size: 10px;
+  font-size: 11px;
   color:#557386;
   display:block;
   background:#f0f6fa;
@@ -2486,7 +2486,7 @@ Vertical inline menu
 
 .ver-inline-menu li.active a,
 .ver-inline-menu li:hover a {
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .ver-inline-menu li.active a {
@@ -2626,7 +2626,7 @@ Custom tabs
 
 .tabbable-custom.tabbable-full-width .nav-tabs > li > a {
   color:#424242;
-  font-size:12px;
+  font-size:13px;
   padding:9px 15px;
 }
 
@@ -2758,7 +2758,7 @@ Dashboard stats
 }
 
 .dashboard-stat .visual i {
-  font-size: 62px;
+  font-size: 63px;
   line-height: 65px;
   color: #fff;
 }
@@ -2766,7 +2766,7 @@ Dashboard stats
 @media (min-width: 992px) and (max-width: 1024px) {  
 
   .dashboard-stat .visual i { 
-    font-size: 25px;
+    font-size: 26px;
     line-height: 28px;
   }
 
@@ -2781,7 +2781,7 @@ Dashboard stats
 .dashboard-stat .details .number {    
   padding-top: 15px;
   text-align: right;
-  font-size: 31px;
+  font-size: 32px;
   line-height: 34px;
   letter-spacing: -1px;
   margin-bottom: 5px;
@@ -2791,7 +2791,7 @@ Dashboard stats
 
 .dashboard-stat .details .desc {
   text-align: right;
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 0px;
   font-weight: 300;
   color: #fff;  
@@ -2803,7 +2803,7 @@ Dashboard stats
   padding: 5px 10px 5px 10px;
   text-transform: uppercase;
   font-weight: 300;
-  font-size: 8px;
+  font-size: 9px;
   color: #fff;  
   opacity: 0.7;  
   filter: alpha(opacity=70);
@@ -2880,7 +2880,7 @@ Tiles(new in v1.1.1)
   color: #ffffff;
   position: relative;
   font-weight: 300;
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.02em;
   line-height: 20px;
   overflow: hidden;
@@ -2924,7 +2924,7 @@ Tiles(new in v1.1.1)
 .tile.selected .check:after {  
   content: "";
   font-family: FontAwesome;
-  font-size: 10px;
+  font-size: 11px;
   content: "\f00c";
   display: inline-block;
   position: absolute;
@@ -2943,7 +2943,7 @@ Tiles(new in v1.1.1)
   overflow: hidden;
   position: relative;
   font-weight: 400;
-  font-size: 9px;
+  font-size: 10px;
   color: #000000;
   color: #ffffff;
   margin-bottom: 10px;
@@ -2967,7 +2967,7 @@ Tiles(new in v1.1.1)
 .tile .tile-body > i {
   margin-top: 17px;
   display: block;
-  font-size: 53px;
+  font-size: 54px;
   line-height: 56px;
   text-align: center;
 }
@@ -3006,7 +3006,7 @@ Tiles(new in v1.1.1)
 
 .tile .tile-body p {
   font-weight: 400;
-  font-size: 10px;
+  font-size: 11px;
   color: #000000;
   color: #ffffff;
   line-height: 20px;
@@ -3057,14 +3057,14 @@ Tiles(new in v1.1.1)
   margin-left: 10px;
   margin-right: 15px;
   font-weight: 400;
-  font-size: 11px;
+  font-size: 12px;
   color: #ffffff;
 }
 
 .tile .tile-object > .name > i {
   vertical-align: middle;
   display: block;
-  font-size: 21px;
+  font-size: 22px;
   height: 18px;
   width: 24px;
 }
@@ -3077,7 +3077,7 @@ Tiles(new in v1.1.1)
   color: #ffffff;
   text-align: center;
   font-weight: 600;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.01em;
   line-height: 14px;
   margin-bottom: 8px;
@@ -3167,7 +3167,7 @@ Theme Panel
   text-transform:uppercase;
   display: inline-block;
   width: 85px;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .theme-panel > .theme-options > .theme-option.theme-colors > span {
@@ -3270,7 +3270,7 @@ Horezantal Menu(new in v1.2)
 }
 
 .header .hor-menu ul.nav li a {
-  font-size: 10px;
+  font-size: 11px;
   padding: 11px 18px; 
   background-color: #3d3d3d;
 }
@@ -3403,7 +3403,7 @@ Top News Blocks(new in v1.2.2)
   right: 8px;
   bottom: 15px; 
   opacity:0.3; 
-  font-size: 32px;
+  font-size: 33px;
   position: absolute;
   filter: alpha(opacity=30); /*For IE8*/  
 }
@@ -3414,7 +3414,7 @@ Top News Blocks(new in v1.2.2)
 }
 
 .top-news span {
-  font-size: 15px;
+  font-size: 16px;
   margin-bottom: 5px;
 }
 
@@ -3453,7 +3453,7 @@ Block Images(new in v1.2.2)
 /*Sidebar Tags*/
 ul.sidebar-tags a {
   color: #555;
-  font-size:9px;
+  font-size:10px;
   padding:3px 5px;
   background:#f7f7f7;
   margin:0 2px 5px 0;
@@ -3687,7 +3687,7 @@ Demo Utils
 }
 
 .fontawesome-demo i {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .fontawesome-demo li {
@@ -3716,7 +3716,7 @@ Demo Utils
   height: 115px;
   padding: 10px;
   margin: 0 -1px -1px 0;
-  font-size: 9px;
+  font-size: 10px;
   line-height: 1.4;
   text-align: center;
   border: 1px solid #ddd;
@@ -3725,7 +3725,7 @@ Demo Utils
 .glyphicons-demo .glyphicon {
   display: block;
   margin: 5px auto 10px;
-  font-size: 21px;
+  font-size: 22px;
 }
 .glyphicons-demo ul li:hover {
   background-color: rgba(86,61,124,.1);
@@ -3761,13 +3761,13 @@ textarea.placeholder {
 }
 
 .form-control-static {
-  font-size: 11px;
+  font-size: 12px;
   padding-top: 7px;
 }
 
 .control-label .required {
   color: #e02222;
-  font-size: 9px;
+  font-size: 10px;
   padding-left: 2px;
 }
 
@@ -3832,7 +3832,7 @@ textarea.placeholder {
 }
 
 .help-inline {
-  font-size: 10px;
+  font-size: 11px;
   color: #737373;
   display: inline-block;
   padding: 5px;
@@ -4068,7 +4068,7 @@ Responsive Flip Scroll Tables
     border: 0 !important; 
     border-bottom: 1px solid #ddd !important; 
     border-right: 1px solid #ddd !important; 
-    font-size: 10px !important;
+    font-size: 11px !important;
     padding: 5px;
     width: auto !important;
   }
