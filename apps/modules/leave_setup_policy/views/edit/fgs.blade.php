@@ -136,7 +136,7 @@
 				<label class="control-label col-md-3"><span class="required">* </span>{{ lang('leave_setup_policy.accumulation_type') }}</label>
 				<div class="col-md-7">
 					<?php	
-						$accumulation_option = array('' => '',1 => 'Monthly',2 => 'Yearly');
+						$accumulation_option = array('' => '',1 => 'Monthly',2 => 'Yearly',3 => 'Tenure');
                         foreach($accumulation_option as $key => $val)
                         {   
                         	$accumulation_type[$key] = $val;
@@ -146,7 +146,7 @@
 						<span class="input-group-addon">
                         	<i class="fa fa-list-ul"></i>
                         </span>
-	                    {{ form_dropdown('time_form_balance_setup_policy[accumulation_type]',$accumulation_type, $record['time_form_balance_setup_policy.accumulation_type'], 'class="form-control select2me" data-placeholder="Select..." id="time_form_balance_setup_policy-form_id"') }}
+	                    {{ form_dropdown('time_form_balance_setup_policy[accumulation_type]',$accumulation_type, $record['time_form_balance_setup_policy.accumulation_type'], 'class="form-control select2me" data-placeholder="Select..." id="time_form_balance_setup_policy-accumulation_type"') }}
 	                </div>
 	            </div>	
 			</div>			
@@ -174,6 +174,12 @@
 					<input type="text" class="form-control" name="time_form_balance_setup_policy[max_credit]" id="time_form_balance_setup_policy-max_credit" value="{{ $record['time_form_balance_setup_policy.max_credit'] }}" placeholder="Enter Maximum" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>
 				</div>	
 			</div>
+			<div class="form-group tenure" @if($record['time_form_balance_setup_policy.accumulation_type'] < 3) style="display:none" @endif>
+				<label class="control-label col-md-3">{{ lang('leave_setup_policy.tenure') }}</label>
+				<div class="col-md-7">
+					<input style="text-align:right" type="text" class="form-control" name="time_form_balance_setup_policy[tenure]" id="time_form_balance_setup_policy-tenure" value="{{ $record['time_form_balance_setup_policy.tenure'] }}" placeholder="Enter Tenure" data-inputmask="'mask': '9', 'repeat': 12, 'greedy' : false"/>
+				</div>	
+			</div>			
             <div class="form-group">
                 <label class="control-label col-md-3" style="margin-top: 0px;">{{ lang('leave_setup_policy.prorated') }}</label>
                 <div class="col-md-5">

@@ -70,6 +70,12 @@
 				<input type="text" disabled="disabled" class="form-control" name="leave_setup_policy[job_grade_code]" id="leave_setup_policy-job_grade_code" value="{{ $record['time_form_balance_setup_policy.max_credit'] }}"/> 				
 			</div>	
 		</div>
+		<div class="form-group" @if($record['time_form_balance_setup_policy.accumulation_type'] != 'Tenure') style="display:none" @endif>
+			<label class="control-label col-md-3">{{ lang('leave_setup_policy.tenure') }}</label>
+			<div class="col-md-7">							
+				<input type="text" disabled="disabled" class="form-control" name="leave_setup_policy[tenure]" id="leave_setup_policy-job_grade_code" value="{{ $record['time_form_balance_setup_policy.tenure'] }}"/> 				
+			</div>	
+		</div>		
 		<div class="form-group">
 			<label class="control-label col-md-3">{{ lang('leave_setup_policy.prorated') }}</label>
 			<div class="col-md-7">							

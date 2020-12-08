@@ -15,5 +15,6 @@ $lang['leave_setup_policy'] = array(
 	'maximum' => 'Maximum',
 	'prorated' => 'Pro-rated',
 	'leave_reset_date' => 'Leave Reset Date',
-	'rank' => 'Rank'
+	'rank' => 'Rank',
+	'tenure' => "Tenure"
 );

@@ -20,6 +20,7 @@ $config['fieldgroups'][2] = array(
 		'time_form_balance_setup_policy.credit_16_31',
 		'time_form_balance_setup_policy.credit',
 		'time_form_balance_setup_policy.max_credit',
+		'time_form_balance_setup_policy.tenure',
 		'time_form_balance_setup_policy.prorated',
 		'time_form_balance_setup_policy.leave_reset_date'
 	)

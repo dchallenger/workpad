@@ -30,7 +30,7 @@ class leave_fcc_setup_model extends Record
 		$this->icon = 'fa-th-list';
 		$this->short_name = 'Leave FCC Setup';
 		$this->long_name  = 'Leave FCC Setup';
-		$this->description = 'Leave (Forfeiture, Conversion and Carry over  setup';
+		$this->description = 'Leave (Forfeiture, Conversion and Carry over setup)';
 		$this->path = APPPATH . 'modules/leave_fcc_setup/';
 
 		parent::__construct();

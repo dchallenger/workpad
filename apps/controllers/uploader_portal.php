@@ -102,13 +102,17 @@ class Uploader_portal extends MX_Controller
 						'date' => $date,
 						'time_in' => $time_in1,
 						'time_out' => $time_out1,
-						'entry_mode' => 'oclp_portal'
+						'entry_mode' => 'oclp_portal',
+						'time_in_location' => $row->time_in_location,
+						'time_out_location' => $row->Time_Out_Work_Location
 					);						
 
 					$to_update = array(
 						'time_in' => $time_in1,
 						'time_out' => $time_out1,
-						'entry_mode' => 'oclp_portal'
+						'entry_mode' => 'oclp_portal',
+						'time_in_location' => $row->time_in_location,
+						'time_out_location' => $row->Time_Out_Work_Location						
 					);	
 
 					$exist_data = $this->db->get_where('time_record', $where);

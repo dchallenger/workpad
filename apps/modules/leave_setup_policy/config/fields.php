@@ -16,6 +16,21 @@ $config['fields'][2]['time_form_balance_setup_policy.leave_reset_date'] = array(
 	'active' => '1',
 	'encrypt' => 0
 );
+$config['fields'][2]['time_form_balance_setup_policy.tenure'] = array(
+	'f_id' => 11,
+	'fg_id' => 2,
+	'label' => 'Tenure',
+	'description' => '',
+	'table' => 'time_form_balance_setup_policy',
+	'column' => 'tenure',
+	'uitype_id' => 3,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 4,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 0
+);
 $config['fields'][2]['time_form_balance_setup_policy.prorated'] = array(
 	'f_id' => 11,
 	'fg_id' => 2,
