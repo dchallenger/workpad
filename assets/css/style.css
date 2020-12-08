@@ -44,11 +44,16 @@ Reset and overrides
 /* general body settings */
 body { 
   color: #000; 
-  font-family: 'AzoSans-Regular';
+  font-family: 'azo_sansregular';
   padding: 0px !important;
   margin: 0px !important;
-  font-size:15px; 
+  font-size:12px; 
   direction: ltr;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /*
@@ -100,7 +105,7 @@ h3,
 h4, 
 h5, 
 h6 {
-  font-family: 'AzoSans-Regular';
+  font-family: 'azo_sansregular';
   font-weight: 350 !important;
   font-size: 17px !important;
 }
@@ -979,7 +984,7 @@ Page title
   color: #666;
   margin: 0px 0px 15px 0px;
   font-weight: 500;
-  font-family: 'AzoSans-Regular';
+  font-family: 'azo_sansregular';
 }
 
 .page-title small {
@@ -1756,7 +1761,7 @@ Custom icon buttons
 }
 
 .icon-btn div {
-  font-family: 'AzoSans-Regular';
+  font-family: 'azo_sansregular';
   margin-top: 5px;
   margin-bottom: 20px;  
   color: #000;
@@ -1766,7 +1771,7 @@ Custom icon buttons
 
 .icon-btn .badge {
   position: absolute;
-  font-family: 'AzoSans-Regular';
+  font-family: 'azo_sansregular';
   font-size: 11px !important;
   font-weight: 300;
   top: -5px;
@@ -1921,7 +1926,7 @@ Custom icon buttons
 .dropdown-menu.tasks .task .percent {
   font-size: 14px;
   font-weight: 600;
-  font-family: 'AzoSans-Regular';
+  font-family: 'azo_sansregular';
   float: right;
   display: inline-block;
 }

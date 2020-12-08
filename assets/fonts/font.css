@@ -17,14 +17,25 @@
   src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(../fonts/MTP_ySUJH_bn48VBG8sNSnhCUOGz7vYGh680lGh-uXM.woff) format('woff');
 }
 @font-face {
+    font-family: 'azo_sansregular';
+    src: url('azosans-regular-webfont.woff2') format('woff2'),
+         url('azosans-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/*@font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
   src: local('Open Sans Bold'), local('OpenSans-Bold'), url(../fonts/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff) format('woff');
 }
 @font-face {
-  font-family: "AzoSans-Regular";
+  font-family: 'AzoSans-Regular';
   font-style: normal;
-  font-weight: 300;
-  url(../fonts/AzoSans-Regular.woff) format('woff');
-}
+  font-weight: 300;  
+  src: url('./fonts/AzoSans-Regular.eot');
+  src: url('./fonts/AzoSans-Regular.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/AzoSans-Regular.woff') format('woff'),
+       url('./fonts/AzoSans-Regular.ttf') format('truetype'),
+       url('./fonts/AzoSans-Regular.svg#AzoSans-Regular') format('svg');
+}*/
