@@ -1,4 +1,22 @@
 <div>
+    <div class="clearfix">
+        <label class="control-label col-md-3 text-muted text-left small">{{ lang('form_application_manage.date_filed') }} :</label>
+        <div class="col-md-9">
+            <span><?php echo general_date_time($created_on) ?></span>
+        </div>
+    </div>
+    <div class='clearfix'>
+        <label class='control-label col-md-3 text-muted text-left small'>{{ lang('form_application_manage.from') }}:</label>
+        <div class='col-md-9'>
+            <span> <?php echo general_date_w_day($date_from); ?></span>
+        </div>
+    </div>
+    <div class='clearfix'>
+        <label class='control-label col-md-3 text-muted text-left small'>{{ lang('form_application_manage.to') }}:</label>
+        <div class='col-md-9'>
+            <span> <?php echo general_date_w_day($date_to); ?></span>
+        </div>
+    </div>    
     <div class='clearfix'>
         <label class='control-label col-md-3 text-muted text-left small'>Current Schedule:</label>
         <div class='col-md-9'>
@@ -9,12 +27,6 @@
         <label class='control-label col-md-3 text-muted text-left small'>New Schedule:</label>
         <div class='col-md-9'>
             <span> <?php echo $to_shift; ?></span>
-        </div>
-    </div>
-    <div class='clearfix'>
-        <label class='control-label col-md-3 text-muted text-left small'>Date:</label>
-        <div class='col-md-9'>
-            <span> <?php echo date("F d, Y", strtotime($date)); ?></span>
         </div>
     </div>
     <div class='clearfix'>
@@ -30,7 +42,7 @@
         <label class='control-label col-md-3 text-muted text-left small'>Recent Note:</label>
         <?php
         for($j=0; $j < count($remarks); $j++):
-            if(isset($remarks[$j]['comment'])) {
+            if(isset($remarks[$j]['comment'])): ?>
         <div class='col-md-9'>
             <span style='display:block; word-wrap:break-word;'>
                 <?php

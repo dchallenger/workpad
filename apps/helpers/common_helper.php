@@ -499,8 +499,42 @@ function date_local_timezone($date, $timezone)
 }
 
 function general_date($date) {
-	if ($date)
-		return date('M d, Y',strtotime($date));
+	$invalid_date = ['1970-01-01 00:00:00',"",'0000-00-00 00:00:00','January 01, 1970','1970-01-01'];
+
+	if (in_array($date, $invalid_date))
+		return '';
+	else {
+		if ($date < '1900-01-01')
+			return '';
+		else
+			return date('F d, Y',strtotime($date));
+	}
+}
+
+function general_date_w_day($date) {
+	$invalid_date = ['1970-01-01 00:00:00',"",'0000-00-00 00:00:00','January 01, 1970','1970-01-01'];
+
+	if (in_array($date, $invalid_date))
+		return '';
+	else {
+		if ($date < '1900-01-01')
+			return '';
+		else
+			return date('F d, Y - D',strtotime($date));
+	}
+}
+
+function general_date_time($date_time) {
+	$invalid_date = ['1970-01-01 00:00:00',"",'0000-00-00 00:00:00','January 01, 1970','1970-01-01'];
+
+	if (in_array($date_time, $invalid_date))
+		return '';
+	else {
+		if ($date_time < '1900-01-01')
+			return '';
+		else
+			return date("F d, Y - h:i a",strtotime($date_time));
+	}
 }
 
 function localize_timeline($datetime, $timezone)

@@ -45,7 +45,7 @@
         		<input type="hidden" name="view" id="view" value="detail" >
 				<div id="vl_container" class="portlet">
 						<div class="portlet-title">
-							<div class="caption">Mandatory Saturday <small class="text-muted">view</small></div>
+							<div class="caption">{{ $form_title }} <small class="text-muted">{{ lang('common.view') }}</small></div>
 						</div>
 	                    <div class="portlet-body form" id="main_form">
 	                        <!-- BEGIN FORM-->

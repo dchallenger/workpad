@@ -15,7 +15,7 @@ class time_form_policies {
 		$form_policy_error['hr_validate'] =  false; 
         $current_day = date('Y-m-d');
 		$form_policies = $this->CI->time_form_policies_model->get_form_policies($form_id, $user_id);
-         
+        
 		foreach ($form_policies as $form_policy){
 			switch(strtoupper($form_policy['class_code'])) {
 				case $form_code.'-FILING-TENURE':
@@ -40,7 +40,7 @@ class time_form_policies {
 				break;
 				case $form_code.'-LATE-FILING-CUTOFF':
                 if(strtotime($date_from) < strtotime($current_day)){
-    				$late_filing_cutoff = $this->_check_late_filing_cutoff($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id']);
+    				$late_filing_cutoff = $this->_check_late_filing_cutoff($form_policy['class_value'], $date_from, $date_to, $form_policy['up_company_id']);
     				if($late_filing_cutoff == 'error'){
                         if($form_policy['severity'] == 'Warning'){
                             $form_policy_error['warning'][] = "You exceeded the maximum allowable cutoff to file as late filing.";
@@ -58,7 +58,7 @@ class time_form_policies {
 				break;
 				case $form_code.'-LATE-FILING-DAYS':
                 if(strtotime($date_from) < strtotime($current_day)){
-    				$late_filing_days= $this->_check_late_filing_days($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id'],$user_id);
+    				$late_filing_days= $this->_check_late_filing_days($form_policy['class_value'], $date_from, $date_to, $form_policy['up_company_id'],$user_id);
     				if($late_filing_days == 'error'){
                         if($form_policy['severity'] == 'Warning'){
                             $form_policy_error['warning'][] = "You exceeded the maximum allowable days to file as late filing.";
@@ -70,7 +70,7 @@ class time_form_policies {
 				break;
 				case $form_code.'-LATE-FILING-NOT-ALLOWED':
                 if(strtotime($date_from) < strtotime($current_day)){
-    				$late_filing_not_allowed = $this->_check_late_filing_not_allowed($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id']);
+    				$late_filing_not_allowed = $this->_check_late_filing_not_allowed($form_policy['class_value'], $date_from, $date_to, $form_policy['up_company_id']);
     				if($late_filing_not_allowed == 'error'){
                         if($form_policy['severity'] == 'Warning'){
                             $form_policy_error['warning'][] = "Late filing is not allowed.";
@@ -88,7 +88,7 @@ class time_form_policies {
 				break;
 				case $form_code.'-LATE-FILING-WITHIN-CUTOFF':
                 if(strtotime($date_from) < strtotime($current_day)){
-    				$late_filing_within_cutoff = $this->_check_late_filing_within_cutoff($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id']);
+    				$late_filing_within_cutoff = $this->_check_late_filing_within_cutoff($form_policy['class_value'], $date_from, $date_to, $form_policy['up_company_id']);
     				if($late_filing_within_cutoff == 'error'){
                         if($form_policy['severity'] == 'Warning'){
                             $form_policy_error['warning'][] = "Late filing within cutoff is not allowed.";
@@ -106,7 +106,7 @@ class time_form_policies {
 				break;
 				case $form_code.'-ADVANCE-FILING-CUTOFF':
                 if(strtotime($date_to) > strtotime($current_day)){
-    				$advance_filing_cutoff = $this->_check_advance_filing_cutoff($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id']);
+    				$advance_filing_cutoff = $this->_check_advance_filing_cutoff($form_policy['class_value'], $date_from, $date_to, $form_policy['up_company_id']);
                     
     				if($advance_filing_cutoff == 'error'){
                         if($form_policy['severity'] == 'Warning'){
@@ -125,7 +125,7 @@ class time_form_policies {
 				break;
 				case $form_code.'-ADVANCE-FILING-DAYS':
                 if(strtotime($date_to) > strtotime($current_day)){
-    				$advance_filing_days= $this->_check_advance_filing_days($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id'],$user_id);
+    				$advance_filing_days= $this->_check_advance_filing_days($form_policy['class_value'], $date_from, $date_to, $form_policy['up_company_id'],$user_id);
     				if($advance_filing_days == 'error'){
                         if($form_policy['severity'] == 'Warning'){
                             $form_policy_error['warning'][] = "You exceeded the maximum allowable days to file as advance filing.";
@@ -137,7 +137,7 @@ class time_form_policies {
 				break;
 				case $form_code.'-ADVANCE-FILING-NOT-ALLOWED':
                 if(strtotime($date_to) > strtotime($current_day)){
-    				$advance_filing_not_allowed = $this->_check_advance_filing_not_allowed($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id']);
+    				$advance_filing_not_allowed = $this->_check_advance_filing_not_allowed($form_policy['class_value'], $date_from, $date_to, $form_policy['up_company_id']);
     				if($advance_filing_not_allowed == 'error'){
                         if($form_policy['severity'] == 'Warning'){
                             $form_policy_error['warning'][] = "Advance filing is not allowed.";
@@ -155,7 +155,7 @@ class time_form_policies {
 				break;
 				case $form_code.'-ADVANCE-FILING-WITHIN-CUTOFF':
                 if(strtotime($date_to) > strtotime($current_day)){
-    				$advance_filing_cutoff = $this->_check_advance_filing_within_cutoff($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id']);
+    				$advance_filing_cutoff = $this->_check_advance_filing_within_cutoff($form_policy['class_value'], $date_from, $date_to, $form_policy['up_company_id']);
     				if($advance_filing_cutoff == 'error'){
                         if($form_policy['severity'] == 'Warning'){
                             $form_policy_error['warning'][] = "Advance filing within cutoff is not allowed.";
@@ -182,7 +182,7 @@ class time_form_policies {
 				}
 				break;
 				case $form_code.'-HR-VALIDATION-DAYS':
-				$advance_filing_days= $this->_check_if_for_hr_validation($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id'], $user_id);
+				$advance_filing_days= $this->_check_if_for_hr_validation($form_policy['class_value'], $date_from, $date_to, $form_policy['up_company_id'], $user_id);
 				if($advance_filing_days == 'error'){
 					$form_policy_error['hr_validate'] =  true; 
 				}
@@ -348,7 +348,7 @@ class time_form_policies {
                 }
                 break;
                 case $form_code.'-ALLOW-FILING-NO-CREDIT':
-                $credits = $this->_check_credits($form_policy['class_value'], $date_from, $date_to, $user_id, $form_id);
+                $credits = $this->_check_credits($form_policy['class_value'], $date_from, $date_to, $user_id, ($form_id == 3 ? 2 : $form_id));
                 if($credits === 'error'){
                     if($form_policy['severity'] == 'Warning'){
                         $form_policy_error['warning'][] = "You do not have sufficient credit/s to file this form."; 
@@ -1224,7 +1224,7 @@ class time_form_policies {
                 case $form_code.'-LATE-APPROVAL-CUTOFF':
                 // case $form_code.'-LATE-CANCELLATION-CUTOFF':
                 if(strtotime($date_from) < strtotime($current_day)){
-                    $advance_filing_cutoff = $this->_check_advance_change_status_cutoff($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id']);
+                    $advance_filing_cutoff = $this->_check_advance_change_status_cutoff($form_policy['class_value'], $date_from, $date_to, $form_policy['up_company_id']);
                     if($advance_filing_cutoff == 'error'){
                         if($form_policy['severity'] == 'Warning'){
                             $form_policy_error['warning'][] = "Allowable time for approval has already passed.";
@@ -1243,7 +1243,7 @@ class time_form_policies {
                 case $form_code.'-LATE-APPROVAL-DAYS':
                 // case $form_code.'-LATE-CANCELLATION-DAYS':
                 if(strtotime($date_from) < strtotime($current_day)){
-                    $advance_filing_days= $this->_check_advance_change_status_days($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id'],$user_id);
+                    $advance_filing_days= $this->_check_advance_change_status_days($form_policy['class_value'], $date_from, $date_to, $form_policy['up_company_id'],$user_id);
                     if($advance_filing_days == 'error'){
                         $form_policy_error['error'][] = "Allowable time for approval has already passed.";
                     }
@@ -1252,7 +1252,7 @@ class time_form_policies {
                 case $form_code.'-LATE-APPROVAL-NOT-ALLOWED':
                 // case $form_code.'-LATE-CANCELLATION-NOT-ALLOWED':
                 if(strtotime($date_from) < strtotime($current_day)){
-                    $advance_filing_not_allowed = $this->_check_advance_change_status_not_allowed($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id']);
+                    $advance_filing_not_allowed = $this->_check_advance_change_status_not_allowed($form_policy['class_value'], $date_from, $date_to, $form_policy['up_company_id']);
                     if($advance_filing_not_allowed == 'error'){
                         if($form_policy['severity'] == 'Warning'){
                             $form_policy_error['warning'][] = "Allowable time for approval has already passed.";
@@ -1271,7 +1271,7 @@ class time_form_policies {
                 case $form_code.'-LATE-APPROVAL-WITHIN-CUTOFF':
                 // case $form_code.'-LATE-CANCELLATION-WITHIN-CUTOFF':
                 if(strtotime($date_from) < strtotime($current_day)){
-                    $advance_filing_cutoff = $this->_check_advance_change_status_within_cutoff($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id']);
+                    $advance_filing_cutoff = $this->_check_advance_change_status_within_cutoff($form_policy['class_value'], $date_from, $date_to, $form_policy['up_company_id']);
                     if($advance_filing_cutoff == 'error'){
                         if($form_policy['severity'] == 'Warning'){
                             $form_policy_error['warning'][] = "Allowable time for approval has already passed.";
@@ -1290,7 +1290,7 @@ class time_form_policies {
                 case $form_code.'-ADVANCE-APPROVAL-CUTOFF':
                 // case $form_code.'-ADVANCE-CANCELLATION-CUTOFF':
                 if(strtotime($date_to) > strtotime($current_day)){
-                    $late_filing_cutoff = $this->_check_late_change_status_cutoff($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id']);
+                    $late_filing_cutoff = $this->_check_late_change_status_cutoff($form_policy['class_value'], $date_from, $date_to, $form_policy['up_company_id']);
                     if($late_filing_cutoff == 'error'){
                         if($form_policy['severity'] == 'Warning'){
                             $form_policy_error['warning'][] = "Allowable time for approval has already passed.";
@@ -1309,7 +1309,7 @@ class time_form_policies {
                 case $form_code.'-ADVANCE-APPROVAL-DAYS':
                 // case $form_code.'-ADVANCE-CANCELLATION-DAYS':
                 if(strtotime($date_to) > strtotime($current_day)){
-                    $late_filing_days= $this->_check_late_change_status_days($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id'],$user_id);
+                    $late_filing_days= $this->_check_late_change_status_days($form_policy['class_value'], $date_from, $date_to, $form_policy['up_company_id'],$user_id);
                     if($late_filing_days == 'error'){
                         $form_policy_error['error'][] = "Allowable time for approval has already passed.";
                     }
@@ -1318,7 +1318,7 @@ class time_form_policies {
                 case $form_code.'-ADVANCE-APPROVAL-NOT-ALLOWED':
                 // case $form_code.'-ADVANCE-CANCELLATION-NOT-ALLOWED':
                 if(strtotime($date_to) > strtotime($current_day)){
-                    $late_filing_not_allowed = $this->_check_late_change_status_not_allowed($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id']);
+                    $late_filing_not_allowed = $this->_check_late_change_status_not_allowed($form_policy['class_value'], $date_from, $date_to, $form_policy['up_company_id']);
                     if($late_filing_not_allowed == 'error'){
                         if($form_policy['severity'] == 'Warning'){
                             $form_policy_error['warning'][] = "Allowable time for approval has already passed.";
@@ -1337,7 +1337,7 @@ class time_form_policies {
                 case $form_code.'-ADVANCE-APPROVAL-WITHIN-CUTOFF':
                 // case $form_code.'-ADVANCE-CANCELLATION-WITHIN-CUTOFF':
                 if(strtotime($date_to) > strtotime($current_day)){
-                    $late_filing_within_cutoff = $this->_check_late_change_status_within_cutoff($form_policy['class_value'], $date_from, $date_to, $form_policy['company_id']);
+                    $late_filing_within_cutoff = $this->_check_late_change_status_within_cutoff($form_policy['class_value'], $date_from, $date_to, $form_policy['up_company_id']);
                     if($late_filing_within_cutoff == 'error'){
                         if($form_policy['severity'] == 'Warning'){
                             $form_policy_error['warning'][] = "Allowable time for approval has already passed.";
@@ -1358,6 +1358,7 @@ class time_form_policies {
         return $form_policy_error;
     }
 
+    // for advance approval, name of function was check_late because current date less than with date of filing
     function _check_late_change_status_cutoff($value='', $date_from='', $date_to='', $company_id=''){
         $current_day = date('Y-m-d');
         $allowed_date = $this->CI->time_form_policies_model->get_allowed_date_number_cutoff_change_stat($value, $date_from, $company_id);

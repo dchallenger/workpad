@@ -4,7 +4,7 @@
     <div class="form-group">
         <label class="control-label col-md-5"> Employee<span class="required">*</span></label>
         <div class="col-md-6">
-            <select class="form-control" data-placeholder="Select..." name="partners[partner_id][]" id="partners-partner_id" multiple="multiple">
+            <select class="form-control" data-placeholder="Select..." name="partners[partner_id][]" id="partners-partner_id" <?php echo ($multiple == 1 ? 'multiple="multiple"' : '') ?>>
                 <?php 
                     foreach($partner_id_options as $index => $val) {
                     // $selected_duration = ($value[key($value)] == $val['duration_id']) ? "selected" : "";

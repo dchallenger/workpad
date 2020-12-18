@@ -53,7 +53,7 @@
 				<input type="hidden" id="form_id" name="form_id" value="{{ $form_id }}">
 				<div id="vl_container" class="portlet">
 						<div class="portlet-title">
-							<div class="caption">Replacement Schedule Form <small class="text-muted">{{ lang('form_application_admin.view') }}</small></div>
+							<div class="caption">{{ $form_title }} <small class="text-muted">{{ lang('common.view') }}</small></div>
 						</div>
 	                    <div class="portlet-body form" id="main_form">
 	                        <!-- BEGIN FORM-->

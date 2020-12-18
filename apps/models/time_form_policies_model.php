@@ -48,7 +48,7 @@ class time_form_policies_model extends Record
 	}
 
 	public function get_form_policies($form_id=0, $user_id=0, $type=''){
-		$application_form_policies = "SELECT tf.*, tfc.*, tfcp.* FROM {$this->db->dbprefix}time_form tf
+		$application_form_policies = "SELECT tf.*, tfc.*, tfcp.*,up.company_id AS up_company_id FROM {$this->db->dbprefix}time_form tf
 							LEFT JOIN {$this->db->dbprefix}time_form_class tfc ON tf.form_id = tfc.form_id
 							LEFT JOIN {$this->db->dbprefix}time_form_class_policy tfcp ON tfc.class_id = tfcp.class_id
 							LEFT JOIN {$this->db->dbprefix}users_profile up ON FIND_IN_SET(up.company_id, tfcp.company_id)
@@ -150,13 +150,13 @@ class time_form_policies_model extends Record
 		    $row_period = $result_timekeeping_period->row();
 		    $offset = $value - 1;
 		    $limit = 1;
-			$result_timekeeping_period_prev_result = $this->db->query("SELECT * FROM {$this->db->dbprefix}time_period WHERE deleted = 0 AND company_id IN ({$company_id}) AND date_from < '{$current_day}' ORDER BY date_from DESC LIMIT {$limit} OFFSET {$offset}");		        		
+			$result_timekeeping_period_prev_result = $this->db->query("SELECT * FROM {$this->db->dbprefix}time_period WHERE deleted = 0 AND company_id IN ({$company_id}) AND date_from <= '{$current_day}' ORDER BY date_from DESC LIMIT {$limit} OFFSET {$offset}");		        		
 
 			if ($result_timekeeping_period_prev_result && $result_timekeeping_period_prev_result->num_rows() > 0){
 				$result_timekeeping_period_prev_row = $result_timekeeping_period_prev_result->row();
 		        return $result_timekeeping_period_prev_row->date_from;
 			}else{
-				$result_timekeeping_period_prev_result = $this->db->query("SELECT * FROM {$this->db->dbprefix}time_period WHERE deleted = 0 AND company_id IN ({$company_id}) AND date_from < '{$current_day}' ORDER BY date_from DESC ");		        		
+				$result_timekeeping_period_prev_result = $this->db->query("SELECT * FROM {$this->db->dbprefix}time_period WHERE deleted = 0 AND company_id IN ({$company_id}) AND date_from <= '{$current_day}' ORDER BY date_from DESC ");		        		
 
 				if ($result_timekeeping_period_prev_result && $result_timekeeping_period_prev_result->num_rows() > 0){
 					$result_timekeeping_period_prev_row = $result_timekeeping_period_prev_result->row();
@@ -188,19 +188,20 @@ class time_form_policies_model extends Record
 		$current_day = date('Y-m-d');
     	$this->db->where('deleted',0);
     	$this->db->where("company_id IN ($company_id)", '', false);
-        $this->db->where('(\'' . date('Y-m-d',strtotime($current_day)) . '\' BETWEEN date_from AND date_to)', '', false);
+        $this->db->where('(\'' . date('Y-m-d',strtotime($current_day)) . '\' BETWEEN date_from AND cutoff)', '', false);
+        $this->db->order_by('date_from','desc');
         $result_timekeeping_period = $this->db->get('time_period');  
 
         if ($result_timekeeping_period && $result_timekeeping_period->num_rows() > 0){
 		    $row_period = $result_timekeeping_period->row();
 		    $offset = $value - 1;
-			$result_timekeeping_period_prev_result = $this->db->query("SELECT * FROM {$this->db->dbprefix}time_period WHERE deleted = 0 AND company_id IN ({$company_id}) AND date_from > '{$current_day}' ORDER BY date_from ASC LIMIT 1 OFFSET {$offset} ");		        		
+			$result_timekeeping_period_prev_result = $this->db->query("SELECT * FROM {$this->db->dbprefix}time_period WHERE deleted = 0 AND company_id IN ({$company_id}) AND date_from >= '{$row_period->date_from}' ORDER BY date_from ASC LIMIT 1 OFFSET {$offset} ");		        		
 
 			if ($result_timekeeping_period_prev_result && $result_timekeeping_period_prev_result->num_rows() > 0){
 				$result_timekeeping_period_prev_row = $result_timekeeping_period_prev_result->row();
 		        return $result_timekeeping_period_prev_row->cutoff;
 			}else{
-				$result_timekeeping_period_prev_result = $this->db->query("SELECT * FROM {$this->db->dbprefix}time_period WHERE deleted = 0 AND company_id IN ({$company_id}) AND date_from > '{$current_day}' ORDER BY date_from ASC ");
+				$result_timekeeping_period_prev_result = $this->db->query("SELECT * FROM {$this->db->dbprefix}time_period WHERE deleted = 0 AND company_id IN ({$company_id}) AND date_from >= '{$row_period->date_from}' ORDER BY date_from ASC ");
 				if ($result_timekeeping_period_prev_result && $result_timekeeping_period_prev_result->num_rows() > 0){
 					$result_timekeeping_period_prev_row = $result_timekeeping_period_prev_result->row();
 			        return $result_timekeeping_period_prev_row->cutoff;
@@ -289,23 +290,25 @@ class time_form_policies_model extends Record
 		return $shift->row_array();
 	}	
 
+	// modified due to cutoff
 	public function get_allowed_date_number_cutoff_change_stat($value=0, $date_from='', $company_id=''){	
 		$current_day = date('Y-m-d');
     	$this->db->where('deleted',0);
     	$this->db->where("company_id IN ($company_id)", '', false);
-        $this->db->where('(\'' . date('Y-m-d',strtotime($date_from)) . '\' BETWEEN date_from AND date_to)', '', false);
+        $this->db->where('(\'' . date('Y-m-d',strtotime($date_from)) . '\' BETWEEN date_from AND cutoff)', '', false);
+        $this->db->order_by('date_from');
         $result_timekeeping_period = $this->db->get('time_period');  
 
         if ($result_timekeeping_period && $result_timekeeping_period->num_rows() > 0){
 		    $row_period = $result_timekeeping_period->row();
 		    $offset = $value - 1;
-			$result_timekeeping_period_prev_result = $this->db->query("SELECT * FROM {$this->db->dbprefix}time_period WHERE deleted = 0 AND company_id IN ({$company_id}) AND date_from < '{$row_period->date_from}' ORDER BY date_from DESC LIMIT 1 OFFSET {$offset}");		        		
+			$result_timekeeping_period_prev_result = $this->db->query("SELECT * FROM {$this->db->dbprefix}time_period WHERE deleted = 0 AND company_id IN ({$company_id}) AND date_from <= '{$row_period->date_from}' ORDER BY date_from DESC LIMIT 1 OFFSET {$offset}");
 
 			if ($result_timekeeping_period_prev_result && $result_timekeeping_period_prev_result->num_rows() > 0){
 				$result_timekeeping_period_prev_row = $result_timekeeping_period_prev_result->row();
 		        return $result_timekeeping_period_prev_row->date_from;
 			}else{
-				$result_timekeeping_period_prev_result = $this->db->query("SELECT * FROM {$this->db->dbprefix}time_period WHERE deleted = 0 AND company_id IN ({$company_id}) AND date_from < '{$row_period->date_from}' ORDER BY date_from DESC ");		        		
+				$result_timekeeping_period_prev_result = $this->db->query("SELECT * FROM {$this->db->dbprefix}time_period WHERE deleted = 0 AND company_id IN ({$company_id}) AND date_from <= '{$row_period->date_from}' ORDER BY date_from DESC ");		        		
 
 				if ($result_timekeeping_period_prev_result && $result_timekeeping_period_prev_result->num_rows() > 0){
 					$result_timekeeping_period_prev_row = $result_timekeeping_period_prev_result->row();
@@ -333,24 +336,25 @@ class time_form_policies_model extends Record
 		return false;
 	}
 
+	// modified due to cutoff
 	public function get_advance_allowed_date_number_cutoff_change_stat($value=0, $date_from='', $company_id=''){	
 		$current_day = date('Y-m-d');
     	$this->db->where('deleted',0);
     	$this->db->where("company_id IN ($company_id)", '', false);
-        $this->db->where('(\'' . date('Y-m-d',strtotime($date_from)) . '\' BETWEEN date_from AND date_to)', '', false);
+        $this->db->where('(\'' . date('Y-m-d',strtotime($date_from)) . '\' BETWEEN date_from AND cutoff)', '', false);
         $this->db->order_by('date_from','desc');
         $result_timekeeping_period = $this->db->get('time_period');  
 
         if ($result_timekeeping_period && $result_timekeeping_period->num_rows() > 0){
 		    $row_period = $result_timekeeping_period->row();
-		    $offset = $value - 2;
-			$result_timekeeping_period_prev_result = $this->db->query("SELECT * FROM {$this->db->dbprefix}time_period WHERE deleted = 0 AND company_id IN ({$company_id}) AND date_from > '{$row_period->date_from}' ORDER BY date_from ASC LIMIT 1 OFFSET {$offset}");		        		
+		    $offset = $value - 1;
+			$result_timekeeping_period_prev_result = $this->db->query("SELECT * FROM {$this->db->dbprefix}time_period WHERE deleted = 0 AND company_id IN ({$company_id}) AND date_from >= '{$row_period->date_from}' ORDER BY date_from ASC LIMIT 1 OFFSET {$offset}");		        		
 
 			if ($result_timekeeping_period_prev_result && $result_timekeeping_period_prev_result->num_rows() > 0){
 				$result_timekeeping_period_prev_row = $result_timekeeping_period_prev_result->row();
 		        return $result_timekeeping_period_prev_row->cutoff;
 			}else{
-				$result_timekeeping_period_prev_result = $this->db->query("SELECT * FROM {$this->db->dbprefix}time_period WHERE deleted = 0 AND company_id IN ({$company_id}) AND date_from > '{$row_period->date_from}' ORDER BY date_from ASC ");		        		
+				$result_timekeeping_period_prev_result = $this->db->query("SELECT * FROM {$this->db->dbprefix}time_period WHERE deleted = 0 AND company_id IN ({$company_id}) AND date_from >= '{$row_period->date_from}' ORDER BY date_from ASC ");		        		
 
 				if ($result_timekeeping_period_prev_result && $result_timekeeping_period_prev_result->num_rows() > 0){
 					$result_timekeeping_period_prev_row = $result_timekeeping_period_prev_result->row();

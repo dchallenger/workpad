@@ -57,7 +57,7 @@
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ $label_adc }} :</label>
 												<div class="col-md-7 col-sm-7">
-													<span><?php echo ($date_adc && $date_adc != '0000-00-00 00:00:00' && $date_adc != 'January 01, 1970' && $date_adc != '1970-01-01' ? date('F d, Y g:ia - D',strtotime($date_adc)) : "" ) ?></span>
+													<span><?php echo general_date_time($date_adc) ?></span>
 												</div>
 											</div>
 										</div>
@@ -69,7 +69,7 @@
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application.date_filed') }} :</label>
 												<div class="col-md-7 col-sm-7">
-													<span><?php echo date('F d, Y - D',strtotime($record['time_forms_date_sent'])) ?></span>
+													<span><?php echo general_date_time($record['time_forms_date_sent']) ?></span>
 												</div>
 											</div>
 										</div>
@@ -80,7 +80,7 @@
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application.from') }} :</label>
 												<div class="col-md-7 col-sm-7">
-													<span>{{ $record['time_forms_date_from'] }} - <?php echo date('D',strtotime($record['time_forms_date_from'])); ?></span>
+													<span>{{ general_date_w_day($record['time_forms_date_from']) }}</span>
 												</div>
 											</div>
 										</div>
@@ -90,7 +90,7 @@
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application.to') }} :</label>
 												<div class="col-md-7 col-sm-7">
-													<span>{{ $record['time_forms_date_to'] }} - <?php echo date('D',strtotime($record['time_forms_date_to'])); ?></span>
+													<span>{{ general_date_w_day($record['time_forms_date_to']) }}</span>
 												</div>
 											</div>
 										</div>
@@ -177,6 +177,44 @@
 										</div>
 									</div>
 
+									<?php if( count($remarks) > 0 && $form_status_id['val'] == 6){
+										?>
+
+									<hr />
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+			                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">Approver Remarks :</label>
+			                        <?php
+						                    for($j=0; $j < count($remarks); $j++){
+						                    	if(isset($remarks[$j]['comment'])) {
+						                        	if($j > 0){
+			                         ?>
+					                         <label class="control-label col-md-4 col-sm-4 text-right text-muted">&nbsp</label>
+					                         <?php } ?>
+				                         <div class="col-md-7 col-sm-7">
+		                                    <span style='display:block; word-wrap:break-word;'>
+		                                        <?php
+		                                            echo "<b>".$remarks[$j]['display_name']."</b>:";
+		                                        ?>
+		                                        <span class="text-right text-danger">{{ general_date_time($remarks[$j]['comment_date']) }}</span>
+		                                    </span>
+		                                    <div style='display:block; word-wrap:break-word;'>
+		                                        <?php
+		                                            echo ($remarks[$j]['comment']=="") ? "&nbsp;" : $remarks[$j]['comment'];
+		                                        ?>
+		                                    </div>
+										 </div>
+
+									<?php 		}
+											}
+											?>
+
+			                                </div>
+										</div>
+									</div>
+									<?php } ?>
+									
 									<?php if($form_status_id['val'] == 7 || $form_status_id['val'] == 8){
 										?>
 									<hr />
@@ -203,12 +241,12 @@
 													<?php 
 													$date = date("F d, Y H:i:s", strtotime($value['date']));
 												    if(date("H:i:s", strtotime($date)) == "00:00:00"){
-												       $comment_date = 'on '.date("F d, Y", strtotime($date));
+												       $comment_date = 'on '.general_date($date);
 												    }else{
 												    	if($value['date'] == '0000-00-00 00:00:00'){
 												    		$comment_date = '';
 												    	} else {
-												    		$comment_date = 'on '.date("F d, Y g:ia", strtotime($date));
+												    		$comment_date = 'on '.general_date_time($date);
 												    	}
 												    } 
 													?>
@@ -222,7 +260,7 @@
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ $value['form_status'] }}date :</label>
 												<div class="col-md-7 col-sm-7">
-													<span>{{ date('F d, Y g:ia', strtotime($value['date'])) }}</span>
+													<span>{{ general_date_time($value['date']) }}</span>
 												</div>
 											</div>
 										</div>

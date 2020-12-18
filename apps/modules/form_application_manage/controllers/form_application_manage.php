@@ -11,6 +11,7 @@ class Form_application_manage extends MY_PrivateController
         $this->load->library('time_form_policies');
 		parent::__construct();
 
+        $this->lang->load( 'form_application' );
         $this->lang->load( 'form_application_manage' );
         $this->check_reassign_approvals();   
 	}
@@ -89,7 +90,7 @@ class Form_application_manage extends MY_PrivateController
         $data['form_status_id']["val"] = $forms_info['form_status_id'];
         $data['form_id'] = $form_info['form_id'];
         $data['form_code'] = $form_info['form_code'];
-        $data['form_title'] = $form_info['form'].' Form';
+        $data['form_title'] = $form_info['form'].' '.lang('form_application.form');
         $data['upload_id']["val"] = array();
         $data['ut_time_in_out'] = "";
         $data['duration'] = $this->mod->get_duration();
@@ -229,7 +230,7 @@ class Form_application_manage extends MY_PrivateController
             case get_time_form_id('CWS'):
                 $data['shifts'] = $this->mod->get_shifts();
                 $data['shift_details'] = $this->mod->get_shift_details(date("Y-m-d", strtotime($data['form_approver_details']['date_from'])), $forms_info['user_id']);
-               $data['shift_id']['val'] = $data['shift_details']['shift_id'];
+                $data['shift_id']['val'] = $data['shift_details']['shift_id'];
             break;
             case get_time_form_id('ADDL'): //ADDL
                 $this->load->model('form_application_model', 'form_app');
@@ -487,7 +488,7 @@ class Form_application_manage extends MY_PrivateController
             $application_user = $tf_result->row_array();
         }
         
-        $balance_data = $this->mod->get_leave_balance($application_user['user_id'], date('Y-m-d', strtotime($application_user['date_from'])), $application_user['form_id']);
+        $balance_data = $this->mod->get_leave_balance($application_user['user_id'], date('Y-m-d', strtotime($application_user['date_from'])), ($application_user['form_id'] == 3 ? 2 : $application_user['form_id'])); //($application_user['form_id'] == 3 ? 2 : $application_user['form_id']) = el to deduct on vl
         $leavebal = 0;
         $tfdatesbal = 0;
 
@@ -972,6 +973,16 @@ class Form_application_manage extends MY_PrivateController
                 $form_details = array_merge($form_details, $remarks);
                 $this->response->form_details .= $this->load->blade('edit/cws_details', $form_details, true);            
             break;
+            case get_time_form_id('ET')://ET
+                $form_details = $this->mod->get_ot_ut_dtrp_details($forms_id, $this->user->user_id);
+                $remarks['remarks'] = array();
+                $comments = $this->mod->get_approver_remarks($forms_id);
+                foreach ($comments as $comment){
+                    $remarks['remarks'][] = $comment;
+                }
+                $form_details = array_merge($form_details, $remarks);
+                $this->response->form_details .= $this->load->blade('edit/et_details', $form_details, true);            
+            break;            
             case get_time_form_id('ADDL'): //ADDL
                 $form_details = $this->mod->get_ot_ut_dtrp_details($forms_id, $this->user->user_id);
                 $form_page = 'addl_details';

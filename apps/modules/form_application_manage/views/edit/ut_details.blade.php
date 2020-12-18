@@ -1,5 +1,11 @@
 <div>
     <div class='clearfix'>
+        <label class='control-label col-md-3 text-muted small'>{{ lang('form_application_manage.date_filed') }}</label>
+        <div class='col-md-9'>
+            <span class=""><?php echo general_date_time($created_on) ?></span>
+        </div>
+    </div>     
+    <div class='clearfix'>
         <label class='control-label col-md-3 text-muted text-left small'>{{ lang('form_application_manage.date') }}:</label>
         <div class='col-md-9'>
             <?php
@@ -10,7 +16,7 @@
                     $date_time = $time_to;
                 }
             ?>               
-            <span> <?php echo date("F d, Y - h:ia", strtotime($date_time)); ?></span>
+            <span> <?php echo general_date_time($date_time); ?></span>
         </div>
     </div>
     <!-- <div class='clearfix'>

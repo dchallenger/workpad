@@ -56,19 +56,33 @@
 				</div>
 				<div class="portlet-body form">
 					<div class="form-group">
-						<label class="control-label col-md-4">{{ lang('form_application.date') }}<span class="required">* </span></label>
+						<label class="control-label col-md-4">{{ lang('form_application.from') }}<span class="required">* </span></label>
 						<div class="col-md-6">							
 							<div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
-								<input type="text" class="form-control" name="time_forms[date_from]" id="time_forms-date_from" value="{{ $date_from['val'] }}" placeholder="Enter Date">
+								<input type="text" class="form-control" name="time_forms[date_from]" id="time_forms-date_from" value="{{ $date_from['val'] }}" placeholder="Enter Start Date">
 								<span class="input-group-btn">
 									<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
 								</span>
 							</div> 				
 							<div class="help-block small">
-								{{ lang('form_application.select_date') }}
+								{{ lang('form_application.select_startd') }}
 							</div>
 						</div>	
 					</div>
+					<div class="form-group">
+						<label class="control-label col-md-4">{{ lang('form_application.to') }}<span class="required">* </span></label>
+						<div class="col-md-6">							
+							<div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
+								<input type="text" class="form-control" name="time_forms[date_to]" id="time_forms-date_to" value="{{ $date_to['val'] }}" placeholder="Enter End Date">
+								<span class="input-group-btn">
+									<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+								</span>
+							</div> 				
+							<div class="help-block small">
+								{{ lang('form_application.select_endd') }}
+							</div>
+						</div>	
+					</div>					
 					<div class="form-group">
 						<label class="control-label col-md-4">{{ lang('form_application.current_sched') }}<span class="required">* </span></label>
 						<div class="col-md-6">
@@ -85,7 +99,7 @@
 
 							?>							
 							<div class="input-group">
-								<input type="hidden" size="16" class="form-control" readonly id="shift_id" name="shift_id" value="<?php echo $shift_options[$shift_details['cur_shift_id']]; ?>"> 
+								<input type="hidden" size="16" class="form-control" readonly id="shift_id" name="shift_id" value="<?php echo $shift_details['cur_shift_id']; ?>"> 
 								<span class="input-group-addon">
 									<i class="fa fa-list-ul"></i>
 								</span>

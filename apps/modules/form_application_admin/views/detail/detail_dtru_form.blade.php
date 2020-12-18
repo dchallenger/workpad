@@ -42,217 +42,264 @@
 
 	<div class="row">
         <div class="col-md-9">
-        		<input type="hidden" name="view" id="view" value="detail" >
-				<div id="vl_container" class="portlet">
-						<div class="portlet-title">
-							<div class="caption">{{ $form_title }} <small class="text-muted">{{ lang('form_application_admin.view') }}</small></div>
-						</div>
-	                    <div class="portlet-body form" id="main_form">
-	                        <!-- BEGIN FORM-->
-	                            <div class="form-body">
-									<?php if( $record['time_forms_form_status_id'] != 1 ){ ?>
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.date_filed') }} :</label>
-												<div class="col-md-7 col-sm-7">
-													<span><?php echo date('F d, Y - D',strtotime($record['time_forms_date_sent'])) ?></span>
-												</div>
-											</div>
+    		<input type="hidden" name="view" id="view" value="detail" >
+			<div id="vl_container" class="portlet">
+				<div class="portlet-title">
+					<div class="caption">{{ $form_title }} <small class="text-muted">{{ lang('form_application_admin.view') }}</small></div>
+				</div>
+                <div class="portlet-body form" id="main_form">
+                    <!-- BEGIN FORM-->
+                        <div class="form-body">
+							<?php if( $record['time_forms_form_status_id'] >= 6 ){ ?>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ $label_adc }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span><?php echo general_date_time($date_adc) ?></span>
 										</div>
 									</div>
-									<?php } ?>
-	                            	<div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.type') }} :</label>
-												<div class="col-md-7 col-sm-7">
-													<span>
-														<?php
-
-															$dtrp_type_options = array();
-															$dtrp_type_options[1] = 'Time In';
-															$dtrp_type_options[2] = 'Time Out';
-															$dtrp_type_options[3] = 'Time In and Time Out';
-
-						                            		foreach($dtrp_type_options as $index => $value){
-						                            			if( $dtrp_type == $index ){
-						                            				echo $value;
-						                            			}
-						                            		}
-														?>
-													</span>
-												</div>
-											</div>
+								</div>
+							</div>
+							<?php } ?>	                            	
+							<?php if( $record['time_forms_form_status_id'] != 1 ){ ?>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.date_filed') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span><?php echo general_date_time($record['time_forms_date_sent']) ?></span>
 										</div>
 									</div>
+								</div>
+							</div>
+							<?php } ?>
+                        	<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.type') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span>
+												<?php
 
-									<?php if( $dtrp_type == 1 || $dtrp_type == 3 ){ ?>
+													$dtrp_type_options = array();
+													$dtrp_type_options[1] = 'Time In';
+													$dtrp_type_options[2] = 'Time Out';
+													$dtrp_type_options[3] = 'Time In and Time Out';
 
-	                                <div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.from') }} :</label>
-												<div class="col-md-7 col-sm-7">
-													<span>{{ $date_from['val'] }}</span>
-												</div>
-											</div>
+				                            		foreach($dtrp_type_options as $index => $value){
+				                            			if( $dtrp_type == $index ){
+				                            				echo $value;
+				                            			}
+				                            		}
+												?>
+											</span>
 										</div>
 									</div>
+								</div>
+							</div>
 
-									<?php } ?>
+							<?php if( $dtrp_type == 1 || $dtrp_type == 3 ){ ?>
 
-									<?php if( $dtrp_type == 2 || $dtrp_type == 3 ){ ?>
-
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.to') }} :</label>
-												<div class="col-md-7 col-sm-7">
-													<span>{{ $date_to['val'] }}</span>
-												</div>
-											</div>
+                            <div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.from') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span>{{ $date_from['val'] }}</span>
 										</div>
 									</div>
+								</div>
+							</div>
 
-									<?php } ?>
+							<?php } ?>
 
-	                                <div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.reason') }} :</label>
-												<div class="col-md-7 col-sm-7">
-													<span>{{ $record['time_forms_reason'] }}</span>
-												</div>
-											</div>
+							<?php if( $dtrp_type == 2 || $dtrp_type == 3 ){ ?>
+
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.to') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span>{{ $date_to['val'] }}</span>
 										</div>
 									</div>
-									<div class="row">
-										<div class="col-md-12">
-			                                <div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.file_upload') }} :</label>
-												<div class="controls col-md-6">
-													<ul class="padding-none">
+								</div>
+							</div>
 
-                                                    <?php 
-													implode($uploads);
-														if( count($uploads) > 0 ) {
+							<?php } ?>
 
-															foreach( $uploads as $upload_id_val )
+                            <div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.reason') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span>{{ $record['time_forms_reason'] }}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+	                                <div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.file_upload') }} :</label>
+										<div class="controls col-md-6">
+											<ul class="padding-none">
+
+                                            <?php 
+											implode($uploads);
+												if( count($uploads) > 0 ) {
+
+													foreach( $uploads as $upload_id_val )
+													{
+														$upload = $db->get_where('system_uploads', array('upload_id' => $upload_id_val))->row();
+														$file = FCPATH . urldecode( $upload->upload_path );
+														if( file_exists( $file ) )
+														{
+															$f_info = get_file_info( $file );
+															$f_type = filetype( $file );
+
+															$finfo = finfo_open(FILEINFO_MIME_TYPE);
+															$f_type = finfo_file($finfo, $file);
+
+															switch( $f_type )
 															{
-																$upload = $db->get_where('system_uploads', array('upload_id' => $upload_id_val))->row();
-																$file = FCPATH . urldecode( $upload->upload_path );
-																if( file_exists( $file ) )
-																{
-																	$f_info = get_file_info( $file );
-																	$f_type = filetype( $file );
-
-																	$finfo = finfo_open(FILEINFO_MIME_TYPE);
-																	$f_type = finfo_file($finfo, $file);
-
-																	switch( $f_type )
-																	{
-																		case 'image/jpeg':
-																			$icon = 'fa-picture-o';
-																			break;
-																		case 'video/mp4':
-																			$icon = 'fa-film';
-																			break;
-																		case 'audio/mpeg':
-																			$icon = 'fa-volume-up';
-																			break;
-																		default:
-																			$icon = 'fa-file-text-o';
-																	}
-																	$filepath = base_url()."time/application/download_file/".$upload_id_val;
-																	echo '<li class="padding-3 fileupload-delete-'.$upload_id_val.'" style="list-style:none;">
-																			<a href="'.$filepath.'">
-																            <span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
-																            <span>'. basename($f_info['name']) .'</span>
-																            <span class="padding-left-10"></span>
-																            </a>
-															        	</li>';
-																}
+																case 'image/jpeg':
+																	$icon = 'fa-picture-o';
+																	break;
+																case 'video/mp4':
+																	$icon = 'fa-film';
+																	break;
+																case 'audio/mpeg':
+																	$icon = 'fa-volume-up';
+																	break;
+																default:
+																	$icon = 'fa-file-text-o';
 															}
+															$filepath = base_url()."time/application/download_file/".$upload_id_val;
+															echo '<li class="padding-3 fileupload-delete-'.$upload_id_val.'" style="list-style:none;">
+																	<a href="'.$filepath.'">
+														            <span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
+														            <span>'. basename($f_info['name']) .'</span>
+														            <span class="padding-left-10"></span>
+														            </a>
+													        	</li>';
 														}
-													?>
+													}
+												}
+											?>
 
 
-                                                </ul>
-												</div>
-											</div>
+                                        </ul>
 										</div>
 									</div>
-									<?php if($form_status_id['val'] == 7 || $form_status_id['val'] == 8){
-										?>
-									<hr />
-	                                <?php 
-										foreach ($disapproved_cancelled_remarks as $key => $value) :
-									?>
-	                                <div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.approver')}} :</label>
-												<div class="col-md-7 col-sm-7">
-													<span>{{ $value['approver_name'] }}</span>
-													<br />
-													<?php 
-													$date = date("F d, Y H:i:s", strtotime($value['date']));
-												    if(date("H:i:s", strtotime($date)) == "00:00:00"){
-												       $comment_date = 'on '.date("F d, Y", strtotime($date));
-												    }else{
-												    	if($value['date'] == '0000-00-00 00:00:00'){
-												    		$comment_date = '';
-												    	} else {
-												    		$comment_date = 'on '.date("F d, Y g:ia", strtotime($date));
-												    	}
-												    } 
-													?>
-													<span class="help-block small">{{ $value['form_status'] }} {{ $comment_date }}</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row hidden">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ $value['form_status'] }}date :</label>
-												<div class="col-md-7 col-sm-7">
-													<span>{{ date('F d, Y g:ia', strtotime($value['date'])) }}</span>
-												</div>
-											</div>
-										</div>
-									</div>
-	                                <div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">&nbsp;</label>
-												<div class="col-md-7 col-sm-7">
-													<span>{{ ($value['comment'] == '') ? '' : $value['comment'] }}</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<?php
-										endforeach;
+								</div>
+							</div>
+							<?php if( count($remarks) > 0 ){
+								?>
+
+							<hr />
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+	                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.approver_remarks') }} :</label>
+	                        <?php
+				                    for($j=0; $j < count($remarks); $j++){
+				                    	if(isset($remarks[$j]['comment'])) {
+				                        	if($j > 0){
+	                         ?>
+			                         <label class="control-label col-md-4 col-sm-4 text-right text-muted">&nbsp</label>
+			                         <?php } ?>
+		                         <div class="col-md-7 col-sm-7">
+                                    <span style='display:block; word-wrap:break-word;'>
+                                        <?php
+                                            echo "<b>".$remarks[$j]['display_name']."</b>:";
+                                        ?>
+                                        <span class="text-right text-danger">{{ general_date_time($remarks[$j]['comment_date']) }}</span>
+                                    </span>
+                                    <div style='display:block; word-wrap:break-word;'>
+                                        <?php
+                                            echo ($remarks[$j]['comment']=="") ? "&nbsp;" : $remarks[$j]['comment'];
+                                        ?>
+                                    </div>
+								 </div>
+
+							<?php 		}
 									}
 									?>
-	                            </div>
-	                            <div class="form-actions fluid">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="col-md-offset-4 col-md-8">
-	                                        	<a href="{{ $mod->url }}" class="btn btn-default btn-sm">{{ lang('form_application_admin.back_tolist') }}</a>
-	                                        </div>
-                                        </div>
+
+	                                </div>
+								</div>
+							</div>
+							<?php } ?>
+
+							<?php if($form_status_id['val'] == 7 || $form_status_id['val'] == 8){
+								?>
+							<hr />
+                            <?php 
+								foreach ($disapproved_cancelled_remarks as $key => $value) :
+							?>
+                            <div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.approver')}} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span>{{ $value['approver_name'] }}</span>
+											<br />
+											<?php 
+											$date = date("F d, Y H:i:s", strtotime($value['date']));
+										    if(date("H:i:s", strtotime($date)) == "00:00:00"){
+										       $comment_date = 'on '.general_date_time($date);
+										    }else{
+										    	if($value['date'] == '0000-00-00 00:00:00'){
+										    		$comment_date = '';
+										    	} else {
+										    		$comment_date = 'on '.general_date_time($date);
+										    	}
+										    } 
+											?>
+											<span class="help-block small">{{ $value['form_status'] }} {{ $comment_date }}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row hidden">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ $value['form_status'] }}date :</label>
+										<div class="col-md-7 col-sm-7">
+											<span>{{ general_date_time($value['date']) }}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+                            <div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">&nbsp;</label>
+										<div class="col-md-7 col-sm-7">
+											<span>{{ ($value['comment'] == '') ? '' : $value['comment'] }}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<?php
+								endforeach;
+							}
+							?>
+                        </div>
+                        <div class="form-actions fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-offset-4 col-md-8">
+                                    	<a href="{{ $mod->url }}" class="btn btn-default btn-sm">{{ lang('form_application_admin.back_tolist') }}</a>
                                     </div>
                                 </div>
-	                        <!-- END FORM--> 
-	                    </div>
-	            	</div>
-
-
-
+                            </div>
+                        </div>
+                    <!-- END FORM--> 
+                </div>
+        	</div>
        	</div>  
     	<div class="col-md-3 visible-lg visible-md">
 			<div class="portlet">

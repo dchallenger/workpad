@@ -138,5 +138,7 @@ $lang['form_application_manage'] = array(
 	'required_disapp' => 'Required if you choose to disapprove',
 	'selected_dates' => 'Selected Dates',
 	'pay_dates' => 'Pay Dates',
-	'seemore' => 'see more'
+	'seemore' => 'see more',
+	'time_from' => 'Time To',
+	'time_to' => 'Time From',	
 );

@@ -1,9 +1,15 @@
 <div>
+    <div class='clearfix'>
+        <label class='control-label col-md-3 text-muted small'>{{ lang('form_application_manage.date_filed') }}</label>
+        <div class='col-md-9'>
+            <span class=""><?php echo general_date_time($created_on) ?></span>
+        </div>
+    </div>      
     <?php if ($time_from != '0000-00-00 00:00:00') { ?>
     <div class='clearfix'>
         <label class='control-label col-md-3 text-muted text-left small'>{{ lang('form_application_manage.time_in') }}:</label>
         <div class='col-md-9'>
-            <span> <?php echo date("F d, Y - h:ia", strtotime($time_from)); ?></span>
+            <span> <?php echo general_date_time($time_from); ?></span>
         </div>
     </div>
     <?php } ?>
@@ -11,7 +17,7 @@
     <div class='clearfix'>
         <label class='control-label col-md-3 text-muted text-left small'>{{ lang('form_application_manage.time_out') }}:</label>
         <div class='col-md-9'>
-            <span> <?php echo date("F d, Y - h:ia", strtotime($time_to)); ?></span>
+            <span> <?php echo general_date_time($time_to); ?></span>
         </div>
     </div>
     <?php } ?>
@@ -20,13 +26,7 @@
         <div class='col-md-9'>
             <span> <?php echo $hrs; ?></span>
         </div>
-    </div> -->
-    <div class='clearfix'>
-        <label class='control-label col-md-3 text-muted small'>{{ lang('form_application_manage.date_filed') }}</label>
-        <div class='col-md-9'>
-            <span class="small"> <?php echo date("F d, Y - h:ia", strtotime($created_on)); ?></span>
-        </div>
-    </div>      
+    </div> -->    
     <div class='clearfix'>
         <label class='control-label col-md-3 text-muted text-left small'>{{ lang('form_application_manage.reason') }}:</label>
         <div class='col-md-9'>

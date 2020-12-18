@@ -144,5 +144,8 @@ $lang['form_application'] = array(
 	'approver' => 'Approver',
 	'cannot_file_within_date' => 'You already have application on the selected date',
 	'selected_dates' => 'Selected Dates',
-	'approver_remarks' => 'Approver Remarks'
+	'approver_remarks' => 'Approver Remarks',
+	'time_from' => 'Time To',
+	'time_to' => 'Time From',
+	'return_work' => 'Return to work',
 );

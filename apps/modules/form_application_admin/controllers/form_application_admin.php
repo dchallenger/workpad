@@ -8,6 +8,7 @@ class Form_application_admin extends MY_PrivateController
         $this->load->library('time_form_policies');
 
         $this->lang->load( 'form_application_admin' );
+        $this->lang->load( 'form_application_manage' );
         $this->lang->load( 'form_application' );
         parent::__construct();
     }
@@ -114,7 +115,7 @@ class Form_application_admin extends MY_PrivateController
         $data['form_status_id']["val"] = $forms_info['form_status_id'];
         $data['form_id'] = $form_info['form_id'];
         $data['form_code'] = $form_info['form_code'];
-        $data['form_title'] = $form_info['form'].' Form';
+        $data['form_title'] = $form_info['form'].' '.lang('form_application.form');
         $data['upload_id']["val"] = array();
         $data['ut_time_in_out'] = "";
         $data['duration'] = $this->mod->get_duration();
@@ -555,14 +556,16 @@ class Form_application_admin extends MY_PrivateController
             $this->response->target = $latest;
             
             //Check if filed form is approved and hr validation is enabled
-            if($form_name['form_status_id'] == 6){ //approved already
-                $this->load->model('form_application_manage_model', 'form_manage');
-                $this->form_manage->transfer_to_validation($form_name);
-            }elseif($form_name['form_status_id'] == 7){ //disapproved
-                $this->load->model('form_application_manage_model', 'form_manage');
-                $this->form_manage->remove_additiona_leave($form_name);
+            if (!empty($form_nam)) {
+                if($form_name['form_status_id'] == 6){ //approved already
+                    $this->load->model('form_application_manage_model', 'form_manage');
+                    $this->form_manage->transfer_to_validation($form_name);
+                }elseif($form_name['form_status_id'] == 7){ //disapproved
+                    $this->load->model('form_application_manage_model', 'form_manage');
+                    $this->form_manage->remove_additiona_leave($form_name);
+                }
             }
-
+            
             // determines to where the action was 
             // performed and used by after_save to
             // know which notification to broadcast
@@ -789,6 +792,16 @@ class Form_application_admin extends MY_PrivateController
 
                 $this->response->form_details .= $this->load->blade('edit/cws_details', $form_details, true);            
             break;
+            case get_time_form_id('ET')://ET
+                $form_details = $this->mod->get_ot_ut_dtrp_details($forms_id, $this->user->user_id);
+                $remarks['remarks'] = array();
+                $comments = $this->mod->get_approver_remarks($forms_id);
+                foreach ($comments as $comment){
+                    $remarks['remarks'][] = $comment;
+                }
+                $form_details = array_merge($form_details, $remarks);
+                $this->response->form_details .= $this->load->blade('edit/et_details', $form_details, true);            
+            break;            
             case get_time_form_id('ADDL'): //ADDL
                 $form_details = $this->mod->get_ot_ut_dtrp_details($forms_id, $this->user->user_id);
                 $form_page = 'addl_details';
@@ -1114,6 +1127,17 @@ class Form_application_admin extends MY_PrivateController
         }
 
         $data['record']['partners.partner_id'] = '';
+        $form_type = $this->input->post('form_type');
+
+        $forms = ['1','2','3','4','5','6','7','8','14','15','16','19','20'];
+        $multiple = 0;
+        if (in_array($form_type, $forms))
+            $multiple = 0;
+        else
+            $multiple = 1;
+
+        $data['multiple'] = $multiple;
+
         $view['content'] = $this->load->view('edit/change_employees', $data, true);
 
         $this->response->filtered_employees = $view['content'];
@@ -1234,7 +1258,7 @@ class Form_application_admin extends MY_PrivateController
 
             break;
             case get_time_form_id('CWS')://CWS
-                $_POST['date_to'] = $_POST['date_from'];
+                //$_POST['date_to'] = $_POST['date_from'];
                 $date_from = date('Y-m-d', strtotime($this->input->post('date_from'))); 
                 $date_to = date('Y-m-d', strtotime($this->input->post('date_to')));
                 $_POST['focus_date'] = date('Y-m-d',strtotime($date_from));
@@ -1691,7 +1715,7 @@ class Form_application_admin extends MY_PrivateController
                                     'cancelled_comment' => $this->input->post('cancelled_comment') 
                                     );
                             }
-                            $breakout = true;
+                            //$breakout = true;
                         break;                        
                         case 15: //ET
                             $date_time = $dt->format('Y-m-d')." ".date("H:i",strtotime($this->input->post('ut_time_in_out')));  

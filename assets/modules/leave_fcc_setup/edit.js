@@ -54,6 +54,13 @@ function save_record( form, action, callback )
 				async: false,
 				success: function ( response ) {
 					handle_ajax_message( response.message );
+					
+					$("#time_form_balance_fcc_setup-employment_type option[value='']").remove();
+					$('#time_form_balance_fcc_setup-employment_type').trigger('change');
+					$("#time_form_balance_fcc_setup-employment_status option[value='']").remove();
+					$('#time_form_balance_fcc_setup-employment_status').trigger('change');
+					$("#time_form_balance_fcc_setup-job_level option[value='']").remove();
+					$('#time_form_balance_fcc_setup-job_level').trigger('change');
 
 					if( response.saved )
 					{

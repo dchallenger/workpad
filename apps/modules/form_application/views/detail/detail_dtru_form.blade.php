@@ -56,7 +56,7 @@
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application.date_filed') }} :</label>
 												<div class="col-md-7 col-sm-7">
-													<span><?php echo date('F d, Y - D',strtotime($record['time_forms_date_sent'])) ?></span>
+													<span><?php echo general_date_time($record['time_forms_date_sent']) ?></span>
 												</div>
 											</div>
 										</div>
@@ -209,12 +209,12 @@
 													<?php 
 													$date = date("F d, Y H:i:s", strtotime($value['date']));
 												    if(date("H:i:s", strtotime($date)) == "00:00:00"){
-												       $comment_date = 'on '.date("F d, Y", strtotime($date));
+												       $comment_date = 'on '.general_date($date);
 												    }else{
 												    	if($value['date'] == '0000-00-00 00:00:00'){
 												    		$comment_date = '';
 												    	} else {
-												    		$comment_date = 'on '.date("F d, Y g:ia", strtotime($date));
+												    		$comment_date = 'on '.general_date_time($date);
 												    	}
 												    } 
 													?>
@@ -228,7 +228,7 @@
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ $value['form_status'] }}date :</label>
 												<div class="col-md-7 col-sm-7">
-													<span>{{ date('F d, Y g:ia', strtotime($value['date'])) }}</span>
+													<span>{{ general_date_time($value['date']) }}</span>
 												</div>
 											</div>
 										</div>

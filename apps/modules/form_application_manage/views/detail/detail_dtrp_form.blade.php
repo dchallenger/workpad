@@ -48,7 +48,7 @@
         		<input type="hidden" name="view" id="view" value="detail" >
 				<div id="vl_container" class="portlet">
 						<div class="portlet-title">
-							<div class="caption">{{ lang('form_application_manage.dtrp_form') }} <small class="text-muted">{{ lang('form_application_manage.view') }}</small></div>
+							<div class="caption">{{ $form_title }} <small class="text-muted">{{ lang('form_application_manage.view') }}</small></div>
 						</div>
 	                    <div class="portlet-body form" id="main_form">
 	                        <!-- BEGIN FORM-->
@@ -69,7 +69,7 @@
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ $label_adc }} :</label>
 												<div class="col-md-7 col-sm-7">
-													<span><?php echo ($date_adc && $date_adc != '0000-00-00 00:00:00' && $date_adc != 'January 01, 1970' && $date_adc != '1970-01-01' ? date('F d, Y g:ia - D',strtotime($date_adc)) : "" ) ?></span>
+													<span><?php echo general_date_time($date_adc) ?></span>
 												</div>
 											</div>
 										</div>
@@ -81,7 +81,7 @@
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_manage.date_filed') }} :</label>
 												<div class="col-md-7 col-sm-7">
-													<span><?php echo date('F d, Y - D',strtotime($record['time_forms_date_sent'])) ?></span>
+													<span><?php echo general_date_time($record['time_forms_date_sent']) ?></span>
 												</div>
 											</div>
 										</div>
@@ -112,25 +112,23 @@
 										</div>
 									</div>
 
-									<?php if( $dtrp_type == 1 || $dtrp_type == 3 ){
-
-									if( $dtrp_type == 3){ ?>
-		                                <div class="row">
-											<div class="col-md-12">
-												<div class="form-group">
-													<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_manage.dtrp_date') }}</label>
-													<div class="col-md-7 col-sm-7">
-														<span>{{ date('F d, Y - D',strtotime($record['time_forms_focus_date'])) }}</span>
-													</div>
-												</div>
-											</div>
-										</div>										
-									<?php } ?>
+									<?php if( $dtrp_type == 1 || $dtrp_type == 3 ){ ?>
 
 	                                <div class="row">
 										<div class="col-md-12">
 											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_manage.from') }} :</label>
+												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_manage.dtrp_date') }}</label>
+												<div class="col-md-7 col-sm-7">
+													<span>{{ general_date_w_day($record['time_forms_focus_date']) }}</span>
+												</div>
+											</div>
+										</div>
+									</div>										
+
+	                                <div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_manage.time_from') }} :</label>
 												<div class="col-md-7 col-sm-7">
 													<span>{{ $date_from['val'] }}</span>
 												</div>
@@ -140,25 +138,23 @@
 
 									<?php } ?>
 
-									<?php if( $dtrp_type == 2){ ?>
-		                                <div class="row">
-											<div class="col-md-12">
-												<div class="form-group">
-													<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_manage.dtrp_date') }}</label>
-													<div class="col-md-7 col-sm-7">
-														<span>{{ date('F d, Y - D',strtotime($record['time_forms_focus_date'])) }}</span>
-													</div>
-												</div>
-											</div>
-										</div>										
-									<?php } ?>
-
 									<?php if( $dtrp_type == 2 || $dtrp_type == 3 ){ ?>
 
+	                                <div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_manage.dtrp_date') }}</label>
+												<div class="col-md-7 col-sm-7">
+													<span>{{ general_date_w_day($record['time_forms_focus_date']) }}</span>
+												</div>
+											</div>
+										</div>
+									</div>	
+										
 									<div class="row">
 										<div class="col-md-12">
 											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_manage.to') }} :</label>
+												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_manage.time_to') }} :</label>
 												<div class="col-md-7 col-sm-7">
 													<span>{{ $date_to['val'] }}</span>
 												</div>
@@ -254,12 +250,7 @@
 			                                        <?php
 			                                            echo "<b>".$remarks[$j]['display_name']."</b>:";
 			                                        ?>
-			                                        <span class="text-right text-danger">
-				                                        <?php
-			                                            if( ($remarks[$j]['comment_date']) && ($remarks[$j]['comment_date']) <> '0000-00-00 00:00:00' )
-			                                            	echo date("F d, Y - h:i a", strtotime($remarks[$j]['comment_date']));
-			                                        ?>
-			                                    	</span>
+			                                        <span class="text-right text-danger">{{ general_date_time($remarks[$j]['comment_date']) }}</span>
 			                                    </span>
 			                                    <div style='display:block; word-wrap:break-word;'>
 			                                        <?php
@@ -302,12 +293,12 @@
 																<?php 
 																$date = date("F d, Y H:i:s", strtotime($value['date']));
 															    if(date("H:i:s", strtotime($date)) == "00:00:00"){
-															       $comment_date = 'on '.date("F d, Y", strtotime($date));
+															       $comment_date = 'on '.general_date_time($date);
 															    }else{
 															    	if($value['date'] == '0000-00-00 00:00:00'){
 															    		$comment_date = '';
 															    	} else {
-															    		$comment_date = 'on '.date("F d, Y g:ia", strtotime($date));
+															    		$comment_date = 'on '.general_date_time($date);
 															    	}
 															    } 
 																?>
@@ -321,7 +312,7 @@
 														<div class="form-group">
 															<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ $value['form_status'] }}date :</label>
 															<div class="col-md-7 col-sm-7">
-																<span>{{ date('F d, Y g:ia', strtotime($value['date'])) }}</span>
+																<span>{{ general_date_time($value['date']) }}</span>
 															</div>
 														</div>
 													</div>

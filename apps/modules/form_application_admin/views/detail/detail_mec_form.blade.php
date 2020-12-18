@@ -46,7 +46,7 @@
         		<input type="hidden" name="record_id" id="record_id" value="<?php echo $forms_id; ?>" >
 				<div id="vl_container" class="portlet">
 						<div class="portlet-title">
-							<div class="caption">Marriage of Child Leave <small class="text-muted">view</small></div>
+							<div class="caption">{{ $form_title }} <small class="text-muted">{{ lang('common.view') }}</small></div>
 						</div>
 	                    <div class="portlet-body form" id="main_form">
 	                        <!-- BEGIN FORM-->

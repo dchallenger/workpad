@@ -998,6 +998,7 @@ class Form_application extends MY_PrivateController
         $date_time_from = '';
         $date_time_to = '';
         $date_time = '';
+
         switch($form_id){
             case get_time_form_id('OBT'): //OBT
             case get_time_form_id('OT'): //OT
@@ -1028,7 +1029,7 @@ class Form_application extends MY_PrivateController
             $date_to = date('Y-m-d', strtotime($this->input->post('date_to')));
             break;
             case get_time_form_id('CWS')://CWS
-            $_POST['date_to'] = $_POST['date_from'];
+            //$_POST['date_to'] = $_POST['date_from'];
             $date_from = date('Y-m-d', strtotime($this->input->post('date_from'))); 
             $date_to = date('Y-m-d', strtotime($this->input->post('date_to')));
             $_POST['focus_date'] = date('Y-m-d',strtotime($date_from));
@@ -1612,6 +1613,7 @@ class Form_application extends MY_PrivateController
         //Validate form based on policies    
             $uploads = $this->input->post('upload_id');
             $shift_to = $this->input->post('shift_to');
+            $curr_shift = $this->input->post('shift_id');
             $schedule = $this->input->post('scheduled');
             $addl_type = $this->input->post('addl_type');
 
@@ -2023,21 +2025,25 @@ class Form_application extends MY_PrivateController
                         $breakout = true;
                         break;
                     case get_time_form_id('CWS'): // CWS 
-                    if($this->input->post('form_status_id') != 8){
-                        $time_forms_date_table[] = array(
-                            'forms_id' => $forms_id,
-                            'date' => $dt->format('Y-m-d'),
-                            'day' => 1
-                            );
-                    }else{
-                        $time_forms_date_table[] = array(
-                            'forms_id' => $forms_id,
-                            'date' => $dt->format('Y-m-d'),
-                            'day' => 1,
-                            'cancelled_comment' => $this->input->post('cancelled_comment') 
-                            );
-                    }
-                    $days = 1;
+                        if($this->input->post('form_status_id') != 8){
+                            $time_forms_date_table[] = array(
+                                'forms_id' => $forms_id,
+                                'date' => $dt->format('Y-m-d'),
+                                'day' => 1,
+                                'shift_id' => $curr_shift,
+                                'shift_to' => $shift_to
+                                );
+                        }else{
+                            $time_forms_date_table[] = array(
+                                'forms_id' => $forms_id,
+                                'date' => $dt->format('Y-m-d'),
+                                'day' => 1,
+                                'shift_id' => $curr_shift,
+                                'shift_to' => $shift_to,
+                                'cancelled_comment' => $this->input->post('cancelled_comment') 
+                                );
+                        }
+                        $days = 1;
                     break;
                     case get_time_form_id('ADDL'): //ADDL
                     if( $this->input->post('addl_type') == 'File' ){
@@ -2161,7 +2167,7 @@ class Form_application extends MY_PrivateController
         $form_type = $this->mod->get_form_type($form_id);
 
         if($form_type['is_leave'] == 1 && ($form_type['with_credits'] == 1) &&  $this->input->post('form_status_id') != 8){
-            $balance_data = $this->mod->get_leave_balance($this->user->user_id, date('Y-m-d', strtotime($date_from)), $form_id);
+            $balance_data = $this->mod->get_leave_balance($this->user->user_id, date('Y-m-d', strtotime($date_from)), ($form_id == 3 ? 2 : $form_id)); // ($form_id == 3 ? 2 : $form_id) = el to deduct on vl
             $leavebal = 0;
             $tfdatesbal = 0;
             
@@ -2267,7 +2273,7 @@ class Form_application extends MY_PrivateController
                 // deduct 1 day since date from was included on the counting
                 if (($days - 1) > $days_alloted) {
                         $this->response->message[] = array(
-                        'message' => "Insufficient Leave Credits, you only have ".$days_alloted." days alotted",
+                        'message' => "Insufficient Leave Credits, you only have ".($days_alloted+1)." days alotted",
                         'type' => 'error'
                         );  
                         $this->_ajax_return();                        
@@ -2429,7 +2435,11 @@ class Form_application extends MY_PrivateController
                 }
             }
         }
-        
+
+        if ($form_id == 12) {
+            unset($main_record['time_forms_date']);
+        }
+
         //start saving with sub table
         foreach( $main_record as $table => $data )
         {
@@ -2486,7 +2496,6 @@ class Form_application extends MY_PrivateController
                 $error = true;
             }
         }
-
         // if($this->input->post('form_status_id') == 2 ){  //submit
         //     //check if for validation
         //     $this->check_for_validation($main_record[$this->mod->table], $forms_id);
@@ -2572,16 +2581,18 @@ class Form_application extends MY_PrivateController
         if(!empty($forms_id)){
             $form_details = $this->mod->get_forms_details($forms_id);
 
-            if($form_details['form_status_id'] == 2 || $form_details['form_status_id'] == 8){
-                //INSERT NOTIFICATIONS FOR APPROVERS
-                $this->response->notified = $this->mod->notify_approvers( $form_id, $form_details );
-                $this->response->notified = $this->mod->notify_filer( $form_id, $form_details );
-            } elseif ($form_details['form_status_id'] == 4) {
-                $this->response->notified = $this->mod->notify_hr( $form_id, $form_details );
-            }
+            if (!empty($form_details)) {
+                if($form_details['form_status_id'] == 2 || $form_details['form_status_id'] == 8){
+                    //INSERT NOTIFICATIONS FOR APPROVERS
+                    $this->response->notified = $this->mod->notify_approvers( $form_id, $form_details );
+                    $this->response->notified = $this->mod->notify_filer( $form_id, $form_details );
+                } elseif ($form_details['form_status_id'] == 4) {
+                    $this->response->notified = $this->mod->notify_hr( $form_id, $form_details );
+                }
 
-            if($_POST['form_code'] == 'ML' && $this->input->post('return_date') != ''){
-                $result = $this->db->query("CALL sp_time_forms_maternity(".$forms_id.")");
+                if($_POST['form_code'] == 'ML' && $this->input->post('return_date') != ''){
+                    $result = $this->db->query("CALL sp_time_forms_maternity(".$forms_id.")");
+                }
             }
         }
 

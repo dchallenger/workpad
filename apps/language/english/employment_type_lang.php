@@ -1,9 +1,9 @@
 <?php
 $lang['employment_type'] = array(
 	'user_manager' => 'User Manager',
-	'employment_type_information' => 'Employment Type Information',
-	'employment_type' => 'Employment Type',
-	'p_employment_type' => 'Enter Employment Type',
+	'employment_type_information' => 'Level Information',
+	'employment_type' => 'Level',
+	'p_employment_type' => 'Enter Level',
 	'active' => 'Active',
 	'option_yes' => 'Yes',
 	'option_no' => 'No',

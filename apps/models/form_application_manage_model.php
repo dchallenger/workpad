@@ -224,7 +224,8 @@ public function call_sp_time_calendar($date_from='', $date_to='', $user_id=0){
 	public function get_shift_details($date='', $user_id=0){
 				$shift_details_qry = "SELECT 
 									p.user_id AS user_id, tr.date AS DATE, 
-									p.shift_id AS shift_id,
+									tr.shift_id AS shift_id,
+									IF(tr.aux_shift_id=0, tr.shift_id, tr.aux_shift_id) AS cur_shift_id,
 									IF(IFNULL(ts_aux.time_start,'')='', ts.time_start, ts_aux.time_start) AS shift_time_start, 
 									IF(IFNULL(ts_aux.time_end,'')='', ts.time_end, ts_aux.time_end) AS shift_time_end,
 									IF(IFNULL(tr.aux_time_in,0)=0, IFNULL(tr.time_in, '-'), IF(tr.aux_time_in > tr.time_in, tr.time_in, tr.aux_time_in)) AS logs_time_in,  

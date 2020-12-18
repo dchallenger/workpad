@@ -9,6 +9,14 @@ $(document).ready(function(){
 		rtl: App.isRTL(),
 		autoclose: true
 	});	
+
+	$('#time_form_balance_setup_policy-accumulation_type').live('change',function() {
+		var accumulation_type = $(this).val();
+		if (accumulation_type == 3)
+			$('.tenure').show();
+		else
+			$('.tenure').hide();
+	});
 });
 
 function save_record( form, action, callback )
@@ -28,9 +36,9 @@ function save_record( form, action, callback )
 		$('#time_form_balance_setup_policy-employment_status').select2("val", "").trigger('change');
 	}
 
-	if ($('#time_form_balance_fcc_setup-job_level').val() == null) {
-		$('#time_form_balance_fcc_setup-job_level').prepend(new Option("", ""));
-		$('#time_form_balance_fcc_setup-job_level').select2("val", "").trigger('change');
+	if ($('#time_form_balance_setup_policy-job_level').val() == null) {
+		$('#time_form_balance_setup_policy-job_level').prepend(new Option("", ""));
+		$('#time_form_balance_setup_policy-job_level').select2("val", "").trigger('change');
 	}	
 		
 	$.blockUI({ message: saving_message(),
@@ -54,6 +62,14 @@ function save_record( form, action, callback )
 				success: function ( response ) {
 					handle_ajax_message( response.message );
 
+					$("#time_form_balance_fcc_setup-employment_type option[value='']").remove();
+					$('#time_form_balance_fcc_setup-employment_type').trigger('change');
+					$("#time_form_balance_fcc_setup-employment_status option[value='']").remove();
+					$('#time_form_balance_fcc_setup-employment_status').trigger('change');
+					$("#time_form_balance_fcc_setup-job_level option[value='']").remove();
+					$('#time_form_balance_fcc_setup-job_level').trigger('change');
+
+					
 					if( response.saved )
 					{
 						if( response.action == 'insert' )

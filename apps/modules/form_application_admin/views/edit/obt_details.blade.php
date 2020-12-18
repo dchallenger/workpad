@@ -1,14 +1,20 @@
 <div>
+    <div class="clearfix">
+        <label class="control-label col-md-3 text-muted text-left small">{{ lang('form_application_manage.date_filed') }} :</label>
+        <div class="col-md-9">
+            <span><?php echo general_date_time($created_on) ?></span>
+        </div>
+    </div>    
     <div class='clearfix'>
         <label class='control-label col-md-3 text-muted text-left small'>From:</label>
         <div class='col-md-9'>
-            <span> <?php echo date("F d, Y - h:ia", strtotime($time_from)); ?></span>
+            <span> <?php echo general_date_w_day($time_from)); ?></span>
         </div>
     </div>
     <div class='clearfix'>
         <label class='control-label col-md-3 text-muted text-left small'>To:</label>
         <div class='col-md-9'>
-            <span> <?php echo date("F d, Y - ", strtotime($date_to)). date("h:ia", strtotime($time_to)); ?></span>
+            <span> <?php echo general_date_w_day($time_to); ?></span>
         </div>
     </div>
     <div class='clearfix'>

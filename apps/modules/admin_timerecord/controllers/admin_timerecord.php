@@ -308,7 +308,7 @@ class Admin_timerecord extends MY_PrivateController
 	function update_department()
 	{
 		$this->_ajax_only();
-		$departments = $this->db->query('SELECT * FROM approver_class_department WHERE company_id='.$this->input->post('company_id'));
+		$departments = $this->db->query('SELECT * FROM approver_class_department WHERE company_id='.$this->input->post('company_id').' ORDER BY department');
 		$this->response->departments = '<option value="" selected="selected">Select department...</option>';
 		foreach( $departments->result() as $department )
 		{

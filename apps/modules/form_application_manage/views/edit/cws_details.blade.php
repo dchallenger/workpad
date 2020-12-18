@@ -1,4 +1,22 @@
 <div>
+    <div class="clearfix">
+        <label class="control-label col-md-3 text-muted text-left small">{{ lang('form_application_manage.date_filed') }} :</label>
+        <div class="col-md-9">
+            <span><?php echo general_date_time($created_on) ?></span>
+        </div>
+    </div>
+    <div class='clearfix'>
+        <label class='control-label col-md-3 text-muted text-left small'>{{ lang('form_application_manage.from') }}:</label>
+        <div class='col-md-9'>
+            <span> <?php echo general_date_w_day($date_from); ?></span>
+        </div>
+    </div>
+    <div class='clearfix'>
+        <label class='control-label col-md-3 text-muted text-left small'>{{ lang('form_application_manage.to') }}:</label>
+        <div class='col-md-9'>
+            <span> <?php echo general_date_w_day($date_to); ?></span>
+        </div>
+    </div>    
     <div class='clearfix'>
         <label class='control-label col-md-3 text-muted text-left small'>{{ lang('form_application_manage.current_sched') }}:</label>
         <div class='col-md-9'>
@@ -9,12 +27,6 @@
         <label class='control-label col-md-3 text-muted text-left small'>{{ lang('form_application_manage.new_sched') }}:</label>
         <div class='col-md-9'>
             <span> <?php echo $to_shift; ?></span>
-        </div>
-    </div>
-    <div class='clearfix'>
-        <label class='control-label col-md-3 text-muted text-left small'>{{ lang('form_application_manage.date') }}:</label>
-        <div class='col-md-9'>
-            <span> <?php echo date("F d, Y", strtotime($date)); ?></span>
         </div>
     </div>
     <div class='clearfix'>

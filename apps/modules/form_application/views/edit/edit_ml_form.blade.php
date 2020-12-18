@@ -221,7 +221,7 @@
 							<div class="form-group">
                                 <label class="control-label col-md-4">{{ lang('form_application.num_preg') }}</label>
                                 <div class="col-md-6">
-                                    <input type="text" value="{{ $record['time_forms_maternity.pregnancy_no'] }}" readonly="" placeholder="" id="time_forms_maternity-pregnancy_no" name="time_forms_maternity[pregnancy_no]" maxlength="25" class="form-control">
+                                    <input type="text" value="{{ $record['time_forms_maternity.pregnancy_no'] }}" placeholder="" id="time_forms_maternity-pregnancy_no" name="time_forms_maternity[pregnancy_no]" maxlength="25" class="form-control">
                                 </div>
                             </div>
 
@@ -248,7 +248,7 @@
 							</div>
 
 							<div class="form-group">
-								<label class="control-label col-md-4">{{ lang('form_application.report_date') }}</label>
+								<label class="control-label col-md-4">{{ lang('form_application.return_work') }}</label>
 								<div class="col-md-6">							<div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
 												<input type="text" class="form-control" name="time_forms_maternity[return_date]" id="time_forms_maternity-return_date" value="{{ $record['time_forms_maternity.return_date'] }}" placeholder="Enter Report Date" disabled>
 												<span class="input-group-btn">

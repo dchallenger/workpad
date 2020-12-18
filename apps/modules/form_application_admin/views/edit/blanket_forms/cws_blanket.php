@@ -1,15 +1,29 @@
 <input type="hidden" name="form_code" id="form_code" value="CWS">
 <div class="form-group">
-	<label class="control-label col-md-4"><?php echo lang('form_application.date') ?><span class="required">* </span></label>
+	<label class="control-label col-md-4"><?php echo lang('form_application.from') ?><span class="required">* </span></label>
 	<div class="col-md-6">							
 		<div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
-			<input type="text" class="form-control" name="time_forms[date_from]" id="time_forms-date_from" placeholder="Enter Date">
+			<input type="text" class="form-control" name="time_forms[date_from]" id="time_forms-date_from" placeholder="Enter Start Date">
 			<span class="input-group-btn">
 				<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
 			</span>
 		</div> 				
 		<div class="help-block small">
-			<?php echo lang('form_application.select_date') ?>
+			<?php echo lang('form_application.select_startd') ?>
+		</div>
+	</div>	
+</div>
+<div class="form-group">
+	<label class="control-label col-md-4"><?php echo lang('form_application.to') ?><span class="required">* </span></label>
+	<div class="col-md-6">							
+		<div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
+			<input type="text" class="form-control" name="time_forms[date_to]" id="time_forms-date_to" placeholder="Enter End Date">
+			<span class="input-group-btn">
+				<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+			</span>
+		</div> 				
+		<div class="help-block small">
+			<?php echo lang('form_application.select_endd') ?>
 		</div>
 	</div>	
 </div>
@@ -26,7 +40,7 @@
 
 		?>							
 		<div class="input-group">
-			<input type="hidden" size="16" class="form-control" readonly id="shift_id" name="shift_id"> 
+			<input type="hidden" size="16" class="form-control" readonly id="shift_id" name="shift_id" value="<?php echo $shift_id['val'] ?>"> 
 			<span class="input-group-addon">
 				<i class="fa fa-list-ul"></i>
 			</span>
@@ -64,6 +78,10 @@
 		        rtl: App.isRTL(),
 		        autoclose: true
 		    });
+		    $('#time_forms-date_to').parent('.date-picker').datepicker({
+		        rtl: App.isRTL(),
+		        autoclose: true
+		    });		    
 		    $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
 		}
 	});

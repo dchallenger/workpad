@@ -28,8 +28,8 @@ class employment_type_model extends Record
 		$this->primary_key = 'employment_type_id';
 		$this->table = 'partners_employment_type';
 		$this->icon = '';
-		$this->short_name = 'Employment Type';
-		$this->long_name  = 'Employment Type';
+		$this->short_name = 'Level';
+		$this->long_name  = 'Level';
 		$this->description = '';
 		$this->path = APPPATH . 'modules/employment_type/';
 

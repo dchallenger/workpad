@@ -37,4 +37,6 @@ $lang['user_manager'] = array(
 	'branch' => 'Branch',
 	'sbu_unit' => 'SBU Unit',
 	'p_sbu_unit' => 'Manage and list sbu unit.',
+	'emp_level' => 'Level',
+	'p_emp_level' => 'Manage and list level.',	
 );
