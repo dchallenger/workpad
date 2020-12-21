@@ -163,6 +163,7 @@ if(get_time_form_id('PL') != false){
 			'time_forms.reason',
 			'time_forms_upload.upload_id',
 			'time_forms_maternity.delivery_id',
+			'time_forms_maternity.type',
 			'time_forms_maternity.actual_date',
 			'time_forms.form_status_id'
 		)

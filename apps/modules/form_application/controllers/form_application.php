@@ -2166,6 +2166,25 @@ class Form_application extends MY_PrivateController
 
         $form_type = $this->mod->get_form_type($form_id);
 
+        // validate lwop, can not file if there is vacation leave balane
+        if($form_id == 7 && $this->input->post('form_status_id') != 8){
+            $leavebal = 0;
+            $balance_data = $this->mod->get_leave_balance($this->user->user_id, date('Y-m-d', strtotime($date_from)), 2); // ($form_id == 3 ? 2 : $form_id) = el to deduct on vl            
+
+            if (!empty($balance_data)) {
+                foreach ($balance_data as $balancekey => $balance) {
+                    $leavebal += $balance['balance'];
+                }
+                if($leavebal > 0) {
+                    $this->response->message[] = array(
+                        'message' => 'LWOP can not file, Vacation Leave has remaining balance.',
+                        'type' => 'error'
+                    );  
+                    $this->_ajax_return();                    
+                }         
+            }
+        }
+
         if($form_type['is_leave'] == 1 && ($form_type['with_credits'] == 1) &&  $this->input->post('form_status_id') != 8){
             $balance_data = $this->mod->get_leave_balance($this->user->user_id, date('Y-m-d', strtotime($date_from)), ($form_id == 3 ? 2 : $form_id)); // ($form_id == 3 ? 2 : $form_id) = el to deduct on vl
             $leavebal = 0;
@@ -2270,8 +2289,22 @@ class Form_application extends MY_PrivateController
                 $time_delivery_row = $time_delivery->row();
                 $days_alloted = $time_delivery_row->leave_days;
 
+                $qry = "SELECT SUM(tfd.day) AS total FROM {$this->db->dbprefix}time_forms tf
+                        LEFT JOIN {$this->db->dbprefix}time_forms_date tfd ON tf.forms_id = tfd.forms_id
+                        INNER JOIN {$this->db->dbprefix}time_forms_maternity tfm ON tf.forms_id = tfm.forms_id
+                        WHERE tf.user_id = {$this->user->user_id} AND tf.form_id = {$form_id} 
+                        AND tf.form_status_id IN (6)
+                        AND tfm.delivery_id = $delivery_id 
+                        AND (YEAR(tf.date_from) = YEAR(CURDATE()) AND YEAR(tf.date_to) = YEAR(CURDATE()))";
+
+                $approved_ml = $this->db->query($qry);
+
+                $approved_ml_total = 0;
+                if ($approved_ml && $approved_ml->num_rows() > 0) {
+                    $approved_ml_total = $approved_ml->row()->total;
+                }
                 // deduct 1 day since date from was included on the counting
-                if (($days - 1) > $days_alloted) {
+                if ((($days - 1) + $approved_ml_total) > $days_alloted) {
                         $this->response->message[] = array(
                         'message' => "Insufficient Leave Credits, you only have ".($days_alloted+1)." days alotted",
                         'type' => 'error'
@@ -2310,6 +2343,42 @@ class Form_application extends MY_PrivateController
             }*/
         }
 
+        // validation for maternity leave
+        if($_POST['form_code'] == 'PL' && $this->input->post('form_status_id') != 8){
+            $delivery_id = $_POST['time_forms_maternity']['type'];
+
+            $this->db->where('deleted',0);
+            $this->db->where('delivery_id',$delivery_id);
+            $time_delivery = $this->db->get('time_delivery');
+
+            if ($time_delivery && $time_delivery->num_rows() > 0) {
+                $time_delivery_row = $time_delivery->row();
+                $days_alloted = $time_delivery_row->leave_days;
+
+                $qry = "SELECT SUM(tfd.day) AS total FROM {$this->db->dbprefix}time_forms tf
+                        LEFT JOIN {$this->db->dbprefix}time_forms_date tfd ON tf.forms_id = tfd.forms_id
+                        INNER JOIN {$this->db->dbprefix}time_forms_maternity tfm ON tf.forms_id = tfm.forms_id
+                        WHERE tf.user_id = {$this->user->user_id} AND tf.form_id = {$form_id} 
+                        AND tf.form_status_id IN (6)
+                        AND tfm.type = $delivery_id 
+                        AND (YEAR(tf.date_from) = YEAR(CURDATE()) AND YEAR(tf.date_to) = YEAR(CURDATE()))";
+
+                $approved_pl = $this->db->query($qry);
+
+                $approved_pl_total = 0;
+                if ($approved_pl && $approved_pl->num_rows() > 0) {
+                    $approved_pl_total = $approved_pl->row()->total;
+                }
+                // deduct 1 day since date from was included on the counting
+                if ((($days - 1) + $approved_pl_total) > $days_alloted) {
+                        $this->response->message[] = array(
+                        'message' => "Insufficient Leave Credits, you only have ".($days_alloted+1)." days alotted",
+                        'type' => 'error'
+                        );  
+                        $this->_ajax_return();                        
+                }
+            }
+        }
         //Validate additional leave
         if($_POST['form_code'] == 'ADDL' && $this->input->post('form_status_id') != 8){
             if( $this->input->post('addl_type') == 'Use' ){

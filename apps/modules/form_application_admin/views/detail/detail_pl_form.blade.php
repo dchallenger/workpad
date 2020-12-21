@@ -107,6 +107,28 @@
 											</div>
 										</div>
 									</div>
+	                            	<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.delivery') }} :</label>
+												<div class="col-md-7 col-sm-7">
+													<span>
+														<?php
+															$db->select('delivery_id,delivery');
+						                            		$db->where('deleted', '0');
+						                            		$options = $db->get('time_delivery');
+
+						                            		foreach($options->result() as $option){
+						                            			if( $record['time_forms_maternity_type'] == $option->delivery_id ){
+						                            				echo $option->delivery;
+						                            			}
+						                            		}
+														?>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>									
 	                                <div class="row">
 										<div class="col-md-12">
 											<div class="form-group">

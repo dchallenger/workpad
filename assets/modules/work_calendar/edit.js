@@ -330,6 +330,8 @@ var save_calendar = function( form ){
 	        for (var i in response.message) {
 	            notify(response.message[i].type, response.message[i].message);
 	        }
+
+            document.location = base_url + module.get('route');
 	    }
 	});
 

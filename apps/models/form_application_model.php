@@ -233,7 +233,7 @@ public function call_sp_time_calendar($date_from='', $date_to='', $user_id=0){
 							AND IF((tfcp.group_id  != 'ALL') AND (up.group_id IS NOT NULL AND LENGTH(up.group_id) > 0), FIND_IN_SET(up.group_id, tfcp.group_id), 1)
 							#AND IF((tfcp.project_id IS NOT NULL AND LENGTH(tfcp.project_id) > 0) AND (up.project_id IS NOT NULL AND LENGTH(up.project_id) > 0), FIND_IN_SET(up.project_id, tfcp.project_id), 1)
 							AND IF(pp.key_value = 'Male', tf.only_female != 1, tf.only_male != 1)
-							#AND IF(pps.key_value = 1, 1=1, tf.form_id != 16)
+							AND IF(pps.key_value = 1, 1=1, tf.form_id != 16)
 							AND tfcp.deleted = 0
 							GROUP BY tf.form_code
 							ORDER BY tf.order_by, tf.form_id";

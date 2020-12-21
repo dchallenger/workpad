@@ -54,152 +54,166 @@
 					<div class="tools"><a class="collapse" href="javascript:;"></a></div>
 				</div>
 				<div class="portlet-body form"  id="main_form">			
-
-                        <div class="form-group">
-							<label class="control-label col-md-4">{{ lang('form_application.delivery') }}<span class="required">* </span></label>
-							<div class="col-md-6">
-								<?php	                            	                            		
-													$db->select('delivery_id,delivery');
-				                            		$db->where('deleted', '0');
-				                            		$options = $db->get('time_delivery');
-													$time_delivery_delivery_id_options = array();
-				                            		foreach($options->result() as $option)
-				                            		{
-				                            			$time_delivery_delivery_id_options[$option->delivery_id] = $option->delivery;
-				                            		} ?>							
-				                            <div class="input-group">
-											<span class="input-group-addon">
-				                            <i class="fa fa-list-ul"></i>
-				                            </span>
-				                            {{ form_dropdown('time_forms_maternity[delivery_id]',$time_delivery_delivery_id_options, $record['time_forms_maternity.delivery_id'], 'id="time_forms_paternity-delivery_id" class="form-control select2me" data-placeholder="Select..."') }}
-				                        </div> 				</div>	
-						</div>
+                    <div class="form-group">
+						<label class="control-label col-md-4">{{ lang('form_application.delivery') }}<span class="required">* </span></label>
+						<div class="col-md-6">
+							<?php	                            	                            		
+								$db->select('delivery_id,delivery');
+                        		$db->where('deleted', '0');
+                        		$db->where('maternity_paternity', '0');
+                        		$options = $db->get('time_delivery');
+								$time_delivery_delivery_id_options = array();
+                        		foreach($options->result() as $option)
+                        		{
+                        			$time_delivery_delivery_id_options[$option->delivery_id] = $option->delivery;
+                        		} 
+                        	?>							
+				            <div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
+				                    {{ form_dropdown('time_forms_maternity[delivery_id]',$time_delivery_delivery_id_options, $record['time_forms_maternity.delivery_id'], 'id="time_forms_paternity-delivery_id" class="form-control select2me" data-placeholder="Select..."') }}
+				            </div> 				
+			        	</div>	
+					</div>
+                    <div class="form-group">
+						<label class="control-label col-md-4">{{ lang('form_application.type') }}<span class="required">* </span></label>
+						<div class="col-md-6">
+							<?php	                            	                            		
+								$db->select('delivery_id,delivery');
+                        		$db->where('deleted', '0');
+                        		$db->where('maternity_paternity', '2');
+                        		$options = $db->get('time_delivery');
+								$type_options = array();
+                        		foreach($options->result() as $option)
+                        		{
+                        			$type_options[$option->delivery_id] = $option->delivery;
+                        		} 
+                        	?>								
+				            <div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
+				                    {{ form_dropdown('time_forms_maternity[type]',$type_options, $record['time_forms_maternity.type'], 'id="time_forms_paternity-type" class="form-control select2me" data-placeholder="Select..."') }}
+				            </div> 				
+			        	</div>	
+					</div>					
 					<div class="form-group">
 						<label class="control-label col-md-4">{{ lang('form_application.from') }}<span class="required">* </span></label>
-						<div class="col-md-6">							<div class="paternity_date_from input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
-							<input type="text" class="form-control" name="time_forms[date_from]" id="time_forms-date_from" value="{{ $record['time_forms.date_from'] }}" placeholder="">
-							<span class="input-group-btn">
-								<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+						<div class="col-md-6">
+							<div class="paternity_date_from input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
+								<input type="text" class="form-control" name="time_forms[date_from]" id="time_forms-date_from" value="{{ $record['time_forms.date_from'] }}" placeholder="">
+								<span class="input-group-btn">
+									<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+								</span>
+							</div> 				
+							<div class="help-block small">
+								{{ lang('form_application.select_startd') }}
+							</div>	
+						</div>	
+					</div>	
+					<div class="form-group">
+						<label class="control-label col-md-4">{{ lang('form_application.to') }}<span class="required">* </span></label>
+						<div class="col-md-6">
+							<div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
+								<input type="text" class="form-control" name="time_forms[date_to]" id="time_forms-date_to" value="{{ $record['time_forms.date_to'] }}" placeholder="">
+								<span class="input-group-btn">
+									<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+								</span>
+							</div> 				
+							<div class="help-block small">
+								{{ lang('form_application.select_endd') }}
+							</div>	
+						</div>	
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-4 text-danger small">{{ lang('form_application.note') }}: </label>
+						<div class="col-md-6">
+							<div class="btn-grp">
+								<button id="goto_vl_co" class="btn blue" type="button"><small>{{ lang('form_application.change_opt') }}</small></button>
+							</div>
+							<div class="help-block small">
+								{{ lang('form_application.use_changeopt') }}
+							</div>
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						<label class="control-label col-md-4">{{ lang('form_application.reason') }}<span class="required">* </span></label>
+						<div class="col-md-6">							
+							<textarea class="form-control" name="time_forms[reason]" id="time_forms-reason" placeholder="" rows="4">{{ $record['time_forms.reason'] }}</textarea> 				
+						</div>	
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-4">{{ lang('form_application.file_upload') }}</label>
+						<div class="col-md-6">							<div data-provides="fileupload" class="fileupload fileupload-new" id="time_forms_upload-upload_id-container">
+							<input type="hidden" name="time_forms_upload[upload_id]" id="time_forms_upload-upload_id" value="<?php echo implode(",", $upload_id['val']) ?>"/>
+							<span class="btn default btn-sm btn-file">
+								<span class="fileupload-new"><i class="fa fa-paper-clip"></i> {{ lang('form_application.select') }}</span>
+								<input type="file" id="time_forms_upload-upload_id-fileupload" type="file" name="files[]" multiple="">
 							</span>
+							<ul class="padding-none margin-top-10">
+								<?php 
+								implode($upload_id['val']);
+								if( count($upload_id['val']) > 0 ) {
+																	// $upload_ids =  explode(',', $upload_id['val']);
+																	// print_r($upload_id['val']);
+									foreach( $upload_id['val'] as $upload_id_val )
+									{
+										$upload = $db->get_where('system_uploads', array('upload_id' => $upload_id_val))->row();
+										$file = FCPATH . urldecode( $upload->upload_path );
+										if( file_exists( $file ) )
+										{
+											$f_info = get_file_info( $file );
+											$f_type = filetype( $file );
+
+											$finfo = finfo_open(FILEINFO_MIME_TYPE);
+											$f_type = finfo_file($finfo, $file);
+
+											switch( $f_type )
+											{
+												case 'image/jpeg':
+												$icon = 'fa-picture-o';
+												break;
+												case 'video/mp4':
+												$icon = 'fa-film';
+												break;
+												case 'audio/mpeg':
+												$icon = 'fa-volume-up';
+												break;
+												default:
+												$icon = 'fa-file-text-o';
+											}
+												$filepath = base_url()."time/application/download_file/".$upload_id_val;
+											echo '<li class="padding-3 fileupload-delete-'.$upload_id_val.'" style="list-style:none;">
+											<a href="'.$filepath.'">
+											<span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
+											<span>'. basename($f_info['name']) .'</span>
+											<span class="padding-left-10"><a style="float: none;" data-dismiss="fileupload" class="close fileupload-delete" upload_id="'.$upload_id_val.'" href="javascript:void(0)"></a></span>
+											</a></li>';
+										}
+									}
+								}
+								?>
+							</ul>
 						</div> 				
 						<div class="help-block small">
-							{{ lang('form_application.select_startd') }}
-						</div>	
-
+							{{ lang('form_application.supp_docs') }}
+						</div>
 					</div>	
 				</div>	
 
+				<hr />			
+
 				<div class="form-group">
-					<label class="control-label col-md-4">{{ lang('form_application.to') }}<span class="required">* </span></label>
+					<label class="control-label col-md-4">{{ lang('form_application.actual_delivery') }}</label>
 					<div class="col-md-6">							<div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
-						<input type="text" class="form-control" name="time_forms[date_to]" id="time_forms-date_to" value="{{ $record['time_forms.date_to'] }}" placeholder="">
+						<input type="text" class="form-control" name="time_forms_maternity[actual_date]" id="time_forms_maternity-actual_date" value="{{ $record['time_forms_maternity.actual_date'] }}" placeholder="">
 						<span class="input-group-btn">
 							<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
 						</span>
 					</div> 				
-					<div class="help-block small">
-						{{ lang('form_application.select_endd') }}
-					</div>	
-
 				</div>	
-			</div>
-
-			<div class="form-group">
-				<label class="control-label col-md-4 text-danger small">{{ lang('form_application.note') }}: </label>
-				<div class="col-md-6">
-					<div class="btn-grp">
-						<button id="goto_vl_co" class="btn blue" type="button"><small>{{ lang('form_application.change_opt') }}</small></button>
-					</div>
-					<div class="help-block small">
-						{{ lang('form_application.use_changeopt') }}
-					</div>
-				</div>
-			</div>
-
-
-			<div class="form-group">
-				<label class="control-label col-md-4">{{ lang('form_application.reason') }}<span class="required">* </span></label>
-				<div class="col-md-6">							
-					<textarea class="form-control" name="time_forms[reason]" id="time_forms-reason" placeholder="" rows="4">{{ $record['time_forms.reason'] }}</textarea> 				
-				</div>	
-			</div>
-
-			<div class="form-group">
-				<label class="control-label col-md-4">{{ lang('form_application.file_upload') }}</label>
-				<div class="col-md-6">							<div data-provides="fileupload" class="fileupload fileupload-new" id="time_forms_upload-upload_id-container">
-					<input type="hidden" name="time_forms_upload[upload_id]" id="time_forms_upload-upload_id" value="<?php echo implode(",", $upload_id['val']) ?>"/>
-					<span class="btn default btn-sm btn-file">
-						<span class="fileupload-new"><i class="fa fa-paper-clip"></i> {{ lang('form_application.select') }}</span>
-						<input type="file" id="time_forms_upload-upload_id-fileupload" type="file" name="files[]" multiple="">
-					</span>
-					<ul class="padding-none margin-top-10">
-						<?php 
-						implode($upload_id['val']);
-						if( count($upload_id['val']) > 0 ) {
-															// $upload_ids =  explode(',', $upload_id['val']);
-															// print_r($upload_id['val']);
-							foreach( $upload_id['val'] as $upload_id_val )
-							{
-								$upload = $db->get_where('system_uploads', array('upload_id' => $upload_id_val))->row();
-								$file = FCPATH . urldecode( $upload->upload_path );
-								if( file_exists( $file ) )
-								{
-									$f_info = get_file_info( $file );
-									$f_type = filetype( $file );
-
-									$finfo = finfo_open(FILEINFO_MIME_TYPE);
-									$f_type = finfo_file($finfo, $file);
-
-									switch( $f_type )
-									{
-										case 'image/jpeg':
-										$icon = 'fa-picture-o';
-										break;
-										case 'video/mp4':
-										$icon = 'fa-film';
-										break;
-										case 'audio/mpeg':
-										$icon = 'fa-volume-up';
-										break;
-										default:
-										$icon = 'fa-file-text-o';
-									}
-										$filepath = base_url()."time/application/download_file/".$upload_id_val;
-									echo '<li class="padding-3 fileupload-delete-'.$upload_id_val.'" style="list-style:none;">
-									<a href="'.$filepath.'">
-									<span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
-									<span>'. basename($f_info['name']) .'</span>
-									<span class="padding-left-10"><a style="float: none;" data-dismiss="fileupload" class="close fileupload-delete" upload_id="'.$upload_id_val.'" href="javascript:void(0)"></a></span>
-									</a></li>';
-								}
-							}
-						}
-						?>
-					</ul>
-				</div> 				
-				<div class="help-block small">
-					{{ lang('form_application.supp_docs') }}
-				</div>
 			</div>	
-		</div>	
-
-		<hr />			
-
-
-		<div class="form-group">
-			<label class="control-label col-md-4">{{ lang('form_application.actual_delivery') }}</label>
-			<div class="col-md-6">							<div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
-				<input type="text" class="form-control" name="time_forms_maternity[actual_date]" id="time_forms_maternity-actual_date" value="{{ $record['time_forms_maternity.actual_date'] }}" placeholder="">
-				<span class="input-group-btn">
-					<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-				</span>
-			</div> 				</div>	
-		</div>	
-
-
-
-
-
 	</div>
 	<?php
 			if(in_array($form_status_id['val'], array(2,3,6)) && $within_cutoff){
@@ -217,7 +231,7 @@
 		<?php
 	}
 	?>
-</div>
+	</div>
 
 
 <div name="change_options" id="change_options">
@@ -252,10 +266,6 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
 </form>
 </div>  
 <div class="col-md-3 visible-lg visible-md">

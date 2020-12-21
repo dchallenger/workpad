@@ -12,15 +12,22 @@
                     <div class="portlet-body" >
 
                         <input type="hidden" name="current_date" id="current_date" value="<?php echo date("Y-m-d", strtotime($date) ); ?>">
+                        <input type="hidden" name="current_date_shift" id="current_date_shift" value="<?php echo $current_date_shift ?>">
                         <input type="hidden" name="update_shift" value="1">
 
                         <div id="available_schedules" class="list-group">
 
-                            <?php for($i=0; $i < count( $currentday_schedules ); $i++){ ?>
-                                <a href="javascript:;" class="list-group-item small available_scheds" data-shift-id="<?php echo $currentday_schedules[$i]['form_id']; ?>">
-                                    <?php echo $currentday_schedules[$i]['title']; ?><!-- <span class="small pull-right text-muted">(5)</span> -->
-                                </a>
-                            <?php } ?>
+                            <?php 
+                                for($i=0; $i < count( $currentday_schedules ); $i++){ 
+                                    if ($currentday_schedules[$i]['type'] != 'BIRTHDAY') {
+                            ?>
+                                        <a href="javascript:;" class="list-group-item small available_scheds" data-shift-id="<?php echo $currentday_schedules[$i]['form_id']; ?>">
+                                            <?php echo $currentday_schedules[$i]['title']; ?><!-- <span class="small pull-right text-muted">(5)</span> -->
+                                        </a>
+                            <?php 
+                                    } 
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -116,7 +123,7 @@
                                             name="shift_id[<?php echo $i; ?>]" 
                                             id="select_<?php echo $partners[$i]['shift_id']; ?>"
                                             data-select-id="<?php echo $partners[$i]['user_id']; ?>"
-                                            class="form-control selectM3 shiftSelect" 
+                                            class="form-control shiftSelect" 
                                             data-placeholder="Select...">
 
                                             <option value="" selected="selected">--</option>
@@ -171,7 +178,7 @@
 
         if(gsd_is_processing) return;
 
-        var data = {keyword: keyword};
+        var data = {keyword: keyword,current_date: $("#current_date").val(),current_date_shift: $('#current_date_shift').val()};
 
         $.ajax({
             url: base_url + module.get('route') + '/get_search_data',
@@ -192,13 +199,11 @@
                     $("table.table tbody tr").remove();
                     $("table.table tbody").append(response.partners_list);
                     
-                    jQuery('select.selectM3').select2();
-                    jQuery("select.shiftSelect").select2();
 
                     customHandleUniform();
                 }
                 else{
-
+                    $("table.table tbody tr").remove();
                     // will do something here...
                 }
             },
@@ -238,7 +243,7 @@
             //$(".shiftSelect").select2("destroy");
             //$(".shiftSelect").select2();
             
-            $("select.shiftSelect").select2("val", $(this).val());
+            $(".shiftSelect").val($(this).val());
 
             if($(this).val()){
                 
@@ -252,6 +257,8 @@
         });
 
         $(".available_scheds").on('click', function(){
+
+            $('#current_date_shift').val($(this).data('shift-id'));
 
             var request_data = {shift_id: $(this).data('shift-id'), date: $("#current_date").val()}
 

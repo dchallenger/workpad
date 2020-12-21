@@ -109,14 +109,16 @@ class work_calendar_model extends Record
 		return $data;		
 	}
 
-	public function get_searched_partner($manager_id, $keyword, $role_id){ 
+	public function get_searched_partner($manager_id, $keyword, $role_id, $shift_id = '', $date = ''){ 
 
 		$data = array();
 		$admin_list = array("2", "6");
 
-		$qry = "SELECT p.user_id, p.id_number, p.alias display_name, p.shift_id, shift, p.calendar_id, calendar 
+		$qry = "SELECT p.user_id, p.id_number, p.alias display_name, p.calendar_id, calendar, ts.shift_id, ts.shift
 				FROM partners p 
-				LEFT JOIN users_profile up ON up.`user_id` = p.`user_id` ";
+				LEFT JOIN users_profile up ON up.`user_id` = p.`user_id`
+				LEFT JOIN ww_time_record tr ON up.user_id = tr.user_id
+				LEFT JOIN ww_time_shift ts ON IF(IFNULL(tr.`aux_shift_id`,0)=0,tr.`shift_id`,tr.`aux_shift_id`)=ts.shift_id";
 
 
 		/*WHERE IFNULL(p.resigned_date,0) = 0 AND alias LIKE '%james%' ";
@@ -155,11 +157,11 @@ class work_calendar_model extends Record
 					  AND alias LIKE '%" . $keyword . "%' ";
 		}
 
+		$qry .= " AND IF(IFNULL(tr.`aux_shift_id`,0)=0,tr.`shift_id`,tr.`aux_shift_id`)= ".$shift_id."";
+
+		$qry .= " AND tr.`date`= '".$date."'";
 
 		$qry .= "	ORDER BY display_name ASC";  
-
-
-
 
 		$result = $this->db->query($qry);
 

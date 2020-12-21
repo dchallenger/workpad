@@ -190,12 +190,12 @@ $(document).ready(function(){
         var form_type = $('#form_type').val();
         var forms = ['1','2','3','4','5','6','7','8','14','15','16','19','20'];
         $('#partners-partner_id').find("option:selected").removeAttr("selected");
-        
-        if ($('#partners-partner_id').length > 0){
+
+/*        if ($('#partners-partner_id').length > 0){
             if ($.inArray($('#form_type').val(),forms) >= 0){
-                $('#partners-partner_id').multiselect({
+                $("#partners-partner_id").multiselect({
                     selectedList: 1
-                });
+                }).multiselectfilter();
             }
             else{
                 $("#partners-partner_id").multiselect().multiselectfilter();
@@ -203,7 +203,10 @@ $(document).ready(function(){
         }
         if($('#employee_filtered').val() == 0){
             update_employees( $('#users_location-location_id').val(), $('#users_company-company_id').val(), $('#users_division-division_id').val(), $('#users_department-department_id').val(), form_type);
-        }
+        }*/
+                
+        update_employees( $('#users_location-location_id').val(), $('#users_company-company_id').val(), $('#users_division-division_id').val(), $('#users_department-department_id').val(), form_type);
+
         $('#main_form').hide();
         $('.form-actions').hide();
         $('#change_employees').show();
@@ -281,9 +284,9 @@ function update_employees( location_id, company_id, division_id, department_id, 
                     var forms = ['1','2','3','4','5','6','7','8','14','15','16','19','20'];
 
                     if ($.inArray($('#form_type').val(),forms) >= 0){
-                        $('#partners-partner_id').multiselect({
+                        $("#partners-partner_id").multiselect({
                             selectedList: 1
-                        });
+                        }).multiselectfilter();
                     }
                     else{
                         $("#partners-partner_id").multiselect().multiselectfilter();

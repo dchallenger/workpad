@@ -74,6 +74,11 @@ function init_form()
         allowClear: true
     });
 
+    $('#time_forms_paternity-type').select2({
+        placeholder: "Select an option",
+        allowClear: true
+    });
+
     if (jQuery().datepicker) {
         $('#time_forms_maternity-expected_date').parent('.date-picker').datepicker({
             autoclose: true

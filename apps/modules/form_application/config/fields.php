@@ -776,6 +776,21 @@ if(get_time_form_id('PL') != false){
 		'active' => '1',
 		'encrypt' => 0
 	);
+	$config['fields'][get_time_form_id('PL')]['time_forms_maternity.type'] = array(
+		'f_id' => 21,
+		'fg_id' => get_time_form_id('PL'),
+		'label' => 'Type',
+		'description' => 'Type',
+		'table' => 'time_forms_maternity',
+		'column' => 'type',
+		'uitype_id' => 4,
+		'display_id' => 3,
+		'quick_edit' => 1,
+		'sequence' => 5,
+		'datatype' => 'required',
+		'active' => '1',
+		'encrypt' => 0
+	);	
 	$config['fields'][get_time_form_id('PL')]['time_forms_maternity.delivery_id'] = array(
 		'f_id' => 21,
 		'fg_id' => get_time_form_id('PL'),

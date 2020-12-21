@@ -23,23 +23,23 @@
         </td> 
                                     
         <td>
-            <?php echo $partners[$i]['calendar']; ?>
+            <?php echo $partners[$i]['shift']; ?>
         </td>
                                     
         <td>
             <select  
-                name="calendar_id[<?php echo $i; ?>]" 
-                id="select_<?php echo $partners[$i]['calendar_id']; ?>"
-                data-select-id="<?php echo $partners[$i]['user_id']; ?>"
-                class="form-control shiftSelect" 
+                name="shift_id[<?php echo $i; ?>]" 
+                id="select_<?php echo $partners[$i]['shift_id']; ?>" 
+                data-select-id="<?php echo $partners[$i]['user_id']; ?>" 
+                class="form-control selectM3 shiftSelect" 
                 data-placeholder="Select...">
 
                 <option value="" selected="selected">--</option>
 
-                <?php for($j=0; $j < count( $shifts_weekly ); $j++){ ?>
-                    <option value="<?php echo $shifts_weekly[$j]['calendar_id']; ?>">
-                        <?php echo $shifts_weekly[$j]['calendar']; ?>
-                    </option>
+                <?php for($j=0; $j < count( $shifts ); $j++){ ?>
+                <option value="<?php echo $shifts[$j]['shift_id']; ?>">
+                    <?php echo $shifts[$j][ 'shift']; ?>
+                </option>
                 <?php } ?>
             </select>
         </td>

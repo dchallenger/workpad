@@ -487,15 +487,27 @@ class Timerecord_manage extends MY_PrivateController
 
 		$subFilter = $this->input->post('subFilter');
 		if($subFilter == '2'){
- 			$data['subordinates'] = $this->mod->getAllSubordinates();
+ 			$subordinates = $this->mod->getAllSubordinates();
 		}else{
- 			$data['subordinates'] = $this->mod->getManagerPartners();
+ 			$subordinates = $this->mod->getManagerPartners();
 		}
 
- 		$this->response->subordinates = '<option value="">Select...</option>';
-		foreach( $data['subordinates'] as $subordinate )
-		{
-			$this->response->subordinates .= '<option value="'.$subordinate['partner_id'].'">'.$subordinate['partner_name'].'</option>';
+		$this->response->subordinates = '';
+		
+		if (array_key_exists('direct',$subordinates)) {
+			foreach ($subordinates as $key => $value) {
+				$this->response->subordinates .= '<optgroup label="'.ucfirst($key).'">';
+				foreach( $value as $subordinate )
+				{
+					$this->response->subordinates .= '<option value="'.$subordinate['partner_id'].'">'.$subordinate['partner_name'].'</option>';
+				}
+			}
+		}
+		else {
+			foreach( $subordinates as $subordinate )
+			{
+				$this->response->subordinates .= '<option value="'.$subordinate['partner_id'].'">'.$subordinate['partner_name'].'</option>';
+			}
 		}
 
 		$this->_ajax_return();	

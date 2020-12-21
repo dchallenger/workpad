@@ -136,6 +136,11 @@ $config['field_validations']['time_forms_maternity.delivery_id'][] = array(
 	'label'   => 'Delivery',
 	'rules'   => 'required'
 );
+$config['field_validations']['time_forms_maternity.type'][] = array(
+	'field'   => 'time_forms_maternity[type]',
+	'label'   => 'Type',
+	'rules'   => 'required'
+);
 $config['field_validations']['time_forms_maternity.pregnancy_no'][] = array(
 	'field'   => 'time_forms_maternity[pregnancy_no]',
 	'label'   => 'No. of Pregnancy',

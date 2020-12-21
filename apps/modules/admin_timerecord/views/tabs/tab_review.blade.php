@@ -14,6 +14,7 @@
 
     <div class="portlet-title">
     @include('employee_filter')
+    <br>
     </div>
 
     <div class="portlet-body">

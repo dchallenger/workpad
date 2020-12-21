@@ -37,7 +37,7 @@ class Work_calendar extends MY_PrivateController
 
 
 		// final
-		$Partners = isset($_POST['user_id']) ? $_POST['user_id'] : '';
+		$partners = isset($_POST['user_id']) ? $_POST['user_id'] : '';
 		$shift_id = isset($_POST['shift_id']) ? $_POST['shift_id'] : '';
         $calendar_id = isset($_POST['calendar_id']) ? $_POST['calendar_id'] : '';
 		$start_date = isset($_POST['date']['start']) ? $_POST['date']['start'] : '';
@@ -46,7 +46,7 @@ class Work_calendar extends MY_PrivateController
 		//double check if date is set
 		$start_date = $start_date == '' ? $_POST['current_date'] : $start_date;
 
-		if( !$Partners ){
+		if( !$partners ){
 
 			$this->response->message[] = array(
 			    'message' => 'Please choose partner(s)!',
@@ -59,12 +59,12 @@ class Work_calendar extends MY_PrivateController
 
 		if(isset($_POST['shift_id'])){ 
 
-			foreach($Partners as $index => $id){
-				$this->mod->update_partner_work_schedule( date("Y-m-d", strtotime($start_date)), $Partners[$index], $shift_id[$index]);	
+			foreach($partners as $index => $id){
+				$this->mod->update_partner_work_schedule( date("Y-m-d", strtotime($start_date)), $partners[$index], $shift_id[$index]);	
 
                 //saving of history for audit
                 $schedule_history = array(
-                                        'user_id' => $Partners[$index],
+                                        'user_id' => $partners[$index],
                                         'from_date' => $start_date,
                                         'to_date' => $start_date,
                                         'shift_id' => $shift_id[$index],
@@ -78,7 +78,7 @@ class Work_calendar extends MY_PrivateController
 
             $startdate = $start_date;
 
-            foreach($Partners as $index => $id)
+            foreach($partners as $index => $id)
             {
                 $start_date = $startdate;
 
@@ -98,11 +98,11 @@ class Work_calendar extends MY_PrivateController
 
                         if(!$result_restDay->num_rows() > 0)
                         {
-                            $this->mod->update_partner_work_schedule( date("Y-m-d", strtotime($start_date)), $Partners[$index], $shift_id[$index]);
+                            $this->mod->update_partner_work_schedule( date("Y-m-d", strtotime($start_date)), $partners[$index], $shift_id[$index]);
                         }  
                     }
                     elseif (isset($calendar_id[$index])){
-                        $this->mod->update_partner_work_schedule_weekly( date("Y-m-d", strtotime($start_date)), $Partners[$index], $calendar_id[$index]);
+                        $this->mod->update_partner_work_schedule_weekly( date("Y-m-d", strtotime($start_date)), $partners[$index], $calendar_id[$index]);
                     } 
             
                     $start_date = date ("Y-m-d", strtotime("+1 day", strtotime($start_date)));
@@ -116,7 +116,7 @@ class Work_calendar extends MY_PrivateController
                 {
                     $schedule_history = array(
                                                 'coordinator_id' => $this->user->user_id,
-                                                'user_id' => $Partners[$index],
+                                                'user_id' => $partners[$index],
                                                 'from_date' => $start_date,
                                                 'to_date' => $end_date,
                                                 'shift_id' => $shift_id[$index],
@@ -127,7 +127,7 @@ class Work_calendar extends MY_PrivateController
                 {
                     $schedule_history = array(
                                                 'coordinator_id' => $this->user->user_id,
-                                                'user_id' => $Partners[$index],
+                                                'user_id' => $partners[$index],
                                                 'from_date' => $start_date,
                                                 'to_date' => $end_date,
                                                 'calendar_id' => $calendar_id[$index],
@@ -136,7 +136,7 @@ class Work_calendar extends MY_PrivateController
                 }
                 $this->db->insert('time_record_schedule_history',$schedule_history);
 
-			} //foreach $Partners
+			} //foreach $partners
 
 		}
 
@@ -214,6 +214,7 @@ class Work_calendar extends MY_PrivateController
         $data['title'] = 'Manage Partners Work Schedule';
         $data['shifts'] = $this->mod->get_shift();
         $data['date'] = $_POST['date'];
+        $data['current_date_shift'] = $this->input->post('shift_id');
 
         $user = $this->config->item('user'); 
         $role_id = $user['role_id'];
@@ -426,7 +427,7 @@ class Work_calendar extends MY_PrivateController
                     date("Y-m-d", strtotime($this->input->post('date'))), 
                     $this->session->userdata('user')->user_id);
 
-            $data['partners']= $manager_id !== '0' ? $this->mod->get_searched_partner($manager_id, $search_keyword, $role_id) : array(); 
+            $data['partners']= $manager_id !== '0' ? $this->mod->get_searched_partner($manager_id, $search_keyword, $role_id, $this->input->post('current_date_shift'), $this->input->post('current_date')) : array(); 
 
             if ($this->input->post('type') == 'shift'){
                 $view['content'] = $this->load->view('edit/search_result', $data, true);
@@ -459,7 +460,7 @@ class Work_calendar extends MY_PrivateController
                     date("Y-m-d", strtotime($this->input->post('date'))), 
                     $this->session->userdata('user')->user_id);
 
-            $data['partners']= $manager_id !== '0' ? $this->mod->get_searched_partner($manager_id, '', $role_id) : array(); 
+            $data['partners']= $manager_id !== '0' ? $this->mod->get_searched_partner($manager_id, '', $role_id, $this->input->post('current_date_shift'), $this->input->post('current_date')) : array(); 
 
             if ($this->input->post('type') == 'shift'){
                 $view['content'] = $this->load->view('edit/search_result', $data, true);

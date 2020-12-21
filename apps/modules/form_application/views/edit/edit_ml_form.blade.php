@@ -93,6 +93,7 @@
 								<?php	                            	                            		
 													$db->select('delivery_id,delivery');
 				                            		$db->where('deleted', '0');
+				                            		$db->where_in('maternity_paternity', [0,1]);
 				                            		$options = $db->get('time_delivery');
 													$time_delivery_delivery_id_options = array();
 				                            		foreach($options->result() as $option)

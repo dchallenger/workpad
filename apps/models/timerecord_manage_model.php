@@ -185,8 +185,7 @@ class timerecord_manage_model extends Record
 		$manager_ids = array();
 
 		$qry = "SELECT 
-					up.user_id partner_id, 
-					CONCAT(lastname, ', ', firstname, ' ', maidenname) partner_name 
+					up.user_id partner_id, up.display_name partner_name 
 				FROM users_profile up
 				LEFT JOIN users ON users.user_id = up.user_id 
 				WHERE up.reports_to_id = '".$this->user->user_id."'  
@@ -196,14 +195,13 @@ class timerecord_manage_model extends Record
 
 		if($result->num_rows() > 0){			
 			foreach($result->result_array() as $row){
-				$data[] = $row;
+				$data['direct'][] = $row;
 				$manager_ids[] = $row['partner_id'];
 			}
 		}
 
 		$qry = "SELECT 
-					up.user_id partner_id, 
-					CONCAT(lastname, ', ', firstname, ' ', maidenname) partner_name 
+					up.user_id partner_id, up.display_name partner_name
 				FROM users_profile up
 				LEFT JOIN users ON users.user_id = up.user_id 
 				WHERE up.reports_to_id IN (".implode(',', $manager_ids).")  
@@ -213,7 +211,7 @@ class timerecord_manage_model extends Record
 
 		if($result->num_rows() > 0){			
 			foreach($result->result_array() as $row){
-				$data[] = $row;
+				$data['subordinates'][] = $row;
 			}
 		}
 
