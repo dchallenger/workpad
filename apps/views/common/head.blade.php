@@ -59,7 +59,7 @@
 	<link href="{{ theme_path() }}css/style-responsive.css" rel="stylesheet" type="text/css"/>
 	<link href="{{ theme_path() }}css/plugins.css" rel="stylesheet" type="text/css"/>
 	<link href="{{ theme_path() }}css/pages/tasks.css" rel="stylesheet" type="text/css"/>
-	<link href="{{ theme_path() }}css/themes/green.css" rel="stylesheet" type="text/css" id="style_color"/>
+	<link href="{{ theme_path() }}css/themes/ortigas.css" rel="stylesheet" type="text/css" id="style_color"/>
 	<link href="{{ theme_path() }}css/custom.css" rel="stylesheet" type="text/css"/>
 	<link href="{{ theme_path() }}css/game.css" rel="stylesheet" type="text/css"/>
 	<!-- END THEME STYLES -->
