@@ -6,7 +6,8 @@
 	<?php if( !empty( $fg['description'] ) ):?>
 		<p><?php echo $fg['description']?></p>
 	<?php endif;?>
-	<div class="portlet-body form"><?php
+	<div class="portlet-body form">
+		<?php
 		foreach($fg['fields'] as $f_name){
 			$field = $fields[$f_name];
 			$name = $field['table'].'['.$field['column'].']';
@@ -27,7 +28,8 @@
 			?>
 			<div class="form-group">
 				<label class="control-label col-md-3"><?php if( in_array('required', $rules) ):?><span class="required">* </span><?php endif; echo $field['label']; ?></label>
-				<div class="col-md-7"><?php
+				<div class="col-md-7">
+					<?php
 					switch( $field['uitype_id'] )
 					{
 						case 1: //textfield

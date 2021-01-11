@@ -120,7 +120,7 @@
                 ?>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3">{{ lang('applicants.email') }}</label>
+                    <label class="control-label col-md-3">{{ lang('applicants.email') }}<span class="required">*</span></label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" name="recruitment[email]" id="recruitment-email" value="{{ $record['email'] }}" placeholder="Enter Email Address"/>
                     </div>

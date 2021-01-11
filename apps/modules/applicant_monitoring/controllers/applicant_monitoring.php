@@ -1599,7 +1599,7 @@ class Applicant_monitoring extends MY_PrivateController
 		}
 
 		$this->db->select("CONCAT(title,' ',firstname,' ',lastname) as full_name",false);
-		$hrd_manager_result = $this->db->get_where('users_profile',array('position_id' => 380));
+		$hrd_manager_result = $this->db->get_where('users_profile',array('position_id' => 21));
 
 		if ($hrd_manager_result && $hrd_manager_result->num_rows() > 0){
 			$hrd_manager = $hrd_manager_result->row();

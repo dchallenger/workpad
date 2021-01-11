@@ -48,9 +48,11 @@
      </td>
     <td>
         @if( $permission['edit'] == 1 )
-            <div class="btn-group">
-                <a class="btn btn-xs text-muted" href="{{ $edit_url }}"><i class="fa fa-pencil"></i> {{ lang('common.edit') }}</a>
-            </div>
+            @if($recruitment_status_id != 7)
+                <div class="btn-group">
+                    <a class="btn btn-xs text-muted" href="{{ $edit_url }}"><i class="fa fa-pencil"></i> {{ lang('common.edit') }}</a>
+                </div>
+            @endif
             @if( $permission['detail'] == 1 AND $permission['delete'] == 1 )
                 <div class="btn-group">
                     <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> {{ lang('common.options') }}</a>

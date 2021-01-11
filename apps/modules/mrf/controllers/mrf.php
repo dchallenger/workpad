@@ -601,7 +601,7 @@ class Mrf extends MY_PrivateController
                             $subject = $this->parser->parse_string($mrf_send_template['subject'], $sendmrfdata, TRUE); 
 
                             $this->db->query("INSERT INTO {$this->db->dbprefix}system_email_queue (`to`, `subject`, body)
-                                     VALUES('{$approvers_details->email}', '{$subject}', '".@mysql_real_escape_string($msg)."') ");
+                                     VALUES('{$approvers_details->email}', '{$subject}', '".$this->db->escape_str($msg)."') ");
                             //create system logs
                             $insert_array = array(
                                 'to' => $approvers_details->email, 
