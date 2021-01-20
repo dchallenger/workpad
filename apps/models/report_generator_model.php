@@ -813,14 +813,16 @@ class report_generator_model extends Record
 			$content->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
 			$content->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
 			$content->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('L')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('M')->setAutoSize(true);
 
 			$content->getActiveSheet()->getStyle("A1:A2")->applyFromArray($style_center);
-			$content->getActiveSheet()->mergeCells('A1:K1');
-			$content->getActiveSheet()->mergeCells('A2:K2');
+			$content->getActiveSheet()->mergeCells('A1:M1');
+			$content->getActiveSheet()->mergeCells('A2:M2');
 
-			$content->getActiveSheet()->getStyle("A1:K3")->getFont()->setBold(true);
+			$content->getActiveSheet()->getStyle("A1:M3")->getFont()->setBold(true);
 
-			$content->getActiveSheet()->getStyle("A3:K".($result->num_rows()+3))->applyFromArray($border_style);			
+			$content->getActiveSheet()->getStyle("A3:M".($result->num_rows()+3))->applyFromArray($border_style);			
 		}
 
 		if (isset($exc_report_header)) {
