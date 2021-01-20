@@ -12,6 +12,7 @@
                 $class = 'badge badge-warning';
                 break;
             case 3:
+            case 8:
             case 11:
                 $class = 'badge badge-success';
                 break;

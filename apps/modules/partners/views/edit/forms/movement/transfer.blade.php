@@ -85,19 +85,21 @@
 						?>
 						</select>
 						<?php
-						foreach($options->result() as $option)
-						{
-							$option_field_id = strtolower($transfer_field['field_name'].'_id');		
-							if($transfer_field['table_name'] == 'ww_users'){
-								if($option->user_id == $transfer_field['to_id']){
-									echo  $option->display_name;
+						if ($options && $options->num_rows() > 0) {
+							foreach($options->result() as $option)
+							{
+								$option_field_id = strtolower($transfer_field['field_name'].'_id');		
+								if($transfer_field['table_name'] == 'ww_users'){
+									if($option->user_id == $transfer_field['to_id']){
+										echo  $option->display_name;
+									}
+								}else{
+									if(isset($option->{$option_field_id}) && $option->{$option_field_id} == $transfer_field['to_id']){
+										echo $option->{$transfer_field['field_name']};
+									}
 								}
-							}else{
-								if(isset($option->$option_field_id) && $option->$option_field_id == $transfer_field['to_id']){
-									echo $option->$transfer_field['field_name'];
-								}
-							}
-						}	
+							}	
+						}
 
 						?>	
 					</div> 	

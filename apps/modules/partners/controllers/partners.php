@@ -1008,7 +1008,7 @@ class Partners extends MY_PrivateController
 							ON pma.movement_id = pm.movement_id
 						INNER JOIN {$this->db->dbprefix}partners_movement_cause pmc 
 							ON pm.due_to_id = pmc.cause_id 
-						WHERE pm.status_id = 3 
+						WHERE pm.status_id = 8 
 						AND pma.user_id = {$user_id}";
 		$movement_sql = $this->db->query($movement_qry);
 
@@ -1500,7 +1500,7 @@ class Partners extends MY_PrivateController
 								ON pma.movement_id = pm.movement_id
 							INNER JOIN {$this->db->dbprefix}partners_movement_cause pmc 
 								ON pm.due_to_id = pmc.cause_id 
-							WHERE pma.status_id = 6 
+							WHERE pm.status_id = 8 
 							AND pma.user_id = {$user_id}";
 			$movement_sql = $this->db->query($movement_qry);
 
