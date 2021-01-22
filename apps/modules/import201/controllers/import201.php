@@ -4323,7 +4323,345 @@ class Import201 extends MY_PrivateController
 		echo "Done.";	
 	}
 
+	function update_level_shift(){
+		$this->load->library('excel');
+
+		$objReader = new PHPExcel_Reader_Excel5;
+
+		if (!$objReader) {
+			show_error('Could not get reader.');
+		}
+
+		$objReader->setReadDataOnly(true);
+		$objPHPExcel = $objReader->load('D:\oclp new version\oclp requirements\level and shift template.xls');
+		$rowIterator = $objPHPExcel->getActiveSheet()->getRowIterator();
+	
+		$ctr = 0;	
+		$import_data = array();
+
+		foreach($rowIterator as $row){
+			$cellIterator = $row->getCellIterator();
+			$cellIterator->setIterateOnlyExistingCells(false); // Loop all cells, even if it is not set
+			
+			$rowIndex = $row->getRowIndex();
+			
+			// Build the array to insert and check for validation errors as well.
+			foreach ($cellIterator as $cell) {
+				$import_data[$ctr][] = $cell->getCalculatedValue();
+			}
+
+			if ($rowIndex == 1) {
+
+				foreach ($import_data as $row) {
+					foreach ($row as $cell => $value) {
+						switch ($value) {														
+							case 'ID Number':
+								$valid_cells[] = 'id_number';
+								break;
+							case 'Level Id':
+								$valid_cells[] = 'employment_type_id';
+								break;
+							case 'Weekly Shift Id':
+								$valid_cells[] = 'calendar_id';
+								break;																
+						}
+					}
+				}
+
+				unset($import_data[$ctr]);
+			}
+
+			$ctr++;
+		}
+
+
+		$ctr = 0;
+
+		// Remove non-matching cells.
+		foreach ($import_data as $row) {		
+			$arr_field_val = array();
+			$id_number = '';
+			foreach ($valid_cells as $key => $value) {
+				if (in_array($value, ['employment_type_id','calendar_id'])) {
+					$arr_field_val[$value] = $row[$key];
+				} else {
+					$id_number = $row[$key];
+				}
+			}
+
+			$this->db->where('id_number',$id_number);
+			$this->db->update('partners',$arr_field_val);
+		}
+
+		echo "Done.";	
+	}
+
+	function import_movement(){
+		$this->load->library('excel');
+
+		$objReader = new PHPExcel_Reader_Excel5;
+
+		if (!$objReader) {
+			show_error('Could not get reader.');
+		}
+
+		$objReader->setReadDataOnly(true);
+		$objPHPExcel = $objReader->load('D:\oclp new version\employee movement import template.xls');
+		$rowIterator = $objPHPExcel->getActiveSheet()->getRowIterator();
+	
+		$ctr = 0;	
+		$import_data = array();
+
+		foreach($rowIterator as $row){
+			$cellIterator = $row->getCellIterator();
+			$cellIterator->setIterateOnlyExistingCells(false); // Loop all cells, even if it is not set
+			
+			$rowIndex = $row->getRowIndex();
+			
+			// Build the array to insert and check for validation errors as well.
+			foreach ($cellIterator as $cell) {
+				$import_data[$ctr][] = $cell->getCalculatedValue();
+			}
+
+			if ($rowIndex == 1) {
+
+				foreach ($import_data as $row) {
+					foreach ($row as $cell => $value) {
+						switch ($value) {
+							case 'ID Number':
+								$valid_cells_movement[] = 'id_number';
+								break;
+							case 'Due To':
+								$valid_cells_movement[] = 'due_to_id';
+								break;
+							case 'Type':
+								$valid_cells_movement_action[] = 'type_id';
+								break;								
+							case 'Effective Date':
+								$valid_cells_movement_action[] = 'effectivity_date';
+								break;
+							case 'Remarks':
+								$valid_cells_movement[] = 'remarks';
+								break;
+							case 'Field Name':
+								$valid_cells_movement_action_transfer[] = 'field_id';
+								break;
+							case 'From':
+								$valid_cells_movement_action_transfer[] = 'from_id';
+								break;
+							case 'To':
+								$valid_cells_movement_action_transfer[] = 'to_id';
+								break;
+							case 'Black Listed (Yes / No)':
+								$valid_cells_movement_action_moving[] = 'blacklisted';
+								break;
+							case 'Eligible For Rehire (Yes / No)':
+								$valid_cells_movement_action_moving[] = 'eligible_for_rehire';
+								break;
+							case 'Reviewed By (Id Number)':
+								$valid_cells_movement_approver_hr[] = 'user_id';
+								break;
+						}
+					}
+				}
+
+				unset($import_data[$ctr]);
+			}
+
+			$ctr++;
+		}
+
+
+		$ctr = 0;
+
+		// Remove non-matching cells.
+		foreach ($import_data as $row) {		
+			$arr_field_val = array();
+			$user_id = 0
+			foreach ($valid_cells_movement as $key => $value) {
+				switch ($value) {
+					case 'id_number':
+						$result = $this->db->get_where('partners',array('id_number' => $row[$key]));
+						if ($result && $result->num_rows() > 0){
+							$partners = $result->row();
+							$row[$key] = $partners->user_id;
+							$user_id = $partners->user_id;
+						}
+						else{
+							$row[$key] = '';
+						}						
+						break;
+					case 'due_to_id':
+						$result = $this->db->get_where('partners_movement_cause',array('cause' => $row[$key]));
+						if ($result && $result->num_rows() > 0){
+							$movement_cause = $result->row();
+							$row[$key] = $movement_cause->cause_id;
+						}
+						else{
+							$row[$key] = '';
+						}						
+						break;							
+				}	
+				
+				$arr_field_val[$value] = $row[$key];
+			}
+
+			$this->db->insert('partners_movement',$arr_field_val);
+			$movement_id = $this->db->insert_id();
+
+			$arr_field_val_action = array();
+			foreach ($valid_cells_movement_action as $key => $value) {
+				switch ($value) {
+					case 'type_id':
+						$result = $this->db->get_where('partners_movement_type',array('type' => $row[$key]));
+						if ($result && $result->num_rows() > 0){
+							$movement_type = $result->row();
+							$row[$key] = $movement_type->type_id;						
+						}
+						else{
+							$row[$key] = '';
+						}						
+						break;						
+				}	
+				
+				$arr_field_val_action[$value] = $row[$key];
+			}
+
+			$arr_field_val_action['user_id'] = $user_id;
+			$arr_field_val_action['movement_id'] = $movement_id;
+
+			$this->db->insert('partners_movement_action',$arr_field_val_action);
+			$action_id = $this->db->insert_id();
+
+			$arr_field_val_action_transfer = array();
+			foreach ($valid_cells_movement_action_transfer as $key => $value) {
+				$field_name = '';
+				switch ($value) {
+					case 'field_id':
+						$field_name = $row[$key];					
+						$result = $this->db->get_where('partners_movement_fields',array('field_name' => $row[$key]));
+						if ($result && $result->num_rows() > 0){
+							$movement_fields = $result->row();
+							$row[$key] = $movement_fields->field_id;						
+						}
+						else{
+							$row[$key] = '';
+						}
+
+						$arr_field_val_action_transfer['field_name'] = $row[$key];
+						break;
+					case 'from_id':
+						$from_val = $this->get_movement_field_from_to($field_name,$row[$key]);
+						$row[$key] = $from_val['id'];
+						$arr_field_val_action_transfer['from_name'] = $from_val['val'];					
+						break;
+					case 'to_id':
+						$to_val = $this->get_movement_field_from_to($field_name,$row[$key]);
+						$row[$key] = $to_val['id'];
+						$arr_field_val_action_transfer['to_name'] = $to_val['val'];					
+						break;						
+				}	
+				
+				$arr_field_val_action_transfer[$value] = $row[$key];
+			}
+
+			$arr_field_val_action_transfer['action_id'] = $action_id;
+			$arr_field_val_action_transfer['movement_id'] = $movement_id;
+
+			$this->db->insert('partners_movement_action_transfer',$arr_field_val_action_transfer);
+
+			$arr_field_val_action_moving = array();
+			foreach ($valid_cells_movement_action_moving as $key => $value) {
+				switch ($value) {
+					case 'blacklisted':
+						$row[$key] = (strtolower($row[$key]) == 'yes' ? 1 : 0);
+						break;
+					case 'eligible_for_rehire':
+						$row[$key] = (strtolower($row[$key]) == 'yes' ? 1 : 0);					
+						break;							
+				}	
+				
+				$arr_field_val_action_moving[$value] = $row[$key];
+			}
+
+			$arr_field_val_action_moving['action_id'] = $action_id;
+			$arr_field_val_action_moving['movement_id'] = $movement_id;
+
+			$this->db->insert('partners_movement_action_transfer',$arr_field_val_action_moving);			
+
+			$arr_field_val_approver_hr['movement_id'] = $movement_id;
+			$arr_field_val_approver_hr['user_id'] = 234; //fixed to naisa
+			$this->db->insert('partners_movement_action_transfer',$arr_field_val_action_moving);
+		}
+
+		echo "Done.";	
+	}
+
 	/************************************************************************************************/	
+
+	public function get_movement_field_from_to($field_name = '',$val = '')
+	{
+		switch ($field_name) {
+			case 'department':
+				$result = $this->db->get_where('users_department',array('department' => $val);
+				if ($result && $result->num_rows() > 0){
+					$department_result = $result->row();
+					$value['id'] = $department_result->department_id;
+					$value['val'] = $department_result->department;
+				}
+				break;
+			case 'division':
+				# code...
+				break;
+			case 'location':
+				# code...
+				break;
+			case 'position':
+				# code...
+				break;
+			case 'rank':
+				# code...
+				break;
+			case 'project':
+				# code...
+				break;
+			case 'reports_to':
+				# code...
+				break;
+			case 'role':
+				# code...
+				break;
+			case 'employment_status':
+				# code...
+				break;
+			case 'employment_type':
+				# code...
+				break;
+			case 'temp_assign_end_date':
+				# code...
+				break;
+			case 'company':
+				# code...
+				break;
+			case 'job_level':
+				# code...
+				break;
+			case 'branch':
+				# code...
+				break;
+			case 'sbu_unit':
+				# code...
+				break;
+			case 'section':
+				# code...
+				break;				
+			default:
+				$value['id'] = '';
+				$value['val'] = '';
+				break;
+		}
+		return $value;
+	}
 
 	public function get_import_form()
 	{

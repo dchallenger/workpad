@@ -750,7 +750,7 @@ class Record extends MY_Model
 								$save[$table][$column] = $this->phpass->hash( $value );
 								break;	
 							case 10: //multiselect checkbox
-								$save[$table][$field['column']] = implode(',', $post[$table][$field['column']]);
+								$save[$table][$field['column']] = (!empty($post[$table][$field['column']]) ? implode(',', $post[$table][$field['column']]) : "");
 								break;	
 							case 12: //date from date to
 								unset( $post[$table][$field['column']] );

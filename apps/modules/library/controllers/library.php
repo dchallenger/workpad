@@ -117,6 +117,77 @@ class Library extends MY_PrivateController
 		$this->_ajax_return();
 	}
 
+	public function detail( $record_id, $child_call = false )
+	{
+		if( !$this->permission['detail'] )
+		{
+			echo $this->load->blade('pages.insufficient_permission')->with( $this->load->get_cached_vars() );
+			die();
+		}
+
+		$this->_detail( $child_call );
+	}
+
+	private function _detail( $child_call, $new = false )
+	{
+		$record_check = false;
+		$this->record_id = $data['record_id'] = '';	
+
+		if( !$new )
+		{
+			if( !$this->_set_record_id() )
+			{
+				echo $this->load->blade('pages.insufficient_data')->with( $this->load->get_cached_vars() );
+				die();
+			}
+
+			$this->record_id = $data['record_id'] = $_POST['record_id'];
+		}
+
+		$this->record_id = $data['record_id'] = $_POST['record_id'];
+		
+		$record_check = $this->mod->_exists( $this->record_id );
+		if( $new || $record_check === true )
+		{
+			$result = $this->mod->_get( 'detail', $this->record_id );
+			if( $new )
+			{
+				$field_lists = $result->list_fields();
+				foreach( $field_lists as $field )
+				{
+					$data['record'][$field] = '';
+				}
+			}
+			else{
+				$record = $result->row_array();
+				foreach( $record as $index => $value )
+				{
+					$record[$index] = trim( $value );	
+				}
+				$data['record'] = $record;
+			}
+
+			$this->record = $data['record'];
+
+			$data['library_value'] = $this->mod->get_library_value($this->record_id);
+			
+			$this->load->vars( $data );
+
+			if( !$child_call ){
+				$this->load->helper('form');
+				$this->load->helper('file');
+				echo $this->load->blade('pages.detail')->with( $this->load->get_cached_vars() );
+			}
+		}
+		else
+		{
+			$this->load->vars( $data );
+			if( !$child_call ){
+				echo $this->load->blade('pages.error', array('error' => $record_check))->with( $this->load->get_cached_vars() );
+			}
+		}
+	}
+
 	public function edit( $record_id = "", $child_call = false )
 	{
 		if( !$this->permission['edit'] )
