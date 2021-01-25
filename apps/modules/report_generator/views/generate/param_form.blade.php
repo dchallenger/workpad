@@ -52,6 +52,7 @@
 
 							<tr>
 								<input type="hidden" class="<?php echo ($filter->required == 1 ? 'required' : '' ) ?>" label="<?php echo $label ?>" form-name="filter[<?php echo $filter->filter_id ?>]">
+								<input type="hidden" class="form-control" name="filter_var[{{$filter->value_column}}]" value="{{$filter->filter_id}}" readonly>
 								<td>{{ $label }} <?php echo ($filter->required == 1 ? '<label class="control-label"><span class="required">*</span></label>' : '')?></td>
 								<td>{{ $filter->label }}</td>
 								<td>

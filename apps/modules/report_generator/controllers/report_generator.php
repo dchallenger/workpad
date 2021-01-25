@@ -519,6 +519,7 @@ class Report_generator extends MY_PrivateController
             case 'TARDY':                   
             case 'Time Record Schedule History':
             case 'LEAVE_REPORT':
+            case 'LEAVE_BALANCE_REPORT':
                 $button = array('xls' => 0, 'csv' => 1, 'pdf' => 1, 'txt' => 0);
                 $data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);
                 break;                
@@ -1093,6 +1094,8 @@ class Report_generator extends MY_PrivateController
         
         $filter_ctr = 1;
 
+        $filter_var = $this->input->post('filter_var');
+
         if( $report['fixed_filters']->num_rows() > 0 )
         {
             foreach( $report['fixed_filters']->result() as $row )
@@ -1258,7 +1261,7 @@ class Report_generator extends MY_PrivateController
                 {
                     case 'excel':
                         // debug($result);
-                        $filename = $this->mod->export_excel( $report['main'], $report['columns'], $result, $post['filter'] );
+                        $filename = $this->mod->export_excel( $report['main'], $report['columns'], $result, $post['filter'], $filter_var);
                         break;
                     case 'csv':
                         $filename = $this->mod->export_csv( $report['main'], $report['columns'], $result );

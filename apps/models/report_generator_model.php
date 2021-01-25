@@ -347,7 +347,7 @@ class report_generator_model extends Record
 		return true;
 	} 
 
-	function export_excel( $report, $columns, $result, $filter )
+	function export_excel( $report, $columns, $result, $filter, $filter_var )
 	{
 		ini_set('memory_limit', '1024M');   
         ini_set('max_execution_time', 1800);
@@ -658,7 +658,11 @@ class report_generator_model extends Record
 				$auto_size = 1;
 				$w_border = 1;
         		$excel = $this->load->view("templates/excel", array('result' => $result), true);
-                break;                
+                break;
+			case 'LEAVE_BALANCE_REPORT':
+				$lbr_header = 1;
+				$excel = $this->load->view("templates/leave_balance_report", array('columns' => $columns, 'result' => $result, 'query' => $query, 'report_name' => $report->report_name,'filter' => $filter, 'filter_var' => $filter_var), true);
+				break;
 			default:
 				$excel = $this->load->view("templates/excel", array('result' => $result), true);
 				break;
@@ -879,6 +883,44 @@ class report_generator_model extends Record
 			$content->getActiveSheet()->getStyle("A1:F3")->getFont()->setBold(true);
 
 			$content->getActiveSheet()->getStyle("A3:F".($result->num_rows()))->applyFromArray($border_style);			
+		}
+
+		if (isset($lbr_header)) {
+			$content->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
+
+			$content->getActiveSheet()->getStyle("A1:A2")->applyFromArray($style_center);
+			$content->getActiveSheet()->mergeCells('A1:k1');
+
+			$content->getActiveSheet()->getStyle("A1:K2")->getFont()->setBold(true);
+
+			$company = "Company";
+
+			foreach( $result->result() as $row ) {
+				$data[$row->$company][] = $row; 
+			}
+
+			$ctr = 3;
+			foreach ($data as $company => $value) {
+				$content->getActiveSheet()->getStyle("A".$ctr."")->getFont()->setBold(true);
+
+				foreach ($value as $key => $value1) {
+					$ctr++;
+				}
+
+				$ctr++;
+			}
+
+			$content->getActiveSheet()->getStyle("A2:K".$ctr)->applyFromArray($border_style);			
 		}
 
 		if($lmr_header == 1){
