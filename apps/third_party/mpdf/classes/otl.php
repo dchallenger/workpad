@@ -5374,7 +5374,11 @@ function replaceSpace(&$txt, &$cOTLdata) {
 
 function trimOTLdata(&$cOTLdata, $Left=true, $Right=true) {
 
-	$len = count($cOTLdata['char_data']);
+	if (isset($cOTLdata['char_data']) && $cOTLdata['char_data'] != '')
+		$len = count($cOTLdata['char_data']);
+	else
+		$len = 0;
+	
 	$nLeft = 0;
 	$nRight = 0;
 	for($i=0;$i<$len;$i++) {

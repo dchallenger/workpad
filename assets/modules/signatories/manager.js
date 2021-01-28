@@ -539,6 +539,12 @@ function save_signatory()
 				}else if(response.mv == 1){
 					var affected_count = response.pending_mv_count;
 					var affected = 'movement';
+				}else if(response.epa == 1){
+					var affected_count = response.pending_epa_count;
+					var affected = 'External Program Application';
+				}else if(response.idp == 1){
+					var affected_count = response.pending_idp_count;
+					var affected = 'Individual Development Plan';
 				}
 
 				if(affected_count == 0){

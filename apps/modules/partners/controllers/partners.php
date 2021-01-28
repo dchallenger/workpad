@@ -3006,7 +3006,7 @@ class Partners extends MY_PrivateController
         $view['title'] = 'Partner';
         $view['description'] = 'add';
 
-        $series = get_system_series('AHI_ID_NUMBER', '');
+        $series = get_system_series('OCLP_ID_NUMBER', '', true);
         
         $data['series'] = $series;
 
@@ -3386,7 +3386,7 @@ class Partners extends MY_PrivateController
             if ($company_code_result && $company_code_result->num_rows() > 0)
         		$company_code = $company_code_result->row()->company_code;
 
-            $series = get_system_series('AHI_ID_NUMBER', $company_code);
+            $series = get_system_series('OCLP_ID_NUMBER', '', true);
 
             $this->response->id_number = $series;
             $this->response->message[] = array(

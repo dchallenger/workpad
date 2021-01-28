@@ -363,7 +363,7 @@ class signatories_model extends Record
 				JOIN users_profile up ON acp.position_id = up.position_id AND acp.department_id = up.department_id AND acp.company_id = up.company_id
 				JOIN time_forms tf ON tf.user_id=up.user_id AND tf.form_status_id IN (2,3,4,5) AND tf.form_code=ac.class_code
 				WHERE acp.user_id = $user_id AND acp.position_id = {$position_id} AND acp.department_id = {$department_id} AND acp.company_id = {$company_id} AND up.active=1 AND ac.class_id=$class_id
-				GROUP BY 1,2,3;
+				GROUP BY 1;
 				";
 		$result = $this->db->query( $qry );
 
@@ -378,7 +378,7 @@ class signatories_model extends Record
 					JOIN users_profile up ON acp.position_id = up.position_id AND acp.department_id = up.department_id AND acp.company_id = up.company_id
 					JOIN time_forms tf ON tf.user_id=up.user_id AND tf.form_status_id IN (2,3,4,5) AND tf.form_code=ac.class_code
 					WHERE acp.position_id = {$position_id} AND acp.department_id = {$department_id} AND acp.company_id = {$company_id} AND up.active=1 AND ac.class_id=$class_id
-					GROUP BY 1,2,3;
+					GROUP BY 1;
 					";
 			$result = $this->db->query( $qry );
 
@@ -393,7 +393,7 @@ class signatories_model extends Record
 						JOIN users_profile up ON acp.department_id = up.department_id AND acp.company_id = up.company_id
 						JOIN time_forms tf ON tf.user_id=up.user_id AND tf.form_status_id IN (2,3,4,5) AND tf.form_code=ac.class_code
 						WHERE acp.department_id = {$department_id} AND acp.company_id = {$company_id} AND up.active=1 AND ac.class_id=$class_id
-						GROUP BY 1,2,3;
+						GROUP BY 1;
 						";
 				$result = $this->db->query( $qry );
 
@@ -408,7 +408,7 @@ class signatories_model extends Record
 							JOIN users_profile up ON acp.company_id = up.company_id
 							JOIN time_forms tf ON tf.user_id=up.user_id AND tf.form_status_id IN (2,3,4,5) AND tf.form_code=ac.class_code
 							WHERE acp.company_id = {$company_id} AND up.active=1 AND ac.class_id=$class_id
-							GROUP BY 1,2,3;
+							GROUP BY 1;
 							";
 					$result = $this->db->query( $qry );
 
@@ -1017,7 +1017,7 @@ class signatories_model extends Record
 		return $erequest->num_rows();
 	}
 
-	function select_existing_pending_partner_loan_application($class_id=0, $user_id=0, $position_id=0, $department_id=0, $company_id=0)
+	function select_existing_pending_partner_loan_application($class_id=0, $position_id=0, $department_id=0, $company_id=0, $user_id=0)
 	{
 		$result_rows = 0;
 
@@ -1027,7 +1027,7 @@ class signatories_model extends Record
 				JOIN users_profile up ON acp.position_id = up.position_id AND acp.department_id = up.department_id AND acp.company_id = up.company_id
 				JOIN {$this->db->dbprefix}partners_loan_application pla ON pla.user_id=up.user_id AND pla.loan_application_status_id IN (2,3,4,5) AND pla.loan_type_code=ac.class_code
 				WHERE acp.user_id = $user_id AND acp.position_id = {$position_id} AND acp.department_id = {$department_id} AND acp.company_id = {$company_id} AND up.active=1 AND ac.class_id=$class_id
-				GROUP BY 1,2,3;
+				GROUP BY 1;
 				";
 		$result = $this->db->query( $qry );
 
@@ -1042,7 +1042,7 @@ class signatories_model extends Record
 					JOIN users_profile up ON acp.position_id = up.position_id AND acp.department_id = up.department_id AND acp.company_id = up.company_id
 					JOIN {$this->db->dbprefix}partners_loan_application pla ON pla.user_id=up.user_id AND pla.loan_application_status_id IN (2,3,4,5) AND pla.loan_type_code=ac.class_code
 					WHERE acp.position_id = {$position_id} AND acp.department_id = {$department_id} AND acp.company_id = {$company_id} AND up.active=1 AND ac.class_id=$class_id
-					GROUP BY 1,2,3;
+					GROUP BY 1;
 					";
 			$result = $this->db->query( $qry );
 
@@ -1057,7 +1057,7 @@ class signatories_model extends Record
 						JOIN users_profile up ON acp.department_id = up.department_id AND acp.company_id = up.company_id
 						JOIN {$this->db->dbprefix}partners_loan_application pla ON pla.user_id=up.user_id AND pla.loan_application_status_id IN (2,3,4,5) AND pla.loan_type_code=ac.class_code
 						WHERE acp.department_id = {$department_id} AND acp.company_id = {$company_id} AND up.active=1 AND ac.class_id=$class_id
-						GROUP BY 1,2,3;
+						GROUP BY 1;
 						";
 				$result = $this->db->query( $qry );
 
@@ -1072,7 +1072,151 @@ class signatories_model extends Record
 							JOIN users_profile up ON acp.company_id = up.company_id
 							JOIN {$this->db->dbprefix}partners_loan_application pla ON pla.user_id=up.user_id AND pla.loan_application_status_id IN (2,3,4,5) AND pla.loan_type_code=ac.class_code
 							WHERE acp.company_id = {$company_id} AND up.active=1 AND ac.class_id=$class_id
-							GROUP BY 1,2,3;
+							GROUP BY 1;
+							";
+					$result = $this->db->query( $qry );
+
+					if($result && $result->num_rows() > 0) {
+						// return affected company
+						$result_rows = $result->num_rows();
+					} else {
+						$result_rows = 0;
+					}
+				}
+			}
+		}
+
+		return $result_rows;
+	}
+
+	function select_existing_pending_epa($class_id=0, $user_id=0, $position_id=0, $department_id=0, $company_id=0)
+	{
+		$result_rows = 0;
+
+		$qry = "SELECT up.user_id, pla.loan_type_code
+				FROM {$this->db->dbprefix}approver_class_user acp
+				JOIN {$this->db->dbprefix}approver_class ac ON ac.class_id=acp.class_id
+				JOIN users_profile up ON acp.position_id = up.position_id AND acp.department_id = up.department_id AND acp.company_id = up.company_id
+				JOIN {$this->db->dbprefix}training_application ta ON ta.user_id=up.user_id AND ta.status IN (3,4) 
+				WHERE acp.user_id = $user_id AND acp.position_id = {$position_id} AND acp.department_id = {$department_id} AND acp.company_id = {$company_id} AND up.active=1 AND ac.class_id=$class_id
+				GROUP BY 1;
+				";
+		$result = $this->db->query( $qry );
+
+		if($result && $result->num_rows() > 0) {
+			// return affected users
+			$result_rows = $result->num_rows();
+
+		} else {
+			$qry = "SELECT up.user_id, pla.loan_type_code
+					FROM {$this->db->dbprefix}approver_class_position acp
+					JOIN {$this->db->dbprefix}approver_class ac ON ac.class_id=acp.class_id
+					JOIN users_profile up ON acp.position_id = up.position_id AND acp.department_id = up.department_id AND acp.company_id = up.company_id
+					JOIN {$this->db->dbprefix}training_application ta ON ta.user_id=up.user_id AND ta.status IN (3,4) 
+					WHERE acp.position_id = {$position_id} AND acp.department_id = {$department_id} AND acp.company_id = {$company_id} AND up.active=1 AND ac.class_id=$class_id
+					GROUP BY 1;
+					";
+			$result = $this->db->query( $qry );
+
+			if($result && $result->num_rows() > 0) {
+				// return affected positions
+				$result_rows = $result->num_rows();
+			
+			} else {
+				$qry = "SELECT up.user_id, pla.loan_type_code 
+						FROM {$this->db->dbprefix}approver_class_department acp
+						JOIN {$this->db->dbprefix}approver_class ac ON ac.class_id=acp.class_id
+						JOIN users_profile up ON acp.department_id = up.department_id AND acp.company_id = up.company_id
+						JOIN {$this->db->dbprefix}training_application ta ON ta.user_id=up.user_id AND ta.status IN (3,4) 
+						WHERE acp.department_id = {$department_id} AND acp.company_id = {$company_id} AND up.active=1 AND ac.class_id=$class_id
+						GROUP BY 1;
+						";
+				$result = $this->db->query( $qry );
+
+				if($result && $result->num_rows() > 0) {
+					// return affected departments
+					$result_rows = $result->num_rows();
+
+				} else {
+					$qry = "SELECT up.user_id, pla.loan_type_code 
+							FROM {$this->db->dbprefix}approver_class_department acp
+							JOIN {$this->db->dbprefix}approver_class ac ON ac.class_id=acp.class_id
+							JOIN users_profile up ON acp.company_id = up.company_id
+							JOIN {$this->db->dbprefix}training_application ta ON ta.user_id=up.user_id AND ta.status IN (3,4) 
+							WHERE acp.company_id = {$company_id} AND up.active=1 AND ac.class_id=$class_id
+							GROUP BY 1;
+							";
+					$result = $this->db->query( $qry );
+
+					if($result && $result->num_rows() > 0) {
+						// return affected company
+						$result_rows = $result->num_rows();
+					} else {
+						$result_rows = 0;
+					}
+				}
+			}
+		}
+
+		return $result_rows;
+	}
+
+	function select_existing_pending_idp($class_id=0, $user_id=0, $position_id=0, $department_id=0, $company_id=0)
+	{
+		$result_rows = 0;
+
+		$qry = "SELECT up.user_id, pla.loan_type_code
+				FROM {$this->db->dbprefix}approver_class_user acp
+				JOIN {$this->db->dbprefix}approver_class ac ON ac.class_id=acp.class_id
+				JOIN users_profile up ON acp.position_id = up.position_id AND acp.department_id = up.department_id AND acp.company_id = up.company_id
+				JOIN {$this->db->dbprefix}performance_appraisal_idp idp ON idp.user_id=up.user_id AND idp.training_application_status_id IN (2,3)
+				WHERE acp.user_id = $user_id AND acp.position_id = {$position_id} AND acp.department_id = {$department_id} AND acp.company_id = {$company_id} AND up.active=1 AND ac.class_id=$class_id
+				GROUP BY 1;
+				";
+		$result = $this->db->query( $qry );
+
+		if($result && $result->num_rows() > 0) {
+			// return affected users
+			$result_rows = $result->num_rows();
+
+		} else {
+			$qry = "SELECT up.user_id, pla.loan_type_code
+					FROM {$this->db->dbprefix}approver_class_position acp
+					JOIN {$this->db->dbprefix}approver_class ac ON ac.class_id=acp.class_id
+					JOIN users_profile up ON acp.position_id = up.position_id AND acp.department_id = up.department_id AND acp.company_id = up.company_id
+					JOIN {$this->db->dbprefix}performance_appraisal_idp idp ON idp.user_id=up.user_id AND idp.training_application_status_id IN (2,3)
+					WHERE acp.position_id = {$position_id} AND acp.department_id = {$department_id} AND acp.company_id = {$company_id} AND up.active=1 AND ac.class_id=$class_id
+					GROUP BY 1;
+					";
+			$result = $this->db->query( $qry );
+
+			if($result && $result->num_rows() > 0) {
+				// return affected positions
+				$result_rows = $result->num_rows();
+			
+			} else {
+				$qry = "SELECT up.user_id, pla.loan_type_code 
+						FROM {$this->db->dbprefix}approver_class_department acp
+						JOIN {$this->db->dbprefix}approver_class ac ON ac.class_id=acp.class_id
+						JOIN users_profile up ON acp.department_id = up.department_id AND acp.company_id = up.company_id
+						JOIN {$this->db->dbprefix}performance_appraisal_idp idp ON idp.user_id=up.user_id AND idp.training_application_status_id IN (2,3)
+						WHERE acp.department_id = {$department_id} AND acp.company_id = {$company_id} AND up.active=1 AND ac.class_id=$class_id
+						GROUP BY 1;
+						";
+				$result = $this->db->query( $qry );
+
+				if($result && $result->num_rows() > 0) {
+					// return affected departments
+					$result_rows = $result->num_rows();
+
+				} else {
+					$qry = "SELECT up.user_id, pla.loan_type_code 
+							FROM {$this->db->dbprefix}approver_class_department acp
+							JOIN {$this->db->dbprefix}approver_class ac ON ac.class_id=acp.class_id
+							JOIN users_profile up ON acp.company_id = up.company_id
+							JOIN {$this->db->dbprefix}performance_appraisal_idp idp ON idp.user_id=up.user_id AND idp.training_application_status_id IN (2,3)
+							WHERE acp.company_id = {$company_id} AND up.active=1 AND ac.class_id=$class_id
+							GROUP BY 1;
 							";
 					$result = $this->db->query( $qry );
 
@@ -1512,6 +1656,89 @@ class signatories_model extends Record
 		}
 
 		$update_partners_personal_approver_qry = "CALL sp_partners_movement_change_pending_approvers('". implode(",", $user_ids) ."', {$class_id})";
+		$result_update = $this->db->query( $update_partners_personal_approver_qry );
+		mysqli_next_result($this->db->conn_id);
+
+		$response = array();
+		$response['type'] = "";
+		if( $this->db->_error_message() != "" ){
+			$response = array(
+				'message' => $this->db->_error_message(),
+				'type' => 'error'
+			);
+		}
+
+		return $response;
+	}
+
+	function update_existing_pla_approvers($class_id=0, $position_id=0, $department_id=0, $company_id=0, $user_id=0)
+	{
+		$position_qry = "SELECT * FROM {$this->db->dbprefix}approver_class_position acp
+           		INNER JOIN users_profile up ON acp.position_id = up.position_id
+           		AND acp.department_id = up.department_id 
+           		AND acp.company_id = up.company_id
+           		WHERE acp.position_id = {$position_id}
+           		AND acp.department_id = {$department_id}
+           		AND acp.company_id = {$company_id}
+           		GROUP BY up.user_id";
+		$position_result = $this->db->query( $position_qry );
+
+		if($position_result->num_rows() > 0){
+			foreach($position_result->result_array() as $row){
+				$user_ids[] = $row['user_id'];
+			}	
+		}else{
+			$department_qry = "SELECT * FROM {$this->db->dbprefix}approver_class_department acd
+           		INNER JOIN users_profile up ON acd.department_id = up.department_id 
+           		AND acd.company_id = up.company_id
+           		WHERE acd.department_id = {$department_id}
+           		AND acd.company_id = {$company_id}
+           		GROUP BY up.user_id";
+			$department_result = $this->db->query( $department_qry );
+
+			if($department_result->num_rows() > 0){
+				foreach($department_result->result_array() as $row){
+					$user_ids[] = $row['user_id'];
+				}	
+			}else{
+				$company_qry = "SELECT * FROM {$this->db->dbprefix}approver_class_company acc
+	           		INNER JOIN users_profile up ON acc.company_id = up.company_id
+	           		WHERE acc.company_id = {$company_id}
+	           		GROUP BY up.user_id";
+				$company_result = $this->db->query( $company_qry );
+
+				if($company_result->num_rows() > 0){
+					foreach($company_result->result_array() as $row){
+						$user_ids[] = $row['user_id'];
+					}	
+				} else {
+					$user_qry = "SELECT * FROM {$this->db->dbprefix}approver_class_user acu
+		           		INNER JOIN users_profile up ON acu.user_id = up.user_id
+		           		WHERE acu.user_id = {$user_id}
+		           		GROUP BY up.user_id";
+					$user_result = $this->db->query( $user_qry );
+
+					if($user_result->num_rows() > 0){
+						foreach($user_result->result_array() as $row){
+							$user_ids[] = $row['user_id'];
+						}	
+					} else {
+						$user_ids[] = 0;
+					}
+				}
+			}
+		}
+
+		$this->db->where('class_id',$class_id);
+		$ccode = $this->db->get('approver_class');
+		$class_code = '';
+		if ($ccode && $ccode->num_rows() > 0) {
+			$ccode_row = $ccode->row();
+			$class_code = $ccode_row->class_code;
+		}
+
+		$update_partners_personal_approver_qry = "CALL sp_partners_loan_application_change_pending_approvers('". implode(",", $user_ids) ."', '{$class_code}')";
+
 		$result_update = $this->db->query( $update_partners_personal_approver_qry );
 		mysqli_next_result($this->db->conn_id);
 

@@ -30,7 +30,7 @@
                                     }
                                     
                     			} 
-                                 $id_number = get_system_series("ID_NUMBER", $company_code);
+                                 $id_number = get_system_series("OCLP_ID_NUMBER", '', true);
                                  
                                  if(date('Y', strtotime($record['partners.resigned_date'] )) == date('Y') ){
                                     $id_number = $record['partners.id_number'];

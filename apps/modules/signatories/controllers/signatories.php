@@ -644,6 +644,7 @@ class Signatories extends MY_PrivateController
 		            case 37: //Leave Incentive Leave
 		            case 38: //Home Leave
 		            case 39: //Force Leave
+		            case 41: //Service Incentive Leave
 					//select existing forms approver
 					case 35:
 					$update_pending_approver = $this->mod->update_existing_form_approvers($data['class_id'], $data['user_id'], $data['position_id'], $data['department_id'], $data['company_id'], $data['user_id']);
@@ -675,7 +676,13 @@ class Signatories extends MY_PrivateController
 					case 40://Movement
 					//select existing online request	
 					$update_pending_approver = $this->mod->update_existing_mv_approvers($data['class_id'], $data['position_id'], $data['department_id'], $data['company_id'],  $data['user_id']);
-					break;								
+					break;
+					case 42://Mobile Application Plan
+					case 43://Omnibus Loan Application
+					case 44://Car Plan Loan Application
+					//select existing online request	
+					$update_pending_approver = $this->mod->update_existing_pla_approvers($data['class_id'], $data['position_id'], $data['department_id'], $data['company_id'],  $data['user_id']);
+					break;					
 					default:
 					$update_pending_approver['type'] = 'success';
 				}
@@ -917,8 +924,16 @@ class Signatories extends MY_PrivateController
 			$this->response->cpla = 1;
 			$this->response->pending_cpla_count = $this->mod->select_existing_pending_partner_loan_application($data['class_id'], $data['position_id'], $data['department_id'], $data['company_id'],  $data['user_id']);
 			break;
+			case 45://EPA	
+			$this->response->epa = 1;
+			$this->response->pending_epa_count = $this->mod->select_existing_pending_epa($data['class_id'], $data['position_id'], $data['department_id'], $data['company_id'],  $data['user_id']);
+			break;						
+			case 46://IDP	
+			$this->response->idp = 1;
+			$this->response->pending_idp_count = $this->mod->select_existing_pending_idp($data['class_id'], $data['position_id'], $data['department_id'], $data['company_id'],  $data['user_id']);
+			break;			
 		}
-		
+
 		$this->response->message[] = array(
 			'message' => '',
 			'type' => 'success'

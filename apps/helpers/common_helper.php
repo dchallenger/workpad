@@ -310,6 +310,26 @@ function get_system_series($series_code, $code, $increment = false )
 			}
 		}
 
+		if($series_code == 'OCLP_ID_NUMBER'){
+			if(strlen($sequence) < 3){
+				$sequence = sprintf("%03d",$sequence);
+			}
+
+			$format = str_replace('{yearmonth}', date('ym'), $format);
+			$format = str_replace('{series}', $sequence, $format);
+
+			$id_number_qry = "SELECT  partner_id, id_number
+								FROM {$ci->db->dbprefix}partners 
+								WHERE id_number = '{$format}' 
+								AND deleted = 0
+								LIMIT 1;
+								";
+			$idnum_sql = $ci->db->query( $id_number_qry );
+			if($idnum_sql && $idnum_sql->num_rows() > 0){
+				$format = get_system_series($series_code, $code, true);
+			}
+		}
+
         if($series_code == 'RIOFIL_ID_NUMBER'){
             if(strlen($sequence) < 3){
 				$sequence = sprintf("%03d",$sequence);
@@ -875,4 +895,15 @@ function get_valid_key_value($item_key_name = []) {
 		$value = $item_key_name[0]['key_value'];
 
 	return $value;
+}
+
+function get_first_letter($string = '') {
+	$str_arr = explode(' ', $string);
+	$f_letter_combine = '';
+	foreach ($str_arr as $key => $value) {
+		$first_letter = substr($value, 0, 1);
+		$f_letter_combine = $f_letter_combine . $first_letter;
+	}
+
+	return $f_letter_combine;
 }
