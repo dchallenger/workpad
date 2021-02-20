@@ -202,8 +202,10 @@
 											</div>
 										</div>
 									</div>
+									
+									<!-- request by oclp to hide 02212021 -->
 
-									<hr />
+<!-- 									<hr />
 
 									<div class="row">
 										<div class="col-md-12">
@@ -247,7 +249,7 @@
 												</div>
 											</div>
 										</div>
-									</div>
+									</div> -->
 
 									<?php if( count($remarks) > 0 ){
 										?>
@@ -372,17 +374,17 @@
 	                            <br>
 		                <!--Other Request-->
 		                <div class="portlet margin-top-25">
-							<div class="portlet-title">
+<!-- 							<div class="portlet-title">
 								<div class="caption">Other Request</div>
 								<div class="tools">
 									<a class="collapse" ></a>
 								</div>
 							</div>
-							<p class="margin-bottom-25">This section contains other request listing.</p>
+							<p class="margin-bottom-25">This section contains other request listing.</p> -->
 
 							<div class="portlet-body">					
 		                        <!-- Table -->
-		                        <table class="table table-condensed table-striped table-hover" >
+		                        <table class="table table-condensed table-striped table-hover hidden" >
 		                            <thead>
 		                                <tr>
 		                                	<th width="30%" class="padding-top-bottom-10" >Purpose</th>

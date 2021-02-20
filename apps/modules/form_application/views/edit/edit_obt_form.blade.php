@@ -173,8 +173,9 @@
 						</div>	
 					</div>	
 
-
-					<hr />
+					<!-- request by oclp to hide 02212021 -->
+					
+<!-- 					<hr />
 
 					<div class="form-group">
 						<label class="control-label col-md-4">{{ lang('form_application.comp_name') }}</label>
@@ -202,7 +203,7 @@
 						<div class="col-md-6">							
 							<input type="text" class="form-control" name="time_forms_obt[contact_no]" id="time_forms_obt-contact_no" value="{{ $record['time_forms_obt_contact_no'] }}" placeholder=""/> 				
 						</div>	
-					</div>
+					</div> -->
 
 
 				</div>
@@ -228,111 +229,118 @@
 			<br>
             <!--Other Request-->
             <div class="portlet margin-top-25">
-				<div class="portlet-title">
+            	<!-- request by oclp to hide 02212021 -->
+
+<!-- 				<div class="portlet-title">
 					<div class="caption">Other Request</div>
 					<div class="tools">
 						<a class="collapse" ></a>
 					</div>
 				</div>
-				<p class="margin-bottom-25">This section contains other request listing.</p>
+				<p class="margin-bottom-25">This section contains other request listing.</p> -->
 
 				<div class="portlet-body">
 					<!-- BEGIN FORM-->
-					<div class="form-group">
-                    	<label class="control-label col-md-4">Purpose</label>
-                        <div class="col-md-4">
-						<?php	                            	                            		
-							$db->select('purpose_id,purpose');
-                    		$db->where('deleted', '0');
-                    		$options = $db->get('time_forms_obt_purpose');
-							$time_forms_obt_purpose_options = array('' => 'Select...');
-                    		foreach($options->result() as $option)
-                    		{
-                    			$time_forms_obt_purpose_options[$option->purpose_id] = $option->purpose;
-                    		} 
-                    		?>	
-                            <div class="input-group">
-                                
-                    {{ form_dropdown('obt_purpose',$time_forms_obt_purpose_options, '', 'id="obt_purpose" class="form-control select2me" data-placeholder="Select..."') }}
-                            
-                                <span class="input-group-btn">
-                                <button type="button" class="btn btn-success" onclick="add_form('obt_purpose', 'obt_transpo')">
-                                	<i class="fa fa-plus"></i></button>
-                                </span>
-                            </div>
-                            <div class="help-block small">
-                            	Select purpose type.
-                        	</div>
-                            <!-- /input-group -->
-                        </div>
-                    </div>
-                    <br>
-                    <!-- Table -->
-                    <table class="table table-condensed table-striped table-hover" >
-                        <thead>
-                            <tr>
-                            	<th width="20%" class="padding-top-bottom-10" >Purpose</th>
-                            	<th width="20%" class="padding-top-bottom-10" >Amount</th>
-                            	<th width="25%" class="padding-top-bottom-10" >Remarks</th>
-                            	<th width="10%" class="padding-top-bottom-10" >Status</th>
-                            	<th width="10%" class="padding-top-bottom-10" >Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="obt_transpo">
-                        <?php
-                        	$request_status_id = 0;
-                        ?>
-						@if(count($obt_transpo) > 0)
-							@foreach($obt_transpo as $index => $value)
-							 <tr rel="0">
-							    <!-- this first column shows the year of this holiday item -->
-							    <td>
-							        <?php       
-							        // echo "here1";      exit();                                                              
-							            $db->select('purpose_id,purpose');
-							            $db->where('deleted', '0');
-							            $options = $db->get('time_forms_obt_purpose');
-							            $time_forms_obt_purpose_options = array('' => 'Select...');
-							            foreach($options->result() as $option)
-							            {
-							                $time_forms_obt_purpose_options[$option->purpose_id] = $option->purpose;
-							            } 
 
-							            echo form_dropdown('time_forms_obt_transpo[purpose_id][]', $time_forms_obt_purpose_options, $value['purpose_id'], 'id="obt_purpose" class="form-control select2me" data-placeholder="Select..."');
-							        ?>
-							    </td>
-							     <td>
-							        <input value="{{ $value['amount'] }}" type="text" class="form-control" maxlength="64" name="time_forms_obt_transpo[amount][]" id="time_forms_obt_transpo-amount" >
-							    </td>
-							    <td>
-							        <input value="{{ $value['remarks'] }}" type="text" class="form-control" maxlength="64" name="time_forms_obt_transpo[remarks][]" id="time_forms_obt_transpo-remarks" >
-							    </td>
-							    <td>
-								    <?php								    	
-							            switch($value['status_id']){ 
-							                case 1: ?><span class="badge badge-danger">{{ $value['obt_status'] }}</span><?php break;
-							                case 2: ?><span class="badge badge-warning">{{ $value['obt_status'] }}</span><?php break;
-							                case 3: ?><span class="badge badge-warning">{{ $value['obt_status'] }}</span><?php break;
-							                case 4: ?><span class="badge badge-info">{{ $value['obt_status'] }}</span><?php break;
-							                case 5: ?><span class="badge badge-info">{{ $value['obt_status'] }}</span><?php break;
-							                case 6: ?><span class="badge badge-success">{{ $value['obt_status'] }}</span><?php break;
-							                case 7: ?><span class="badge badge-important">{{ $value['obt_status'] }}</span><?php break;
-							                case 8: ?><span class="badge badge-default">{{ $value['obt_status'] }}</span><?php break;
-							         }
-							         $request_status_id = $value['status_id'];
-							         $obt_status = $value['obt_status'];
-							         $request_remarks = $value['request_remarks'];
-							         ?>
-							     </td>
-							    <td>
-							        <a class="btn btn-xs text-muted delete_row" ><i class="fa fa-trash-o"></i> Delete</a>
-							    </td>
-							    
-							</tr>
-							@endforeach
-						@endif
-                        </tbody>
-                    </table>
+					<!-- request by oclp to hide 02212021 -->
+
+					<div class="hidden">
+						<div class="form-group">
+	                    	<label class="control-label col-md-4">Purpose</label>
+	                        <div class="col-md-4">
+							<?php	                            	                            		
+								$db->select('purpose_id,purpose');
+	                    		$db->where('deleted', '0');
+	                    		$options = $db->get('time_forms_obt_purpose');
+								$time_forms_obt_purpose_options = array('' => 'Select...');
+	                    		foreach($options->result() as $option)
+	                    		{
+	                    			$time_forms_obt_purpose_options[$option->purpose_id] = $option->purpose;
+	                    		} 
+	                    		?>	
+	                            <div class="input-group">
+	                                
+	                    {{ form_dropdown('obt_purpose',$time_forms_obt_purpose_options, '', 'id="obt_purpose" class="form-control select2me" data-placeholder="Select..."') }}
+	                            
+	                                <span class="input-group-btn">
+	                                <button type="button" class="btn btn-success" onclick="add_form('obt_purpose', 'obt_transpo')">
+	                                	<i class="fa fa-plus"></i></button>
+	                                </span>
+	                            </div>
+	                            <div class="help-block small">
+	                            	Select purpose type.
+	                        	</div>
+	                            <!-- /input-group -->
+	                        </div>
+	                    </div>
+	                    <br>
+	                    <!-- Table -->
+	                    <table class="table table-condensed table-striped table-hover" >
+	                        <thead>
+	                            <tr>
+	                            	<th width="20%" class="padding-top-bottom-10" >Purpose</th>
+	                            	<th width="20%" class="padding-top-bottom-10" >Amount</th>
+	                            	<th width="25%" class="padding-top-bottom-10" >Remarks</th>
+	                            	<th width="10%" class="padding-top-bottom-10" >Status</th>
+	                            	<th width="10%" class="padding-top-bottom-10" >Actions</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody id="obt_transpo">
+	                        <?php
+	                        	$request_status_id = 0;
+	                        ?>
+							@if(count($obt_transpo) > 0)
+								@foreach($obt_transpo as $index => $value)
+								 <tr rel="0">
+								    <!-- this first column shows the year of this holiday item -->
+								    <td>
+								        <?php       
+								        // echo "here1";      exit();                                                              
+								            $db->select('purpose_id,purpose');
+								            $db->where('deleted', '0');
+								            $options = $db->get('time_forms_obt_purpose');
+								            $time_forms_obt_purpose_options = array('' => 'Select...');
+								            foreach($options->result() as $option)
+								            {
+								                $time_forms_obt_purpose_options[$option->purpose_id] = $option->purpose;
+								            } 
+
+								            echo form_dropdown('time_forms_obt_transpo[purpose_id][]', $time_forms_obt_purpose_options, $value['purpose_id'], 'id="obt_purpose" class="form-control select2me" data-placeholder="Select..."');
+								        ?>
+								    </td>
+								     <td>
+								        <input value="{{ $value['amount'] }}" type="text" class="form-control" maxlength="64" name="time_forms_obt_transpo[amount][]" id="time_forms_obt_transpo-amount" >
+								    </td>
+								    <td>
+								        <input value="{{ $value['remarks'] }}" type="text" class="form-control" maxlength="64" name="time_forms_obt_transpo[remarks][]" id="time_forms_obt_transpo-remarks" >
+								    </td>
+								    <td>
+									    <?php								    	
+								            switch($value['status_id']){ 
+								                case 1: ?><span class="badge badge-danger">{{ $value['obt_status'] }}</span><?php break;
+								                case 2: ?><span class="badge badge-warning">{{ $value['obt_status'] }}</span><?php break;
+								                case 3: ?><span class="badge badge-warning">{{ $value['obt_status'] }}</span><?php break;
+								                case 4: ?><span class="badge badge-info">{{ $value['obt_status'] }}</span><?php break;
+								                case 5: ?><span class="badge badge-info">{{ $value['obt_status'] }}</span><?php break;
+								                case 6: ?><span class="badge badge-success">{{ $value['obt_status'] }}</span><?php break;
+								                case 7: ?><span class="badge badge-important">{{ $value['obt_status'] }}</span><?php break;
+								                case 8: ?><span class="badge badge-default">{{ $value['obt_status'] }}</span><?php break;
+								         }
+								         $request_status_id = $value['status_id'];
+								         $obt_status = $value['obt_status'];
+								         $request_remarks = $value['request_remarks'];
+								         ?>
+								     </td>
+								    <td>
+								        <a class="btn btn-xs text-muted delete_row" ><i class="fa fa-trash-o"></i> Delete</a>
+								    </td>
+								    
+								</tr>
+								@endforeach
+							@endif
+	                        </tbody>
+	                    </table>
+	                </div>
 				</div>
 			</div>
 

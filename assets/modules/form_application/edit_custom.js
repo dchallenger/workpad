@@ -98,7 +98,7 @@ function init_form()
         $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
     }
 
-    $("#time_forms-datetime_from").datetimepicker({
+    $(".form_datetime").datetimepicker({
         format: "MM dd, yyyy - HH:ii p",
         autoclose: true,
         todayBtn: false,
@@ -106,13 +106,13 @@ function init_form()
         minuteStep: 1
     });
 
-    $("#time_forms-datetime_to").datetimepicker({
+/*    $("#time_forms-datetime_to").datetimepicker({
         format: "MM dd, yyyy - HH:ii p",
         autoclose: true,
         todayBtn: false,
         pickerPosition: "bottom-left",
         minuteStep: 1
-    });
+    });*/
 
     $("#ut_time_in_out").datetimepicker({
         format: "MM dd, yyyy - HH:ii p",

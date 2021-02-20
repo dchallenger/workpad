@@ -1,6 +1,6 @@
 <tr class="record" rel="1">
-    <td>
-        <a class="text-success" href="{{ $detail_url }}" id="display_name">{{ $display_name }}</a>
+    <td class="text-success">
+        {{ $display_name }}
     </td>
     <td>
         <span class="text-info">{{ $form }}</span><br>

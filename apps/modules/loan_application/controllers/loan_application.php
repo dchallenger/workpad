@@ -4,6 +4,7 @@ class Loan_application extends MY_PrivateController
 {
 	public function __construct()
 	{
+        $this->load->model('my_calendar_model', 'my_calendar');
 		$this->load->model('loan_application_model', 'mod');
         $this->load->model('loan_application_manage_model', 'app_manage');
         $this->load->model('loan_application_admin_model', 'app_admin');
@@ -350,6 +351,16 @@ class Loan_application extends MY_PrivateController
 
 
         /*******START Filed FORM validation********/
+
+        // check approver
+        $approver_list = $this->my_calendar->call_sp_approvers(strtoupper($this->input->post('loan_type_code')), $this->user->user_id);
+        if (empty($approver_list)) {
+            $this->response->message[] = array(
+                'message' => 'Please contact HR Admin. Approver has not been set.',
+                'type' => 'error'
+            );
+            $this->_ajax_return();            
+        }
 
         //check if loan application is still draft/for approval
         if(!empty($loan_application_id)){

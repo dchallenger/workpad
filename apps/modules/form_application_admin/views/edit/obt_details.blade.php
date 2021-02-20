@@ -8,7 +8,7 @@
     <div class='clearfix'>
         <label class='control-label col-md-3 text-muted text-left small'>From:</label>
         <div class='col-md-9'>
-            <span> <?php echo general_date_w_day($time_from)); ?></span>
+            <span> <?php echo general_date_w_day($time_from); ?></span>
         </div>
     </div>
     <div class='clearfix'>

@@ -135,7 +135,7 @@
 											    ?>
 											    <span style="display:block; word-wrap:break-word;" class="<?php if( $countSelectedDates > 4 ) echo 'hidden'; ?> toggle-<?php echo $countSelectedDates; ?>">
 				                                    <?php echo $index; ?> 
-				                                    <span class="small"> - <?php echo $array_keys[0]; ?> :
+				                                    <span class=""> - <?php echo $array_keys[0]; ?> :
 				                                    </span>
 				                                    <span class="text-info">
 								                        <?php 

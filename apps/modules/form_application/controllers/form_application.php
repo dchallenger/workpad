@@ -4,6 +4,7 @@ class Form_application extends MY_PrivateController
 {
     public function __construct()
     {
+        $this->load->model('my_calendar_model', 'my_calendar');
         $this->load->model('form_application_manage_model', 'app_manage');
         $this->load->model('form_application_admin_model', 'app_admin');        
         $this->load->model('form_application_model', 'mod');
@@ -46,7 +47,6 @@ class Form_application extends MY_PrivateController
         $this->load->model('hr_validation_model', 'hr_valid');
         $data['permission_validation'] = isset($permission[$this->hr_valid->mod_code]['list']) ? $permission[$this->hr_valid->mod_code]['list'] : 0;
         
-        $this->load->model('my_calendar_model', 'my_calendar');
         $form_list = $this->my_calendar->get_form_policy_grant($this->user->user_id);
         $data['status'] = $this->my_calendar->get_form_status($this->user->user_id); // for status filter
 
@@ -135,7 +135,6 @@ class Form_application extends MY_PrivateController
                 }
             }
             
-            $this->load->model('my_calendar_model', 'my_calendar');
             $form_info = $this->my_calendar->get_form_policy_grant($this->user->user_id);
             // $form_info = $this->mod->get_form_info();
 
@@ -148,7 +147,6 @@ class Form_application extends MY_PrivateController
             $data['otherForms'] = $otherForms;
             $data['no_credit_disable'] = $no_credit_disable;
 
-            $this->load->model('my_calendar_model', 'my_calendar');
             $form_list = $this->my_calendar->get_form_policy_grant($this->user->user_id);
             
             $data['leave_forms'] = array();
@@ -349,7 +347,6 @@ class Form_application extends MY_PrivateController
                 break;     
             }   
 
-            $this->load->model('my_calendar_model', 'my_calendar');
             $data['approver_list'] = $this->my_calendar->call_sp_approvers(strtoupper($data['form_code']), $this->user->user_id);
 
             $this->load->vars($data);
@@ -593,7 +590,6 @@ class Form_application extends MY_PrivateController
             }
         }
 
-        $this->load->model('my_calendar_model', 'my_calendar');
         if($data['form_status_id']['val'] > 1){
             $data['approver_list'] = $this->my_calendar->get_time_forms_approvers($record_id);
             $data['approver_title'] = lang('form_application.approval_status');
@@ -863,7 +859,6 @@ class Form_application extends MY_PrivateController
             // $data['form_status'] = $disapproved_cancelled_remarks['form_status'];
         }
         
-        $this->load->model('my_calendar_model', 'my_calendar');
         if($data['form_status_id']['val'] > 1){
             $data['approver_list'] = $this->my_calendar->get_time_forms_approvers($record_id);
             $data['approver_title'] = lang('form_application.approval_status');
@@ -964,6 +959,17 @@ class Form_application extends MY_PrivateController
                 $_POST[$key] = $val;
             }
         }
+        
+        // check approver
+        $approver_list = $this->my_calendar->call_sp_approvers(strtoupper($this->input->post('form_code')), $this->user->user_id);
+        if (empty($approver_list)) {
+            $this->response->message[] = array(
+                'message' => 'Please contact HR Admin. Approver has not been set.',
+                'type' => 'error'
+            );
+            $this->_ajax_return();            
+        }
+
         // Not allow application on the selected date for SL VL
         $date_replace = str_replace(' - ', ' ', $this->input->post('date_from'));
         $date = date('Y-m-d', strtotime($date_replace));
@@ -1361,7 +1367,7 @@ class Form_application extends MY_PrivateController
                         if(strtotime($this->input->post('focus_date')) > strtotime($date_from. ' +1 day') || strtotime($this->input->post('focus_date')) < strtotime($date_from. ' -1 day')
                             || strtotime($this->input->post('focus_date')) > strtotime($date_to) || strtotime($this->input->post('focus_date')) < strtotime($date_to. ' -1 day')){
                             $this->response->message[] = array(
-                                'message' => "lang('form_application.invalid_date')",
+                                'message' => lang('form_application.invalid_date'),
                                 'type' => 'warning'
                                 );  
                         $this->_ajax_return();

@@ -135,9 +135,9 @@
 											    ?>
 											    <span style="display:block; word-wrap:break-word;" class="<?php if( $countSelectedDates > 4 ) echo 'hidden'; ?> toggle-<?php echo $countSelectedDates; ?>">
 				                                    <?php echo $index; ?> 
-				                                    <span class="small"> - <?php echo $array_keys[0]; ?> -
+				                                    <span class=""> - <?php echo $array_keys[0]; ?> -
 				                                    </span>
-				                                    <span class="small"> (<?php echo number_format($array_values[1], 0, '.', ',') ?> hrs) :
+				                                    <span class=""> (<?php echo number_format($array_values[1], 0, '.', ',') ?> hrs) :
 				                                    </span>						                                    
 				                                    <span class="text-info">
 								                        <?php 
