@@ -2856,7 +2856,7 @@ class Form_application extends MY_PrivateController
                         $user = $this->db->get_where('users_profile',array('user_id' => $this->user->user_id))->row();
                         if ($shift_details['cur_shift_id'] != ''){
                             $shift_policy = $this->mod->get_shift_policy($shift_details['cur_shift_id'],$user->company_id,'WORKING-HOURS');
-                            $time_duration_arr[$dt->format('F d, Y')] = $shift_policy['class_value'];
+                            $time_duration_arr[$dt->format('F d, Y')] = (!empty($shift_policy) ? $shift_policy['class_value'] : '');
                         }
                     }
 
