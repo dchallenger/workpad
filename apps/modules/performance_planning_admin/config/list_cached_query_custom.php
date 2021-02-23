@@ -15,8 +15,8 @@ $config["list_cached_query_custom"] = 'SELECT
 `ww_performance_planning`.`modified_by` AS "performance_planning_modified_by",
 `ww_performance_status`.`performance_status` AS "performance_planning_performance_status",
 `ww_performance_planning_applicable`.`status_id` AS "performance_planning_performance_status_id",
-`t6`.`performance_status` AS "performance_planning_performance_approver_status",
-`t6`.`performance_status_id` AS "performance_planning_performance_aprpover_status_id"
+`T6`.`performance_status` AS "performance_planning_performance_approver_status",
+`T6`.`performance_status_id` AS "performance_planning_performance_aprpover_status_id"
 FROM (`ww_performance_planning`)
 LEFT JOIN (`ww_performance_setup_performance`) ON `ww_performance_setup_performance`.`performance_id` = `ww_performance_planning`.`performance_type_id`
 LEFT JOIN (`ww_performance_planning_applicable`) ON `ww_performance_planning_applicable`.`planning_id` = `ww_performance_planning`.`planning_id`
