@@ -122,9 +122,9 @@ $(document).ready(function(){
             if ($(element).val() != '' && !isNaN($(element).val())) {
                 total_weight_average += parseFloat($(element).val());
             }
-        })
+        });
 
-        appraisal_object.total_weight_average['q'+question] = total_weight_average;
+        appraisal_object.total_weight_average['q'+question] = total_weight_average;            
 
         appraisal_object.grand_total_weight_average = sum_object(appraisal_object.total_weight_average).toFixed(2);
 
@@ -138,7 +138,7 @@ $(document).ready(function(){
 
         setTimeout(function(){
             $('.coach_section_rating_'+section_id+'').html(appraisal_object.grand_total_weight_average);
-            $('.non_core_coach_rating_'+question).html((total_weight_average).toFixed(2));
+            $('.non_core_coach_rating_'+question).html((appraisal_object.total_weight_average['q'+question]).toFixed(2));
             $('.coach_total_weighted_'+section_id+'').html(total_coach_weighted_score.toFixed(2));
 
             $('.coach_rating').html(parseFloat(appraisal_object.grand_total_coach_weighted_score).toFixed(2));
@@ -221,6 +221,22 @@ $(document).ready(function(){
         $('.section_coach_section_rating_'+section_id).val(total_section.toFixed(2));
         $('.section_coach_total_weighted_score_'+section_id).val(total_coach_weighted_score);
     });
+
+    $('.none_core_coach_rating').each(function(){
+        $(this).trigger('keyup');
+    });
+
+    $('.none_core_self_rating').each(function(){
+        $(this).trigger('keyup');
+    });
+
+    $('.core_self_rating').each(function(){
+        $(this).trigger('change');
+    });
+
+    $('.core_coach_rating').each(function(){
+        $(this).trigger('change');
+    });        
 });        
 
 function view_discussion( form, status_id )

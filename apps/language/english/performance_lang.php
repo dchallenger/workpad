@@ -21,5 +21,7 @@ $lang['performance'] = array(
 	'performance_type' => 'Performance Type',
 	'performance_type_desc' => 'Event to monitor and measure relevant performance metrics to assess a contractual, probationary partner. Often times to assess at company-wide level.',
 	'portlet_notif' => 'Portlet Notification',
-	'portlet_notif_desc' => 'Types of schedule when to do notification. Also defining what medium to use.'
+	'portlet_notif_desc' => 'Types of schedule when to do notification. Also defining what medium to use.',
+	'financial_metrics_kpi' => 'Financial Metrics KPI',
+	'financial_metrics_kpi_desc' => 'List of KPI needed with the creation of financial metrics template that will be use on planning and appraisal',
 );

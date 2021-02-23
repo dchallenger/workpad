@@ -36,7 +36,7 @@
                 </div> 				
             </div>	
 		</div>
-		<div class="form-group">
+		<div class="form-group hidden">
 			<label class="control-label col-md-3"><span class="required">* </span>Position Classification</label>
 			<div class="col-md-7">
 				<?php
@@ -56,6 +56,26 @@
                 </div> 				
             </div>	
 		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3"><span class="required">* </span>Level</label>
+			<div class="col-md-7">
+				<?php
+					$db->select('employment_type_id,employment_type');
+                    $db->order_by('employment_type', '0');
+                    $db->where('deleted', '0');
+                    $options = $db->get('partners_employment_type'); 	                            
+                    $performance_template_employment_type_id_options = array();
+                    	foreach($options->result() as $option)
+                    	{
+							$performance_template_employment_type_id_options[$option->employment_type_id] = $option->employment_type;
+                    	} 
+                ?>							
+                <div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
+                        {{ form_multiselect('performance_template[employment_type_id][]',$performance_template_employment_type_id_options, explode(',',$record['performance_template.employment_type_id']), 'class="form-control select2me" data-placeholder="Select..." id="performance_template-employment_type_id"') }}
+                </div> 				
+            </div>	
+		</div>		
 		<div class="form-group">
 			<label class="control-label col-md-3"><span class="required">* </span>Rank</label>
 			<div class="col-md-7">

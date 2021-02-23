@@ -18,7 +18,7 @@ class Performance_planning extends MY_PrivateController
         $vars['appraisal_individual_planning'] = isset($permission['appraisal_individual_planning']) ? $permission['appraisal_individual_planning'] : 0;
 
 		// $this->db->order_by('performance_status', 'asc');
-		$this->db->group_by('year,performance_type_id');
+		$this->db->group_by('year');
 		$performance_planning_year = $this->db->get_where('performance_planning', array('deleted' => 0));
 		$vars['performance_planning_year'] = $performance_planning_year->result();
 
@@ -371,7 +371,7 @@ class Performance_planning extends MY_PrivateController
 
 		unset( $_POST['notification_id'] );
 		unset( $_POST['performance_planning_reminder'] );
-		//unset( $_POST['performance_planning_applicable'] );
+		unset( $_POST['performance_planning_applicable'] );
 
 		$transactions = true;
 		$this->db->trans_begin();
@@ -388,6 +388,7 @@ class Performance_planning extends MY_PrivateController
 		            //delete from applicable if REMOVED
 		            $this->db->where_not_in('user_id', $user_id);
 		        	$this->db->delete('performance_planning_applicable', array( $this->mod->primary_key => $this->response->record_id ) ); 
+
 		            //delete from approver if REMOVED
 		            $this->db->where_not_in('user_id', $user_id);
 		        	$this->db->delete('performance_planning_approver', array( $this->mod->primary_key => $this->response->record_id ) ); 
@@ -395,7 +396,8 @@ class Performance_planning extends MY_PrivateController
 		            foreach ($user_id as $index => $id){
 
 		            	$performance_populate_approvers = $this->db->query("CALL sp_performance_planning_populate_approvers({$this->response->record_id}, ".$id.", ".$id.")");
-
+						
+						$applicable_for_insert['planning_id'] = $this->response->record_id;
 		            	$applicable_for_insert['user_id'] = $id;
 		            	$applicable_for_insert['to_user_id'] = $id;
 		            	$applicable_for_insert['template_id'] =  $_POST['performance_planning']['template_id'];
@@ -741,18 +743,21 @@ class Performance_planning extends MY_PrivateController
 			$position_classification_id = array();
 			$job_grade_id = array();
 			$employment_status_id = array();
+			$employment_type_id = array();
 
 			foreach ($template->result() as $row) {
 				$company_id[] = $row->company_id;
 				$position_classification_id[] = $row->position_classification_id;
 				$job_grade_id[] = $row->job_grade_id;
 				$employment_status_id[] = $row->employment_status_id;
+				$employment_type_id[] = $row->employment_type_id;
 			}
 
 			$company_id = implode(',', $company_id);
 			$position_classification_id = implode(',', $position_classification_id);
 			$job_grade_id = implode(',', $job_grade_id);
 			$employment_status_id = implode(',', $employment_status_id);
+			$employment_type_id = implode(',', $employment_type_id);
 		}
 
 
@@ -771,6 +776,9 @@ class Performance_planning extends MY_PrivateController
 
         if ($position_classification_id)
         	$qry .= " AND partners.position_classification_id IN ({$position_classification_id})";
+
+        if ($employment_type_id)
+        	$qry .= " AND partners.employment_type_id IN ({$employment_type_id})";
 
         if ($job_grade_id)
         	$qry .= " AND partners.job_grade_id IN ({$job_grade_id})";

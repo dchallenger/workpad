@@ -11,6 +11,7 @@ ww_performance_template.applicable_to_id as "performance_template.applicable_to_
 ww_performance_template.applicable_to as "performance_template.applicable_to",
 ww_performance_template.company_id as "performance_template.company_id",
 ww_performance_template.position_classification_id as "performance_template.position_classification_id",
+ww_performance_template.employment_type_id as "performance_template.employment_type_id",
 ww_performance_template.job_grade_id as "performance_template.job_grade_id",
 ww_performance_template.employment_type_id as "performance_template.employment_type_id",
 ww_performance_template.employment_status_id as "performance_template.employment_status_id",

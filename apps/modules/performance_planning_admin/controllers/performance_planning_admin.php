@@ -135,6 +135,11 @@ class Performance_planning_admin extends MY_PrivateController
 /*			$rec['options'] .= '<li><a href="javascript: view_transaction_logs('.$record['record_id'].', '.$record['user_id'].')"><i class="fa fa-info"></i> View Planning Logs </a></li>';
 			$rec['options'] .= '<li><a href="javascript: initialize_planning('.$record['record_id'].', '.$record['user_id'].')"><i class="fa fa-pencil"></i> Initialize Template </a></li>';*/
 		}
+
+        $rec['hr_appraisal_admin'] = 0;
+        if ($this->permission['process']) {
+            $rec['hr_appraisal_admin'] = 1;
+        }
 	}
 
 	function delete_planning()

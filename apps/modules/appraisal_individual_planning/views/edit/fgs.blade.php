@@ -11,7 +11,7 @@
         <div class="portlet">
 			<div class="portlet-body">
 				<table class="table table-bordered table-striped">
-					<input type="hidden" name="user_id" value="{{ $appraisee->user_id }}" />
+					<input type="hidden" class="appraisee_user_id" name="user_id" value="{{ $appraisee->user_id }}" />
 					<input type="hidden" name="template_id" value="{{ $appraisee->template_id }}" />
 					<input type="hidden" name="planning_id" value="{{ $appraisee->planning_id }}" />
 					<input type="hidden" name="status_id" value="{{ $appraisee->status_id }}" />
@@ -135,9 +135,9 @@
 							</td>
 							<td>
 								<div class="form-group">
-									<label class="control-label col-md-4 bold">{{ lang('appraisal_individual_planning.pos_classification') }}</label>
+									<label class="control-label col-md-4 bold">{{ lang('appraisal_individual_planning.level') }}</label>
 									<div class="col-md-8">
-										<input type="text" class="form-control" value="{{ $appraisee->position_classification }}" readonly>
+										<input type="text" class="form-control" value="{{ $appraisee->employment_type }}" readonly>
 									</div>
 								</div>
 							</td>
@@ -239,6 +239,22 @@
 														{{ $child->template_section }} ({{ $child->weight }}%)
 													</h3>
 												</div>
+												@if($employee_appraisal_planning && $employee_appraisal_planning->num_rows() > 0)
+													<br>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label col-md-5 bold" style="text-align:left">Previous Appraisal Planning</label>
+															<div class="col-md-7">
+																<select class="form-control upload_appraisal_planning" data-section_id="{{$child->template_section_id}}">
+																	<option value="">Select Appraisal Planning</option>
+																	@foreach($employee_appraisal_planning->result() as $row)
+																		<option value="{{$row->planning_id}}">{{$row->performance}}</option>
+																	@endforeach
+																</select>
+															</div>
+														</div>
+													</div>
+												@endif
 												@include('edit/sections/balance_scorecard', array('section_id' => $child->template_section_id, 'header' => $child->header, 'footer' => $child->footer))
 											</div> <?php 
 											break;

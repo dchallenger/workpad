@@ -1370,7 +1370,12 @@ class Performance_appraisal extends MY_PrivateController
 		$appraisal_id = $this->input->post('appraisal_id');
 		$status_id = $this->input->post('status_id');
 		// $records = explode(',', $appraisal_id);
-		
+
+		//if closed planning then save the user info as history due to movement
+		if ($status_id == 0)
+			$this->mod->save_history_user_info($appraisal_id);
+		//if closed planning then save the user info as history due to movement
+				
 		$data['status_id'] = $status_id;
 		$this->db->where($this->mod->primary_key, $appraisal_id);
 		$this->db->update($this->mod->table, $data);

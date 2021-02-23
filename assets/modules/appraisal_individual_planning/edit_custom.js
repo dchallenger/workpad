@@ -413,6 +413,39 @@ function view_discussion( form, status_id )
 	});
 }
 
+$(document).on('change', '.upload_appraisal_planning', function (e) {
+	e.preventDefault();
+
+	var data = {
+		appraisee_user_id: $('.appraisee_user_id').val(),
+		planning_id: $(this).val(),
+		section_id: $(this).data('section_id')
+	};
+
+	if ($(this).val() != '') {
+		bootbox.confirm('Are you sure you want to upload "' + $("option:selected").text() + '" performance planning?', function(confirm) {
+			if( confirm )
+			{
+				$.blockUI({ message: '<div>Updating content, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />', 
+					onBlock: function(){
+						$.ajax({
+							url: base_url + module.get('route') + '/populate_appraisal_planning',
+							type:"POST",
+							data: data,
+							dataType: "json",
+							async: false,
+							success: function ( response ) {
+								$('.kra-section').html(response.items);
+							}
+						});
+					}
+				});
+				$.unblockUI();
+			}
+		});	
+	}
+});
+
 $(document).on('keypress', '#discussion_notes', function (e) {	
     if (e.which == 13) {
     	e.preventDefault();

@@ -55,4 +55,6 @@ $lang['appraisal_individual_planning'] = array(
 	'over_all_rating' => 'Overall Rating',
 	'coach_rating' => 'Coach Rating',
 	'committee_rating' => 'Committee Rating',
+	'level' => 'Level',
+	'status' => 'Status',
 );

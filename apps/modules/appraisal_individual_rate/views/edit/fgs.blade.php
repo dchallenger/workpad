@@ -134,9 +134,9 @@
 							</td>
 							<td>
 								<div class="form-group">
-									<label class="control-label col-md-4 bold">{{ lang('appraisal_individual_planning.pos_classification') }}</label>
+									<label class="control-label col-md-4 bold">{{ lang('appraisal_individual_planning.level') }}</label>
 									<div class="col-md-8">
-										<input type="text" class="form-control" value="{{ $appraisee->position_classification }}" readonly>
+										<input type="text" class="form-control" value="{{ $appraisee->employment_type }}" readonly>
 									</div>
 								</div>
 							</td>

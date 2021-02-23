@@ -29,6 +29,9 @@
 			<span class="pull-left margin-right-10"><img src="{{ $avatar }}" alt="photo" width="48px" /></span>
 			<span class="pull-left">
 				{{ $fullname }}
+				@if ($employment_status_id == 8)
+					<span class="small text-danger">({{ $employment_status }})</span>
+				@endif
 				<br>
 				<span class="small text-muted" id="date_set">
 					{{ $performance_type }} / {{ date('M d, Y', strtotime( $performance_appraisal_date_from ) ) }} to {{ date('M d, Y', strtotime( $performance_appraisal_date_to ) ) }}
@@ -84,5 +87,13 @@
         <div class="btn-group">
         	<a class="small text-muted" href="{{ $href }}"><i class="fa fa-search"></i> {{ lang('common.view') }}</a>
         </div>
+        @if(in_array($performance_appraisal_performance_status_id,array(2,14)) && $hr_appraisal_admin && $status_id == 1)
+	        <div class="btn-group">
+	        	<?php
+					$href = get_mod_route('appraisal_individual_rate') . '/edit_admin/'.$record_id.'/'.$user_id;
+				?>
+	            <a class="small text-muted" href="{{ $href }}"><i class="fa fa-pencil"></i> Edit</a>
+	        </div>
+	    @endif        
     </td>
 </tr>

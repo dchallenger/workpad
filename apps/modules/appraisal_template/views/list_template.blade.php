@@ -8,7 +8,7 @@
 		{{ $performance_template_company }}
 	</td>
 	<td class="hidden-xs">
-		{{ $performance_template_position_classification }}
+		{{ $performance_template_employment_type }}
 	</td>
 	<td class="hidden-xs">
 		{{ $performance_template_job_level }}

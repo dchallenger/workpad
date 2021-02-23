@@ -135,9 +135,9 @@
 							</td>
 							<td>
 								<div class="form-group">
-									<label class="control-label col-md-4 bold">{{ lang('appraisal_individual_planning.pos_classification') }}</label>
+									<label class="control-label col-md-4 bold">{{ lang('appraisal_individual_planning.level') }}</label>
 									<div class="col-md-8">
-										<input type="text" class="form-control" value="{{ $appraisee->position_classification }}" readonly>
+										<input type="text" class="form-control" value="{{ $appraisee->employment_type }}" readonly>
 									</div>
 								</div>
 							</td>
@@ -147,7 +147,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4 bold">{{ lang('appraisal_individual_planning.coach_rating') }}</label>
 									<div class="col-md-8">
-										<input type="text" name="coach_rating" class="form-control" value="{{ $appraisee->coach_rating }}" readonly>
+										<input type="text" name="coach_rating" class="form-control" value="@if($self_rating) @if($appraisee->status_id == 4) {{$appraisee->coach_rating}} @endif @else {{$appraisee->coach_rating}} @endif" readonly>
 									</div>
 								</div>
 							</td>
@@ -155,7 +155,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4 bold">{{ lang('appraisal_individual_planning.committee_rating') }}</label>
 									<div class="col-md-8">
-										<input type="text" name="committee_rating" class="form-control" value="{{ $appraisee->committee_rating }}" @if($committee_rater) '' @else readonly @endif>
+										<input type="text" name="committee_rating" class="form-control" value="@if($self_rating) @if($appraisee->status_id == 4) {{$appraisee->committee_rating}} @endif @else {{$appraisee->committee_rating}} @endif" @if($committee_rater) '' @else readonly @endif>
 									</div>
 								</div>
 							</td>
@@ -420,7 +420,15 @@
 													<td></td>
 													<td></td>
 													<td class="bold">Coach Rating</td>
-													<td class="coach_rating">{{$appraisee->coach_rating}}</td>															
+													<td class="coach_rating">
+														@if ($self_rating)
+															@if($appraisee->status_id == 4)
+																{{ $appraisee->coach_rating }}	
+															@endif
+														@else
+															{{ $appraisee->coach_rating }}
+														@endif
+													</td>															
 												</tr>
 											@endif
 										</tbody>								
@@ -470,6 +478,7 @@
 									</td>
 									<td>
 										<span class="{{ $applog['class'] }}"> {{ $applog['performance_status'] }}</span><br>
+										<span class="small text-muted">@if($applog['edited'] == 1) Edited @endif</span><br />
 									@if( $applog['approver_id'] == $applog['to_user_id'] )
 										<span class="small text-danger">Attention to {{ $applog['display_name'] }}</span>
 									@endif
@@ -528,7 +537,7 @@
             <div class="row" align="center">
                 <div class="col-md-12">
 		            <div>   
-						@if(!isset($appraisal_admin) || $appraisal_admin == 0)
+						@if((!isset($appraisal_admin) || $appraisal_admin == 0) && (!isset($hr_appraisal_admin) || $hr_appraisal_admin == 0))
 							@if(isset($approver_info['performance_status_id']) &&  $approver_info['performance_status_id'] == 2) <!-- current status is for approval which is 2 -->
 								<button type="button" class="btn blue btn-sm" onclick="change_status( $(this).closest('form'), 99)"><i class="fa fa-check"></i> Save as Draft</button>
 								<button type="button" class="btn green btn-sm" onclick="change_status( $(this).closest('form'), 4)"><i class="fa fa-check"></i> Approved</button>

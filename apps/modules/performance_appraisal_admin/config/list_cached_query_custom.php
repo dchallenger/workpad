@@ -14,13 +14,19 @@ $config["list_cached_query_custom"] = 'SELECT
 `ww_performance_appraisal`.`modified_by` AS "performance_appraisal_modified_by",
 `ww_performance_status`.`performance_status` AS "performance_appraisal_performance_status",
 `ww_performance_appraisal_applicable`.`status_id` AS "performance_appraisal_performance_status_id",
+`t6`.`performance_status` AS "performance_appraisal_performance_approver_status",
+`t6`.`performance_status_id` AS "performance_appraisal_performance_approver_status_id",
 `ww_performance_status`.`class` AS "appraisal_status_class",
+`ww_partners`.`status_id` AS "employment_status_id",
+`ww_partners`.`status` AS "employment_status",
 `users_profile`.`photo` AS "photo"
 FROM (`ww_performance_appraisal`)
 LEFT JOIN (`ww_performance_setup_performance`) ON `ww_performance_setup_performance`.`performance_id` = `ww_performance_appraisal`.`performance_type_id`
 LEFT JOIN (`ww_performance_appraisal_applicable`) ON `ww_performance_appraisal_applicable`.`appraisal_id` = `ww_performance_appraisal`.`appraisal_id`
 LEFT JOIN (`users_profile`) ON `users_profile`.`user_id` = `ww_performance_appraisal_applicable`.`user_id`
+LEFT JOIN (`ww_partners`) ON `users_profile`.`user_id` = `ww_partners`.`user_id`
 LEFT JOIN `ww_performance_status` ON `ww_performance_status`.performance_status_id = `ww_performance_appraisal_applicable`.`status_id`
+LEFT JOIN `ww_performance_appraisal_approver` T6 ON `T6`.`user_id` = `ww_performance_appraisal_applicable`.`user_id` AND `T6`.`appraisal_id` = `ww_performance_appraisal_applicable`.`appraisal_id`
 WHERE (
 	ww_performance_appraisal.year like "%{$search}%" OR
 	ww_performance_setup_performance.performance like "%{$search}%"OR

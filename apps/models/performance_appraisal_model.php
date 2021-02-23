@@ -166,11 +166,44 @@ class performance_appraisal_model extends Record
 	}
 
 	function getPerformancePlanningApplicable($planning_id = 0) {
-		$this->db->where('deleted',0);
+		$this->db->where('performance_planning.deleted',0);
 		$this->db->where('performance_planning.planning_id',$planning_id);
 		$this->db->join('performance_planning','performance_planning_applicable.planning_id = performance_planning.planning_id');
 		$result = $this->db->get('performance_planning_applicable');
 		
 		return $result;
 	}
+
+	function save_history_user_info($appraisal_id = 0) {
+		$this->db->where('appraisal_id',$appraisal_id);
+		$this->db->delete('performance_planning_applicable_user_info');
+
+		$this->db->where('appraisal_id',$appraisal_id);
+		$appraisal_applicable = $this->db->get('performance_appraisal_applicable');
+		if ($appraisal_applicable && $appraisal_applicable->num_rows() > 0) {
+			foreach ($appraisal_applicable->result() as $row) {
+				$this->db->where('users_profile.user_id',$row->user_id);
+				$this->db->join('partners','users_profile.user_id = partners.user_id','left');
+				$users = $this->db->get('users_profile');
+				if ($users && $users->num_rows() > 0) {
+					$users_info = $users->row();
+
+					$info_arr = array(
+										'appraisal_id' => $appraisal_id,
+										'user_id' => $row->user_id,
+										'position_id' => $users_info->position_id,
+										'job_grade_id' => $users_info->job_grade_id,
+										'employment_type_id' => $users_info->employment_type_id,
+										'company_id' => $users_info->company_id,
+										'division_id' => $users_info->division_id,
+										'department_id' => $users_info->department_id,
+										'reports_to_id' => $users_info->reports_to_id
+									 );
+					$this->db->insert('performance_appraisal_applicable_user_info',$info_arr);
+
+				}
+			}
+
+		}
+	}	
 }

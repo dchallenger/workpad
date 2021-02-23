@@ -34,6 +34,14 @@ $show_add = false;
 						<th class="bold">% Achieved</th>
 						<th class="bold">% Weight Average</th>					
 					@endforeach
+				@else
+					@if($self_rating && $performance_status_id == 4)
+						@foreach($list_approver->result() as $row)
+							<th class="bold">Coach Rating</th>
+							<th class="bold">% Achieved</th>
+							<th class="bold">% Weight Average</th>					
+						@endforeach					
+					@endif
 				@endif
 			</tr>
 		</thead>
@@ -83,18 +91,26 @@ $show_add = false;
 									$coach_weight_ave_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][105][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][105][1] : '';									
 
 									$disabled = '';
-									if ($performance_status_id >= 4)
+									if ($performance_status_id >= 4 || (isset($approver_approved) && $approver_approved) || $hr_appraisal_admin)
 										$disabled = 'disabled';									
 								?>
-								<td><input disabled type="text" question="{{ $val['scorecard_id'] }}" value="{{ $self_rate_val }}" class="form-control none_core_self_rating" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][100][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></td>
-								<td><input disabled type="text" question="{{ $val['scorecard_id'] }}" value="{{ $self_achieve_val }}" class="form-control self_achieved" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][101][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></td>
-								<td><input disabled type="text" question="{{ $val['scorecard_id'] }}" value="{{ $self_weight_ave_val }}" class="form-control self_weight_average" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][102][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></td>
+								<td><input disabled type="text" question="{{ $val['scorecard_id'] }}" value="{{ $self_rate_val }}" class="form-control none_core_self_rating" name="field_appraisal[{{ $appraisee_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][100][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></td>
+								<td><input disabled type="text" question="{{ $val['scorecard_id'] }}" value="{{ $self_achieve_val }}" class="form-control self_achieved" name="field_appraisal[{{ $appraisee_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][101][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></td>
+								<td><input disabled type="text" question="{{ $val['scorecard_id'] }}" value="{{ $self_weight_ave_val }}" class="form-control self_weight_average" name="field_appraisal[{{ $appraisee_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][102][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></td>
 								@if(!$self_rating && $list_approver && $list_approver->num_rows() > 0)
 									@foreach($list_approver->result() as $row)
 										<td><input {{ $disabled }} type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_rate_val }}" class="form-control none_core_coach_rating" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][103][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>
 										<td><input readonly='readonly' type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_achieve_val }}" class="form-control coach_achieved" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][104][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>
 										<td><input readonly='readonly' type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_weight_ave_val }}" class="form-control coach_weight_average " name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][105][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>					
 									@endforeach
+								@else
+									@if($self_rating && $performance_status_id == 4)
+										@foreach($list_approver->result() as $row)
+											<td><input {{ $disabled }} type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_rate_val }}" class="form-control none_core_coach_rating" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][103][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>
+											<td><input readonly='readonly' type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_achieve_val }}" class="form-control coach_achieved" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][104][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>
+											<td><input readonly='readonly' type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_weight_ave_val }}" class="form-control coach_weight_average " name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][105][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>															
+										@endforeach
+									@endif
 								@endif								
 						<?php
 							}
@@ -164,7 +180,7 @@ $show_add = false;
 											$coach_weight_ave_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][105][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][105][$key1] : '';									
 
 											$disabled = '';
-											if ($performance_status_id >= 4)
+											if ($performance_status_id >= 4 || (isset($approver_approved) && $approver_approved) || $hr_appraisal_admin)
 												$disabled = 'disabled';											
 										?>	
 										<td><input disabled type="text" question="{{ $val['scorecard_id'] }}" value="{{ $self_rate_val }}" class="form-control none_core_self_rating" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][100][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></td>
@@ -176,6 +192,14 @@ $show_add = false;
 												<td><input readonly='readonly' type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_achieve_val }}" class="form-control coach_achieved" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][104][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>
 												<td><input readonly='readonly' type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_weight_ave_val }}" class="form-control coach_weight_average" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][105][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>					
 											@endforeach
+										else
+											@if($self_rating && $performance_status_id == 4)
+												@foreach($list_approver->result() as $row)
+													<td><input {{ $disabled }} type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_rate_val }}" class="form-control none_core_coach_rating" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][103][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>
+													<td><input readonly='readonly' type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_achieve_val }}" class="form-control coach_achieved" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][104][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>
+													<td><input readonly='readonly' type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_weight_ave_val }}" class="form-control coach_weight_average" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][105][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>																	
+												@endforeach
+											@endif												
 										@endif											
 								<?php										
 									}

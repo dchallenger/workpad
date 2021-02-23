@@ -135,9 +135,9 @@
 							</td>
 							<td>
 								<div class="form-group">
-									<label class="control-label col-md-4 bold">{{ lang('appraisal_individual_planning.pos_classification') }}</label>
+									<label class="control-label col-md-4 bold">{{ lang('appraisal_individual_planning.level') }}</label>
 									<div class="col-md-8">
-										<input type="text" class="form-control" value="{{ $appraisee->position_classification }}" readonly>
+										<input type="text" class="form-control" value="{{ $appraisee->employment_type }}" readonly>
 									</div>
 								</div>
 							</td>
@@ -385,6 +385,7 @@
 									</td>
 									<td>
 										<span class="{{ $applog['class'] }}"> {{ $applog['performance_status'] }}</span><br>
+										<span class="small text-muted">@if($applog['edited'] == 1) Edited @endif</span><br />										
 									@if( $applog['approver_id'] == $applog['to_user_id'] )
 										<span class="small text-danger">Attention to {{ $applog['display_name'] }}</span>
 									@endif
@@ -445,19 +446,22 @@
                     <div>
                     	@if( $appraisee->user_id == $user['user_id'] )
 	                    	<?php switch( $appraisee->performance_status_id ):
-								case 0;
-								case 1; ?>
-									@include('buttons/partner/no_status') <?php
-									break;
-							endswitch;?>
+									case 0;
+									case 1;
+									case 6; ?>
+										@include('buttons/partner/no_status') <?php
+										break;
+								endswitch;
+							?>
 						@else
 							@if(!isset($planning_admin) || $planning_admin == 0)
 		                    	<?php 
 		                    		switch( $approver->performance_status_id ):
-									case 2; ?>
-										@include('buttons/immediate/for_approval') <?php
-										break;									
-								endswitch;?>						
+										case 2; ?>
+											@include('buttons/immediate/for_approval') <?php
+											break;									
+									endswitch;
+								?>						
 							@endif
 						@endif
                     	<a class="btn default btn-sm back_button_gray" href="{{ $mod->url }}">{{ lang('common.back') }}</a>

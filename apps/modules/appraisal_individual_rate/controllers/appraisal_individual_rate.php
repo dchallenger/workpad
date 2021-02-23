@@ -26,9 +26,9 @@ class Appraisal_individual_rate extends MY_PrivateController
         }
         
         $permission = parent::_check_permission('performance_appraisal_manage');
-        $data['allow_manage'] = $permission['list'];
+        $data['allow_manage'] = ($permission != 0 ? $permission['list'] : $permission);;
         $permission = parent::_check_permission('performance_appraisal');
-        $data['allow_admin'] = $permission['list'];
+        $data['allow_admin'] = ($permission != 0 ? $permission['list'] : $permission);;
 
         $this->load->vars($data);
         echo $this->load->blade('pages.listing')->with( $this->load->get_cached_vars() );
@@ -288,7 +288,7 @@ class Appraisal_individual_rate extends MY_PrivateController
 
                 $this->db->update('performance_appraisal_applicable', $update, $where);
 
-                $this->response->redirect = get_mod_route('appraisal_individual_planning');                
+                $this->response->redirect = get_mod_route('appraisal_individual_rate');                
 
                 //create system logs
                 $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'performance_appraisal_applicable', $previous_main_data, $update);
@@ -533,14 +533,14 @@ class Appraisal_individual_rate extends MY_PrivateController
             $field = $_POST['field_appraisal'];
 
             // if the login user is the second approver then use the first approver user id to delete the records.
-            if ($status_id == 4 || $status_id == 99)
+/*            if ($status_id == 4 || $status_id == 99)
                 $this->db->where('rate_user_id',$fst_approver->approver_id); // for rater
             else
                 $this->db->where('rate_user_id',$this->user->user_id); // for ratee
 
             $this->db->where('user_id',$this->input->post('user_id'));
             $this->db->where('appraisal_id',$this->input->post('record_id'));
-            $this->db->delete('performance_appraisal_applicable_fields');
+            $this->db->delete('performance_appraisal_applicable_fields');*/
 
             foreach ($field as $user_id => $info) {
                 foreach ($info as $section_id => $section) {                                       
@@ -557,16 +557,50 @@ class Appraisal_individual_rate extends MY_PrivateController
                                         'sequence' => $key + 1
                                     );
 
-                                    if ($status_id == 4 || $status_id == 99)
-                                        $item_info['rate_user_id'] = $fst_approver->approver_id; // for rater
-                                    else
-                                        $item_info['rate_user_id'] = $this->user->user_id; // for ratee
-                                
-                                $this->db->insert('performance_appraisal_applicable_fields',$item_info);
+                                $where = array(
+                                        'appraisal_id' => $this->input->post('record_id'),
+                                        'user_id' => $this->input->post('user_id'),
+                                        'template_section_id' => $section_id,                                    
+                                        'criteria_id' => $scorecard_or_library_id,
+                                        'item_id' => $section_column_or_library_value_id,
+                                        'sequence' => $key + 1
+                                    );
 
-                                $item_id = $this->db->insert_id();
+                                if ($status_id == 4 || $status_id == 99)
+                                    $item_info['rate_user_id'] = $fst_approver->approver_id; // for rater
+                                else
+                                    $item_info['rate_user_id'] = $this->user->user_id; // for ratee
 
-                                $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'performance_appraisal_applicable_fields', '', $value);
+                                if ($status_id == 4 || $status_id == 99)
+                                    $where['rate_user_id'] = $fst_approver->approver_id; // for rater
+                                else
+                                    $where['rate_user_id'] = $this->user->user_id; // for ratee
+
+                                $this->db->where($where);
+                                $result = $this->db->get('performance_appraisal_applicable_fields');
+                                if ($result && $result->num_rows() > 0) {
+                                    $previous_main_data = $result->row_array();
+
+                                    if ($previous_main_data['value'] !== $value) {
+                                        $this->db->where('appraisal_id',$this->input->post('record_id'));
+                                        $this->db->where('user_id',$this->input->post('user_id'));
+                                        $this->db->where('approver_id',$this->user->user_id);
+                                        $this->db->update('performance_appraisal_approver',array('edited' => 1));
+
+                                        $item_info['edited'] = 1;
+                                    }
+
+                                    $this->db->where($where);
+                                    $this->db->update('performance_appraisal_applicable_fields',$item_info);
+
+                                    $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'performance_appraisal_applicable_fields', $previous_main_data, $item_info);                                    
+                                } else {
+                                    $this->db->insert('performance_appraisal_applicable_fields',$item_info);
+
+                                    $item_id = $this->db->insert_id();
+
+                                    $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'performance_appraisal_applicable_fields', '', $value);
+                                }
                             }
                         }
                     }
@@ -715,6 +749,356 @@ class Appraisal_individual_rate extends MY_PrivateController
         $this->_ajax_return();
     }
 
+    function change_status_admin( $return = false )
+    {
+        $this->load->model('system_feed');        
+        $this->load->library('parser');
+        $this->parser->set_delimiters('{{', '}}');  
+
+        $this->_ajax_only();
+        
+        $this->db->trans_begin();
+        $error = false;
+
+        $appraisee = $this->mod->get_appraisee( $_POST['appraisal_id'], $_POST['user_id'] );      
+        $status_id = $this->input->post('status_id');
+        
+        //get approvers
+        $where = array(
+            'appraisal_id' => $this->input->post('appraisal_id'),
+            'user_id' => $this->input->post('user_id'),
+        );
+        $this->db->order_by('sequence');
+        $approvers = $this->db->get_where('performance_appraisal_approver', $where)->result();
+        $no_approvers = sizeof($approvers);
+
+        $condition = $approvers[0]->condition;
+        $fst_approver = $approvers[0];
+
+        $appraisal_other_info = isset($_POST['individual_appraisal']) ? $_POST['individual_appraisal'] : array();
+
+        $this->response->redirect = false;
+
+        $update['status_id'] = $status_id;
+
+        switch( $status_id ) {
+            case 2://for approval
+                $update['to_user_id'] = $fst_approver->approver_id;
+
+                $where = array(
+                    'appraisal_id' => $this->input->post('appraisal_id'),
+                    'user_id' => $this->input->post('user_id'),
+                );
+
+                //get previous data for audit logs
+                $previous_main_data = $this->db->get_where('performance_appraisal_applicable', $where)->row_array();
+
+                $this->db->update('performance_appraisal_applicable', $update, $where);
+
+                //reset status of approver to new since back to employee for review
+                $this->db->where('appraisal_id',$this->input->post('appraisal_id'));
+                $this->db->where('user_id',$this->input->post('user_id'));
+                $this->db->update('performance_appraisal_approver',array('performance_status_id' => 0));
+
+                foreach(  $approvers  as $index => $approver )
+                {
+                    if( $index == 0 )
+                    {
+                        $this->db->update('performance_appraisal_approver', array('performance_status_id' => 2), array('id' => $approver->id));
+
+                        $feed = array(
+                            'status' => 'info',
+                            'message_type' => 'Comment',
+                            'user_id' => $this->user->user_id,
+                            'feed_content' => 'Please review '.$appraisee->fullname.'\'s performance targets.',
+                            'uri' => $this->mod->route . '/review_admin/'.$_POST['appraisal_id'].'/'.$_POST['user_id'],
+                            'recipient_id' => $approver->approver_id
+                        );
+
+                        $recipients = array($approver->approver_id);
+                        $this->system_feed->add( $feed, $recipients );
+
+                        // email to approver for approval
+                        $this->db->where('user_id',$approver->approver_id);
+                        $approver_result = $this->db->get('users');
+                        $approver_info = $approver_result->row();
+
+                        $approver_recepient = $approver->approver_id;
+                        $sendtargetsettings['approver'] = $approver_info->full_name;
+
+                        $sendtargetsettings['appraisee'] = $appraisee->fullname;
+
+                        $target_settings_send_template = $this->db->get_where( 'system_template', array( 'code' => 'PERFORMANCE-APPRAISAL-SEND-APPROVER') )->row_array();
+                        $msg = $this->parser->parse_string($target_settings_send_template['body'], $sendtargetsettings, TRUE); 
+                        $subject = $this->parser->parse_string($target_settings_send_template['subject'], $sendtargetsettings, TRUE); 
+
+                        $this->db->query("INSERT INTO {$this->db->dbprefix}system_email_queue (`to`, `subject`, body)
+                                 VALUES('{$approver_recepient}', '{$subject}', '".$this->db->escape_str($msg)."') ");
+                        // email to approver for approval
+
+                        $this->response->notify[] = $approver->approver_id;
+                    }
+                }   
+
+                //create system logs
+                $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'performance_appraisal_applicable', $previous_main_data, $update);
+
+                $this->response->redirect = get_mod_route('performance_appraisal');                
+
+                break;
+            case 4:
+                $update['committee_rating'] = $this->input->post('committee_rating');
+
+                $feed = array(
+                    'status' => 'info',
+                    'message_type' => 'Comment',
+                    'user_id' => $this->user->user_id,
+                    'feed_content' => 'Your performance appraisal have been inputted committee rate.',
+                    'uri' => $this->mod->route . '/review/'.$this->input->post('appraisal_id').'/'.$this->input->post('user_id'),
+                    'recipient_id' => $this->input->post('user_id')
+                );
+
+                $recipients = array($this->input->post('user_id'));
+                $this->system_feed->add( $feed, $recipients );
+
+                $this->response->notify[] = $this->input->post('user_id');
+
+                // email to appraisee
+                $this->db->where('user_id',$this->input->post('user_id'));
+                $appraisee_result = $this->db->get('users');
+                $appraisee_info = $appraisee_result->row();
+
+                $appraisee_recepient = $this->input->post('user_id');
+                $sendtargetsettings['recepient'] = $appraisee_info->full_name;
+
+                $target_settings_send_template = $this->db->get_where( 'system_template', array( 'code' => 'PERFORMANCE-APPRAISAL-SEND-COMMITTEE') )->row_array();
+                $msg = $this->parser->parse_string($target_settings_send_template['body'], $sendtargetsettings, TRUE); 
+                $subject = $this->parser->parse_string($target_settings_send_template['subject'], $sendtargetsettings, TRUE); 
+
+                $this->db->query("INSERT INTO {$this->db->dbprefix}system_email_queue (`to`, `subject`, body)
+                         VALUES('{$appraisee_recepient}', '{$subject}', '".$this->db->escape_str($msg)."') ");
+                // email to approver for approval    
+
+                $where = array(
+                    'appraisal_id' => $this->input->post('appraisal_id'),
+                    'template_id' => $this->input->post('template_id'),
+                    'user_id' => $this->input->post('user_id'),
+                );
+                
+                //get previous data for audit logs
+                $previous_main_data = $this->db->get_where('performance_appraisal_applicable', $where)->row_array();
+
+                $this->db->update('performance_appraisal_applicable', $update, $where);
+
+                //create system logs
+                $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'performance_planning_applicable', $previous_main_data, $update);
+
+                $this->response->redirect = get_mod_route('performance_appraisal');
+                break;
+            case 14:
+                $update['committee_rating'] = $this->input->post('committee_rating');
+                
+                $this->db->update('performance_appraisal_applicable', $update, $where);
+
+                $this->response->redirect = get_mod_route('performance_appraisal');
+                break;
+        }
+
+        if (in_array($status_id, array(2,4,14))) {
+            $field = $_POST['field_appraisal'];
+
+            foreach ($field as $user_id => $info) {
+                foreach ($info as $section_id => $section) {                                       
+                    foreach ($section as $scorecard_or_library_id => $criteria) {
+                        foreach ($criteria as $section_column_or_library_value_id => $item) {
+                            foreach ($item as $key => $value) {
+                                $item_info = array(
+                                        'appraisal_id' => $this->input->post('record_id'),
+                                        'user_id' => $this->input->post('user_id'),
+                                        'rate_user_id' => $user_id,
+                                        'template_section_id' => $section_id,                                    
+                                        'criteria_id' => $scorecard_or_library_id,
+                                        'item_id' => $section_column_or_library_value_id,
+                                        'value' => $value,
+                                        'sequence' => $key + 1
+                                    );
+
+                                $where = array(
+                                        'appraisal_id' => $this->input->post('record_id'),
+                                        'user_id' => $this->input->post('user_id'),
+                                        'rate_user_id' => $user_id,
+                                        'template_section_id' => $section_id,                                    
+                                        'criteria_id' => $scorecard_or_library_id,
+                                        'item_id' => $section_column_or_library_value_id,
+                                        'sequence' => $key + 1
+                                    );
+
+                                $this->db->where($where);
+                                $result = $this->db->get('performance_appraisal_applicable_fields');
+                                if ($result && $result->num_rows() > 0) {
+                                    $previous_main_data = $result->row_array();
+
+                                    if ($previous_main_data['value'] !== $value) {
+                                        $item_info['edited_hr_admin'] = 1;
+                                    }
+
+                                    $this->db->where($where);
+                                    $this->db->update('performance_appraisal_applicable_fields',$item_info);
+
+                                    $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'performance_appraisal_applicable_fields', $previous_main_data, $item_info);                                    
+                                } else {
+                                    $this->db->insert('performance_appraisal_applicable_fields',$item_info);
+
+                                    $item_id = $this->db->insert_id();
+
+                                    $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'performance_appraisal_applicable_fields', '', $value);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // saving of section ratings
+        $section_key_weight = $_POST['section_key_weight'];
+        $section_self_rating = $_POST['section_self_rating'];
+        $section_coach_rating = $_POST['section_coach_rating'];
+        $section_total_weight_ave = $_POST['section_total_weight_ave'];
+        $section_coach_section_rating = $_POST['section_coach_section_rating'];
+        $section_weight = $_POST['section_weight'];
+        $section_total_weighted_score = $_POST['section_total_weighted_score'];
+        $section_coach_total_weighted_score = $_POST['section_coach_total_weighted_score'];
+
+        $this->db->where('user_id',$this->input->post('user_id'));
+        $this->db->where('appraisal_id',$this->input->post('record_id'));
+        $this->db->delete('performance_appraisal_applicable_section_ratings');
+
+        $section_rating_info = array();
+        foreach ($section_weight as $template_section_id => $value) {
+            foreach ($value as $key => $val) {
+                $section_rating_info = array(
+                                                'appraisal_id' => $this->input->post('record_id'),
+                                                'template_section_id' => $template_section_id,
+                                                'user_id' => $this->input->post('user_id'),
+                                                'key_weight' => $section_key_weight[$template_section_id][$key],
+                                                'self_rating' => $section_self_rating[$template_section_id][$key],
+                                                'coach_rating' => $section_coach_rating[$template_section_id][$key],
+                                                'total_weight_average' => $section_total_weight_ave[$template_section_id][$key],
+                                                'coach_section_rating' => $section_coach_section_rating[$template_section_id][$key],
+                                                'weight' => $val,
+                                                'total_weighted_score' => $section_total_weighted_score[$template_section_id][$key],
+                                                'coach_total_weighted_score' => $section_coach_total_weighted_score[$template_section_id][$key]
+                                            );
+                $this->db->insert('performance_appraisal_applicable_section_ratings',$section_rating_info);
+            }
+        }
+        // saving of section ratings
+
+        // saving of score or library ratings
+        $none_core_score_car_library_key_weight = $_POST['none_core_score_car_library_key_weight'];
+        $none_core_score_car_library_self_rating = $_POST['none_core_score_car_library_self_rating'];
+        $none_core_score_car_library_coach_rating = $_POST['none_core_score_car_library_coach_rating'];
+        $none_core_score_car_library_total_weight_ave = $_POST['none_core_score_car_library_total_weight_ave'];
+        $none_core_score_car_library_section_rating = $_POST['none_core_score_car_library_section_rating'];
+        $none_core_score_car_library_weight = $_POST['none_core_score_car_library_weight'];
+        $none_core_score_car_library_total_weighted_score = $_POST['none_core_score_car_library_total_weighted_score'];
+        $none_core_score_car_library_coach_total_weighted_score = $_POST['none_core_score_car_library_coach_total_weighted_score'];
+
+        $this->db->where('user_id',$this->input->post('user_id'));
+        $this->db->where('appraisal_id',$this->input->post('record_id'));
+        $this->db->delete('performance_appraisal_applicable_score_library_ratings');
+
+        $score_library_rating_info = array();
+        foreach ($none_core_score_car_library_self_rating as $template_section_id => $template_section) {
+            foreach ($template_section as $score_library_value_id => $value) {
+                foreach ($value as $key => $val) {
+                    $score_library_rating_info = array(
+                                                    'appraisal_id' => $this->input->post('record_id'),
+                                                    'template_section_id' => $template_section_id,
+                                                    'score_library_id' => $score_library_value_id,
+                                                    'user_id' => $this->input->post('user_id'),
+                                                    'key_weight' => $none_core_score_car_library_key_weight[$template_section_id][$score_library_value_id][$key],
+                                                    'self_rating' => $val,
+                                                    'coach_rating' => $none_core_score_car_library_coach_rating[$template_section_id][$score_library_value_id][$key],
+                                                    'total_weight_average' => $none_core_score_car_library_total_weight_ave[$template_section_id][$score_library_value_id][$key],
+                                                    'coach_section_rating' => $none_core_score_car_library_section_rating[$template_section_id][$score_library_value_id][$key],
+                                                    'weight' => $none_core_score_car_library_weight[$template_section_id][$score_library_value_id][$key],
+                                                    'total_weighted_score' => $none_core_score_car_library_total_weighted_score[$template_section_id][$score_library_value_id][$key],
+                                                    'coach_total_weighted_score' => $none_core_score_car_library_coach_total_weighted_score[$template_section_id][$score_library_value_id][$key]
+                                                );
+
+                    $this->db->insert('performance_appraisal_applicable_score_library_ratings',$score_library_rating_info);
+                }
+            }
+        }
+
+        $core_score_car_library_key_weight = $_POST['core_score_car_library_key_weight'];
+        $core_score_car_library_self_rating = $_POST['core_score_car_library_self_rating'];
+        $core_score_car_library_coach_rating = $_POST['core_score_car_library_coach_rating'];
+        $core_score_car_library_total_weight_ave = $_POST['core_score_car_library_total_weight_ave'];
+        $core_score_car_library_section_rating = $_POST['core_score_car_library_section_rating'];
+        $core_score_car_library_weight = $_POST['core_score_car_library_weight'];
+        $core_score_car_library_total_weighted_score = $_POST['core_score_car_library_total_weighted_score'];
+        $core_score_car_library_coach_total_weighted_score = $_POST['core_score_car_library_coach_total_weighted_score'];        
+
+        $score_library_rating_info = array();
+        foreach ($core_score_car_library_self_rating as $template_section_id => $template_section) {
+            foreach ($template_section as $score_library_value_id => $value) {
+                foreach ($value as $key => $val) {
+                    $score_library_rating_info = array(
+                                                    'appraisal_id' => $this->input->post('record_id'),
+                                                    'template_section_id' => $template_section_id,
+                                                    'score_library_id' => $score_library_value_id,
+                                                    'user_id' => $this->input->post('user_id'),
+                                                    'key_weight' => $core_score_car_library_key_weight[$template_section_id][$score_library_value_id][$key],
+                                                    'self_rating' => $val,
+                                                    'coach_rating' => $core_score_car_library_coach_rating[$template_section_id][$score_library_value_id][$key],
+                                                    'total_weight_average' => $core_score_car_library_total_weight_ave[$template_section_id][$score_library_value_id][$key],
+                                                    'coach_section_rating' => $core_score_car_library_section_rating[$template_section_id][$score_library_value_id][$key],
+                                                    'weight' => $core_score_car_library_weight[$template_section_id][$score_library_value_id][$key],
+                                                    'total_weighted_score' => $core_score_car_library_total_weighted_score[$template_section_id][$score_library_value_id][$key],
+                                                    'coach_total_weighted_score' => $core_score_car_library_coach_total_weighted_score[$template_section_id][$score_library_value_id][$key]
+                                                );
+
+                    $this->db->insert('performance_appraisal_applicable_score_library_ratings',$score_library_rating_info);
+                }
+            }
+        }    
+        // saving of score or library ratings
+
+        if( $this->db->_error_message() != "" )
+        {
+            $this->response->message[] = array(
+                'message' => $this->db->_error_message(),
+                'type' => 'error'
+            );
+            $error = true;
+            goto stop;
+        }
+
+        stop:
+        if( !$error ){
+            $this->db->trans_commit();
+        }
+        else{
+             $this->db->trans_rollback();
+             $this->response->redirect = false;
+        }
+
+        if( $return )
+        {
+            return !$error;
+        }
+
+        $this->response->message[] = array(
+            'message' => lang('common.save_success'),
+            'type' => 'success'
+        );
+
+        $this->_ajax_return();
+    }
+
     function review( $record_id, $user_id )
     {
         parent::edit('', true);
@@ -722,13 +1106,26 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['manager_id'] ='';
         $this->load->model('performance_appraisal_manage_model', 'pam');
         $appraisee = $vars['appraisee'] = $this->mod->get_appraisee( $this->record_id, $user_id );
-        $vars['list_approver'] = $this->mod->get_approver( $this->record_id, $user_id, $this->user->user_id);
+
+        $first_approver = $this->mod->get_list_approver( $this->record_id, $user_id, 1);
+
+        $login_user_id = $first_approver->row()->approver_id;
+
+        $vars['list_approver'] = $approver_info = $this->mod->get_approver( $this->record_id, $user_id, $login_user_id);
+
+        $vars['approver_info'] = array();
+        if ($approver_info) {
+            $approver_info_arr = $approver_info->row_array();
+            $vars['approver_info'] = $approver_info_arr;
+        }
 
         $vars['tenure'] = get_tenure($appraisee->effectivity_date);
         $vars['planning_admin'] = 0;
         $vars['readonly'] = '';
         $vars['committee_rater'] = 0;
         $vars['approver_info'] = array();
+
+        $vars['hr_appraisal_admin'] = 0;
 
         if( !in_array($appraisee->status_id,array(0,1,6)) ) {
             $vars['readonly'] = "readonly='readonly'";
@@ -747,16 +1144,16 @@ class Appraisal_individual_rate extends MY_PrivateController
 
         $vars['approversLog'] = array();
         $approvers_log = "SELECT IF(ppar.display_name='', CONCAT(usp.lastname,' ',usp.firstname), ppar.display_name) AS display_name, 
-                        ppl.created_on, ppar.approved_date, ppap.user_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id  
+                        ppl.created_on, ppar.approved_date, ppap.user_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id, ppar.edited 
                         FROM {$this->db->dbprefix}performance_appraisal_applicable ppap 
                         INNER JOIN {$this->db->dbprefix}performance_appraisal_approver ppar ON ppap.appraisal_id = ppar.appraisal_id 
-                        -- AND ppap.user_id = ppar.user_id 
+                        AND ppap.user_id = ppar.user_id 
                         INNER JOIN {$this->db->dbprefix}users_profile usp ON ppar.approver_id = usp.user_id
                         INNER JOIN {$this->db->dbprefix}users_position pos ON usp.position_id = pos.position_id
                         INNER JOIN {$this->db->dbprefix}performance_status pstat ON ppar.performance_status_id = pstat.performance_status_id 
                         LEFT JOIN {$this->db->dbprefix}performance_appraisal_logs ppl ON ppap.appraisal_id = ppl.appraisal_id 
                         AND ppap.user_id = ppl.user_id AND ppar.approver_id = ppl.to_user_id 
-                        WHERE ppap.appraisal_id = {$appraisee->appraisal_id} AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppl.id ";
+                        WHERE ppap.appraisal_id = {$appraisee->appraisal_id} AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppar.sequence ";
                         
         $approversLog = $this->db->query($approvers_log);
         if( $approversLog->num_rows() > 0 ){
@@ -774,7 +1171,7 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['appraisal_applicable_section_ratings'] = $this->mod->get_appraisal_applicable_section_ratings($this->record_id,$appraisee->user_id);
         $vars['appraisal_applicable_score_library_ratings'] = $this->mod->get_appraisal_applicable_score_library_ratings($this->record_id,$appraisee->user_id);
         $vars['readonly'] = '';
-        $vars['login_user_id'] = $this->user->user_id;
+        $vars['login_user_id'] = $login_user_id;
 
         $this->load->vars( $vars );
 
@@ -795,8 +1192,13 @@ class Appraisal_individual_rate extends MY_PrivateController
 
         $login_user_id = $first_approver->row()->approver_id;
 
-        // for oclp it was specific approver only
-        $vars['list_approver'] = $approver_info = $this->mod->get_approver( $this->record_id, $user_id, $this->user->user_id);
+        $vars['hr_appraisal_admin'] = 0;
+        // for oclp it was specific approver only, if hr appraisal admin then get first approver since it was specific
+        if ($this->permission['process']) {
+            $vars['list_approver'] = $approver_info = $this->mod->get_approver( $this->record_id, $user_id, $login_user_id);
+            $vars['hr_appraisal_admin'] = 1;
+        } else
+            $vars['list_approver'] = $approver_info = $this->mod->get_approver( $this->record_id, $user_id, $this->user->user_id);
 
         $vars['approver_info'] = array();
         if ($approver_info) {
@@ -836,19 +1238,26 @@ class Appraisal_individual_rate extends MY_PrivateController
 
         $vars['approversLog'] = array();
         $approvers_log = "SELECT IF(ppar.display_name='', CONCAT(usp.lastname,' ',usp.firstname), ppar.display_name) AS display_name, 
-                        ppl.created_on, ppar.approved_date, ppap.user_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id  
+                        ppl.created_on, ppar.approved_date, ppap.user_id, ppar.performance_status_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id, ppar.edited  
                         FROM {$this->db->dbprefix}performance_appraisal_applicable ppap 
                         INNER JOIN {$this->db->dbprefix}performance_appraisal_approver ppar ON ppap.appraisal_id = ppar.appraisal_id 
+                        AND ppap.user_id = ppar.user_id
                         INNER JOIN {$this->db->dbprefix}users_profile usp ON ppar.approver_id = usp.user_id
                         INNER JOIN {$this->db->dbprefix}users_position pos ON usp.position_id = pos.position_id
                         INNER JOIN {$this->db->dbprefix}performance_status pstat ON ppar.performance_status_id = pstat.performance_status_id 
                         LEFT JOIN {$this->db->dbprefix}performance_appraisal_logs ppl ON ppap.appraisal_id = ppl.appraisal_id 
                         AND ppap.user_id = ppl.user_id AND ppar.approver_id = ppl.to_user_id 
-                        WHERE ppap.appraisal_id = {$appraisee->appraisal_id} AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppl.id ";
+                        WHERE ppap.appraisal_id = {$appraisee->appraisal_id} AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppar.sequence ";
                         
         $approversLog = $this->db->query($approvers_log);
         if( $approversLog->num_rows() > 0 ){
             $vars['approversLog'] = $approversLog->result_array();
+        }
+
+        $vars['approver_approved'] = 0;
+        foreach ($vars['approversLog'] as $key => $value) {
+            if ($value['approver_id'] == $this->user->user_id && $value['performance_status_id'] == 4)
+                $vars['approver_approved'] = 1;
         }
 
         $vars['transaction_type'] = '';
@@ -869,6 +1278,110 @@ class Appraisal_individual_rate extends MY_PrivateController
         $this->load->helper('form');
         $this->load->helper('file');
         echo $this->load->blade('pages.summary')->with( $this->load->get_cached_vars() );          
+    }
+
+    function edit_admin( $record_id, $user_id )
+    {
+        parent::edit('', true);
+
+        $settings_config = $this->config->item('other_settings');
+
+        $appraisee = $vars['appraisee'] = $this->mod->get_appraisee( $this->record_id, $user_id );
+
+        $first_approver = $this->mod->get_list_approver( $this->record_id, $user_id, 1);
+
+        $login_user_id = $first_approver->row()->approver_id;
+
+        $vars['hr_appraisal_admin'] = 0;
+        // for oclp it was specific approver only, if hr appraisal admin then get first approver since it was specific
+        if ($this->permission['process']) {
+            $vars['list_approver'] = $approver_info = $this->mod->get_approver( $this->record_id, $user_id, $login_user_id);
+            $vars['hr_appraisal_admin'] = 1;
+        } else
+            $vars['list_approver'] = $approver_info = $this->mod->get_approver( $this->record_id, $user_id, $this->user->user_id);
+
+        $vars['approver_info'] = array();
+        if ($approver_info) {
+            $approver_info_arr = $approver_info->row_array();
+            $vars['approver_info'] = $approver_info_arr;
+        }
+
+        $vars['tenure'] = get_tenure($appraisee->effectivity_date);
+        $vars['appraisal_admin'] = 0;
+        $vars['readonly'] = '';
+        $vars['committee_rater'] = 0;
+
+        if( !$vars['list_approver'] ) {
+            $vars['appraisal_admin'] = 1;
+            $vars['readonly'] = "readonly='readonly'";
+        }
+        else {
+            /*$vars['readonly'] = "readonly='readonly'";*/                                            
+            if (isset($settings_config['appraisal_committee_rating']) && $settings_config['appraisal_committee_rating'] == $this->user->user_id) {
+                if (in_array($appraisee->performance_status_id,array(14))) {
+                    $vars['appraisal_admin'] = 1;
+                    $vars['committee_rater'] = 1;
+                }
+            }
+        }
+
+        if (($vars['hr_appraisal_admin'] || $vars['appraisal_admin']) && $appraisee->performance_status_id == 2)
+            $vars['readonly'] = "readonly='readonly'";
+
+        $vars['self_rating'] = 0;
+        if ($appraisee->user_id == $this->user->user_id)
+            $vars['self_rating'] = 1;
+
+        $vars['manager_id'] = '';
+        $vars['current_user_id'] = $this->user->user_id;
+
+        $this->load->model('appraisal_template_model', 'template');
+        $vars['template'] = $this->template; 
+        $vars['templatefile'] = $this->template->get_template( $appraisee->template_id ); 
+
+        $vars['approversLog'] = array();
+        $approvers_log = "SELECT IF(ppar.display_name='', CONCAT(usp.lastname,' ',usp.firstname), ppar.display_name) AS display_name, 
+                        ppl.created_on, ppar.approved_date, ppap.user_id, ppar.performance_status_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id, ppar.edited  
+                        FROM {$this->db->dbprefix}performance_appraisal_applicable ppap 
+                        INNER JOIN {$this->db->dbprefix}performance_appraisal_approver ppar ON ppap.appraisal_id = ppar.appraisal_id 
+                        AND ppap.user_id = ppar.user_id
+                        INNER JOIN {$this->db->dbprefix}users_profile usp ON ppar.approver_id = usp.user_id
+                        INNER JOIN {$this->db->dbprefix}users_position pos ON usp.position_id = pos.position_id
+                        INNER JOIN {$this->db->dbprefix}performance_status pstat ON ppar.performance_status_id = pstat.performance_status_id 
+                        LEFT JOIN {$this->db->dbprefix}performance_appraisal_logs ppl ON ppap.appraisal_id = ppl.appraisal_id 
+                        AND ppap.user_id = ppl.user_id AND ppar.approver_id = ppl.to_user_id 
+                        WHERE ppap.appraisal_id = {$appraisee->appraisal_id} AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppar.sequence ";
+                        
+        $approversLog = $this->db->query($approvers_log);
+        if( $approversLog->num_rows() > 0 ){
+            $vars['approversLog'] = $approversLog->result_array();
+        }
+
+        $vars['approver_approved'] = 0;
+        foreach ($vars['approversLog'] as $key => $value) {
+            if ($value['approver_id'] == $this->user->user_id && $value['performance_status_id'] == 4)
+                $vars['approver_approved'] = 1;
+        }
+
+        $vars['transaction_type'] = '';
+        $vars['appraisal_id'] = $this->record_id;
+        $vars['balance_score_card'] = $this->individual_planning_model->get_balance_score_card();
+        $vars['template_section_column'] = $this->individual_planning_model->get_template_section_column();
+        $vars['planning_applicable_fields'] = $this->individual_planning_model->get_planning_applicable_fields($appraisee->planning_id,$appraisee->user_id);
+        $vars['appraisal_applicable_fields'] = $this->mod->get_appraisal_applicable_fields($this->record_id,$appraisee->user_id);
+        $vars['template_section'] = $this->individual_planning_model->get_template_section($appraisee->template_id);
+        $vars['library_competencies'] = $this->individual_planning_model->get_library_competencies();
+        $vars['appraisal_applicable_section_ratings'] = $this->mod->get_appraisal_applicable_section_ratings($this->record_id,$appraisee->user_id);
+        $vars['appraisal_applicable_score_library_ratings'] = $this->mod->get_appraisal_applicable_score_library_ratings($this->record_id,$appraisee->user_id);
+        $vars['login_user_id'] = $login_user_id;
+
+        $vars['status'] = $this->db->get_where('performance_status', array('deleted' => 0,'appraisal' => 1))->result();
+
+        $this->load->vars( $vars );
+
+        $this->load->helper('form');
+        $this->load->helper('file');
+        echo $this->load->blade('pages.edit_admin')->with( $this->load->get_cached_vars() );          
     }
 
     function crowdsource( $record_id, $user_id )
@@ -1169,7 +1682,7 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['discussions'] = $this->mod->get_cs_discussion($_POST['appraisal_id'],$_POST['section_id'], $_POST['user_id'], $_POST['contributor_id']);
         $contributor = array();
 
-        $contributor = $this->db->get_where('users', array('user_id' => $_POST['user_id']))->row();
+        $contributor = $this->db->get_where('users', array('user_id' => $_POST['user_id']))->row_array();
 
         $appraisal_get_approvers = $this->db->query("CALL sp_performance_appraisal_get_approvers(".$_POST['appraisal_id'].", ".$_POST['user_id'].")")->result_array();
         mysqli_next_result($this->db->conn_id);
@@ -1210,7 +1723,7 @@ class Appraisal_individual_rate extends MY_PrivateController
         if ($this->user->user_id == $this->input->post('user_id'))
             $vars['approver_id'] = 0;
 
-        $data['title'] = $contributor->full_name . '<br><span class="text-muted">Discussion Logs</span>';
+        $data['title'] = $contributor['full_name'] . '<br><span class="text-muted">Discussion Logs</span>';
         $vars['contributor'] = $contributor;       
         $this->load->vars($vars);
         $data['content'] = $this->load->blade('crowdsource.discussion_form')->with( $this->load->get_cached_vars() );

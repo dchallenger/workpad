@@ -11,7 +11,17 @@ $(document).ready(function(){
 		get_sections();
 	}
 
+	$('.select2me').select2({
+	    placeholder: "Select",
+	    allowClear: true
+	}); 
+
 	$('#performance_template-employment_status_id').select2({
+	    placeholder: "Select Employment Status",
+	    allowClear: true
+	}); 
+
+	$('#performance_template-employment_type_id').select2({
 	    placeholder: "Select Employment Status",
 	    allowClear: true
 	});  	

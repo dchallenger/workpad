@@ -31,9 +31,9 @@ $config['field_validations']['performance_template.company_id'][] = array(
 	'label'   => 'Company',
 	'rules'   => 'required'
 );
-$config['field_validations']['performance_template.position_classification_id'][] = array(
-	'field'   => 'performance_template[position_classification_id]',
-	'label'   => 'Position Classification',
+$config['field_validations']['performance_template.employment_type_id'][] = array(
+	'field'   => 'performance_template[employment_type_id]',
+	'label'   => 'Employment Type',
 	'rules'   => 'required'
 );
 $config['field_validations']['performance_template.job_grade_id'][] = array(

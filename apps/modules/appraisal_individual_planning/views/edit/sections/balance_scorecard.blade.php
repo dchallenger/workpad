@@ -11,7 +11,7 @@ $show_add = false;
 
 {{ $header }}
 
-<div class="table-responsive">
+<div class="table-responsive kra-section">
 	<table class="table">
 		<thead>
 			<tr>
@@ -64,66 +64,68 @@ $show_add = false;
 							}
 						?>
 					</tr>
-					@foreach($planning_applicable_fields[$val['scorecard_id']] as $key1 => $val1)				
-						@if($key1 > 1)
-							<tr>
-								<td>&nbsp;</td>
-								<?php
-									if (isset($template_section_column) && !empty($template_section_column))
-									{
-										foreach ($template_section_column[$section_id] as $key => $value) {
-											$planning_value = '';
-											$can_add_row = 0;
-											$column_sequence = 0;
+					@if(isset($planning_applicable_fields[$val['scorecard_id']]))
+						@foreach($planning_applicable_fields[$val['scorecard_id']] as $key1 => $val1)				
+							@if($key1 > 1)
+								<tr>
+									<td>&nbsp;</td>
+									<?php
+										if (isset($template_section_column) && !empty($template_section_column))
+										{
+											foreach ($template_section_column[$section_id] as $key => $value) {
+												$planning_value = '';
+												$can_add_row = 0;
+												$column_sequence = 0;
 
-											if (isset($planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id])) {
-												$planning_value = $planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id]['value'];
-												$can_add_row = $planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id]['can_add_row'];
-												$column_sequence = $planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id]['column_sequence'];
-											}
+												if (isset($planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id])) {
+													$planning_value = $planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id]['value'];
+													$can_add_row = $planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id]['can_add_row'];
+													$column_sequence = $planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id]['column_sequence'];
+												}
 
-											switch( $value->uitype_id ) {
-												case 2:
-													if ($can_add_row) {
-								?>
-														<td width="{{ $value->width }}">
-															<input type="text" question="{{ $val['scorecard_id'] }}" value="{{ $planning_value }}" class="form-control {{ $value->class }}" name="field[{{ $val['scorecard_id'] }}][{{ $value->section_column_id }}][]" data-inputmask="'alias': '{{ $value->data_type }}', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false">
-														</td>
-								<?php
-													} else {
-								?>
-														<td width="<?php echo $value->width ?>" style="vertical-align:middle;text-align:center">
-															<div class="btn-group">
-												                <a href="javascript:void(0)" class="btn btn-danger btn-sm delete_row">
-												                  	<i class="fa fa-trash-o"></i>
-												                </a>
-												            </div>															
-														</td>
-								<?php															
-													}
-												break;
-												case 3:
-													if ($can_add_row) {
-								?>
-														<td width="{{ $value->width }}" rowspan="">
-															<textarea class="form-control {{ $value->class }}" rows="4" name="field[{{ $val['scorecard_id'] }}][{{ $value->section_column_id }}][]">{{ $planning_value }}</textarea>
-														</td>										
-								<?php					
-													} else {
-								?>
-														<td width="<?php echo $value->width ?>">
-															&nbsp;
-														</td>				
-								<?php																								
-													}						
-												break;
+												switch( $value->uitype_id ) {
+													case 2:
+														if ($can_add_row) {
+									?>
+															<td width="{{ $value->width }}">
+																<input type="text" question="{{ $val['scorecard_id'] }}" value="{{ $planning_value }}" class="form-control {{ $value->class }}" name="field[{{ $val['scorecard_id'] }}][{{ $value->section_column_id }}][]" data-inputmask="'alias': '{{ $value->data_type }}', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false">
+															</td>
+									<?php
+														} else {
+									?>
+															<td width="<?php echo $value->width ?>" style="vertical-align:middle;text-align:center">
+																<div class="btn-group">
+													                <a href="javascript:void(0)" class="btn btn-danger btn-sm delete_row">
+													                  	<i class="fa fa-trash-o"></i>
+													                </a>
+													            </div>															
+															</td>
+									<?php															
+														}
+													break;
+													case 3:
+														if ($can_add_row) {
+									?>
+															<td width="{{ $value->width }}" rowspan="">
+																<textarea class="form-control {{ $value->class }}" rows="4" name="field[{{ $val['scorecard_id'] }}][{{ $value->section_column_id }}][]">{{ $planning_value }}</textarea>
+															</td>										
+									<?php					
+														} else {
+									?>
+															<td width="<?php echo $value->width ?>">
+																&nbsp;
+															</td>				
+									<?php																								
+														}						
+													break;
+												}
 											}
 										}
-									}
-								?>
-							</tr>
-						@endif
-					@endforeach
+									?>
+								</tr>
+							@endif
+						@endforeach
+					@endif
 				@endforeach
 			@endif	
 		</tbody>

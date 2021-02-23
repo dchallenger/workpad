@@ -36,21 +36,29 @@ class appraisal_individual_planning_model extends Record
 		parent::__construct();
 	}
 
+	function get_employee_appraisal_planning($user_id,$current_planning_id)
+	{
+		$this->db->where('performance_planning.planning_id <>',$current_planning_id);
+		$this->db->where('performance_planning.deleted',0);
+		$this->db->where('user_id',$user_id);
+		$this->db->join('performance_planning_applicable ppa','ppa.planning_id = performance_planning.planning_id','left');
+		$this->db->join('performance_setup_performance sp','sp.performance_id = performance_planning.performance_type_id','left');
+		$result = $this->db->get('performance_planning');
+		return $result;
+	}
+
 	function get_appraisee( $planning_id, $user_id )
 	{
-		$qry = "select a.*, a.created_on as planning_created_on, b.*, b.status_id as performance_status_id,c.v_job_grade, c.alias, c.effectivity_date, d.company, f.position, i.full_name as immediate, h.position as immediate_position,
-		d.v_reports_to, d.v_department, j.immediate as dept_head, d.v_division, k.immediate as div_head, c.position_classification
+		$qry = "select a.*, a.created_on as planning_created_on, b.*, b.status_id as performance_status_id,ppah.employment_type,ppah.job_level as v_job_grade, c.alias, c.effectivity_date, ppah.company, ppah.position as position, i.full_name as immediate, h.position as immediate_position,
+		ppah.reports_to as v_reports_to, ppah.department as v_department, ppah.dept_head as dept_head, ppah.division as v_division, ppah.div_head as div_head, c.position_classification
 		FROM {$this->db->dbprefix}performance_planning a
 		LEFT JOIN {$this->db->dbprefix}performance_planning_applicable b ON b.planning_id = a.planning_id
 		LEFT JOIN partners c ON c.user_id = b.user_id
 		LEFT JOIN {$this->db->dbprefix}users_profile d ON d.user_id = b.user_id
-		LEFT JOIN {$this->db->dbprefix}users_company e ON e.company_id = d.company_id
-		LEFT JOIN {$this->db->dbprefix}users_position f ON f.position_id = d.position_id
+		LEFT JOIN performance_planning_applicable_history ppah ON d.user_id = ppah.user_id AND ppah.planning_id = {$planning_id}
 		LEFT JOIN {$this->db->dbprefix}users_profile g ON g.user_id = d.reports_to_id
 		LEFT JOIN {$this->db->dbprefix}users_position h ON h.position_id = g.position_id
 		LEFT JOIN {$this->db->dbprefix}users i ON i.user_id = d.reports_to_id
-		LEFT JOIN {$this->db->dbprefix}users_department j ON d.department_id = j.department_id
-		LEFT JOIN {$this->db->dbprefix}users_division k ON d.division_id = k.division_id
 		LEFT JOIN {$this->db->dbprefix}users_position_classification l ON c.position_classification_id = l.position_classification_id
 		WHERE b.planning_id = {$planning_id} AND b.user_id = {$user_id}";
 
@@ -176,6 +184,7 @@ class appraisal_individual_planning_model extends Record
 		$this->db->join('performance_template_section_column ptsc','ppaf.section_column_id = ptsc.section_column_id');
 		$this->db->where('ppaf.planning_id',$planning_id);
 		$this->db->where('ppaf.user_id',$appraisee_id);
+		$this->db->where('ppaf.deleted',0);
 		$this->db->order_by('ppaf.scorecard_id,ppaf.sequence');
 		$result = $this->db->get();
 

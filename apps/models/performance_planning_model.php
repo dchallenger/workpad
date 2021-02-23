@@ -167,26 +167,30 @@ class performance_planning_model extends Record
 
 	function save_history_user_info($planning_id = 0) {
 		$this->db->where('planning_id',$planning_id);
+		$this->db->delete('performance_planning_applicable_user_info');
+
+		$this->db->where('planning_id',$planning_id);
 		$planning_applicable = $this->db->get('performance_planning_applicable');
 		if ($planning_applicable && $planning_applicable->num_rows() > 0) {
-			foreach ($planning_applicable as $row) {
-				$this->db->where('user_id',$row->user_id);
+			foreach ($planning_applicable->result() as $row) {
+				$this->db->where('users_profile.user_id',$row->user_id);
 				$this->db->join('partners','users_profile.user_id = partners.user_id','left');
 				$users = $this->db->get('users_profile');
 				if ($users && $users->num_rows() > 0) {
-					foreach ($usres as $row1) {
-						$info_arr = array(
-											'planning_id' => $planning_id,
-											'user_id' => $row->user_id,
-											'position_id' => $row1->position_id,
-											'job_grade_id' => $row1->job_grade_id,
-											'company_id' => $row1->company_id,
-											'division_id' => $row1->division_id,
-											'department_id' => $row1->department_id,
-											'reports_to_id' => $row1->reports_to_id
-										 );
-						$this->db->insert('performance_planning_applicable_user_info',$info_arr);
-					}
+					$users_info = $users->row();
+
+					$info_arr = array(
+										'planning_id' => $planning_id,
+										'user_id' => $row->user_id,
+										'position_id' => $users_info->position_id,
+										'job_grade_id' => $users_info->job_grade_id,
+										'employment_type_id' => $users_info->employment_type_id,
+										'company_id' => $users_info->company_id,
+										'division_id' => $users_info->division_id,
+										'department_id' => $users_info->department_id,
+										'reports_to_id' => $users_info->reports_to_id
+									 );
+					$this->db->insert('performance_planning_applicable_user_info',$info_arr);
 
 				}
 			}

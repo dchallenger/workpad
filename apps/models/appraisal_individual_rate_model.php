@@ -88,18 +88,15 @@ class appraisal_individual_rate_model extends Record
 
 	function get_appraisee( $appraisal_id, $user_id )
 	{
-		$qry = "select a.*, a.status_id as period_status, j.*, j.status_id as performance_status_id, c.v_job_grade, c.effectivity_date, d.company, f.position, i.full_name as immediate, h.position as immediate_position,
-		d.v_reports_to, d.v_department, k.immediate as dept_head, d.v_division, l.immediate as div_head, c.position_classification, a.created_on as appraisal_created_on
+		$qry = "select a.*, a.status_id as period_status, j.*, j.status_id as performance_status_id, paah.employment_type, paah.job_level as v_job_grade, c.effectivity_date, paah.company, paah.position, i.full_name as immediate, h.position as immediate_position,
+		paah.reports_to as v_reports_to, paah.department as v_department, paah.dept_head as dept_head, paah.division as v_division, paah.div_head as div_head, c.position_classification, a.created_on as appraisal_created_on
 		FROM {$this->db->dbprefix}performance_appraisal a
 		LEFT JOIN {$this->db->dbprefix}performance_appraisal_applicable j ON j.appraisal_id = a.appraisal_id
 		LEFT JOIN partners c ON c.user_id = j.user_id
 		LEFT JOIN {$this->db->dbprefix}users_profile d ON d.user_id = j.user_id
-		LEFT JOIN {$this->db->dbprefix}users_company e ON e.company_id = d.company_id
-		LEFT JOIN {$this->db->dbprefix}users_position f ON f.position_id = d.position_id
+		LEFT JOIN performance_appraisal_applicable_history paah ON d.user_id = paah.user_id AND paah.appraisal_id = {$appraisal_id}
 		LEFT JOIN {$this->db->dbprefix}users_profile g ON g.user_id = d.reports_to_id
 		LEFT JOIN {$this->db->dbprefix}users_position h ON h.position_id = g.position_id
-		LEFT JOIN {$this->db->dbprefix}users_department k ON d.department_id = k.department_id
-		LEFT JOIN {$this->db->dbprefix}users_division l ON d.division_id = l.division_id
 		LEFT JOIN {$this->db->dbprefix}users i ON i.user_id = d.reports_to_id
 		WHERE a.appraisal_id = {$appraisal_id} AND j.user_id = {$user_id}";
 

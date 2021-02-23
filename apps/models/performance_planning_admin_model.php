@@ -51,12 +51,19 @@ class performance_planning_admin_model extends Record
 		else{
 			$qry .= " AND {$this->db->dbprefix}{$this->table}.deleted = 0";	
 		}
-		
-		$qry .= " AND ww_performance_planning_applicable.status_id IS NOT NULL ";
+
+		$permission = $this->config->item('permission');
+
+		if (!isset($permission[$this->mod_code]['process'])) {
+			$qry .= " AND T6.approver_id = {$this->user->user_id}";	
+			$qry .= " AND ww_performance_planning_applicable.status_id > 0";
+		} else {
+			$qry .= " AND ww_performance_planning_applicable.status_id IS NOT NULL ";
+		}
 
 		// $qry .= " AND {$this->db->dbprefix}{$this->table}.planning_id = {$this->user->user_id}";	
 		$qry .= ' '. $filter;
-		$qry .= " LIMIT $limit OFFSET $start";
+		$qry .= " GROUP BY ww_performance_planning_applicable.user_id LIMIT $limit OFFSET $start";
 
 		$this->load->library('parser');
 		$this->parser->set_delimiters('{$', '}');
@@ -66,6 +73,12 @@ class performance_planning_admin_model extends Record
 		if($result->num_rows() > 0)
 		{			
 			foreach($result->result_array() as $row){
+				// this is to replace performance status by approver status if login user is approver
+				if (!isset($permission[$this->mod_code]['process'])) {
+					$row['performance_planning_performance_status'] = $row['performance_planning_performance_approver_status'];
+					$row['performance_planning_performance_status_id'] = $row['performance_planning_performance_aprpover_status_id'];
+				}
+
 				$data[] = $row;
 			}
 		}

@@ -406,6 +406,9 @@ function save_record( form, action, callback )
                             case 'new':
                                 document.location = base_url + module.get('route') + '/add';
                                 break;
+                            default:
+                                document.location = base_url + module.get('route');
+                                break;
                         }
                     }
                 }

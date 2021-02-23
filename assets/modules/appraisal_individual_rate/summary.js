@@ -204,6 +204,37 @@ function change_status(form, status_id)
 	$.unblockUI();	
 }
 
+function change_status_admin(form, status_id)
+{
+	$.blockUI({ message: '<div>Saving, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />',
+		onBlock: function(){
+			var data = form.find(":not('.dontserializeme')").serialize() + '&status_id='+status_id;
+			$.ajax({
+				url: base_url + module.get('route') + '/change_status_admin',
+				type:"POST",
+				data: data,
+				dataType: "json",
+				async: false,
+				success: function ( response ) {
+					handle_ajax_message( response.message );
+
+					if(response.hasOwnProperty('notify'))
+					{
+						for(var i in response.notify)
+							socket.emit('get_push_data', {channel: 'get_user_'+response.notify[i]+'_notification', args: { broadcaster: user_id, notify: true }});
+					}
+
+					if(response.redirect)
+						//window.location = base_url + module.get('route');
+						window.location = response.redirect;
+				}
+			});
+		},
+		baseZ: 300000000
+	});
+	$.unblockUI();	
+}
+
 function total_weight( section_id )
 {
 	var total = 0;

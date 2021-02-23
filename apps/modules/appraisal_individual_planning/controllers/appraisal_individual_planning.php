@@ -7,13 +7,14 @@ class Appraisal_individual_planning extends MY_PrivateController
 		$this->load->model('appraisal_individual_planning_model', 'mod');
 		parent::__construct();
         $this->lang->load('appraisal_individual_planning');
+
+        $this->config_permission = $this->config->item('permission');        
 	}
 
     public function index()
     {
-        $permission = $this->config->item('permission');
-        $vars['performance_planning_manage'] = isset($permission['performance_planning_manage']) ? $permission['performance_planning_manage'] : 0;
-        $vars['performance_planning'] = isset($permission['performance_planning']) ? $permission['performance_planning'] : 0;
+        $vars['performance_planning_manage'] = isset($this->config_permission['performance_planning_manage']) ? $this->config_permission['performance_planning_manage'] : 0;
+        $vars['performance_planning'] = isset($this->config_permission['performance_planning']) ? $this->config_permission['performance_planning'] : 0;
         $this->load->vars($vars);
         parent::index();
     }
@@ -46,7 +47,7 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['templatefile'] = $this->template->get_template( $appraisee->template_id );
 
         $vars['approversLog'] = array();
-        $approvers_log = "SELECT ppar.display_name, ppl.created_on, ppar.approved_date, ppap.user_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id  
+        $approvers_log = "SELECT ppar.display_name, ppl.created_on, ppar.approved_date, ppap.user_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id, ppar.edited
                         FROM {$this->db->dbprefix}performance_planning_applicable ppap 
                         INNER JOIN {$this->db->dbprefix}performance_planning_approver ppar ON ppap.planning_id = ppar.planning_id 
                         AND ppap.user_id = ppar.appraisee_id 
@@ -55,7 +56,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                         INNER JOIN {$this->db->dbprefix}performance_status pstat ON ppar.performance_status_id = pstat.performance_status_id 
                         LEFT JOIN {$this->db->dbprefix}performance_planning_logs ppl ON ppap.planning_id = ppl.planning_id 
                         AND ppap.user_id = ppl.user_id AND ppar.approver_id = ppl.to_user_id 
-                        WHERE ppap.planning_id = {$appraisee->planning_id} AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppl.id ";
+                        WHERE ppap.planning_id = {$appraisee->planning_id} AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppar.sequence ";
 
         $approversLog = $this->db->query($approvers_log);
         if( $approversLog->num_rows() > 0 ){
@@ -119,6 +120,7 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['balance_score_card'] = $this->mod->get_balance_score_card();
         $vars['template_section_column'] = $this->mod->get_template_section_column();
         $vars['planning_applicable_fields'] = $this->mod->get_planning_applicable_fields($appraisee->planning_id,$appraisee->user_id);
+        $vars['employee_appraisal_planning'] = $this->mod->get_employee_appraisal_planning($user_id,$this->record_id);
         $vars['template_section'] = $this->mod->get_template_section($appraisee->template_id);
         $vars['library_competencies'] = $this->mod->get_library_competencies();
         $vars['readonly'] = '';
@@ -136,6 +138,32 @@ class Appraisal_individual_planning extends MY_PrivateController
         else{
             echo $this->load->blade('pages.edit')->with( $this->load->get_cached_vars() );
         }
+    }
+
+    public function populate_appraisal_planning()
+    {
+        $planning_id = $this->input->post('planning_id');
+        $user_id = $this->input->post('appraisee_user_id');
+
+        $appraisee = $vars['appraisee'] = $this->mod->get_appraisee( $planning_id, $user_id );
+        
+        $vars['manager_id'] = '';
+        $vars['current_user_id'] = $this->user->user_id;
+
+        $vars['balance_score_card'] = $this->mod->get_balance_score_card();
+        $vars['template_section_column'] = $this->mod->get_template_section_column();
+        $vars['planning_applicable_fields'] = $this->mod->get_planning_applicable_fields($appraisee->planning_id,$appraisee->user_id);
+        $vars['section_id'] = $this->input->post('section_id');
+
+        $this->response->items = $this->load->view('edit/sections/populate_balance_scorecard', $vars, true);
+
+        $this->response->message[] = array(
+            'message' => '',
+            'type' => 'success'
+        );
+
+        $this->_ajax_return();  
+
     }
 
     function get_item_form()
@@ -653,7 +681,14 @@ class Appraisal_individual_planning extends MY_PrivateController
                 //get previous data for audit logs
                 $previous_main_data = $this->db->get_where('performance_planning_applicable', $where)->row_array();
 
+                // set to_user_id to first approver
+                $update['to_user_id'] = $fst_approver->approver_id;
                 $this->db->update('performance_planning_applicable', $update, $where);                
+
+                //reset status of approver to new since back to employee for review
+                $this->db->where('planning_id',$this->input->post('planning_id'));
+                $this->db->where('user_id',$this->input->post('user_id'));
+                $this->db->update('performance_planning_approver',array('performance_status_id' => 0));
 
                 if ($appraisee->user_id != $this->user->user_id){
                     $feed = array(
@@ -661,7 +696,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                         'message_type' => 'Comment',
                         'user_id' => $this->user->user_id,
                         'feed_content' => 'Please review performance targets.',
-                        'uri' => $this->mod->route . '/edit/'.$_POST['planning_id'].'/'.$_POST['user_id'],
+                        'uri' => $this->mod->route . '/review/'.$_POST['planning_id'].'/'.$_POST['user_id'],
                         'recipient_id' => $this->input->post('user_id')
                     );
 
@@ -691,12 +726,179 @@ class Appraisal_individual_planning extends MY_PrivateController
         }
 
         //99 status is for save as draft after approver back to employee. it was fix to 99
-        if (in_array($status_id, array(1,2,6,99))) {
+        if (in_array($status_id, array(1,2,4,6,99))) {
             $field = $_POST['field'];
+
+/*            $this->db->where('user_id',$this->input->post('user_id'));
+            $this->db->where('planning_id',$this->input->post('record_id'));
+            $this->db->delete('performance_planning_applicable_fields');*/
 
             $this->db->where('user_id',$this->input->post('user_id'));
             $this->db->where('planning_id',$this->input->post('record_id'));
-            $this->db->delete('performance_planning_applicable_fields');
+            $this->db->update('performance_planning_applicable_fields',array('deleted' => 1));
+
+            foreach ($field as $scorecard_id => $section_column) {
+                foreach ($section_column as $section_column_id => $section_column_val) {
+                    foreach ($section_column_val as $key => $value) {
+                        $item_info = array(
+                                'planning_id' => $this->input->post('record_id'),
+                                'user_id' => $this->input->post('user_id'),
+                                'scorecard_id' => $scorecard_id,
+                                'section_column_id' => $section_column_id,
+                                'value' => $value,
+                                'deleted' => 0,
+                                'sequence' => $key + 1
+                            );
+
+                        $where = array(
+                                'planning_id' => $this->input->post('record_id'),
+                                'user_id' => $this->input->post('user_id'),
+                                'scorecard_id' => $scorecard_id,
+                                'section_column_id' => $section_column_id,
+                                'deleted' => 1,
+                                'sequence' => $key + 1
+                            );
+
+                        
+                        $this->db->where($where);
+                        $result = $this->db->get('performance_planning_applicable_fields');
+                        if ($result && $result->num_rows() > 0) {
+                            $previous_main_data = $result->row_array();
+
+                            if ($previous_main_data['value'] !== $value) {
+                                $this->db->where('planning_id',$this->input->post('record_id'));
+                                $this->db->where('user_id',$this->input->post('user_id'));
+                                $this->db->where('approver_id',$this->user->user_id);
+                                $this->db->update('performance_planning_approver',array('edited' => 1));
+
+                                $item_info['edited'] = 1;
+                            }
+
+                            $this->db->where($where);
+                            $this->db->update('performance_planning_applicable_fields',$item_info);
+
+                            $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'performance_planning_applicable_fields', $previous_main_data, $item_info);
+                        } else {
+                            $this->db->insert('performance_planning_applicable_fields',$item_info);
+                            $item_id = $this->db->insert_id();
+
+                            $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'performance_planning_applicable_fields', '', $value);                            
+                        }
+                    }
+                }
+            }   
+        }
+
+        $this->db->trans_commit();
+
+        $this->response->message[] = array(
+            'message' => lang('common.save_success'),
+            'type' => 'success'
+        );
+
+        $this->_ajax_return();           
+    }
+
+    private function _change_status_hr_appraisal_admin()
+    {        
+        $this->load->model('system_feed');        
+
+        $this->load->library('parser');
+        $this->parser->set_delimiters('{{', '}}');      
+
+        $appraisee = $this->mod->get_appraisee(  $_POST['planning_id'], $_POST['user_id'] );
+
+        $this->response->redirect = get_mod_route('performance_planning_admin');
+
+        $planning_other_info = isset($_POST['individual_planning']) ? $_POST['individual_planning'] : array();
+        
+        //get approvers
+        $where = array(
+            'planning_id' => $this->input->post('planning_id'),
+            'appraisee_id' => $appraisee->user_id
+        );
+        $this->db->order_by('sequence');
+
+        $approvers = $this->db->get_where('performance_planning_approver', $where)->result();
+        $no_approvers = sizeof($approvers);
+
+        $condition = $approvers[0]->condition;
+        $fst_approver = $approvers[0];
+
+        $this->db->trans_begin();
+        $status_id = $this->input->post('status_id');
+
+        $update['status_id'] = $status_id;        
+
+        switch( $status_id ) {
+            case 2: //for immediate supervisors review.
+                $where = array(
+                    'planning_id' => $this->input->post('planning_id'),
+                    'template_id' => $this->input->post('template_id'),
+                    'user_id' => $this->input->post('user_id')
+                );
+
+                //get previous data for audit logs
+                $previous_main_data = $this->db->get_where('performance_planning_applicable', $where)->row_array();
+
+                $this->db->update('performance_planning_applicable', $update, $where);                
+
+                // set to_user_id to first approver
+                $update['to_user_id'] = $fst_approver->approver_id;
+                $this->db->update('performance_planning_applicable', $update, $where);                
+
+                //reset status of approver to new since back to employee for review
+                $this->db->where('planning_id',$this->input->post('planning_id'));
+                $this->db->where('user_id',$this->input->post('user_id'));
+                $this->db->update('performance_planning_approver',array('performance_status_id' => 0));
+
+                foreach(  $approvers  as $index => $approver )
+                {
+                    if( $index == 0 )
+                    {
+                        $this->db->update('performance_planning_approver', array('performance_status_id' => 2), array('id' => $approver->id));                        
+
+                        $feed = array(
+                            'status' => 'info',
+                            'message_type' => 'Comment',
+                            'user_id' => $this->user->user_id,
+                            'feed_content' => 'Please review '.$appraisee->fullname.'\'s performance targets.',
+                            'uri' => $this->mod->route . '/review_admin/'.$_POST['planning_id'].'/'.$_POST['user_id'],
+                            'recipient_id' => $approver->approver_id
+                        );
+
+                        $recipients = array($approver->approver_id);
+                        $this->system_feed->add( $feed, $recipients );
+
+                        // email to approver for approval
+                        $this->db->where('user_id',$approver->approver_id);
+                        $approver_result = $this->db->get('users');
+                        $approver_info = $approver_result->row();
+
+                        $approver_recepient = $approver->approver_id;
+                        $sendtargetsettings['approver'] = $approver_info->full_name;
+
+                        $target_settings_send_template = $this->db->get_where( 'system_template', array( 'code' => 'PERFORMANCE-TARGET-SETTINGS-SEND-APPROVER') )->row_array();
+                        $msg = $this->parser->parse_string($target_settings_send_template['body'], $sendtargetsettings, TRUE); 
+                        $subject = $this->parser->parse_string($target_settings_send_template['subject'], $sendtargetsettings, TRUE); 
+
+                        $this->db->query("INSERT INTO {$this->db->dbprefix}system_email_queue (`to`, `subject`, body)
+                                 VALUES('{$approver_recepient}', '{$subject}', '".$this->db->escape_str($msg)."') ");
+                        // email to approver for approval
+
+                        $this->response->notify[] = $approver->approver_id;
+                    }
+                }      
+
+                //create system logs
+                $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'performance_planning_applicable', $previous_main_data, $update);
+
+                $this->response->redirect = get_mod_route('performance_planning_admin'); 
+                break;                                                                 
+        }
+
+        if (in_array($status_id, array(2,4))) {
+            $field = $_POST['field'];
                                                                         
             foreach ($field as $scorecard_id => $section_column) {
                 foreach ($section_column as $section_column_id => $section_column_val) {
@@ -710,11 +912,34 @@ class Appraisal_individual_planning extends MY_PrivateController
                                 'sequence' => $key + 1
                             );
 
-                        
-                        $this->db->insert('performance_planning_applicable_fields',$item_info);
-                        $item_id = $this->db->insert_id();
+                        $where = array(
+                                'planning_id' => $this->input->post('record_id'),
+                                'user_id' => $this->input->post('user_id'),
+                                'scorecard_id' => $scorecard_id,
+                                'section_column_id' => $section_column_id,
+                                'sequence' => $key + 1
+                            );
 
-                        $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'performance_planning_applicable_fields', '', $value);
+                        
+                        $this->db->where($where);
+                        $result = $this->db->get('performance_planning_applicable_fields');
+                        if ($result && $result->num_rows() > 0) {
+                            $previous_main_data = $result->row_array();
+
+                            if ($previous_main_data['value'] !== $value) {
+                                $item_info['edited_hr_admin'] = 1;
+                            }
+
+                            $this->db->where($where);
+                            $this->db->update('performance_planning_applicable_fields',$item_info);
+
+                            $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'performance_planning_applicable_fields', $previous_main_data, $item_info);
+                        } else {
+                            $this->db->insert('performance_planning_applicable_fields',$item_info);
+                            $item_id = $this->db->insert_id();
+
+                            $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'performance_planning_applicable_fields', '', $value);                            
+                        }
                     }
                 }
             }   
@@ -963,9 +1188,13 @@ class Appraisal_individual_planning extends MY_PrivateController
         $this->_ajax_only();
         
         if( $this->input->post('manager_id') )
-            $this->_change_status_approver(); // no user for oclp
-        else
-            $this->_change_status_partner();
+            $this->_change_status_approver(); // no use for oclp
+        else {
+            if (isset($this->config_permission['appraisal_individual_planning']['process']))
+                $this->_change_status_hr_appraisal_admin();
+            else
+                $this->_change_status_partner();
+        }
 
         if( $return )
         {
@@ -1053,7 +1282,7 @@ class Appraisal_individual_planning extends MY_PrivateController
         else {
             if (in_array($appraisee->performance_status_id,array(0,1,4,6))) {
                 $vars['planning_admin'] = 1;
-                $vars['readonly'] = "readonly='readonly'";                
+                $vars['readonly'] = "readonly='readonly'";
             }
         }
 
@@ -1066,7 +1295,7 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['templatefile'] = $this->template->get_template( $appraisee->template_id );
 
         $vars['approversLog'] = array();
-        $approvers_log = "SELECT ppar.display_name, ppl.created_on, ppar.approved_date, ppap.user_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id  
+        $approvers_log = "SELECT ppar.display_name, ppl.created_on, ppar.approved_date, ppap.user_id, ppar.performance_status_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id,ppar.edited  
                         FROM {$this->db->dbprefix}performance_planning_applicable ppap 
                         INNER JOIN {$this->db->dbprefix}performance_planning_approver ppar ON ppap.planning_id = ppar.planning_id AND ppap.user_id = ppar.appraisee_id 
                         INNER JOIN {$this->db->dbprefix}users_profile usp ON ppar.approver_id = usp.user_id
@@ -1074,7 +1303,82 @@ class Appraisal_individual_planning extends MY_PrivateController
                         INNER JOIN {$this->db->dbprefix}performance_status pstat ON ppar.performance_status_id = pstat.performance_status_id 
                         LEFT JOIN {$this->db->dbprefix}performance_planning_logs ppl ON ppap.planning_id = ppl.planning_id 
                         AND ppap.user_id = ppl.user_id AND ppar.approver_id = ppl.to_user_id 
-                        WHERE ppap.planning_id = {$appraisee->planning_id} AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppl.id ";
+                        WHERE ppap.planning_id = {$appraisee->planning_id} AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppar.sequence ";
+
+        $approversLog = $this->db->query($approvers_log);
+
+        if( $approversLog && $approversLog->num_rows() > 0 ){
+            $vars['approversLog'] = $approversLog->result_array();
+        }
+
+        foreach ($vars['approversLog'] as $key => $value) {
+            if ($value['approver_id'] == $this->user->user_id && $value['performance_status_id'] == 4)
+                $vars['readonly'] = "readonly='readonly'";
+        }
+
+        $vars['transaction_type'] = 'view';
+
+        $vars['planning_id'] = $appraisee->planning_id;
+        $vars['balance_score_card'] = $this->mod->get_balance_score_card();
+        $vars['template_section_column'] = $this->mod->get_template_section_column();
+        $vars['planning_applicable_fields'] = $this->mod->get_planning_applicable_fields($appraisee->planning_id,$appraisee->user_id);
+        $vars['template_section'] = $this->mod->get_template_section($appraisee->template_id);
+        $vars['library_competencies'] = $this->mod->get_library_competencies();
+        $vars['tenure'] = get_tenure($appraisee->effectivity_date);
+
+        $this->load->vars( $vars );
+
+        $this->load->helper('form');
+        $this->load->helper('file');
+        echo $this->load->blade('pages.review')->with( $this->load->get_cached_vars() );  
+    }
+
+    public function edit_admin( $record_id, $user_id, $manager = '' )
+    {
+        parent::edit('', true);
+
+        $appraisee = $vars['appraisee'] = $this->mod->get_appraisee( $this->record_id, $user_id );
+
+        $vars['approver'] = $this->mod->get_approver( $this->record_id, $user_id, $this->user->user_id );
+
+        $vars['planning_admin'] = 0;
+        $vars['readonly'] = '';
+
+        if( !$vars['approver'] ) {
+            $vars['planning_admin'] = 1;
+            $vars['readonly'] = "readonly='readonly'";
+        }
+        else {
+            if (in_array($appraisee->performance_status_id,array(0,1,4,6))) {
+                $vars['planning_admin'] = 1;
+                $vars['readonly'] = "readonly='readonly'";                
+            }
+        }
+
+        $vars['hr_appraisal_admin'] = 0;
+        if (isset($this->config_permission['appraisal_individual_planning']['process'])) {
+            $vars['hr_appraisal_admin'] = 1;
+            $vars['readonly'] = ""; 
+        }
+
+        $vars['manager_id'] = '';
+        $vars['current_user_id'] = $this->user->user_id;
+
+        $vars['back_url_admin'] = get_mod_route('performance_planning_admin').'/index/'.$this->record_id;
+        $this->load->model('appraisal_template_model', 'template');
+        $vars['template'] = $this->template;
+        $vars['templatefile'] = $this->template->get_template( $appraisee->template_id );
+
+        $vars['approversLog'] = array();
+        $approvers_log = "SELECT ppar.display_name, ppl.created_on, ppar.approved_date, ppap.user_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id,ppar.edited  
+                        FROM {$this->db->dbprefix}performance_planning_applicable ppap 
+                        INNER JOIN {$this->db->dbprefix}performance_planning_approver ppar ON ppap.planning_id = ppar.planning_id AND ppap.user_id = ppar.appraisee_id 
+                        INNER JOIN {$this->db->dbprefix}users_profile usp ON ppar.approver_id = usp.user_id
+                        INNER JOIN {$this->db->dbprefix}users_position pos ON usp.position_id = pos.position_id
+                        INNER JOIN {$this->db->dbprefix}performance_status pstat ON ppar.performance_status_id = pstat.performance_status_id 
+                        LEFT JOIN {$this->db->dbprefix}performance_planning_logs ppl ON ppap.planning_id = ppl.planning_id 
+                        AND ppap.user_id = ppl.user_id AND ppar.approver_id = ppl.to_user_id 
+                        WHERE ppap.planning_id = {$appraisee->planning_id} AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppar.sequence ";
 
         $approversLog = $this->db->query($approvers_log);
 
@@ -1096,7 +1400,7 @@ class Appraisal_individual_planning extends MY_PrivateController
 
         $this->load->helper('form');
         $this->load->helper('file');
-        echo $this->load->blade('pages.review')->with( $this->load->get_cached_vars() );  
+        echo $this->load->blade('pages.edit_admin')->with( $this->load->get_cached_vars() );  
     }
 
     function view_discussion()

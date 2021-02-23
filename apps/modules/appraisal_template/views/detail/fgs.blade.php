@@ -7,13 +7,13 @@
 		<div class="form-group">
 			<label class="control-label col-md-3"><span class="required">* </span>Template Title</label>
 			<div class="col-md-7">							
-				<input type="text" class="form-control" name="performance_template[template]" id="performance_template-template" value="{{ $record['performance_template.template'] }}" placeholder="Enter Template Title" />
+				<input type="text" class="form-control" name="performance_template[template]" id="performance_template-template" value="{{ $record['performance_template_template'] }}" placeholder="Enter Template Title" readonly/>
 			</div>	
 		</div>			
 		<div class="form-group">
 			<label class="control-label col-md-3"><span class="required">* </span>Template Code</label>
 			<div class="col-md-7">							
-				<input type="text" class="form-control" name="performance_template[template_code]" id="performance_template-template_code" value="{{ $record['performance_template.template_code'] }}" placeholder="Enter Template Code" /> 				
+				<input type="text" class="form-control" name="performance_template[template_code]" id="performance_template-template_code" value="{{ $record['performance_template_template_code'] }}" placeholder="Enter Template Code" readonly/> 				
 			</div>	
 		</div>
 		<div class="form-group">
@@ -32,11 +32,11 @@
                 ?>							
                 <div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
-                        {{ form_dropdown('performance_template[company_id]',$performance_template_company_id_options, $record['performance_template.company_id'], 'class="form-control select2me" data-placeholder="Select..." id="performance_template-company_id"') }}
+                        {{ form_dropdown('performance_template[company_id]',$performance_template_company_id_options, $record['performance_template_company_id'], 'class="form-control select2me" data-placeholder="Select..." id="performance_template-company_id" disabled') }}
                 </div> 				
             </div>	
 		</div>
-		<div class="form-group">
+		<div class="form-group hidden">
 			<label class="control-label col-md-3"><span class="required">* </span>Position Classification</label>
 			<div class="col-md-7">
 				<?php
@@ -52,10 +52,30 @@
                 ?>							
                 <div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
-                        {{ form_dropdown('performance_template[position_classification_id]',$performance_template_position_classification_id_options, $record['performance_template.position_classification_id'], 'class="form-control select2me" data-placeholder="Select..." id="performance_template-position_classification_id"') }}
+                        {{ form_dropdown('performance_template[position_classification_id]',$performance_template_position_classification_id_options, $record['performance_template_position_classification_id'], 'class="form-control select2me" data-placeholder="Select..." id="performance_template-position_classification_id" disabled') }}
                 </div> 				
             </div>	
 		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3"><span class="required">* </span>Level</label>
+			<div class="col-md-7">
+				<?php
+					$db->select('employment_type_id,employment_type');
+                    $db->order_by('employment_type', '0');
+                    $db->where('deleted', '0');
+                    $options = $db->get('partners_employment_type'); 	                            
+                    $performance_template_employment_type_id_options = array('' => 'Select...');
+                    	foreach($options->result() as $option)
+                    	{
+							$performance_template_employment_type_id_options[$option->employment_type_id] = $option->employment_type;
+                    	} 
+                ?>							
+                <div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
+                        {{ form_multiselect('performance_template[employment_type_id]',$performance_template_employment_type_id_options, explode(',',$record['performance_template_employment_type_id']), 'class="form-control select2me" data-placeholder="Select..." id="performance_template-employment_type_id" disabled') }}
+                </div> 				
+            </div>	
+		</div>			
 		<div class="form-group">
 			<label class="control-label col-md-3"><span class="required">* </span>Rank</label>
 			<div class="col-md-7">
@@ -72,7 +92,7 @@
                 ?>							
                 <div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
-                        {{ form_dropdown('performance_template[job_grade_id]',$performance_template_job_grade_id_options, $record['performance_template.job_grade_id'], 'class="form-control select2me" data-placeholder="Select..." id="performance_template-job_grade_id"') }}
+                        {{ form_dropdown('performance_template[job_grade_id]',$performance_template_job_grade_id_options, $record['performance_template_job_grade_id'], 'class="form-control select2me" data-placeholder="Select..." id="performance_template-job_grade_id" disabled') }}
                 </div> 				
             </div>	
 		</div>
@@ -92,7 +112,7 @@
                 ?>							
                 <div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
-                        {{ form_multiselect('performance_template[employment_status_id][]',$performance_template_employment_status_id_options, explode(',', $record['performance_template.employment_status_id']), 'class="form-control select2me" data-placeholder="Select..." id="performance_template-employment_status_id"') }}
+                        {{ form_multiselect('performance_template[employment_status_id][]',$performance_template_employment_status_id_options, explode(',', $record['performance_template_employment_status_id']), 'class="form-control select2me" data-placeholder="Select..." id="performance_template-employment_status_id" disabled') }}
                 </div> 				
             </div>	
 		</div>				
@@ -136,7 +156,7 @@
 		<div class="form-group">
 			<label class="control-label col-md-3">Description</label>
 			<div class="col-md-7">
-				<textarea class="form-control" name="performance_template[description]" id="performance_template-description" placeholder="Enter Description" rows="4">{{ $record['performance_template.description'] }}</textarea> 				
+				<textarea class="form-control" name="performance_template[description]" id="performance_template-description" placeholder="Enter Description" rows="4" readonly>{{ $record['performance_template_description'] }}</textarea> 				
 			</div>	
 		</div>	
 	</div>

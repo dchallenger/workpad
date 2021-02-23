@@ -110,6 +110,17 @@
 										<div class="clearfix"></div>
 									</div>
 
+									<div>
+										<div class="col-md-9 margin-bottom-10">
+											<h4>{{ lang('performance.financial_metrics_kpi')}}</h4>
+											<div class="text-muted small">{{ lang('performance.financial_metrics_kpi_desc')}}</div>
+										</div>
+										<div class="col-md-3 margin-bottom-25">
+											<a class="btn btn-default" type="button" rel="{{ get_mod_route('financial_metrics_kpi') }}" href="{{ get_mod_route('financial_metrics_kpi') }}">{{ lang('performance.view_list_button') }}</a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+
 									<div class="hidden">
 										<div class="col-md-9 margin-bottom-10">
 											<h4>{{ lang('performance.portlet_notif')}}</h4>

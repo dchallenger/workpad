@@ -24,7 +24,7 @@ class Performance_appraisal_admin extends MY_PrivateController
 		}
 		
 		$data['appraisal_id'] = $appraisal_id;
-		$data['status'] = $this->db->get_where('performance_status', array('deleted' => 0))->result();
+		$data['status'] = $this->db->get_where('performance_status', array('deleted' => 0,'appraisal' => 1))->result();
 
 
 		$this->load->vars( $data );
@@ -131,7 +131,13 @@ class Performance_appraisal_admin extends MY_PrivateController
 
 			$rec['mod_manage'] = $this->mod_manage;
 
+	        $rec['hr_appraisal_admin'] = 0;
+	        if ($this->permission['process']) {
+	            $rec['hr_appraisal_admin'] = 1;
+	        }
+
 			$record = array_merge($record, $rec);
+
 			$this->response->list .= $this->load->blade('list_template', $record, true)->with( $this->load->get_cached_vars() );
 		}
 	}

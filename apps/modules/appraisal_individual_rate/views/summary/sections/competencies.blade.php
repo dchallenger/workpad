@@ -47,6 +47,13 @@ $show_add = false;
 						<th class="bold">Coach Rating</th>
 						<th class="bold">Coach Comment</th>
 					@endforeach
+				@else
+					@if($self_rating && $performance_status_id == 4)				
+						@foreach($list_approver->result() as $row)
+							<th class="bold">Coach Rating</th>
+							<th class="bold">Coach Comment</th>
+						@endforeach					
+					@endif
 				@endif
 			</tr>
 		</thead>
@@ -118,7 +125,7 @@ $show_add = false;
 											$coach_comment_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$library_id][$val['library_value_id']][2]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$library_id][$val['library_value_id']][2] : '';
 
 											$disabled = '';
-											if ($performance_status_id >= 4)
+											if ($performance_status_id >= 4 || (isset($approver_approved) && $approver_approved) || $hr_appraisal_admin)
 												$disabled = 'disabled';
 
 											switch( $value->uitype_id ) {
@@ -157,6 +164,60 @@ $show_add = false;
 										}
 						?>
 									@endforeach
+								@else
+									@if($self_rating && $performance_status_id == 4)
+										@foreach($list_approver->result() as $row)
+							<?php
+											foreach ($template_section_column[$section_id] as $key => $value) {
+												$planning_value = '';
+												if (isset($planning_applicable_fields[$val['library_value_id']][1][$value->section_column_id])) {
+													$planning_value = $planning_applicable_fields[$val['library_value_id']][1][$value->section_column_id]['value'];
+												}
+
+												$coach_rate_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$library_id][$val['library_value_id']][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$library_id][$val['library_value_id']][1] : '';
+												$coach_comment_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$library_id][$val['library_value_id']][2]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$library_id][$val['library_value_id']][2] : '';
+
+												$disabled = '';
+												if ($performance_status_id >= 4 || (isset($approver_approved) && $approver_approved) || $hr_appraisal_admin)
+													$disabled = 'disabled';
+
+												switch( $value->uitype_id ) {
+													case 2:
+							?>
+														<td width="{{ $value->width }}">
+															<input {{ $disabled }} type="text" question="{{ $val['library_value_id'] }}" value="{{ $coach_comment_val }}" class="form-control {{ $value->class }}" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $library_id }}][{{ $val['library_value_id'] }}][]" data-inputmask="'alias': '{{ $value->data_type }}', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false">
+														</td>
+							<?php
+													break;
+													case 3:
+							?>
+														<td width="{{ $value->width }}" rowspan="">
+															<textarea {{ $disabled }} class="form-control {{ $value->class }}" rows="4" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $library_id }}][{{ $val['library_value_id'] }}][]">{{ $coach_comment_val }}</textarea>
+														</td>										
+							<?php											
+													break;
+													case 9:
+							?>
+														<td width="{{ $value->width }}" rowspan="">
+															<select {{ $disabled }} class="form-control core_coach_rating" ratio-weight="{{ $section_info->weight }}" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $library_id }}][{{ $val['library_value_id'] }}][]" section-id="{{ $section_info->template_section_id }}" question="{{ $val['library_value_id'] }}">
+																<option value="0">Select</option>													
+																@for($i=1;$i<6;$i++)
+																	<?php 
+																		$selected = "";
+																		if($coach_rate_val == $i)
+																			$selected = 'selected="selected"';
+																	?>
+																	<option value="{{ currency_format($i) }}" {{ $selected }}>{{ currency_format($i) }}</option>
+																@endfor
+															</select>
+														</td>																					
+							<?php
+													break;
+												}
+											}
+							?>
+										@endforeach									
+									@endif
 								@endif								
 						<?php
 							}

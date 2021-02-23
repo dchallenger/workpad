@@ -6,7 +6,7 @@
 		{{ $fullname }}
 	</td>
 	<td class="hidden-xs">
-		<a class="text-success" href="{{ $edit_url }}/{{ $user_id }}">{{ $performance_type }}</a>
+		<span class="text-success">{{ $performance_type }}</span>
 		<br>
 		<span class="small" id="date_set">{{ date('M d, Y', strtotime( $performance_planning_date_from ) ) }} to {{ date('M d, Y', strtotime( $performance_planning_date_to ) ) }}</span>
 	</td>
@@ -50,6 +50,14 @@
 			?>
             <a class="small text-muted" href="{{ $href }}"><i class="fa fa-search"></i> View</a>
         </div>
+        @if($performance_planning_performance_status_id == 4 && $hr_appraisal_admin && $status_id == 1)
+	        <div class="btn-group">
+	        	<?php
+					$href = get_mod_route('appraisal_individual_planning') . '/edit_admin/'.$record_id.'/'.$user_id;
+				?>
+	            <a class="small text-muted" href="{{ $href }}"><i class="fa fa-pencil"></i> Edit</a>
+	        </div>
+	    @endif
 <!--         <div class="btn-group">
             <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> Options</a>
             <ul class="dropdown-menu pull-right">
