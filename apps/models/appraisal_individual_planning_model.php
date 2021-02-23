@@ -213,6 +213,7 @@ class appraisal_individual_planning_model extends Record
 	{
 		$this->db->where('deleted',0);
 		$this->db->where('template_id',$template_id);
+		$this->db->order_by('sequence');
 		$result = $this->db->get('performance_template_section');
 		return $result;
 	}	
