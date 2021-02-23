@@ -53,8 +53,11 @@ $(document).ready(function(){
             weight_average = 0;
         }
 
-        $(parent).find('.self_achieved').val(parseInt(achieved));
-        $(parent).find('.self_weight_average').val(weight_average);
+        console.log(achieved);
+        console.log(weight_average);
+
+        $(parent).find('.self_achieved').val(!isNaN(achieved) ? parseInt(achieved) : '');
+        $(parent).find('.self_weight_average').val(!isNaN(weight_average) ? weight_average : '');
 
         var total_weight_average = 0;
         $('.self_weight_average[question='+question+']').each(function (index, element) {
