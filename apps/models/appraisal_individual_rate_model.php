@@ -88,17 +88,19 @@ class appraisal_individual_rate_model extends Record
 
 	function get_appraisee( $appraisal_id, $user_id )
 	{
-		$qry = "select a.*, a.status_id as period_status, j.*, j.status_id as performance_status_id, paah.employment_type, paah.job_level as v_job_grade, c.effectivity_date, paah.company, paah.position, i.full_name as immediate, h.position as immediate_position,
-		paah.reports_to as v_reports_to, paah.department as v_department, paah.dept_head as dept_head, paah.division as v_division, paah.div_head as div_head, c.position_classification, a.created_on as appraisal_created_on
+		$qry = "select a.*, a.status_id as period_status, b.*, b.status_id as performance_status_id, IFNULL(paah.employment_type,c.employment_type) AS employment_type,IFNULL(paah.job_level,c.v_job_grade) as v_job_grade, c.effectivity_date, IFNULL(paah.company,d.company) AS company, IFNULL(paah.position,d.v_position) as position, i.full_name as immediate, h.position as immediate_position,
+		IFNULL(paah.reports_to,d.v_reports_to) as v_reports_to, IFNULL(paah.department,d.v_department) as v_department, IFNULL(paah.dept_head,j.immediate) as dept_head, IFNULL(paah.division,d.v_division) as v_division, IFNULL(paah.div_head,k.immediate) as div_head, c.position_classification, a.created_on as appraisal_created_on
 		FROM {$this->db->dbprefix}performance_appraisal a
-		LEFT JOIN {$this->db->dbprefix}performance_appraisal_applicable j ON j.appraisal_id = a.appraisal_id
-		LEFT JOIN partners c ON c.user_id = j.user_id
-		LEFT JOIN {$this->db->dbprefix}users_profile d ON d.user_id = j.user_id
+		LEFT JOIN {$this->db->dbprefix}performance_appraisal_applicable b ON b.appraisal_id = a.appraisal_id
+		LEFT JOIN partners c ON c.user_id = b.user_id
+		LEFT JOIN {$this->db->dbprefix}users_profile d ON d.user_id = b.user_id
 		LEFT JOIN performance_appraisal_applicable_history paah ON d.user_id = paah.user_id AND paah.appraisal_id = {$appraisal_id}
 		LEFT JOIN {$this->db->dbprefix}users_profile g ON g.user_id = d.reports_to_id
 		LEFT JOIN {$this->db->dbprefix}users_position h ON h.position_id = g.position_id
 		LEFT JOIN {$this->db->dbprefix}users i ON i.user_id = d.reports_to_id
-		WHERE a.appraisal_id = {$appraisal_id} AND j.user_id = {$user_id}";
+		LEFT JOIN {$this->db->dbprefix}users_department j ON j.department_id = d.department_id
+		LEFT JOIN {$this->db->dbprefix}users_division k ON k.division_id = d.division_id		
+		WHERE a.appraisal_id = {$appraisal_id} AND b.user_id = {$user_id}";
 
 		$appraisee = $this->db->query( $qry );
 		return $appraisee->row();
