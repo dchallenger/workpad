@@ -155,7 +155,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4 bold">{{ lang('appraisal_individual_planning.committee_rating') }}</label>
 									<div class="col-md-8">
-										<input type="text" name="committee_rating" class="form-control" value="@if($self_rating) @if($appraisee->status_id == 4) {{$appraisee->committee_rating}} @endif @else {{$appraisee->committee_rating}} @endif" @if($committee_rater) '' @else readonly @endif>
+										<input type="text" name="committee_rating" class="form-control" value="@if($self_rating) @if($appraisee->status_id == 4) {{$appraisee->committee_rating}} @endif @else {{$appraisee->committee_rating}} @endif" @if($committee_rater || $hr_appraisal_admin) '' @else readonly @endif>
 									</div>
 								</div>
 							</td>

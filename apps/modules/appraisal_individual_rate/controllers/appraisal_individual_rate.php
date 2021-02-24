@@ -529,7 +529,7 @@ class Appraisal_individual_rate extends MY_PrivateController
                 break;
         }
 
-        if (in_array($status_id, array(1,2,4,99))) {
+        if (in_array($this->input->post('status_id'), array(1,2,4,99))) {
             $field = $_POST['field_appraisal'];
 
             // if the login user is the second approver then use the first approver user id to delete the records.
