@@ -192,7 +192,7 @@ $show_add = false;
 												<td><input readonly='readonly' type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_achieve_val }}" class="form-control coach_achieved" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][104][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>
 												<td><input readonly='readonly' type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_weight_ave_val }}" class="form-control coach_weight_average" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][105][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>					
 											@endforeach
-										else
+										@else
 											@if($self_rating && $performance_status_id == 4)
 												@foreach($list_approver->result() as $row)
 													<td><input {{ $disabled }} type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_rate_val }}" class="form-control none_core_coach_rating" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][103][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>
