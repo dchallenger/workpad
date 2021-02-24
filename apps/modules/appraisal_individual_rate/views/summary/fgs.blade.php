@@ -13,7 +13,7 @@
 				<input type="hidden" name="template_id" value="{{ $appraisee->template_id }}" />
 				<input type="hidden" name="appraisal_id" value="{{ $appraisee->appraisal_id }}" />
 				<input type="hidden" name="planning_id" value="{{ $appraisee->planning_id }}" />	
-				<input type="hidden" name="status_id" value="{{ $appraisee->status_id }}" />			
+				<input type="hidden" name="status_id" value="{{ $appraisee->status_id }}" />
 				<table class="table table-bordered table-striped">
 					<tbody>
 						<tr class="success">

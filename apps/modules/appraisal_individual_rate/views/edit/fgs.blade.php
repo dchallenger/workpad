@@ -12,7 +12,7 @@
 				<input type="hidden" name="user_id" value="{{ $appraisee->user_id }}" />
 				<input type="hidden" name="template_id" value="{{ $appraisee->template_id }}" />
 				<input type="hidden" name="appraisal_id" value="{{ $appraisee->appraisal_id }}" />
-				<input type="hidden" name="planning_id" value="{{ $appraisee->planning_id }}" />				
+				<input type="hidden" name="planning_id" value="{{ $appraisee->planning_id }}" />
 				<table class="table table-bordered table-striped">
 					<tbody>
 						<tr class="success">
@@ -527,14 +527,14 @@
 					@if( $appraisee->to_user_id == $user['user_id'] && $appraisee->period_status )
 	                	@if( $appraisee->status_id <= 1 )
 		                    <div class="col-md-offset-4 col-md-8">
-								<button type="button" class="btn blue btn-sm" onclick="change_status( $(this).closest('form'), 1)"><i class="fa fa-check"></i> Save as Draft</button>		                    			                    	
-								<button type="button" class="btn yellow btn-sm" onclick="change_status( $(this).closest('form'), 2)"><i class="fa fa-check"></i> Send to Approver</button>
+								<button type="button" class="btn blue btn-sm" onclick="change_status_self( $(this).closest('form'), 1)"><i class="fa fa-check"></i> Save as Draft</button>		                    			                    	
+								<button type="button" class="btn yellow btn-sm" onclick="change_status_self( $(this).closest('form'), 2)"><i class="fa fa-check"></i> Send to Approver</button>
 			        			<a class="btn default btn-sm" href="{{ $mod->url }}">Back</a>
 		                    </div>
 	                    @else
 		                    <div class="col-md-offset-5 col-md-7">
 		                    	@if( $appraisee->cs_status == 3 && $appraisee->status_id == 8 )
-		                    		<button type="button" class="btn yellow btn-sm" onclick="change_status( $(this).closest('form'), 6)"><i class="fa fa-check"></i> Approved</button>
+		                    		<button type="button" class="btn yellow btn-sm" onclick="change_status_self( $(this).closest('form'), 6)"><i class="fa fa-check"></i> Approved</button>
 		                    	@endif
 		                    	<a class="btn default btn-sm" href="{{ $mod->url }}">Back</a>
 		                    </div>

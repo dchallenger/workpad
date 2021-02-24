@@ -175,6 +175,36 @@ function calc_section_cs_avg_rating( section_id )
 
 function change_status(form, status_id)
 {
+    var validation = {};
+
+    if (status_id == 4) {
+        $('.none_core_coach_rating').each(function (index, element){
+            var fieldval = parseFloat($(this).val());
+            var weight_val = $(this).closest('tr').find('.weight').val();
+            var score_card = $(this).data('score-card');
+
+            var valid = /^[-+]?\d+(\.\d+)?$/.test( fieldval );
+
+            if( fieldval.toString() != "" && valid){
+                if( fieldval < 0.1 && weight_val > 0){
+                    validation[index] = {};
+                    validation[index]['type'] = "error";
+                    validation[index]['message'] = 'Under "'+score_card+'" has field 0 value';
+                }
+            }
+            else if(isNaN(fieldval.toString())) {
+                validation[index] = {};
+                validation[index]['type'] = "error";
+                validation[index]['message'] = 'Under "'+score_card+'" has empty field';            
+            }        
+        });
+
+        if (!$.isEmptyObject(validation)) {
+            handle_ajax_message( validation );
+            return false;
+        }
+    }
+
 	$.blockUI({ message: '<div>Saving, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />',
 		onBlock: function(){
 			var data = form.find(":not('.dontserializeme')").serialize() + '&status_id='+status_id;

@@ -303,3 +303,65 @@ function string_to_float() {
     var res = str[1].slice(0, 2);
     document.getElementById("demo").innerHTML = str[0]+'.'+res;
 }
+
+
+function change_status_self(form, status_id)
+{
+    var validation = {};
+    
+    if (status_id > 1) {
+        $('.none_core_self_rating').each(function (index, element){
+            var fieldval = parseFloat($(this).val());
+            var weight_val = $(this).closest('tr').find('.weight').val();
+            var score_card = $(this).data('score-card');
+
+            var valid = /^[-+]?\d+(\.\d+)?$/.test( fieldval );
+
+            if( fieldval.toString() != "" && valid){
+                if( fieldval < 0.1 && weight_val > 0){
+                    validation[index] = {};
+                    validation[index]['type'] = "error";
+                    validation[index]['message'] = 'Under "'+score_card+'" has field 0 value';
+                }
+            }
+            else if(isNaN(fieldval.toString())) {
+                validation[index] = {};
+                validation[index]['type'] = "error";
+                validation[index]['message'] = 'Under "'+score_card+'" has empty field';            
+            }        
+        });
+
+        if (!$.isEmptyObject(validation)) {
+            handle_ajax_message( validation );
+            return false;
+        }
+    }
+
+    $.blockUI({ message: '<div>Saving, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />',
+        onBlock: function(){
+            var data = form.find(":not('.dontserializeme')").serialize() + '&status_id='+status_id;
+            $.ajax({
+                url: base_url + module.get('route') + '/change_status',
+                type:"POST",
+                data: data,
+                dataType: "json",
+                async: false,
+                success: function ( response ) {
+                    handle_ajax_message( response.message );
+
+                    if(response.notify != "undefined")
+                    {
+                        for(var i in response.notify)
+                            socket.emit('get_push_data', {channel: 'get_user_'+response.notify[i]+'_notification', args: { broadcaster: user_id, notify: true }});
+                    }
+
+                    if(response.redirect)
+                        //window.location = base_url + module.get('route');
+                        window.location = response.redirect;
+                }
+            });
+        },
+        baseZ: 300000000
+    });
+    $.unblockUI();  
+}
