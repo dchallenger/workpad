@@ -6,6 +6,7 @@ class Performance_appraisal extends MY_PrivateController
 	{
 		$this->load->model('performance_appraisal_model', 'mod');
 		$this->load->model('performance_appraisal_manage_model', 'mod_manage');
+		$this->load->model('appraisal_individual_rate_model', 'mod_individual_rate');
 		parent::__construct();
 		$this->lang->load('performance_appraisal');
 	}
@@ -496,7 +497,7 @@ class Performance_appraisal extends MY_PrivateController
 	                    'message_type' => 'Comment',
 	                    'user_id' => $this->user->user_id,
 	                    'feed_content' => "{$planning_year} performance appraisal period for {$performance_type['performance']} $appraisal_status.",
-	                    'uri' => $this->mod_manage->route,
+	                    'uri' => $this->mod_individual_rate->route. '/edit/'.$this->response->record_id.'/'.$user_id,
 	                    'recipient_id' => $user_id
 	                );
 
