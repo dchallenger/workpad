@@ -1,6 +1,8 @@
 
 $(document).ready(function(){
 	UIExtendedModals.init();
+    
+    $(":input").inputmask();
 
 	$('.select2me').select2({
 	    placeholder: "Select an option",
@@ -112,6 +114,82 @@ $(document).ready(function(){
 		$('#recruitment_personal-resume-container .fileupload-new').each(function(){ $(this).css('display', 'none') });
 		$('#recruitment_personal-resume-container .fileupload-exists').each(function(){ $(this).css('display', 'inline-block') });
 	}
+
+	$('#recruitment_personal_history-licensure-attach-fileupload').fileupload({
+        url: base_url + module.get('route') + '/single_upload',
+        autoUpload: true,
+    }).bind('fileuploadadd', function (e, data) {
+        $.blockUI({ message: '<div>Attaching file, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />' });
+    }).bind('fileuploaddone', function (e, data) {
+        $.unblockUI();
+        var file = data.result.file;
+        if(file.error != undefined && file.error != "")
+        {
+            notify('error', file.error);
+        }
+        else{
+            $('#recruitment_personal_history-licensure-attach').val(file.url);
+            $('#recruitment_personal_history-licensure-attach-container .fileupload-preview').html(file.name);
+            $('#recruitment_personal_history-licensure-attach-container .fileupload-new').each(function(){ $(this).css('display', 'none') });
+            $('#recruitment_personal_history-licensure-attach-container .fileupload-exists').each(function(){ $(this).css('display', 'inline-block') });
+        }
+    }).bind('fileuploadfail', function (e, data) {
+        $.unblockUI();
+        notify('error', data.errorThrown);
+    });
+
+    $('#recruitment_personal_history-licensure-attach-container .fileupload-delete').click(function(){
+        $('#recruitment_personal_history-licensure-attach').val('');
+        $('#recruitment_personal_history-licensure-attach-container .fileupload-preview').html('');
+        $('#recruitment_personal_history-licensure-attach-container .fileupload-new').each(function(){ $(this).css('display', 'inline-block') });
+        $('#recruitment_personal_history-licensure-attach-container .fileupload-exists').each(function(){ $(this).css('display', 'none') });
+    });
+
+    if( $('#recruitment_personal_history-licensure-attach').val() != "" )
+    {
+        $('#recruitment_personal_history-licensure-attach-container .fileupload-new').each(function(){ $(this).css('display', 'none') });
+        $('#recruitment_personal_history-licensure-attach-container .fileupload-exists').each(function(){ $(this).css('display', 'inline-block') });
+    }	
+
+    $('.test_attach').fileupload({ 
+        url: base_url + module.get('route') + '/single_upload',
+        autoUpload: true,
+        contentType: false,
+    }).bind('fileuploadadd', function (e, data) {
+        $.blockUI({ message: '<div>Attaching file, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />' });
+    }).bind('fileuploaddone', function (e, data) { 
+
+        $.unblockUI();
+        var file = data.result.file;
+        if(file.error != undefined && file.error != "")
+		{
+			notify('error', file.error);
+		}
+		else{
+            $(this).parent().parent().parent().children('span').children('span').children('span.fileupload-preview').html(file.name);
+            $(this).parent().children('span.fileupload-new').css('display', 'none');
+            $(this).parent().children('.fileupload-exists').css('display', 'inline-block');
+            $(this).parent().parent().children('.fileupload-delete').css('display', 'inline-block');
+        	$(this).parent().parent().parent().parent().children('input:hidden:first').val(file.url);
+        }
+    }).bind('fileuploadfail', function (e, data) { 
+        $.unblockUI();
+        notify('error', data.errorThrown);
+    });
+
+    $('.fileupload-delete').click(function(){
+        $(this).parent().parent().parent().children('input:hidden:first').val('');
+        $(this).parent().parent().children('span').children('span').children('span.fileupload-preview').html('');
+        $(this).parent().children('span.add_file').children('span.fileupload-new').css('display', 'inline-block');
+        $(this).parent().children('span.add_file').children('span.fileupload-exists').css('display', 'none');
+        $(this).css('display', 'none');
+
+        // $('#users_profile-photo').val('');
+        // $('#users_profile-photo-container .fileupload-preview').html('');
+        // $("#img-preview").attr('src', base_url + 'assets/img/avatar.png');
+        // $('#photo-container .fileupload-new').each(function(){ $(this).css('display', 'inline-block') });
+        // $('#photo-container .fileupload-exists').each(function(){ $(this).css('display', 'none') });
+    });
 
 	if($('#record_id').val() >0){
 		$.ajax({
@@ -258,6 +336,40 @@ $(document).ready(function(){
 	});
 	$('label[for="recruitment_personal-illness_question-temp"]').css('margin-top', '0');	
 
+    $('#recruitment_personal_history-training-budgeted-temp').change(function(){
+        if( $(this).is(':checked') ){
+            $(this).parent().next().val(1);
+        }
+        else{
+            $(this).parent().next().val(0);
+        }
+    }); 
+	$('label[for="recruitment_personal_history-training-budgeted-temp"]').css('margin-top', '0');
+		
+    $('.make-switch').not(".has-switch")['bootstrapSwitch']();
+    $('label[for="recruitment_personal_history-family-dependent-temp"]').css('margin-top', '0');
+    $('label[for="recruitment_personal_history-family-dependent-hmo-temp"]').css('margin-top', '0');
+    $('label[for="recruitment_personal_history-family-dependent-insurance-temp"]').css('margin-top', '0');
+
+    $('.exam_result').change(function(){
+        if( $(this).is(':checked') ){
+            $(this).parent().next().val(1);
+        }
+        else{
+            $(this).parent().next().val(0);
+        }
+    });        
+    $('label[for="recruitment_personal_history-test-result-temp"]').css('margin-top', '0');
+
+	$('.dependent').change(function(){
+	    if( $(this).is(':checked') ){
+	    	$(this).parent().next().val(1);
+	    }
+	    else{
+	    	$(this).parent().next().val(0);
+	    }
+	});
+	
 });
 
 function copy_present_to_permanent(same_as_present) {
@@ -387,6 +499,35 @@ function edit_personal_details(modal_form, key_class, sequence){
 				}
 		});	
 }
+function view_personal_details(modal_form, key_class, sequence){	
+	$.ajax({
+		url: base_url + module.get('route') + '/view_personal_details',
+		type:"POST",
+		async: false,
+		data: 'modal_form='+modal_form+'&key_class='+key_class+'&sequence='+sequence+'&record_id='+$('#record_id').val(),
+		dataType: "json",
+		beforeSend: function(){
+					// $('body').modalmanager('loading');
+				},
+				success: function ( response ) {
+
+					for( var i in response.message )
+					{
+						if(response.message[i].message != "")
+						{
+							var message_type = response.message[i].type;
+							notify(response.message[i].type, response.message[i].message);
+						}
+					}
+
+					if( typeof(response.view_details) != 'undefined' )
+					{	
+						$('.modal-container-partners').html(response.view_details).modal();		
+					}
+
+				}
+		});	
+}
 
 //remove phone
 function remove_form(div_form, mode, tab){
@@ -467,6 +608,8 @@ function add_form(add_form, mode, sequence){
 				    allowClear: true
 				});*/				
 				FormComponents.init();
+
+				$(":input").inputmask();
 			}
 
 		}

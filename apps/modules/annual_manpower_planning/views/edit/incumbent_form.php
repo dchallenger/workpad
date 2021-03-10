@@ -43,8 +43,8 @@
                                         <tr>
                                             <th width="20%" class="padding-top-bottom-10"><?=lang('annual_manpower_planning.plan')?></th>
                                             <th width="25%" class="padding-top-bottom-10"><?=lang('annual_manpower_planning.month')?></th>
-                                            <th width="15%" class="padding-top-bottom-10"><?=lang('annual_manpower_planning.budget')?></th>
-                                            <th width="15%" class="padding-top-bottom-10">Payroll Under</th>
+                                            <th width="15%" class="padding-top-bottom-10 hidden"><?=lang('annual_manpower_planning.budget')?></th>
+                                            <th width="15%" class="padding-top-bottom-10 hidden">Payroll Under</th>
                                             <th width="15%" class="padding-top-bottom-10"><?=lang('common.actions')?></th>
                                         </tr>
                                     </thead>                                   
@@ -70,7 +70,7 @@
                                             $companies = $this->db->get_where('users_company', array('deleted' => 0));
                                             foreach( $companies->result() as $company )
                                             {
-                                                $companys[$company->company_id] = $company->company_code;
+                                                $companys[$company->company_id] = $company->company_initial;
                                             }
                                             if($plans)
                                             {
@@ -82,10 +82,10 @@
                                                         <td>
                                                             <?php echo form_dropdown('month[]', $months, $plan->month, 'class="form-control select2me" data-placeholder="Select..."') ?>   
                                                         </td>
-                                                        <td>
+                                                        <td class="hidden">
                                                             <input name="budget[]" type="text" class="form-control" maxlength="64" value="<?php echo $plan->budget?>">
                                                         </td>
-                                                        <td>
+                                                        <td class="hidden">
                                                             <?php echo form_dropdown('company_id[]', $companys, $plan->company_id, 'class="form-control select2me" data-placeholder="Select..." ') ?>
                                                         </td>
                                                         <td>

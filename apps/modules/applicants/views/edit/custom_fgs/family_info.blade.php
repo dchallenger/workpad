@@ -51,20 +51,25 @@
         $count_family++;
 
         //date in mm/dd/yyyy format; or it can be in other formats as well
-        if($family['family-birthdate'] == "" || $family['family-birthdate'] == '0000-00-00'){
-            $family['family-birthdate']  = "";
-            $family_age = "";
-        }else{
-            $birthDate = date('m/d/Y', strtotime($family['family-birthdate']));
-            //explode the date to get month, day and year
-            $birthDate = explode("/", $birthDate);
-            //get age from date or birthdate
-            $family_age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
-                    ? ((date("Y") - $birthDate[2]) - 1)
-                    : (date("Y") - $birthDate[2]));
+        if (isset($family['family-birthdate'])) {
+            if($family['family-birthdate'] == "" || $family['family-birthdate'] == '0000-00-00'){
+                $family['family-birthdate']  = "";
+                $family_age = "";
+            }else{
+                $birthDate = date('m/d/Y', strtotime($family['family-birthdate']));
+                //explode the date to get month, day and year
+                $birthDate = explode("/", $birthDate);
+                //get age from date or birthdate
+                $family_age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
+                        ? ((date("Y") - $birthDate[2]) - 1)
+                        : (date("Y") - $birthDate[2]));
 
-            $family['family-birthdate']  = date('F d, Y', strtotime($family['family-birthdate'] ));
-        }
+                $family['family-birthdate']  = date('F d, Y', strtotime($family['family-birthdate'] ));
+            }
+        } else {
+            $family_age = "";
+            $family['family-birthdate']  = "";            
+        }            
         ?>
         <div class="portlet">
             <div class="portlet-title">
@@ -110,13 +115,31 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="control-label col-md-3">{{ lang('applicants.family_dependent_hmo') }}</label>
+                                <div class="col-md-5">
+                                    <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
+                                        <input type="checkbox" value="1" @if( isset($family['family-dependent-hmo']) ? $family['family-dependent-hmo'] : "" ) checked="checked" @endif name="recruitment_personal_history[family-dependent-hmo][temp][]" id="recruitment_personal_history-family-dependent-hmo-temp" class="dontserializeme toggle dependent"/>
+                                        <input type="hidden" name="recruitment_personal_history[family-dependent-hmo][]" id="recruitment_personal_history-family-dependent-hmo" value="@if( isset($family['family-dependent-hmo'])) 1 else 0 @endif"/>
+                                    </div> 
+                                </div>
+                            </div>                            
+                            <div class="form-group">
+                                <label class="control-label col-md-3">{{ lang('applicants.family_dependent_insurance') }}</label>
+                                <div class="col-md-5">
+                                    <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
+                                        <input type="checkbox" value="1" @if( isset($family['family-dependent-insurance']) ? $family['family-dependent-insurance'] : "" ) checked="checked" @endif name="recruitment_personal_history[family-dependent-insurance][temp][]" id="recruitment_personal_history-family-dependent-insurance-temp" class="dontserializeme toggle dependent"/>
+                                        <input type="hidden" name="recruitment_personal_history[family-dependent-insurance][]" id="recruitment_personal_history-family-dependent-insurance" value="@if( isset($family['family-dependent-insurance'])) 1 else 0 @endif"/>
+                                    </div> 
+                                </div>
+                            </div>                            
+                            <div class="form-group hidden">
                                 <label class="control-label col-md-3">{{ lang('applicants.occupation') }}</label>
                                 <div class="col-md-5">
                                     <input type="text" class="form-control" name="recruitment_personal_history[family-occupation][]" id="recruitment_personal_history-family-occupation<?php echo$count_family ?>" 
                                     value="<?php echo (isset($family['family-occupation']) ? $family['family-occupation'] : ""); ?>" placeholder="Enter Occupation"/>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group hidden">
                                 <label class="control-label col-md-3">{{ lang('applicants.employer') }}</label>
                                 <div class="col-md-5">
                                     <input type="text" class="form-control" name="recruitment_personal_history[family-employer][]" id="recruitment_personal_history-family-employer<?php echo$count_family ?>" 

@@ -1,301 +1,199 @@
 <?php
+    $number = '&nbsp;&nbsp;';
+    $next_pa = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
     if ($result && $result->num_rows() > 0){
         $ctr = 1;
         foreach ($result->result() as $row) {
             if ($ctr > 1){
 ?>
-                <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff; margin-bottom: 10px;'> 
-                    <tr>
-                        <td style="width:100%;border-bottom: 1px solid #000">&nbsp;</td>
-                    </tr> 
-                </table>
+                <div style="page-break-before: always;">&nbsp;</div>
 <?php
-            }
+            }            
 ?>
             <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff; margin-bottom: 10px;'> 
                 <tr>
-                    <td style="width:25%">Company</td>
-                    <td><?php echo $row->company ?></td>
-                </tr> 
-                <tr>
-                    <td style="width:25%">Department</td>
-                    <td><?php echo $row->department ?></td>
-                </tr> 
-                <tr>
                     <td style="width:25%">Reference Person</td>
                     <td><?php echo $row->reference_person ?></td>
-                </tr>                                                 
+                </tr>
                 <tr>
                     <td style="width:25%">Position</td>
                     <td><?php echo $row->position ?></td>
-                </tr> 
+                </tr>                 
                 <tr>
-                    <td stye="width:25%">Employment Status:</td>
-                    <td><?php echo $row->employment_status ?></td>
-                </tr>  
-                <tr>
-                    <td stye="width:25%">Date Hired:</td>
-                    <td><?php echo ($row->date_hired != '1970-01-01' ? date('M d Y',strtotime($row->date_hired)) : '') ?></td>
-                </tr>              
-                <tr>
-                    <td stye="width:25%">Date Resigned:</td>
-                    <td><?php echo ($row->date_resigned != '1970-01-01' ? date('M d Y',strtotime($row->date_resigned)) : '') ?></td>
-                </tr>
-                <tr>
-                    <td stye="width:25%">Reason for Leaving:</td>
-                    <td><?php echo $row->reason_for_leaving ?></td>
-                </tr>                                     
-            </table>   
-            <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff; margin-bottom: 10px;'> 
-                <tr>
-                    <td style="width:3%">1.</td>
-                    <td>Did s/he handle cash or important matter during his/her stay in the company?</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff;'> 
-                            <tr>
-                                <td style="width:15%;text-align:center;">&nbsp;</td>
-                                <td style="width:2%;text-align:center;">&nbsp;</td>
-                                <td style="width:41%;text-align:left;"><u>&nbsp;&nbsp;&nbsp;<?php echo ($row->q1 == 1 ? 'x' : '') ?>&nbsp;&nbsp;&nbsp;</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
-                                <td style="width:41%;text-align:left"><u>&nbsp;&nbsp;&nbsp;<?php echo ($row->q1 == 0 ? 'x' : '') ?>&nbsp;&nbsp;&nbsp;</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</td>
-                            </tr>                                                                                             
-                        </table>                      
-                    </td>
-                </tr>                                                                        
-            </table> 
-            <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff; margin-bottom: 10px;'> 
-                <tr>
-                    <td colspan="2">
-                        <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff;'> 
-                            <tr>
-                                <td style="width:10%;text-align:center">&nbsp;</td>
-                                <td colspan="3">If yes, was s/he able to handle it</td>
-                            </tr>   
-                            <tr>
-                                <td style="width:10%;text-align:center">&nbsp;</td>
-                                <td colspan="3">properly? <u><?php echo $row->q1_ans ?></u></td>
-                            </tr>                                                                                           
-                        </table>                      
-                    </td>
-                </tr>                                                                        
-            </table>         
-            <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff; margin-bottom: 10px;'>  
-                <tr>
-                    <td style="width:3%">2.</td>
-                    <td>Was s/he involved in any disciplinary action?</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff;'> 
-                            <tr>
-                                <td style="width:16%;text-align:center">&nbsp;</td>
-                                <td style="width:10%;text-align:center">&nbsp;</td>
-                                <td style="width:37%;text-align:left"><u>&nbsp;&nbsp;&nbsp;<?php echo ($row->q2 == 1 ? 'x' : '') ?>&nbsp;&nbsp;&nbsp;</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
-                                <td style="width:37%;text-align:left"><u>&nbsp;&nbsp;&nbsp;<?php echo ($row->q2 == 0 ? 'x' : '') ?>&nbsp;&nbsp;&nbsp;</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</td>
-                            </tr>                                                                                             
-                        </table>                      
-                    </td>
-                </tr> 
-                <tr>
-                    <td style="width:3%">3.</td>
-                    <td>Did s/he suffer from any illnes?</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff;'> 
-                            <tr>
-                                <td style="width:16%;text-align:center">&nbsp;</td>
-                                <td style="width:10%;text-align:center">&nbsp;</td>
-                                <td style="width:37%;text-align:left"><u>&nbsp;&nbsp;&nbsp;<?php echo ($row->q3 == 1 ? 'x' : '') ?>&nbsp;&nbsp;&nbsp;</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
-                                <td style="width:37%;text-align:left"><u>&nbsp;&nbsp;&nbsp;<?php echo ($row->q3 == 0 ? 'x' : '') ?>&nbsp;&nbsp;&nbsp;</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</td>
-                            </tr>                                                                                             
-                        </table>                      
-                    </td>
-                </tr>                                                                       
-            </table>         
-            <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff; margin-bottom: 10px;'>
-                <tr>
-                    <td><STRONG>PREVIOUS WORK RELATED INFORMATION</STRONG></td>
-                </tr>      
-            </table> 
-            <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff; margin-bottom: 10px;'> 
-                <tr>
-                    <td style="width:3%">4.</td>
-                    <td>How would you describe his/her attendance record?</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff;'> 
-                            <tr>
-                                <td style="width:62px;text-align:center">&nbsp;</td>
-                                <td colspan="3" style="width:500px;border-bottom: 1px solid #e4e4e4;"><?php echo $row->q4_ans ?></td>
-                            </tr>                                                                                           
-                        </table>                                         
-                    </td>
-                </tr>                                                                       
+                    <td style="width:25%">Company</td>
+                    <td><?php echo $row->company ?></td>
+                </tr>                                                                                   
+            </table>
+            <table align='center' cellpadding="2px" cellspacing="0" style='border:1px solid #e4e4e4; width: 95%; height: auto; background: #fff; margin-bottom: 10px;'> 
+                <tbody>
+                    <tr>
+                        <td colspan="2" width="50%" style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">Name of Character Reference</td>
+                        <td width="50%" style="border-bottom: 1px solid #e4e4e4;"><?php echo $row->reference_person ?></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">Position</td>
+                        <td style="border-bottom: 1px solid #e4e4e4;"><?php echo $row->position ?></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">Company</td>
+                        <td style="border-bottom: 1px solid #e4e4e4;"><?php echo $row->company ?></td>
+                    </tr>
+                    <tr>
+                        <td width="4%" style="border-bottom: 1px solid #e4e4e4" valign="top">1.</td>
+                        <td style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">
+                            <p>Relationship</p>
+                            <p>How did you know the candidate?</p>
+                        </td>
+                        <td style="border-bottom: 1px solid #e4e4e4;">
+                            <?php echo $row->ans1 ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="4%" style="border-bottom: 1px solid #e4e4e4" valign="top">2.</td>
+                        <td style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">
+                            <p>Efficiency at work</p>
+                            <p>What can you say about his/her attendance (absence/tardiness)?</p>
+                        </td>
+                        <td style="border-bottom: 1px solid #e4e4e4;">
+                            <?php echo $row->ans2 ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="4%" style="border-bottom: 1px solid #e4e4e4">&nbsp;</td>
+                        <td style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">
+                            <p>How closely was he/she supervised?</p>
+                        </td>
+                        <td style="border-bottom: 1px solid #e4e4e4;">
+                            <?php echo $row->ans3 ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="4%" style="border-bottom: 1px solid #e4e4e4">&nbsp;</td>
+                        <td style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">
+                            <p>How would you describe the QUALITY of work he/she does?</p>
+                        </td>
+                        <td style="border-bottom: 1px solid #e4e4e4;">
+                            <?php echo $row->ans4 ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="4%" style="border-bottom: 1px solid #e4e4e4">&nbsp;</td>
+                        <td style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">
+                            <p>How would you describe the QUANTITY of work he/she does?</p>
+                        </td>
+                        <td style="border-bottom: 1px solid #e4e4e4;">
+                            <?php echo $row->ans5 ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="4%" style="border-bottom: 1px solid #e4e4e4">&nbsp;</td>
+                        <td style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">
+                            <p>How would you describe his/her management style? (handling of multiple responsibilities/stress)</p>
+                        </td>
+                        <td style="border-bottom: 1px solid #e4e4e4;">
+                            <?php echo $row->ans6 ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="4%" style="border-bottom: 1px solid #e4e4e4">&nbsp;</td>
+                        <td style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">
+                            <p>How would you rate his/her communication skills?</p>
+                        </td>
+                        <td style="border-bottom: 1px solid #e4e4e4;">
+                            <?php echo $row->ans7 ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="4%" style="border-bottom: 1px solid #e4e4e4" valign="top">3.</td>
+                        <td style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">
+                            <p>Interpersonal skills</p>
+                            <p>How would you describe her performance when working with others/ a team?</p>
+                        </td>
+                        <td style="border-bottom: 1px solid #e4e4e4;">
+                            <?php echo $row->ans8 ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="4%" style="border-bottom: 1px solid #e4e4e4" valign="top">4.</td>
+                        <td style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">
+                            <p>Strengths/Technical Knowledge</p>
+                            <p>Would there be any specific technical/product knowledge or skills, you think, that he/she can contribute to his/her prospective employer?</p>
+                        </td>
+                        <td style="border-bottom: 1px solid #e4e4e4;">
+                            <?php echo $row->ans9 ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="4%" style="border-bottom: 1px solid #e4e4e4" valign="top">5.</td>
+                        <td style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">
+                            <p>Weaknesses/Candidate’s Potentials</p>
+                            <p>Could you identify any areas of development that the prospective employer should look into?</p>
+                        </td>
+                        <td style="border-bottom: 1px solid #e4e4e4;">
+                            <?php echo $row->ans10 ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="4%" style="border-bottom: 1px solid #e4e4e4" valign="top">6.</td>
+                        <td style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">
+                            <p>Integrity</p>
+                            <p>Would you be aware of any issues/controversy that he/she has been involved with? Can you provide details?</p>
+                        </td>
+                        <td style="border-bottom: 1px solid #e4e4e4;">
+                            <?php echo $row->ans11 ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="4%" style="border-bottom: 1px solid #e4e4e4">&nbsp;</td>
+                        <td style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">
+                            <p>Can you describe his/her way of handling sensitive/confidential information/materials?</p>
+                        </td>
+                        <td style="border-bottom: 1px solid #e4e4e4;">
+                            <?php echo $row->ans12 ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="4%" style="border-bottom: 1px solid #e4e4e4" valign="top">7.</td>
+                        <td style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">
+                            <p>If applicable</p>
+                            <p>What would you consider as his/her biggest contribution to the company?</p>
+                        </td>
+                        <td style="border-bottom: 1px solid #e4e4e4;">
+                            <?php echo $row->ans13 ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="4%" style="border-bottom: 1px solid #e4e4e4">&nbsp;</td>
+                        <td style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">
+                            <p>Would you know the reason why he/she left your company?</p>
+                        </td>
+                        <td style="border-bottom: 1px solid #e4e4e4;">
+                            <?php echo $row->ans14 ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="4%" style="border-bottom: 1px solid #e4e4e4">&nbsp;</td>
+                        <td style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">
+                            <p>If given the opportunity, would you consider re-hiring him/her? Why?</p>
+                        </td>
+                        <td style="border-bottom: 1px solid #e4e4e4;">
+                            <?php echo $row->ans15 ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="4%" style="border-bottom: 1px solid #e4e4e4">&nbsp;</td>
+                        <td style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4">
+                            <p>Is there anything else you would like to add to help us further evaluate his/her application?</p>
+                        </td>
+                        <td style="border-bottom: 1px solid #e4e4e4;">
+                            <?php echo $row->ans16 ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Thank you very much for your time, and rest assured that we will be keeping all this information confidential. Have a very good day sir/ma’am!</td>
+                    </tr>                            
+                </tbody>                        
             </table>  
-            <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff; margin-bottom: 10px;'> 
-                <tr>
-                    <td style="width:3%">5.</td>
-                    <td>How would you rate his/her sense of integrity, trustwothiness and honestly?</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff;'> 
-                            <tr>
-                                <td style="width:16%;text-align:center">&nbsp;</td>
-                                <td style="width:28%;text-align:left"><u>&nbsp;&nbsp;&nbsp;<?php echo ($row->q5 == 'High' ? 'x' : '') ?>&nbsp;&nbsp;&nbsp;</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High</td>
-                                <td style="width:28%;text-align:left"><u>&nbsp;&nbsp;&nbsp;<?php echo ($row->q5 == 'Average' ? 'x' : '') ?>&nbsp;&nbsp;&nbsp;</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Average</td>
-                                <td style="width:28%;text-align:left"><u>&nbsp;&nbsp;&nbsp;<?php echo ($row->q5 == 'Low' ? 'x' : '') ?>&nbsp;&nbsp;&nbsp;</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low</td>
-                            </tr>                                                                                                                                           
-                        </table>                                         
-                    </td>
-                </tr>                                                                       
-            </table> 
-            <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff; margin-bottom: 10px;'> 
-                <tr>
-                    <td colspan="2">
-                        <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff;'> 
-                            <tr>
-                                <td style="width:62px;text-align:center">&nbsp;</td>
-                                <td colspan="3" style="width:500px;">Why?</td>
-                            </tr>
-                            <tr>
-                                <td style="width:62px;text-align:center">&nbsp;</td>
-                                <td colspan="3" style="width:500px;border-bottom: 1px solid #e4e4e4;"><?php echo $row->q5_ans ?></td>
-                            </tr>                                                                                                                    
-                        </table>                                         
-                    </td>
-                </tr>                                                                       
-            </table>
-            <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff; margin-bottom: 10px;'> 
-                <tr>
-                    <td style="width:3%">6.</td>
-                    <td>How would you describe his/her work performance in terms of quality of output & timeliness of result?</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff;'> 
-                            <tr>
-                                <td style="width:62px;text-align:center">&nbsp;</td>
-                                <td colspan="3" style="width:500px;border-bottom: 1px solid #e4e4e4;"><?php echo $row->q6_ans ?></td>
-                            </tr>                                                                                           
-                        </table>                                         
-                    </td>
-                </tr>                                                                       
-            </table> 
-            <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff; margin-bottom: 10px;'>
-                <tr>
-                    <td><STRONG>ATTITUDE TOWARDS SUBORDINATES</STRONG></td>
-                </tr>      
-            </table>  
-            <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff; margin-bottom: 10px;'> 
-                <tr>
-                    <td style="width:3%">7.</td>
-                    <td>How would you describe his/her relationship with subordinates/co-employees?</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff;'> 
-                            <tr>
-                                <td style="width:62px;text-align:center">&nbsp;</td>
-                                <td colspan="3" style="width:500px;border-bottom: 1px solid #e4e4e4;"><?php echo $row->q7_ans ?></td>
-                            </tr>                                                                                           
-                        </table>                                         
-                    </td>
-                </tr>                                                                       
-            </table> 
-            <br><br><br>         
-            <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff; margin-bottom: 10px;'>
-                <tr>
-                    <td><STRONG>ATTITUDE TOWARDS COMPANY</STRONG></td>
-                </tr>      
-            </table>
-            <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff; margin-bottom: 10px;'> 
-                <tr>
-                    <td style="width:3%">8.</td>
-                    <td>Is your company unionized?</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff;'> 
-                            <tr>
-                                <td style="width:16%;text-align:center">&nbsp;</td>
-                                <td style="width:10%;text-align:center">&nbsp;</td>
-                                <td style="width:37%;text-align:left"><u>&nbsp;&nbsp;&nbsp;<?php echo ($row->q8 == 1 ? 'x' : '') ?>&nbsp;&nbsp;&nbsp;</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
-                                <td style="width:37%;text-align:left"><u>&nbsp;&nbsp;&nbsp;<?php echo ($row->q8 == 0 ? 'x' : '') ?>&nbsp;&nbsp;&nbsp;</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</td>
-                            </tr>                                                                                             
-                        </table>                      
-                    </td>
-                </tr>                                                                       
-            </table>
-            <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff; margin-bottom: 10px;'> 
-                <tr>
-                    <td style="width:3%">9.</td>
-                    <td>What are some his/her significant contributions to your company?</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff;'> 
-                            <tr>
-                                <td style="width:62px;text-align:center">&nbsp;</td>
-                                <td colspan="3" style="width:500px;border-bottom: 1px solid #e4e4e4;"><?php echo $row->q9_ans ?></td>
-                            </tr>                                                                                           
-                        </table>                                         
-                    </td>
-                </tr>                                                                       
-            </table>
-            <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff; margin-bottom: 10px;'> 
-                <tr>
-                    <td style="width:4%">10.</td>
-                    <td>To your knowledge, has this person ever been charged administratively or criminally for any offense?</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff;'> 
-                            <tr>
-                                <td style="width:16%;text-align:center">&nbsp;</td>
-                                <td style="width:10%;text-align:center">&nbsp;</td>
-                                <td style="width:37%;text-align:left"><u>&nbsp;&nbsp;&nbsp;<?php echo ($row->q10 == 1 ? 'x' : '') ?>&nbsp;&nbsp;&nbsp;</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
-                                <td style="width:37%;text-align:left"><u>&nbsp;&nbsp;&nbsp;<?php echo ($row->q10 == 0 ? 'x' : '') ?>&nbsp;&nbsp;&nbsp;</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</td>
-                            </tr>                                                                                             
-                        </table>                      
-                    </td>
-                </tr>       
-                <tr>
-                    <td style="width:4%">11.</td>
-                    <td>Wa s/he cleared of accountability after resignation/termination?</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff;'> 
-                            <tr>
-                                <td style="width:16%;text-align:center">&nbsp;</td>
-                                <td style="width:10%;text-align:center">&nbsp;</td>
-                                <td style="width:37%;text-align:left"><u>&nbsp;&nbsp;&nbsp;<?php echo ($row->q11 == 1 ? 'x' : '') ?>&nbsp;&nbsp;&nbsp;</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
-                                <td style="width:37%;text-align:left"><u>&nbsp;&nbsp;&nbsp;<?php echo ($row->q11 == 0 ? 'x' : '') ?>&nbsp;&nbsp;&nbsp;</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</td>
-                            </tr>                                                                                             
-                        </table>                      
-                    </td>
-                </tr>  
-                <tr>
-                    <td style="width:4%">12.</td>
-                    <td>Would you recommend him/her for hiring? why?</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <table align='center' cellpadding="2px" cellspacing="0" style='width: 95%; height: auto; background: #fff;'> 
-                            <tr>
-                                <td style="width:16%;text-align:center">&nbsp;</td>
-                                <td style="width:10%;text-align:center">&nbsp;</td>
-                                <td style="width:37%;text-align:left"><u>&nbsp;&nbsp;&nbsp;<?php echo ($row->q12 == 1 ? 'x' : '') ?>&nbsp;&nbsp;&nbsp;</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
-                                <td style="width:37%;text-align:left"><u>&nbsp;&nbsp;&nbsp;<?php echo ($row->q12 == 0 ? 'x' : '') ?>&nbsp;&nbsp;&nbsp;</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No</td>
-                            </tr>                                                                                             
-                        </table>                      
-                    </td>
-                </tr>                                                                                       
-            </table> 
 <?php
             $ctr++;
         }

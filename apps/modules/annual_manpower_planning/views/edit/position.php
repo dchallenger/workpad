@@ -35,14 +35,12 @@
 	</td>
 	<?php
 		$total = 0;
-		for($i=1;$i<=12;$i++)
-		{
+		for ($i=1;$i<=12;$i++) {
 			$plan = $this->mod->get_position_plans( $post['plan_id'], $position->position_id, $i);
-			if($plan){ 
+			if ($plan) { 
 				$needed = 0;
 				$budget = 0;
-				foreach ($plan as $plans)
-				{
+				foreach ($plan as $plans) {
 					// $plan = $plan[0];
 					$total += ($plans->budget*$plans->needed);
 					$needed += $plans->needed;
@@ -51,14 +49,14 @@
 				<td class="text-center">
 					<?php
 						echo $needed;
-						if( $budget != 0 ) echo '<p class="small text-muted">P'. number_format($budget, 2, '.', ',') .'</p>';
+						if( $budget != 0 ) echo '<p class="small text-muted hidden">P'. number_format($budget, 2, '.', ',') .'</p>';
 					?>
 				</td>
-			<?
+			<?php
+			} else {?>
+				<td>&nbsp;</td>
+	<?php
 			}
-			else{
-				echo '<td>&nbsp;</td>';
-			}?> <?php	
 		}	
 	?>
 	<td></td>

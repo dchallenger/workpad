@@ -58,6 +58,88 @@ class recruitform_model extends Record
 	    	return array();
 	}
 
+	function check_the_same_position($user_id = 0,$oth_position = '',$position_sought = '')
+	{
+		$this->db->select('recruitment.*')
+	    ->from('users_profile ')
+	    ->join('recruitment', 'recruitment.partner_id = users_profile.partner_id', 'left')
+	    ->where("users_profile.user_id = $user_id");
+
+	    $recruit_result = $this->db->get('');	
+
+	    $error = 0;
+	    if ($recruit_result && $recruit_result->num_rows() > 0) {
+	    	$recruit_info = $recruit_result->row();
+	    	if ($oth_position != '' && $oth_position == $recruit_info->oth_position)
+	    		$error = 1; // the same other position
+
+			$this->db->select('key,key_value')
+		    ->from('recruitment_personal ')
+		    ->where("recruitment_personal.recruit_id = $recruit_info->recruit_id")
+		    ->where("recruitment_personal.key = 'position_sought'")
+		    ->where("recruitment_personal.key_value = '$position_sought'");
+
+		    $recruit_personal_result = $this->db->get('');	    	
+		    if ($recruit_personal_result && $recruit_personal_result->num_rows() > 0)
+		    	$error = 2;
+	    }
+
+	    return $error;
+	}
+
+	function get_users_profile($user_id)
+	{
+		$this->db->select('partner_id,title,lastname,firstname,middlename,maidenname,nickname,email,birth_date')
+	    ->from('users_profile ')
+	    ->join('users', 'users.user_id = users_profile.user_id', 'left')
+	    ->where("users_profile.user_id = $user_id");
+
+	    $users_profile = $this->db->get('');	
+
+		if( $users_profile && $users_profile->num_rows() > 0 )
+	    	return $users_profile->result_array();
+	    else
+	    	return array();
+	}
+
+	function get_partners_personal($user_id)
+	{
+		$this->db->select('key,key_value')
+	    ->from('partners_personal ')
+	    ->join('partners', 'partners_personal.partner_id = partners.partner_id', 'left')
+	    ->where("partners.user_id = $user_id");
+
+	    $partner_personal = $this->db->get('');	
+
+	    $partner_info = array();
+		if( $partner_personal && $partner_personal->num_rows() > 0 ) {
+			foreach ($partner_personal->result() as $row) {
+				$partner_info[$row->key] = $row->key_value;
+			}
+	    	return $partner_info;
+	    } else
+	    	return array();
+	}
+
+	function get_partners_personal_history($user_id)
+	{
+		$this->db->select('key,key_value')
+	    ->from('partners_personal_history ')
+	    ->join('partners', 'partners_personal_history.partner_id = partners.partner_id', 'left')
+	    ->where("partners.user_id = $user_id");
+
+	    $partner_personal_history = $this->db->get('');	
+
+	    $partner_history_info = array();
+		if( $partner_personal_history && $partner_personal_history->num_rows() > 0 ){
+			foreach ($partner_personal_history->result() as $row) {
+				$partner_history_info[$row->key][] = $row->key_value;
+			}
+	    	return $partner_history_info;
+	    } else
+	    	return array();
+	}
+
 	function get_recruitment_personal_value($recruit_id=0, $key=''){
 
 		$this->db->select('key_value')

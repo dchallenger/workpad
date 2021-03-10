@@ -325,6 +325,7 @@ function get_system_series($series_code, $code, $increment = false )
 								LIMIT 1;
 								";
 			$idnum_sql = $ci->db->query( $id_number_qry );
+
 			if($idnum_sql && $idnum_sql->num_rows() > 0){
 				$format = get_system_series($series_code, $code, true);
 			}
@@ -859,9 +860,12 @@ function convert_number_to_words($number) {
     return $string;
 }
 
-function currency_format($number) {
+function currency_format($number,$remove_decimal = 1) {
 	$amount = str_replace(',', '', $number);
-	$amount = str_replace('.', '', $amount);
+	
+	if ($remove_decimal)
+		$amount = str_replace('.', '', $amount);
+
 	$amount = number_format(floatval($amount), 2, '.', ',');
 	return $amount;
 }

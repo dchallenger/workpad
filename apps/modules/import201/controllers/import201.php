@@ -4597,6 +4597,110 @@ class Import201 extends MY_PrivateController
 		echo "Done.";	
 	}
 
+	function import_leave_credits(){
+		$this->load->library('excel');
+
+		$objReader = new PHPExcel_Reader_Excel5;
+
+		if (!$objReader) {
+			show_error('Could not get reader.');
+		}
+
+		$objReader->setReadDataOnly(true);
+		$objPHPExcel = $objReader->load('D:\oclp new version\carry over template for import.xls');
+		$rowIterator = $objPHPExcel->getActiveSheet()->getRowIterator();
+	
+		$ctr = 0;	
+		$import_data = array();
+
+		foreach($rowIterator as $row){
+			$cellIterator = $row->getCellIterator();
+			$cellIterator->setIterateOnlyExistingCells(false); // Loop all cells, even if it is not set
+			
+			$rowIndex = $row->getRowIndex();
+			
+			// Build the array to insert and check for validation errors as well.
+			foreach ($cellIterator as $cell) {
+				$import_data[$ctr][] = $cell->getCalculatedValue();
+			}
+
+			if ($rowIndex == 1) {
+
+				foreach ($import_data as $row) {
+					foreach ($row as $cell => $value) {
+						switch ($value) {														
+							case 'ID Number':
+								$valid_cells[] = 'user_id';
+								break;
+							case 'Form Type':
+								$valid_cells[] = 'form_code';
+								break;
+							case 'Previous Credit':
+								$valid_cells[] = 'previous';
+								break;																					
+						}
+					}
+				}
+
+				unset($import_data[$ctr]);
+			}
+
+			$ctr++;
+		}
+
+
+		$ctr = 0;
+
+		// Remove non-matching cells.
+		foreach ($import_data as $row) {
+			$form_id = '';
+			$user_id = '';
+			$arr_field_val = array('year' => 2021);
+			foreach ($valid_cells as $key => $value) {
+				switch ($value) {
+					case 'user_id':
+						$result = $this->db->get_where('partners',array('id_number' => $row[$key]));
+						if ($result && $result->num_rows() > 0){
+							$row_partners = $result->row();
+							$row[$key] = $row_partners->user_id;
+							$user_id = $row_partners->user_id;
+						}
+						else{
+							$row[$key] = '';
+						}
+						break;
+					case 'form_code':
+						$result = $this->db->get_where('time_form',array('form_code' => $row[$key]));
+						if ($result && $result->num_rows() > 0){
+							$row_form = $result->row();
+							$row[$key] = $row_form->form_code;
+							$arr_field_val['form_id'] = $row_form->form_id;
+							$form_id = $row_form->form_id;
+						}
+						else{
+							$row[$key] = '';
+						}
+						break;	
+				}			
+				$arr_field_val[$value] = $row[$key];
+			}
+
+			$this->db->where('user_id',$user_id);
+			$this->db->where('year',2021);
+			$this->db->where('form_id',$form_id);
+			$result = $this->db->get('time_form_balance');
+
+			if ($result && $result->num_rows() > 0) {
+				$row = $result->row();
+				$this->db->where('id',$row->id);
+				$this->db->update('time_form_balance',$arr_field_val);
+			} else {
+				$this->db->insert('time_form_balance',$arr_field_val);
+			}
+		}
+
+		echo "Done.";	
+	}
 	/************************************************************************************************/	
 
 	public function get_movement_field_from_to($field_name = '',$val = '')

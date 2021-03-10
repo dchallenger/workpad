@@ -5,7 +5,7 @@
 			<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
 			<?php
 				$table_details = $db->get_where($key->key_table, array('deleted' => 0));
-				$option = array();
+				$option = array('' => '');
 				foreach( $table_details->result_array() as $tbl )
 				{
 					$option[ $tbl[$key->key_field_id] ] = $tbl[$key->key_field];

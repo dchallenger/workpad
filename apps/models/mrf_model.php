@@ -52,8 +52,8 @@ class mrf_model extends Record
 		$this->primary_key = 'request_id';
 		$this->table = 'recruitment_request';
 		$this->icon = 'fa-folder';
-		$this->short_name = ' Personnel Requisition Form';
-		$this->long_name  = ' Personnel Requisition Form';
+		$this->short_name = ' Manpower Requisition Form';
+		$this->long_name  = ' Manpower Requisition Form';
 		$this->description = '';
 		$this->path = APPPATH . 'modules/mrf/';
 
@@ -501,8 +501,6 @@ class mrf_model extends Record
 								'message' => 'Quantity should be greater than zero.',
 								'type' => 'warning'
 							);
-							$error = true;
-							goto stop;
 						}
 					}
 

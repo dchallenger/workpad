@@ -35,7 +35,7 @@
                             <table class="table table-condensed table-striped table-hover" >
                                 <thead>
                                     <tr>
-                                        <th width="25%" class="padding-top-bottom-10" >Exam Name</th>
+                                        <th width="25%" class="padding-top-bottom-10" >Type of Exam</th>
                                         <th width="25%" class="padding-top-bottom-10" >Date</th>
                                         <th width="20%" class="padding-top-bottom-10 hidden-xs" >Score</th>
                                         <th width="20%" class="padding-top-bottom-10 hidden-xs" >Status</th>

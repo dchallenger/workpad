@@ -35,6 +35,26 @@
                 <input type="text" class="form-control" name="recruitment_personal_history[employment-location][]" id="recruitment_personal_history-employment-location" placeholder="Enter Location"/>
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Reasons for Leaving</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control"name="recruitment_personal_history[employment-reason-for-leaving][]" id="recruitment_personal_history-employment-reason-for-leaving" >
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3"><?php echo lang('applicants.latest_salary') ?></label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" name="recruitment_personal_history[employment-latest-salary][]" id="recruitment_personal_history-employment-latest-salary" 
+                value="" placeholder="<?php echo lang('applicants.latest_salary') ?>" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3"><?php echo lang('applicants.name_immediate_superior') ?></label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" name="recruitment_personal_history[employment-supervisor][]" id="recruitment_personal_history-employment-supervisor" 
+                value="" placeholder="<?php echo lang('applicants.name_immediate_superior') ?>"/>
+            </div>
+        </div>        
 <!--         <div class="form-group">
             <label class="control-label col-md-3">Contact Number</label>
             <div class="col-md-6">
@@ -43,7 +63,7 @@
             </div>
         </div> -->
         <div class="form-group">
-            <label class="control-label col-md-3">Date Hired<span class="required">*</span></label>
+            <label class="control-label col-md-3">Hired Date<span class="required">*</span></label>
             <div class="col-md-9">
                 <div class="input-group input-medium pull-left">
                     <select  class="form-control form-select" data-placeholder="Select Month.." name="recruitment_personal_history[employment-month-hired][]" id="recruitment_personal_history-employment-month-hired">
@@ -88,13 +108,6 @@
                 <span class="pull-left"><input type="text" class="form-control input-small" maxlength="4" name="recruitment_personal_history[employment-year-end][]" id="recruitment_personal_history-employment-year-end" placeholder="Year"></span>
             </div>
         </div>
-        <div class="form-group">
-            <label class="control-label col-md-3">Last Salary</label>
-            <div class="col-md-6">
-                <input type="text" class="form-control" name="recruitment_personal_history[employment-last-salary][]" id="recruitment_personal_history-employment-last-salary" 
-                value="" placeholder="Enter Last Salary"/>
-            </div>
-        </div>
 <!--         <div class="form-group">
             <label class="control-label col-md-3">Immediate Superior/Position</label>
             <div class="col-md-6">
@@ -106,12 +119,6 @@
             <label class="control-label col-md-3">Duties and Responsibilities</label>
             <div class="col-md-6">
                 <textarea rows="3" class="form-control"name="recruitment_personal_history[employment-duties][]" id="recruitment_personal_history-employment-duties" ></textarea>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-3">Reasons for Leaving</label>
-            <div class="col-md-6">
-                <textarea rows="3" class="form-control"name="recruitment_personal_history[employment-reason-for-leaving][]" id="recruitment_personal_history-employment-reason-for-leaving" ></textarea>
             </div>
         </div>
 

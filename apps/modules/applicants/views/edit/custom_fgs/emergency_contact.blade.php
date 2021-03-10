@@ -1,3 +1,32 @@
+<?php
+    $db->select('city_id,city');
+    $db->where('deleted', '0');
+    $db->order_by('city');
+    $options = $db->get('cities');
+    $partners_city_options = array('' => '');
+    foreach($options->result() as $option) {
+        $partners_city_options[$option->city_id] = $option->city;
+    }
+
+    $db->select('country_id,short_name');
+    $db->where('deleted', '0');
+    $db->order_by('short_name');
+    $options = $db->get('countries');
+
+    $partners_country_options = array('' => '');
+    foreach($options->result() as $option) {
+        $partners_country_options[$option->country_id] = $option->short_name;
+    }    
+
+    $db->select('relationship_id,relationship');
+    $db->where('deleted', '0');
+    $db->order_by('relationship');
+    $options = $db->get('relationship');
+    $relationship_options = array('' => '');
+    foreach($options->result() as $option) {
+        $relationship_options[$option->relationship] = $option->relationship;
+    }    
+?>
 <div class="portlet">
 	<div class="portlet-title">
 		<div class="caption">{{ lang('applicants.emergency_contact') }}</div>
@@ -60,10 +89,10 @@
                     <div class="col-md-5">
                         <div class="input-group">
                             <span class="input-group-addon">
-                               <i class="fa fa-map-marker"></i>
-                             </span>
-                        <input type="text" class="form-control" name="recruitment_personal[emergency_city]" id="recruitment_personal-emergency_city" value="{{ $record['emergency_city'] }}" placeholder="Enter City"/>
-                         </div>
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            {{ form_dropdown('recruitment_personal[emergency_city]',$partners_city_options, $record['emergency_city'], 'class="form-control select2me" data-placeholder="Select..."') }}
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -71,9 +100,9 @@
                     <div class="col-md-5">
                         <div class="input-group">
                             <span class="input-group-addon">
-                               <i class="fa fa-map-marker"></i>
-                             </span>
-                        <input type="text" class="form-control" name="recruitment_personal[emergency_country]" id="recruitment_personal-emergency_country" value="{{ $record['emergency_country'] }}" placeholder="Enter Country"/>
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            {{ form_dropdown('recruitment_personal[emergency_country]',$partners_country_options, $record['emergency_country'], 'class="form-control select2me" data-placeholder="Select..."') }}
                         </div>
                     </div>
                 </div>

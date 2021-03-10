@@ -3,13 +3,30 @@
 		<div class="caption"> {{ lang('mrf.mrf_form') }}</div>
 		<div class="tools"><a class="collapse" href="javascript:;"></a></div>
 	</div>
-	<div class="portlet-body form">			
+	<div class="portlet-body form">
+		<div class="form-group">
+			<label class="control-label col-md-3"><span class="required">* </span>
+			{{ lang('mrf.nature_req') }}</label>
+			<div class="col-md-5">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
+					<?php
+						$option = array('1'=>'Budgeted',
+							'0'=>'Not Budgeted',
+							'2'=> 'Change of Plan');
+						
+						// $value = isset( $key->key_value ) ? $key->key_value : '';
+						echo form_dropdown('recruitment_request[budgeted]', $option, $record['recruitment_request.budgeted'], 'class="form-control select2me" data-placeholder="Select..." id="recruitment_request-budgeted" '.$record['disabled']);
+					?>
+				</div>	
+			</div>
+		</div>		
 		<div class="form-group">
 			<label class="control-label col-md-3">
 				<span class="required">* </span>{{ lang('mrf.company') }}
 			</label>
 			<div class="col-md-5">
-				<input type="text" class="form-control dontserializeme" value="{{ $record['company'] }}" placeholder="Enter Requested By" readonly /> 
+				<input type="text" class="form-control dontserializeme hidden" value="{{ $record['company'] }}" placeholder="Enter Requested By" readonly /> 
 				<?php
 					$db->select('company_id,company');
 					$db->order_by('company', '0');
@@ -21,14 +38,38 @@
 						$recruitment_request_company_id_options[$option->company_id] = $option->company;
 					} 
 				?>
-				<div class="input-group hidden">
+				<div class="input-group">
 					<span class="input-group-addon">
 						<i class="fa fa-list-ul"></i>
 					</span>
-					{{ form_dropdown('recruitment_request[company_id]',$recruitment_request_company_id_options, $record['recruitment_request.company_id'], 'class="form-control select2me" data-placeholder="Select..." id="recruitment_request-company_id"') }}
+					{{ form_dropdown('recruitment_request[company_id]',$recruitment_request_company_id_options, $record['recruitment_request.company_id'], 'class="form-control select2me" data-placeholder="Select..." id="recruitment_request-company_id"'.$record['disabled']) }}
 				</div>
 			</div>	
-		</div>			
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3">
+				<span class="required">* </span>{{ lang('mrf.division') }}
+			</label>
+			<div class="col-md-5">
+				<?php
+					$db->select('division_id,division,division_code');
+					$db->order_by('division', '0');
+					$db->where('deleted', '0');
+					$options = $db->get('users_division');
+					$recruitment_request_division_id_options = array('' => '');
+					foreach($options->result() as $option)
+					{
+						$recruitment_request_division_id_options[$option->division_id] = $option->division .' ('.$option->division_code.')';
+					} 
+				?>
+				<div class="input-group">
+					<span class="input-group-addon">
+						<i class="fa fa-list-ul"></i>
+					</span>
+					{{ form_dropdown('recruitment_request[division_id]',$recruitment_request_division_id_options, $record['recruitment_request.division_id'], 'class="form-control select2me" data-placeholder="Select..." id="recruitment_request-division_id" '.$record['disabled']) }}
+				</div>
+			</div>	
+		</div>		
 		<div class="form-group">
 			<label class="control-label col-md-3">
 				<span class="required">* </span>{{ lang('mrf.dept') }}
@@ -50,7 +91,7 @@
 						<i class="fa fa-list-ul"></i>
 					</span>
                     <?php $disabled = $record['recruitment_request.status_id'] == 7 ? "disabled" : "" ; ?>
-					{{ form_dropdown('recruitment_request[department_id]',$recruitment_request_department_id_options, $record['recruitment_request.department_id'], 'class="form-control select2me" data-placeholder="Select..." id="recruitment_request-department_id" '.$disabled) }}
+					{{ form_dropdown('recruitment_request[department_id]',$recruitment_request_department_id_options, $record['recruitment_request.department_id'], 'class="form-control select2me" data-placeholder="Select..." id="recruitment_request-department_id"'.$record['disabled']) }}
 				</div>
 			</div>	
 		</div>
@@ -60,8 +101,29 @@
 				<input type="text" class="form-control dontserializeme" value="{{ $record['recruitment_request.immediate'] }}" readonly id="recruitment_request-immediate" /> 
 			</div>	
 		</div>
-
-		<div class="form-group">
+		<div class="form-group mrf_plan_code" <?php echo ($record['recruitment_request.budgeted'] == 0 ? 'style="display:none"' : '') ?>>
+			<label class="control-label col-md-3">{{ lang('mrf.plan_code') }}</label>
+			<div class="col-md-5">
+				<div class="input-group">
+					<span class="input-group-addon">
+						<i class="fa fa-list-ul"></i>
+					</span>
+					<select name="recruitment_request[plan_code]" id="plan_code" class="form-control select2me" <?php echo $record['disabled'] ?>>
+						<option value=""></option>
+						<?php
+							if (isset($plan_code) && $plan_code && $plan_code->num_rows() > 0) {
+								foreach ($plan_code->result() as $row) {
+						?>
+									<option value="<?php echo $row->plan_code ?>" <?php echo ($row->plan_code == $record['recruitment_request.plan_code'] ? "SELECTED" : "") ?>><?php echo $row->plan_code ?></option>
+						<?php
+								}
+							}
+						?>
+					</select>
+				</div>
+			</div>	
+		</div>			
+		<div class="form-group hidden">
 			<label class="control-label col-md-3">
 				<span class="required">* </span>{{ lang('mrf.hiring_type') }}
 			</label>
@@ -80,41 +142,6 @@
 					{{ form_dropdown('recruitment_request[hiring_type]',$hiring_type, $record['recruitment_request.hiring_type'], 'class="form-control select2me" data-placeholder="Select..." id="recruitment_request-hiring_type" '.$record['disabled']) }}
 				</div>
 			</div>	
-		</div>
-		<div class="form-group">
-			<label class="control-label col-md-3"><span class="required">* </span>
-			{{ lang('mrf.nature_req') }}</label>
-			<div class="col-md-5">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
-					<?php
-						$option = array('1'=>'Budgeted',
-							'0'=>'Not Budgeted',
-							'2'=> 'Change of Plan');
-						
-						// $value = isset( $key->key_value ) ? $key->key_value : '';
-						echo form_dropdown('recruitment_request[budgeted]', $option, $record['recruitment_request.budgeted'], 'class="form-control select2me" data-placeholder="Select..." id="recruitment_request-budgeted" '.$record['disabled']);
-					?>
-				</div>	
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-md-3">{{ lang('mrf.purpose') }}</label>
-			<div class="col-md-5">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
-					<?php
-						$natures = $db->get_where('recruitment_request_nature', array('deleted' => 0));
-						$option = array(''=>'Select...');
-						foreach( $natures->result() as $nature )
-						{
-							$option[$nature->nature_id] = $nature->nature;
-						}
-						// $value = isset( $key->key_value ) ? $key->key_value : '';
-						echo form_dropdown('recruitment_request[nature_id]', $option, $record['recruitment_request.nature_id'], 'class="form-control select2me" data-placeholder="Select..." '.$record['disabled']);
-					?>
-				</div>	
-			</div>
 		</div>
 		<div class="form-group change_plan hidden">
 			<label class="control-label col-md-3">
@@ -242,7 +269,24 @@
 				</div>
 			</div>	
 		</div>	
-
+		<div class="form-group">
+			<label class="control-label col-md-3">{{ lang('mrf.purpose') }}</label>
+			<div class="col-md-5">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
+					<?php
+						$natures = $db->get_where('recruitment_request_nature', array('deleted' => 0));
+						$option = array(''=>'Select...');
+						foreach( $natures->result() as $nature )
+						{
+							$option[$nature->nature_id] = $nature->nature;
+						}
+						// $value = isset( $key->key_value ) ? $key->key_value : '';
+						echo form_dropdown('recruitment_request[nature_id]', $option, $record['recruitment_request.nature_id'], 'class="form-control select2me" data-placeholder="Select..." '.$record['disabled']);
+					?>
+				</div>	
+			</div>
+		</div>
 	</div>
 </div> 
 
@@ -287,6 +331,32 @@
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-3">
+							<span class="required">* </span>{{ lang('mrf.rank') }}
+						</label>
+						<div class="col-md-5">
+							<?php
+								$db->where('users_job_grade_level.deleted',0);
+								$result = $db->get('users_job_grade_level');
+
+								$recruitment_request_job_grade_id_options = array('' => '');
+								if ($result && $result->num_rows() > 0){
+									foreach($result->result() as $option)
+									{
+										$recruitment_request_job_grade_id_options[$option->job_grade_id] = $option->job_level;
+									} 
+								}
+		
+							?>
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="fa fa-list-ul"></i>
+								</span>
+								{{ form_dropdown('recruitment_request[rank_id]',$recruitment_request_job_grade_id_options, $record['recruitment_request.rank_id'], 'class="form-control select2me" data-placeholder="Select..." id="recruitment_request-position_id" '.$record['disabled']) }}
+							</div>
+						</div>	
+					</div>						
+					<div class="form-group">
+						<label class="control-label col-md-3">
 							<span class="required">* </span>Employment Status
 						</label>
 						<div class="col-md-5">
@@ -310,7 +380,7 @@
 						</div>	
 					</div>
 
-					<div class="form-group" id="contract_duration">
+					<div class="form-group">
 						<label class="control-label col-md-3">
 							<!-- <span class="required">* </span> -->
 							Contract Duration
@@ -328,7 +398,7 @@
 					    	<input type="text" name="recruitment_request[quantity]" id="recruitment_request-quantity" value="{{ $record['recruitment_request.quantity'] }}"  class="form-control" {{ $record['disabled'] }} >
 					    </div>
 					</div>
-					<div class="form-group">
+					<div class="form-group hidden">
 						<label class="control-label col-md-3"><span class="required">* </span>{{ lang('mrf.age_range') }}</label>
 						<div class="col-md-9">
 							<div class="input-group">
@@ -337,8 +407,27 @@
 								<input type="text" class="form-control input-medium" value="{{ $record['recruitment_request.age_range_to'] }}" name="recruitment_request[age_range_to]" {{ $record['disabled'] }}/> 
 							</div>
 						</div>	
-					</div>	
+					</div>
 					<div class="form-group">
+						<label class="control-label col-md-3">
+							<span class="required">* </span>{{ lang('mrf.date_needed') }}
+						</label>
+						<div class="col-md-5">
+							<div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
+								<input type="text" class="form-control" name="recruitment_request[date_needed]" id="recruitment_request-date_needed" value="{{ $record['recruitment_request.date_needed'] }}" placeholder="Enter Date Needed" {{ $record['disabled'] }} >
+								<span class="input-group-btn {{ ($record['disabled']) ? 'hidden' : '' }}">
+									<button class="btn default" type="button" ><i class="fa fa-calendar" ></i></button>
+								</span>
+							</div>
+							<div class="help-block small hidden">
+                            	LEADTIME:<br>
+								45 working days - Managerial<br>
+								30 working days - Technical Supervisory<br>
+								20 working days - Staff
+                        	</div>
+						</div>	
+					</div>						
+					<div class="form-group hidden">
 						<label class="control-label col-md-3">
 							<span class="required">* </span>{{ lang('mrf.gender') }}
 						</label>
@@ -360,7 +449,7 @@
 							</div>
 						</div>	
 					</div>	
-					<div class="form-group">
+					<div class="form-group hidden">
 						<label class="control-label col-md-3">
 							<span class="required">* </span>{{ lang('mrf.civil_status') }}
 						</label>
@@ -382,38 +471,19 @@
 							</div>
 						</div>	
 					</div>						
-					<div class="form-group">
-						<label class="control-label col-md-3">
-							<span class="required">* </span>{{ lang('mrf.date_needed') }}
-						</label>
-						<div class="col-md-5">
-							<div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
-								<input type="text" class="form-control" name="recruitment_request[date_needed]" id="recruitment_request-date_needed" value="{{ $record['recruitment_request.date_needed'] }}" placeholder="Enter Date Needed" {{ $record['disabled'] }} >
-								<span class="input-group-btn {{ ($record['disabled']) ? 'hidden' : '' }}">
-									<button class="btn default" type="button" ><i class="fa fa-calendar" ></i></button>
-								</span>
-							</div>
-							<div class="help-block small">
-                            	LEADTIME:<br>
-								45 working days - Managerial<br>
-								30 working days - Technical Supervisory<br>
-								20 working days - Staff
-                        	</div>
-						</div>	
-					</div>	
-					<div class="form-group">
+					<div class="form-group hidden">
 						<label class="control-label col-md-3"><span class="required">* </span>{{ lang('mrf.max_no_personel') }}</label>
 						<div class="col-md-5">
 							<input type="text" class="form-control" value="{{ $record['recruitment_request.max_no_personel'] }}" name="recruitment_request[max_no_personel]" {{ $record['disabled'] }}/> 
 						</div>	
 					</div>	
-					<div class="form-group">
+					<div class="form-group hidden">
 						<label class="control-label col-md-3"><span class="required">* </span>{{ lang('mrf.total_no_incumbet') }}</label>
 						<div class="col-md-5">
 							<input type="text" class="form-control" value="{{ $record['recruitment_request.total_no_incumbent'] }}" name="recruitment_request[total_no_incumbent]" {{ $record['disabled'] }}/> 
 						</div>	
 					</div>
-					<div class="form-group">
+					<div class="form-group hidden">
 						<label class="control-label col-md-3">Salary Range</label>
 						<div class="col-md-9">
 							<div class="input-group">
@@ -431,33 +501,24 @@
 					</div>
 					<?php	
 					}
-					else if($key_class->key_class_code == 'requirements'){
-					?>
-					<div class="form-group">
-						<label class="control-label col-md-3">Appropriate Educational Attainment</label>
-						<div class="col-md-5">
-							<textarea {{ $record['disabled'] }} class="form-control" name="recruitment_request[educational_attainment]" id="recruitment_request-description" placeholder="Enter Educcational Attainment" rows="4">{{ $record['recruitment_request.educational_attainment'] }}</textarea>
-						</div>	
-					</div>
-					<?php
-					}
 						$keys = $mod->get_keys( $key_class->key_class_id, $record_id );
 						if( $keys )
 						{
 							foreach( $keys as $key ):
 								switch( $key->key_code ):
 									case 'notes':
+									case 'special_skills':
 									case 'require_licensure':
 									//case 'hra_remarks': ?>
 										@include('edit/keys/textarea', array('key' => $key))<?php
 										break;
-									case 'course':
 									case 'years_of_experience': ?>
 										@include('edit/keys/textfield', array('key' => $key))<?php
 										break;
 									case 'nature_of_request': ?>
 										@include('edit/keys/nature_of_request', array('key' => $key))<?php
 										break;
+									case 'company_qualified':										
 									case 'paid_sourcing_tools':
 									case 'budgeted': ?>
 										@include('edit/keys/yes_no', array('key' => $key))<?php
@@ -486,6 +547,7 @@
 									case 'attachment': ?>
 										@include('edit/keys/attachment', array('key' => $key))<?php
 										break;
+									case 'course':										
 									case 'sourcing_tools':
 									case 'employment_type':
 									case 'job_class':

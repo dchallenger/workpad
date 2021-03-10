@@ -46,5 +46,6 @@ $lang['mrf_manage'] = array(
 	'gender' => 'Sex',
 	'civil_status' => 'Civil Status',
 	'max_no_personel' => 'Maximum no of personnel for this position',
-	'total_no_incumbet' => 'Total no. of incumbents for this position including current requisition'    
+	'total_no_incumbet' => 'Total no. of incumbents for this position including current requisition',
+	'rank' => 'Rank'
 ); 

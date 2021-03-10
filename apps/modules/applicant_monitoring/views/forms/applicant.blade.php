@@ -31,19 +31,18 @@
                                                 @if( sizeof( $mrf ) > 0 )
                                                     @foreach( $mrf as $year => $mrfs )
                                                         @foreach( $mrfs as $mrf )
-                                                            <option value="{{ $mrf->position_sought }}" mrf_id="{{ $mrf->request_id }}"> {{ $mrf->position_sought }} ({{ $mrf->document_no }})</option>
+                                                            <option value="{{ $mrf->request_id }}" mrf_id="{{ $mrf->request_id }}"> {{ $mrf->position_sought }} ({{ $mrf->document_no }})</option>
                                                         @endforeach
                                                     @endforeach
                                                 @endif
                                         </select>
-                                        <input type="hidden" class="form-control mrf_req" name="recruitment[request_id]" id="recruitment-request_id" value="" placeholder="Enter Position Sought"/>
+                                        <input type="hidden" class="form-control mrf_req" name="recruitment[request_id]" id="recruitment-request_id" value="{{$request_id}}" placeholder="Enter Position Sought"/>
                                     </div>
                             </div>
                             <div class="form-group">
                                     <label class="control-label col-md-4">Applicant<span class="required">*</span></label>
                                     <div class="col-md-7">
-                                        <select class="form-control select2me applicants" data-placeholder="Select..." name="recruitment[recruit_id]" id="recruitment-recruit_id">
-                                            <option value="">Please Select</option>
+                                        <select class="form-control select2me applicants" name="recruitment[recruit_id]" id="recruitment-recruit_id">
                                         </select>
                                     </div>
                             </div>
@@ -111,12 +110,12 @@
                                         @if( sizeof( $mrf2 ) > 0 )
                                             @foreach( $mrf2 as $year => $mrfs )
                                                 @foreach( $mrfs as $mrf )
-                                                    <option value="{{ $mrf->position }}" mrf_id="{{ $mrf->request_id }}"> {{ $mrf->position }} ({{ $mrf->document_no }})</option>
+                                                    <option value="{{ $mrf->request_id }}" mrf_id="{{ $mrf->request_id }}"> {{ $mrf->position }} ({{ $mrf->document_no }})</option>
                                                 @endforeach
                                             @endforeach
                                         @endif
                                 </select>
-                                <input type="hidden" class="form-control mrf_req" name="recruitment[request_id]" id="recruitment-request_id2" value="" placeholder="Enter Position Sought"/>
+                                <input type="hidden" class="form-control mrf_req" name="recruitment[request_id]" id="recruitment-request_id2" value="{{$request_id}}" placeholder="Enter Position Sought"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -155,12 +154,12 @@
                                         @if( sizeof( $mrf2 ) > 0 )
                                             @foreach( $mrf2 as $year => $mrfs )
                                                 @foreach( $mrfs as $mrf )
-                                                    <option value="{{ $mrf->position }}" mrf_id="{{ $mrf->request_id }}"> {{ $mrf->position }} ({{ $mrf->document_no }})</option>
+                                                    <option value="{{ $mrf->request_id }}" mrf_id="{{ $mrf->request_id }}"> {{ $mrf->position }} ({{ $mrf->document_no }})</option>
                                                 @endforeach
                                             @endforeach
                                         @endif
                                 </select>
-                                <input type="hidden" class="form-control mrf_req" name="recruitment[request_id]" id="recruitment-request_id3" value="" placeholder="Enter Position Sought"/>
+                                <input type="hidden" class="form-control mrf_req" name="recruitment[request_id]" id="recruitment-request_id3" value="{{$request_id}}" placeholder="Enter Position Sought"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -232,7 +231,10 @@ $(document).ready(function(){
         }
     });
 
-    $('select.select2me').select2();
+    $('select.select2me').select2({
+        placeholder: "Select",
+        allowClear: true
+    });
 
     $('#recruitment_personal-resume-fileupload').fileupload({ 
         url: base_url + module.get('route') + '/single_upload',
@@ -276,8 +278,10 @@ $(document).ready(function(){
 
     if( $('#recruitment-request_id').val() != "" )
     {
-        $('#recruitment_personal-position_sought option[mrf_id='+$('#recruitment-request_id').val()+']').attr('selected', 'selected');  
+        //$('#recruitment_personal-position_sought option[mrf_id='+$('#recruitment-request_id').val()+']').attr('selected', 'selected');  
+        $("#recruitment_personal-position_sought").select2("val", $('#recruitment-request_id').val());
     }
+
     $('#recruitment_personal-position_sought').change(function(){
         var mrf_id = $('#recruitment_personal-position_sought option:selected').attr('mrf_id');
         $('#recruitment-request_id').val( mrf_id );
@@ -299,8 +303,9 @@ $(document).ready(function(){
                 $('#recruitment-recruit_id').html(response.applicants);
             }
         });
-
     });
+
+    $('#recruitment_personal-position_sought').trigger('change');
 
    /* $('#recruitment-recruit_id').change(function() {
         $.ajax({
@@ -319,7 +324,8 @@ $(document).ready(function(){
 
     if( $('#recruitment-request_id2').val() != "" )
     {
-        $('#recruitment_personal-position_sought2 option[mrf_id='+$('#recruitment-request_id2').val()+']').attr('selected', 'selected');  
+        //$('#recruitment_personal-position_sought2 option[mrf_id='+$('#recruitment-request_id2').val()+']').attr('selected', 'selected');  
+        $("#recruitment_personal-position_sought2").select2("val", $('#recruitment-request_id').val());
     }
     $('#recruitment_personal-position_sought2').change(function(){
         var mrf_id = $('#recruitment_personal-position_sought2 option:selected').attr('mrf_id');
@@ -330,7 +336,8 @@ $(document).ready(function(){
 
     if( $('#recruitment-request_id3').val() != "" )
     {
-        $('#recruitment_personal-position_sought3 option[mrf_id='+$('#recruitment-request_id3').val()+']').attr('selected', 'selected');  
+        //$('#recruitment_personal-position_sought3 option[mrf_id='+$('#recruitment-request_id3').val()+']').attr('selected', 'selected');  
+        $("#recruitment_personal-position_sought3").select2("val", $('#recruitment-request_id').val());
     }
     $('#recruitment_personal-position_sought3').change(function(){
         var mrf_id = $('#recruitment_personal-position_sought3 option:selected').attr('mrf_id');

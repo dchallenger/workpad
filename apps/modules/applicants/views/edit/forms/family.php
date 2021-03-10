@@ -39,12 +39,30 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-md-3">Dependent on HMO</label>
+                        <div class="col-md-6">
+                            <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
+                                <input type="checkbox" value="0" name="recruitment_personal_history[family-dependent-hmo][temp][]" id="recruitment_personal_history-family-dependent-hmo-temp" class="dontserializeme toggle dependent"/>
+                                <input type="hidden" name="recruitment_personal_history[family-dependent-hmo][]" id="recruitment_personal_history-family-dependent-hmo" value="0"/>
+                            </div> 
+                        </div>
+                    </div>                            
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Beneficiary of Life Insurance</label>
+                        <div class="col-md-6">
+                            <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
+                                <input type="checkbox" value="0" name="recruitment_personal_history[family-dependent-insurance][temp][]" id="recruitment_personal_history-family-dependent-insurance-temp" class="dontserializeme toggle dependent"/>
+                                <input type="hidden" name="recruitment_personal_history[family-dependent-insurance][]" id="recruitment_personal_history-family-dependent-insurance" value="0"/>
+                            </div> 
+                        </div>
+                    </div>                      
+                    <div class="form-group hidden">
                         <label class="control-label col-md-3">Occupation</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control" name="recruitment_personal_history[family-occupation][]" id="recruitment_personal_history-family-occupation<?php echo $count;?>" placeholder="Enter Occupation"/>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group hidden">
                         <label class="control-label col-md-3">Employer</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control" name="recruitment_personal_history[family-employer][]" id="recruitment_personal_history-family-employer<?php echo $count;?>" placeholder="Enter Employer"/>
@@ -66,6 +84,17 @@
             });
             $('body').removeClass("modal-open"); 
         }
+        $('.make-switch').not(".has-switch")['bootstrapSwitch']();
+        $('label[for="recruitment_personal_history-family-dependent-hmo-temp"]').css('margin-top', '0');
+        $('label[for="recruitment_personal_history-family-dependent-insurance-temp"]').css('margin-top', '0');
 
+        $('.dependent').change(function(){
+            if( $(this).is(':checked') ){
+                $(this).parent().next().val(1);
+            }
+            else{
+                $(this).parent().next().val(0);
+            }
+        });        
     });
 </script>

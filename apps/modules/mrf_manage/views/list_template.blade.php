@@ -39,6 +39,7 @@
         		case 'Draft':
         			$badge = "badge-default";
         			break;
+                case 'For HR Validation':
         		case 'For Approval':
         		case 'On-going':
         			$badge = "badge-warning";

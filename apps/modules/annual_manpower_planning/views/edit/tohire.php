@@ -2,19 +2,19 @@
     <td>
         <?php echo form_dropdown('employment_status_id[]', $employment_statuss, $form_value, 'class="form-control select2me" data-placeholder="Select..."') ?>   
     </td>
-    <td>
+    <td class="hidden">
         <?php echo form_dropdown('job_class_id[]', $job_classes, '', 'class="form-control select2me" data-placeholder="Select..."') ?>   
     </td>
     <td>
         <?php echo form_dropdown('month[]', $months, '', 'class="form-control select2me" data-placeholder="Select..."') ?>   
     </td>
-    <td>
+    <td class="hidden">
         <input name="budget[]" type="text" class="form-control" maxlength="64" value="">
     </td>
     <td>
         <input name="needed[]" type="text" class="form-control" maxlength="64" value="">
     </td>
-    <td>
+    <td class="hidden">
         <?php echo form_dropdown('company_id[]', $companies, '', 'class="form-control select2me" data-placeholder="Select..."') ?>   
     </td>
     <td>

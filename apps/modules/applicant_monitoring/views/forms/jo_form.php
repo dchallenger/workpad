@@ -224,7 +224,7 @@
                                                                 </div>
                                                                 <?php endif;?>
                                                                 <div class="btn-group">
-                                                                    <a class="btn btn-xs text-muted" href="javascript:print_interview(<?php echo $sched->process_id?>);"><i class="fa fa-print"></i> <?=lang('applicant_monitoring.print')?></a>
+                                                                    <a class="btn btn-xs text-muted" href="javascript:print_interview(<?php echo $sched->process_id?>,<?php echo $sched->type?>);"><i class="fa fa-print"></i> <?=lang('applicant_monitoring.print')?></a>
                                                                 </div>
                                                             </td>
                                                         </tr> <?php
@@ -240,7 +240,7 @@
                     </div>
                     <div class="modal-footer margin-top-0">
                         <button type="button" data-dismiss="modal" class="btn btn-default btn-sm"><?=lang('common.close')?></button>
-                        <button type="button" data-dismiss="modal" class="btn btn-default btn-sm" onclick="print_interview(<?php echo $process_id?>)"><?=lang('common.print_only')?></button>
+                        <button type="button" data-dismiss="modal" class="btn btn-default btn-sm hidden" onclick="print_interview(<?php echo $process_id?>)"><?=lang('common.print_only')?></button>
                         <?php if( $process->status_id == 2 && $process->from_seting_final_interview == 1) {
                         ?>
                             <button <?=$hidden?> type="button" onclick="move_to_exam(<?php echo $process_id?>,<?php echo $interview_success ?>)" class="demo-loading-btn btn btn-success btn-sm"><?=lang('applicant_monitoring.move_to_exam')?></button>
@@ -395,7 +395,7 @@
                                     <label class="control-label col-md-4">&nbsp;
                                     </label>                                    
                                     <div class="col-md-8">
-                                        <textarea class="wysihtml5 form-control template_val" name="jo[template_value]" placeholder="" rows="6"><?php echo (isset($template_value) ? $template_value : '') ?></textarea>
+                                        <textarea class="wysihtml5 form-control template_val" name="jo[template_value]" placeholder="" rows="6"></textarea>
                                     </div>
                                 </div>                                
                                 <div class="form-group">

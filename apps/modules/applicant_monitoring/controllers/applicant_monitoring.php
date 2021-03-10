@@ -45,6 +45,25 @@ class Applicant_monitoring extends MY_PrivateController
 		echo $this->load->blade('pages.dashboard')->with( $this->load->get_cached_vars() );
 	}
 
+	public function preemp_upload()
+	{
+		$this->_ajax_only();
+		define('UPLOAD_DIR', 'uploads/applicant_monitoring/');
+		$this->load->library("UploadHandler");
+		$files = $this->uploadhandler->post();
+		$file = $files[0];
+		if( isset($file->error) && $file->error != "" )
+		{
+			$this->response->message[] = array(
+				'message' => $file->error,
+				'type' => 'error'
+			);	
+		}
+		$this->response->file = $file;
+		$this->response->idnumber = $this->input->post('idnumber');
+		$this->_ajax_return();
+	}
+
 	public function single_upload()
 	{
 		$this->_ajax_only();
@@ -143,7 +162,7 @@ class Applicant_monitoring extends MY_PrivateController
 
 				$qry = "select a.*, concat(b.firstname, ' ', b.lastname) as fullname, b.blacklisted, c.key_value as gender
 						FROM {$this->db->dbprefix}recruitment_process a
-						LEFT JOIN {$this->db->dbprefix}recruitment b on b.recruit_id = a.recruit_id
+						JOIN {$this->db->dbprefix}recruitment b on b.recruit_id = a.recruit_id
 						LEFT JOIN {$this->db->dbprefix}recruitment_request rr ON a.request_id = rr.request_id
 						LEFT JOIN {$this->db->dbprefix}recruitment_personal c on c.recruit_id = a.recruit_id and c.key = 'gender'";
 				if($is_interviewer){
@@ -175,7 +194,7 @@ class Applicant_monitoring extends MY_PrivateController
 				$qry = "select a.*, concat(c.firstname, ' ', c.lastname) as fullname, c.blacklisted, d.key_value as gender 
 						FROM {$this->db->dbprefix}recruitment_process a
 						LEFT JOIN {$this->db->dbprefix}recruitment_request b ON b.request_id = a.request_id
-						LEFT JOIN {$this->db->dbprefix}recruitment c on c.recruit_id = a.recruit_id
+						JOIN {$this->db->dbprefix}recruitment c on c.recruit_id = a.recruit_id
 						LEFT JOIN {$this->db->dbprefix}recruitment_personal d on d.recruit_id = a.recruit_id and d.key = 'gender'";
 				if($is_interviewer){ 
 					$qry .= " LEFT JOIN {$this->db->dbprefix}recruitment_request_approver rra on rra.request_id = a.request_id";
@@ -190,7 +209,7 @@ class Applicant_monitoring extends MY_PrivateController
                 if($is_interviewer){ $qry .= " AND (rra.approver_id = ".$this->user->user_id. " OR b.created_by = ".$this->user->user_id.") GROUP BY a.request_id"; }
 
                 $qry .= " ORDER BY b.created_on ASC";
-     
+     	
 				$recruits = $this->db->query($qry);
 						
 				foreach( $recruits->result() as $recruit )
@@ -294,73 +313,46 @@ class Applicant_monitoring extends MY_PrivateController
 				'process_id' => $process_id
 			);
 		
-		$this->db->insert('recruitment_process_background', $process_brackground_info); 
-		$rpb_id = $this->db->insert_id();
+		$this->db->where($process_brackground_info);
+		$pb_result = $this->db->get('recruitment_process_background');
+
+		if (!$pb_result || $pb_result->num_rows() == 0) {
+			$this->db->insert('recruitment_process_background', $process_brackground_info); 
+			$rpb_id = $this->db->insert_id();
+		} else {
+			$rpb_id = $pb_result->row()->rpb_id;
+		}
 
 		$company = $this->input->post('company');
-		$department = $this->input->post('department');
 		$reference_person = $this->input->post('reference_person');
 		$position = $this->input->post('position');
-		$employment_status = $this->input->post('employment_status');
-		$date_hired = $this->input->post('date_hired');
-		$date_resigned = $this->input->post('date_resigned');
-		$reason_for_leaving = $this->input->post('reason_for_leaving');
-		$q1 = $this->input->post('q1');
-		$q1_ans = $this->input->post('q1_ans');
-		$q2 = $this->input->post('q2');
-		$q3 = $this->input->post('q3');
-		$q4_ans = $this->input->post('q4_ans');
-		$q5 = $this->input->post('q5');
-		$q5_ans = $this->input->post('q5_ans');
-		$q6_ans = $this->input->post('q6_ans');
-		$q7_ans = $this->input->post('q7_ans');
-		$q8 = $this->input->post('q8');
-		$q9_ans = $this->input->post('q9_ans');
-		$q10 = $this->input->post('q10');
-		$q11 = $this->input->post('q11');
-		$q12 = $this->input->post('q12');
+
+		for ($i=1; $i < 17; $i++) {
+			${'ans'.$i} = $this->input->post('ans'.$i.'');
+		}
 
 		$this->db->where('rpb_id',$rpb_id);
-		$this->db->delete('recruitment_process_background_item'); 
+		$this->db->delete('recruitment_process_background_items'); 
 
-		foreach( $position as $key => $val )
-		{	
-			$date_hired_val = '0000-00-00';
-			if(strtotime($date_hired[$key])){
-				$date_hired_val = date( 'Y-m-d', strtotime($date_hired[$key]) );				
+		if (!empty($position)) {
+			foreach( $position as $key => $val )
+			{	
+				$process_brackground_info_item = array(
+					'rpb_id' => $rpb_id,
+					'company' => $company[$key],
+					'reference_person' => $reference_person[$key],
+					'position' => $val,
+				);
+
+				for ($i=1; $i < 17; $i++) {
+					$process_brackground_info_item['ans'.$i.''] = ${'ans'.$i}[$key];
+				}
+
+				$this->db->insert('recruitment_process_background_items', $process_brackground_info_item);
+
+				//create system logs
+				$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', $this->mod->table, array(), $process_brackground_info_item);				
 			}
-			$date_resigned_val = '0000-00-00';
-			if(strtotime($date_resigned[$key])){
-				$date_resigned_val = date( 'Y-m-d', strtotime($date_resigned[$key]) );				
-			}	
-
-			$process_brackground_info_item = array(
-				'rpb_id' => $rpb_id,
-				'company' => $company[$key],
-				'department' => $department[$key],
-				'reference_person' => $reference_person[$key],
-				'position' => $val,
-				'employment_status' => $employment_status[$key],
-				'date_hired' => $date_hired_val,
-				'date_resigned' => $date_resigned_val,
-				'reason_for_leaving' => $reason_for_leaving[$key],
-				'q1' => $q1[$key],
-				'q1_ans' => $q1_ans[$key],
-				'q2' => $q2[$key],
-				'q3' => $q3[$key],
-				'q4_ans' => $q4_ans[$key],
-				'q5' => (isset($q5[$key]) ? $q5[$key] : ''),
-				'q5_ans' => $q5_ans[$key],
-				'q6_ans' => $q6_ans[$key],
-				'q7_ans' => $q7_ans[$key],
-				'q8' => $q8[$key],
-				'q9_ans' => $q9_ans[$key],
-				'q10' => $q10[$key],
-				'q11' => $q11[$key],
-				'q12' => $q12[$key],
-			);
-
-			$this->db->insert('recruitment_process_background_items', $process_brackground_info_item); 			
 		}
 
 		if( $this->db->_error_message() != "" )
@@ -376,6 +368,56 @@ class Applicant_monitoring extends MY_PrivateController
 		$this->response->saved = true;
 		$this->response->message[] = array(
 			'message' => 'Success saving background investigation.',
+			'type' => 'success'
+		);
+
+		$this->_ajax_return();	
+	}
+
+	function save_pre_employment(){
+		$this->_ajax_only();
+
+		$process_id = $this->input->post('process_id');
+		$this->response->saved = false;
+
+		//$checklists = $this->db->get_where('recruitment_employment_checklist', array('deleted' => 0))->result_array();
+		$completed = $_POST['completed'];
+		$attachment = $_POST['attachment'];
+		$number_value = $_POST['number_value'];
+		$date_submitted = $_POST['date_submitted'];
+
+		$this->db->where('process_id',$process_id);
+		$this->db->delete('recruitment_process_employment_checklist');
+
+		foreach($completed as $key => $val){
+			$insert_list = array(
+							'process_id' => $process_id, 
+							'checklist_id' => $key,
+							'attachment' => ($attachment[$key] != '' ? $attachment[$key] : ''),
+							'number_value' => ($number_value[$key] != '' ? $number_value[$key] : ''),
+							'submitted' => $val,
+							'date_submitted' => ($date_submitted[$key] != '' ? date( 'Y-m-d', strtotime($date_submitted[$key])) : ''),
+							'created_by' => $this->user->user_id
+							);
+
+			$this->db->insert('recruitment_process_employment_checklist', $insert_list);
+			//create system logs
+			$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'recruitment_process_employment_checklist', array(), $insert_list);
+		}
+
+		if( $this->db->_error_message() != "" )
+		{
+			$this->response->message[] = array(
+				'message' => 'Unexpected error occured. Contact your system admin.',
+				'type' => 'success'
+			);
+
+			$this->_ajax_return();	
+		}
+
+		$this->response->saved = true;
+		$this->response->message[] = array(
+			'message' => 'Success saving pre-employment.',
 			'type' => 'success'
 		);
 
@@ -597,7 +639,7 @@ class Applicant_monitoring extends MY_PrivateController
 			$this->response->saved = true;
 			if( $process->status_id == 1 || $process->status_id == 5)
 			{
-				$update_data = array('status_id' => 2, 
+				$update_data = array('status_id' => ($process->status_id == 1 ? 2 : 5), 
 										'modified_by' => $this->user->user_id,
 										'modified_on' => date('Y-m-d H:i:s')
 									);
@@ -704,6 +746,7 @@ class Applicant_monitoring extends MY_PrivateController
 
 		$vars['userinfo'] = $userinfo_qry->row();
 
+		$vars['hr_recruitment_manager'] = $this->permission['process'];
 			// echo "<pre>\n";
 			// print_r($vars);
 		$this->load->helper('form');
@@ -777,6 +820,8 @@ class Applicant_monitoring extends MY_PrivateController
 	function get_interview_form()
 	{
 		$this->_ajax_only();
+
+		$status_id = 1;
 		$vars['schedule_id'] = $schedule_id = $this->input->post('schedule_id');
 		$vars['sched'] = $sched = $this->mod->get_sched( $schedule_id );
 		$this->db->limit(1);
@@ -790,9 +835,11 @@ class Applicant_monitoring extends MY_PrivateController
         LEFT JOIN {$this->db->dbprefix}users_department ud on ud.department_id = rr.department_id
 		WHERE a.process_id = {$sched->process_id} LIMIT 1";
 		$vars['recruit'] = $this->db->query( $qry )->row();
+		$status_id = $vars['recruit']->status_id;
 
 		$interviewKeyClass_sql = "SELECT * FROM {$this->db->dbprefix}recruitment_interview_key_class 
-								WHERE deleted = 0 
+								WHERE deleted = 0
+								AND interview_type like '%{$status_id}%' 
 								ORDER BY sort_order
 								";
 		$interviewKeyClass = $this->db->query( $interviewKeyClass_sql )->result_array();
@@ -849,6 +896,7 @@ class Applicant_monitoring extends MY_PrivateController
 	function view_interview_result()
 	{
 		$this->_ajax_only();
+		$status_id =  1;
 		$vars['schedule_id'] = $schedule_id = $this->input->post('schedule_id');
 		$vars['sched'] = $sched = $this->mod->get_sched( $schedule_id );
 		$this->db->limit(1);
@@ -863,8 +911,18 @@ class Applicant_monitoring extends MY_PrivateController
 		WHERE a.process_id = {$sched->process_id} LIMIT 1";
 		$vars['recruit'] = $this->db->query( $qry )->row();
 
+		if (in_array($vars['recruit']->status_id, array(2,5)))
+			$status_id = $vars['recruit']->status_id;
+		else {
+			if ($sched->type == 2)
+				$status_id =  5;
+			else
+				$status_id =  2;
+		}
+
 		$interviewKeyClass_sql = "SELECT * FROM {$this->db->dbprefix}recruitment_interview_key_class 
 								WHERE deleted = 0 
+								AND interview_type like '%{$status_id}%'
 								ORDER BY sort_order
 								";
 		$interviewKeyClass = $this->db->query( $interviewKeyClass_sql )->result_array();
@@ -1287,6 +1345,44 @@ class Applicant_monitoring extends MY_PrivateController
 		$this->_ajax_return();
 	}
 
+	function move_to_applicant()
+	{
+		$this->_ajax_only();
+
+		$process_id = $this->input->post('process_id');
+		$this->db->limit(1);
+		$process = $this->db->get_where('recruitment_process', array('process_id' => $process_id))->row();
+
+		$update_data_process = array('deleted' => 1,
+							'modified_by' => $this->user->user_id,
+							'modified_on' => date('Y-m-d H:i:s')
+							);
+
+		$update_data_recruitment = array('status_id' => 11,
+						    'request_id' => 0,
+							'modified_by' => $this->user->user_id,
+							'modified_on' => date('Y-m-d H:i:s')
+							);
+
+	//get previous data for audit logs
+		$previous_main_data = $this->db->get_where('recruitment_process', array('process_id' => $process_id))->row_array();
+		$this->db->update('recruitment_process', $update_data_process, array('process_id' => $process_id));
+		//create system logs
+		$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'recruitment_process', $previous_main_data, $update_data_process);
+
+	//get previous data for audit logs
+		$previous_main_data = $this->db->get_where('recruitment', array('recruit_id' => $process->recruit_id))->row_array();
+		$this->db->update('recruitment', $update_data_recruitment, array('recruit_id' => $process->recruit_id));
+		//create system logs
+		$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'recruitment', $previous_main_data, $update_data_recruitment);
+
+		$this->response->message[] = array(
+			'message' => 'Candidate successfully moved to Applicant.',
+			'type' => 'success'
+		);
+		$this->_ajax_return();
+	}
+
 	function move_to_exam()
 	{
 		$this->_ajax_only();
@@ -1356,13 +1452,18 @@ class Applicant_monitoring extends MY_PrivateController
 		{
 			$this->response->pending = true;
 			$this->response->message[] = array(
-				'message' => 'Examination is not yet passed',
+				'message' => 'Interview not yet done',
 				'type' => 'warning'
 			);
 			$this->_ajax_return();
 		}	
 
 		$process_id = $this->input->post('process_id');
+
+		$exam = $this->mod->get_exams($process_id);
+
+		$interview = $this->mod->get_interview($process_id);
+
 		$this->db->limit(1);
 		$process = $this->db->get_where('recruitment_process', array('process_id' => $process_id))->row();
 		$update_data = array('status_id' => 4,
@@ -1591,8 +1692,8 @@ class Applicant_monitoring extends MY_PrivateController
 		$process_id = $this->input->post('process_id');
 		$recruit_id = $this->input->post('recruit_id');
 
-		$this->db->select("CONCAT(title,' ',firstname,' ',lastname) as full_name,CONCAT(title,' ',lastname) as last_name",false);
-		$applicant_result = $this->db->get_where('recruitment',array('recruit_id' => $recruit_id));
+		$qry = "SELECT * FROM applicant_details WHERE recruit_id = {$recruit_id}";
+		$applicant_result = $this->db->query($qry);
 
 		if ($applicant_result && $applicant_result->num_rows() > 0){
 			$applicant = $applicant_result->row();
@@ -1601,14 +1702,33 @@ class Applicant_monitoring extends MY_PrivateController
 		$this->db->select("CONCAT(title,' ',firstname,' ',lastname) as full_name",false);
 		$hrd_manager_result = $this->db->get_where('users_profile',array('position_id' => 21));
 
+		$qry = "SELECT * FROM ww_recruitment_process_offer WHERE process_id = {$process_id}";
+		$rec_process_result = $this->db->query($qry);
+
+		$start_date = '';
+		if ($rec_process_result && $rec_process_result->num_rows() > 0) {
+			$rec_process_info = $rec_process_result->row(); 
+			$start_date = date('d F Y',strtotime($rec_process_info->start_date));
+		}
+
 		if ($hrd_manager_result && $hrd_manager_result->num_rows() > 0){
 			$hrd_manager = $hrd_manager_result->row();
 		}
 
 		$vars['cur_date'] = date('d F Y');
-		$vars['applicant_full_name'] = $applicant->full_name;
-		$vars['last_name'] = $applicant->last_name;
+		$vars['applicant_full_name'] = $applicant->fullname;
+		$vars['last_name'] = $applicant->title .' '. $applicant->lastname;
+		$vars['applicant_address'] = $applicant->present_address_street;		
+		$vars['position'] = $applicant->position;
+		$vars['dept_head'] = $applicant->dept_head;
+		$vars['div_head'] = $applicant->div_head;
+		$vars['div_head_position'] = $applicant->div_head_position;
+		$vars['rank'] = $applicant->rank;
+		$vars['company'] = $applicant->company;
+		$vars['start_date'] = $start_date;
+		$vars['compensation'] = $this->get_benefit($process_id);
 		$vars['hrd_manager'] = $hrd_manager->full_name;
+		$vars['logo'] = base_url().$applicant->logo;
 
 		$result = $this->db->get_where('recruitment_process_offer_template',array('template_id' => $jo_template_id));
 		if ($result && $result->num_rows() > 0){
@@ -1619,6 +1739,31 @@ class Applicant_monitoring extends MY_PrivateController
 
 		$this->response->jo_template = $jo_template_val;
 		$this->_ajax_return();		
+	}
+
+	function get_benefit($process_id = 0) {
+		$benefit_html = '<table align="center" cellpadding="2px" cellspacing="0" style="border:1px solid #e4e4e4;width: 100%; height: auto; background: #fff; margin-bottom: 10px;">';
+
+    	$this->db->join('payroll_transaction','recruitment_process_offer_compben.benefit_id = payroll_transaction.transaction_id');
+    	$benefit_saved = $this->db->get_where('recruitment_process_offer_compben',array('process_id' => $process_id));
+    	if ($benefit_saved && $benefit_saved->num_rows() > 0){
+    		$total = 0;
+    		foreach ($benefit_saved->result() as $row) {
+    			$total += $row->amount;
+        		$benefit_html .= '<tr>
+                					<td style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4;width:50%" align="left">'.$row->transaction_label.'</td>
+                					<td style="border-bottom: 1px solid #e4e4e4;width:50%" align="left">'.number_format($row->amount, 2, '.', ',').'</td>
+            					</tr>';
+    		}
+    		$benefit_html .= '<tr>
+            					<td style="border-right: 1px solid #e4e4e4;width:50%" align="lect"><b>Gross Pay</b></td>
+            					<td style="width:50%" align="left">'.number_format($total, 2, '.', ',').'</td>
+        					</tr>';        		
+    	}
+
+        $benefit_html .= '</table>';	
+
+        return $benefit_html;	
 	}
 
 	function get_jo_form()
@@ -1983,7 +2128,9 @@ class Applicant_monitoring extends MY_PrivateController
             $record['recruitment_keys'][] = $keys['key_code'];
             $record['recruitment_labels'][$keys['key_code']] = $keys['key_label'];
         }
-        
+
+        $record['request_id'] = $this->input->post('request_id');
+
         $this->load->vars($record);
 		$this->load->helper('form');
 		$this->load->helper('file');
@@ -2069,10 +2216,53 @@ class Applicant_monitoring extends MY_PrivateController
 		$this->response->invalid=false;
 		$error = false;
 
+		$validation_rules[] = 
+			array(
+				'field' => 'recruitment_personal[position_sought]',
+				'label' => 'Position Sought',
+				'rules' => 'required'
+				);
+
+		$validation_rules[] = 
+			array(
+				'field' => 'recruitment_request[user_id]',
+				'label' => 'Partner',
+				'rules' => 'required'
+				);
+
+		if( sizeof( $validation_rules ) > 0 )
+		{
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules( $validation_rules );
+			if ($this->form_validation->run() == false)
+			{
+				foreach( $this->form_validation->get_error_array() as $f => $f_error )
+				{
+					$this->response->message[] = array(
+						'message' => $f_error,
+						'type' => 'warning'
+						);  
+				}
+
+				$this->_ajax_return();
+			}
+		}
+
+		// get position base on request id
+		$this->db->select('users_position.position');
+		$this->db->where('request_id',$_POST['recruitment_personal']['position_sought']);
+		$this->db->join('users_position','recruitment_request.position_id = users_position.position_id','left');
+		$request = $this->db->get('recruitment_request');
+
+		$val = "";
+		if ($request && $request->num_rows() > 0) 
+			$val = $request->row()->position;
+		// get position 
+
 		$data['user_id'] 		= $_POST['recruitment_request']['user_id'];
 		$data['request_id'] 	= $_POST['recruitment']['request_id'];
 		// $data['cover_letter'] 	= $this->input->post('cover_letter');
-		$data['position'] 		= $_POST['recruitment_personal']['position_sought'];
+		$data['position'] 		= $val;
 		unset($_POST['recruitment_request']);
 		unset($_POST['recruitment']);
 		unset($_POST['recruitment_personal']);
@@ -2530,7 +2720,20 @@ class Applicant_monitoring extends MY_PrivateController
     						$sequence = count($record) + 1;
     						$record = array();
     					}
-    					$data_personal = array('key_value' => $partners_personal[$key]);
+    					if ($key == 'position_sought') {
+    						$this->db->select('users_position.position');
+    						$this->db->where('request_id',$partners_personal[$key]);
+    						$this->db->join('users_position','recruitment_request.position_id = users_position.position_id','left');
+    						$request = $this->db->get('recruitment_request');
+
+    						$val = "";
+    						if ($request && $request->num_rows() > 0) 
+    							$val = $request->row()->position;
+
+							$data_personal = array('key_value' => $val);
+    					} else 
+    						$data_personal = array('key_value' => $partners_personal[$key]);
+
     					$previous_main_data = array();
     					switch( true )
     					{
@@ -2860,7 +3063,7 @@ class Applicant_monitoring extends MY_PrivateController
 			$series = get_system_series('ID_NUMBER', $company_code);			
 		}*/
 
-		$series = get_system_series('AHI_ID_NUMBER', '', true);
+		$series = get_system_series('OCLP_ID_NUMBER', '', true);
 
 		$vars['recuser_login'] = $series;
 		if( !empty($recuser_user_id) )
@@ -2877,7 +3080,8 @@ class Applicant_monitoring extends MY_PrivateController
 
 		$this->db->limit(1);
 
-		$jo = $this->db->get_where('recruitment_process_offer', array('process_id' => $process_id));
+		$this->db->join('recruitment_process_offer_compben','recruitment_process_offer.process_id = recruitment_process_offer_compben.process_id','left');
+		$jo = $this->db->get_where('recruitment_process_offer', array('recruitment_process_offer.process_id' => $process_id));
 		if( $jo->num_rows() == 1 )
 		{
 			$jo = $jo->row_array();
@@ -2931,7 +3135,7 @@ class Applicant_monitoring extends MY_PrivateController
 	{
 		$this->_ajax_only();
 
-        $series = get_system_series('AHI_ID_NUMBER', '', true);
+        $series = get_system_series('OCLP_ID_NUMBER', '', true);
 
         $this->response->id_number = $series;
         $this->response->message[] = array(
@@ -3093,9 +3297,14 @@ class Applicant_monitoring extends MY_PrivateController
 			$partners['user_id'] = $new_user_id;
 			$partners['created_by'] = $this->user->user_id;
 			$partners['id_number'] = $users['login'];
+			$partners['biometric'] = $users['login'];
 			$partners['effectivity_date'] = $offer->start_date;
 			$partners['calendar_id'] = $partners['calendar_id'];
 			$partners['alias'] = $recruit->lastname.', '.$recruit->firstname;
+			$partners['status_id'] = $offer->employment_status_id;
+			$partners['job_grade_id'] = $request->rank_id;
+			$partners['old_new'] = 1;
+
 			
 			$this->db->insert('partners', $partners);
 			$new_partner_id = $this->db->insert_id();
@@ -3119,9 +3328,14 @@ class Applicant_monitoring extends MY_PrivateController
 			$users_profile['middlename'] = $recruit->middlename;
 			$users_profile['maidenname'] = $recruit->maidenname;
 			$users_profile['nickname'] = $recruit->nickname;
+			$users_profile['company_id'] = $request->company_id;
+			$users_profile['division_id'] = $request->division_id;
+			$users_profile['department_id'] = $request->department_id;
 			$users_profile['position_id'] = $request->position_id;
+			$users_profile['reports_to_id'] = $offer->reports_to;
 			$users_profile['title'] = $recruit->title;
 			$users_profile['birth_date'] = $recruit->birth_date;
+			$users_profile['middleinitial'] = empty($recruit->middlename) ? " " : " ".ucfirst(substr($recruit->middlename,0,1)).". ";
 			$this->db->insert('users_profile', $users_profile);
 
 			if( $this->db->_error_message() != "" ){
@@ -3134,6 +3348,147 @@ class Applicant_monitoring extends MY_PrivateController
 
 			//create system logs
 			$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'users_profile', array(), $users_profile);
+
+			$partners_personal = $this->mod->get_recruitment_personal($recruit->recruit_id); //get recruitment personal record;
+			$partners_personal_history = $this->mod->get_recruitment_personal_history($recruit->recruit_id); //get recruitment personal record;
+
+			$partners_personal_table = "partners_personal";
+			$partners_personal_history_table = "partners_personal_history";
+
+			$partners_personal_key = array('position_sought','desired_salary', 'photo', 'salary_pay_mode', 'currently_employed', 'resume'
+				,'phone', 'mobile', 'address_1', 'city_town', 'province', 'country', 'zip_code', 'emergency_name', 'emergency_relationship', 'emergency_phone', 'emergency_mobile', 'emergency_address', 'emergency_city', 'emergency_country', 'emergency_zip_code'
+				,'gender', 'birth_place', 'religion', 'nationality', 'civil_status', 'height', 'weight', 'interests_hobbies', 'language', 'dialect', 'dependents_count', 'solo_parent', 'sss_number', 'tin_number', 'pagibig_number', 'philhealth_number'
+				,'machine_operated', 'driver_license', 'driver_type_license', 'prc_license', 'prc_type_license', 'prc_license_no', 'prc_date_expiration', 'illness_question', 'illness_yes', 'trial_court', 'how_hiring_heard', 'work_start', 'referred_employee'
+				,'education-type', 'education-school', 'education-year-from', 'education-year-to', 'education-degree', 'education-status'
+				,'reference-name', 'reference-occupation', 'reference-years-known', 'reference-phone', 'reference-mobile', 'reference-address', 'reference-city', 'reference-country', 'reference-zipcode'
+				,'affiliation-name', 'affiliation-position', 'affiliation-month-start', 'affiliation-month-end', 'affiliation-year-start', 'affiliation-year-end');
+
+			$partners_personal_history_key = array(
+				'family-relationship', 'family-name', 'family-birthdate', 'family-age', 'family-occupation', 'family-employer', 
+				'education-type', 'education-school', 'education-year-from', 'education-year-to', 'education-degree', 'education-status', 'education-honors_awards', 
+				'employment-company', 'employment-position-title', 'employment-location', 'employment-duties', 'employment-month-hired', 'employment-month-end', 'employment-year-hired', 'employment-year-end', 'employment-last-salary', 'employment-reason-for-leaving',
+				'reference-name', 'reference-occupation', 'reference-years-known', 'reference-phone', 'reference-mobile', 'reference-address', 'reference-city', 'reference-country', 'reference-zipcode', 'reference-organization',
+				'licensure-title', 'licensure-number', 'licensure-remarks', 'licensure-month-taken', 'licensure-year-taken',
+				'training-category', 'training-title', 'training-venue', 'training-start-month', 'training-start-year', 'training-end-month', 'training-end-year',
+				'skill-name', 'skill-level', 'skill-remarks',
+				'affiliation-name', 'affiliation-position', 'affiliation-month-start', 'affiliation-month-end', 'affiliation-year-start', 'affiliation-year-end',
+				'friend-relative-employee', 'friend-relative-position', 'friend-relative-dept', 'friend-relative-relation'
+				);
+
+			//personal profile
+			if(count($partners_personal_key) > 0){
+				// $this->load->model('my201_model', 'profile_mod');
+				$sequence = 1;
+				$current_sequence = (isset($post['sequence']) ? $post['sequence'] : 1);
+				foreach( $partners_personal_key as $table => $key )
+				{
+					if(isset($partners_personal[$key]) && !is_array($partners_personal[$key])){
+						$record = $this->mod->get_partners_personal($new_user_id, $partners_personal_table, $key, $current_sequence);
+						if($current_sequence == 0) //insert to personal history
+						{
+							$sequence = count($record) + 1;
+							$record = array();
+						}
+						$data_personal = array('key_value' => $partners_personal[$key]);
+						switch( true )
+						{
+							case count($record) == 0:
+								$data_personal = $this->mod->insert_partners_personal($new_user_id, $key, $partners_personal[$key], $sequence, $new_partner_id);
+								if (!empty($data_personal))
+									$this->db->insert($partners_personal_table, $data_personal);
+								// $this->record_id = $this->db->insert_id();
+								break;
+							case count($record) == 1:
+								$where_array = array( 'partner_id' => $new_partner_id, 'key' => $key );
+								$this->db->update( $partners_personal_table, $data_personal, $where_array );
+								break;
+							default:
+								$this->response->message[] = array(
+									'message' => lang('common.inconsistent_data'),
+									'type' => 'error'
+								);
+								$error = true;
+								goto stop;
+						}
+
+						if( $this->db->_error_message() != "" ){
+							$this->response->message[] = array(
+								'message' => $this->db->_error_message(),
+								'type' => 'error'
+							);
+							$error = true;
+						}
+					}
+				}
+			}
+
+
+			//personal history profile
+			if(count($partners_personal_history_key) > 0){
+				// $this->load->model('my201_model', 'profile_mod');
+				$sequence = 1;
+				$current_sequence = (isset($post['sequence']) ? $post['sequence'] : 0);
+				foreach( $partners_personal_history_key as $table => $key )
+				{
+					if (isset($partners_personal_history[$key])) {
+						if(!is_array($partners_personal_history[$key])){
+							$record = $this->mod->get_partners_personal($new_user_id, $partners_personal_history_table, $key, $current_sequence);
+							if($current_sequence == 0) //insert to personal history
+							{
+								$sequence = count($record) + 1;
+								$record = array();
+							}
+							$data_personal = array('key_value' => $partners_personal_history[$key]);
+							switch( true )
+							{
+								case count($record) == 0:
+									$data_personal = $this->mod->insert_partners_personal($new_user_id, $key, $partners_personal_history[$key], $sequence, $new_partner_id);
+									if (!empty($data_personal))
+										$this->db->insert($partners_personal_history_table, $data_personal);
+									// $this->record_id = $this->db->insert_id();
+									break;
+								case count($record) == 1:
+									$where_array = array( 'partner_id' => $new_partner_id, 'key' => $key );
+									$this->db->update( $partners_personal_history_table, $data_personal, $where_array );
+									break;
+								default:
+									$this->response->message[] = array(
+										'message' => lang('common.inconsistent_data'),
+										'type' => 'error'
+									);
+									$error = true;
+									goto stop;
+							}
+
+							if( $this->db->_error_message() != "" ){
+								$this->response->message[] = array(
+									'message' => $this->db->_error_message(),
+									'type' => 'error'
+								);
+								$error = true;
+							}
+						}else{
+							$sequence = 1;
+							$this->db->delete($partners_personal_history_table, array( 'partner_id' => $new_partner_id, 'key' => $key ));
+							foreach( $partners_personal_history[$key] as $table => $data_personal )
+							{	
+								$data_personal = $this->mod->insert_partners_personal($new_user_id, $key, $data_personal, $sequence, $new_partner_id);
+								$this->db->insert($partners_personal_history_table, $data_personal);
+
+								if( $this->db->_error_message() != "" ){
+									$this->response->message[] = array(
+										'message' => $this->db->_error_message(),
+										'type' => 'error'
+									);
+									$error = true;
+								}	
+								$sequence++;
+							}
+
+						}
+					}
+				}
+			}
 
 			$this->load->model('system_feed');
 
@@ -3240,7 +3595,15 @@ class Applicant_monitoring extends MY_PrivateController
 				$error = true;
 			}
 		}
-		
+
+		$system_series = $this->db->get_where('system_series', array('series_code' => 'OCLP_ID_NUMBER'))->row();
+
+		if(!(empty($system_series))){
+		    // records have been returned
+		    $sequence = $system_series->sequence + 1; 
+			$this->db->update('system_series',  array('last_sequence' => $sequence, 'sequence' => $sequence), array('id' => $system_series->id));
+		}
+
 		stop:
 		if( $transactions )
 		{
@@ -3417,6 +3780,8 @@ class Applicant_monitoring extends MY_PrivateController
 
 		//$checklists = $this->db->get_where('recruitment_employment_checklist', array('deleted' => 0))->result_array();
 		$completed = $_POST['completed'];
+		$attachment = $_POST['attachment'];
+		$number_value = $_POST['number_value'];		
 		$date_submitted = $_POST['date_submitted'];
 
 		$this->db->where('process_id',$process_id);
@@ -3426,6 +3791,8 @@ class Applicant_monitoring extends MY_PrivateController
 			$insert_list = array(
 							'process_id' => $process_id, 
 							'checklist_id' => $key,
+							'attachment' => ($attachment[$key] != '' ? $attachment[$key] : ''),
+							'number_value' => ($number_value[$key] != '' ? $number_value[$key] : ''),							
 							'submitted' => $val,
 							'date_submitted' => ($date_submitted[$key] != '' ? date( 'Y-m-d', strtotime($date_submitted[$key])) : ''),
 							'created_by' => $this->user->user_id
@@ -3507,7 +3874,7 @@ class Applicant_monitoring extends MY_PrivateController
 		 	$request_details = $this->db->query($request_qry)->row_array();
 			$scheduleData['company_name'] = $schedule_details['company'];
 			$scheduleData['interview_venue'] = $schedule_details['address'];
-			$scheduleData['company_code'] = $schedule_details['company_code'];
+			$scheduleData['company_code'] = $schedule_details['company_initial'];
 
 		 	$comcontact_qry = "SELECT * FROM {$this->db->dbprefix}users_company_contact ucc 
 		 					WHERE ucc.company_id = {$schedule_details['company_id']}";
@@ -3586,6 +3953,9 @@ class Applicant_monitoring extends MY_PrivateController
 			case 2:
 			$template_data['daysofwork'] = "Mondays to Saturdays";
 			break;
+			default:
+			$template_data['daysofwork'] = "Mondays to Fridays";
+			break;			
 		}		
 		switch($offer['lunch_break']){
 			case 1:
@@ -3594,10 +3964,16 @@ class Applicant_monitoring extends MY_PrivateController
 			case 2:
 			$template_data['breaktime'] = "1:00 pm to 2:00 pm";
 			break;
+			default:
+			$template_data['breaktime'] = "12:00 noon to 1:00 pm";
+			break;			
 		}
 
-		$shift = $this->db->get_where( 'time_shift', array( 'shift_id' => $offer['shift_id']) )->row_array();	
-		$template_data['timeshift'] = $shift['shift'];
+		$template_data['timeshift'] = "8AM_5PM";
+		if ($offer['shift_id'] != '') {
+			$shift = $this->db->get_where( 'time_shift', array( 'shift_id' => $offer['shift_id']) )->row_array();	
+			$template_data['timeshift'] = $shift['shift'];
+		}
 
 	 	$immediate_qry = "SELECT pos.* FROM {$this->db->dbprefix}users_profile up
 					LEFT JOIN {$this->db->dbprefix}users_position pos ON up.position_id = pos.position_id
@@ -3625,7 +4001,7 @@ class Applicant_monitoring extends MY_PrivateController
 	 	$request_details = $this->db->query($request_qry)->row_array();
 		$template_data['company_name'] = $request_details['company'];
 		$template_data['interview_venue'] = $request_details['address'];
-		$template_data['company_code'] = $request_details['company_code'];
+		$template_data['company_code'] = $request_details['company_initial'];
 
 		$template_data['basicsalary'] = '';
 
@@ -3656,9 +4032,14 @@ class Applicant_monitoring extends MY_PrivateController
 
 	 	$hr_qry = "SELECT up.* FROM {$this->db->dbprefix}users_profile up
 						LEFT JOIN {$this->db->dbprefix}users_position pos ON up.position_id = pos.position_id
-						WHERE pos.position_code = 'HRM-RES'";
-	 	$hr = $this->db->query($hr_qry)->row_array();
-		$template_data['HRmanager'] = $hr['firstname'].' '.$hr['lastname'];
+						WHERE pos.position = 'AVP, Head of Human Resources'";
+		$hr_result = $this->db->query($hr_qry);
+
+		$template_data['HRmanager'] = '';
+		if ($hr_result && $hr_result->num_rows() > 0) {
+			$hr = $hr_result->row_array();
+			$template_data['HRmanager'] = $hr['firstname'].' '.$hr['lastname'];			
+		}
 
 		$template_data['system_url'] = $this->db->query("SELECT value FROM {$this->db->dbprefix}config WHERE `key` = 'URL' LIMIT  1")->row_array();
     	$template_data['system_title'] = $this->db->query("SELECT value FROM {$this->db->dbprefix}config WHERE `key` = 'application_title' LIMIT  1")->row_array();
@@ -3705,10 +4086,24 @@ class Applicant_monitoring extends MY_PrivateController
 
 		if($jo->num_rows() == 0){
 			$this->response->message[] = array(
-				'message' => 'Please fillout first Job Offer details before sending email.',
+				'message' => 'Please fillout first Job Offer details and save before printing.',
 				'type' => 'warning'
 			);
 			$this->_ajax_return();
+		}
+
+		$qry = "SELECT * 
+					FROM ww_recruitment_process rp
+					LEFT JOIN applicant_details ap ON rp.recruit_id = ap.recruit_id
+					WHERE rp.process_id = {$process_id}
+				";
+
+		$applicant_details_result = $this->db->query($qry);
+		
+		$logo = '';
+		if ($applicant_details_result && $applicant_details_result->num_rows() > 0) {
+			$applicant_info = $applicant_details_result->row();
+			$logo = $applicant_info->logo;
 		}
 
     	$user = $this->config->item('user');
@@ -3716,7 +4111,7 @@ class Applicant_monitoring extends MY_PrivateController
         $mpdf=new PDFm();
 
         $mpdf->SetTitle( 'Job Offer' );
-        $mpdf->SetMargins(0, 0, 40);
+        //$mpdf->SetMargins(0, 0, 40);
         $mpdf->SetAutoPageBreak(true, 1);
         $mpdf->SetAuthor( $user['lastname'] .', '. $user['firstname'] . ' ' .$user['middlename'] );  
         $mpdf->SetDisplayMode('real', 'default');
@@ -3843,7 +4238,7 @@ class Applicant_monitoring extends MY_PrivateController
             					<td style="border-bottom: 1px solid #000" align="center">Amount</td>
         					</tr>';
 
-        if (count($benefit) > 0){
+        if ($benefit != '' && count($benefit) > 0){
         	$total = 0;
         	foreach ($benefit as $key => $value) {
         		$benefit_item = '';
@@ -3852,22 +4247,25 @@ class Applicant_monitoring extends MY_PrivateController
         		if ($benefit_item_result && $benefit_item_result->num_rows() > 0){
         			$benefit_item = $benefit_item_result->row()->transaction_label;
         		}
-        		if (!$permanent[$key]){
+/*        		if (!$permanent[$key]){*/
 	        		$benefit_html .= '<tr>
 	                					<td style="border-right: 1px solid #000" align="lect">'.$benefit_item.'</td>
 	                					<td align="left">'.number_format($amount_val, 2, '.', ',').'</td>
 	            					</tr>';
         			$total += str_replace(',','',$amount[$key]);	            					
-            	}
+/*            	}*/
         	}
-    		$benefit_html .= '<tr>
+
+        	if ($total > 0) {
+    			$benefit_html .= '<tr>
             					<td style="border-right: 1px solid #000" align="lect"><b>Gross Pay</b></td>
             					<td align="left">'.number_format($total, 2, '.', ',').'</td>
-        					</tr>';          	
+        						</tr>';          	
+        	}
         }
         else{
         	$this->db->join('payroll_transaction','recruitment_process_offer_compben.benefit_id = payroll_transaction.transaction_id');
-        	$benefit_saved = $this->db->get_where('recruitment_process_offer_compben',array('process_id' => $process_id, 'permanent' => 0));
+        	$benefit_saved = $this->db->get_where('recruitment_process_offer_compben',array('process_id' => $process_id));
         	if ($benefit_saved && $benefit_saved->num_rows() > 0){
         		$total = 0;
         		foreach ($benefit_saved->result() as $row) {
@@ -3893,7 +4291,7 @@ class Applicant_monitoring extends MY_PrivateController
             					<td style="border-bottom: 1px solid #000" align="center">Amount</td>
         					</tr>';
 
-        if (count($benefit) > 0){
+        if ($benefit != '' && count($benefit) > 0){
         	$total = 0;
         	foreach ($benefit as $key => $value) {
         		$total += str_replace(',','',$amount[$key]);
@@ -3943,6 +4341,7 @@ class Applicant_monitoring extends MY_PrivateController
 		$this->parser->set_delimiters('{{', '}}');
 
 		$template_data['jo_template'] = $this->parser->parse_string($template_data['jo_template'], $vars, TRUE);
+        //$template_data['logo'] = base_url().$logo;
 
        	$mrf_template = $this->db->get_where( 'system_template', array( 'code' => 'JOB-OFFER-FORM') )->row_array();
 		$html = $this->parser->parse_string($mrf_template['body'], $template_data, TRUE);
@@ -3965,6 +4364,104 @@ class Applicant_monitoring extends MY_PrivateController
 	}
 
 	function print_emp_agree()
+	{
+		$this->_ajax_only();
+
+		$process_id = $this->input->post('process_id');
+		$jo = $this->db->get_where('recruitment_process_offer', array('process_id' => $process_id));
+
+		if($jo->num_rows() == 0){
+			$this->response->message[] = array(
+				'message' => 'Please fillout first Job Offer details before printing.',
+				'type' => 'warning'
+			);
+			$this->_ajax_return();
+		}
+
+    	$user = $this->config->item('user');
+
+        $this->load->library('PDFm');
+        $mpdf = new PDFm();
+
+        $mpdf->SetTitle( 'Employee Agreement' );
+        $mpdf->SetAutoPageBreak(true, 1);
+        $mpdf->SetAuthor( $user['lastname'] .', '. $user['firstname'] . ' ' .$user['middlename'] );  
+        $mpdf->SetDisplayMode('real', 'default');
+        $mpdf->AddPage();
+
+		$qry = "SELECT * FROM {$this->db->dbprefix}recruitment_process rp
+				LEFT JOIN applicant_details ad ON rp.recruit_id = ad.recruit_id
+				WHERE rp.process_id = {$process_id}";
+		$applicant_result = $this->db->query($qry);
+
+		if ($applicant_result && $applicant_result->num_rows() > 0){
+			$applicant = $applicant_result->row();
+		}
+
+		$this->db->select("CONCAT(title,' ',firstname,' ',lastname) as full_name",false);
+		$hrd_manager_result = $this->db->get_where('users_profile',array('position_id' => 21));
+
+		$qry = "SELECT * FROM ww_recruitment_process_offer WHERE process_id = {$process_id}";
+		$rec_process_result = $this->db->query($qry);
+
+		$start_date = '';
+		if ($rec_process_result && $rec_process_result->num_rows() > 0) {
+			$rec_process_info = $rec_process_result->row(); 
+			$start_date = date('d F Y',strtotime($rec_process_info->start_date));
+		}
+
+		if ($hrd_manager_result && $hrd_manager_result->num_rows() > 0){
+			$hrd_manager = $hrd_manager_result->row();
+		}
+
+		$template_data['cur_date'] = date('d F Y');
+		$template_data['applicant_full_name'] = $applicant->fullname;
+		$template_data['last_name'] = $applicant->title .' '. $applicant->lastname;
+		$template_data['applicant_address'] = $applicant->present_address_street;		
+		$template_data['position'] = $applicant->position;
+		$template_data['dept_head'] = $applicant->dept_head;
+		$template_data['div_head'] = $applicant->div_head;
+		$template_data['div_head_position'] = $applicant->div_head_position;
+		$template_data['rank'] = $applicant->rank;
+		$template_data['company'] = $applicant->company;
+		$template_data['start_date'] = $start_date;
+		$template_data['compensation'] = $this->get_benefit($process_id);
+		$template_data['hrd_manager'] = $hrd_manager->full_name;
+		$template_data['logo'] = base_url().$applicant->logo;
+
+	 	$comben_qry = "SELECT offben.* FROM {$this->db->dbprefix}recruitment_process_offer_compben offben
+					   WHERE offben.process_id = {$process_id} AND offben.benefit_id = 273";
+	 	$compben = $this->db->query($comben_qry)->row_array();
+		$template_data['basic_salary'] = currency_format($compben['amount'],0);
+
+		$template_data['system_url'] = $this->db->query("SELECT value FROM {$this->db->dbprefix}config WHERE `key` = 'URL' LIMIT  1")->row_array();
+    	$template_data['system_title'] = $this->db->query("SELECT value FROM {$this->db->dbprefix}config WHERE `key` = 'application_title' LIMIT  1")->row_array();
+    	$template_data['system_author'] = $this->db->query("SELECT value FROM {$this->db->dbprefix}config WHERE `key` = 'author' LIMIT  1")->row_array();
+        
+        $this->load->helper('file');
+		$this->load->library('parser');
+
+       	$mrf_template = $this->db->get_where( 'system_template', array( 'code' => 'EMPLOYMENT-AGREEMENT') )->row_array();
+		$this->parser->set_delimiters('{{', '}}');
+		$html = $this->parser->parse_string($mrf_template['body'], $template_data, TRUE);
+
+        $this->load->helper('file');
+        $path = 'uploads/templates/employment_agreement/pdf/';
+        $this->check_path( $path );
+        $filename = $path .$template_data['dear']."-".$template_data['position']. "-".' Employment Agreement' .".pdf";
+
+        $mpdf->WriteHTML($html, 0, true, false);
+        $mpdf->Output($filename, 'F');
+
+        $this->response->filename = $filename;
+		$this->response->message[] = array(
+			'message' => 'File successfully loaded.',
+			'type' => 'success'
+		);
+		$this->_ajax_return();
+	}
+
+	function print_emp_agree_abraham()
 	{
 		$this->_ajax_only();
 
@@ -4006,6 +4503,9 @@ class Applicant_monitoring extends MY_PrivateController
 			case 2:
 			$template_data['daysofwork'] = "Mondays to Saturdays";
 			break;
+			default:
+			$template_data['daysofwork'] = "Mondays to Fridays";
+			break;			
 		}		
 		switch($offer['lunch_break']){
 			case 1:
@@ -4014,10 +4514,16 @@ class Applicant_monitoring extends MY_PrivateController
 			case 2:
 			$template_data['breaktime'] = "1:00 pm to 2:00 pm";
 			break;
+			default:
+			$template_data['breaktime'] = "12:00 noon to 1:00 pm";
+			break;			
 		}
 
-		$shift = $this->db->get_where( 'time_shift', array( 'shift_id' => $offer['shift_id']) )->row_array();	
-		$template_data['timeshift'] = $shift['shift'];
+		$template_data['timeshift'] = "8AM_5PM";
+		if ($offer['shift_id'] != '') {
+			$shift = $this->db->get_where( 'time_shift', array( 'shift_id' => $offer['shift_id']) )->row_array();	
+			$template_data['timeshift'] = $shift['shift'];
+		}
 
 	 	$immediate_qry = "SELECT pos.* FROM {$this->db->dbprefix}users_profile up
 					LEFT JOIN {$this->db->dbprefix}users_position pos ON up.position_id = pos.position_id
@@ -4038,7 +4544,7 @@ class Applicant_monitoring extends MY_PrivateController
 	 	$request_details = $this->db->query($request_qry)->row_array();
 		$template_data['company_name'] = $request_details['company'];
 		$template_data['interview_venue'] = $request_details['address'];
-		$template_data['company_code'] = $request_details['company_code'];
+		$template_data['company_code'] = $request_details['company_initial'];
 
 	 	$comben_qry = "SELECT offben.* FROM {$this->db->dbprefix}recruitment_process_offer_compben offben
 						LEFT JOIN {$this->db->dbprefix}recruitment_benefit comben ON offben.benefit_id = comben.benefit_id
@@ -4119,6 +4625,7 @@ class Applicant_monitoring extends MY_PrivateController
 	{
 		$this->_ajax_only();
 
+		$type = $this->input->post('type');
 		$process_id = $this->input->post('process_id');
     	$user = $this->config->item('user');
 
@@ -4138,7 +4645,11 @@ class Applicant_monitoring extends MY_PrivateController
 	 	$recruit_details = $this->db->query($interview_qry)->row_array();
 	 	$template_data['dear'] = $recruit_details['firstname'].' '.$recruit_details['lastname'];
 		$template_data['recipients'] = $recruit_details['firstname'].' '.$recruit_details['lastname'];
-		$template_data['date'] = date('M d Y',strtotime($recruit_details['recruitment_date']));
+		$template_data['date'] = date('M d, Y',strtotime($recruit_details['recruitment_date']));
+		$template_data['firstname'] = $recruit_details['firstname'];
+		$template_data['middleinitial'] = empty($recruit_details['middlename']) ? " " : " ".ucfirst(substr($recruit_details['middlename'],0,1)).". ";
+		$template_data['lastname'] = $recruit_details['lastname'];
+		$template_data['nickname'] = $recruit_details['nickname'];
 
 	 	$request_qry = "SELECT * FROM {$this->db->dbprefix}recruitment_request rr 
 	 					LEFT JOIN {$this->db->dbprefix}users_company uc ON rr.company_id = uc.company_id
@@ -4146,95 +4657,69 @@ class Applicant_monitoring extends MY_PrivateController
 	 					WHERE rr.request_id = {$recruit_details['request_id']}";
 	 	$request_details = $this->db->query($request_qry)->row_array();
 		$template_data['company_name'] = $request_details['company'];
-		$template_data['company_code'] = $request_details['company_code'];
+		$template_data['company_code'] = $request_details['company_initial'];
 		$template_data['department'] = $request_details['department'];
 		$template_data['logo'] = base_url().$request_details['print_logo'];
 		$template_data['section'] = 'RECRUITMENT';
 
-        $optional_requirements = $this->mrf_am->get_recruitment_request_key_value($recruit_details['request_id'], 'optional_requirements');
-        $optional_requirements = (count($optional_requirements) == 0 ? " " : ($optional_requirements[0]['key_value'] == "" ? "" : $optional_requirements[0]['key_value']));
-        $optional_requirements = unserialize($optional_requirements);
-        $template_data['optional_requirements1'] = $optional_requirements[0];
-        $template_data['optional_requirements2'] = $optional_requirements[1];
-        $template_data['optional_requirements3'] = $optional_requirements[2];
 		$position_where = array( 'recruit_id' => $recruit_details['recruit_id'], 'key' => 'position_sought');
 		$position_sought = $this->db->get_where( 'recruitment_personal', $position_where )->row_array();
 		$template_data['position'] = $position_sought['key_value'];
         // get recruitment interview details
-        $recruitment_process_interview_qry = "SELECT * FROM {$this->db->dbprefix}recruitment_process_interview rpi 
-                        LEFT JOIN {$this->db->dbprefix}recruitment_process rp ON rpi.process_id = rp.process_id
-                        WHERE rpi.process_id = {$process_id}";
+
+		$class_id = 0;
+		if (in_array($recruit_details['status_id'], array(2,5))) {
+			if ($recruit_details['status_id'] == 2)
+				$class_id = 21;
+			else
+				$class_id = 22;
+		} else {
+			if ($type == 2)
+				$class_id = 22;
+			else
+				$class_id = 21;
+		}
+
+        $recruitment_process_interview_qry = "SELECT * FROM {$this->db->dbprefix}recruitment_interview_key rik 
+                        LEFT JOIN {$this->db->dbprefix}recruitment_interview_details rid ON rik.key_id = rid.key_id
+                        LEFT JOIN {$this->db->dbprefix}recruitment_process_interview rpi ON rpi.id = rid.interview_id
+                        WHERE rpi.process_id = {$process_id} AND rik.key_class_id = {$class_id}
+                        ORDER BY rik.sort_order";
         $recruit_inteview_details = $this->db->query($recruitment_process_interview_qry);
+
+        $total_score = 0;
+		$template_data['recommendation'] = '';
+		$template_data['remarks'] = '';
+		$template_data['interviewer'] = '';
+		$template_data['interviewer_date'] = '';
         if ($recruit_inteview_details && $recruit_inteview_details->num_rows() > 0){
         	$html = '';
         	foreach ($recruit_inteview_details->result() as $row) {
 		        $recommendation = $this->mod->get_recruitment_interview_details($row->id, 'technical_recommendation');
-		        if (count($recommendation) > 0){
-		        	$recommendation_val = ($recommendation['key_value'] == "") ? "" : $recommendation['key_value'];
-		        	$remarks = $this->mod->get_recruitment_interview_details($row->id, 'remarks');
-		        	$remarks_val = ($remarks['key_value'] == "") ? "" : $remarks['key_value'];
-		        	$interviewer = $this->mod->get_recruitment_interview_details($row->id, 'interviewer');
-		        	$interviewer_val = ($interviewer['key_value'] == "") ? "" : $interviewer['key_value'];
-		        	$interviewer_date = $this->mod->get_recruitment_interview_details($row->id, 'interviewer_date');
-		        	$interviewer_date_val = ($interviewer_date['key_value'] == "") ? "" : $interviewer_date['key_value'];				        			        	
-		        	$html .= '<tr>
-		                <td style="border-right: 1px solid #000;border-bottom: 1px solid #000;width:70%">'.$remarks_val.'</td>
-		                <td style="width:30%;border-bottom: 1px solid #000;">
-		                    <u>&nbsp;&nbsp;&nbsp;'.($recommendation_val == 'Consider' ? "X" : "&nbsp;&nbsp;").'&nbsp;&nbsp;&nbsp;</u> consider <br>
-		                    <u>&nbsp;&nbsp;&nbsp;'.($recommendation_val == 'Hold' ? "X" : "&nbsp;&nbsp;").'&nbsp;&nbsp;&nbsp;</u> hold <br>
-		                    <u>&nbsp;&nbsp;&nbsp;'.($recommendation_val == 'Reject' ? "X" : "&nbsp;&nbsp;").'&nbsp;&nbsp;&nbsp;</u> reject <br><br><br><br>
-		                    By: <u>&nbsp;&nbsp;&nbsp;'.$interviewer_val.'&nbsp;&nbsp;&nbsp;</u> <br>
-		                    Date: <u>&nbsp;&nbsp;&nbsp;'.$interviewer_date_val.'&nbsp;&nbsp;&nbsp;</u>
-		                </td>
-		            </tr> ';
-		        }	        
+	        	$recommendation_val = ($recommendation['key_value'] == "") ? "" : $recommendation['key_value'];
+	        	$remarks = $this->mod->get_recruitment_interview_details($row->id, 'hrd_remarks');
+	        	$remarks_val = ($remarks['key_value'] == "") ? "" : $remarks['key_value'];
+	        	$interviewer = $this->mod->get_recruitment_interview_details($row->id, 'interviewer');
+	        	$interviewer_val = ($interviewer['key_value'] == "") ? "" : $interviewer['key_value'];
+	        	$interviewer_date = $this->mod->get_recruitment_interview_details($row->id, 'interviewer_date');
+	        	$interviewer_date_val = ($interviewer_date['key_value'] == "") ? "" : $interviewer_date['key_value'];
+
+				$template_data['recommendation'] = $recommendation_val;
+				$template_data['remarks'] = $remarks_val;
+				$template_data['interviewer'] = $interviewer_val;
+				$template_data['interviewer_date'] = $interviewer_date_val;
+
+				$total_score += $row->key_value;
+	        	$html .= '<tr>
+	                <td style="border-bottom: 1px solid #000;border-left: 1px solid #000;border-right: 1px solid #000;">'.$row->key_name.'</td>
+	                <td style="border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center">'.$row->key_value.'</td>
+	                <td colspan="4" style="border-bottom: 1px solid #000;border-right: 1px solid #000;">'.$row->other_remarks.'</td>
+	            </tr>';
         	}
         }
 
         $template_data['comments'] = $html;
-/*
-        $employment_status = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'employment_status');
-        $template_data['employment_status'] = count($employment_status) == 0 ? " " : $employment_status['key_value'] == "" ? "" : $employment_status['key_value'];
-        $salary = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'salary');
-        $template_data['salary'] = count($salary) == 0 ? " " : $salary['key_value'] == "" ? "" : $salary['key_value'];
-        $benefits = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'benefits');
-        $template_data['benefits'] = count($benefits) == 0 ? " " : $benefits['key_value'] == "" ? "" : $benefits['key_value'];
-        $working_schedule = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'working_schedule');
-        $template_data['working_schedule'] = count($working_schedule) == 0 ? " " : $working_schedule['key_value'] == "" ? "" : $working_schedule['key_value'];
-        $immediate_superior = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'immediate_superior');
-        $template_data['immediate_superior'] = count($immediate_superior) == 0 ? " " : $immediate_superior['key_value'] == "" ? "" : $immediate_superior['key_value'];
-        $expected_salary = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'expected_salary');
-        $template_data['expected_salary'] = count($expected_salary) == 0 ? " " : $expected_salary['key_value'] == "" ? "" : $expected_salary['key_value'];
-        $employment_type = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'employment_type');
-        $template_data['employment_type'] = count($employment_type) == 0 ? " " : $employment_type['key_value'] == "" ? "" : $employment_type['key_value'];
-        $pref_work_locations = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'pref_work_locations');
-        $template_data['pref_work_locations'] = count($pref_work_locations) == 0 ? " " : $pref_work_locations['key_value'] == "" ? "" : $pref_work_locations['key_value'];
-        $pref_work_schedule = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'pref_work_schedule');
-        $template_data['pref_work_schedule'] = count($pref_work_schedule) == 0 ? " " : $pref_work_schedule['key_value'] == "" ? "" : $pref_work_schedule['key_value'];
-        $avail_client_int = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'avail_client_int');
-        $template_data['avail_client_int'] = count($avail_client_int) == 0 ? " " : $avail_client_int['key_value'] == "" ? "" : $avail_client_int['key_value'];
-        $avail_employment = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'avail_employment');
-        $template_data['avail_employment'] = count($avail_employment) == 0 ? " " : $avail_employment['key_value'] == "" ? "" : $avail_employment['key_value'];
-        $pending_applications = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'pending_applications');
-        $template_data['pending_applications'] = count($pending_applications) == 0 ? " " : $pending_applications['key_value'] == "" ? "" : $pending_applications['key_value'];
-        $reason_for_leaving = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'reason_for_leaving');
-        $template_data['reason_for_leaving'] = count($reason_for_leaving) == 0 ? " " : $reason_for_leaving['key_value'] == "" ? "" : $reason_for_leaving['key_value'];
-        $competencies = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'competencies');
-        $template_data['competencies'] = count($competencies) == 0 ? " " : $competencies['key_value'] == "" ? "" : $competencies['key_value'];
-        $personality = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'personality');
-        $template_data['personality'] = count($personality) == 0 ? " " : $personality['key_value'] == "" ? "" : $personality['key_value'];
-        $hr_remarks = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'hr_remarks');
-        $template_data['hr_remarks'] = count($hr_remarks) == 0 ? " " : $hr_remarks['key_value'] == "" ? "" : $hr_remarks['key_value'];
-        $interviewers_notes = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'interviewers_notes');
-        $template_data['interviewers_notes'] = count($interviewers_notes) == 0 ? " " : $interviewers_notes['key_value'] == "" ? "" : $interviewers_notes['key_value'];
-        $remarks = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'remarks');
-        $template_data['remarks'] = count($remarks) == 0 ? " " : $remarks['key_value'] == "" ? "" : $remarks['key_value'];
-        $technical_recommendation = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'technical_recommendation');
-        $template_data['technical_recommendation'] = count($technical_recommendation) == 0 ? " " : $technical_recommendation['key_value'] == "" ? "" : $technical_recommendation['key_value'];
-        $interviewer_date = $this->mod->get_recruitment_interview_details($recruit_inteview_details['id'], 'interviewer_date');
-        $template_data['interviewer_date'] = count($interviewer_date) == 0 ? " " : $interviewer_date['key_value'] == "" ? "" : $interviewer_date['key_value'];
-        
-		$template_data['desired_salary'] = '';*/
+        $template_data['total_score'] = $total_score;
 		
 		$template_data['system_url'] = $this->db->query("SELECT value FROM {$this->db->dbprefix}config WHERE `key` = 'URL' LIMIT  1")->row_array();
     	$template_data['system_title'] = $this->db->query("SELECT value FROM {$this->db->dbprefix}config WHERE `key` = 'application_title' LIMIT  1")->row_array();
@@ -4302,7 +4787,7 @@ class Applicant_monitoring extends MY_PrivateController
 			$bi_header_row = $bi_header->row();
 		}
 
-	 	$template_data['date'] = 'MARCH 01, 2013';
+	 	$template_data['date'] = date('M d, Y');
 	 	$template_data['date_created'] = date('F d, Y',strtotime($bi_header_row->created_on));
 	 	$interview_qry = "SELECT * FROM {$this->db->dbprefix}recruitment_process recp 
 	 					LEFT JOIN {$this->db->dbprefix}recruitment rec ON recp.recruit_id = rec.recruit_id
@@ -4322,7 +4807,7 @@ class Applicant_monitoring extends MY_PrivateController
 	 	$request_details = $this->db->query($request_qry)->row_array();
 		$template_data['company_name'] = $request_details['company'];
 		$template_data['interview_venue'] = $request_details['address'];
-		$template_data['company_code'] = $request_details['company_code'];
+		$template_data['company_code'] = $request_details['company_initial'];
 		$template_data['department'] = $request_details['department'];
 		$template_data['logo'] = base_url().$request_details['print_logo'];
 
@@ -4415,7 +4900,7 @@ class Applicant_monitoring extends MY_PrivateController
 	 	$request_details = $this->db->query($request_qry)->row_array();
 		$template_data['company_name'] = $request_details['company'];
 		$template_data['interview_venue'] = $request_details['address'];
-		$template_data['company_code'] = $request_details['company_code'];
+		$template_data['company_code'] = $request_details['company_initial'];
 		$template_data['department'] = $request_details['department'];
 
 		$position_where = array( 'recruit_id' => $recruit_details['recruit_id'], 'key' => 'position_sought');
@@ -4515,7 +5000,7 @@ class Applicant_monitoring extends MY_PrivateController
 	 	$request_details = $this->db->query($request_qry)->row_array();
 		$template_data['company_name'] = $request_details['company'];
 		$template_data['interview_venue'] = $request_details['address'];
-		$template_data['company_code'] = $request_details['company_code'];
+		$template_data['company_code'] = $request_details['company_initial'];
 		$template_data['department'] = $request_details['department'];
 
 		$position_where = array( 'recruit_id' => $recruit_details['recruit_id'], 'key' => 'position_sought');
@@ -4625,7 +5110,7 @@ class Applicant_monitoring extends MY_PrivateController
 	 	$request_details = $this->db->query($request_qry)->row_array();
 		$template_data['company_name'] = $request_details['company'];
 		$template_data['company_address'] = $request_details['address'];
-		$template_data['company_code'] = $request_details['company_code'];
+		$template_data['company_code'] = $request_details['company_initial'];
 
 	 	$hr_qry = "SELECT up.* FROM {$this->db->dbprefix}users_profile up
 						LEFT JOIN {$this->db->dbprefix}users_position pos ON up.position_id = pos.position_id

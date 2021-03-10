@@ -28,8 +28,8 @@ class mrf_admin_model extends Record
 		$this->primary_key = 'request_id';
 		$this->table = 'recruitment_request';
 		$this->icon = 'fa-folder';
-		$this->short_name = 'Personnel Requisition - Admin';
-		$this->long_name  = 'Personnel Requisition - Admin';
+		$this->short_name = 'Manpower Requisition - Admin';
+		$this->long_name  = 'Manpower Requisition - Admin';
 		$this->description = '';
 		$this->path = APPPATH . 'modules/mrf_admin/';
 

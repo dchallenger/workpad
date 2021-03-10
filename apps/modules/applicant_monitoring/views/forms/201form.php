@@ -74,6 +74,12 @@
                         <p><?=lang('applicant_monitoring.note_add_interview')?></p>
 
                         <div class="portlet-body form">
+                            <?php
+                                if($process->status_id > 1){
+                                    $disabled = "disabled";  
+                                    $hidden = "style='display:none'"; 
+                                }                            
+                            ?>                              
                             <!-- START FORM -->
                             <form action="#" class="form-horizontal" name="schedule-form">
                                 <input type="hidden"  name="process_id" value="<?php echo $process_id?>">
@@ -380,7 +386,7 @@
                                     <label class="control-label col-md-4">&nbsp;
                                     </label>                                    
                                     <div class="col-md-8">
-                                        <textarea <?php echo $disabled ?> class="wysihtml5 form-control template_val" name="jo[template_value]" placeholder="" rows="6"><?php echo (isset($template_value) ? $template_value : '') ?></textarea>
+                                        <textarea <?php echo $disabled ?> class="wysihtml5 form-control template_val" name="jo[template_value]" placeholder="" rows="6"></textarea>
                                     </div>
                                 </div>                                
                                 <div class="form-group">
@@ -776,7 +782,7 @@
                                                 $options[$opt->user_id] = $opt->full_name;
                                             }
 
-                                            echo form_dropdown('users_profile[reports_to_id]',$options, $recuser_reports_to_id, $disabled.' class="form-control select2me" data-placeholder="Select..."');
+                                            echo form_dropdown('users_profile[reports_to_id]',$options, $reports_to, $disabled.' class="form-control select2me" data-placeholder="Select..."');
                                         ?> 
                                     </div>
                                 </div>
@@ -828,7 +834,7 @@
                                     </label>
                                     <div class="col-md-6">
                                         <div class="input-icon">
-                                            <input type="text" name="users[salary]" id="users-login" <?=$disabled?> value="" class="form-control" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false">
+                                            <input type="text" name="users[salary]" id="users-login" <?=$disabled?> value="<?php echo $amount ?>" class="form-control" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false">
                                         </div>
                                     </div>
                                 </div>                                

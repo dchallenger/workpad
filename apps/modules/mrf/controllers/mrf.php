@@ -364,9 +364,9 @@ class Mrf extends MY_PrivateController
 			}
 			
 			if($new){
-				$data['record']['recruitment_request.department_id'] = $arPartner_record['department_id'];	
-				$data['record']['recruitment_request.immediate'] = $arPartner_record['immediate'];
-				$data['record']['recruitment_request.company_id'] = $arPartner_record['company_id'];
+				$data['record']['recruitment_request.department_id'] = '';//$arPartner_record['department_id'];	
+				$data['record']['recruitment_request.immediate'] = '';//$arPartner_record['immediate'];
+				$data['record']['recruitment_request.company_id'] = '';//$arPartner_record['company_id'];
 			}else{
 				$department = $this->db->get_where('users_department', array('department_id' => $data['record']['recruitment_request.department_id']));
 				$data['record']['recruitment_request.immediate'] = $department->row()->immediate;
@@ -377,13 +377,35 @@ class Mrf extends MY_PrivateController
 
 			$data['record']['disabled'] = "";
 			$data['record']['readonly'] = "";
-			if($data['record']['recruitment_request.status_id'] > 1 && $data['record']['recruitment_request.status_id'] < 8){
+			if($data['record']['recruitment_request.status_id'] > 1 && $data['record']['recruitment_request.status_id'] < 10){
 				$data['record']['disabled'] = "disabled";
 				$data['record']['readonly'] = "readonly";
 			}
 			// echo "<pre>\n";
 			// print_r($data['record']);
 			// exit;
+
+			if (!$new) {
+				$qry = "SELECT *
+								 FROM {$this->db->dbprefix}recruitment_manpower_plan
+								 WHERE department_id={$record['recruitment_request.department_id']}";
+		
+				$manpower_plan = $this->db->query($qry);
+				
+				if ($manpower_plan && $manpower_plan->num_rows() > 0) {
+					$manpower_plan_info = $manpower_plan->row();
+					$plan_id = $manpower_plan_info->plan_id;
+
+					$qry1 = "SELECT *
+									 FROM recruitment_manpower_plan_position
+									 WHERE plan_id={$plan_id}";
+
+					$plan_code = $this->db->query($qry1);								 
+
+					$data['plan_code'] = $plan_code;					
+				}	
+			}
+
 			$this->load->vars( $data );
 
 			if( !$child_call ){
@@ -452,6 +474,11 @@ class Mrf extends MY_PrivateController
 
     	if (isset($req['replacement_transfer_leave_date_to']) && $req['replacement_transfer_leave_date_to'] == '1970-01-01'){
     		$_POST['recruitment_request']['replacement_transfer_leave_date_to'] = '';
+    	}
+
+    	if ($req['budgeted'] == 0) {
+			$_POST['recruitment_request']['status_id'] = 9;
+			$_POST['recruitment']['status_id'] = 9;
     	}
 
 		if(isset($this->record_id))
@@ -768,7 +795,7 @@ class Mrf extends MY_PrivateController
 
     	$department_info = $this->db->get('');
 
-		if( $department_info->num_rows() > 0 ){
+		if( $department_info && $department_info->num_rows() > 0 ){
     		$dep_info = $department_info->row_array();
 
     		$this->db->select('full_name')
@@ -826,4 +853,84 @@ class Mrf extends MY_PrivateController
         $series = get_system_series('PRF_CONTROL_NO', 'PRF');
         return $series;
     }
+
+	function get_plan_code(){
+		$this->_ajax_only();
+
+		$dept_id = $this->input->post('dept_id');
+
+		$this->db->select('*')
+	    ->from('users_department')
+    	->where("department_id = {$dept_id}");
+
+    	$department_info = $this->db->get('');
+
+		$this->response->plan_code = '';
+
+		if( $department_info && $department_info->num_rows() > 0 ){
+    		$dep_info = $department_info->row_array();
+
+			$qry = "SELECT *
+							 FROM {$this->db->dbprefix}recruitment_manpower_plan
+							 WHERE department_id={$dept_id}";
+	
+			$manpower_plan = $this->db->query($qry);
+
+			if ($manpower_plan && $manpower_plan->num_rows() > 0) {
+				$manpower_plan_info = $manpower_plan->row();
+				$plan_id = $manpower_plan_info->plan_id;
+
+				$qry1 = "SELECT *
+								 FROM recruitment_manpower_plan_position
+								 WHERE plan_id={$plan_id}";
+
+				$plan_code = $this->db->query($qry1);								 
+
+				if ($plan_code && $plan_code->num_rows() > 0) {
+					$this->response->plan_code .= '<option value=""></option>';
+
+			        foreach( $plan_code->result() as $row )
+			        {
+			            $this->response->plan_code .= '<option value="'.$row->plan_code.'">'.$row->plan_code.'</option>';
+			        }
+				}
+
+			}
+		}
+
+	    $this->_ajax_return();  		
+	}
+
+	function get_plan_details(){
+		$this->_ajax_only();
+
+		$plan_code = $this->input->post('plan_code');
+
+		$qry = "SELECT *
+						 FROM recruitment_manpower_plan_position
+						 WHERE plan_code='{$plan_code}'";
+
+		$plan_info = $this->db->query($qry);	
+
+		$this->response->checker = 'undefined';
+
+		if( $plan_info && $plan_info->num_rows() > 0 ){
+    		$plan_info_details = $plan_info->row();
+
+    		$month = $plan_info_details->month;
+
+    		$date = $month.'/01/'.date('Y');
+
+    		$date_needed = date('F d,Y',strtotime($date));
+
+
+    		$this->response = $plan_info_details;
+
+    		$this->response->checker = 'success';    		
+
+    		$this->response->date_needed = $date_needed;
+		}
+
+	    $this->_ajax_return();  		
+	} 	
 }

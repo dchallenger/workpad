@@ -28,8 +28,8 @@ class mrf_manage_model extends Record
 		$this->primary_key = 'request_id';
 		$this->table = 'recruitment_request';
 		$this->icon = 'fa-folder';
-		$this->short_name = 'Personnel Requisition Form - Manage';
-		$this->long_name  = 'Personnel Requisition Form - Manage';
+		$this->short_name = 'Manpower Requisition Form - Manage';
+		$this->long_name  = 'Manpower Requisition Form - Manage';
 		$this->description = '';
 		$this->path = APPPATH . 'modules/mrf_manage/';
 
@@ -52,7 +52,7 @@ class mrf_manage_model extends Record
 
 		if( $this->user->user_id != 1 )
 		{
-			$qry .= " AND {$this->db->dbprefix}{$this->table}.status_id <> 1";
+			$qry .= " AND {$this->db->dbprefix}{$this->table}.status_id > 1";
 		}
 
 

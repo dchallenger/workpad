@@ -68,7 +68,7 @@
                             <span class="pull-left padding-left-right-10">-</span>
                             <span class="pull-left">
                                 <input type="text" class="form-control input-small" maxlength="4" name="recruitment_personal_history[affiliation-year-start][]" id="recruitment_personal_history-affiliation-year-start" 
-                            value="<?php echo (isset($affiliation['affiliation-year-start']) ? $affiliation['affiliation-year-start'] : ""); ?>"placeholder="Year">
+                            value="<?php echo (isset($affiliation['affiliation-year-start']) ? $affiliation['affiliation-year-start'] : ""); ?>"placeholder="Year" data-inputmask="'mask': '9999'">
                             </span>                            
                         </div>
                 </div>
@@ -82,7 +82,7 @@
                             <span class="pull-left padding-left-right-10">-</span>
                             <span class="pull-left">
                                 <input type="text" class="form-control input-small" maxlength="4" name="recruitment_personal_history[affiliation-year-end][]" id="recruitment_personal_history-affiliation-year-end" 
-                            value="<?php echo (isset($affiliation['affiliation-year-end']) ? $affiliation['affiliation-year-end'] : ""); ?>"placeholder="Year">
+                            value="<?php echo (isset($affiliation['affiliation-year-end']) ? $affiliation['affiliation-year-end'] : ""); ?>"placeholder="Year" data-inputmask="'mask': '9999'">
                             </span>                            
                         </div>
                 </div>

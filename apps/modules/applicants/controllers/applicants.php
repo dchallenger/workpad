@@ -148,10 +148,11 @@ class Applicants extends MY_PrivateController
 				            } 
 	                    }
 	                    if ($row->key == 'education-degree'){
-	                    	$arHistory_d_s[$row->sequence]['degree'] = $row->key_value;
+	                    	$arHistory_d_s[$row->sequence]['degree'] = $this->mod->get_degree_obtained($row->key_value);
 	                    }
+
 	                    if ($row->key == 'education-school'){
-	                    	$arHistory_d_s[$row->sequence]['school'] = $row->key_value;
+	                    	$arHistory_d_s[$row->sequence]['school'] = $this->mod->get_school($row->key_value);
 	                    }	                    	                    
 	                }
 
@@ -190,11 +191,11 @@ class Applicants extends MY_PrivateController
 	
 	function _list_options_active( $record, &$rec )
 	{
-		// if( $this->permission['detail'] )
-		// {
-		// 	$rec['detail_url'] = $this->mod->url . '/detail/' . $record['record_id'];
-		// 	$rec['options'] .= '<li><a href="'.$rec['detail_url'].'"><i class="fa fa-search"></i> View</a></li>';
-		// }
+		if( $this->permission['detail'] && $record['recruitment_status_id'] > 0)
+		{
+			$rec['detail_url'] = $this->mod->url . '/detail/' . $record['record_id'];
+			$rec['options'] .= '<li><a href="'.$rec['detail_url'].'"><i class="fa fa-search"></i> View</a></li>';
+		}
 
 		if( $this->permission['edit'] )
 		{
@@ -256,14 +257,22 @@ class Applicants extends MY_PrivateController
 			$data['record']['currently_employed'] = (count($currently_employed) == 0 ? " " : ($currently_employed[0]['key_value'] == "" ? "" : $currently_employed[0]['key_value']));
 			$how_hiring_heard = $this->mod->get_recruitment_personal_value($recruit_id, 'how_hiring_heard');
 			$data['record']['how_hiring_heard'] = (count($how_hiring_heard) == 0 ? " " : ($how_hiring_heard[0]['key_value'] == "" ? "" : $how_hiring_heard[0]['key_value']));
-			
+			$referred_by = $this->mod->get_recruitment_personal_value($recruit_id, 'referred_by');
+			$data['record']['referred_by'] = (count($referred_by) == 0 ? " " : ($referred_by[0]['key_value'] == "" ? "" : $referred_by[0]['key_value']));
+
 			$sourcing_tools = $this->mod->get_recruitment_personal_value($recruit_id, 'sourcing_tools');
 			$data['record']['sourcing_tools'] = (count($sourcing_tools) == 0 ? " " : ($sourcing_tools[0]['key_value'] == "" ? "" : $sourcing_tools[0]['key_value']));
 	
 			$resume = $this->mod->get_recruitment_personal_value($recruit_id, 'resume');
 			$data['record']['resume'] = (count($resume) == 0 ? " " : ($resume[0]['key_value'] == "" ? "" : $resume[0]['key_value']));
 
-			$telephones = array();
+			$phone_numbers = $this->mod->get_recruitment_personal_value($recruit_id, 'phone');
+			$data['record']['phone'] = (count($phone_numbers) == 0 ? " " : ($phone_numbers[0]['key_value'] == "" ? "" : $phone_numbers[0]['key_value']));
+
+			$mobile_numbers = $this->mod->get_recruitment_personal_value($recruit_id, 'mobile');
+			$data['record']['mobile'] = (count($mobile_numbers) == 0 ? " " : ($mobile_numbers[0]['key_value'] == "" ? "" : $mobile_numbers[0]['key_value']));
+
+/*			$telephones = array();
 			$phone_numbers = $this->mod->get_recruitment_personal_value($recruit_id, 'phone');
 			foreach($phone_numbers as $phone){
 				// $telephones[] = $this->format_phone($phone['key_value']);
@@ -283,12 +292,16 @@ class Applicants extends MY_PrivateController
 				// $mobiles[] = $this->format_phone($mobile['key_value']);
 				$mobiles[] = $mobile['key_value'];
 			}
-			$data['profile_mobiles'] = $mobiles;
+			$data['profile_mobiles'] = $mobiles;*/
+
 			$city_town = $this->mod->get_recruitment_personal_value($recruit_id, 'city_town');
-			$city_town = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $city_town[0]['key_value']));
-			$data['profile_live_in'] = $city_town;
+			$data['city'] = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $city_town[0]['key_value']));
+			$data['profile_live_in'] = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $this->mod->get_city($city_town[0]['key_value'])));;
+
 			$countries = $this->mod->get_recruitment_personal_value($recruit_id, 'country');
-			$data['profile_country'] = (count($countries) == 0 ? " " : ($countries[0]['key_value'] == "" ? "" : $countries[0]['key_value']));
+			$data['country'] = (count($countries) == 0 ? " " : ($countries[0]['key_value'] == "" ? "" : $countries[0]['key_value']));
+			$data['profile_country'] = (count($countries) == 0 ? " " : ($countries[0]['key_value'] == "" ? "" : $this->mod->get_country($countries[0]['key_value'])));
+
 			$civil_status = $this->mod->get_recruitment_personal_value($recruit_id, 'civil_status');
 			$data['profile_civil_status'] = (count($civil_status) == 0 ? " " : ($civil_status[0]['key_value'] == "" ? "" : $civil_status[0]['key_value']));
 			$spouse = $this->mod->get_recruitment_personal_value($recruit_id, 'spouse');
@@ -434,7 +447,10 @@ class Applicants extends MY_PrivateController
 			$data['record']['pagibig_number'] = (count($pagibig_number) == 0 ? " " : ($pagibig_number[0]['key_value'] == "" ? "" : $pagibig_number[0]['key_value']));
 			$philhealth_number = $this->mod->get_recruitment_personal_value($recruit_id, 'philhealth_number');
 			$data['record']['philhealth_number'] = (count($philhealth_number) == 0 ? " " : ($philhealth_number[0]['key_value'] == "" ? "" : $philhealth_number[0]['key_value']));
-
+			$drivers_license_no = $this->mod->get_recruitment_personal_value($recruit_id, 'drivers_license_no');
+			$data['record']['drivers_license_no'] = get_valid_key_value($drivers_license_no);
+			$passport_no = $this->mod->get_recruitment_personal_value($recruit_id, 'passport_no');
+			$data['record']['passport_no'] = get_valid_key_value($passport_no);	
 
 			$cert_member_to_trade = $this->mod->get_recruitment_personal_value($recruit_id, 'cert_member_to_trade');
 			$data['record']['cert_member_to_trade'] = (count($cert_member_to_trade) == 0 ? " " : ($cert_member_to_trade[0]['key_value'] == "" ? "" : $cert_member_to_trade[0]['key_value']));
@@ -491,7 +507,7 @@ class Applicants extends MY_PrivateController
 				$details_data_id[$emp['sequence']][$emp['key']] = $emp['personal_id'];
 			}
 			$data['licensure_tab'] = $licensures_tab;
-			$data['details_data_id'] = $details_data_id;
+			$data['details_data_id']['licensure'] = $details_data_id;
 		//Trainings and Seminars
 			$training_tab = array();
 			$trainings_tab = array();
@@ -552,6 +568,17 @@ class Applicants extends MY_PrivateController
 			$data['employee'] = $this->mod->get_employee();
 			$data['type_license'] = $this->mod->get_type_license();
 			$data['sourcing_tool'] = $this->mod->get_sourcing_tools();			
+
+		//test profile
+			$test_tab = array();
+			$tests_tab = array();
+			$test_tab = $this->mod->get_recruitment_personal_value_history($recruit_id, 'test');
+			foreach($test_tab as $emp){
+				$tests_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+				$details_data_id[$emp['sequence']][$emp['key']] = $emp['personal_id'];
+			}
+			$data['test_tab'] = $tests_tab;
+			$data['details_data_id']['test'] = $details_data_id;
 		}
 
 		$this->load->vars( $data );
@@ -559,6 +586,400 @@ class Applicants extends MY_PrivateController
 		$this->load->helper('form');
 		$this->load->helper('file');
 		echo $this->load->blade('edit.edit_custom')->with( $this->load->get_cached_vars() );
+	}
+
+	public function detail( $recruit_id=0, $child_call = false )
+	{
+		$record_check = false;
+		$this->record_id = $recruit_id;
+
+		$result = $this->mod->_get_edit_cached_query_custom( $this->record_id );
+		$result_personal = $this->mod->_get_edit_cached_query_personal_custom( $this->record_id );
+
+		if( empty($recruit_id) )
+		{
+			$field_lists = $result->list_fields();
+			foreach( $field_lists as $field )
+			{
+				$data['record'][$field] = '';
+			}
+		}
+		else{
+			$this->load->model('profile_model', 'profile_mod');
+			$data['record'] = $result;
+
+			$photo = $this->mod->get_recruitment_personal_value($recruit_id, 'photo');
+			$data['record']['photo'] = (count($photo) == 0 ? " " : ($photo[0]['key_value'] == "" ? "" : $photo[0]['key_value']));
+
+			$middle_initial = empty($result['middlename']) ? " " : " ".ucfirst(substr($result['middlename'],0,1)).". ";
+			$data['profile_name'] = $result['firstname'].$middle_initial.$result['lastname'];
+			$birthday = new DateTime($result['birth_date']);
+			$data['profile_age'] = $birthday->diff(new DateTime)->y;
+
+			//application
+			$this->load->model('recruitform_model', 'rec_mod');
+			$data['mrf'] = $this->rec_mod->get_active_mrf_by_year();
+			$position_sought = $this->mod->get_recruitment_personal_value($recruit_id, 'position_sought');
+			$data['record']['position_sought'] = (count($position_sought) == 0 ? " " : ($position_sought[0]['key_value'] == "" ? "" : $position_sought[0]['key_value']));
+			$desired_salary = $this->mod->get_recruitment_personal_value($recruit_id, 'desired_salary');
+			$data['record']['desired_salary'] = (count($desired_salary) == 0 ? " " : ($desired_salary[0]['key_value'] == "" ? "" : $desired_salary[0]['key_value']));
+			$salary_pay_mode = $this->mod->get_recruitment_personal_value($recruit_id, 'salary_pay_mode');
+			$data['record']['salary_pay_mode'] = (count($salary_pay_mode) == 0 ? " " : ($salary_pay_mode[0]['key_value'] == "" ? "" : $salary_pay_mode[0]['key_value']));
+			$currently_employed = $this->mod->get_recruitment_personal_value($recruit_id, 'currently_employed');
+			$data['record']['currently_employed'] = (count($currently_employed) == 0 ? " " : ($currently_employed[0]['key_value'] == "" ? "" : $currently_employed[0]['key_value']));
+			$how_hiring_heard = $this->mod->get_recruitment_personal_value($recruit_id, 'how_hiring_heard');
+			$data['record']['how_hiring_heard'] = (count($how_hiring_heard) == 0 ? " " : ($how_hiring_heard[0]['key_value'] == "" ? "" : $how_hiring_heard[0]['key_value']));
+			$referred_by = $this->mod->get_recruitment_personal_value($recruit_id, 'referred_by');
+			$data['record']['referred_by'] = (count($referred_by) == 0 ? " " : ($referred_by[0]['key_value'] == "" ? "" : $referred_by[0]['key_value']));
+
+			$sourcing_tools = $this->mod->get_recruitment_personal_value($recruit_id, 'sourcing_tools');
+			$data['record']['sourcing_tools'] = (count($sourcing_tools) == 0 ? " " : ($sourcing_tools[0]['key_value'] == "" ? "" : $sourcing_tools[0]['key_value']));
+	
+			$resume = $this->mod->get_recruitment_personal_value($recruit_id, 'resume');
+			$data['record']['resume'] = (count($resume) == 0 ? " " : ($resume[0]['key_value'] == "" ? "" : $resume[0]['key_value']));
+
+			$phone_numbers = $this->mod->get_recruitment_personal_value($recruit_id, 'phone');
+			$data['record']['phone'] = (count($phone_numbers) == 0 ? " " : ($phone_numbers[0]['key_value'] == "" ? "" : $phone_numbers[0]['key_value']));
+
+			$mobile_numbers = $this->mod->get_recruitment_personal_value($recruit_id, 'mobile');
+			$data['record']['mobile'] = (count($mobile_numbers) == 0 ? " " : ($mobile_numbers[0]['key_value'] == "" ? "" : $mobile_numbers[0]['key_value']));
+
+			foreach ($data['mrf'] as $key => $value) {
+				foreach ($value as $key1 => $value1) {
+					if ($value1->position_sought == $data['record']['position_sought'])
+						$data['record']['position_sought'] = $value1->position_sought.' ('. $value1->document_no .')';
+				}
+			}
+/*			$telephones = array();
+			$phone_numbers = $this->mod->get_recruitment_personal_value($recruit_id, 'phone');
+			foreach($phone_numbers as $phone){
+				// $telephones[] = $this->format_phone($phone['key_value']);
+				$telephones[] = $phone['key_value'];
+			}
+			$data['profile_telephones'] = $telephones;	
+			$fax = array();
+			$fax_numbers = $this->mod->get_recruitment_personal_value($recruit_id, 'fax');
+			foreach($fax_numbers as $fax_no){
+				// $fax[] = $this->format_phone($fax_no['key_value']);
+				$fax[] = $fax_no['key_value'];
+			}
+			$data['profile_fax'] = $fax;		
+			$mobiles = array();
+			$mobile_numbers = $this->mod->get_recruitment_personal_value($recruit_id, 'mobile');
+			foreach($mobile_numbers as $mobile){
+				// $mobiles[] = $this->format_phone($mobile['key_value']);
+				$mobiles[] = $mobile['key_value'];
+			}
+			$data['profile_mobiles'] = $mobiles;*/
+
+			$city_town = $this->mod->get_recruitment_personal_value($recruit_id, 'city_town');
+			$data['city'] = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $city_town[0]['key_value']));
+			$data['profile_live_in'] = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $this->mod->get_city($city_town[0]['key_value'])));;
+
+			$countries = $this->mod->get_recruitment_personal_value($recruit_id, 'country');
+			$data['country'] = (count($countries) == 0 ? " " : ($countries[0]['key_value'] == "" ? "" : $countries[0]['key_value']));
+			$data['profile_country'] = (count($countries) == 0 ? " " : ($countries[0]['key_value'] == "" ? "" : $this->mod->get_country($countries[0]['key_value'])));
+
+			$civil_status = $this->mod->get_recruitment_personal_value($recruit_id, 'civil_status');
+			$data['profile_civil_status'] = (count($civil_status) == 0 ? " " : ($civil_status[0]['key_value'] == "" ? "" : $civil_status[0]['key_value']));
+			$spouse = $this->mod->get_recruitment_personal_value($recruit_id, 'spouse');
+			$data['profile_spouse'] = (count($spouse) == 0 ? " " : ($spouse[0]['key_value'] == "" ? "" : $spouse[0]['key_value']));
+
+			$solo_parent = $this->mod->get_recruitment_personal_value($recruit_id, 'solo_parent');
+			$data['record']['personal_solo_parent'] = (count($solo_parent) == 0 ? " " : ($solo_parent[0]['key_value'] == "" ? "" : $solo_parent[0]['key_value']));
+				//Personal Contact
+			$address_1 = $this->mod->get_recruitment_personal_value($recruit_id, 'address_1');
+			$address_1 = (count($address_1) == 0 ? " " : ($address_1[0]['key_value'] == "" ? "" : $address_1[0]['key_value']));
+			$address_2 = $this->mod->get_recruitment_personal_value($recruit_id, 'address_2');
+			$address_2 = (count($address_2) == 0 ? " " : ($address_2[0]['key_value'] == "" ? "" : $address_2[0]['key_value']));
+			$data['complete_address'] = $address_1." ".$address_2;	
+			$data['record']['address_1'] = $address_1;	
+			$data['record']['address_2'] = $data['address_2'] = $address_2;
+			$zip_code = $this->mod->get_recruitment_personal_value($recruit_id, 'zip_code');
+			$data['record']['zip_code'] = (count($zip_code) == 0 ? " " : ($zip_code[0]['key_value'] == "" ? "" : $zip_code[0]['key_value']));
+			$province = $this->mod->get_recruitment_personal_value($recruit_id, 'province');
+			$data['record']['province'] = (count($province) == 0 ? " " : ($province[0]['key_value'] == "" ? "" : $province[0]['key_value']));
+			$presentadd_no = $this->mod->get_recruitment_personal_value($recruit_id, 'presentadd_no');
+			$data['record']['presentadd_no'] = (count($presentadd_no) == 0 ? " " : ($presentadd_no[0]['key_value'] == "" ? "" : $presentadd_no[0]['key_value']));
+			$presentadd_village = $this->mod->get_recruitment_personal_value($recruit_id, 'presentadd_village');
+			$data['record']['presentadd_village'] = (count($presentadd_village) == 0 ? " " : ($presentadd_village[0]['key_value'] == "" ? "" : $presentadd_village[0]['key_value']));
+			$town = $this->mod->get_recruitment_personal_value($recruit_id, 'town');
+			$data['record']['town'] = (count($town) == 0 ? " " : ($town[0]['key_value'] == "" ? "" : $town[0]['key_value']));
+						
+			$duration_years = $this->mod->get_recruitment_personal_value($recruit_id, 'duration_years');
+			$data['record']['duration_years'] = (count($duration_years) == 0 ? " " : ($duration_years[0]['key_value'] == "" ? "" : $duration_years[0]['key_value']));
+			$duration_month = $this->mod->get_recruitment_personal_value($recruit_id, 'duration_month');
+			$data['record']['duration_month'] = (count($duration_month) == 0 ? " " : ($duration_month[0]['key_value'] == "" ? "" : $duration_month[0]['key_value']));
+		
+			//permanent address
+			$same_as_present_address = $this->mod->get_recruitment_personal_value($recruit_id, 'same_as_present_address');
+			$data['record']['same_as_present_address'] = (count($same_as_present_address) == 0 ? " " : ($same_as_present_address[0]['key_value'] == "" ? "" : $same_as_present_address[0]['key_value']));
+			$permanent_address_1 = $this->mod->get_recruitment_personal_value($recruit_id, 'permanent_address_1');
+			$data['record']['permanent_address_1'] = (count($permanent_address_1) == 0 ? " " : ($permanent_address_1[0]['key_value'] == "" ? "" : $permanent_address_1[0]['key_value']));
+			$permanent_address_2 = $this->mod->get_recruitment_personal_value($recruit_id, 'permanent_address_2');
+			$data['record']['permanent_address_2'] = (count($permanent_address_2) == 0 ? " " : ($permanent_address_2[0]['key_value'] == "" ? "" : $permanent_address_2[0]['key_value']));
+			$permanent_city_town = $this->mod->get_recruitment_personal_value($recruit_id, 'permanent_city_town');
+			$data['record']['permanent_city_town'] = (count($permanent_city_town) == 0 ? " " : ($permanent_city_town[0]['key_value'] == "" ? "" : $permanent_city_town[0]['key_value']));
+			$permanent_province = $this->mod->get_recruitment_personal_value($recruit_id, 'permanent_province');
+			$data['record']['permanent_province'] = (count($permanent_province) == 0 ? " " : ($permanent_province[0]['key_value'] == "" ? "" : $permanent_province[0]['key_value']));
+			$permanent_country = $this->mod->get_recruitment_personal_value($recruit_id, 'permanent_country');
+			$data['record']['permanent_country'] = (count($permanent_country) == 0 ? " " : ($permanent_country[0]['key_value'] == "" ? "" : $permanent_country[0]['key_value']));
+			$permanent_zipcode = $this->mod->get_recruitment_personal_value($recruit_id, 'permanent_zipcode');
+			$data['record']['permanent_zipcode'] = (count($permanent_zipcode) == 0 ? " " : ($permanent_zipcode[0]['key_value'] == "" ? "" : $permanent_zipcode[0]['key_value']));
+			$permanent_add_no = $this->mod->get_recruitment_personal_value($recruit_id, 'permanent_add_no');
+			$data['record']['permanent_add_no'] = (count($permanent_add_no) == 0 ? " " : ($permanent_add_no[0]['key_value'] == "" ? "" : $permanent_add_no[0]['key_value']));
+			$permanent_add_village = $this->mod->get_recruitment_personal_value($recruit_id, 'permanent_add_village');
+			$data['record']['permanent_add_village'] = (count($permanent_add_village) == 0 ? " " : ($permanent_add_village[0]['key_value'] == "" ? "" : $permanent_add_village[0]['key_value']));
+			$permanent_town = $this->mod->get_recruitment_personal_value($recruit_id, 'permanent_town');
+			$data['record']['permanent_town'] = (count($permanent_town) == 0 ? " " : ($permanent_town[0]['key_value'] == "" ? "" : $permanent_town[0]['key_value']));
+		
+			//employment info
+			$probationary_date = $this->mod->get_recruitment_personal_value($recruit_id, 'probationary_date');
+			$data['record_personal'][1]['recruitment_personal.probationary_date'] = (count($probationary_date) == 0 ? " " : ($probationary_date[0]['key_value'] == "" ? "" : date("F d, Y", strtotime($probationary_date[0]['key_value']))));
+			$original_date_hired = $this->mod->get_recruitment_personal_value($recruit_id, 'original_date_hired');
+			$data['record_personal'][1]['recruitment_personal.original_date_hired'] = (count($original_date_hired) == 0 ? " " : ($original_date_hired[0]['key_value'] == "" ? "" : date("F d, Y", strtotime($original_date_hired[0]['key_value']))));
+			$last_probationary = $this->mod->get_recruitment_personal_value($recruit_id, 'last_probationary');
+			$data['record_personal'][1]['recruitment_personal.last_probationary'] = (count($last_probationary) == 0 ? " " : ($last_probationary[0]['key_value'] == "" ? "" : date("F d, Y", strtotime($last_probationary[0]['key_value']))));
+			$last_salary_adjustment = $this->mod->get_recruitment_personal_value($recruit_id, 'last_salary_adjustment');
+			$data['record_personal'][1]['recruitment_personal.last_salary_adjustment'] = (count($last_salary_adjustment) == 0 ? " " : ($last_salary_adjustment[0]['key_value'] == "" ? "" : date("F d, Y", strtotime($last_salary_adjustment[0]['key_value']))));
+			$organization = $this->mod->get_recruitment_personal_value($recruit_id, 'organization');
+			$data['record_personal'][1]['recruitment_personal.organization'] = (count($organization) == 0 ? " " : ($organization[0]['key_value'] == "" ? "" : $organization[0]['key_value']));
+			
+			//Emergency Contact
+			$emergency_name = $this->mod->get_recruitment_personal_value($recruit_id, 'emergency_name');
+			$data['record']['emergency_name'] = (count($emergency_name) == 0 ? " " : ($emergency_name[0]['key_value'] == "" ? "" : $emergency_name[0]['key_value']));
+			$emergency_relationship = $this->mod->get_recruitment_personal_value($recruit_id, 'emergency_relationship');
+			$data['record']['emergency_relationship'] = (count($emergency_relationship) == 0 ? " " : ($emergency_relationship[0]['key_value'] == "" ? "" : $emergency_relationship[0]['key_value']));
+			$emergency_phone = $this->mod->get_recruitment_personal_value($recruit_id, 'emergency_phone');
+			$data['record']['emergency_phone'] = (count($emergency_phone) == 0 ? " " : ($emergency_phone[0]['key_value'] == "" ? "" : $emergency_phone[0]['key_value']));
+			$emergency_mobile = $this->mod->get_recruitment_personal_value($recruit_id, 'emergency_mobile');
+			$data['record']['emergency_mobile'] = (count($emergency_mobile) == 0 ? " " : ($emergency_mobile[0]['key_value'] == "" ? "" : $emergency_mobile[0]['key_value']));
+			$emergency_address = $this->mod->get_recruitment_personal_value($recruit_id, 'emergency_address');
+			$data['record']['emergency_address'] = (count($emergency_address) == 0 ? " " : ($emergency_address[0]['key_value'] == "" ? "" : $emergency_address[0]['key_value']));
+			$emergency_city = $this->mod->get_recruitment_personal_value($recruit_id, 'emergency_city');
+			$data['record']['emergency_city'] = (count($emergency_city) == 0 ? " " : ($emergency_city[0]['key_value'] == "" ? "" : $emergency_city[0]['key_value']));
+			$emergency_country = $this->mod->get_recruitment_personal_value($recruit_id, 'emergency_country');
+			$data['record']['emergency_country'] = (count($emergency_country) == 0 ? " " : ($emergency_country[0]['key_value'] == "" ? "" : $emergency_country[0]['key_value']));
+			$emergency_zip_code = $this->mod->get_recruitment_personal_value($recruit_id, 'emergency_zip_code');
+			$data['record']['emergency_zip_code'] = (count($emergency_zip_code) == 0 ? " " : ($emergency_zip_code[0]['key_value'] == "" ? "" : $emergency_zip_code[0]['key_value']));
+
+			/***** PERSONAL TAB *****/
+				//Personal
+			$gender = $this->mod->get_recruitment_personal_value($recruit_id, 'gender');
+			$data['record']['gender'] = (count($gender) == 0 ? " " : ($gender[0]['key_value'] == "" ? "" : $gender[0]['key_value']));
+			$birth_place = $this->mod->get_recruitment_personal_value($recruit_id, 'birth_place');
+			$data['record']['birth_place'] = (count($birth_place) == 0 ? " " : ($gender[0]['key_value'] == "" ? "" : $birth_place[0]['key_value']));
+			$religion = $this->mod->get_recruitment_personal_value($recruit_id, 'religion');
+			$data['record']['religion'] = (count($religion) == 0 ? " " : ($religion[0]['key_value'] == "" ? "" : $this->mod->get_religion($religion[0]['key_value'])));
+
+			$nationality = $this->mod->get_recruitment_personal_value($recruit_id, 'nationality');
+			$data['record']['nationality'] = (count($nationality) == 0 ? " " : ($nationality[0]['key_value'] == "" ? "" : $nationality[0]['key_value']));
+				//Other Information
+			$height = $this->mod->get_recruitment_personal_value($recruit_id, 'height');
+			$data['record']['height'] = (count($height) == 0 ? " " : ($height[0]['key_value'] == "" ? "" : $height[0]['key_value']));
+			$weight = $this->mod->get_recruitment_personal_value($recruit_id, 'weight');
+			$data['record']['weight'] = (count($weight) == 0 ? " " : ($weight[0]['key_value'] == "" ? "" : $weight[0]['key_value']));
+			$interests_hobbies = $this->mod->get_recruitment_personal_value($recruit_id, 'interests_hobbies');
+			$data['record']['interests_hobbies'] = (count($interests_hobbies) == 0 ? " " : ($interests_hobbies[0]['key_value'] == "" ? "" : $interests_hobbies[0]['key_value']));
+			$language = $this->mod->get_recruitment_personal_value($recruit_id, 'language');
+			$data['record']['language'] = (count($language) == 0 ? " " : ($language[0]['key_value'] == "" ? "" : $language[0]['key_value']));
+			$dialect = $this->mod->get_recruitment_personal_value($recruit_id, 'dialect');
+			$data['record']['dialect'] = (count($dialect) == 0 ? " " : ($dialect[0]['key_value'] == "" ? "" : $dialect[0]['key_value']));
+			$dependents_count = $this->mod->get_recruitment_personal_value($recruit_id, 'dependents_count');
+			$data['record']['dependents_count'] = (count($dependents_count) == 0 ? " " : ($dependents_count[0]['key_value'] == "" ? "" : $dependents_count[0]['key_value']));
+
+			//other questions
+			$machine_operated = $this->mod->get_recruitment_personal_value($recruit_id, 'machine_operated');
+			$data['record']['machine_operated'] = (count($machine_operated) == 0 ? " " : ($machine_operated[0]['key_value'] == "" ? "" : $machine_operated[0]['key_value']));
+			$driver_license = $this->mod->get_recruitment_personal_value($recruit_id, 'driver_license');
+			$data['record']['driver_license'] = (count($driver_license) == 0 ? " " : ($driver_license[0]['key_value'] == "" ? "" : $driver_license[0]['key_value']));			
+			$driver_type_license = $this->mod->get_recruitment_personal_value($recruit_id, 'driver_type_license');
+			$data['record']['driver_type_license'] = (count($driver_type_license) == 0 ? " " : ($driver_type_license[0]['key_value'] == "" ? "" : $driver_type_license[0]['key_value']));						
+			$prc_license = $this->mod->get_recruitment_personal_value($recruit_id, 'prc_license');
+			$data['record']['prc_license'] = (count($prc_license) == 0 ? " " : ($prc_license[0]['key_value'] == "" ? "" : $prc_license[0]['key_value']));			
+			$prc_type_license = $this->mod->get_recruitment_personal_value($recruit_id, 'prc_type_license');
+			$data['record']['prc_type_license'] = (count($prc_type_license) == 0 ? " " : ($prc_type_license[0]['key_value'] == "" ? "" : $prc_type_license[0]['key_value']));						
+			$prc_license_no = $this->mod->get_recruitment_personal_value($recruit_id, 'prc_license_no');
+			$data['record']['prc_license_no'] = (count($prc_license_no) == 0 ? " " : ($prc_license_no[0]['key_value'] == "" ? "" : $prc_license_no[0]['key_value']));			
+			$prc_date_expiration = $this->mod->get_recruitment_personal_value($recruit_id, 'prc_date_expiration');
+			$data['record']['prc_date_expiration'] = (count($prc_date_expiration) == 0 ? " " : ($prc_date_expiration[0]['key_value'] == "" ? "" : $prc_date_expiration[0]['key_value']));			
+			$illness_question = $this->mod->get_recruitment_personal_value($recruit_id, 'illness_question');
+			$data['record']['illness_question'] = (count($illness_question) == 0 ? " " : ($illness_question[0]['key_value'] == "" ? "" : $illness_question[0]['key_value']));			
+			$illness_yes = $this->mod->get_recruitment_personal_value($recruit_id, 'illness_yes');
+			$data['record']['illness_yes'] = (count($illness_yes) == 0 ? " " : ($illness_yes[0]['key_value'] == "" ? "" : $illness_yes[0]['key_value']));						
+			$trial_court = $this->mod->get_recruitment_personal_value($recruit_id, 'trial_court');
+			$data['record']['trial_court'] = (count($trial_court) == 0 ? " " : ($trial_court[0]['key_value'] == "" ? "" : $trial_court[0]['key_value']));			
+			$how_hiring_heard = $this->mod->get_recruitment_personal_value($recruit_id, 'how_hiring_heard');
+			$data['record']['how_hiring_heard'] = (count($how_hiring_heard) == 0 ? " " : ($how_hiring_heard[0]['key_value'] == "" ? "" : $how_hiring_heard[0]['key_value']));						
+			$work_start = $this->mod->get_recruitment_personal_value($recruit_id, 'work_start');
+			$data['record']['work_start'] = (count($work_start) == 0 ? " " : ($work_start[0]['key_value'] == "" ? "" : $work_start[0]['key_value']));			
+			$referred_employee = $this->mod->get_recruitment_personal_value($recruit_id, 'referred_employee');
+			$data['record']['referred_employee'] = (count($referred_employee) == 0 ? " " : ($referred_employee[0]['key_value'] == "" ? "" : $referred_employee[0]['key_value']));						
+			$illness_question = $this->mod->get_recruitment_personal_value($recruit_id, 'illness_question');
+			$data['record']['illness_question'] = (count($illness_question) == 0 ? " " : ($illness_question[0]['key_value'] == "" ? "" : $illness_question[0]['key_value']));			
+
+			$tin_number = $this->mod->get_recruitment_personal_value($recruit_id, 'tin_number');
+			$data['record']['tin_number'] = (count($tin_number) == 0 ? " " : ($tin_number[0]['key_value'] == "" ? "" : $tin_number[0]['key_value']));
+			$sss_number = $this->mod->get_recruitment_personal_value($recruit_id, 'sss_number');
+			$data['record']['sss_number'] = (count($sss_number) == 0 ? " " : ($sss_number[0]['key_value'] == "" ? "" : $sss_number[0]['key_value']));
+			$pagibig_number = $this->mod->get_recruitment_personal_value($recruit_id, 'pagibig_number');
+			$data['record']['pagibig_number'] = (count($pagibig_number) == 0 ? " " : ($pagibig_number[0]['key_value'] == "" ? "" : $pagibig_number[0]['key_value']));
+			$philhealth_number = $this->mod->get_recruitment_personal_value($recruit_id, 'philhealth_number');
+			$data['record']['philhealth_number'] = (count($philhealth_number) == 0 ? " " : ($philhealth_number[0]['key_value'] == "" ? "" : $philhealth_number[0]['key_value']));
+			$drivers_license_no = $this->mod->get_recruitment_personal_value($recruit_id, 'drivers_license_no');
+			$data['record']['drivers_license_no'] = get_valid_key_value($drivers_license_no);
+			$passport_no = $this->mod->get_recruitment_personal_value($recruit_id, 'passport_no');
+			$data['record']['passport_no'] = get_valid_key_value($passport_no);	
+
+			$cert_member_to_trade = $this->mod->get_recruitment_personal_value($recruit_id, 'cert_member_to_trade');
+			$data['record']['cert_member_to_trade'] = (count($cert_member_to_trade) == 0 ? " " : ($cert_member_to_trade[0]['key_value'] == "" ? "" : $cert_member_to_trade[0]['key_value']));
+			$previously_employed_at_hdi = $this->mod->get_recruitment_personal_value($recruit_id, 'previously_employed_at_hdi');
+			$data['record']['previously_employed_at_hdi'] = (count($previously_employed_at_hdi) == 0 ? " " : ($previously_employed_at_hdi[0]['key_value'] == "" ? "" : $previously_employed_at_hdi[0]['key_value']));
+			$known_people_at_hdi = $this->mod->get_recruitment_personal_value($recruit_id, 'known_people_at_hdi');
+			$data['record']['known_people_at_hdi'] = (count($known_people_at_hdi) == 0 ? " " : ($known_people_at_hdi[0]['key_value'] == "" ? "" : $known_people_at_hdi[0]['key_value']));
+			$physical_disabilities = $this->mod->get_recruitment_personal_value($recruit_id, 'physical_disabilities');
+			$data['record']['physical_disabilities'] = (count($physical_disabilities) == 0 ? " " : ($physical_disabilities[0]['key_value'] == "" ? "" : $physical_disabilities[0]['key_value']));
+			$work_limitations = $this->mod->get_recruitment_personal_value($recruit_id, 'work_limitations');
+			$data['record']['work_limitations'] = (count($work_limitations) == 0 ? " " : ($work_limitations[0]['key_value'] == "" ? "" : $work_limitations[0]['key_value']));
+			$illness_injuries = $this->mod->get_recruitment_personal_value($recruit_id, 'illness_injuries');
+			$data['record']['illness_injuries'] = (count($illness_injuries) == 0 ? " " : ($illness_injuries[0]['key_value'] == "" ? "" : $illness_injuries[0]['key_value']));
+			$illness_injuries_desc = $this->mod->get_recruitment_personal_value($recruit_id, 'illness_injuries_desc');
+			$data['record']['illness_injuries_desc'] = (count($illness_injuries_desc) == 0 ? " " : ($illness_injuries_desc[0]['key_value'] == "" ? "" : $illness_injuries_desc[0]['key_value']));
+			$illness_compensated = $this->mod->get_recruitment_personal_value($recruit_id, 'illness_compensated');
+			$data['record']['illness_compensated'] = (count($illness_compensated) == 0 ? " " : ($illness_compensated[0]['key_value'] == "" ? "" : $illness_compensated[0]['key_value']));
+			$willing_to_relocate = $this->mod->get_recruitment_personal_value($recruit_id, 'willing_to_relocate');
+			$data['record']['willing_to_relocate'] = (count($willing_to_relocate) == 0 ? " " : ($willing_to_relocate[0]['key_value'] == "" ? "" : $willing_to_relocate[0]['key_value']));
+			$days_notice_to_work = $this->mod->get_recruitment_personal_value($recruit_id, 'days_notice_to_work');
+			$data['record']['days_notice_to_work'] = (count($days_notice_to_work) == 0 ? " " : ($days_notice_to_work[0]['key_value'] == "" ? "" : $days_notice_to_work[0]['key_value']));
+			/***** HISTORY TAB *****/
+				//Education
+			$education_tab = array();
+			$educational_tab = array();
+			$education_tab = $this->mod->get_recruitment_personal_value_history($recruit_id, 'education');
+			foreach($education_tab as $educ){
+				$educational_tab[$educ['sequence']][$educ['key']] = $educ['key_value'];
+			}
+			$data['education_tab'] = $educational_tab;
+		//Employment
+			$employment_tab = array();
+			$employments_tab = array();
+			$employment_tab = $this->mod->get_recruitment_personal_value_history($recruit_id, 'employment');
+			foreach($employment_tab as $emp){
+				$employments_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			}
+			$data['employment_tab'] = $employments_tab;
+		//Character Reference
+			$reference_tab = array();
+			$references_tab = array();
+			$reference_tab = $this->mod->get_recruitment_personal_value_history($recruit_id, 'reference');
+			foreach($reference_tab as $emp){
+				$references_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			}
+			$data['reference_tab'] = $references_tab;
+		//Licensure
+			$licensure_tab = array();
+			$licensures_tab = array();
+			$details_data_id = array();
+			$licensure_tab = $this->mod->get_recruitment_personal_value_history($recruit_id, 'licensure');
+			foreach($licensure_tab as $emp){
+				$licensures_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+				$details_data_id[$emp['sequence']][$emp['key']] = $emp['personal_id'];
+			}
+			$data['licensure_tab'] = $licensures_tab;
+			$data['details_data_id']['licensure'] = $details_data_id;
+		//Trainings and Seminars
+			$training_tab = array();
+			$trainings_tab = array();
+			$training_tab = $this->mod->get_recruitment_personal_value_history($recruit_id, 'training');
+			foreach($training_tab as $emp){
+				$trainings_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			}
+			$data['training_tab'] = $trainings_tab;
+		//Skills
+			$skill_tab = array();
+			$skills_tab = array();
+			$skill_tab = $this->mod->get_recruitment_personal_value_history($recruit_id, 'skill');
+			foreach($skill_tab as $emp){
+				$skills_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			}
+			$data['skill_tab'] = $skills_tab;
+		//Affiliation
+			$affiliation_tab = array();
+			$affiliations_tab = array();
+			$affiliation_tab = $this->mod->get_recruitment_personal_value_history($recruit_id, 'affiliation');
+			foreach($affiliation_tab as $emp){
+				$affiliations_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			}
+			$data['affiliation_tab'] = $affiliations_tab;
+		//Friends and Relatives
+			$friend_relative_tab = array();
+			$friend_relatives_tab = array();
+			$friend_relative_tab = $this->mod->get_recruitment_personal_value_history($recruit_id, 'friends_relatives');
+			foreach($friend_relative_tab as $emp){
+				$friend_relatives_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			}
+			$data['friend_relative_tab'] = $friend_relatives_tab;			
+		//Accountabilities
+			$accountabilities_tab = array();
+			$accountable_tab = array();
+			$accountabilities_tab = $this->mod->get_recruitment_personal_value_history($recruit_id, 'accountabilities');
+			foreach($accountabilities_tab as $emp){
+				$accountable_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			}
+			$data['accountabilities_tab'] = $accountable_tab;
+		//Attachments
+			$attachment_tab = array();
+			$attachments_tab = array();
+			$attachment_tab = $this->mod->get_recruitment_personal_value_history($recruit_id, 'attachment');
+			foreach($attachment_tab as $emp){
+				$attachments_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			}
+			$data['attachment_tab'] = $attachments_tab;
+		//Family
+			$family_tab = array();
+			$families_tab = array();
+			$family_tab = $this->mod->get_recruitment_personal_value_history($recruit_id, 'family');
+			foreach($family_tab as $emp){
+				$families_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			}
+			$data['family_tab'] = $families_tab;
+		//test profile
+			$test_tab = array();
+			$tests_tab = array();
+			$test_tab = $this->mod->get_recruitment_personal_value_history($recruit_id, 'test');
+			foreach($test_tab as $emp){
+				$tests_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+				$details_data_id[$emp['sequence']][$emp['key']] = $emp['personal_id'];
+			}
+			$data['test_tab'] = $tests_tab;
+			$data['details_data_id']['test'] = $details_data_id;
+
+			$dependents_result = $this->mod->get_recruitment_personal_value_history($recruit_id, 'family');
+
+			$number_children = 0;
+			$dependents_count = 0;
+			foreach ($dependents_result as $key => $value) {
+				if ($value['key'] == 'family-relationship') {
+					$dependents_count++;
+
+					if ($value['key_value'] == 'Son' || $value['key_value'] == 'Daughter')
+						$number_children++;
+				}
+			}
+
+			$data['dependents_count'] = ($dependents_count == 0 ? '' : $dependents_count);
+			$data['number_children'] = ($number_children == 0 ? '' : $number_children);
+
+			$data['employee'] = $this->mod->get_employee();
+			$data['type_license'] = $this->mod->get_type_license();
+			$data['sourcing_tool'] = $this->mod->get_sourcing_tools();			
+		}
+
+		$this->load->vars( $data );
+
+		$this->load->helper('form');
+		$this->load->helper('file');
+		echo $this->load->blade('detail.detail_custom')->with( $this->load->get_cached_vars() );
 	}
 
 	public function add( $recruit_id=0, $child_call = false )
@@ -609,6 +1030,10 @@ class Applicants extends MY_PrivateController
 			$data['record']['address_1'] = "";
 			$data['record']['address_2'] = "";
 			$data['record']['zip_code'] = "";
+			$data['record']['phone'] = "";
+			$data['record']['mobile'] = "";
+			$data['country'] = "";
+			$data['city'] = "";
 
 			//emergency contacts
 			$data['record']['emergency_name'] = "";
@@ -675,6 +1100,9 @@ class Applicants extends MY_PrivateController
 		//Trainings and Seminars
 			$trainings_tab = array();
 			$data['training_tab'] = $trainings_tab;
+		//Test Profile
+			$test_tab = array();
+			$data['test_tab'] = $test_tab;			
 		//Skills
 			$skills_tab = array();
 			$data['skill_tab'] = $skills_tab;
@@ -703,6 +1131,8 @@ class Applicants extends MY_PrivateController
 			$data['record']['sss_number'] = "";
 			$data['record']['pagibig_number'] = "";
 			$data['record']['philhealth_number'] = "";
+			$data['record']['drivers_license_no'] = "";
+			$data['record']['passport_no'] = "";			
 			$data['record']['cert_member_to_trade'] = "";
 			$data['record']['previously_employed_at_hdi'] = "";
 			$data['record']['known_people_at_hdi'] = "";
@@ -767,10 +1197,9 @@ class Applicants extends MY_PrivateController
 			}
 			$data['profile_mobiles'] = $mobiles;
 			$city_town = $this->mod->get_recruitment_personal_value($recruit_id, 'city_town');
-			$city_town = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $city_town[0]['key_value']));
-			$data['profile_live_in'] = $city_town;
+			$data['profile_live_in'] = (count($city_town) == 0 ? " " : ($city_town[0]['key_value'] == "" ? "" : $this->mod->get_city($city_town[0]['key_value'])));;
 			$countries = $this->mod->get_recruitment_personal_value($recruit_id, 'country');
-			$data['profile_country'] = (count($countries) == 0 ? " " : ($countries[0]['key_value'] == "" ? "" : $countries[0]['key_value']));
+			$data['profile_country'] = (count($countries) == 0 ? " " : ($countries[0]['key_value'] == "" ? "" : $this->mod->get_country($countries[0]['key_value'])));
 			$civil_status = $this->mod->get_recruitment_personal_value($recruit_id, 'civil_status');
 			$data['profile_civil_status'] = (count($civil_status) == 0 ? " " : ($civil_status[0]['key_value'] == "" ? "" : $civil_status[0]['key_value']));
 			$spouse = $this->mod->get_recruitment_personal_value($recruit_id, 'spouse');
@@ -862,9 +1291,17 @@ class Applicants extends MY_PrivateController
 			$partners_personal_table = "recruitment_personal";
 			// $other_tables['partners'] = $post['partners'];
 			// $other_tables['partners']['effectivity_date'] = date('Y-m-d', strtotime($post['partners']['effectivity_date']));
-			$partners_personal_key = array('position_sought', 'desired_salary', 'photo', 'salary_pay_mode', 'currently_employed', 'sourcing_tools', 'resume');
+			$partners_personal_key = array('position_sought', 'desired_salary', 'photo', 'salary_pay_mode', 'currently_employed', 'sourcing_tools', 'resume', 'how_hiring_heard', 'referred_by');
 			$partners_personal = $post['recruitment_personal'];
 			break;
+			case 2:
+			//ID NUmbers Tab
+			$partners_personal_table = "recruitment_personal";
+			// $other_tables['users_profile'] = $post['users_profile'];
+			// $other_tables['users_profile']['birth_date'] = date('Y-m-d', strtotime($post['users_profile']['birth_date']));
+			$partners_personal_key = array('tin_number', 'sss_number','pagibig_number','philhealth_number','drivers_license_no','passport_no');
+			$partners_personal = $post['recruitment_personal'];
+			break;			
 			case 3:
 			//Contacts Tab
 			$validation_rules[] = 
@@ -881,12 +1318,12 @@ class Applicants extends MY_PrivateController
 								'emergency_name', 'emergency_relationship', 'emergency_phone', 'emergency_mobile', 'emergency_address', 'emergency_city', 'emergency_country', 'emergency_zip_code');
 			$partners_personal = $post['recruitment_personal'];
 
-			$partner_phone = $_POST['recruitment_personal']['phone'];
+/*			$partner_phone = $_POST['recruitment_personal']['phone'];
 			$partner_mobile = $_POST['recruitment_personal']['mobile'];
 			$emergency_phone = $_POST['recruitment_personal']['emergency_phone'];
-			$emergency_mobile = $_POST['recruitment_personal']['emergency_mobile'];
+			$emergency_mobile = $_POST['recruitment_personal']['emergency_mobile'];*/
 
-			unset($partners_personal['mobile']);
+/*			unset($partners_personal['mobile']);
 			foreach ($partner_mobile as $phone){
 				$mobile = $this->check_mobile($phone);
 				if(!empty($phone)){
@@ -925,7 +1362,32 @@ class Applicants extends MY_PrivateController
 			}
         	if(!isset($partners_personal['phone'])){
         		$partners_personal['phone'] = array();
+        	}*/
+			if(!empty($partners_personal['mobile'])){
+				$mobile = $this->check_mobile($partners_personal['mobile'], $this->record_id);
+				if(!($mobile)){
+					$this->response->invalid=true;
+					$this->response->invalid_message='Invalid mobile number';
+					$this->response->message[] = array(
+				    	'message' => 'Invalid ofice mobile number',
+				    	'type' => 'warning'
+					);
+	        		$this->_ajax_return();
+	        	}
         	}
+
+        	if(!empty($partners_personal['phone'])){
+	        	$phone = $this->check_phone($partners_personal['phone'], $this->record_id);
+				if(!($phone)){
+					$this->response->invalid=true;
+					$this->response->invalid_message='Invalid phone number';
+					$this->response->message[] = array(
+				    	'message' => 'Invalid phone number',
+				    	'type' => 'warning'
+					);
+	        		$this->_ajax_return();
+	        	}
+        	}        	
 			if(!empty($partners_personal['emergency_mobile'])){
 				$mobile = $this->check_mobile($partners_personal['emergency_mobile']);
 				if(!$mobile){
@@ -980,7 +1442,6 @@ class Applicants extends MY_PrivateController
 			// $other_tables['users_profile'] = $post['users_profile'];
 			// $other_tables['users_profile']['birth_date'] = date('Y-m-d', strtotime($post['users_profile']['birth_date']));
 			$partners_personal_key = array('gender', 'birth_place', 'religion', 'nationality', 'civil_status', 
-									'tin_number', 'sss_number','pagibig_number','philhealth_number',
 									'machine_operated', 'driver_license', 'driver_type_license', 'prc_license', 'prc_type_license', 'prc_license_no', 'prc_date_expiration', 'illness_question', 'illness_yes', 'trial_court', 'how_hiring_heard', 'work_start', 'referred_employee',
 									'cert_member_to_trade', 'previously_employed_at_hdi', 'known_people_at_hdi', 'physical_disabilities', 'work_limitations', 'illness_injuries', 'illness_injuries_desc', 'illness_compensated', 'willing_to_relocate', 'days_notice_to_work', 
 									'height', 'weight', 'interests_hobbies', 'language', 'dialect', 'dependents_count', 'solo_parent');
@@ -1052,7 +1513,7 @@ class Applicants extends MY_PrivateController
 				);
 			$partners_personal_table = "recruitment_personal_history";
 			$partners_personal_key = array('employment-company', 'employment-position-title', 'employment-location', 'employment-duties', 'employment-month-hired', 'employment-month-end', 'employment-year-hired', 'employment-year-end',
-								'employment-nature-of-business', 'employment-contact-number', 'employment-last-salary', 'employment-supervisor', 'employment-reason-for-leaving');
+								'employment-nature-of-business', 'employment-contact-number', 'employment-last-salary', 'employment-supervisor', 'employment-reason-for-leaving', 'employment-latest-salary');
 			if (isset($post['recruitment_personal_history'])) {
 				$partners_personal = $post['recruitment_personal_history'];
 			}else{	
@@ -1105,7 +1566,7 @@ class Applicants extends MY_PrivateController
 				'rules' => 'required|numeric'
 				);
 			$partners_personal_table = "recruitment_personal_history";
-			$partners_personal_key = array('licensure-title', 'licensure-number', 'licensure-remarks', 'licensure-month-taken', 'licensure-year-taken');
+			$partners_personal_key = array('licensure-title', 'licensure-number', 'licensure-remarks', 'licensure-month-taken', 'licensure-year-taken', 'licensure-month-validity-until', 'licensure-year-validity-until', 'licensure-attach');
 			if (isset($post['recruitment_personal_history'])) {
 				$partners_personal = $post['recruitment_personal_history'];
 			}else{	
@@ -1143,7 +1604,7 @@ class Applicants extends MY_PrivateController
 				'rules' => 'required|numeric'
 				);
 			$partners_personal_table = "recruitment_personal_history";
-			$partners_personal_key = array('training-category', 'training-title', 'training-venue', 'training-start-month', 'training-start-year', 'training-end-month', 'training-end-year');
+			$partners_personal_key = array('training-category', 'training-title', 'training-venue', 'training-start-month', 'training-start-year', 'training-end-month', 'training-end-year', 'training-remarks', 'training-provider', 'training-cost', 'training-budgeted');
 			if (isset($post['recruitment_personal_history'])) {
 				$partners_personal = $post['recruitment_personal_history'];
 			}else{	
@@ -1291,7 +1752,7 @@ class Applicants extends MY_PrivateController
 				'rules' => 'required'
 				);
 			$partners_personal_table = "recruitment_personal_history";
-			$partners_personal_key = array('family-age', 'family-relationship', 'family-name', 'family-birthdate', 'family-occupation', 'family-employer');
+			$partners_personal_key = array('family-age', 'family-relationship', 'family-name', 'family-birthdate', 'family-occupation', 'family-employer', 'family-dependent-hmo', 'family-dependent-insurance');
 			if (isset($post['recruitment_personal_history'])) {
 				$partners_personal = $post['recruitment_personal_history'];
 			}else{	
@@ -1322,6 +1783,36 @@ class Applicants extends MY_PrivateController
 						);  
 				$this->_ajax_return();
 			}
+			break;
+			case 16:
+			//Test Profile tab
+			$validation_rules[] = 
+			array(
+				'field' => 'recruitment_personal_history[test-title]',
+				'label' => 'Title',
+				'rules' => 'required'
+				);
+			$validation_rules[] = 
+			array(
+				'field' => 'recruitment_personal_history[test-date-taken]',
+				'label' => 'Date Taken',
+				'rules' => 'required'
+				);
+/*			$validation_rules[] = 
+			array(
+				'field' => 'recruitment_personal_history[test-location]',
+				'label' => 'Location',
+				'rules' => 'required'
+				);
+			$validation_rules[] = 
+			array(
+				'field' => 'recruitment_personal_history[test-score]',
+				'label' => 'Score/Rating',
+				'rules' => 'required'
+				);*/
+			$partners_personal_table = "recruitment_personal_history";
+			$partners_personal_key = array('test-category', 'test-date-taken', 'test-location', 'test-score', 'test-result', 'test-remarks', 'test-attachments', 'test-title');
+			$partners_personal = (isset($post['recruitment_personal_history']) ? $post['recruitment_personal_history'] : array());
 			break;			
 		}
 
@@ -1624,7 +2115,7 @@ class Applicants extends MY_PrivateController
 		$this->load->helper('file');
         // $view['title'] = $data['forms_title'];
         // $view['content'] = $this->load->view('edit/edit_'.$this->input->post('form_code').'_form', $data, true);
-		$this->response->view_details = $this->load->view('edit/'.$this->input->post('modal_form'), $data, true);
+		$this->response->view_details = $this->load->view('detail/'.$this->input->post('modal_form'), $data, true);
 
 		$this->response->message[] = array(
 			'message' => '',
@@ -1672,8 +2163,7 @@ class Applicants extends MY_PrivateController
     }
 
 	function download_file($personal_id){	
-		$this->load->model('my201_model', 'profile_mod');	
-		$image_details = $this->profile_mod->get_partners_personal_image_details($this->user->user_id, $personal_id);
+		$image_details = $this->mod->get_applicants_personal_image_details($this->user->user_id, $personal_id);
 		$path = base_url() . $image_details['key_value'];
 		
 		header('Content-disposition: attachment; filename='.substr( $image_details['key_value'], strrpos( $image_details['key_value'], '/' )+1 ).'');

@@ -79,7 +79,7 @@
                                                                     default:
                                                                     $icon = 'fa-file-text-o';
                                                                 }
-                                                                $filepath = base_url()."partners/download_file/".$details_data_id['attachment-file'];
+                                                                $filepath = base_url()."applicants/download_file/".$details_data_id['attachment-file'];
                                                                 $file_view = base_url().$details['attachment-file'];
 
                                                                 echo '<li class="padding-3" style="list-style:none;"><a href="'.$filepath.'">

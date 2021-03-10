@@ -11,7 +11,10 @@ $config['fieldgroups'][1] = array(
 	'fields' => array(
 		'recruitment_request.company_id',
         'recruitment_request.document_no',
+        'recruitment_request.plan_code',
+        'recruitment_request.division_id',
 		'recruitment_request.department_id',
+		'recruitment_request.rank_id',
 		'recruitment_request.position_id',
 		'recruitment_request.replacement_of',
 		'recruitment_request.user_id',

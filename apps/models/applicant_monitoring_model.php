@@ -36,12 +36,109 @@ class applicant_monitoring_model extends Record
 		parent::__construct();
 	}
 
+    function get_partners_personal($user_id=0, $partners_personal_table='', $key='', $sequence=0){
+        $this->db->select('personal_id, key_value')
+        ->from($partners_personal_table)
+        ->join('partners', $partners_personal_table.'.partner_id = partners.partner_id', 'left')
+        ->where("partners.user_id = $user_id")
+        ->where("partners.deleted = 0")
+        ->where($partners_personal_table.".key = '$key'");
+        if($sequence != 0)
+            $this->db->where($partners_personal_table.".sequence = '$sequence'");
+
+        if($partners_personal_table == 'partners_personal'){
+            $this->db->where("partners_personal.deleted = 0");
+        }
+
+        $partners_personal = $this->db->get('');    
+        
+        if( $partners_personal->num_rows() > 0 )
+            return $partners_personal->result_array();
+        else
+            return array();
+    }
+
+    public function insert_partners_personal($user_id=0, $key_code='', $key_value='', $sequence=0, $partner_id=0)
+    {
+        $sql_partner = $this->db->get_where('partners', array('user_id' => $user_id));
+        $partner_details = $sql_partner->row_array();
+
+        if(!count($partner_details) > 0){
+            $this->db->insert('partners', array('user_id' => $user_id));
+            $partner_id = $this->db->insert_id();
+        }
+        
+        $sql_partner_key = $this->db->get_where('partners_key', array('key_code' => $key_code));
+        $key_details = $sql_partner_key->row_array();
+
+        $data = array();
+        
+        if ($key_details && !empty($key_details)) {
+            $data = array(
+                'partner_id' => ($partner_id == 0) ? $partner_details['partner_id'] : $partner_id,
+                'key_id' => $key_details['key_id'],     
+                'key' => $key_details['key_code'],
+                'sequence' => $sequence,
+                'key_name' => $key_details['key_label'],
+                'key_value' => $key_value,
+                'created_on' => date('Y-m-d H:i:s'),
+                'created_by' => $this->user->user_id
+                );
+        }
+
+        return $data;
+    }
+
+    function get_recruitment_personal($recruit_id)
+    {
+        $this->db->select('key,key_value')
+        ->from('recruitment_personal ')
+        ->where("recruitment_personal.recruit_id = $recruit_id");
+
+        $recruitment_personal = $this->db->get(''); 
+
+        $recruitment_info = array();
+        if( $recruitment_personal && $recruitment_personal->num_rows() > 0 ) {
+            foreach ($recruitment_personal->result() as $row) {
+                $recruitment_info[$row->key] = $row->key_value;
+            }
+            return $recruitment_info;
+        } else
+            return array();
+    }
+
+    function get_recruitment_personal_history($recruit_id)
+    {
+        $this->db->select('key,key_value')
+        ->from('recruitment_personal_history ')
+        ->where("recruitment_personal_history.recruit_id = $recruit_id");
+
+        $recruitment_personal_history = $this->db->get(''); 
+
+        $recruitment_history_info = array();
+        if( $recruitment_personal_history && $recruitment_personal_history->num_rows() > 0 ){
+            foreach ($recruitment_personal_history->result() as $row) {
+                $recruitment_history_info[$row->key][] = $row->key_value;
+            }
+            return $recruitment_history_info;
+        } else
+            return array();
+    }
+
     function get_scheds( $process_id )
     {
         $rps_status_id = '';
         $rps = $this->db->get_where('recruitment_process',array('process_id' => $process_id));
         if ($rps && $rps->num_rows() > 0){
             $rps_status_id = $rps->row()->status_id;
+            $type = 1;
+            if ($rps_status_id <= 5) {
+                if ($rps_status_id != 5)
+                    $type = 'a.type != 2';
+                else
+                    $type = 'a.type = 2';
+            }
+
         }
 
         $qry = "select a.user_id as interviewer, a.*, b.full_name, d.position, f.*, h.*
@@ -52,7 +149,7 @@ class applicant_monitoring_model extends Record
         LEFT JOIN {$this->db->dbprefix}recruitment_process_interview e on e.schedule_id = a.schedule_id
         LEFT JOIN {$this->db->dbprefix}recruitment_process_interview_result f on f.result_id = e.result_id
         LEFT JOIN {$this->db->dbprefix}recruitment_interview_location h on a.location_id = h.interview_location_id
-        WHERE a.deleted = 0 and a.process_id = {$process_id} and ".($rps_status_id != 5 ? 1 : "a.type = 2")." ";
+        WHERE a.deleted = 0 and a.process_id = {$process_id} and ".$type." ";
 
         $scheds = $this->db->query( $qry );
         if( $scheds &&  $scheds->num_rows() > 0)
@@ -70,6 +167,32 @@ class applicant_monitoring_model extends Record
         $exams = $this->db->query( $qry );
         if( $exams->num_rows() > 0)
             return $exams->result_array();
+        else
+            return false;               
+    }
+
+    function get_interview( $process_id )
+    {
+        $qry = "select *
+        FROM {$this->db->dbprefix}recruitment_process_interview
+        WHERE deleted = 0 and process_id = {$process_id}";
+
+        $interview = $this->db->query( $qry );
+        if( $interview->num_rows() > 0)
+            return $interview->result_array();
+        else
+            return false;               
+    }
+
+    function get_benefit( $process_id )
+    {
+        $qry = "select *
+        FROM {$this->db->dbprefix}recruitment_process_offer_compben
+        WHERE deleted = 0 and process_id = {$process_id}";
+
+        $benefit = $this->db->query( $qry );
+        if( $benefit->num_rows() > 0)
+            return $benefit->result_array();
         else
             return false;               
     }

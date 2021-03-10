@@ -65,7 +65,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 		<form class="rec-kiosk-form form-horizontal" id="form-1" partner_id="1" method="post">
 		<input type="hidden" value="" name="record_id" id="record_id">
 		<input type="hidden" value="1" name="current_page" id="current_page" class="current_page">
-			<span class="pagination text-muted pull-right small"></span>
+			<span class="pagination text-muted pull-right small hidden"></span>
 			<h4 class="kiosk-title">{{ lang('recruitform.app_form') }}</h4>
 			<hr class="rec-kiosk-title">
 				<div class="message_app_div" style="display:none">
@@ -79,8 +79,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					{{ lang('recruitform.nice_day') }} <i class="m-icon-swapright m-icon-white"></i>
 				</button> 
 				<div id="recform-1" name="recform-1" data-form_number="1" class="recform">
-					@include('edit/custom_fgs/general')
-					<hr class="rec-kiosk-title">
+					<!-- @include('edit/custom_fgs/general') -->
+					<!-- <hr class="rec-kiosk-title"> -->
 					@include('edit/custom_fgs/application')  
 				</div>
 				<div id="recform-2" name="recform-2" data-form_number="2" class="recform hidden">
@@ -126,7 +126,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					@include('edit/custom_fgs/other_question')
 				</div>							
 				<div id="nextback_button" name="nextback_button" class="recform_button">
-					@include('edit/custom_fgs/nextback_buttons')
+					@include('edit/custom_fgs/submit_buttons')
 				</div>
 
 		</form>

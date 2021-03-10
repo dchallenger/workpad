@@ -5,10 +5,10 @@
     <td>
         <?php echo form_dropdown('month[]', $months, '', 'class="form-control select2me" data-placeholder="Select..."') ?>   
     </td>
-    <td>
+    <td class="hidden">
         <input name="budget[]" type="text" class="form-control" maxlength="64" value="">
     </td>
-    <td>
+    <td class="hidden">
         <?php echo form_dropdown('company_id[]', $companies, '', 'class="form-control select2me" data-placeholder="Select..."') ?>   
     </td>
     <td>

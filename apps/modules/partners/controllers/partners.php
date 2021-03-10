@@ -2632,7 +2632,7 @@ class Partners extends MY_PrivateController
 
         				}*/
 
-						$system_series = $this->db->get_where('system_series', array('series_code' => 'AHI_ID_NUMBER'))->row();
+						$system_series = $this->db->get_where('system_series', array('series_code' => 'OCLP_ID_NUMBER'))->row();
 
         				if(!(empty($system_series))){
 						    // records have been returned
@@ -2870,7 +2870,7 @@ class Partners extends MY_PrivateController
 			
 			}
 			
-			$system_series = $this->db->get_where('system_series', array('series_code' => 'ID_NUMBER'))->row();
+			$system_series = $this->db->get_where('system_series', array('series_code' => 'OCLP_ID_NUMBER'))->row();
 			$sequence = $system_series->sequence + 1; 
 			$this->db->update('system_series',  array('last_sequence' => $idnumber, 'sequence' => $sequence), array('id' => $system_series->id));
 

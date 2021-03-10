@@ -95,7 +95,7 @@
                 $value = $multiple_sql->row_array();
             }                   
                 $option = $this->db->get_where('recruitment_interview_remarks', array('deleted' => 0));
-                $options = array('' => 'Select...');
+                $options = array('' => '');
                 foreach ($option->result() as $opt) {
                     $options[$opt->remarks] = $opt->remarks;
                 }

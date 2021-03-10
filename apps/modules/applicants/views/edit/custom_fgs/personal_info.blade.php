@@ -1,4 +1,14 @@
-     
+
+<?php
+    $db->select('religion_id,religion');
+    $db->where('deleted', '0');
+    $db->order_by('religion');
+    $options = $db->get('religion');
+    $partners_religion_options = array('' => '');
+    foreach($options->result() as $option) {
+        $partners_religion_options[$option->religion_id] = $option->religion;
+    }   
+?>     
 <div class="portlet">
 	<div class="portlet-title">
 		<div class="caption">{{ lang('applicants.personal') }}</div>
@@ -44,7 +54,12 @@
                 <div class="form-group">
                     <label class="control-label col-md-4">{{ lang('applicants.religion') }}</label>
                     <div class="col-md-5">
-                        <input type="text" class="form-control" name="recruitment_personal[religion]" id="recruitment_personal-religion" value="{{ $record['religion'] }}" placeholder="Enter Religion"/>
+                       <div class="input-group">
+                            <span class="input-group-addon">
+                               <i class="fa fa-user"></i>
+                             </span>
+                            {{ form_dropdown('recruitment_personal[religion]',$partners_religion_options, $record['religion'], 'class="form-control select2me" data-placeholder="Select..."') }}
+                        </div>                        
                     </div>
                 </div>
                 <div class="form-group">
@@ -70,31 +85,7 @@
                             <input type="hidden" name="recruitment_personal[solo_parent]" id="recruitment_personal-solo_parent" value="@if( $record['personal_solo_parent'] ) 1 @else 0 @endif"/>
                         </div> 
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-4">{{ lang('applicants.tin') }}</label>
-                    <div class="col-md-5">
-                        <input type="text" class="form-control" name="recruitment_personal[tin_number]" id="recruitment_personal-tin_number" value="{{ $record['tin_number'] }}" placeholder="Enter TIN"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-4">{{ lang('applicants.sss_no') }}</label>
-                    <div class="col-md-5">
-                        <input type="text" class="form-control" name="recruitment_personal[sss_number]" id="recruitment_personal-sss_number" value="{{ $record['sss_number'] }}" placeholder="Enter SSS Number"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-4">{{ lang('applicants.pagibig_no') }}</label>
-                    <div class="col-md-5">
-                        <input type="text" class="form-control" name="recruitment_personal[pagibig_number]" id="recruitment_personal-pagibig_number" value="{{ $record['pagibig_number'] }}" placeholder="Enter Pagibig Number"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-4">{{ lang('applicants.philhealth_no') }}</label>
-                    <div class="col-md-5">
-                        <input type="text" class="form-control" name="recruitment_personal[philhealth_number]" id="recruitment_personal-philhealth_number" value="{{ $record['philhealth_number'] }}" placeholder="Enter Philhealth Number"/>
-                    </div>
-                </div>                                
+                </div>                             
             </div>                            
         </div>
 	</div>

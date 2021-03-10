@@ -43,7 +43,7 @@
                         <input type="text" class="form-control" name="recruitment_personal[dialect]" id="recruitment_personal-dialect" value="{{ $record['dialect'] }}" placeholder="Enter Dialects"/>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group hidden">
                     <label class="control-label col-md-4">{{ lang('applicants.no_dependents') }}</label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" name="recruitment_personal[dependents_count]" id="recruitment_personal-dependents_count" value="{{ $record['dependents_count'] }}" placeholder="Enter No. of Dependents"/>
@@ -129,7 +129,7 @@
                 </div> -->
                 
             </div>
-<!--             <div class="form-actions fluid">
+            <div class="form-actions fluid">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-offset-4 col-md-8">
@@ -139,7 +139,7 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
 	</div>
 </div>

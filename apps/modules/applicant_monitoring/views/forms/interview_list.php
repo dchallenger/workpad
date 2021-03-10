@@ -47,7 +47,7 @@
         <div class="">
             <ul class="nav nav-tabs ">
                 <?php
-                    if ($process->status_id == 5){
+                    if ($process->status_id == 5 && !$saved_scheds){
                 ?>
                         <li class="<?php if($process->status_id == 5) echo 'active' ?>"><a data-toggle="tab" href="#tab_final_interview"><?=lang('applicant_monitoring.final_interview')?></a></li>
                 <?php
@@ -55,9 +55,11 @@
                     else{
                 ?>
                         <li><a data-toggle="tab" href="#tab_schedule"><?=lang('applicant_monitoring.schedule')?></a></li>
-                        <li class="<?php if($process->status_id == 2) echo 'active' ?>"><a data-toggle="tab" href="#tab_interview"><?=lang('applicant_monitoring.interview')?></a></li>
-                        <li class="<?php if($process->status_id == 3) echo 'active' ?>"><a data-toggle="tab" href="#tab_examination">Examination</a></li>       
-                        <li class="<?php if($process->status_id == 4) echo 'active' ?>"><a data-toggle="tab" href="#tab_bi">BI</a></li>                
+                        <li class="<?php if($process->status_id == 2 || ($process->status_id == 5 && $saved_scheds)) echo 'active' ?>"><a data-toggle="tab" href="#tab_interview"><?=lang('applicant_monitoring.interview')?></a></li>
+                        <?php if ($process->status_id >= 3 && $process->status_id != 5) { ?>
+                            <li class="<?php if($process->status_id == 3) echo 'active' ?>"><a data-toggle="tab" href="#tab_examination">Examination</a></li>       
+                            <li class="<?php if($process->status_id == 4) echo 'active' ?>"><a data-toggle="tab" href="#tab_bi">BI</a></li>                
+                        <?php } ?>
                 <?php
                     }
                 ?>
@@ -152,7 +154,7 @@
                     </div>
                 </div>
 
-                <div id="tab_interview" class="tab-pane <?php if($process->status_id == 2) echo 'active' ?>">
+                <div id="tab_interview" class="tab-pane <?php if($process->status_id == 2 || ($process->status_id == 5 && $saved_scheds)) echo 'active' ?>">
                     <div class="portlet">
                         <div class="portlet-title">
                             <div class="caption"><?=lang('applicant_monitoring.interview_details')?></div>
@@ -162,14 +164,14 @@
                         </div>
                         <?php
                             $status = "Initial";
-                            if( $process->status_id == 2 && $process->from_seting_final_interview == 2){
+                            if( $process->status_id == 5 && $process->from_seting_final_interview == 2){
                                 $status = "Final";
                             }
                         ?>
                         <p>This section manage to <strong><?php echo $status ?></strong> interview results. All pending status can only edit by the interviewer.</p>
                         <div class="portlet-body form">
                             <?php
-                                if($process->status_id > 2){
+                                if($process->status_id >= 3  && ($process->status_id != 5)){
                                     $disabled = "disabled";  
                                     $hidden = "style='display:none'"; 
                                 }                         
@@ -227,7 +229,7 @@
                                                                 ?>
                                                             </td>
                                                             <td>
-                                                                <?php if(($sched->interviewer == $login_user && $interview_success != 1) || $edit_remarks):?>
+                                                                <?php if((($sched->interviewer == $login_user && $sched->result != 'Consider') || ($edit_remarks) && $sched->result != 'Consider') && ($process->status_id == 2 || ($process->status_id == 5 && $process->from_seting_final_interview == 2))):?>
                                                                 <div class="btn-group">
                                                                     <a class="btn btn-xs text-muted" href="javascript:edit_interview_result(<?php echo $sched->schedule_id?>);"><i class="fa fa-pencil"></i> <?=lang('common.edit')?></a>
                                                                 </div>
@@ -253,21 +255,23 @@
                     </div>
                     <div class="modal-footer margin-top-0">
                         <button type="button" data-dismiss="modal" class="btn btn-default btn-sm"><?=lang('common.close')?></button>
-                        <button type="button" data-dismiss="modal" class="btn btn-default btn-sm" onclick="print_interview(<?php echo $process_id?>)"><?=lang('common.print_only')?></button>
-                        <?php if( $process->status_id == 2 && $process->from_seting_final_interview == 2) {
+                        <button type="button" data-dismiss="modal" class="btn btn-default btn-sm hidden" onclick="print_interview(<?php echo $process_id?>)"><?=lang('common.print_only')?></button>
+                        <?php 
+                            if ($hr_recruitment_manager) {
+                                if( $process->status_id == 5 && $process->from_seting_final_interview == 2) {
                         ?>
-                            <button <?=$hidden?> type="button" onclick="move_to_jo(<?php echo $process_id?>,<?php echo $interview_success ?>)" class="demo-loading-btn btn btn-success btn-sm"><?=lang('applicant_monitoring.move_to_jo')?></button>
+                                    <button <?=$hidden?> type="button" onclick="move_to_jo(<?php echo $process_id?>,<?php echo $interview_success ?>)" class="demo-loading-btn btn btn-success btn-sm"><?=lang('applicant_monitoring.move_to_jo')?></button>
                         <?php
-                            }
-                            else{
+                                } else {
                         ?>
-                            <button <?=$hidden?> type="button" onclick="move_to_exam(<?php echo $process_id?>,<?php echo $interview_success ?>)" class="demo-loading-btn btn btn-success btn-sm"><?=lang('applicant_monitoring.move_to_exam')?></button>
+                                    <button <?=$hidden?> type="button" onclick="move_to_exam(<?php echo $process_id?>,<?php echo $interview_success ?>)" class="demo-loading-btn btn btn-success btn-sm"><?=lang('applicant_monitoring.move_to_exam')?></button>
                         <?php
+                                }
                             }
                         ?>
                     </div>
                 </div> 
-                <div id="tab_final_interview" class="tab-pane <?php if($process->status_id == 5) echo 'active' ?>">
+                <div id="tab_final_interview" class="tab-pane <?php if($process->status_id == 5 && !$saved_scheds) echo 'active' ?>">
                     <div class="portlet">
                         <div class="portlet-title">
                             <div class="caption"><?=lang('applicant_monitoring.interview_sched')?></div>
@@ -366,7 +370,7 @@
 
                 <div id="tab_bi" class="tab-pane <?php if($process->status_id == 4) echo 'active' ?>">
                 <?php 
-                    if($process->status_id == 2 && $process->from_seting_final_interview == 2){                
+                    if($process->status_id == 5){                
                         require 'bi_forms_view.php'; 
                     }
                     else{

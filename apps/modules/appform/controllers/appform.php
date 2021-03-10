@@ -7,6 +7,7 @@ class Appform extends MY_publicController
 		$this->load->model('appform_model', 'mod');
 		parent::__construct();
 		$this->lang->load( 'appform' );
+		$this->lang->load( 'recruitform' );
 	}
 
 	public function kiosk(){

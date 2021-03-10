@@ -91,6 +91,33 @@
             </tr>
     <?php 
             break;
+            case 5://interview_remarks   
+            $multiple_qry = "SELECT * FROM ww_recruitment_interview_details 
+                            WHERE `key` = '{$key['key_code']}' AND interview_id = {$interview->id}";
+            $multiple_sql = $db->query($multiple_qry);
+            if($multiple_sql->num_rows() > 0){
+                $value = $multiple_sql->row_array();
+            }                   
+                $option = $this->db->get_where('recruitment_interview_remarks', array('deleted' => 0));
+                $options = array('' => '');
+                foreach ($option->result() as $opt) {
+                    $options[$opt->remarks] = $opt->remarks;
+                }
+    ?>
+
+            <tr>
+                <td width="20%" class="active" style="font-size:13px !important;">
+                    <?php if($key['show_key_label']) echo $key['key_label']; ?>
+                </td>
+                <td width="40%">
+                <?php  
+                    echo $value['key_value'];
+                ?>
+                </td>
+                <?php include 'other_remarks.php'; ?>
+            </tr>
+    <?php
+            break;            
         }
 
     ?>

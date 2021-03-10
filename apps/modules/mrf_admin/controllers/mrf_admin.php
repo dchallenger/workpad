@@ -355,9 +355,10 @@ class Mrf_admin extends MY_PrivateController
 							WHERE user_id = {$data['record']['recruitment_request.user_id']} ";
 			$partner_record = $this->db->query($partner_record)->row_array();
 
-			$data['record']['recruitment_request.company_id'] = $partner_record['company_id'];
-			$data['record']['recruitment_request.department_id'] = $partner_record['department_id'];
-			$data['record']['recruitment_request.immediate'] = $partner_record['immediate'];
+			//$data['record']['recruitment_request.company_id'] = $partner_record['company_id'];
+			//$data['record']['recruitment_request.department_id'] = $partner_record['department_id'];
+			$department = $this->db->get_where('users_department', array('department_id' => $data['record']['recruitment_request.department_id']));
+			$data['record']['recruitment_request.immediate'] = $department->row()->immediate;			
 			$data['record']['company'] = $partner_record['comp'];
 
 			$data['record']['disabled'] = "";
@@ -367,6 +368,27 @@ class Mrf_admin extends MY_PrivateController
 				$data['record']['readonly'] = "readonly";
 			}
 
+			if (!$new) {
+				$qry = "SELECT *
+								 FROM {$this->db->dbprefix}recruitment_manpower_plan
+								 WHERE department_id={$record['recruitment_request.department_id']}";
+		
+				$manpower_plan = $this->db->query($qry);
+				
+				if ($manpower_plan && $manpower_plan->num_rows() > 0) {
+					$manpower_plan_info = $manpower_plan->row();
+					$plan_id = $manpower_plan_info->plan_id;
+
+					$qry1 = "SELECT *
+									 FROM recruitment_manpower_plan_position
+									 WHERE plan_id={$plan_id}";
+
+					$plan_code = $this->db->query($qry1);								 
+
+					$data['plan_code'] = $plan_code;					
+				}	
+			}
+			
 			$this->load->vars( $data );
 
 			if( !$child_call ){
@@ -433,7 +455,7 @@ class Mrf_admin extends MY_PrivateController
 
 	function save( $child_call = false )
 	{ 
-        if($_POST['recruitment']['status_id'] == 7){ //validated
+        if($_POST['recruitment']['status_id'] == 7 || $_POST['recruitment']['status_id'] == 2){ //validated
         	$_hr_remarks = trim($_POST['recruitment_request']['hr_remarks']);
         	if( empty($_hr_remarks) ){
                 $this->response->message[] = array(

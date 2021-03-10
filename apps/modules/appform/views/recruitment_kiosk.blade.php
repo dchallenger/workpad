@@ -28,6 +28,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 	<!-- BEGIN PAGE LEVEL STYLES --> 
 	<link rel="stylesheet" type="text/css" href="{{ theme_path() }}plugins/select2/select2_metro.css" />
 	<link href="{{ theme_path() }}plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="{{ theme_path() }}plugins/bootstrap-switch/static/stylesheets/bootstrap-switch-metro.css"/>
 	<!-- END PAGE LEVEL SCRIPTS -->
     
 	<!-- BEGIN THEME STYLES --> 
@@ -71,7 +72,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 			@include('forms/general')   
 		
             <hr class="rec-kiosk-title">
-           
+
+			@include('forms/application')
+			
+			<hr class="rec-kiosk-title">
+
 			@include('forms/contacts')  
 			@include('forms/buttons')  
 
@@ -123,6 +128,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="{{ theme_path() }}scripts/app.js" type="text/javascript"></script>
 	<script src="{{ theme_path() }}plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+	<script src="{{ theme_path() }}plugins/bootstrap-switch/static/js/bootstrap-switch.min.js" type="text/javascript" ></script> 
 	<!--<script src="{{ theme_path() }}modules/common/global.js" type="text/javascript"></script> -->
 	<script src="{{ theme_path() }}modules/appform/edit_custom.js" type="text/javascript"></script> 
 	<!-- END PAGE LEVEL SCRIPTS --> 

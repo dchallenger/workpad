@@ -402,6 +402,37 @@ function save_bi()
 	$.unblockUI();
 }
 
+function save_pre_employment()
+{
+	$.blockUI({ message: '<div>Saving, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />', 
+		onBlock: function(){
+			$.ajax({
+				url: base_url + module.get('route') + '/save_pre_employment',
+				type:"POST",
+				dataType: "json",
+				data: $('form[name="preemp"]').serialize(),
+				async: false,
+				beforeSend: function(){
+				},
+				success: function ( response ) {
+					handle_ajax_message( response.message );
+					if(response.notify != "undefined")
+					{
+						for(var i in response.notify)
+							socket.emit('get_push_data', {channel: 'get_user_'+response.notify[i]+'_notification', args: { broadcaster: user_id, notify: true }});
+					}
+					if(response.saved){
+						// $('.modal-container').modal('hide');
+						get_steps();
+					}
+				}
+			});
+		},
+		baseZ: 999999999
+	});
+	$.unblockUI();
+}
+
 function save_exam()
 {
 	$.blockUI({ message: '<div>Saving, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />', 
@@ -635,6 +666,33 @@ function save_interview()
 	$.unblockUI();		
 }
 
+function move_to_applicant(process_id)
+{
+	bootbox.confirm("Are you sure you want to move this candidate to applicant?", function(confirm) {
+		if( confirm )
+		{
+			$.blockUI({ message: '<div>'+lang.common.processing_message+'</div><img src="'+root_url+'assets/img/ajax-loading.gif" />', 
+				onBlock: function(){
+					$.ajax({
+						url: base_url + module.get('route') + '/move_to_applicant',
+						type:"POST",
+						async: false,
+						data: {process_id:process_id},
+						dataType: "json",
+						success: function ( response ) {
+							handle_ajax_message( response.message );
+							$('.modal-container').modal('hide');
+							$.unblockUI();
+							get_steps();
+						}
+					});
+				}
+			});
+		}
+	});
+}
+
+
 function move_to_jo(process_id,result_id)
 {
 	bootbox.confirm("Are you sure you want to move this applicant to Job Offer status?", function(confirm) {
@@ -649,6 +707,7 @@ function move_to_jo(process_id,result_id)
 						data: {process_id:process_id, result_id:result_id},
 						dataType: "json",
 						success: function ( response ) {
+							handle_ajax_message( response.message );
 							$('.modal-container').modal('hide');
 							$.unblockUI();
 							get_steps();
@@ -674,6 +733,7 @@ function move_to_exam(process_id,result_id)
 						data: {process_id:process_id, result_id:result_id},
 						dataType: "json",
 						success: function ( response ) {
+							handle_ajax_message( response.message );
 							$('.modal-container').modal('hide');
 							$.unblockUI();
 							get_steps();
@@ -699,6 +759,7 @@ function move_to_bi(process_id,result_id)
 						data: {process_id:process_id, result_id:result_id},
 						dataType: "json",
 						success: function ( response ) {
+							handle_ajax_message( response.message );
 							$('.modal-container').modal('hide');
 							$.unblockUI();
 							get_steps();
@@ -724,6 +785,7 @@ function move_to_final_interview(process_id)
 						data: {process_id:process_id},
 						dataType: "json",
 						success: function ( response ) {
+							handle_ajax_message( response.message );
 							$('.modal-container').modal('hide');
 							$.unblockUI();
 							get_steps();
@@ -794,7 +856,11 @@ function get_jo_form( process_id )
 							});
 						
 							$('input[name="_wysihtml5_mode"]').addClass('dontserializeme');
-						}						
+						}
+
+			            setTimeout(function () {
+							$('.template_id').trigger('change');
+			            }, 1000);
 					}
 				}
 			});
@@ -830,7 +896,59 @@ function get_preemp_form( process_id )
 							});
 						
 							$('input[name="_wysihtml5_mode"]').addClass('dontserializeme');
-						}							
+						}
+
+			            setTimeout(function () {
+							$('.template_id').trigger('change');
+			            }, 1000);
+
+				        if($('#count_attachment').val() != 0)
+				        {
+				            var count_file = $('#count_attachment').val();
+				            for(i=1; i<=count_file; i++) {
+				                $('#recruitment_personal-resume-fileupload'+i+'').fileupload({ 
+				                    url: base_url + module.get('route') + '/preemp_upload',
+				                    autoUpload: true,
+				                    contentType: false,
+				                    formData : {idnumber:i},
+				                }).bind('fileuploadadd', function (e, data) {
+				                    $.blockUI({ message: '<div>Attaching file, please wait...</div><img src="'+base_url+'assets/img/ajax-loading.gif" />' });
+				                }).bind('fileuploaddone', function (e, data) { 
+
+				                    $.unblockUI();
+				                    var file = data.result.file;
+				                    if(file.error != undefined && file.error != "")
+				                    {
+				                        notify('error', file.error);
+				                    }
+				                    else{
+				                        $('#recruitment_personal-resume-container'+data.result.idnumber+' .fileupload-preview').html(file.name);
+
+				                        $('#resume-container'+data.result.idnumber+' .fileupload-new').each(function(){ $(this).css('display', 'none') });
+				                        $('#resume-container'+data.result.idnumber+' .fileupload-exists').each(function(){ $(this).css('display', 'inline-block') });
+				                        $('#recruitment_personal-resume'+data.result.idnumber+'').val(file.name);			                        
+				                    }
+				                }).bind('fileuploadfail', function (e, data) { 
+				                    $.unblockUI();
+				                    notify('error', data.errorThrown);
+				                });
+
+				                $('.resume-container .fileupload-delete').click(function (e){
+				                	console.log($(this).parents('.fileupload').find('.recruitment_personal-resume').val());
+
+				                	$(this).parents('.fileupload').find('.recruitment_personal-resume').val('');
+									$(this).parents('.fileupload').find('.fileupload-preview').html('');
+				                    $(this).parents('.fileupload').find('.fileupload-new').each(function(){ $(this).css('display', 'inline-block') });
+				                    $(this).parents('.fileupload').find('.fileupload-exists').each(function(){ $(this).css('display', 'none') });
+				                });
+
+				                if( $('#recruitment_personal-resume'+i+'').val() != "" )
+				                {
+				                    $('#recruitment_personal-resume-container'+i+' .fileupload-new').each(function(){ $(this).css('display', 'none') });
+				                    $('#recruitment_personal-resume-container'+i+' .fileupload-exists').each(function(){ $(this).css('display', 'inline-block') });
+				                }				                
+				            }
+				        }			            
 					}
 				}
 			});
@@ -976,11 +1094,13 @@ function move_to_preemp(process_id)
 
 function add_candid( candid_id )
 {
+	var request_id = $('input[name="request_id"]').val();
+	
 	$.ajax({
 	    url: base_url + module.get('route') + '/add_candid',
 	    type: "POST",
 	    async: false,
-	    data: 'add_candid='+add_candid,
+	    data: 'add_candid='+candid_id+'&request_id='+request_id,
 	    dataType: "json",
 	    beforeSend: function () {
 	        $.blockUI({
@@ -1010,21 +1130,21 @@ function add_candid( candid_id )
 
 function save_applicant( partner )
 {
-	partner.submit( function(e){ e.preventDefault(); } );
 	var user_id = $('#record_id').val();
 	var partner_id = partner.attr('partner_id');
-	$.blockUI({ message: "Trying to save, please wait...", 
+	var data = partner.find(":not('.dontserializeme')").serialize();
+	data = data + '&record_id=' + $('#record_id').val()+ '&fgs_number=' + partner_id;
+
+	$.blockUI({ message: '<div>Saving, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />', 
 		onBlock: function(){
-			partner.submit( function(e){ e.preventDefault(); } );
-			var partner_id = partner.attr('partner_id');
-			var data = partner.find(":not('.dontserializeme')").serialize();
-			data = data + '&record_id=' + $('#record_id').val()+ '&fgs_number=' + partner_id;
 			$.ajax({
 				url: base_url + module.get('route') + '/save_applicant',
 				type:"POST",
 				data: data,
 				dataType: "json",
 				async: false,
+				beforeSend: function(){
+				},				
 				success: function ( response ) {
 					$('#record_id').val( response.record_id );
 
@@ -1032,12 +1152,13 @@ function save_applicant( partner )
 					
 					if(response.saved )
 					{
-						$('#form-1').trigger("reset");
-						self.location.reload();
+						$('.modal-container').modal('hide');
+						get_steps();
 					}
 				}
 			});
-		}
+		},
+		baseZ: 999999999		
 	});
 	$.unblockUI();	
     // location.reload();
@@ -1174,7 +1295,12 @@ function create_201( process_id, user_id )
 							});
 						
 							$('input[name="_wysihtml5_mode"]').addClass('dontserializeme');
-						}							
+						}
+
+
+			            setTimeout(function () {
+							$('.template_id').trigger('change');
+			            }, 1000);						
 /*	                    $.ajax({
 	                        url: base_url + module.get('route') + '/get_employee_id_no',
 	                        type:"POST",
@@ -1274,6 +1400,10 @@ function move_to_c201(process_id)
 							$('.modal-container').modal('hide');
 							$.unblockUI();
 							get_steps();
+
+				            setTimeout(function () {
+								$('.template_id').trigger('change');
+				            }, 1000);							
 						}
 					});
 				}
@@ -1395,10 +1525,11 @@ function print_emp_agree (process_id)
 	});
 }
 
-function print_interview (process_id)
+function print_interview (process_id,type = 0)
 {
 	var data = {
-		process_id:process_id
+		process_id:process_id,
+		type:type
 		}
 	$.blockUI({ message: '<div>Loading, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />', 
 		onBlock: function(){

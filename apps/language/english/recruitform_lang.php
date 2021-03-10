@@ -2,7 +2,7 @@
 	$lang['recruitform'] = array(
 		'applicants' => 'Applicants',
 		'app_list' => 'List of Applicants',
-		'app_form' => 'APPLICATION FORM',
+		'app_form' => 'Application Form',
 		'app_info' => 'Application Information',
 		'livein' => 'Live in',
 		'partner' => 'Partner',

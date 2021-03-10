@@ -11,7 +11,7 @@
 				<input type="text" class="form-control" name="recruitment_manpower_plan[year]" id="recruitment_manpower_plan-year" value="{{ $record['recruitment_manpower_plan.year'] }}" placeholder="Enter Year" {{ $record['readonly'] }}/>
 			</div>	
 		</div>
-		<div class="form-group">
+		<div class="form-group" hidden>
 			<label class="control-label col-md-4"><span class="required">* </span>{{ lang('annual_manpower_planning.company') }}</label>
 			<div class="col-md-5"><?php
 				$db->select('company_id,company');
@@ -39,7 +39,7 @@
 				$db->order_by('department', '0');
 				$db->where('deleted', '0');
 				$options = $db->get('users_department');
-				$recruitment_manpower_plan_department_id_options = array('' => 'Select...');
+				$recruitment_manpower_plan_department_id_options = array('' => '');
 				foreach($options->result() as $option)
 				{
 					$recruitment_manpower_plan_department_id_options[$option->department_id] = $option->department;
@@ -311,10 +311,11 @@
 							                                <tr>
 							                                	<th width="19%" class="padding-top-bottom-10">{{ lang('annual_manpower_planning.job_title') }}</th>
 							                                	<th width="18%" class="padding-top-bottom-10">Employment Status</th>
-							                                	<th width="15%" class="padding-top-bottom-10">{{ lang('annual_manpower_planning.job_class') }}</th>
+							                                	<th width="15%" class="padding-top-bottom-10 hidden">{{ lang('annual_manpower_planning.job_class') }}</th>
 							                                	<th width="18%" class="padding-top-bottom-10">{{ lang('annual_manpower_planning.month') }}</th>
-							                                	<th width="15%" class="padding-top-bottom-10">{{ lang('annual_manpower_planning.budget') }}</th>
-							                                	<th width="20%" class="padding-top-bottom-10">Payroll Under</th>
+							                                	<th width="18%" class="padding-top-bottom-10">{{ lang('annual_manpower_planning.qty') }}</th>
+							                                	<th width="15%" class="padding-top-bottom-10 hidden">{{ lang('annual_manpower_planning.budget') }}</th>
+							                                	<th width="20%" class="padding-top-bottom-10 hidden">Payroll Under</th>
 							                                	@if ($record['view_type'] == 'edit')
 							                                	<th width="15%" class="padding-top-bottom-10">{{ lang('common.actions') }}</th>
 							                                	@endif
@@ -336,16 +337,19 @@
 																            <td>
 																                <?php echo form_dropdown('new_position[employment_status_id][]', $employment_statuss, $plan->employment_status_id, 'class="form-control select2me" data-placeholder="Select..."' . $record["disabled"]) ?>   
 																            </td>
-																            <td>
+																            <td class="hidden">
 																                <?php echo form_dropdown('new_position[job_class_id][]', $job_classes, $plan->job_class_id, 'class="form-control select2me" data-placeholder="Select..."' . $record["disabled"]) ?>   
 																            </td>
 																            <td>
 																                <?php echo form_dropdown('new_position[month][]', $months, $plan->month, 'class="form-control select2me" data-placeholder="Select..."' . $record["disabled"]) ?>   
 																            </td>
 																            <td>
+																                <input type="text" maxlength="64" name="new_position[needed][]" value="{{ $plan->needed }}" class="form-control" {{$record['disabled']}}>
+																            </td>																            
+																            <td class="hidden">
 																                <input type="text" maxlength="64" name="new_position[budget][]" value="{{ $plan->budget }}" class="form-control" {{$record['disabled']}}>
 																            </td>
-																            <td>
+																            <td class="hidden">
 																                <?php echo form_dropdown('new_position[company_id][]', $users_companys, $plan->company_id, 'class="form-control select2me" data-placeholder="Select..."' . $record["disabled"]) ?>   
 																            </td>
 																            @if ($record['view_type'] == 'edit')
@@ -391,16 +395,19 @@
             <td>
                 <?php echo form_dropdown('new_position[employment_status_id][]', $employment_statuss, '', 'class="form-control select2menow dontserializeme" data-placeholder="Select..."') ?>   
             </td>
-            <td>
+            <td class="hidden">
                 <?php echo form_dropdown('new_position[job_class_id][]', $job_classes, '', 'class="form-control select2menow dontserializeme" data-placeholder="Select..."') ?>   
             </td>
             <td>
                 <?php echo form_dropdown('new_position[month][]', $months, '', 'class="form-control select2menow dontserializeme" data-placeholder="Select..."') ?>   
             </td>
             <td>
+                <input name="new_position[needed][]" type="text" class="form-control" maxlength="64" value="">
+            </td>            
+            <td class="hidden">
                 <input type="text" maxlength="64" name="new_position[budget][]" class="form-control dontserializeme">
             </td>
-            <td>
+            <td class="hidden">
                 <?php echo form_dropdown('new_position[company_id][]', $users_companys, '', 'class="form-control select2menow dontserializeme" data-placeholder="Select..."') ?>   
             </td>
             <td>

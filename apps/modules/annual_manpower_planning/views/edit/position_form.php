@@ -36,12 +36,12 @@
                                 <table class="table table-condensed table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th width="13%" class="padding-top-bottom-10">Employment Status</th>
-                                            <th width="10%" class="padding-top-bottom-10"><?=lang('annual_manpower_planning.job_class')?></th>
-                                            <th width="10%" class="padding-top-bottom-10"><?=lang('annual_manpower_planning.month')?></th>
-                                            <th width="15%" class="padding-top-bottom-10"><?=lang('annual_manpower_planning.budget')?></th>
-                                            <th width="10%" class="padding-top-bottom-10"><?=lang('annual_manpower_planning.qty')?></th>
-                                            <th width="18%" class="padding-top-bottom-10">Payroll Under</th>
+                                            <th width="30%" class="padding-top-bottom-10">Employment Status</th>
+                                            <th width="10%" class="padding-top-bottom-10 hidden"><?=lang('annual_manpower_planning.job_class')?></th>
+                                            <th width="30%" class="padding-top-bottom-10"><?=lang('annual_manpower_planning.month')?></th>
+                                            <th width="15%" class="padding-top-bottom-10 hidden"><?=lang('annual_manpower_planning.budget')?></th>
+                                            <th width="30%" class="padding-top-bottom-10"><?=lang('annual_manpower_planning.qty')?></th>
+                                            <th width="18%" class="padding-top-bottom-10 hidden">Payroll Under</th>
                                             <th width="5%" class="padding-top-bottom-10"><?=lang('common.actions')?></th>
                                         </tr>
                                     </thead>
@@ -98,19 +98,19 @@
                                                         <td>
                                                             <?php echo form_dropdown('employment_status_id[]', $employment_statuss, $plan->employment_status_id, 'class="form-control select2me" data-placeholder="Select..."') ?>   
                                                         </td>
-                                                        <td>
+                                                        <td class="hidden">
                                                             <?php echo form_dropdown('job_class_id[]', $job_classes, $plan->job_class_id, 'class="form-control select2me" data-placeholder="Select..."') ?>   
                                                         </td>
                                                         <td>
                                                             <?php echo form_dropdown('month[]', $months, $plan->month, 'class="form-control select2me" data-placeholder="Select..."') ?>   
                                                         </td>
-                                                        <td>
+                                                        <td class="hidden">
                                                             <input name="budget[]" type="text" class="form-control" maxlength="64" value="<?php echo $plan->budget?>">
                                                         </td>
                                                         <td>
                                                             <input name="needed[]" type="text" class="form-control" maxlength="64" value="<?php echo $plan->needed?>">
                                                         </td>
-                                                        <td>
+                                                        <td class="hidden">
                                                             <?php echo form_dropdown('company_id[]', $users_companys, $plan->company_id, 'class="form-control select2me" data-placeholder="Select..."') ?>   
                                                         </td>
                                                         <td>

@@ -1,3 +1,22 @@
+<?php
+    $db->select('education_school_id,education_school');
+    $db->where('deleted', '0');
+    $db->order_by('education_school');
+    $education_school = $db->get('users_education_school');
+    $education_school_options = array('' => '');
+    foreach($education_school->result() as $option) {
+        $education_school_options[$option->education_school_id] = $option->education_school;
+    }
+
+    $db->select('education_degree_obtained_id,education_degree_obtained');
+    $db->where('deleted', '0');
+    $db->order_by('education_degree_obtained');
+    $degree_obtained = $db->get('users_education_degree_obtained');
+    $degree_obtained_options = array('' => '');
+    foreach($degree_obtained->result() as $degree_option) {
+        $degree_obtained_options[$degree_option->education_degree_obtained_id] = $degree_option->education_degree_obtained;
+    }      
+?>
 <div class="portlet">
 	<div class="portlet-title">
 		<div class="caption" id="education-category">{{ lang('applicants.educ_bg') }}</div>
@@ -66,8 +85,12 @@
     				<div class="form-group">
                         <label class="control-label col-md-3">{{ lang('applicants.school') }}<span class="required">*</span></label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="recruitment_personal_history[education-school][]" id="recruitment_personal_history-education-school" 
-                            value="<?php echo (isset($education['education-school']) ? $education['education-school'] : ""); ?>" placeholder="Enter School"/>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-list-ul"></i>
+                                </span>
+                                {{ form_dropdown('recruitment_personal_history[education-school][]',$education_school_options, (isset($education['education-school']) ? $education['education-school'] : ''), 'class="form-control select2me" data-placeholder="Select..."') }}
+                            </div>                            
                         </div>
                     </div>
                     <div class="form-group">
@@ -84,19 +107,16 @@
                             value="<?php echo (isset($education['education-year-to']) ? $education['education-year-to'] : ""); ?>" placeholder="Enter Year To"/>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">{{ lang('applicants.honors') }}<span class="required">*</span></label>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" name="recruitment_personal_history[education-honors_awards][]" id="recruitment_personal_history-education-honors_awards" 
-                            value="<?php echo (isset($education['education-honors_awards']) ? $education['education-honors_awards'] : ""); ?>" placeholder="Enter Honors/Awards"/>
-                        </div>
-                    </div>                    
                     <?php if(in_array(strtolower($education_type), $type_with_degree)) { ?>
                     <div class="form-group">
                         <label class="control-label col-md-3">{{ lang('applicants.degree') }}<span class="required">*</span></label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="recruitment_personal_history[education-degree][]" id="recruitment_personal_history-education-degree" 
-                            value="<?php echo (isset($education['education-degree']) ? $education['education-degree'] : ""); ?>" placeholder="Enter Degree"/>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-list-ul"></i>
+                                </span>                            
+                                {{ form_dropdown('recruitment_personal_history[education-degree][]',$degree_obtained_options, (isset($education['education-degree']) ? $education['education-degree'] : ''), 'class="form-control select2me" data-placeholder="Select..."') }}
+                            </div>                            
                         </div>
                     </div>
                     <?php 
@@ -111,7 +131,14 @@
                     </div>
                     <?php
                         } 
-                    ?>
+                    ?>                    
+                    <div class="form-group">
+                        <label class="control-label col-md-3">{{ lang('applicants.honors_receive') }}<span class="required">*</span></label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="recruitment_personal_history[education-honors_awards][]" id="recruitment_personal_history-education-honors_awards" 
+                            value="<?php echo (isset($education['education-honors_awards']) ? $education['education-honors_awards'] : ""); ?>" placeholder="Enter Honors/Awards"/>
+                        </div>
+                    </div>                    
                     <div class="form-group">
                         <label class="control-label col-md-3">{{ lang('common.status') }}<span class="required">*</span></label>
                         <div class="col-md-7 checkbox-list">
@@ -128,7 +155,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="form-group <?php echo strtolower($education_status) != 'graduated' ? "" : "hidden" ?>">
+                    <div class="form-group hidden">
                         <label class="control-label col-md-3">{{ lang('applicants.last_sy_attended') }}</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control" name="recruitment_personal_history[education-lastsem-attended][]" id="recruitment_personal_history-education-lastsem-attended-<?php echo $count_education;?>" 
@@ -148,8 +175,8 @@
             <div class="col-md-offset-3 col-md-8">
                 <button class="btn green btn-sm" type="button" onclick="save_partner( $(this).parents('form') )" ><i class="fa fa-check"></i> {{ lang('common.save') }}</button>
                 <button class="btn blue btn-sm" type="submit"><i class="fa fa-undo"></i> {{ lang('common.reset') }}</button>
-                <a class="btn default btn-sm" href="{{ $mod->url }}" type="button" >{{ lang('applicants.back_to_list') }}</a>                            
-            </div>s
+                <a class="btn default btn-sm" href="{{ $mod->url }}" type="button" >{{ lang('common.back_to_list') }}</a>                            
+            </div>
         </div>
     </div>
 </div>

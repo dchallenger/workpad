@@ -1,3 +1,23 @@
+<?php
+    $db->select('city_id,city');
+    $db->where('deleted', '0');
+    $db->order_by('city');
+    $options = $db->get('cities');
+    $partners_city_options = array('' => '');
+    foreach($options->result() as $option) {
+        $partners_city_options[$option->city_id] = $option->city;
+    }
+
+    $db->select('country_id,short_name');
+    $db->where('deleted', '0');
+    $db->order_by('short_name');
+    $options = $db->get('countries');
+
+    $partners_country_options = array('' => '');
+    foreach($options->result() as $option) {
+        $partners_country_options[$option->country_id] = $option->short_name;
+    }    
+?>
 <div class="portlet">
 	<div class="portlet-title">
 		<div class="caption" id="education-category">{{ lang('applicants.character_ref') }}</div>
@@ -62,7 +82,7 @@
                     <label class="control-label col-md-3">{{ lang('applicants.years_known') }}<span class="required">*</span></label>
                     <div class="col-md-6">
                         <input type="text" class="form-control" name="recruitment_personal_history[reference-years-known][]" id="recruitment_personal_history-reference-years-known" 
-                        value="<?php echo (isset($reference['reference-years-known']) ? $reference['reference-years-known'] : ""); ?>" placeholder="Enter Years Known"/>
+                        value="<?php echo (isset($reference['reference-years-known']) ? $reference['reference-years-known'] : ""); ?>" placeholder="Enter Years Known" data-inputmask="'mask': '9', 'repeat': 2, 'greedy' : false"/>
                     </div>
                 </div>
                 <div class="form-group hidden-sm hidden-xs">
@@ -71,7 +91,7 @@
                          <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                         <input type="text" class="form-control" name="recruitment_personal_history[reference-phone][]" id="recruitment_personal_history-reference-phone" 
-                        value="<?php echo (isset($reference['reference-phone']) ? $reference['reference-phone'] : ""); ?>" placeholder="Enter Telephone Number"/>
+                        value="<?php echo (isset($reference['reference-phone']) ? $reference['reference-phone'] : ""); ?>" placeholder="Enter Telephone Number" data-inputmask="'mask': '9', 'repeat': 10, 'greedy' : false"/>
                          </div>
                     </div>
                 </div>
@@ -81,7 +101,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
                         <input type="text" class="form-control" name="recruitment_personal_history[reference-mobile][]" id="recruitment_personal_history-reference-mobile" 
-                        value="<?php echo (isset($reference['reference-mobile']) ? $reference['reference-mobile'] : ""); ?>" placeholder="Enter Mobile Number"/>
+                        value="<?php echo (isset($reference['reference-mobile']) ? $reference['reference-mobile'] : ""); ?>" placeholder="Enter Mobile Number" data-inputmask="'mask': '9', 'repeat': 12, 'greedy' : false"/>
                          </div>
                     </div>
                 </div>
@@ -102,11 +122,10 @@
                     <div class="col-md-6">
                         <div class="input-group">
                             <span class="input-group-addon">
-                               <i class="fa fa-map-marker"></i>
-                             </span>
-                        <input type="text" class="form-control" name="recruitment_personal_history[reference-city][]" id="recruitment_personal_history-reference-city" 
-                        value="<?php echo (isset($reference['reference-city']) ? $reference['reference-city'] : ""); ?>" placeholder="Enter City"/>
-                         </div>
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            {{ form_dropdown('recruitment_personal_history[reference-city][]',$partners_city_options, $reference['reference-city'], 'class="form-control select2me" data-placeholder="Select..."') }}
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -114,10 +133,9 @@
                     <div class="col-md-6">
                         <div class="input-group">
                             <span class="input-group-addon">
-                               <i class="fa fa-map-marker"></i>
-                             </span>
-                        <input type="text" class="form-control" name="recruitment_personal_history[reference-country][]" id="recruitment_personal_history-reference-country" 
-                        value="<?php echo (isset($reference['reference-country']) ? $reference['reference-country'] : ""); ?>" placeholder="Enter Country"/>
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            {{ form_dropdown('recruitment_personal_history[reference-country][]',$partners_country_options, $reference['reference-country'], 'class="form-control select2me" data-placeholder="Select..."') }}
                         </div>
                     </div>
                 </div>

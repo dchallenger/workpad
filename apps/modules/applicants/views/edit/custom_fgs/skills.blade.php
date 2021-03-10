@@ -30,13 +30,13 @@
         <div class="form-horizontal">
             <div class="form-body">
 		<!-- START FORM -->
-<!--                <div class="form-group">
+               <div class="form-group">
                     <label class="control-label col-md-3">{{ lang('applicants.skills_type') }}<span class="required">*</span></label>
                     <div class="col-md-6">
                         <input type="text" class="form-control" name="recruitment_personal_history[skill-type][]" id="recruitment_personal_history-skill-type" 
                         value="<?php echo (isset($skill['skill-type']) ? $skill['skill-type'] : ""); ?>" placeholder="Enter Type"/>
                     </div>
-                </div> -->
+                </div>
                 <div class="form-group">
                     <label class="control-label col-md-3">{{ lang('applicants.skills_name') }}<span class="required">*</span></label>
                     <div class="col-md-6">

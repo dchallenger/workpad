@@ -104,8 +104,7 @@
                             <?php
                                 }
                             ?>                                
-                            </select>                            
-                        </div>                        
+                            </select>                                                   
                         </div>
                     </div>
                 </div>

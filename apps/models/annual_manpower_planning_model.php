@@ -54,7 +54,7 @@ class annual_manpower_planning_model extends Record
 
 	function get_saved_incumbents( $plan_id )
 	{
-		$qry = "select a.*, c.position_id, c.position, e.employment_status
+		$qry = "select a.*, c.position_id, c.position, e.employment_status, b.company
 		FROM {$this->db->dbprefix}users a
 		LEFT JOIN {$this->db->dbprefix}users_profile b on b.user_id = a.user_id
 		LEFT JOIN {$this->db->dbprefix}users_position c ON c.position_id = b.position_id
@@ -89,9 +89,9 @@ class annual_manpower_planning_model extends Record
 			return false;
 	}
 
-	function get_incumbents( $company_id, $department_id, $position_id = "" )
+	function get_incumbents( $company_id, $department_id, $position_id = "", $position_only = 0 )
 	{
-		$qry = "select a.*, c.position_id, c.position, e.employment_status
+		$qry = "select a.*, c.position_id, c.position, e.employment_status, b.company
 		FROM {$this->db->dbprefix}users a
 		LEFT JOIN {$this->db->dbprefix}users_profile b on b.user_id = a.user_id
 		LEFT JOIN {$this->db->dbprefix}users_position c ON c.position_id = b.position_id
@@ -101,6 +101,10 @@ class annual_manpower_planning_model extends Record
 		b.company_id = {$company_id} AND b.department_id = {$department_id}";
 		if( !empty( $position_id ) )
 			$qry .= " AND c.position_id = {$position_id}";
+
+		if ($position_only)
+			$qry .= " GROUP BY c.position_id";
+
 		$qry .= " order by a.full_name";
 		// echo "<pre>";print_r($qry);
 		$users = $this->db->query( $qry );

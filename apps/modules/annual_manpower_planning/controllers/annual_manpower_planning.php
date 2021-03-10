@@ -30,6 +30,7 @@ class Annual_manpower_planning extends MY_PrivateController
 
         $this->load->model('amp_admin_model', 'amp_ad');
         $data['amp_admin'] = isset($permission[$this->amp_ad->mod_code]['list']) ? $permission[$this->amp_ad->mod_code]['list'] : 0;
+        $data['amp_admin'] = 0; // fixed to false since oclp doesnt have approval, hr created and it was automatically considered as request or final
 
         $this->load->vars($data);  
 		echo $this->load->blade('pages.listing')->with( $this->load->get_cached_vars() );
@@ -55,9 +56,28 @@ class Annual_manpower_planning extends MY_PrivateController
 			if( $this->input->post('new_position') )
 			{
 				if (isset($_POST['new_position']['position'])){
+
+					$dept_code = '';
+					$this->db->where('plan_id',$this->record_id);
+					$manpower_plan = $this->db->get('recruitment_manpower_plan');
+					if ($manpower_plan && $manpower_plan->num_rows() > 0) {
+						$department_id = $manpower_plan->row()->department_id;
+
+						$this->db->where('department_id',$department_id);
+						$department_result = $this->db->get('users_department');
+						if ($department_result && $department_result->num_rows() > 0) {
+							$department_info = $department_result->row();
+							$dept = $department_info->department;
+							$dept_code = $department_info->department_code;
+							if ($dept_code == '')
+								$dept_code = get_first_letter($dept);
+						}
+					}
+
 					$new_positions = $_POST['new_position']['position'];
 					$arIDS = $_POST['new_position']['id'];
 					$month = $_POST['new_position']['month'];
+					$needed = $_POST['new_position']['needed'];
 					$employment_status_id = $_POST['new_position']['employment_status_id'];
 					$job_class_id = $_POST['new_position']['job_class_id'];
 					// $jobrank = $_POST['new_position']['job_rank_id'];
@@ -66,18 +86,31 @@ class Annual_manpower_planning extends MY_PrivateController
 
 					foreach( $new_positions as $index => $new_position )
 					{
+
+						$position_code = '';
+						$position_code = get_first_letter($new_position);
+											
+				   		$system_series = $this->db->get_where('system_series', array('series_code' => 'AMP_CONTROL_NO'))->row();
+				        $sequence = $system_series->sequence + 1; 
+				        $this->db->update('system_series',  array('last_sequence' => $sequence, 'sequence' => $sequence), array('id' => $system_series->id));
+
+						$plan_code = $dept_code.'-'.$position_code.'-'.$sequence;
+
 						$insert = array(
 							'plan_id' => $this->record_id,
+							'plan_code' => $plan_code,
 							'position' => $new_position,
 							'employment_status_id' => $employment_status_id[$index],
 							'job_class_id' => $job_class_id[$index],
 							'company_id' => $company_id[$index],
 							'month' => $month[$index],
+							'needed' => $needed[$index],
 							'budget' => $budget[$index],
 							'created_by' => $this->user->user_id
 						);
 
 						if (isset($arIDS[$index]) && $arIDS[$index] != 0){
+							$id = $arIDS[$index];
 							$this->db->where('id',$arIDS[$index]);
 							$this->db->update('recruitment_manpower_plan_position_new', $insert);
 						}
@@ -86,8 +119,18 @@ class Annual_manpower_planning extends MY_PrivateController
 							$result = $this->db->get('recruitment_manpower_plan_position_new');
 							if (!$result || $result->num_rows() == 0){
 								$this->db->insert('recruitment_manpower_plan_position_new', $insert);
+								$id = $this->db->insert_id();
 							}
-						}
+
+							$this->db->where('position',$new_position);
+							$position_result = $this->db->get('users_position');
+							if ($position_result && $position_result->num_rows() > 0) {
+								$position = $position_result->row();
+
+								$this->db->where('id',$id);
+								$this->db->update('recruitment_manpower_plan_position_new',array('position_id' => $position->position_id));
+							}								
+						}					
 
 						//create system logs
 						$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'recruitment_manpower_plan_position_new', array(), $insert);
@@ -177,7 +220,7 @@ class Annual_manpower_planning extends MY_PrivateController
 	{
 		$this->_ajax_only();
 		
-		$save_positions = $this->mod->get_incumbents( $_POST['company_id'], $_POST['department_id'] );
+		$save_positions = $this->mod->get_incumbents( $_POST['company_id'], $_POST['department_id'],'',1 );
 		// $save_positions = $this->mod->get_saved_positions( $_POST['plan_id'] );
 		
 // echo "<pre>";print_r($this->db->last_query()) ;
@@ -319,13 +362,38 @@ class Annual_manpower_planning extends MY_PrivateController
 			$this->_ajax_return();
 		}
 
+		$dept_code = '';
+		$this->db->where('plan_id',$this->input->post('plan_id'));
+		$manpower_plan = $this->db->get('recruitment_manpower_plan');
+		if ($manpower_plan && $manpower_plan->num_rows() > 0) {
+			$department_id = $manpower_plan->row()->department_id;
+
+			$this->db->where('department_id',$department_id);
+			$department_result = $this->db->get('users_department');
+			if ($department_result && $department_result->num_rows() > 0) {
+				$department_info = $department_result->row();
+				$dept = $department_info->department;
+				$dept_code = $department_info->department_code;
+				if ($dept_code == '')
+					$dept_code = get_first_letter($dept);
+			}
+		}
+
+		$position_code = '';
+		$this->db->where('position_id',$this->input->post('position_id'));
+		$position_result = $this->db->get('users_position');
+		if ($position_result && $position_result->num_rows() > 0) {
+			$position = $position_result->row()->position;
+			$position_code = get_first_letter($position);
+		}
+
 		$where = array(
 			'plan_id' => $this->input->post('plan_id'),
 			'position_id' => $this->input->post('position_id'),
 		);
 		$this->db->delete('recruitment_manpower_plan_position', $where);
 		//create system logs
-		$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'delete', 'recruitment_manpower_plan_position - plan_id', array(), explode(',', $this->input->post('plan_id')));
+		//$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'delete', 'recruitment_manpower_plan_position - plan_id', array(), explode(',', $this->input->post('plan_id')));
 
 		$months = $this->input->post('month');
 		$job_class_id = $this->input->post('job_class_id');
@@ -338,8 +406,16 @@ class Annual_manpower_planning extends MY_PrivateController
 		{
 			foreach( $months as $index => $month )
 			{
+
+		   		$system_series = $this->db->get_where('system_series', array('series_code' => 'AMP_CONTROL_NO'))->row();
+		        $sequence = $system_series->sequence + 1; 
+		        $this->db->update('system_series',  array('last_sequence' => $sequence, 'sequence' => $sequence), array('id' => $system_series->id));
+
+				$plan_code = $dept_code.'-'.$position_code.'-'.$sequence;
+
 				$insert = array(
 					'plan_id' => $this->input->post('plan_id'),
+					'plan_code' => $plan_code,
 					'position_id' => $this->input->post('position_id'),
 					'job_class_id' => $job_class_id[$index],
 					'employment_status_id' => $employment_status_id[$index],
@@ -539,7 +615,7 @@ class Annual_manpower_planning extends MY_PrivateController
         $companies = $this->db->get_where('users_company', array('deleted' => 0));
         foreach( $companies->result() as $company )
         {
-            $companys[$company->company_id] = $company->company_code;
+            $companys[$company->company_id] = $company->company_initial;
         }
 
 	    $months = array(
@@ -602,7 +678,7 @@ class Annual_manpower_planning extends MY_PrivateController
         $companies = $this->db->get_where('users_company', array('deleted' => 0));
         foreach( $companies->result() as $company )
         {
-            $companys[$company->company_id] = $company->company_code;
+            $companys[$company->company_id] = $company->company_initial;
         }
 
 	    $months = array(

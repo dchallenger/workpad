@@ -72,6 +72,26 @@
                             value="<?php echo (isset($employment['employment-location']) ? $employment['employment-location'] : ""); ?>" placeholder="Enter Location"/>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">{{ lang('applicants.reason_leaving') }}</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="recruitment_personal_history[employment-reason-for-leaving][]" id="recruitment_personal_history-employment-reason-for-leaving"  value="<?php echo (isset($employment['employment-reason-for-leaving']) ? $employment['employment-reason-for-leaving'] : ""); ?>">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">{{ lang('applicants.latest_salary') }}</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="recruitment_personal_history[employment-latest-salary][]" id="recruitment_personal_history-employment-latest-salary" 
+                            value="<?php echo (isset($employment['employment-latest-salary']) ? $employment['employment-latest-salary'] : ""); ?>" placeholder="<?php echo lang('applicants.latest_salary') ?>" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">{{ lang('applicants.name_immediate_superior') }}</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="recruitment_personal_history[employment-supervisor][]" id="recruitment_personal_history-employment-supervisor" 
+                            value="<?php echo (isset($employment['employment-supervisor']) ? $employment['employment-supervisor'] : ""); ?>" placeholder="<?php echo lang('applicants.name_immediate_superior') ?>"/>
+                        </div>
+                    </div>                     
 <!--                     <div class="form-group">
                         <label class="control-label col-md-3">{{ lang('applicants.contact_no') }}</label>
                         <div class="col-md-6">
@@ -107,13 +127,6 @@
                             </span>                            
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">{{ lang('applicants.last_sal') }}</label>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" name="recruitment_personal_history[employment-last-salary][]" id="recruitment_personal_history-employment-last-salary" 
-                            value="<?php echo (isset($employment['employment-last-salary']) ? $employment['employment-last-salary'] : ""); ?>" placeholder="Enter Last Salary"/>
-                        </div>
-                    </div>
 <!--                     <div class="form-group">
                         <label class="control-label col-md-3">{{ lang('applicants.immediate_position') }}</label>
                         <div class="col-md-6">
@@ -127,13 +140,6 @@
                             <textarea rows="3" class="form-control"name="recruitment_personal_history[employment-duties][]" id="recruitment_personal_history-employment-duties" ><?php echo (isset($employment['employment-duties']) ? $employment['employment-duties'] : ""); ?></textarea>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">{{ lang('applicants.reason_leaving') }}</label>
-                        <div class="col-md-6">
-                            <textarea rows="3" class="form-control"name="recruitment_personal_history[employment-reason-for-leaving][]" id="recruitment_personal_history-employment-reason-for-leaving" ><?php echo (isset($employment['employment-reason-for-leaving']) ? $employment['employment-reason-for-leaving'] : ""); ?></textarea>
-                        </div>
-                    </div>
-
     			</div>
     		</div>
     	</div>

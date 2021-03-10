@@ -139,7 +139,26 @@ function history( process_id, user_id )
 							});
 						
 							$('input[name="_wysihtml5_mode"]').addClass('dontserializeme');
-						}							
+						}
+
+						var jo_template_id = $('#template_id').val();
+						var process_id = $('#process_id').val();
+						var recruit_id = $('#recruit_id').val();
+						
+			            setTimeout(function () {						
+							$.ajax({
+								url: base_url + 'recruitment/applicant_monitoring/get_jo_template',
+								type:"POST",
+								dataType: "json",
+								data: {jo_template_id:jo_template_id,process_id:process_id,recruit_id:recruit_id},
+								async: false,
+								beforeSend: function(){
+								},
+								success: function ( response ) {
+									$('.template_val').data("wysihtml5").editor.setValue(response.jo_template);
+								}
+							});
+						}, 1000)														
 						// init_datepicker();
 						// init_searchabledd();
 					}

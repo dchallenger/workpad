@@ -4,7 +4,7 @@
         if($data['other_remarks'] == 1){
     ?>
         <th colspan="2" class="text-center success"><?php echo $data['header_text'] ?></th>
-        <th class="text-center success">Other Remarks</th>
+        <th class="text-center success">HR Remarks</th>
     <?php       
         }else{
     ?>

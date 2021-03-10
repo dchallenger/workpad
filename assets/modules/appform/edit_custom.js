@@ -49,6 +49,14 @@ $(document).ready(function(){
     	var mrf_id = $('#recruitment_personal-position_sought option:selected').attr('mrf_id');
     	$('#recruitment-request_id').val( mrf_id );
     });
+
+	$('#recruitment_personal-currently_employed-temp').change(function(){
+	    if( $(this).is(':checked') )
+	        $('#recruitment_personal-currently_employed').val('1');
+	    else
+	        $('#recruitment_personal-currently_employed').val('0');
+	});
+	$('label[for="recruitment_personal-currently_employed-temp"]').css('margin-top', '0');    
 });
 
 function handle_ajax_message( message )

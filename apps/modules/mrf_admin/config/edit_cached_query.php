@@ -1,7 +1,9 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 $config["edit_cached_query"] = 'SELECT `ww_recruitment_request`.`request_id` as record_id, 
+`ww_recruitment_request`.`plan_code` as "recruitment_request.plan_code",
 `ww_recruitment_request`.`created_on` as "recruitment_request.created_on",
 `ww_recruitment_request`.`position_id` as "recruitment_request.position_id",
+`ww_recruitment_request`.`rank_id` as "recruitment_request.rank_id",
 `ww_recruitment_request`.`replacement_of` as "recruitment_request.replacement_of", 
 `ww_recruitment_request`.`due_to_id` as "recruitment_request.due_to_id", 
 `ww_recruitment_request`.`replacement_transfer_location` as "recruitment_request.replacement_transfer_location", 
@@ -38,6 +40,7 @@ DATE_FORMAT(ww_recruitment_request.hr_remarks_on, \'%M %d, %Y\ - %r\') as "recru
 `ww_recruitment_request`.`closing_remarks` as "recruitment_request.closing_remarks",
 ww_recruitment_request.closed_by as "recruitment_request.closed_by", 
 DATE_FORMAT(ww_recruitment_request.closed_on, \'%M %d, %Y\ - %r\') as "recruitment_request.closed_on", 
+ww_recruitment_request.division_id as "recruitment_request.division_id",
 ww_recruitment_request.department_id as "recruitment_request.department_id", 
 ww_recruitment_request.company_id as "recruitment_request.company_id",
 ww_recruitment_request.salary_from as "recruitment_request.salary_from", 

@@ -83,21 +83,15 @@
 						</ul>
 						<!--  LOOP ALL PHONE NUMBERS HERE -->
 						<ul class="list-inline text-muted margin-bottom-10">
-							<?php foreach($profile_telephones as $telephone){ ?>
-							<li><i class="fa fa-phone"></i> <?=$telephone?></li>
-							<?php } ?>
+							<li><i class="fa fa-phone"></i><?=$record['phone']?></li>
 						</ul>
 						<!--  LOOP ALL FAX NUMBERS HERE -->
-						<ul class="list-inline text-muted margin-bottom-10">
-							<?php foreach($profile_fax as $fax_no){ ?>
+<!-- 						<ul class="list-inline text-muted margin-bottom-10">
 							<li><i class="fa fa-print"></i> <?=$fax_no?></li>
-							<?php } ?>
-						</ul>
+						</ul> -->
 						<!-- LOOP ALL MOBILE NUMBERS HERE -->
 						<ul class="list-inline text-muted margin-bottom-10">
-							<?php foreach($profile_mobiles as $mobile){ ?>
-							<li><i class="fa fa-mobile"></i> <?=$mobile?></li>
-							<?php } ?>
+							<li><i class="fa fa-mobile"></i> <?=$record['mobile']?></li>
 						</ul>
 					</div>
 					<!-- PERSONAL INFORMATION -->

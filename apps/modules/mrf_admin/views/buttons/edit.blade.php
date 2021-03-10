@@ -19,6 +19,12 @@
         ?>
               <button type="button" class="btn green btn-sm" onclick="save_record( $(this).closest('form'), '5')"><i class="fa fa-check"></i> Close Request</button>
         <?php
+            break;
+            case 9: //for validation
+        ?>
+            <button type="button" class="btn green btn-sm" onclick="save_record( $(this).closest('form'), '2')"><i class="fa fa-check"></i> For Approval</button>
+            <button type="button" class="btn green btn-sm" onclick="save_record( $(this).closest('form'), '5')"><i class="fa fa-check"></i> Close Request</button>
+        <?php
               break;
         	endswitch;
         ?>

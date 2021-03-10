@@ -87,6 +87,31 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="control-label col-md-3">{{ lang('applicants.training_provider') }}</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="recruitment_personal_history[training-provider][]" id="recruitment_personal_history-training-provider" 
+                                    value="<?php echo (isset($training['training-provider']) ? $training['training-provider'] : ""); ?>" placeholder="Enter {{lang('partners.training_provider')}}"/>
+                                </div>
+                            </div>                            
+                            <div class="form-group">
+                                <label class="control-label col-md-3">{{ lang('applicants.training_cost') }}</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="recruitment_personal_history[training-cost][]" id="recruitment_personal_history-training-cost" 
+                                    value="<?php echo (isset($training['training-cost']) ? $training['training-cost'] : ""); ?>" placeholder="Enter {{lang('partners.training_cost')}}" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>
+                                </div>
+                            </div>                            
+                            <div class="form-group">
+                                <label class="control-label col-md-3">{{ lang('applicants.budgeted') }}</label>
+                                <div class="col-md-6">
+                                    <div class="make-switch" data-on="success" data-off="danger" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
+                                        <?php $budgeted = (isset($training['training-budgeted']) ? $training['training-budgeted'] : ""); ?>
+                                        <input type="checkbox" value="1" @if( $budgeted ) checked="checked" @endif name="recruitment_personal_history[training-budgeted][temp][]" id="recruitment_personal_history-training-budgeted-temp" class="dontserializeme toggle"/>
+                                        <input type="hidden" name="recruitment_personal_history[training-budgeted][]" id="recruitment_personal_history-training-budgeted" 
+                                        value="<?php echo (isset($training['training-budgeted']) ? $training['training-budgeted'] : 0); ?>"/>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label col-md-3">{{ lang('applicants.start_date') }}<span class="required">*</span></label>                                
                                 <div class="col-md-9">
                                     <div class="input-group input-medium pull-left">
@@ -114,7 +139,12 @@
                                     </span>                            
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Remarks</label>
+                                <div class="col-md-6">
+                                    <textarea rows="3" class="form-control"name="recruitment_personal_history[training-remarks][]" id="recruitment_personal_history-training-remarks" ><?php echo (isset($training['training-remarks']) ? $training['training-remarks'] : ""); ?></textarea>
+                                </div>
+                            </div> 
                         </div>
                     </div>
                 </div>

@@ -36,10 +36,14 @@ class training_feedback_participants_model extends Record
 		parent::__construct();
 	}
 
-	function _get_list($start, $limit, $search, $filter, $trash = false, $calendar_id)
+	function _get_list($start, $limit, $search, $filter, $trash = false)
 	{
+		$modify_search = explode('||', $search);
 		$data = array();				
 		
+		$search = $modify_search[0];
+		$calendar_id = $modify_search[1];
+
 		$qry = $this->_get_list_cached_query();
 
 		if( $trash )
@@ -58,7 +62,7 @@ class training_feedback_participants_model extends Record
 		$this->load->library('parser');
 		$this->parser->set_delimiters('{$', '}');
 		$qry = $this->parser->parse_string($qry, array('search' => $search), TRUE);
-		// debug($qry); die;
+		debug($qry); die;
 		$result = $this->db->query( $qry );
 		if($result->num_rows() > 0)
 		{			

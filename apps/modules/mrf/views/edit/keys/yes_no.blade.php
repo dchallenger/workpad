@@ -3,8 +3,8 @@
     <div class="col-md-5">
     	@if(!$record['disabled'])
     	<div class="make-switch" data-off="danger" data-on="success" data-on-label="&nbsp;<?=lang('mrf.yes')?>&nbsp;" data-off-label="&nbsp;<?=lang('mrf.no')?>&nbsp;">
-	    	<input type="checkbox" value="1" <?php if( isset($key->key_value) ) {if( $key->key_value ) echo 'checked="checked"';}?> class="dontserializeme toggle"/>
-	    	<input type="hidden" name="key[{{$key->key_id}}]" value="@if( isset($key->key_value) ){{$key->key_value}}@endif"/>
+	    	<input type="checkbox" value="1" <?php if( isset($key->key_value) ) {if( $key->key_value ) echo 'checked="checked"';}?> class="dontserializeme toggle yes_no"/>
+	    	<input type="hidden" name="key[{{$key->key_id}}]" value="3" class="yes_no_val"/>
 		</div>
 		@else
 			@if( isset($key->key_value) )

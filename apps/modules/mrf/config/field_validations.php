@@ -11,9 +11,14 @@ $config['field_validations']['recruitment_request.created_on'][] = array(
 	'label'   => 'Requested on',
 	'rules'   => 'required'
 );
-$config['field_validations']['recruitment_request.date_needed'][] = array(
-	'field'   => 'recruitment_request[date_needed]',
-	'label'   => 'Date Needed',
+$config['field_validations']['recruitment_request.company_id'][] = array(
+	'field'   => 'recruitment_request[company_id]',
+	'label'   => 'Company',
+	'rules'   => 'required'
+);
+$config['field_validations']['recruitment_request.division_id'][] = array(
+	'field'   => 'recruitment_request[division_id]',
+	'label'   => 'Division',
 	'rules'   => 'required'
 );
 $config['field_validations']['recruitment_request.department_id'][] = array(
@@ -26,9 +31,14 @@ $config['field_validations']['recruitment_request.position_id'][] = array(
 	'label'   => 'Position',
 	'rules'   => 'required'
 );
-$config['field_validations']['recruitment_request.job_class_id'][] = array(
-	'field'   => 'recruitment_request[job_class_id]',
-	'label'   => 'Job Class',
+$config['field_validations']['recruitment_request.rank_id'][] = array(
+	'field'   => 'recruitment_request[rank_id]',
+	'label'   => 'Rank',
+	'rules'   => 'required'
+);
+$config['field_validations']['recruitment_request.employment_status_id'][] = array(
+	'field'   => 'recruitment_request[employment_status_id]',
+	'label'   => 'Employment Status',
 	'rules'   => 'required'
 );
 $config['field_validations']['recruitment_request.quantity'][] = array(
@@ -36,9 +46,14 @@ $config['field_validations']['recruitment_request.quantity'][] = array(
 	'label'   => 'Quantity',
 	'rules'   => 'is_natural_no_zero'
 );
-$config['field_validations']['recruitment_request.employment_status_id'][] = array(
-	'field'   => 'recruitment_request[employment_status_id]',
-	'label'   => 'Employment Status',
+$config['field_validations']['recruitment_request.date_needed'][] = array(
+	'field'   => 'recruitment_request[date_needed]',
+	'label'   => 'Date Needed',
+	'rules'   => 'required'
+);
+$config['field_validations']['recruitment_request.job_class_id'][] = array(
+	'field'   => 'recruitment_request[job_class_id]',
+	'label'   => 'Job Class',
 	'rules'   => 'required'
 );
 /*$config['field_validations']['recruitment_request.attachment'][] = array(

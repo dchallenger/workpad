@@ -36,6 +36,16 @@ class applicants_model extends Record
 		parent::__construct();
 	}
 
+	function get_applicants_personal_image_details($user_id=0, $personal_id=''){
+
+		$this->db->select('key_value')
+	    ->from('recruitment_personal_history ')
+	    ->where("recruitment_personal_history.personal_id = '$personal_id'");
+
+	    $partners_personal_image_detail = $this->db->get('');	
+		return $partners_personal_image_detail->row_array();
+	}
+
 	function get_employee(){
 		$this->db->where('user_id !=',1);
 		$result = $this->db->get('users');

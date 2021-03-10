@@ -32,179 +32,165 @@
                                     <br clear="all">    
                                 </div> -->
                                 <div class="form-body">
-                                    <div class="portlet">  
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">Company</label>
-                                            <div class="col-md-6">
-                                                <input <?php echo $disabled ?> type="text" class="form-control" name="company" id="company" value="<?php echo $row->company ?>" readonly='readonly'/>
-                                            </div>
-                                        </div>   
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">Department</label>
-                                            <div class="col-md-6">
-                                                <input <?php echo $disabled ?> type="text" class="form-control" name="department" id="company" value="<?php echo $row->department ?>" readonly='readonly'/>
-                                            </div>
-                                        </div>  
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">Reference Person</label>
-                                            <div class="col-md-6">
-                                                <input <?php echo $disabled ?> type="text" class="form-control" name="reference_person" id="company" value="<?php echo $row->reference_person ?>"/>
-                                            </div>
-                                        </div>                                           
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">Position</label>
-                                            <div class="col-md-6">
-                                                <input <?php echo $disabled ?> type="text" class="form-control" name="position[]" id="company" value="<?php echo $row->position ?>"/>
+                                    <div class="portlet">
+                                        <div class="portlet-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="50%">Name of Character Reference</td>
+                                                            <td width="50%"><input <?php echo $disabled ?> type="text" class="form-control" name="reference_person[]" id="reference_person" value="<?php echo $row->reference_person ?>"/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Position</td>
+                                                            <td><input <?php echo $disabled ?> type="text" class="form-control" name="position[]" id="position" value="<?php echo $row->position ?>"/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Company</td>
+                                                            <td><input <?php echo $disabled ?> type="text" class="form-control" name="company[]" id="company" value="<?php echo $row->company ?>"/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="no-margin"><span class="number">1.</span>Relationship</p>
+                                                                <p class="next_pa">How did you know the candidate?</p>
+                                                            </td>
+                                                            <td>
+                                                                <input <?php echo $disabled ?> type="text" size="16" class="form-control" name="ans1[]" value="<?php echo $row->ans1 ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="no-margin"><span class="number">2.</span>Efficiency at work</p>
+                                                                <p class="next_pa">What can you say about his/her attendance (absence/tardiness)?</p>
+                                                            </td>
+                                                            <td>
+                                                                <input <?php echo $disabled ?> type="text" size="16" class="form-control" name="ans2[]" value="<?php echo $row->ans2 ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="next_pa">How closely was he/she supervised?</p>
+                                                            </td>
+                                                            <td>
+                                                                <input <?php echo $disabled ?> type="text" size="16" class="form-control" name="ans3[]" value="<?php echo $row->ans3 ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="next_pa">How would you describe the QUALITY of work he/she does?</p>
+                                                            </td>
+                                                            <td>
+                                                                <input <?php echo $disabled ?> type="text" size="16" class="form-control" name="ans4[]" value="<?php echo $row->ans4 ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="next_pa">How would you describe the QUANTITY of work he/she does?</p>
+                                                            </td>
+                                                            <td>
+                                                                <input <?php echo $disabled ?> type="text" size="16" class="form-control" name="ans5[]" value="<?php echo $row->ans5 ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="next_pa">How would you describe his/her management style? (handling of multiple responsibilities/stress)</p>
+                                                            </td>
+                                                            <td>
+                                                                <input <?php echo $disabled ?> type="text" size="16" class="form-control" name="ans6[]" value="<?php echo $row->ans6 ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="next_pa">How would you rate his/her communication skills?</p>
+                                                            </td>
+                                                            <td>
+                                                                <input <?php echo $disabled ?> type="text" size="16" class="form-control" name="ans7[]" value="<?php echo $row->ans7 ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="no-margin"><span class="number">3.</span>Interpersonal skills</p>
+                                                                <p class="next_pa">How would you describe her performance when working with others/ a team?</p>
+                                                            </td>
+                                                            <td>
+                                                                <input <?php echo $disabled ?> type="text" size="16" class="form-control" name="ans8[]" value="<?php echo $row->ans8 ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="no-margin"><span class="number">4.</span>Strengths/Technical Knowledge</p>
+                                                                <p class="next_pa">Would there be any specific technical/product knowledge or skills, you think, that he/she can contribute to his/her prospective employer?</p>
+                                                            </td>
+                                                            <td>
+                                                                <input <?php echo $disabled ?> type="text" size="16" class="form-control" name="ans9[]" value="<?php echo $row->ans9 ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="no-margin"><span class="number">5.</span>Weaknesses/Candidate’s Potentials</p>
+                                                                <p class="next_pa">Could you identify any areas of development that the prospective employer should look into?</p>
+                                                            </td>
+                                                            <td>
+                                                                <input <?php echo $disabled ?> type="text" size="16" class="form-control" name="ans10[]" value="<?php echo $row->ans10 ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="no-margin"><span class="number">6.</span>Integrity</p>
+                                                                <p class="next_pa">Would you be aware of any issues/controversy that he/she has been involved with? Can you provide details?</p>
+                                                            </td>
+                                                            <td>
+                                                                <input <?php echo $disabled ?> type="text" size="16" class="form-control" name="ans11[]" value="<?php echo $row->ans11 ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="next_pa">Can you describe his/her way of handling sensitive/confidential information/materials?</p>
+                                                            </td>
+                                                            <td>
+                                                                <input <?php echo $disabled ?> type="text" size="16" class="form-control" name="ans12[]" value="<?php echo $row->ans12 ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="no-margin"><span class="number">7.</span>If applicable</p>
+                                                                <p class="next_pa">What would you consider as his/her biggest contribution to the company?</p>
+                                                            </td>
+                                                            <td>
+                                                                <input <?php echo $disabled ?> type="text" size="16" class="form-control" name="ans13[]" value="<?php echo $row->ans13 ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="next_pa">Would you know the reason why he/she left your company?</p>
+                                                            </td>
+                                                            <td>
+                                                                <input <?php echo $disabled ?> type="text" size="16" class="form-control" name="ans14[]" value="<?php echo $row->ans14 ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="next_pa">If given the opportunity, would you consider re-hiring him/her? Why?</p>
+                                                            </td>
+                                                            <td>
+                                                                <input <?php echo $disabled ?> type="text" size="16" class="form-control" name="ans15[]" value="<?php echo $row->ans15 ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="next_pa">Is there anything else you would like to add to help us further evaluate his/her application?</p>
+                                                            </td>
+                                                            <td>
+                                                                <input <?php echo $disabled ?> type="text" size="16" class="form-control" name="ans16[]" value="<?php echo $row->ans16 ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">Thank you very much for your time, and rest assured that we will be keeping all this information confidential. Have a very good day sir/ma’am!</td>
+                                                        </tr>                            
+                                                    </tbody>                        
+                                                </table>                      
                                             </div>
                                         </div>     
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">Employment Status</label>
-                                            <div class="col-md-6">
-                                                <input <?php echo $disabled ?> type="text" class="form-control" name="employment_status[]" id="company" value="<?php echo $row->employment_status ?>"/>
-                                            </div>
-                                        </div>  
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">Date Hired</label>
-                                            <div class="col-md-6">
-                                                <div class="input-group date date-picker" data-date-format="MM dd, yyyy">
-                                                    <input <?php echo $disabled ?> type="text" size="16" class="form-control" name="date_hired[]" value="<?php echo date( 'F d, Y', strtotime($row->date_hired) ) ?>">
-                                                    <span class="input-group-btn">
-                                                    </span>
-                                                </div> 
-                                            </div>
-                                        </div>  
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">Date Resigned</label>
-                                            <div class="col-md-6">
-                                                <div class="input-group date date-picker" data-date-format="MM dd, yyyy">
-                                                    <input <?php echo $disabled ?> type="text" size="16" class="form-control" name="date_resigned[]" value="<?php echo date( 'F d, Y', strtotime($row->date_resigned) ) ?>">
-                                                    <span class="input-group-btn">
-                                                    </span>
-                                                </div>                                                
-                                            </div>
-                                        </div>     
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">Reason for Leaving</label>
-                                            <div class="col-md-6">
-                                                <input <?php echo $disabled ?> type="text" class="form-control" name="reason_for_leaving[]" id="company" value="<?php echo $row->reason_for_leaving ?>"/>
-                                            </div>
-                                        </div>                                       
-                                        <div class="form-group">
-                                            <label class="control-label col-md-9">1. Did s/he handle cash or important matter during his/her stay in the company? </label>
-                                            <div class="col-md-3">
-                                                <div class="make-switch" data-off="danger" data-on="success" data-on-label="&nbsp;Yes&nbsp;&nbsp;" data-off-label="&nbsp;No&nbsp;">
-                                                    <input <?php echo $disabled ?> type="checkbox" value="0" <?php if( $row->q1 ) echo 'checked="checked"'; ?> class="dontserializeme toggle q"/>
-                                                    <input type="hidden" name="q1[]" value="<?php echo ( $row->q1 ) ? 1 : 0 ; ?>"/>
-                                                </div>
-                                            </div>
-                                            <br clear="all"/>
-                                            <label class="control-label col-md-6" style="padding-right:42px">If yes, was s/he able to handle it properly? </label>
-                                            <br clear="all"/>
-                                            <div class="col-md-11" style="padding-left:115px">
-                                                <input <?php echo $disabled ?> type="text" class="form-control" name="q1_ans[]" id="company" value="<?php echo $row->q1_ans ?>"/>
-                                            </div>                            
-                                        </div>    
-                                        <div class="form-group">
-                                            <label class="control-label col-md-6">2. Was s/he involved in any disciplinary action? </label>
-                                            <div class="col-md-5">
-                                                <div class="make-switch" data-off="danger" data-on="success" data-on-label="&nbsp;Yes&nbsp;&nbsp;" data-off-label="&nbsp;No&nbsp;">
-                                                    <input <?php echo $disabled ?> type="checkbox" value="0" <?php if( $row->q2 ) echo 'checked="checked"'; ?> class="dontserializeme toggle q"/>
-                                                    <input type="hidden" name="q2[]" value="<?php echo ( $row->q2 ) ? 1 : 0 ; ?>"/>
-                                                </div>
-                                            </div>                           
-                                        </div>  
-                                        <div class="form-group">
-                                            <label class="control-label col-md-5" style="padding-right:30px">3. Did s/he suffer from any illnes? </label>
-                                            <div class="col-md-5">
-                                                <div class="make-switch" data-off="danger" data-on="success" data-on-label="&nbsp;Yes&nbsp;&nbsp;" data-off-label="&nbsp;No&nbsp;">
-                                                    <input <?php echo $disabled ?> type="checkbox" value="0" <?php if( $row->q3 ) echo 'checked="checked"'; ?> class="dontserializeme toggle q"/>
-                                                    <input type="hidden" name="q3[]" value="<?php echo ( $row->q3 ) ? 1 : 0 ; ?>"/>
-                                                </div>
-                                            </div>                           
-                                        </div> 
-                                        <h3 style="padding-left:90px"><strong>ATTITUDE TOWARDS WORK</strong></h3>      
-                                        <div class="form-group">
-                                            <label class="control-label col-md-7" style="padding-right:33px">4. How would you describe his/her attendance record?</label>
-                                            <br clear="all"/>
-                                            <div class="col-md-11" style="padding-left:115px">
-                                                <input <?php echo $disabled ?> type="text" class="form-control" name="q4_ans[]" id="company" value="<?php echo $row->q4_ans ?>"/>
-                                            </div>                            
-                                        </div>                                                                                                                   
-                                        <div class="form-group">
-                                            <label class="control-label col-md-9" style="padding-right:20px">5. How would you rate his/her sense of integrity, trustwothiness and honestly?</label>
-                                            <div class="col-md-6" style="padding-left:140px">
-                                                <div class="radio-list">
-                                                    <label class="radio-inline"><input <?php echo $disabled ?> class="form-filter option" type="radio" name="q5[]" id="optionsRadios2" value="Highly" <?php if( $row->q5 == "Highly") echo 'checked="checked"'; ?>  data-form-id="8">Highly</label>
-                                                    <label class="radio-inline"><input <?php echo $disabled ?> class="form-filter option" type="radio" name="q5[]" id="optionsRadios2" value="Average" <?php if( $row->q5 == "Average") echo 'checked="checked"'; ?> data-form-id="9">Average</label>
-                                                    <label class="radio-inline"><input <?php echo $disabled ?> class="form-filter option" type="radio" name="q5[]" id="optionsRadios2" value="Low" <?php if( $row->q5 == "Low") echo 'checked="checked"'; ?> data-form-id="9">Low</label>
-                                                </div>
-                                            </div>
-                                            <br clear="all"/>
-                                            <label class="control-label col-md-3" style="padding-right:67px">Why? </label>
-                                            <br clear="all"/>
-                                            <div class="col-md-11" style="padding-left:115px">
-                                                <input <?php echo $disabled ?> type="text" class="form-control" name="q5_ans[]" id="company" value="<?php echo $row->q5_ans ?>"/>
-                                            </div>                               
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-12" style="padding-right:56px">6. How would you describe his/her work performance in terms of quality of output & timeliness of result?</label>
-                                            <br clear="all"/>
-                                            <div class="col-md-11" style="padding-left:115px">
-                                                <input <?php echo $disabled ?> type="text" class="form-control" name="q6_ans[]" id="company" value="<?php echo $row->q6_ans ?>"/>
-                                            </div>                            
-                                        </div>                         
-                                        <h3 style="padding-left:90px"><strong>ATTITUDE TOWARDS SUBORDINATES</strong></h3>      
-                                        <div class="form-group">
-                                            <label class="control-label col-md-10" style="padding-right:70px">7. How would you describe his/her relationship with subordinates/co-employees?</label>
-                                            <br clear="all"/>
-                                            <div class="col-md-11" style="padding-left:115px">
-                                                <input <?php echo $disabled ?> type="text" class="form-control" name="q7_ans[]" id="company" value="<?php echo $row->q7_ans ?>"/>
-                                            </div>                            
-                                        </div> 
-                                        <h3 style="padding-left:90px"><strong>ATTITUDE TOWARDS COMPANY</strong></h3>      
-                                        <div class="form-group">
-                                            <label class="control-label col-md-5" style="padding-right:50px">8. Is your company unionized? </label>
-                                            <div class="col-md-5">
-                                                <div class="make-switch" data-off="danger" data-on="success" data-on-label="&nbsp;Yes&nbsp;&nbsp;" data-off-label="&nbsp;No&nbsp;">
-                                                    <input <?php echo $disabled ?> type="checkbox" value="0" <?php if( $row->q8 ) echo 'checked="checked"'; ?> class="dontserializeme toggle q"/>
-                                                    <input type="hidden" name="q8[]" value="<?php echo ( $row->q8 ) ? 1 : 0 ; ?>"/>
-                                                </div>
-                                            </div>                           
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-8" style="padding-right:10px">9. What are some his/her significant contributions to your company?</label>
-                                            <br clear="all"/>
-                                            <div class="col-md-11" style="padding-left:115px">
-                                                <input <?php echo $disabled ?> type="text" class="form-control" name="q9_ans[]" id="company" value="<?php echo $row->q9_ans ?>"/>
-                                            </div>                            
-                                        </div>  
-                                        <div class="form-group">
-                                            <label class="control-label col-md-12" style="padding-right:60px">10. To your knowledge, has this person ever been charged administratively or criminally for any offense? </label>
-                                            <div class="col-md-4" style="padding-left:115px">
-                                                <div class="make-switch" data-off="danger" data-on="success" data-on-label="&nbsp;Yes&nbsp;&nbsp;" data-off-label="&nbsp;No&nbsp;">
-                                                    <input <?php echo $disabled ?> type="checkbox" value="0" <?php if( $row->q10 ) echo 'checked="checked"'; ?> class="dontserializeme toggle q"/>
-                                                    <input type="hidden" name="q10[]" value="<?php echo ( $row->q10 ) ? 1 : 0 ; ?>"/>
-                                                </div>
-                                            </div>                           
-                                        </div>  
-                                        <div class="form-group">
-                                            <label class="control-label col-md-8" style="padding-right:15px">11. Wa s/he cleared of accountability after resignation/termination? </label>
-                                            <div class="col-md-4">
-                                                <div class="make-switch" data-off="danger" data-on="success" data-on-label="&nbsp;Yes&nbsp;&nbsp;" data-off-label="&nbsp;No&nbsp;">
-                                                    <input <?php echo $disabled ?> type="checkbox" value="0" <?php if( $row->q11 ) echo 'checked="checked"'; ?> class="dontserializeme toggle q"/>
-                                                    <input type="hidden" name="q11[]" value="<?php echo ( $row->q11 ) ? 1 : 0 ; ?>"/>
-                                                </div>
-                                            </div>                           
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-7" style="padding-right:49px">12. Would you recommend him/her for hiring? why? </label>
-                                            <div class="col-md-4">
-                                                <div class="make-switch" data-off="danger" data-on="success" data-on-label="&nbsp;Yes&nbsp;&nbsp;" data-off-label="&nbsp;No&nbsp;">
-                                                    <input <?php echo $disabled ?> type="checkbox"  value="0" <?php if( $row->q12 ) echo 'checked="checked"'; ?> class="dontserializeme toggle q"/>
-                                                    <input type="hidden" name="q12[]" value="<?php echo ( $row->q12 ) ? 1 : 0 ; ?>"/>
-                                                </div>
-                                            </div>                           
-                                        </div>                                                                                                                          
                                     </div>
                                 </div>
                             </div>

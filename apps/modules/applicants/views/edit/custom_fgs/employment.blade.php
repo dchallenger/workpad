@@ -83,9 +83,7 @@
                     <label class="control-label col-md-3">{{ lang('applicants.oth_pos') }}
                     </label>
                     <div class="col-md-5">
-                        <div class="input-icon">
-                            <input type="text" class="form-control" maxlength="64" name="recruitment[oth_position]" value="{{ $record['oth_position'] }}" placeholder="Enter Other Position" id="recruitment-firstname">
-                        </div>
+                        <input type="text" class="form-control" maxlength="64" name="recruitment[oth_position]" value="{{ $record['oth_position'] }}" placeholder="Enter Other Position" id="recruitment-firstname">
                     </div>
                 </div>                
                 <div class="form-group">
@@ -95,7 +93,7 @@
                             <span class="input-group-addon">
                                <i class="fa fa-money"></i>
                              </span>
-                            <input type="text" class="form-control" name="recruitment_personal[desired_salary]" id="recruitment_personal-desired_salary" value="{{ $record['desired_salary'] }}" placeholder="Enter Desired Salary"/>
+                            <input type="text" class="form-control" name="recruitment_personal[desired_salary]" id="recruitment_personal-desired_salary" value="{{ $record['desired_salary'] }}" placeholder="Enter Desired Salary" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>
                         </div>
                     </div>
                 </div>
@@ -125,6 +123,18 @@
                         </div> 
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('applicants.learn_job') }}</label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" maxlength="64" name="recruitment_personal[how_hiring_heard]" value="{{ $record['how_hiring_heard'] }}" id="recruitment-firstname">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('applicants.referral') }}</label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" maxlength="64" name="recruitment_personal[referred_by]" value="{{ $record['referred_by'] }}" id="recruitment-firstname">
+                    </div>
+                </div>                
 <!--                 <div class="form-group">
                     <label class="control-label col-md-3"> Sourcing Tools<br>
                         <span class="text-muted small">{{ lang('applicants.note') }}</span>

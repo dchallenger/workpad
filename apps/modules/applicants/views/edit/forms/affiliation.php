@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3">Date Started<span class="required">*</span></label>                    
+                    <label class="control-label col-md-3">Start Date<span class="required">*</span></label>                    
                     <div class="col-md-9">
                         <div class="input-group input-medium pull-left">
                             <select  class="form-control form-select" data-placeholder="Select Month.." name="recruitment_personal_history[affiliation-month-start][]" id="recruitment_personal_history-affiliation-month-start">
@@ -42,11 +42,11 @@
                             </select>
                         </div>
                         <span class="pull-left padding-left-right-10">-</span>
-                        <span class="pull-left"><input type="text" class="form-control input-small" maxlength="4" name="recruitment_personal_history[affiliation-year-start][]" id="recruitment_personal_history-affiliation-year-start" placeholder="Year"></span>
+                        <span class="pull-left"><input type="text" class="form-control input-small" maxlength="4" name="recruitment_personal_history[affiliation-year-start][]" id="recruitment_personal_history-affiliation-year-start" placeholder="Year" data-inputmask="'mask': '9999'"></span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3">Date End<span class="required">*</span></label>
+                    <label class="control-label col-md-3">End Date<span class="required">*</span></label>
                     <div class="col-md-9">
                     <div class="input-group input-medium pull-left">
                         <select  class="form-control form-select" data-placeholder="Select Month.." name="recruitment_personal_history[affiliation-month-end][]" id="recruitment_personal_history-affiliation-month-end">
@@ -65,7 +65,7 @@
                         </select>
                     </div>
                     <span class="pull-left padding-left-right-10">-</span>
-                    <span class="pull-left"><input type="text" class="form-control input-small" maxlength="4" name="recruitment_personal_history[affiliation-year-end][]" id="recruitment_personal_history-affiliation-year-end" placeholder="Year"></span>
+                    <span class="pull-left"><input type="text" class="form-control input-small" maxlength="4" name="recruitment_personal_history[affiliation-year-end][]" id="recruitment_personal_history-affiliation-year-end" placeholder="Year" data-inputmask="'mask': '9999'"></span>
                 </div>
                 </div>
 			</div>

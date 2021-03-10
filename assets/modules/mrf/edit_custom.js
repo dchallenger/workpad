@@ -1,5 +1,16 @@
 $(document).ready(function(){
-	
+	$('#plan_code').select2({
+	    placeholder: "Select an option",
+	    allowClear: true
+	});	
+
+    $('.yes_no').change(function(){
+        if( $(this).is(':checked') ) {
+            $(this).parent().parent().find('.yes_no_val').val('1');
+        } else {
+            $(this).parent().parent().find('.yes_no_val').val('0');
+        }
+    });	
 
 	if ($('.wysihtml5').size() > 0) {
 		$('.wysihtml5').wysihtml5({
@@ -38,6 +49,7 @@ $(document).ready(function(){
 	}
 
 	$('#recruitment_request-department_id').change(function(){
+		get_plan_code($(this).val());
 		get_dept_immediate( $(this).val() );
 	});
 
@@ -51,6 +63,20 @@ $(document).ready(function(){
 		show_hide_budget_from_to( $(this).val() );
 	});
 */
+	$('#recruitment_request-budgeted').change(function() {
+		if ($(this).val() == 0) {
+			$('.purpose').hide();
+			$('.mrf_plan_code').hide();
+			$("#recruitment_request-position_id").select2("val", "");
+			$("#recruitment_request-employment_status_id").select2("val", "");
+			$('#recruitment_request-date_needed').val("");
+			$('#recruitment_request-quantity').val("");			
+		} else {
+			$('.purpose').show();
+			$('.mrf_plan_code').show();
+		}
+	});
+
 	$('#recruitment_request-nature_id').trigger('change');
 	
 	if($('#recruitment_request-nature_id').val() == ''){
@@ -127,6 +153,34 @@ $(document).ready(function(){
         
         });
 	}
+
+	$('#plan_code').live('change',function() {
+		if ($('#recruitment_request-budgeted').val() == 1) {
+			$.ajax({
+				url: base_url + module.get('route') + '/get_plan_details',
+				type:"POST",
+				async: false,
+				data: {plan_code : $(this).val()},
+				dataType: "json",
+				beforeSend: function(){
+				},
+				success: function ( response ) {
+					if (response.checker == 'success') {
+						$("#recruitment_request-position_id").select2("val", response.position_id);
+						$("#recruitment_request-employment_status_id").select2("val", response.employment_status_id);
+						$('#recruitment_request-date_needed').val(response.date_needed);
+						$('#recruitment_request-quantity').val(response.needed);
+					}
+					else {
+						$("#recruitment_request-position_id").select2("val", "");
+						$("#recruitment_request-employment_status_id").select2("val", "");
+						$('#recruitment_request-date_needed').val("");
+						$('#recruitment_request-quantity').val("");							
+					}
+				}
+			});		
+		}		
+	});
 });
 
 function show_hide_contract_duration(employment_status_id){
@@ -200,6 +254,28 @@ function get_dept_immediate(dept_id){
 			}else{
 				$('#recruitment_request-immediate').val('');
 			}
+		}
+	});	
+}
+
+function get_plan_code(dept_id){
+	var data = {
+		dept_id: dept_id
+	};
+	$.ajax({
+		url: base_url + module.get('route') + '/get_plan_code',
+		type:"POST",
+		async: false,
+		data: data,
+		dataType: "json",
+		beforeSend: function(){
+		},
+		success: function ( response ) {
+			$('#plan_code').html(response.plan_code);
+			$('#plan_code').select2({
+			    placeholder: "Select an option",
+			    allowClear: true
+			});			
 		}
 	});	
 }

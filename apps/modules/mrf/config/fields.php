@@ -12,7 +12,7 @@ $config['fields'][1]['recruitment_request.hiring_type'] = array(
 	'display_id' => 3,
 	'quick_edit' => 1,
 	'sequence' => 2,
-	'datatype' => 'required',
+	'datatype' => '',
 	'active' => '1',
 	'encrypt' => 0,
 	'searchable' => array(
@@ -52,6 +52,21 @@ $config['fields'][1]['recruitment_request.document_no'] = array(
     'quick_edit' => 1,
     'sequence' => 1,
     'datatype' => 'required',
+    'active' => '1',
+    'encrypt' => 0
+);
+$config['fields'][1]['recruitment_request.plan_code'] = array(
+    'f_id' => 4,
+    'fg_id' => 1,
+    'label' => 'Plan Code',
+    'description' => '',
+    'table' => 'recruitment_request',
+    'column' => 'plan_code',
+    'uitype_id' => 1,
+    'display_id' => 3,
+    'quick_edit' => 1,
+    'sequence' => 1,
+    'datatype' => '',
     'active' => '1',
     'encrypt' => 0
 );
@@ -96,7 +111,7 @@ $config['fields'][1]['recruitment_request.max_no_personel'] = array(
     'display_id' => 3,
     'quick_edit' => 1,
     'sequence' => 1,
-    'datatype' => 'required',
+    'datatype' => '',
     'active' => '1',
     'encrypt' => 0
 );
@@ -111,7 +126,7 @@ $config['fields'][1]['recruitment_request.total_no_incumbent'] = array(
     'display_id' => 3,
     'quick_edit' => 1,
     'sequence' => 1,
-    'datatype' => 'required',
+    'datatype' => '',
     'active' => '1',
     'encrypt' => 0
 );
@@ -151,6 +166,30 @@ $config['fields'][1]['recruitment_request.position_id'] = array(
 		'group_by' => '',
 		'label' => 'position',
 		'value' => 'position_id',
+		'textual_value_column' => ''
+	)
+);
+$config['fields'][1]['recruitment_request.rank_id'] = array(
+	'f_id' => 9,
+	'fg_id' => 1,
+	'label' => 'Rank',
+	'description' => '',
+	'table' => 'recruitment_request',
+	'column' => 'rank_id',
+	'uitype_id' => 4,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 2,
+	'datatype' => 'required',
+	'active' => '1',
+	'encrypt' => 0,
+	'searchable' => array(
+		'type_id' => '1',
+		'table' => 'users_job_grade_level',
+		'multiple' => 0,
+		'group_by' => '',
+		'label' => 'job_level',
+		'value' => 'job_grade_id',
 		'textual_value_column' => ''
 	)
 );
@@ -268,6 +307,30 @@ $config['fields'][1]['recruitment_request.department_id'] = array(
 		'group_by' => '',
 		'label' => 'department',
 		'value' => 'department_id',
+		'textual_value_column' => ''
+	)
+);
+$config['fields'][1]['recruitment_request.division_id'] = array(
+	'f_id' => 2,
+	'fg_id' => 1,
+	'label' => 'Division',
+	'description' => '',
+	'table' => 'recruitment_request',
+	'column' => 'division_id',
+	'uitype_id' => 4,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 2,
+	'datatype' => 'required',
+	'active' => '1',
+	'encrypt' => 0,
+	'searchable' => array(
+		'type_id' => '1',
+		'table' => 'users_division',
+		'multiple' => 0,
+		'group_by' => '',
+		'label' => 'division',
+		'value' => 'division_id',
 		'textual_value_column' => ''
 	)
 );
@@ -449,7 +512,7 @@ $config['fields'][1]['recruitment_request.age_range_from'] = array(
     'display_id' => 3,
     'quick_edit' => 1,
     'sequence' => 1,
-    'datatype' => 'required',
+    'datatype' => '',
     'active' => '1',
     'encrypt' => 0
 );
@@ -464,7 +527,7 @@ $config['fields'][1]['recruitment_request.age_range_to'] = array(
     'display_id' => 3,
     'quick_edit' => 1,
     'sequence' => 1,
-    'datatype' => 'required',
+    'datatype' => '',
     'active' => '1',
     'encrypt' => 0
 );
