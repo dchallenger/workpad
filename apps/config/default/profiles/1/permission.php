@@ -1,5 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
- 
+  
 $permission = array();
 $permission['users']['list'] = 1;
 $permission['users']['detail'] = 1;
