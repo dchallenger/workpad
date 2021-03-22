@@ -36,6 +36,62 @@ class appraisal_individual_planning_model extends Record
 		parent::__construct();
 	}
 
+	function get_target_completion()
+	{
+		$this->db->where('performance_appraisal_target_completion.deleted',0);
+		$this->db->order_by('performance_appraisal_target_completion.target_completion');
+		$result = $this->db->get('performance_appraisal_target_completion');
+		return $result;		
+	}
+
+	function get_competencies()
+	{
+		$this->db->where('training_category.deleted',0);
+		$this->db->order_by('training_category.category');
+		$result = $this->db->get('training_category');
+		return $result;		
+	}
+
+	function get_learning_mode()
+	{
+		$this->db->where('performance_appraisal_learning_mode.deleted',0);
+		$this->db->order_by('performance_appraisal_learning_mode.learning_mode');
+		$result = $this->db->get('performance_appraisal_learning_mode');
+		return $result;		
+	}
+
+	function get_areas_for_development()
+	{
+		$this->db->where('performance_appraisal_areas_development.deleted',0);
+		$this->db->order_by('performance_appraisal_areas_development.appraisal_areas_development');
+		$result = $this->db->get('performance_appraisal_areas_development');
+		return $result;		
+	}
+
+	function get_financial_metric_details($financial_metric_ids = 0)
+	{
+		$fm_ids = implode(',', $financial_metric_ids);
+
+		$qry = "select SUM(fmp.key_in_weight) AS key_in_weight,fmpd.financial_metric_kpi_id,fmk.financial_metrics_kpi,SUM(fmpd.weight) AS weight,SUM(fmpd.value) AS value
+		FROM {$this->db->dbprefix}performance_financial_metric_planning_details fmpd
+		LEFT JOIN {$this->db->dbprefix}performance_financial_metric_planning fmp ON fmp.financial_metric_planning_id = fmpd.financial_metric_planning_id
+		LEFT JOIN {$this->db->dbprefix}performance_setup_financial_metrics_kpi fmk ON fmpd.financial_metric_kpi_id = fmk.financial_metrics_kpi_id
+		WHERE fmpd.financial_metric_planning_id IN ({$fm_ids})
+		AND fmpd.deleted = 0
+		GROUP BY fmpd.financial_metric_kpi_id";
+
+		$financial_metric_details = $this->db->query( $qry );
+
+		return $financial_metric_details;
+	}
+
+	function get_financial_metric_title()
+	{
+		$this->db->where('performance_financial_metric_planning.deleted',0);
+		$result = $this->db->get('performance_financial_metric_planning');
+		return $result;		
+	}
+
 	function get_employee_appraisal_planning($user_id,$current_planning_id)
 	{
 		$this->db->where('performance_planning.planning_id <>',$current_planning_id);
@@ -131,8 +187,11 @@ class appraisal_individual_planning_model extends Record
 			return false;
 	}
 
-	function get_balance_score_card()
+	function get_balance_score_card($scorecard_id = 0)
 	{
+		if ($scorecard_id)
+			$this->db->where('scorecard_id',$scorecard_id);	
+
 		$this->db->where('deleted',0);
 		$this->db->where('status_id',1);
 		$result = $this->db->get('performance_setup_scorecard');

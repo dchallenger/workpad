@@ -30,7 +30,7 @@ $show_add = false;
 		<tbody class="get-section section-<?php echo $section_id ?>" section="<?php echo $section_id ?>">
 			@if(isset($balance_score_card) && $balance_score_card->num_rows() > 0)
 				@foreach($balance_score_card->result_array() as $key => $val)
-					<tr class="q{{ $key+1 }}">
+					<tr class="q{{ $key+1 }} @if($val['scorecard_id'] == 1) fmt@endif">
 						<td>
 							{{ $key+1 . ". " . $val['scorecard'] }}&nbsp;
 						    <a href="javasript:void(0)" class="btn-success" style="padding:1px 2px"><i class="fa fa-plus add_row" data-section_id="{{ $section_id }}" data-scorecard_id="{{ $val['scorecard_id'] }}" data-num_question="q{{ $key+2 }}"></i></a>
@@ -48,7 +48,7 @@ $show_add = false;
 										case 2:
 						?>
 											<td width="{{ $value->width }}">
-												<input type="text" question="{{ $val['scorecard_id'] }}" value="{{ $planning_value }}" class="form-control {{ $value->class }}" name="field[{{ $val['scorecard_id'] }}][{{ $value->section_column_id }}][]" data-inputmask="'alias': '{{ $value->data_type }}', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false">
+												<input type="text" question="{{ $val['scorecard_id'] }}" value="{{ $planning_value }}" class="form-control {{ $value->class }}" name="field[{{ $val['scorecard_id'] }}][{{ $value->section_column_id }}][]" data-inputmask="'alias': '{{ $value->data_type }}', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false">
 											</td>
 						<?php
 										break;
@@ -88,7 +88,7 @@ $show_add = false;
 														if ($can_add_row) {
 									?>
 															<td width="{{ $value->width }}">
-																<input type="text" question="{{ $val['scorecard_id'] }}" value="{{ $planning_value }}" class="form-control {{ $value->class }}" name="field[{{ $val['scorecard_id'] }}][{{ $value->section_column_id }}][]" data-inputmask="'alias': '{{ $value->data_type }}', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false">
+																<input type="text" question="{{ $val['scorecard_id'] }}" value="{{ $planning_value }}" class="form-control {{ $value->class }}" name="field[{{ $val['scorecard_id'] }}][{{ $value->section_column_id }}][]" data-inputmask="'alias': '{{ $value->data_type }}', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false">
 															</td>
 									<?php
 														} else {

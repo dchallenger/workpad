@@ -4,7 +4,7 @@
 		<div class="tools"><a class="collapse" href="javascript:;"></a></div>
 	</div>
 	<div class="portlet-body form">
-		<div class="form-group">
+		<div class="form-group hidden">
 			<label class="control-label col-md-3"><span class="required">* </span>Performance Planning</label>
 			<div class="col-md-7">
 				<?php
@@ -23,7 +23,7 @@
                 </div> 				
             </div>	
 		</div>
-		<div class="form-group">
+		<div class="form-group hidden">
 			<label class="control-label col-md-3"><span class="required">* </span>Employees</label>
 			<div class="col-md-7">
 				<?php
@@ -43,6 +43,12 @@
               	</div>
             </div>	
 		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3"><span class="required">* </span>Financial Metrics Title</label>
+			<div class="col-md-7">
+				<input readonly type="text" class="form-control" name="performance_financial_metric_planning[title]" id="performance_financial_metric_planning-title" value="{{ $record['performance_financial_metric_planning_title'] }}" />
+			</div>	
+		</div>			
 		<div class="form-group">
 			<label class="control-label col-md-3"><span class="required">* </span>Financial Metric KPI</label>
 			<div class="col-md-7">
@@ -64,9 +70,15 @@
 		<div class="form-group">
 			<label class="control-label col-md-3"><span class="required">* </span>Key in Weight</label>
 			<div class="col-md-7">
-				<input type="text" class="form-control" name="performance_financial_metric_planning[key_in_weight]" id="performance_financial_metric_planning-key_in_weight" value="{{ $record['performance_financial_metric_planning_key_in_weight'] }}" placeholder="Enter Key in Weight" />
+				<input readonly type="text" class="form-control" name="performance_financial_metric_planning[key_in_weight]" id="performance_financial_metric_planning-key_in_weight" value="{{ $record['performance_financial_metric_planning_key_in_weight'] }}" placeholder="Enter Key in Weight" />
 			</div>	
-		</div>	
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3">Remarks</label>
+			<div class="col-md-7">
+				<textarea class="form-control" name="performance_financial_metric_planning[remarks]" readonly>{{ $record['performance_financial_metric_planning_remarks'] }}</textarea>
+			</div>	
+		</div>		
 	</div>
 </div>
 <div class="portlet">

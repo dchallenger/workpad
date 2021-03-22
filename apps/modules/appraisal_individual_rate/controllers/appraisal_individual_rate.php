@@ -181,6 +181,10 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['readonly'] = '';
         $vars['login_user_id'] = $this->user->user_id;
         $vars['tenure'] = get_tenure($appraisee->effectivity_date);
+        $vars['areas_development'] = $this->individual_planning_model->get_areas_for_development();
+        $vars['learning_mode'] = $this->individual_planning_model->get_learning_mode();
+        $vars['competencies'] = $this->individual_planning_model->get_competencies();
+        $vars['target_completion'] = $this->individual_planning_model->get_target_completion();
 
         $this->load->vars( $vars );
 
@@ -1172,6 +1176,10 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['appraisal_applicable_score_library_ratings'] = $this->mod->get_appraisal_applicable_score_library_ratings($this->record_id,$appraisee->user_id);
         $vars['readonly'] = '';
         $vars['login_user_id'] = $login_user_id;
+        $vars['areas_development'] = $this->individual_planning_model->get_areas_for_development();
+        $vars['learning_mode'] = $this->individual_planning_model->get_learning_mode();
+        $vars['competencies'] = $this->individual_planning_model->get_competencies();
+        $vars['target_completion'] = $this->individual_planning_model->get_target_completion();
 
         $this->load->vars( $vars );
 
@@ -1272,6 +1280,10 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['appraisal_applicable_score_library_ratings'] = $this->mod->get_appraisal_applicable_score_library_ratings($this->record_id,$appraisee->user_id);
         $vars['readonly'] = '';
         $vars['login_user_id'] = $login_user_id;
+        $vars['areas_development'] = $this->individual_planning_model->get_areas_for_development();
+        $vars['learning_mode'] = $this->individual_planning_model->get_learning_mode();
+        $vars['competencies'] = $this->individual_planning_model->get_competencies();
+        $vars['target_completion'] = $this->individual_planning_model->get_target_completion();
 
         $this->load->vars( $vars );
 
@@ -1374,7 +1386,11 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['appraisal_applicable_section_ratings'] = $this->mod->get_appraisal_applicable_section_ratings($this->record_id,$appraisee->user_id);
         $vars['appraisal_applicable_score_library_ratings'] = $this->mod->get_appraisal_applicable_score_library_ratings($this->record_id,$appraisee->user_id);
         $vars['login_user_id'] = $login_user_id;
-
+        $vars['areas_development'] = $this->individual_planning_model->get_areas_for_development();
+        $vars['learning_mode'] = $this->individual_planning_model->get_learning_mode();
+        $vars['competencies'] = $this->individual_planning_model->get_competencies();
+        $vars['target_completion'] = $this->individual_planning_model->get_target_completion();
+        
         $vars['status'] = $this->db->get_where('performance_status', array('deleted' => 0,'appraisal' => 1))->result();
 
         $this->load->vars( $vars );

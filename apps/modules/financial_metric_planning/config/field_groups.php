@@ -10,9 +10,11 @@ $config['fieldgroups'][3] = array(
 	'active' => 1,
 	'fields' => array(
 		'performance_financial_metric_planning.planning_id',
+		'performance_financial_metric_planning.title',
 		'performance_financial_metric_planning.user_ids',
 		'performance_financial_metric_planning.financial_metric_kpi_ids',
-		'performance_financial_metric_planning.key_in_weight'
+		'performance_financial_metric_planning.key_in_weight',
+		'performance_financial_metric_planning.remarks',
 	)
 );
 $config['fieldgroups'][4] = array(

@@ -33,7 +33,7 @@
 	<td>
         <div class="btn-group">
             <?php $edit_status_id = array(0,1,3,6); ?>
-            @if($to_user_id == $user_id AND (in_array($applicable_status_id, $edit_status_id)))
+            @if($to_user_id == $user_id AND (in_array($applicable_status_id, $edit_status_id)) AND $status_id == 1)
             <a class="small text-muted" href="{{ $edit_url }}/{{ $user_id }}"><i class="fa fa-pencil"></i> 
              {{ lang('common.edit') }}
          	</a>

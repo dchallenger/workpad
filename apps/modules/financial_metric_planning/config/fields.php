@@ -27,7 +27,7 @@ $config['fields'][3]['performance_financial_metric_planning.user_ids'] = array(
 	'display_id' => 3,
 	'quick_edit' => 1,
 	'sequence' => 2,
-	'datatype' => 'required',
+	'datatype' => '',
 	'active' => '1',
 	'encrypt' => 0,
 	'searchable' => array(
@@ -87,4 +87,34 @@ $config['fields'][3]['performance_financial_metric_planning.planning_id'] = arra
 		'value' => 'planning_id',
 		'textual_value_column' => ''
 	)
+);
+$config['fields'][3]['performance_financial_metric_planning.title'] = array(
+	'f_id' => 7,
+	'fg_id' => 3,
+	'label' => 'Financial Metrics Title',
+	'description' => '',
+	'table' => 'performance_financial_metric_planning',
+	'column' => 'title',
+	'uitype_id' => 1,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 4,
+	'datatype' => 'required',
+	'active' => '1',
+	'encrypt' => 0
+);
+$config['fields'][3]['performance_financial_metric_planning.remarks'] = array(
+	'f_id' => 7,
+	'fg_id' => 3,
+	'label' => 'Remarks',
+	'description' => '',
+	'table' => 'performance_financial_metric_planning',
+	'column' => 'remarks',
+	'uitype_id' => 2,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 4,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 0
 );

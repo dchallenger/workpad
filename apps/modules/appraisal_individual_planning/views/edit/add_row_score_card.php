@@ -1,4 +1,4 @@
-<tr>
+<tr  class="<?php if ($scorecard_id == 1) echo 'fmt' ?>">
 	<?php
 		if (isset($template_section_column) && !empty($template_section_column))
 		{

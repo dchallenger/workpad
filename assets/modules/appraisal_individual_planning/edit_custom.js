@@ -1,6 +1,12 @@
 $(document).ready(function(){
 	$(":input").inputmask();
-    $('#individual_planning_appraisee_acceptance_tmp').change(function(){
+
+	$('.financial_metric').select2({
+	    placeholder: "Select Financial Metric Title",
+	    allowClear: true
+	});
+
+    $('#individual_planning_appraisee_acceptance_tmp').change(function() {
     	if( $(this).is(':checked') )
     		$('#individual_planning_appraisee_acceptance').val('1');
     	else
@@ -413,6 +419,7 @@ function view_discussion( form, status_id )
 	});
 }
 
+//for oclp
 $(document).on('change', '.upload_appraisal_planning', function (e) {
 	e.preventDefault();
 
@@ -435,7 +442,44 @@ $(document).on('change', '.upload_appraisal_planning', function (e) {
 							dataType: "json",
 							async: false,
 							success: function ( response ) {
+								handle_ajax_message( response.message );
+
 								$('.kra-section').html(response.items);
+							}
+						});
+					}
+				});
+				$.unblockUI();
+			}
+		});	
+	}
+});
+
+$(document).on('change', '.financial_metric', function (e) {
+	e.preventDefault();
+
+	var data = {
+		financial_metric_ids: $(this).val(),
+		section_id: $(this).data('section_id')
+	};
+
+	if ($(this).val() != null) {
+		bootbox.confirm('Are you sure you want to load Financial Metrics?', function(confirm) {
+			if( confirm )
+			{
+				$.blockUI({ message: '<div>Updating content, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />', 
+					onBlock: function(){
+						$.ajax({
+							url: base_url + module.get('route') + '/populate_financial_metric',
+							type:"POST",
+							data: data,
+							dataType: "json",
+							async: false,
+							success: function ( response ) {
+								handle_ajax_message( response.message );
+
+								$('.fmt').remove();
+								$('tbody.get-section').prepend(response.items);
 							}
 						});
 					}
@@ -453,7 +497,6 @@ $(document).on('keypress', '#discussion_notes', function (e) {
     } else return;
 });
 
-//for oclp
 $(document).on('click', '.add_row', function (e) {
 	e.preventDefault();
 
@@ -511,6 +554,38 @@ $(document).on('keyup', '.key_weight', function (e) {
 
     if ($(this).val() != '')
     	$('.key_weight_total_'+scorecard_id).html(parseFloat($(this).val()));
+});
+
+$(document).on('click', '.add_idp', function (e) {
+	e.preventDefault();
+
+	var data = {
+		section_id: $(this).data('section_id'),
+		scorecard_id: $(this).data('scorecard_id')
+	};
+
+	var elem = $(this);
+
+    $.ajax({
+        url: base_url + module.get('route') + '/add_idp',
+        type:"POST",
+        data: data,
+        dataType: "json",
+        async: true,
+        success: function ( response ) {
+            handle_ajax_message( response.message );
+			
+			$('tbody.idp').append(response.items);
+
+            $(":input").inputmask();
+        }
+    });
+});
+
+$(document).on('click', '.delete_idp', function (e) {
+	e.preventDefault();
+
+	$(this).closest('tr').remove();
 });
 
 //end for oclp

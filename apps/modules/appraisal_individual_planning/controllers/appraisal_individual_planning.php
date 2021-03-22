@@ -34,10 +34,12 @@ class Appraisal_individual_planning extends MY_PrivateController
 
         $vars['planning_admin'] = 0;
         $vars['readonly'] = '';
+        $vars['disabled'] = '';
 
         if( !in_array($appraisee->status_id,array(0,1,6)) ) {
             $vars['readonly'] = "readonly='readonly'";
             $vars['planning_admin'] = 1;
+            $vars['disabled'] = 'disabled';
         }
 
         $vars['manager_id'] = $manager_id; 
@@ -80,6 +82,10 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['template_section'] = $this->mod->get_template_section($appraisee->template_id);
         $vars['library_competencies'] = $this->mod->get_library_competencies();
         $vars['tenure'] = get_tenure($appraisee->effectivity_date);
+        $vars['areas_development'] = $this->mod->get_areas_for_development();
+        $vars['learning_mode'] = $this->mod->get_learning_mode();
+        $vars['competencies'] = $this->mod->get_competencies();
+        $vars['target_completion'] = $this->mod->get_target_completion();
 
         $this->load->vars( $vars );
         
@@ -125,6 +131,11 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['library_competencies'] = $this->mod->get_library_competencies();
         $vars['readonly'] = '';
         $vars['tenure'] = get_tenure($appraisee->effectivity_date);
+        $vars['financial_metric_title'] = $this->mod->get_financial_metric_title();
+        $vars['areas_development'] = $this->mod->get_areas_for_development();
+        $vars['learning_mode'] = $this->mod->get_learning_mode();
+        $vars['competencies'] = $this->mod->get_competencies();
+        $vars['target_completion'] = $this->mod->get_target_completion();
 
         $this->load->vars( $vars );
 
@@ -147,6 +158,15 @@ class Appraisal_individual_planning extends MY_PrivateController
 
         $appraisee = $vars['appraisee'] = $this->mod->get_appraisee( $planning_id, $user_id );
         
+        if ($appraisee->performance_status_id <> 4) {
+            $this->response->message[] = array(
+                'message' => 'Performance Planning does not exists.',
+                'type' => 'warning'
+            );            
+
+            $this->_ajax_return();  
+        }
+
         $vars['manager_id'] = '';
         $vars['current_user_id'] = $this->user->user_id;
 
@@ -156,6 +176,29 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['section_id'] = $this->input->post('section_id');
 
         $this->response->items = $this->load->view('edit/sections/populate_balance_scorecard', $vars, true);
+
+        $this->response->message[] = array(
+            'message' => '',
+            'type' => 'success'
+        );
+
+        $this->_ajax_return();  
+
+    }
+
+    public function populate_financial_metric()
+    {
+        $financial_metric_ids = $this->input->post('financial_metric_ids');
+
+        $vars['manager_id'] = '';
+        $vars['current_user_id'] = $this->user->user_id;
+
+        $vars['balance_score_card'] = $this->mod->get_balance_score_card(1)->row_array();
+        $vars['template_section_column'] = $this->mod->get_template_section_column();
+        $vars['financial_metric_details'] = $this->mod->get_financial_metric_details($financial_metric_ids);
+        $vars['section_id'] = $this->input->post('section_id');
+
+        $this->response->items = $this->load->view('edit/sections/populate_financial_metrics', $vars, true);
 
         $this->response->message[] = array(
             'message' => '',
@@ -1274,15 +1317,18 @@ class Appraisal_individual_planning extends MY_PrivateController
 
         $vars['planning_admin'] = 0;
         $vars['readonly'] = '';
+        $vars['disabled'] = '';
 
         if( !$vars['approver'] ) {
             $vars['planning_admin'] = 1;
             $vars['readonly'] = "readonly='readonly'";
+            $vars['disabled'] = 'disabled';
         }
         else {
             if (in_array($appraisee->performance_status_id,array(0,1,4,6))) {
                 $vars['planning_admin'] = 1;
                 $vars['readonly'] = "readonly='readonly'";
+                $vars['disabled'] = 'disabled';
             }
         }
 
@@ -1312,8 +1358,10 @@ class Appraisal_individual_planning extends MY_PrivateController
         }
 
         foreach ($vars['approversLog'] as $key => $value) {
-            if ($value['approver_id'] == $this->user->user_id && $value['performance_status_id'] == 4)
+            if ($value['approver_id'] == $this->user->user_id && $value['performance_status_id'] == 4) {
                 $vars['readonly'] = "readonly='readonly'";
+                $vars['disabled'] = 'disabled';
+            }
         }
 
         $vars['transaction_type'] = 'view';
@@ -1325,6 +1373,10 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['template_section'] = $this->mod->get_template_section($appraisee->template_id);
         $vars['library_competencies'] = $this->mod->get_library_competencies();
         $vars['tenure'] = get_tenure($appraisee->effectivity_date);
+        $vars['areas_development'] = $this->mod->get_areas_for_development();
+        $vars['learning_mode'] = $this->mod->get_learning_mode();
+        $vars['competencies'] = $this->mod->get_competencies();
+        $vars['target_completion'] = $this->mod->get_target_completion();
 
         $this->load->vars( $vars );
 
@@ -1715,6 +1767,29 @@ class Appraisal_individual_planning extends MY_PrivateController
         $this->load->vars( $vars );
 
         $this->response->items = $this->load->view('edit/add_row_score_card', $_POST, true);
+
+        $this->response->message[] = array(
+            'message' => '',
+            'type' => 'success'
+        );
+
+        $this->_ajax_return();            
+    }
+
+    function add_idp()
+    {
+        $this->_ajax_only();
+
+        $vars['template_section_column'] = $this->mod->get_template_section_column();
+
+        $vars['areas_development'] = $this->mod->get_areas_for_development();
+        $vars['learning_mode'] = $this->mod->get_learning_mode();
+        $vars['competencies'] = $this->mod->get_competencies();
+        $vars['target_completion'] = $this->mod->get_target_completion();
+
+        $this->load->vars( $vars );
+
+        $this->response->items = $this->load->view('edit/add_idp', $_POST, true);
 
         $this->response->message[] = array(
             'message' => '',

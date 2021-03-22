@@ -8,6 +8,8 @@ $config["edit_cached_query"] = 'SELECT
 ww_performance_financial_metric_planning.key_in_weight as "performance_financial_metric_planning.key_in_weight",
 ww_performance_financial_metric_planning.user_ids as "performance_financial_metric_planning.user_ids",
 ww_performance_financial_metric_planning.financial_metric_kpi_ids as "performance_financial_metric_planning.financial_metric_kpi_ids",
-ww_performance_financial_metric_planning.planning_id as "performance_financial_metric_planning.planning_id"
+ww_performance_financial_metric_planning.planning_id as "performance_financial_metric_planning.planning_id",
+ww_performance_financial_metric_planning.title as "performance_financial_metric_planning.title",
+ww_performance_financial_metric_planning.remarks as "performance_financial_metric_planning.remarks"
 FROM (`ww_performance_financial_metric_planning`)
 WHERE `ww_performance_financial_metric_planning`.`financial_metric_planning_id` = "{$record_id}"';

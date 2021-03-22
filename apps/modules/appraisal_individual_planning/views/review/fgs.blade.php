@@ -224,12 +224,12 @@
 						<div class="caption">{{ $section->template_section }} {{ ($section->weight > 0 ? '(' + $section->weight + ')' : '') }}</div>
 						<div class="tools">
 							<a href="javascript:;" class="collapse"></a>
-							</div>
+						</div>
 					</div> 
 					<div class="portlet-body">
 						<div class="clearfix"> <?php
 							foreach( $section->children as $child ):
-								if  ($child->section_type_id == 2) { // remove this if want to show all section even core competencies
+								if  (in_array($child->section_type_id,array(2,9))) { // remove this if want to show all section even core competencies
 									switch( $child->section_type_id )
 									{
 										case 2: //balance Scorecard ?>
@@ -252,6 +252,16 @@
 												@include('review/sections/competencies', array('section_id' => $child->template_section_id, 'header' => $child->header, 'footer' => $child->footer))
 											</div> <?php
 											break;
+										case 9: //IDP?>
+											<div class="panel panel-success">
+												<div class="panel-heading">
+													<h3 class="panel-title">
+														{{ $child->template_section }} ({{ $child->weight }}%)
+													</h3>
+												</div>
+												@include('review/sections/idp', array('section_id' => $child->template_section_id, 'header' => $child->header, 'footer' => $child->footer))
+											</div> <?php
+											break;												
 										default:
 									}
 								}
@@ -444,7 +454,7 @@
             <div class="row" align="center">
                 <div class="col-md-12">
                     <div>
-                    	@if( $appraisee->user_id == $user['user_id'] )
+                    	@if( $appraisee->user_id == $user['user_id'] AND $appraisee->status_id == 1)
 	                    	<?php switch( $appraisee->performance_status_id ):
 									case 0;
 									case 1;
@@ -454,7 +464,7 @@
 								endswitch;
 							?>
 						@else
-							@if(!isset($planning_admin) || $planning_admin == 0)
+							@if(!isset($planning_admin) || $planning_admin == 0 && !empty($approver))
 		                    	<?php 
 		                    		switch( $approver->performance_status_id ):
 										case 2; ?>

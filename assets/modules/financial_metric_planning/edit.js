@@ -13,19 +13,19 @@ $(document).ready(function(){
 						<div class="">\
 							<label class="control-label"><span class="required">* </span>Key Performance Indicators / Measures</label>\
 							<input type="text" class="form-control" name="" id="performance_financial_metric_planning-key_in_weight" value="'+optionText+'" readonly/>\
-							<input type="hidden" class="form-control" name="performance_financial_metric_planning[kpi][]" id="performance_financial_metric_planning-key_in_weight" value="'+optionValue+'"/>\
+							<input type="hidden" class="form-control" name="performance_financial_metric_planning[kpi][]" value="'+optionValue+'"/>\
 						</div>\
 					</div>\
 					<div class="col-md-4">\
 						<div class="">\
 							<label class="control-label"><span class="required">* </span>% Weight</label>\
-							<input type="text" class="form-control" name="performance_financial_metric_planning[weight][]" id="performance_financial_metric_planning-key_in_weight" value="" placeholder="Enter Weight" />\
+							<input type="text" class="form-control weight" name="performance_financial_metric_planning[weight][]" value="" placeholder="Enter Weight" />\
 						</div>\
 					</div>\
 					<div class="col-md-4">\
 						<div class="">\
 							<label class="control-label"><span class="required">* </span>Target </label>\
-							<input type="text" class="form-control" name="performance_financial_metric_planning[target][]" id="performance_financial_metric_planning-key_in_weight" value="" placeholder="Enter Target" />\
+							<input type="text" class="form-control" name="performance_financial_metric_planning[target][]" value="" placeholder="Enter Target" />\
 						</div>\
 					</div>\
 				</div>';
@@ -44,6 +44,16 @@ $(document).ready(function(){
 	$('#performance_financial_metric_planning-planning_id').select2({
 	    placeholder: "Select an option",
 	    allowClear: true
+	});
+
+	$('.weight').live('keyup', function() {
+		var total_weight = 0;
+	    $('.weight').each(function (index, element) {
+	        if ($(element).val() != '' && parseFloat($(element).val()) > 0) {
+	            total_weight += parseFloat($(element).val());
+	        }
+	    });
+	    $('#performance_financial_metric_planning-key_in_weight').val(total_weight);
 	});
 });
 

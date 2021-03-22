@@ -229,7 +229,7 @@
 					<div class="portlet-body">
 						<div class="clearfix"> <?php
 							foreach( $section->children as $child ):
-								if  ($child->section_type_id == 2) { // remove this if want to show all section even core competencies
+								if  (in_array($child->section_type_id,array(2,9))) { // remove this if want to show all section even core competencies
 									switch( $child->section_type_id )
 									{
 										case 2: //balance Scorecard ?>
@@ -255,6 +255,21 @@
 														</div>
 													</div>
 												@endif
+												<div class="col-md-6">
+													<div class="form-group">
+														<label class="control-label col-md-5 bold" style="text-align:left">Financial Metric Title</label>
+														<div class="col-md-7">
+													    	<select class="financial_metric form-control input-sm" name="financial_metric[]" data-section_id="{{$child->template_section_id}}" multiple>
+													    		<option value=""></option>
+													    		@if ($financial_metric_title && $financial_metric_title->num_rows() > 0)
+													    			@foreach($financial_metric_title->result() as $row)
+													    				<option value="{{$row->financial_metric_planning_id}}">{{$row->title}}</option>
+													    			@endforeach
+													    		@endif
+													    	</select>	
+														</div>
+													</div>
+												</div>												
 												@include('edit/sections/balance_scorecard', array('section_id' => $child->template_section_id, 'header' => $child->header, 'footer' => $child->footer))
 											</div> <?php 
 											break;
@@ -268,6 +283,16 @@
 												@include('edit/sections/competencies', array('section_id' => $child->template_section_id, 'header' => $child->header, 'footer' => $child->footer))
 											</div> <?php
 											break;
+										case 9: //IDP?>
+											<div class="panel panel-success">
+												<div class="panel-heading">
+													<h3 class="panel-title">
+														{{ $child->template_section }} ({{ $child->weight }}%)
+													</h3>
+												</div>
+												@include('edit/sections/idp', array('section_id' => $child->template_section_id, 'header' => $child->header, 'footer' => $child->footer))
+											</div> <?php
+											break;											
 										default:
 									}
 								}
@@ -296,7 +321,7 @@
 										<tbody>
 											@if(isset($template_section) && $template_section->num_rows() > 0)
 												@foreach($template_section->result_array() as $key1 => $val1)
-													@if($val1['parent_id'] > 0 && $val1['is_core'] == 0) <!-- just remove && $val1['is_core'] == 0 to display all section even core competencies -->
+													@if($val1['parent_id'] > 0 && $val1['is_core'] == 0 && $val1['section_type_id'] != 9) <!-- just remove && $val1['is_core'] == 0 to display all section even core competencies -->
 														@if($val1['is_core'] == 0)
 															<tr>
 																<td colspan="5" class="bold">

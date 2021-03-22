@@ -25,6 +25,7 @@
 								switch( $child->section_type_id )
 								{
 									case 2: //balance Scorecard
+									case 9: //IDP
 										$this->load->view('edit/sections/balance_scorecard', array('section_id' => $child->template_section_id));
 										break;
 									case 3: //library

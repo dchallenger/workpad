@@ -4,7 +4,7 @@
 		<div class="tools"><a class="collapse" href="javascript:;"></a></div>
 	</div>
 	<div class="portlet-body form">
-		<div class="form-group">
+		<div class="form-group hidden">
 			<label class="control-label col-md-3"><span class="required">* </span>Performance Planning</label>
 			<div class="col-md-7">
 				<?php
@@ -22,8 +22,8 @@
                     {{ form_dropdown('performance_financial_metric_planning[planning_id]',$performance_financial_metric_planning_planning_id_options, $record['performance_financial_metric_planning.planning_id'], 'class="form-control select2me" data-placeholder="Select..." id="performance_financial_metric_planning-planning_id"') }}
                 </div> 				
             </div>	
-		</div>
-		<div class="form-group">
+		</div>		
+		<div class="form-group hidden">
 			<label class="control-label col-md-3"><span class="required">* </span>Employees</label>
 			<div class="col-md-7">
 				<?php
@@ -43,6 +43,12 @@
               	</div>
             </div>	
 		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3"><span class="required">* </span>Financial Metrics Title</label>
+			<div class="col-md-7">
+				<input type="text" class="form-control" name="performance_financial_metric_planning[title]" id="performance_financial_metric_planning-title" value="{{ $record['performance_financial_metric_planning.title'] }}" placeholder="Enter Financial Metric Title" />
+			</div>	
+		</div>			
 		<div class="form-group">
 			<label class="control-label col-md-3"><span class="required">* </span>Financial Metric KPI</label>
 			<div class="col-md-7">
@@ -66,7 +72,13 @@
 			<div class="col-md-7">
 				<input type="text" class="form-control" name="performance_financial_metric_planning[key_in_weight]" id="performance_financial_metric_planning-key_in_weight" value="{{ $record['performance_financial_metric_planning.key_in_weight'] }}" placeholder="Enter Key in Weight" />
 			</div>	
-		</div>	
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3">Remarks</label>
+			<div class="col-md-7">
+				<textarea class="form-control" name="performance_financial_metric_planning[remarks]" placeholder="Enter Remarks">{{ $record['performance_financial_metric_planning.remarks'] }}</textarea>
+			</div>	
+		</div>		
 	</div>
 </div>
 <div class="portlet">
@@ -83,19 +95,19 @@
 						<div class="">
 							<label class="control-label"><span class="required">* </span>Key Performance Indicators / Measures</label>
 							<input type="text" class="form-control" name="" id="performance_financial_metric_planning-key_in_weight" value="{{$row->financial_metrics_kpi}}" readonly/>
-							<input type="hidden" class="form-control" name="performance_financial_metric_planning[kpi][]" id="performance_financial_metric_planning-key_in_weight" value="{{ $row->financial_metric_kpi_id}}" readonly/>
+							<input type="hidden" class="form-control" name="performance_financial_metric_planning[kpi][]" value="{{ $row->financial_metric_kpi_id}}" readonly/>
 						</div>						
 					</div>
 					<div class="col-md-4">			
 						<div class="">
 							<label class="control-label"><span class="required">* </span>% Weight</label>
-							<input type="text" class="form-control" name="performance_financial_metric_planning[weight][]" id="performance_financial_metric_planning-key_in_weight" value="{{ $row->weight }}" placeholder="Enter Weight" />
+							<input type="text" class="form-control weight" name="performance_financial_metric_planning[weight][]" value="{{ $row->weight }}" placeholder="Enter Weight" />
 						</div>						
 					</div>
 					<div class="col-md-4">			
 						<div class="">
 							<label class="control-label"><span class="required">* </span>Target </label>
-							<input type="text" class="form-control" name="performance_financial_metric_planning[target][]" id="performance_financial_metric_planning-key_in_weight" value="{{ $row->value }}" placeholder="Enter Target" />
+							<input type="text" class="form-control" name="performance_financial_metric_planning[target][]" value="{{ $row->value }}" placeholder="Enter Target" />
 						</div>						
 					</div>
 				</div>

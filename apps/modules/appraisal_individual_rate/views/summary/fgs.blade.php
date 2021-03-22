@@ -251,6 +251,16 @@
 											@include('summary/sections/competencies', array('performance_status_id' => $appraisee->performance_status_id, 'appraisee_user_id' => $appraisee->user_id, 'self_rating' => $self_rating, 'login_user_id' => $login_user_id, 'section_info' => $child, 'section_id' => $child->template_section_id, 'library_id' => $child->library_id, 'header' => $child->header, 'footer' => $child->footer))
 										</div> <?php
 										break;
+										case 9: //IDP?>
+											<div class="panel panel-success">
+												<div class="panel-heading">
+													<h3 class="panel-title">
+														{{ $child->template_section }} ({{ $child->weight }}%)
+													</h3>
+												</div>
+												@include('edit/sections/idp', array('login_user_id' => $login_user_id, 'section_info' => $child, 'section_id' => $child->template_section_id, 'library_id' => $child->library_id, 'header' => $child->header, 'footer' => $child->footer))
+											</div> <?php
+											break;											
 									default:
 								}
 							endforeach;	?>
@@ -280,7 +290,7 @@
 										<tbody>
 											@if(isset($template_section) && $template_section->num_rows() > 0)
 												@foreach($template_section->result_array() as $key1 => $val1)
-													@if($val1['parent_id'] > 0)
+													@if($val1['parent_id'] > 0 &&  $val1['section_type_id'] != 9)
 														<?php
 															$total_weighted_average = (isset($appraisal_applicable_section_ratings[$val1['template_section_id']]) ? $appraisal_applicable_section_ratings[$val1['template_section_id']]['total_weight_average'] : '');
 															$coach_total_weighted_average = (isset($appraisal_applicable_section_ratings[$val1['template_section_id']]) ? $appraisal_applicable_section_ratings[$val1['template_section_id']]['coach_section_rating'] : '');

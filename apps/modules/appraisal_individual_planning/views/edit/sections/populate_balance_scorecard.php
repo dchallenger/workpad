@@ -29,7 +29,7 @@ $show_add = false;
 		if (isset($balance_score_card) && $balance_score_card->num_rows() > 0) {
 			foreach ($balance_score_card->result_array() as $key => $val) { 
 		?>
-				<tr class="q<?php echo $key+1 ?>">
+				<tr class="q<?php echo $key+1 ?> <?php if ($val['scorecard_id'] == 1) echo 'fmt' ?>">
 					<td>
 						<?php echo $key+1 . ". " . $val['scorecard'] ?>&nbsp;
 					    <a href="javasript:void(0)" class="btn-success" style="padding:1px 2px"><i class="fa fa-plus add_row" data-section_id="<?php echo $section_id ?>" data-scorecard_id="<?php echo $val['scorecard_id'] ?>" data-num_question="q<?php echo $key+2 ?>"></i></a>
@@ -68,7 +68,7 @@ $show_add = false;
 					foreach ($planning_applicable_fields[$val['scorecard_id']] as $key1 => $val1) {
 						if($key1 > 1) {
 				?>
-							<tr>
+							<tr class="<?php if ($val['scorecard_id'] == 1) echo 'fmt' ?>">
 								<td>&nbsp;</td>
 								<?php
 									if (isset($template_section_column) && !empty($template_section_column))
