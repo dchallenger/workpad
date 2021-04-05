@@ -2,6 +2,10 @@
 
 @section('page_content')
 	@parent
+	
+	<style>
+		.popover {min-width: 400px !important;}
+    </style>    
    
 	<!-- BEGIN EXAMPLE TABLE PORTLET-->
 	<div class="row">

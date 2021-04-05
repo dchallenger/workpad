@@ -339,11 +339,11 @@ function initPopup(){
             html:true })
         .on('click', showTodoQuickView)
         .parent()
-        .delegate('a.close-pop', 'click', function(e) {
+        .delegate('button.close-pop', 'click', function(e) {
             e.preventDefault();
             $('.custom_popover').popover('hide');
         })
-        .delegate('a.approve-pop', 'click', function(e) {
+        .delegate('button.approve-pop', 'click', function(e) {
             e.preventDefault();
             //$('.custom_popover').popover('hide');
             //console.log('now update forms set selected item to approved!');
@@ -377,7 +377,7 @@ function initPopup(){
 
 
         })
-        .delegate('a.decline-pop', 'click', function(e) {
+        .delegate('button.decline-pop', 'click', function(e) {
             e.preventDefault();
             //console.log('now update forms set selected item to declined!');
 

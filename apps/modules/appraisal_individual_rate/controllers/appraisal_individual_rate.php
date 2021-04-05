@@ -603,7 +603,7 @@ class Appraisal_individual_rate extends MY_PrivateController
 
                                     $item_id = $this->db->insert_id();
 
-                                    $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'performance_appraisal_applicable_fields', '', $value);
+                                    $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'performance_appraisal_applicable_fields', array(), $value);
                                 }
                             }
                         }

@@ -538,7 +538,7 @@
 	                	@if( $appraisee->status_id <= 1 )
 		                    <div class="col-md-offset-4 col-md-8">
 								<button type="button" class="btn blue btn-sm" onclick="change_status_self( $(this).closest('form'), 1)"><i class="fa fa-check"></i> Save as Draft</button>		                    			                    	
-								<button type="button" class="btn yellow btn-sm" onclick="change_status_self( $(this).closest('form'), 2)"><i class="fa fa-check"></i> Send to Approver</button>
+								<button type="button" class="btn green btn-sm" onclick="change_status_self( $(this).closest('form'), 2)"><i class="fa fa-check"></i> Send to Approver</button>
 			        			<a class="btn default btn-sm" href="{{ $mod->url }}">Back</a>
 		                    </div>
 	                    @else

@@ -81,7 +81,7 @@
     <hr class='margin-top-10 margin-bottom-10'>
     <div>
         <button type='button' data-form-name='{{ $form }}' class='btn btn-success btn-sm approve-pop text-success margin-right-5' data-forms-id='{{ $forms_id }}' data-form-owner='{{ $user_id }}' data-user-name='' data-user-id='{{ $approver_id }}' data-decission='1'><i class='fa fa-thumbs-o-up'></i> <?php echo lang('dashboard.approve_form') ?></button>
-        <button type='button' data-form-name='{{ $form }}' class='btn btn-danger btn-sm decline-pop text-danger' data-forms-id='{{ $forms_id }}' data-form-owner='{{ $user_id }}' data-user-name='' data-user-id='{{ $approver_id }}' data-decission='0'><i class='fa fa-thumbs-o-down' ></i> <?php echo lang('dashboard.decline_form') ?></button>
+        <button type='button' data-form-name='{{ $form }}' class='btn btn-danger btn-sm decline-pop text-danger' data-forms-id='{{ $forms_id }}' data-form-owner='{{ $user_id }}' data-user-name='' data-user-id='{{ $approver_id }}' data-decission='0'><i class='fa fa-thumbs-o-down' ></i> <?php echo lang('dashboard.disapprove_form') ?></button>
         <button type='button' class='btn btn-default btn-sm close-pop text-muted pull-right'><i class='fa fa-long-arrow-right'></i> <?php echo lang('dashboard.close_form') ?></button>
     </div>
 

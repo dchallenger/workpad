@@ -64,20 +64,22 @@
     </div>
     <?php
     endif; ?>
-
-    <br>
     <div class='clearfix margin-top-10'>
         <label class='control-label col-md-3 text-muted text-left small'>Remarks:<span class='required'>*</span></label>
         <div class='col-md-9'>
             <textarea rows='2' id='comment-<?php echo $forms_id; ?>' class='form-control'></textarea>
         </div>
+        <label class="col-md-3"></label>
+        <div class='col-md-9'>
+            <span class="text-muted small"><?php echo lang('form_application_manage.required_decline') ?> </span>
+        </div>        
     </div>
     <hr class='margin-top-10 margin-bottom-10'>
-        <div class='clearfix padding-left-right-10'>
-            <a href='#' class='approve-pop small text-success margin-right-10 margin-left-10' data-forms-id='{{ $forms_id }}' data-form-owner='{{ $user_id }}' data-user-name='' data-decission='1'><i class='fa fa-check'></i> Approve</a>
+        <div>
+            <button type='button' class='btn btn-success btn-xs approve-pop small text-success margin-right-10 margin-left-10' data-forms-id='{{ $forms_id }}' data-form-owner='{{ $user_id }}' data-user-name='' data-user-id='{{ $approver_id }}' data-decission='1'><i class='fa fa-check'></i> {{ lang('form_application_manage.approve') }}</button>
             @if ($within_cutoff)
-                <a href='#' class='decline-pop small text-danger margin-right-10' data-forms-id='{{ $forms_id }}' data-form-owner='{{ $user_id }}' data-user-name='' data-decission='0'><i class='fa fa-pencil' ></i> Disapprove</a>
+                <button type='button' class='btn btn-danger btn-xs decline-pop small text-danger margin-right-10' data-forms-id='{{ $forms_id }}' data-form-owner='{{ $user_id }}' data-user-name='' data-user-id='{{ $approver_id }}' data-decission='0'><i class='fa fa-thumbs-o-down' ></i> {{ lang('form_application_manage.disapproved') }}</button>
             @endif
-            <a href='#' class='close-pop small text-muted'><i class='fa fa-times'></i> Close</a>
+            <button type='button' class='btn btn-default btn-xs close-pop small text-muted pull-right'><i class='fa fa-times'></i> {{ lang('form_application_manage.close') }}</button>
         </div>
 </div>

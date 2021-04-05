@@ -72,11 +72,11 @@
 					</a>
 					<ul class="sub-menu">
 				 
-					<li ><a rel="<?php echo site_url('training/training_employee_database');?>" href="<?php echo site_url('training/training_employee_database');?>" menu_id="122" parent="121">Employee Training Database</a></li>
+					<li ><a rel="<?php echo site_url('training/training_request');?>" href="<?php echo site_url('training/training_request');?>" menu_id="139" parent="121">Training Request</a></li>
 				 
 					<li ><a rel="<?php echo site_url('training/training_calendar');?>" href="<?php echo site_url('training/training_calendar');?>" menu_id="123" parent="121">Training Calendar</a></li>
 				 
-					<li ><a rel="<?php echo site_url('training/training_revalida');?>" href="<?php echo site_url('training/training_revalida');?>" menu_id="124" parent="121">Level 2 and 3 Training Evaluation</a></li>
+					<li ><a rel="<?php echo site_url('training/training_employee_database');?>" href="<?php echo site_url('training/training_employee_database');?>" menu_id="122" parent="121">Employee Training Database</a></li>
 				 
 					<li ><a rel="<?php echo site_url('training/training_evaluation');?>" href="<?php echo site_url('training/training_evaluation');?>" menu_id="125" parent="121">Training Evaluation</a></li>
 							</ul>
@@ -89,15 +89,19 @@
 					</a>
 					<ul class="sub-menu">
 				 
-					<li ><a rel="<?php echo site_url('appraisal/individual_planning');?>" href="<?php echo site_url('appraisal/individual_planning');?>" menu_id="98" parent="96">Target Setting</a></li>
+					<li ><a rel="<?php echo site_url('appraisal/individual_planning');?>" href="<?php echo site_url('appraisal/individual_planning');?>" menu_id="98" parent="96">Performance Planning</a></li>
 				 
-					<li ><a rel="<?php echo site_url('appraisal/planning');?>" href="<?php echo site_url('appraisal/planning');?>" menu_id="99" parent="96">Target Setting Period</a></li>
+					<li ><a rel="<?php echo site_url('appraisal/planning');?>" href="<?php echo site_url('appraisal/planning');?>" menu_id="99" parent="96">Performance Planning Period</a></li>
 				 
-					<li ><a rel="<?php echo site_url('appraisal/individual_rate');?>" href="<?php echo site_url('appraisal/individual_rate');?>" menu_id="97" parent="96">Appraisal</a></li>
+					<li ><a rel="<?php echo site_url('appraisal/individual_rate');?>" href="<?php echo site_url('appraisal/individual_rate');?>" menu_id="97" parent="96">Performance Appraisal</a></li>
 				 
 					<li ><a rel="<?php echo site_url('performance/appraisal_manage');?>" href="<?php echo site_url('performance/appraisal_manage');?>" menu_id="103" parent="96">Appraisal Manage</a></li>
 				 
-					<li ><a rel="<?php echo site_url('performance/appraisal');?>" href="<?php echo site_url('performance/appraisal');?>" menu_id="102" parent="96">Appraisal Period</a></li>
+					<li ><a rel="<?php echo site_url('performance/appraisal');?>" href="<?php echo site_url('performance/appraisal');?>" menu_id="102" parent="96">Performance Appraisal Period</a></li>
+				 
+					<li ><a rel="<?php echo site_url('appraisal/financial_metric_planning');?>" href="<?php echo site_url('appraisal/financial_metric_planning');?>" menu_id="137" parent="96">Financial Metrics</a></li>
+				 
+					<li ><a rel="<?php echo site_url('appraisal/individual_development_plan');?>" href="<?php echo site_url('appraisal/individual_development_plan');?>" menu_id="135" parent="96">Individual Development Planning</a></li>
 							</ul>
 			</li>
 	<li>
@@ -141,7 +145,9 @@
 				 
 					<li ><a rel="<?php echo site_url('admin/performance_master');?>" href="<?php echo site_url('admin/performance_master');?>" menu_id="66" parent="9">Appraisal Master</a></li>
 				 
-					<li ><a rel="<?php echo site_url('admin/training_master');?>" href="<?php echo site_url('admin/training_master');?>" menu_id="69" parent="9">Training Manager</a></li>
+					<li ><a rel="<?php echo site_url('admin/training_master');?>" href="<?php echo site_url('admin/training_master');?>" menu_id="69" parent="9">Training Master</a></li>
+				 
+					<li ><a rel="<?php echo site_url('admin/recruitment_master');?>" href="<?php echo site_url('admin/recruitment_master');?>" menu_id="138" parent="9">Recruitment Master</a></li>
 				 
 					<li ><a rel="<?php echo site_url('admin/report_generator');?>" href="<?php echo site_url('admin/report_generator');?>" menu_id="87" parent="9">Report Generator</a></li>
 							</ul>

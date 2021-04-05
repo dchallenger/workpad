@@ -77,6 +77,7 @@ $lang['dashboard'] = array(
 	'date_applied' => 'Date Filed',
 	'approve_form' => 'Approve',
 	'decline_form' => 'Decline',
+	'disapprove_form' => 'Disapprove',
 	'close_form' => 'Close',
 	'admin_util' => 'Admin Utilities',
 	'util_desc' => 'Database tools and other system utilities',
