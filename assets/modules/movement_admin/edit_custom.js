@@ -270,7 +270,7 @@ function edit_movement_details(type_id, action_id, movement_id, user_id){
 								$('.move_action_modal').append(response.type_of_movement);	
 								$('.modal-container-action').modal('show');	*/
 
-								$('#movement_type_container').html(response.type_of_movement);					
+								$('#movement_type_container').html(response.type_of_movement);
 
 								$(":input").inputmask();							
 								// FormComponents.init();

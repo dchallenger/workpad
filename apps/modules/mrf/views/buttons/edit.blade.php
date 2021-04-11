@@ -24,7 +24,7 @@
                     }
                     
                     if($count != 1) { ?> 
-                        <button type="button" class="btn red btn-sm" onclick="save_record( $(this).closest('form'), '6', 'cancel')"> {{ lang('common.cancel') }}</button>
+                        <button type="button" class="btn red btn-sm hidden" onclick="save_record( $(this).closest('form'), '6', 'cancel')"> {{ lang('common.cancel') }}</button>
         			<?php
                     }
                     break;

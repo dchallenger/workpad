@@ -59,6 +59,8 @@
                         <?php if ($process->status_id >= 3 && $process->status_id != 5) { ?>
                             <li class="<?php if($process->status_id == 3) echo 'active' ?>"><a data-toggle="tab" href="#tab_examination">Examination</a></li>       
                             <li class="<?php if($process->status_id == 4) echo 'active' ?>"><a data-toggle="tab" href="#tab_bi">BI</a></li>                
+                        <?php } else if ($process->status_id == 5) {?>
+                                <li class="<?php if($process->status_id == 4) echo 'active' ?>"><a data-toggle="tab" href="#tab_bi">BI</a></li>
                         <?php } ?>
                 <?php
                     }
@@ -370,7 +372,7 @@
 
                 <div id="tab_bi" class="tab-pane <?php if($process->status_id == 4) echo 'active' ?>">
                 <?php 
-                    if($process->status_id == 5){                
+                    if($process->status_id == 5 && $bis){                
                         require 'bi_forms_view.php'; 
                     }
                     else{

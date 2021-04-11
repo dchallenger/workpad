@@ -7,6 +7,7 @@ $config["edit_cached_query"] = 'SELECT `ww_partners_movement`.`movement_id` as r
 	ww_partners_movement_action_moving.further_reason as "partners_movement_action_moving.further_reason", 
 	ww_partners_movement_action_moving.reason_id as "partners_movement_action_moving.reason_id", 
 	ww_partners_movement_action_moving.blacklisted as "partners_movement_action_moving.blacklisted", 
+	ww_partners_movement_action_moving.eligible_for_rehire as "partners_movement_action_moving.eligible_for_rehire", 
 	DATE_FORMAT(ww_partners_movement_action_moving.end_date, \'%M %d, %Y\') as "partners_movement_action_moving.end_date", 
 	ww_partners_movement_action_extension.end_date as "partners_movement_action_extension.end_date", 
 	ww_partners_movement_action_extension.no_of_months as "partners_movement_action_extension.no_of_months", 

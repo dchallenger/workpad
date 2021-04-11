@@ -44,6 +44,22 @@ $(document).ready(function(){
 		create_list();
 	});
 
+	$('#recruitment_request-budgeted').change(function() {
+		if ($(this).val() == 0) {
+			$('.purpose').hide();
+			$('.mrf_plan_code').hide();
+			$("#recruitment_request-position_id").select2("val", "");
+			$("#recruitment_request-employment_status_id").select2("val", "");
+			$('#recruitment_request-date_needed').val("");
+			$('#recruitment_request-quantity').val("");			
+		} else {
+			$('.purpose').show();
+			$('.mrf_plan_code').show();
+		}
+	});
+
+	$('#recruitment_request-budgeted').trigger('change');
+
 	if( $('#recruitment_request-department_id').val() ){
 		get_dept_immediate( $('#recruitment_request-department_id').val() );
 	}
@@ -63,20 +79,6 @@ $(document).ready(function(){
 		show_hide_budget_from_to( $(this).val() );
 	});
 */
-	$('#recruitment_request-budgeted').change(function() {
-		if ($(this).val() == 0) {
-			$('.purpose').hide();
-			$('.mrf_plan_code').hide();
-			$("#recruitment_request-position_id").select2("val", "");
-			$("#recruitment_request-employment_status_id").select2("val", "");
-			$('#recruitment_request-date_needed').val("");
-			$('#recruitment_request-quantity').val("");			
-		} else {
-			$('.purpose').show();
-			$('.mrf_plan_code').show();
-		}
-	});
-
 	$('#recruitment_request-nature_id').trigger('change');
 	
 	if($('#recruitment_request-nature_id').val() == ''){

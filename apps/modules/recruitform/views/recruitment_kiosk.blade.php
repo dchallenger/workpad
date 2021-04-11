@@ -75,7 +75,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<p></p>
 					<br/>
 				</div>
-				<button style="display:none" type="submit" class="btn-success pull-right btn_close">
+				<button style="display:none" type="button" class="btn-success pull-right btn_close">
 					{{ lang('recruitform.nice_day') }} <i class="m-icon-swapright m-icon-white"></i>
 				</button> 
 				<div id="recform-1" name="recform-1" data-form_number="1" class="recform">

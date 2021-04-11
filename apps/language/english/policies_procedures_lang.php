@@ -9,6 +9,6 @@ $lang['policies_procedures'] = array(
 	'description' => 'Description',
 	'attachments' => 'Attachments',
 	'created_by' => 'Created By',
-	'pol_proc' => 'Policies and Procedure',
+	'pol_proc' => 'Policies and Procedure / Memorandum',
 	'select_file' => 'Select File'
 );

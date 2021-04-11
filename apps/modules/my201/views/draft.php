@@ -4,4 +4,9 @@
     </div>
     <hr>
     <?php echo $keys?>
+	<div class="form-group">
+	    <label class="control-label col-md-3">Remarks</label>
+	    <div class="col-md-7">
+	        <textarea class="form-control" name="remarks[<?php echo $key->key_class_id?>][<?php echo $key->key_id?>]" placeholder="Enter Remarks"></textarea>
+	</div>    
 </div>

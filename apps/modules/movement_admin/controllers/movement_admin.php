@@ -1277,7 +1277,7 @@ class Movement_admin extends MY_PrivateController
 		// it will use to get the user id of the movement being created to populate with the partner.
 		if ($this->input->post("movement_id") && $this->input->post("movement_id") > 0){
 			$movement_action_details = $this->mod->get_action_movement($this->input->post("movement_id"));
-			$action_details['user_id'] = $movement_action_details['user_id'];
+			$action_details['user_id'] = $movement_action_detailsd['user_id'];
 		}
 
 		$data['movement_file'] = '';
@@ -1345,6 +1345,7 @@ class Movement_admin extends MY_PrivateController
 					if (!empty($movement_type_details)) {
 						$data['record']['partners_movement_action_moving.id'] = $movement_type_details['id'];//id
 						$data['record']['partners_movement_action_moving.blacklisted'] = $movement_type_details['blacklisted'];//blacklisted
+						$data['record']['partners_movement_action_moving.eligible_for_rehire'] = $movement_type_details['eligible_for_rehire'];//blacklisted
 						$data['record']['partners_movement_action_moving.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
 						$data['record']['partners_movement_action_moving.reason_id'] = $movement_type_details['reason_id'];//reason_id
 						$data['record']['partners_movement_action_moving.further_reason'] = $movement_type_details['further_reason'];//further_reason

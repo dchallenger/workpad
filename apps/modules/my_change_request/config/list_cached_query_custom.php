@@ -3,6 +3,7 @@ $config["list_cached_query_custom"] = 'SELECT `ww_partners_personal_request`.`pe
 `ww_partners_personal_request`.`key_id`,
 `ww_partners_personal_request`.`key_name`,
 `ww_partners_personal_request`.`key_value`,
+`ww_partners_personal_request`.`remarks`,
 T1.full_name AS "partners_personal_request_employee_id",
 T2.id_number AS "partners_personal_request_id_number",
 T3.status AS "partners_personal_request_status", 

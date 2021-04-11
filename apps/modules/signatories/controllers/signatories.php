@@ -40,6 +40,7 @@ class Signatories extends MY_PrivateController
 		}
 
 		$data['companies'] = array();
+		$this->db->order_by('company');
 		$companies = $this->db->get_where('users_company', array('deleted' => 0));
 		foreach( $companies->result() as $company )
 		{
@@ -288,7 +289,7 @@ class Signatories extends MY_PrivateController
 				break;
 		}
 
-		if($data['class_id'] == 16){ //Change Request
+/*		if($data['class_id'] == 16){ //Change Request
 			$data['conditions']  = array(
 				"Either Of" => "Either Of"
 			);
@@ -298,7 +299,14 @@ class Signatories extends MY_PrivateController
 				"By Level" => "By Level",
 				"Either Of" => "Either Of",
 			);
-		}
+		}*/
+
+		$data['conditions']  = array(
+			"All" => "All",
+			"By Level" => "By Level",
+			"Either Of" => "Either Of",
+		);
+					
 		$this->db->select('user_id,full_name');
 		$this->db->order_by('full_name');
 		$users = $this->db->get_where('users', array('deleted' => 0, 'active' => 1));
@@ -731,7 +739,7 @@ class Signatories extends MY_PrivateController
 		$this->response->department = '';
 
 		$company_id = $this->input->post('company_id');
-		$qry = "select * from `approver_class_department` where company_id={$company_id}";
+		$qry = "select * from `approver_class_department` where company_id={$company_id} ORDER BY department";
 		$depts = $this->db->query( $qry );
 		
 		if($depts->num_rows() > 0){
@@ -756,7 +764,7 @@ class Signatories extends MY_PrivateController
 
 		$department_id = $this->input->post('department_id');
 		$company_id = $this->input->post('company_id');
-		$qry = "select * from `approver_class_position` where department_id={$department_id} AND company_id = {$company_id}";
+		$qry = "select * from `approver_class_position` where department_id={$department_id} AND company_id = {$company_id} ORDER BY position";
 		$position = $this->db->query( $qry );
 		if($position->num_rows() > 0){
 			foreach($position->result() as $pos)
@@ -781,7 +789,7 @@ class Signatories extends MY_PrivateController
 		$department_id = $this->input->post('department_id');
 		$company_id = $this->input->post('company_id');
 		$position_id = $this->input->post('position_id');
-		$qry = "select * from `approver_position_users` where department_id={$department_id} AND company_id = {$company_id} AND position_id={$position_id}";
+		$qry = "select * from `approver_position_users` where department_id={$department_id} AND company_id = {$company_id} AND position_id={$position_id} ORDER BY full_name";
 		$users = $this->db->query( $qry );
 		if($users->num_rows() > 0){
 			foreach($users->result() as $user)

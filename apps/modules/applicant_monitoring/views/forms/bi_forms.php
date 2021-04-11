@@ -218,7 +218,11 @@
     <button type="button" data-dismiss="modal" class="btn btn-default btn-sm"><?=lang('common.close')?></button>
     <button type="button" data-dismiss="modal" class="btn btn-default btn-sm" onclick="print_bi(<?php echo $process_id?>)"><?=lang('common.print_only')?></button>
     <button type="button" data-loading-text="Loading..." onclick="save_bi()" class="demo-loading-btn btn btn-success btn-sm"><?=lang('common.save')?></button>
-    <button type="button" onclick="move_to_final_interview(<?php echo $process_id?>)" class="demo-loading-btn btn btn-success btn-sm"><?=lang('applicant_monitoring.move_to_final_interview')?></button>
+    <?php if ($interview && count($interview) < 2) { ?>   
+        <button type="button" onclick="move_to_final_interview(<?php echo $process_id?>)" class="demo-loading-btn btn btn-success btn-sm"><?=lang('applicant_monitoring.move_to_final_interview')?></button>
+    <?php } else { ?>
+    <button type="button" onclick="move_to_jo(<?php echo $process_id?>,<?php echo $interview_success ?>)" class="demo-loading-btn btn btn-success btn-sm"><?=lang('applicant_monitoring.move_to_jo')?></button>
+    <?php } ?>
 </div>
 
 

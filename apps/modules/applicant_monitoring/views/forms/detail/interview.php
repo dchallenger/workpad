@@ -33,6 +33,27 @@
                                         </div>
                                     </div>
                                     <div class="portlet-body form">
+                                       <table class="table table-bordered table-hover" width="100%">
+                                            <tr>
+                                                <th width="40%" class="text-center success">
+                                                    COMPETENCY
+                                                </td>
+                                                <td colspan="5" class="text-center success">RATING SCALE</td>
+                                            </tr>                                                        
+                                            <tr>
+                                                <td width="40%">
+                                                    <p>Interview Tip: Ask candidate to share relevant past behavior</p>
+                                                    <p>*Situation - Describe the whole situation.</p>
+                                                    <p>*Action - What exactly did you do?</p>
+                                                    <p>*Result- What was the outcome/result?</p>
+                                                </td>
+                                                <td align="center">1 <br>Well Below Standard</td>
+                                                <td align="center">2 <br>Below Standard</td>
+                                                <td align="center">3 <br>Meets Standard</td>
+                                                <td align="center">4 <br>Above Standard</td>
+                                                <td align="center">5 <br>Well Above Standard</td>
+                                            </tr>
+                                        </table>                                        
                                         <table class="table table-bordered table-hover">
 
                                         <?php include 'sub/tabular_header.php'; ?>
@@ -65,19 +86,21 @@
                             <?php
                                         break;
                                         case 'Customize':
+                                            if (!empty($data['keys'])) {
                             ?>
-                                            <div class="portlet">
-                                                <div class="portlet-title">
-                                                    <div class="caption"><?php echo $data['key_class'] ?></div>
-                                                    <div class="tools">
-                                                        <a class="collapse" href="javascript:;"></a>
+                                                <div class="portlet">
+                                                    <div class="portlet-title">
+                                                        <div class="caption"><?php echo $data['key_class'] ?></div>
+                                                        <div class="tools">
+                                                            <a class="collapse" href="javascript:;"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="portlet-body form">
+                                                        <?php include 'sub/'.$data['layout_custom_file'].'.php'; ?>  
                                                     </div>
                                                 </div>
-                                                <div class="portlet-body form">
-                                                    <?php include 'sub/'.$data['layout_custom_file'].'.php'; ?>  
-                                                </div>
-                                            </div>
                             <?php
+                                            }
                                         break;
                                     }
                                 endforeach;

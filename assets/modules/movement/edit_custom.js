@@ -1,3 +1,23 @@
+$(document).ready(function() {
+	$('#type_id').live('change',function(){
+		var val = $(this).val();
+		if (val == 8){
+			$('.cat_type').show();
+		}
+		else{
+			$('.cat_type').hide();			
+		}
+
+		if (val == 6) {
+			$('.reason_leaving').show();
+		} else {
+			$('.reason_leaving').hide();
+		}
+
+		edit_movement_details($(this).val(),$('#partners_movement_action-action_id').val());		
+	});
+});
+
 function save_movement( form, action, callback )
 {
 	$.blockUI({ message: saving_message(),
@@ -178,10 +198,28 @@ function edit_movement_details(type_id, action_id){
 
 							if( typeof(response.add_movement) != 'undefined' )
 							{	
-								$('.modal-container-action').html(response.add_movement);
+/*								$('.modal-container-action').html(response.add_movement);
 								$('.move_action_modal').append(response.type_of_movement);	
-								$('.modal-container-action').modal('show');	
+								$('.modal-container-action').modal('show');	*/
 
+								$('#movement_type_container').html(response.type_of_movement);
+
+								$(".make-switch").bootstrapSwitch();
+							  
+								$('#partners_movement_action_moving-blacklisted-temp').change(function(){
+									if( $(this).is(':checked') )
+										$('#partners_movement_action_moving-blacklisted').val('1');
+									else
+										$('#partners_movement_action_moving-blacklisted').val('0');
+								});
+
+								$('#partners_movement_action_moving-eligible_for_rehire-temp').change(function(){
+									if( $(this).is(':checked') )
+										$('#partners_movement_action_moving-eligible_for_rehire').val('1');
+									else
+										$('#partners_movement_action_moving-eligible_for_rehire').val('0');
+								});	
+								
 								$('#partners_movement-photo-fileupload').fileupload({ 
 									url: base_url + module.get('route') + '/single_upload',
 									autoUpload: true,

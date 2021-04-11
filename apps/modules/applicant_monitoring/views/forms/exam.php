@@ -59,7 +59,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <input type="text" <?=$disabled?> class="form-control" maxlength="64" name="score[]" value="<?php echo $exam['score'] ?>" >
+                                            <input type="text" <?=$disabled?> class="form-control" maxlength="64" name="score[]" value="<?php echo $exam['score'] ?>" data-inputmask="'mask': '9', 'repeat': 3, 'greedy' : false">
                                         </td> 
                                         <td>
                                             <div class="make-switch" data-off="danger" data-on="success" data-on-label="&nbsp;Passed&nbsp;&nbsp;" data-off-label="&nbsp;Failed&nbsp;">
@@ -100,6 +100,7 @@
         ?>
                 <button  <?=$hidden?>type="button" data-loading-text="Loading..." onclick="save_exam()" class="demo-loading-btn btn btn-success btn-sm"><?=lang('common.save')?></button>
                 <button <?=$hidden?> type="button" onclick="move_to_bi(<?php echo $process_id?>,<?php echo $interview_success ?>)" class="demo-loading-btn btn btn-success btn-sm"><?=lang('applicant_monitoring.move_to_bi')?></button>
+                <button <?=$hidden?> type="button" onclick="move_to_final_interview(<?php echo $process_id?>)" class="demo-loading-btn btn btn-success btn-sm"><?=lang('applicant_monitoring.move_to_final_interview')?></button>
         <?php 
             } 
         ?>

@@ -87,7 +87,7 @@ class movement_model extends Record
 
 		$data = array();
 
-		$qry = "SELECT * FROM {$this->db->dbprefix}partners_movement_fields WHERE from_to = 1 "; // WHERE user_id = '$userID';
+		$qry = "SELECT * FROM {$this->db->dbprefix}partners_movement_fields WHERE from_to = 1 ORDER BY orderby"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
 		if($result && $result->num_rows() > 0){
@@ -150,8 +150,19 @@ class movement_model extends Record
 				pmoveastat.status,
 				pmoveact.status_id as act_status_id,
 				pmoveact.photo,
+				pmoveact.reason_leaving,
 				pmoveactm.further_reason,
-				pmoveactr.reason
+				pmoveactr.reason,
+				IF(pmoveactm.blacklisted = 1, 'Yes', 'No') as partners_movement_action_moving_blacklisted, 
+				IF(pmoveactm.eligible_for_rehire = 1, 'Yes', 'No') as partners_movement_action_moving_eligible_for_rehire,
+				ww_partners_movement_action_compensation.to_salary as partners_movement_action_compensation_to_salary,
+				ww_partners_movement_action_compensation.current_salary as partners_movement_action_compensation_current_salary,
+				pmove.hrd_remarks as partners_movement_hrd_remarks,
+				MAX(T9.full_name) as partners_movement_reviewed_by,
+				MAX(CASE WHEN `ww_partners_movement_approver_hr`.`sequence` = 1 THEN `ww_partners_movement_approver_hr`.`comment_date` END) AS partners_movement_reviewed_by_approved_date,
+				MAX(CASE WHEN `ww_partners_movement_approver_hr`.`sequence` = 1 THEN `ww_partners_movement_approver_hr`.`comment` END) AS partners_movement_reviewed_by_comment,
+				pmoveact.created_by as partners_movement_action_created_by,
+				T8.full_name as partners_movement_created_by_fname
 				FROM {$this->db->dbprefix}partners_movement pmove
 				LEFT JOIN {$this->db->dbprefix}partners_movement_action pmoveact 
 				ON pmove.movement_id = pmoveact.movement_id 
@@ -162,7 +173,15 @@ class movement_model extends Record
 				LEFT JOIN {$this->db->dbprefix}partners_movement_remarks pmoveremarks
 				ON pmoveremarks.remarks_print_report_id = pmoveact.remarks_print_report_id 											
 				LEFT JOIN {$this->db->dbprefix}partners_movement_status pmoveastat 
-				ON pmove.status_id = pmoveastat.status_id 
+				ON pmove.status_id = pmoveastat.status_id
+				LEFT JOIN `ww_partners_movement_approver_hr` 
+				ON `pmove`.`movement_id` = `ww_partners_movement_approver_hr`.`movement_id`
+				LEFT JOIN `ww_users` T9 
+				ON `T9`.`user_id` = `ww_partners_movement_approver_hr`.`user_id` AND sequence = 1				
+				LEFT JOIN `ww_users` T8 
+				ON `T8`.`user_id` = `pmove`.`created_by`
+				LEFT JOIN `ww_partners_movement_action_compensation` 
+				ON `ww_partners_movement_action_compensation`.`movement_id` = `pmove`.`movement_id`
 				WHERE pmove.movement_id = {$movement_id}
 				AND pmoveact.deleted = 0
 				ORDER BY pmoveact.effectivity_date DESC"; // WHERE user_id = '$userID';
@@ -171,7 +190,7 @@ class movement_model extends Record
 		if($result && $result->num_rows() > 0){
 				
 			foreach($result->result_array() as $row){
-				$data[] = $row;
+				$data = $row;
 			}			
 
 			$result->free_result();			

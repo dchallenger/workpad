@@ -27,11 +27,11 @@
                                     <label class="control-label col-md-4">{{ lang('applicant_monitoring.pos_sought') }}<span class="required">*</span></label>
                                     <div class="col-md-7">
                                         <select class="form-control select2me position_sought" data-placeholder="Select..." name="recruitment_personal[position_sought]" id="recruitment_personal-position_sought">
-                                            <option value="">Please Select</option>
+                                            <option value=""></option>
                                                 @if( sizeof( $mrf ) > 0 )
                                                     @foreach( $mrf as $year => $mrfs )
                                                         @foreach( $mrfs as $mrf )
-                                                            <option value="{{ $mrf->request_id }}" mrf_id="{{ $mrf->request_id }}"> {{ $mrf->position_sought }} ({{ $mrf->document_no }})</option>
+                                                            <option value="{{ $mrf->request_id }}" mrf_id="{{ $mrf->request_id }}" position_id="{{ $mrf->position_id }}"> {{ $mrf->position_sought }} ({{ $mrf->document_no }})</option>
                                                         @endforeach
                                                     @endforeach
                                                 @endif
@@ -110,7 +110,7 @@
                                         @if( sizeof( $mrf2 ) > 0 )
                                             @foreach( $mrf2 as $year => $mrfs )
                                                 @foreach( $mrfs as $mrf )
-                                                    <option value="{{ $mrf->request_id }}" mrf_id="{{ $mrf->request_id }}"> {{ $mrf->position }} ({{ $mrf->document_no }})</option>
+                                                    <option value="{{ $mrf->request_id }}" mrf_id="{{ $mrf->request_id }}" position_id="{{ $mrf->position_id }}"> {{ $mrf->position }} ({{ $mrf->document_no }})</option>
                                                 @endforeach
                                             @endforeach
                                         @endif
@@ -124,10 +124,14 @@
                                 </label>
                                 <div class="col-md-7">
                                     <?php
-                                    $db->select('user_id,full_name');
-                                    $db->order_by('full_name', '0');
-                                    $db->where('deleted', '0');
+                                    $db->select('users.user_id,users.full_name');
+                                    $db->order_by('users.full_name', '0');
+                                    $db->where('users.deleted', '0');
+                                    $db->where('recruit_id is NULL', NULL, FALSE);
+                                    $db->join('partners','users.user_id = partners.user_id');
+                                    $db->join('recruitment','recruitment.partner_id = partners.partner_id','LEFT');
                                     $options = $db->get('users');
+
                                     $recruitment_user_id_options = array('' => 'Select...');
                                     foreach($options->result() as $option)
                                     {
@@ -284,6 +288,7 @@ $(document).ready(function(){
 
     $('#recruitment_personal-position_sought').change(function(){
         var mrf_id = $('#recruitment_personal-position_sought option:selected').attr('mrf_id');
+        var position_id = $('#recruitment_personal-position_sought option:selected').attr('position_id');
         $('#recruitment-request_id').val( mrf_id );
         $('.mrf_req').val( mrf_id );
         $('.position_sought').val( $(this).val() );
@@ -296,7 +301,7 @@ $(document).ready(function(){
         $.ajax({
             url: base_url + module.get('route') + '/get_applicants',
             type:"POST",
-            data: {'position':$(this).val()},
+            data: {'position_id':position_id,'request_id':$(this).val()},
             dataType: "json",
             async: false,
             success: function ( response ) {

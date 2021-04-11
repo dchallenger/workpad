@@ -100,7 +100,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group hidden">
 					<label class="control-label col-md-3">{{ lang('partners.specialization') }}</span></label>
 					<div class="col-md-5">
 						<?php	$db->select('specialization_id,specialization');

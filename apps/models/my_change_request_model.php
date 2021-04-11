@@ -70,7 +70,7 @@ class my_change_request_model extends Record
 		return $data;
 	}
 
-	function notify_approvers( $forms_id=0, $form=array())
+	function notify_approvers( $forms_id=0, $form=array(), $personal_id=0)
 	{
 		$notified = array();
 
@@ -103,9 +103,9 @@ class my_change_request_model extends Record
 				'message_type' => 'Partners',
 				'user_id' => $form['created_by'],
 				'display_name' => $this->get_display_name($form['created_by']),
-				'feed_content' => $form_status.': change request for '.$keys['key_label'].": ".$form['key_value'],
+				'feed_content' => $form_status.' change request for '.$keys['key_label'].": ".$form['key_value'],
 				'recipient_id' => $approver->user_id,
-				'uri' => str_replace(base_url(), '', $this->update201->url).'/detail/'.strtotime($requests['created_on']).'/'.$requests['partner_id'].'/'.$form['status']
+				'uri' => str_replace(base_url(), '', $this->update201->url).'/detail/'.$personal_id
 			);
 			$this->db->insert('system_feeds', $insert);
 			$id = $this->db->insert_id();
@@ -119,7 +119,7 @@ class my_change_request_model extends Record
 		return $notified;
 	}
 
-	function notify_filer( $forms_id=0, $form=array())
+	function notify_filer( $forms_id=0, $form=array(), $personal_id=0)
 	{
 		$notified = array();
 

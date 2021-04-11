@@ -76,9 +76,6 @@ function save_record( form, action, callback, manpower_plan_status_id )
 								document.location = base_url + module.get('route');
 								break;								
 							default:
-								if (manpower_plan_status_id && manpower_plan_status_id != 2 && $('.btn-send').length == 0){
-									$('.btn-savenew').after('<button type="button" class="btn green btn-sm btn-send" onclick="save_record( $(this).closest(&apos;form&apos;), \'back\', \'\', 2)">Send for Approval</button>');
-								}
 								break;
 						}
 					}

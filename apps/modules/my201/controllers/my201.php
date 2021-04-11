@@ -468,7 +468,7 @@ class My201 extends MY_PrivateController
 							ON pma.movement_id = pm.movement_id
 						INNER JOIN {$this->db->dbprefix}partners_movement_cause pmc 
 							ON pm.due_to_id = pmc.cause_id 
-						WHERE pma.status_id = 6 
+						WHERE pma.status_id = 8 
 						AND pma.user_id = {$this->user->user_id}";
 		$movement_sql = $this->db->query($movement_qry);
 
@@ -588,6 +588,19 @@ class My201 extends MY_PrivateController
         $this->_ajax_return();
 	}
 
+    function download_movement_file($upload_id){   
+        $this->db->select("photo")
+        ->from("partners_movement_action_attachment")
+        ->where("movement_attachment_id = {$upload_id}");
+
+        $image_details = $this->db->get()->row_array();   
+        $path = base_url() . $image_details['photo'];
+        
+        header('Content-disposition: attachment; filename='.substr( $image_details['photo'], strrpos( $image_details['photo'], '/' )+1 ).'');
+        header('Content-type: txt/pdf');
+        readfile($path);
+    } 
+    
 	function download_file($personal_id){		
 		$image_details = $this->mod->get_partners_personal_image_details($this->user->user_id, $personal_id);
 		$path = base_url() . $image_details['key_value'];
@@ -674,8 +687,9 @@ class My201 extends MY_PrivateController
 
 		$status = $this->input->post('status');
 		$classes = $this->input->post('key');
+		$remarks = $this->input->post('remarks');
 		$partner_id = get_partner_id( $this->user->user_id );
-		
+
 		foreach( $classes as $class_id => $keys )
 		{
 			$active = $this->mod->has_active_request( $class_id, $this->user->user_id );
@@ -691,6 +705,7 @@ class My201 extends MY_PrivateController
 				$data['key_value'] = $value;
 				$data['status'] = $status;
 				$data['created_by'] = $this->user->user_id;
+				$data['remarks'] = $remarks[$class_id][$key_id];
 
 				$check_on_personal = $this->db->get_where('partners_personal', array('partner_id' => $partner_id, 'key_id' => $key_id));
 
@@ -707,9 +722,14 @@ class My201 extends MY_PrivateController
 					$action = 'update';
 
 					$previous_main_data = $this->db->get_where('partners_personal_request', $where)->row_array();					
+
+					$personal_id = $previous_main_data['personal_id'];
 				}
 				else{
 					$this->db->insert('partners_personal_request', $data);
+
+					$personal_id =  $this->db->insert_id();
+
 					$action = 'insert';
 
 					$personal_request_approver = $this->db->query("CALL sp_partners_personal_populate_approvers({$this->db->insert_id()}, ".$this->user->user_id.")");					
@@ -719,12 +739,12 @@ class My201 extends MY_PrivateController
 
 		        //create system logs
 		        $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $action, 'partners_personal_request', $previous_main_data, $data);								
+
+				// INSERT NOTIFICATIONS FOR APPROVERS
+				$this->response->notified = $this->mod->notify_approvers( $this->user->user_id, $data, $personal_id );
+				$this->response->notified = $this->mod->notify_filer( $this->user->user_id, $data, $personal_id );		        
 			}
 		}
-
-		// INSERT NOTIFICATIONS FOR APPROVERS
-		$this->response->notified = $this->mod->notify_approvers( $this->user->user_id, $data );
-		$this->response->notified = $this->mod->notify_filer( $this->user->user_id, $data );
 
 		$this->response->message[] = array(
 			'message' => '',
@@ -784,18 +804,31 @@ class My201 extends MY_PrivateController
 	function get_action_movement_details(){
 		$this->_ajax_only();
 
+		$this->load->model('movement_manage_model', 'mvm');
+		$this->load->model('movement_model', 'move_mod');
+		$this->load->model('movement_admin_model', 'mod_admin');
+
+		$movement_id = $this->input->post("movement_id");
 		$this->response->action_id = $action_id = $this->input->post("action_id");
 		$this->response->type_id = $type_id = $this->input->post("type_id");
 		$data['cause'] = $this->input->post("cause");
 
-		$this->load->model('movement_model', 'move_mod');
 		$action_details = $this->move_mod->get_action_movement($action_id);
 		$data['count'] = 0;
 		
+		$action_movement_attachment = $this->mod_admin->get_action_movement_attachment($action_id);
+
+		$data['movement_approver_remarks'] = $this->mvm->get_approver_remarks($movement_id);
+		$data['movement_info'] = $this->move_mod->get_movement_details($movement_id);
+
+		/*debug($data['movement_info']);die();*/
+
 		$data['movement_file'] = '';
 		if($action_id > 0){
+			$data['record']['attachement'] = $action_movement_attachment;
 			$data['type'] = $action_details['type'];
 			$data['type_id'] = $action_details['type_id'];
+			$data['photo'] = $action_details['photo'];
 			$data['record']['partners_movement_action.action_id'] = $action_details['action_id'];//user
 			$data['record']['partners_movement_action.type_id'] = $action_details['type_id'];//user
 			$data['record']['partners_movement_action.user_id'] = $action_details['user_id'];//user
@@ -820,8 +853,13 @@ class My201 extends MY_PrivateController
 						$data['transfer_fields'][$index]['from_name'] = $movement_type_details[0]['from_name'];
 						$data['transfer_fields'][$index]['to_name'] = $movement_type_details[0]['to_name'];
 					}else{
-						$data['transfer_fields'][$index]['from_id'] = $data['partner_info'][0][$field['field_name'].'_id'];
-						$data['transfer_fields'][$index]['from_name'] = $data['partner_info'][0][$field['field_name']];
+						if ($field['field_id'] == 13) {
+							$data['transfer_fields'][$index]['from_id'] = (isset($data['partner_info'][0]['job_grade_id']) ? $data['partner_info'][0]['job_grade_id'] : '');
+						}
+						else {
+							$data['transfer_fields'][$index]['from_id'] = (isset($data['partner_info'][0][$field['field_name'].'_id']) ? $data['partner_info'][0][$field['field_name'].'_id'] : '');
+						}
+						$data['transfer_fields'][$index]['from_name'] = (isset($data['partner_info'][0][$field['field_name']]) ? $data['partner_info'][0][$field['field_name']] : '');
 						$data['transfer_fields'][$index]['to_id'] = '';
 						$data['transfer_fields'][$index]['to_name'] = '';
 					}
@@ -829,6 +867,7 @@ class My201 extends MY_PrivateController
 					$data['movement_file'] = 'transfer.blade.php';
 				break;
 				case 2://Salary Increase
+				case 18://Salary Increase
 				$movement_type_details = $this->move_mod->get_compensation_movement($action_id);
 					$data['record']['partners_movement_action_compensation.id'] = $movement_type_details['id'];//id
 					$data['record']['partners_movement_action_compensation.current_salary'] = $movement_type_details['current_salary'];//current_salary
@@ -847,6 +886,7 @@ class My201 extends MY_PrivateController
 				$movement_type_details = $this->move_mod->get_moving_movement($action_id);
 					$data['record']['partners_movement_action_moving.id'] = $movement_type_details['id'];//id
 					$data['record']['partners_movement_action_moving.blacklisted'] = $movement_type_details['blacklisted'];//blacklisted
+					$data['record']['partners_movement_action_moving.eligible_for_rehire'] = $movement_type_details['eligible_for_rehire'];//blacklisted
 					$data['record']['partners_movement_action_moving.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
 					$data['record']['partners_movement_action_moving.reason_id'] = $movement_type_details['reason_id'];//reason_id
 					$data['record']['partners_movement_action_moving.further_reason'] = $movement_type_details['further_reason'];//further_reason
@@ -857,6 +897,7 @@ class My201 extends MY_PrivateController
 				$movement_type_details = $this->move_mod->get_moving_movement($action_id);
 					$data['record']['partners_movement_action_moving.id'] = $movement_type_details['id'];//id
 					$data['record']['partners_movement_action_moving.blacklisted'] = $movement_type_details['blacklisted'];//blacklisted
+					$data['record']['partners_movement_action_moving.eligible_for_rehire'] = $movement_type_details['eligible_for_rehire'];//blacklisted
 					$data['record']['partners_movement_action_moving.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
 					// $data['record']['partners_movement_action_moving.reason_id'] = $movement_type_details['reason_id'];//reason_id
 					$data['record']['partners_movement_action_moving.further_reason'] = $movement_type_details['further_reason'];//further_reason
@@ -869,13 +910,23 @@ class My201 extends MY_PrivateController
 					$data['record']['partners_movement_action_extension.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
 					$data['movement_file'] = 'extension.blade.php';
 				break;
+				case 17://Develop
+				$movement_type_details = $this->move_mod->get_extension_movement($action_id);
+					$data['record']['partners_movement_action_extension.id'] = $movement_type_details['id'];//id
+					$data['record']['partners_movement_action_extension.no_of_months'] = $movement_type_details['no_of_months'];//no_of_months
+					$data['record']['partners_movement_action_extension.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
+					$data['record']['partners_movement_action.grade'] = $action_details['grade'];
+					$data['movement_file'] = 'extension.blade.php';
+				break;
 			}
 		}
+		
+		$data['user_id'] = $this->user->user_id;
 
 		$this->response->count = ++$data['count'];
 		$this->load->helper('file');
 		$this->load->helper('form');
-
+		
 		$this->response->add_movement = $this->load->view('edit/forms/movement/nature.blade.php', $data, true);
 		$this->response->type_of_movement = $this->load->view('edit/forms/movement/'.$data['movement_file'], $data, true);
 		
@@ -1191,7 +1242,7 @@ class My201 extends MY_PrivateController
 							ON pma.movement_id = pm.movement_id
 						INNER JOIN {$this->db->dbprefix}partners_movement_cause pmc 
 							ON pm.due_to_id = pmc.cause_id 
-						WHERE pma.status_id = 6 
+						WHERE pma.status_id = 8 
 						AND pma.user_id = {$this->user->user_id}";
 		$movement_sql = $this->db->query($movement_qry);
 

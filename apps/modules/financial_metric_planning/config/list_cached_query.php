@@ -2,7 +2,7 @@
 $config["list_cached_query"] = 'SELECT 
 `ww_performance_financial_metric_planning`.`financial_metric_planning_id` as record_id, 
 T1.year as "performance_financial_metric_year", 
-t2.performance as "performance_financial_performance_for", 
+T2.performance as "performance_financial_performance_for", 
 ww_performance_financial_metric_planning.title as "performance_financial_metric_planning_title", 
 ww_performance_financial_metric_planning.key_in_weight as "performance_financial_metric_planning_key_in_weight", 
 ww_performance_financial_metric_planning.user_ids as "performance_financial_metric_planning_user_ids", 
@@ -18,8 +18,8 @@ GROUP_CONCAT(DISTINCT T4.financial_metrics_kpi SEPARATOR "<br> ") as "performanc
 FROM (`ww_performance_financial_metric_planning`)
 LEFT JOIN `ww_performance_planning` T1 ON `T1`.`planning_id` = `ww_performance_financial_metric_planning`.`planning_id`
 LEFT JOIN `ww_performance_setup_performance` T2 ON `T1`.`performance_type_id` = `T2`.`performance_id`
-LEFT JOIN `ww_users` T3 ON FIND_IN_SET(t3.user_id,ww_performance_financial_metric_planning.user_ids)
-LEFT JOIN `ww_performance_setup_financial_metrics_kpi` T4 ON FIND_IN_SET(t4.financial_metrics_kpi_id,ww_performance_financial_metric_planning.financial_metric_kpi_ids)
+LEFT JOIN `ww_users` T3 ON FIND_IN_SET(T3.user_id,ww_performance_financial_metric_planning.user_ids)
+LEFT JOIN `ww_performance_setup_financial_metrics_kpi` T4 ON FIND_IN_SET(T4.financial_metrics_kpi_id,ww_performance_financial_metric_planning.financial_metric_kpi_ids)
 WHERE (
 	ww_performance_financial_metric_planning.key_in_weight like "%{$search}%" OR 
 	ww_performance_financial_metric_planning.user_ids like "%{$search}%" OR 

@@ -1109,6 +1109,19 @@ class Partners extends MY_PrivateController
 		readfile($path);
 	}	
 
+    function download_movement_file($upload_id){   
+        $this->db->select("photo")
+        ->from("partners_movement_action_attachment")
+        ->where("movement_attachment_id = {$upload_id}");
+
+        $image_details = $this->db->get()->row_array();   
+        $path = base_url() . $image_details['photo'];
+        
+        header('Content-disposition: attachment; filename='.substr( $image_details['photo'], strrpos( $image_details['photo'], '/' )+1 ).'');
+        header('Content-type: txt/pdf');
+        readfile($path);
+    } 
+
 	function download_file_directly($attachment_file){	
 		$attach_file = base64_decode(urldecode($attachment_file));
 
@@ -3227,16 +3240,28 @@ class Partners extends MY_PrivateController
 	function get_action_movement_details(){
 		$this->_ajax_only();
 
+		$this->load->model('movement_manage_model', 'mvm');
+		$this->load->model('movement_model', 'move_mod');
+		$this->load->model('movement_admin_model', 'mod_admin');
+
+		$movement_id = $this->input->post("movement_id");
 		$this->response->action_id = $action_id = $this->input->post("action_id");
 		$this->response->type_id = $type_id = $this->input->post("type_id");
 		$data['cause'] = $this->input->post("cause");
 
-		$this->load->model('movement_model', 'move_mod');
 		$action_details = $this->move_mod->get_action_movement($action_id);
 		$data['count'] = 0;
 		
+		$action_movement_attachment = $this->mod_admin->get_action_movement_attachment($action_id);
+
+		$data['movement_approver_remarks'] = $this->mvm->get_approver_remarks($movement_id);
+		$data['movement_info'] = $this->move_mod->get_movement_details($movement_id);
+
+		/*debug($data['movement_info']);die();*/
+
 		$data['movement_file'] = '';
 		if($action_id > 0){
+			$data['record']['attachement'] = $action_movement_attachment;
 			$data['type'] = $action_details['type'];
 			$data['type_id'] = $action_details['type_id'];
 			$data['photo'] = $action_details['photo'];
@@ -3264,8 +3289,13 @@ class Partners extends MY_PrivateController
 						$data['transfer_fields'][$index]['from_name'] = $movement_type_details[0]['from_name'];
 						$data['transfer_fields'][$index]['to_name'] = $movement_type_details[0]['to_name'];
 					}else{
-						$data['transfer_fields'][$index]['from_id'] = $data['partner_info'][0][$field['field_name'].'_id'];
-						$data['transfer_fields'][$index]['from_name'] = $data['partner_info'][0][$field['field_name']];
+						if ($field['field_id'] == 13) {
+							$data['transfer_fields'][$index]['from_id'] = (isset($data['partner_info'][0]['job_grade_id']) ? $data['partner_info'][0]['job_grade_id'] : '');
+						}
+						else {
+							$data['transfer_fields'][$index]['from_id'] = (isset($data['partner_info'][0][$field['field_name'].'_id']) ? $data['partner_info'][0][$field['field_name'].'_id'] : '');
+						}
+						$data['transfer_fields'][$index]['from_name'] = (isset($data['partner_info'][0][$field['field_name']]) ? $data['partner_info'][0][$field['field_name']] : '');
 						$data['transfer_fields'][$index]['to_id'] = '';
 						$data['transfer_fields'][$index]['to_name'] = '';
 					}
@@ -3292,6 +3322,7 @@ class Partners extends MY_PrivateController
 				$movement_type_details = $this->move_mod->get_moving_movement($action_id);
 					$data['record']['partners_movement_action_moving.id'] = $movement_type_details['id'];//id
 					$data['record']['partners_movement_action_moving.blacklisted'] = $movement_type_details['blacklisted'];//blacklisted
+					$data['record']['partners_movement_action_moving.eligible_for_rehire'] = $movement_type_details['eligible_for_rehire'];//blacklisted
 					$data['record']['partners_movement_action_moving.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
 					$data['record']['partners_movement_action_moving.reason_id'] = $movement_type_details['reason_id'];//reason_id
 					$data['record']['partners_movement_action_moving.further_reason'] = $movement_type_details['further_reason'];//further_reason
@@ -3302,6 +3333,7 @@ class Partners extends MY_PrivateController
 				$movement_type_details = $this->move_mod->get_moving_movement($action_id);
 					$data['record']['partners_movement_action_moving.id'] = $movement_type_details['id'];//id
 					$data['record']['partners_movement_action_moving.blacklisted'] = $movement_type_details['blacklisted'];//blacklisted
+					$data['record']['partners_movement_action_moving.eligible_for_rehire'] = $movement_type_details['eligible_for_rehire'];//blacklisted
 					$data['record']['partners_movement_action_moving.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
 					// $data['record']['partners_movement_action_moving.reason_id'] = $movement_type_details['reason_id'];//reason_id
 					$data['record']['partners_movement_action_moving.further_reason'] = $movement_type_details['further_reason'];//further_reason
@@ -3319,10 +3351,13 @@ class Partners extends MY_PrivateController
 					$data['record']['partners_movement_action_extension.id'] = $movement_type_details['id'];//id
 					$data['record']['partners_movement_action_extension.no_of_months'] = $movement_type_details['no_of_months'];//no_of_months
 					$data['record']['partners_movement_action_extension.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
+					$data['record']['partners_movement_action.grade'] = $action_details['grade'];
 					$data['movement_file'] = 'extension.blade.php';
 				break;
 			}
 		}
+		
+		$data['user_id'] = $this->user->user_id;
 
 		$this->response->count = ++$data['count'];
 		$this->load->helper('file');
@@ -3472,7 +3507,7 @@ class Partners extends MY_PrivateController
 			$employee = $this->db->get_where('users', array('user_id' => $data['user_id']))->row();
 			$data['employee'] = $employee->full_name;
 		}
-
+/*
 		if($data['class_id'] == 16){ //Change Request
 			$data['conditions']  = array(
 				"Either Of" => "Either Of"
@@ -3483,7 +3518,14 @@ class Partners extends MY_PrivateController
 				"By Level" => "By Level",
 				"Either Of" => "Either Of",
 			);
-		}
+		}*/
+
+		$data['conditions']  = array(
+			"All" => "All",
+			"By Level" => "By Level",
+			"Either Of" => "Either Of",
+		);
+					
 		$this->db->select('user_id,full_name');
 		$this->db->order_by('full_name');
 		$users = $this->db->get_where('users', array('deleted' => 0, 'active' => 1, 'user_id <>' => 1));

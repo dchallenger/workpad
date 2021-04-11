@@ -12,7 +12,7 @@
         </div>
     </td>
     <td>
-        <input type="text" class="form-control" maxlength="64" name="score[]" >
+        <input type="text" class="form-control" maxlength="64" name="score[]" data-inputmask="'mask': '9', 'repeat': 3, 'greedy' : false">
     </td> 
     <td>
         <div class="make-switch" data-off="danger" data-on="success" data-on-label="&nbsp;Passed&nbsp;&nbsp;" data-off-label="&nbsp;Failed&nbsp;">

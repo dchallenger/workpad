@@ -45,7 +45,13 @@ function add_class()
                     if( typeof(response.class_draft) != 'undefined' )
                     {
                         $('#draft-keys').append( response.class_draft );
-                    }  
+                    }
+                    if (jQuery().datepicker) {
+                        $('.bday').parent('.date-picker').datepicker({
+                            rtl: App.isRTL(),
+                            autoclose: true
+                        });
+                    }                    
                 }
             });
         }
@@ -145,10 +151,10 @@ function save_request(action)
     });
 }
 
-
-function view_movement_details(action_id, type_id, cause){  
+function view_movement_details(movement_id, action_id, type_id, cause){ 
     var data = {
         type_id: type_id,
+        movement_id: movement_id,
         action_id: action_id,
         cause: cause
     };

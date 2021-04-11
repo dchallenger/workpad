@@ -198,6 +198,27 @@
 										<div class="clearfix"></div>
 									</div>
 
+									<div>
+										<div class="col-md-9 margin-bottom-10">
+											<h4>{{ lang('user_manager.school')}}</h4>
+											<div class="text-muted small">{{ lang('user_manager.p_school')}}</div>
+										</div>
+										<div class="col-md-3 margin-bottom-25">
+											<a class="btn btn-default" type="button" rel="{{ get_mod_route('school') }}" href="{{ get_mod_route('school') }}">{{ lang('user_manager.view_list_button') }}</a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+
+									<div>
+										<div class="col-md-9 margin-bottom-10">
+											<h4>{{ lang('user_manager.degree')}}</h4>
+											<div class="text-muted small">{{ lang('user_manager.p_degree')}}</div>
+										</div>
+										<div class="col-md-3 margin-bottom-25">
+											<a class="btn btn-default" type="button" rel="{{ get_mod_route('degree') }}" href="{{ get_mod_route('degree') }}">{{ lang('user_manager.view_list_button') }}</a>
+										</div>
+										<div class="clearfix"></div>
+									</div>									
 <!-- 									<div>
 										<div class="col-md-9 margin-bottom-10">
 											<h4>{{ lang('user_manager.assignment')}}</h4>

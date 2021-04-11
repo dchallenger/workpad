@@ -891,7 +891,18 @@ class Mrf extends MY_PrivateController
 
 			        foreach( $plan_code->result() as $row )
 			        {
-			            $this->response->plan_code .= '<option value="'.$row->plan_code.'">'.$row->plan_code.'</option>';
+			        	$to_list = 1;
+			        	$this->db->where('plan_code',$row->plan_code);
+			        	$this->db->where('position_id',$row->position_id);
+			        	$result = $this->db->get('recruitment_request');
+			        	if ($result && $result->num_rows() > 0) {
+			        		$row_request = $result->row();
+			        		if ((int)$row_request->quantity >= (int)$row->needed)
+			        			$to_list = 0;
+			        	}
+
+			        	if ($to_list)
+			            	$this->response->plan_code .= '<option value="'.$row->plan_code.'">'.$row->plan_code.'</option>';
 			        }
 				}
 

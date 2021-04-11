@@ -210,6 +210,10 @@ class profile_model extends Record
 				$this->load->helper('form');
 				return $this->load->view('key_templates/gender', array('key' => $key, 'value' => $value), true);
 				break;
+			case 'bday':
+				$this->load->helper('form');
+				return $this->load->view('key_templates/date_picker', array('key' => $key, 'value' => $value), true);
+				break;					
 			default:
 				return $this->load->view('key_templates/textfield', array('key' => $key, 'value' => $value), true);
 				break;

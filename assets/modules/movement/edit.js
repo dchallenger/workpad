@@ -16,22 +16,6 @@ $(document).ready(function(){
 	    allowClear: true
 	});
 
-	$('#type_id').live('change',function(){
-		var val = $(this).val();
-		if (val == 8){
-			$('.cat_type').show();
-		}
-		else{
-			$('.cat_type').hide();			
-		}
-
-		if (val == 6) {
-			$('.reason_leaving').show();
-		} else {
-			$('.reason_leaving').hide();
-		}
-	});
-
 	$('#partners_movement-photo-fileupload').fileupload({ 
 		url: base_url + module.get('route') + '/single_upload',
 		autoUpload: true,

@@ -74,6 +74,45 @@ class clearance_model extends Record
 		return $data;
 	}
 
+	function notify_hr( $clearance_id=0, $clearance_record='')
+	{	
+		$qry = "SELECT  *
+				FROM {$this->db->dbprefix}roles r 
+				WHERE FIND_IN_SET(2,profile_id)";
+
+		$roles_result = $this->db->query($qry);
+
+		if ($roles_result && $roles_result->num_rows() > 0) {
+			$role_id = $roles_result->row()->role_id;
+
+			$this->db->where('role_id',$role_id);
+			$users = $this->db->get('users');
+
+			if ($users && $users->num_rows() > 0) {
+				$notified = array();		
+
+				foreach ($users->result() as $row) {
+					//insert notification
+					$insert = array(
+						'status' => 'info',
+						'message_type' => 'Clearance',
+						'user_id' => $clearance_record->user_id,
+						'feed_content' => 'Submitted Exit Interview for Validation',//.'.<br><br>Reason: '.$form['reason'],
+						'recipient_id' => $row->user_id,
+						'uri' => str_replace(base_url(), '', $this->mod->url).'/view_exit_interview/'.$clearance_id
+					);
+
+					$this->db->insert('system_feeds', $insert);
+					$id = $this->db->insert_id();
+					$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $row->user_id));
+					$notified[] = $row->user_id;
+				}
+			}
+		}
+
+		return $notified;
+	}
+
 	function get_movement_record($user_id, $action_id)
 	{
 		$query = "SELECT pma.status_id as movement_action_status, pm.*, pma.* FROM {$this->db->dbprefix}partners_movement pm 
@@ -165,6 +204,22 @@ class clearance_model extends Record
 
 		return true;
 
+	}
+
+	function get_user_info($clearance_id = 0)
+	{
+		$query = "SELECT * FROM {$this->db->dbprefix}partners_clearance pc 
+					LEFT JOIN {$this->db->dbprefix}users_profile up
+					    ON pc.user_id = up.user_id
+					WHERE pc.clearance_id = ". $clearance_id . "
+					LIMIT 1";
+
+		$clearance = $this->db->query($query);
+		if($clearance && $clearance->num_rows() > 0){
+			return $clearance->row_array();	
+		}else {
+			return false;
+		}
 	}
 
 	//excel export for exit clearance

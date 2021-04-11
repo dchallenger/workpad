@@ -199,11 +199,12 @@ class applicant_monitoring_model extends Record
 
     function get_backgrounds( $process_id )
     {
-        $qry = "SELECT *, rbi.background_item_id as item_id 
+        $qry = "SELECT *
         FROM {$this->db->dbprefix}recruitment_process_background rpb
-        WHERE rbi.deleted = 0 AND rpb.process_id = {$process_id}";
+        WHERE rpb.deleted = 0 AND rpb.process_id = {$process_id}";
 // echo $qry;
         $bis = $this->db->query( $qry );
+        
         if( $bis && $bis->num_rows() > 0)
             return $bis->result_array();
         else{
@@ -1448,7 +1449,7 @@ class applicant_monitoring_model extends Record
         return $mrf;
     }
 
-    function get_applicants($position = false)
+    function get_applicants($request_id = false)
     {
 
 /*        $query = "SELECT * FROM ww_recruitment
@@ -1466,11 +1467,13 @@ class applicant_monitoring_model extends Record
         $query = "SELECT * FROM ww_recruitment
                     LEFT JOIN `ww_recruitment_personal` ON `ww_recruitment_personal`.`recruit_id` = `ww_recruitment`.`recruit_id` 
                     WHERE ww_recruitment.deleted = 0
-                        AND status_id IN (1,11)";
+                        AND status_id IN (11)";
 
-        if($position != false){
-            $query .= " AND `ww_recruitment_personal`.`key_value` = '{$position}'";
+        if($request_id != false){
+            $query .= " AND `ww_recruitment`.`request_id` = '{$request_id}'";
         }
+
+        $query .= " GROUP BY ww_recruitment.recruit_id";
         
         $applicants = $this->db->query($query);
 
@@ -1487,8 +1490,8 @@ class applicant_monitoring_model extends Record
         $query = "SELECT * FROM ww_recruitment
                     LEFT JOIN `ww_recruitment_personal` ON `ww_recruitment_personal`.`recruit_id` = `ww_recruitment`.`recruit_id` 
                     WHERE ww_recruitment.deleted = 0
-                        AND (oth_position IS NO NULL OR oth_position = '')
-                        AND status_id = 11";
+                        AND (oth_position IS NOT NULL AND oth_position != '')
+                        AND status_id = 11 GROUP BY ww_recruitment.recruit_id";
         $applicants = $this->db->query($query);
 
         if($applicants && $applicants->num_rows() > 0){

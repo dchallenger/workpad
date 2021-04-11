@@ -316,7 +316,7 @@ class movement_manage_model extends Record
 
 		$data = array();
 
-		$qry = "SELECT * FROM {$this->db->dbprefix}partners_movement_fields WHERE from_to = 1 "; // WHERE user_id = '$userID';
+		$qry = "SELECT * FROM {$this->db->dbprefix}partners_movement_fields WHERE from_to = 1 ORDER BY orderby"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
 		if($result->num_rows() > 0){

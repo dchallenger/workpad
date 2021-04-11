@@ -18,7 +18,7 @@ $(document).ready(function(){
 					</div>\
 					<div class="col-md-4">\
 						<div class="">\
-							<label class="control-label"><span class="required">* </span>% Weight</label>\
+							<label class="control-label">% Weight</label>\
 							<input type="text" class="form-control weight" name="performance_financial_metric_planning[weight][]" value="" placeholder="Enter Weight" />\
 						</div>\
 					</div>\

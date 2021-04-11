@@ -39,7 +39,9 @@ class change_request_model extends Record
 	function _get_list($start, $limit, $search, $filter, $trash = false)
 	{
 		$data = array();				
-		
+
+        $permission = $this->config->item('permission');
+
 		$qry = $this->_get_list_cached_query();
 		
 		if( $trash )
@@ -51,7 +53,7 @@ class change_request_model extends Record
 		}
 		
 		$qry .= " AND {$this->db->dbprefix}{$this->table}.status != 1";
-		if($this->user->user_id != 1){//if not super admin
+		if(!isset($permission[$this->mod_code]['process'])){
 			$qry .= " AND (ppa.user_id = ".$this->user->user_id .")";
 		}
 		$qry .= ' '. $filter;
@@ -71,6 +73,32 @@ class change_request_model extends Record
 			}
 		}
 		return $data;
+	}
+
+	function notify_filer( $user_id=0, $status=0)
+	{
+		$notified = array();
+
+			$form_status =  ($status == 3 ? "Approved" : "Declined");
+
+			$this->load->model('my_change_request_model', 'mcrm');
+
+			//insert notification
+			$insert = array(
+				'status' => 'info',
+				'message_type' => 'Partners',
+				'user_id' => $user_id,
+				'feed_content' => $form_status.' change request',
+				'recipient_id' => $user_id,
+				'uri' => str_replace(base_url(), '', $this->mcrm->url)
+			);
+
+			$this->db->insert('system_feeds', $insert);
+			$id = $this->db->insert_id();
+			$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $user_id));
+			$notified[] = $user_id;
+
+		return $notified;
 	}
 
 	function change_status($user_id, $created_on, $status)

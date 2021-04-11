@@ -84,4 +84,68 @@ class clearance_manage_model extends Record
 		return $pending;
 	}
 
+	function notify_hr( $clearance_id=0, $clearance_record='')
+	{	
+		$this->load->model('clearance_model', 'clearance_mod');
+
+		$qry = "SELECT  *
+				FROM {$this->db->dbprefix}roles r 
+				WHERE FIND_IN_SET(2,profile_id)";
+
+		$roles_result = $this->db->query($qry);
+
+		if ($roles_result && $roles_result->num_rows() > 0) {
+			$role_id = $roles_result->row()->role_id;
+
+			$this->db->where('role_id',$role_id);
+			$users = $this->db->get('users');
+
+			if ($users && $users->num_rows() > 0) {
+				$notified = array();		
+
+				foreach ($users->result() as $row) {
+					//insert notification
+					$insert = array(
+						'status' => 'info',
+						'message_type' => 'Clearance',
+						'user_id' => $clearance_record->user_id,
+						'feed_content' => 'Submitted Exit Interview for Validation',//.'.<br><br>Reason: '.$form['reason'],
+						'recipient_id' => $row->user_id,
+						'uri' => str_replace(base_url(), '', $this->clearance_mod->url).'/view_signatories/'.$clearance_id
+					);
+
+					$this->db->insert('system_feeds', $insert);
+					$id = $this->db->insert_id();
+					$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $row->user_id));
+					$notified[] = $row->user_id;
+				}
+			}
+		}
+
+		return $notified;
+	}
+
+	function notify_filer( $clearance_id=0, $clearance_record='')
+	{	
+		$this->load->model('clearance_model', 'clearance_mod');
+		
+		$notified = array();		
+
+		//insert notification
+		$insert = array(
+			'status' => 'info',
+			'message_type' => 'Clearance',
+			'user_id' => $clearance_record->user_id,
+			'feed_content' => 'Submitted Exit Interview for Validation',//.'.<br><br>Reason: '.$form['reason'],
+			'recipient_id' => $clearance_record->user_id,
+			'uri' => str_replace(base_url(), '', $this->clearance_mod->url).'/view_exit_interview/'.$clearance_id
+		);
+
+		$this->db->insert('system_feeds', $insert);
+		$id = $this->db->insert_id();
+		$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $clearance_record->user_id));
+		$notified[] = $clearance_record->user_id;
+
+		return $notified;
+	}	
 }

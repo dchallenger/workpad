@@ -157,7 +157,7 @@
 						    	<input type="checkbox" value="1" @if( $record['payroll_partners.fixed_rate'] ) checked="checked" @endif name="payroll_partners[fixed_rate][temp]" id="payroll_partners-fixed_rate-temp" class="dontserializeme toggle"/>
 						    	<input type="hidden" name="payroll_partners[fixed_rate]" id="payroll_partners-fixed_rate" value="@if( $record['payroll_partners.fixed_rate'] ) 1 else 0 @endif"/>
 							</div> 				</div>	
-			</div>			<div class="form-group">
+			</div>			<div class="form-group hidden">
 				<label class="control-label col-md-3"><span class="required">* </span>Sensitivity</label>
 				<div class="col-md-5"><?php									                            		$db->select('sensitivity_id,sensitivity');
 	                            			                            		$db->order_by('sensitivity', '0');

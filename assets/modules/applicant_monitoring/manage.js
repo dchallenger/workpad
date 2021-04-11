@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	$(":input").inputmask();
+
 	filter_all( $('form[name="filter"] input[name="year"]').val() );
 
     $('#recruitment_request-how_hiring_heard').on('click', function(){
@@ -131,6 +133,7 @@ function get_interview_list( process_id )
 						init_datepicker();
 						init_switch_exam();
 						// init_searchabledd();
+						$(":input").inputmask();
 					}
 				}
 			});
@@ -175,6 +178,7 @@ function add_exam_row(){
 				$("#no_record_exam").hide();
 				init_datepicker();
 				init_switch_exam();
+				$(":input").inputmask();
             }
 
         }

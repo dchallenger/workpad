@@ -582,7 +582,7 @@ class Partners_immediate extends MY_PrivateController
 							ON pma.movement_id = pm.movement_id
 						INNER JOIN {$this->db->dbprefix}partners_movement_cause pmc 
 							ON pm.due_to_id = pmc.cause_id 
-						WHERE pm.status_id = 3 
+						WHERE pm.status_id = 8 
 						AND pma.user_id = {$user_id}";
 		$movement_sql = $this->db->query($movement_qry);
 
@@ -673,6 +673,156 @@ class Partners_immediate extends MY_PrivateController
 		$this->_ajax_return();
 	}
 
+	function get_action_movement_details(){
+		$this->_ajax_only();
+
+		$this->load->model('movement_manage_model', 'mvm');
+		$this->load->model('movement_model', 'move_mod');
+		$this->load->model('movement_admin_model', 'mod_admin');
+
+		$movement_id = $this->input->post("movement_id");
+		$this->response->action_id = $action_id = $this->input->post("action_id");
+		$this->response->type_id = $type_id = $this->input->post("type_id");
+		$data['cause'] = $this->input->post("cause");
+
+		$action_details = $this->move_mod->get_action_movement($action_id);
+		$data['count'] = 0;
+		
+		$action_movement_attachment = $this->mod_admin->get_action_movement_attachment($action_id);
+
+		$data['movement_approver_remarks'] = $this->mvm->get_approver_remarks($movement_id);
+		$data['movement_info'] = $this->move_mod->get_movement_details($movement_id);
+
+		/*debug($data['movement_info']);die();*/
+
+		$data['movement_file'] = '';
+		if($action_id > 0){
+			$data['record']['attachement'] = $action_movement_attachment;
+			$data['type'] = $action_details['type'];
+			$data['type_id'] = $action_details['type_id'];
+			$data['photo'] = $action_details['photo'];
+			$data['record']['partners_movement_action.action_id'] = $action_details['action_id'];//user
+			$data['record']['partners_movement_action.type_id'] = $action_details['type_id'];//user
+			$data['record']['partners_movement_action.user_id'] = $action_details['user_id'];//user
+			$data['record']['partners_movement_action.effectivity_date'] = date("F d, Y", strtotime($action_details['effectivity_date']));//effectivity_date
+			$data['record']['partners_movement_action.remarks'] = $action_details['remarks'];//action_remarks
+			switch($type_id){
+				case 1://Regularization
+				case 3://Promotion
+				case 8://Transfer
+				case 9://Employment Status
+				case 12://Temporary Assignment
+				$end_date = $this->move_mod->get_transfer_movement($action_id, 11);
+				$data['end_date'] = (count($end_date) > 0) ? $end_date[0]['to_name'] : '' ;
+
+				$data['transfer_fields'] = $this->move_mod->getTransferFields();
+				$data['partner_info'] = $this->move_mod->get_employee_details($action_details['user_id']);
+				foreach($data['transfer_fields'] as $index => $field){
+					$movement_type_details = $this->move_mod->get_transfer_movement($action_id, $field['field_id']);
+					if(count($movement_type_details) > 0){
+						$data['transfer_fields'][$index]['from_id'] = $movement_type_details[0]['from_id'];
+						$data['transfer_fields'][$index]['to_id'] = $movement_type_details[0]['to_id'];
+						$data['transfer_fields'][$index]['from_name'] = $movement_type_details[0]['from_name'];
+						$data['transfer_fields'][$index]['to_name'] = $movement_type_details[0]['to_name'];
+					}else{
+						if ($field['field_id'] == 13) {
+							$data['transfer_fields'][$index]['from_id'] = (isset($data['partner_info'][0]['job_grade_id']) ? $data['partner_info'][0]['job_grade_id'] : '');
+						}
+						else {
+							$data['transfer_fields'][$index]['from_id'] = (isset($data['partner_info'][0][$field['field_name'].'_id']) ? $data['partner_info'][0][$field['field_name'].'_id'] : '');
+						}
+						$data['transfer_fields'][$index]['from_name'] = (isset($data['partner_info'][0][$field['field_name']]) ? $data['partner_info'][0][$field['field_name']] : '');
+						$data['transfer_fields'][$index]['to_id'] = '';
+						$data['transfer_fields'][$index]['to_name'] = '';
+					}
+				}
+					$data['movement_file'] = 'transfer.blade.php';
+				break;
+				case 2://Salary Increase
+				case 18://Salary Increase
+				$movement_type_details = $this->move_mod->get_compensation_movement($action_id);
+					$data['record']['partners_movement_action_compensation.id'] = $movement_type_details['id'];//id
+					$data['record']['partners_movement_action_compensation.current_salary'] = $movement_type_details['current_salary'];//current_salary
+					$data['record']['partners_movement_action_compensation.to_salary'] = $movement_type_details['to_salary'];//to_salary
+					$data['movement_file'] = 'compensation.blade.php';
+				break;
+				case 4://Wage Order
+				$movement_type_details = $this->move_mod->get_compensation_movement($action_id);
+					$data['record']['partners_movement_action_compensation.id'] = $movement_type_details['id'];//id
+					$data['record']['partners_movement_action_compensation.current_salary'] = $movement_type_details['current_salary'];//current_salary
+					$data['record']['partners_movement_action_compensation.to_salary'] = $movement_type_details['to_salary'];//to_salary
+					$data['movement_file'] = 'wage.blade.php';
+				break;
+				case 6://Resignation
+				case 7://Termination
+				$movement_type_details = $this->move_mod->get_moving_movement($action_id);
+					$data['record']['partners_movement_action_moving.id'] = $movement_type_details['id'];//id
+					$data['record']['partners_movement_action_moving.blacklisted'] = $movement_type_details['blacklisted'];//blacklisted
+					$data['record']['partners_movement_action_moving.eligible_for_rehire'] = $movement_type_details['eligible_for_rehire'];//blacklisted
+					$data['record']['partners_movement_action_moving.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
+					$data['record']['partners_movement_action_moving.reason_id'] = $movement_type_details['reason_id'];//reason_id
+					$data['record']['partners_movement_action_moving.further_reason'] = $movement_type_details['further_reason'];//further_reason
+					$data['movement_file'] = 'endservice.blade.php';
+				break;
+				case 10://End Contract
+				case 11://Retirement
+				$movement_type_details = $this->move_mod->get_moving_movement($action_id);
+					$data['record']['partners_movement_action_moving.id'] = $movement_type_details['id'];//id
+					$data['record']['partners_movement_action_moving.blacklisted'] = $movement_type_details['blacklisted'];//blacklisted
+					$data['record']['partners_movement_action_moving.eligible_for_rehire'] = $movement_type_details['eligible_for_rehire'];//blacklisted
+					$data['record']['partners_movement_action_moving.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
+					// $data['record']['partners_movement_action_moving.reason_id'] = $movement_type_details['reason_id'];//reason_id
+					$data['record']['partners_movement_action_moving.further_reason'] = $movement_type_details['further_reason'];//further_reason
+					$data['movement_file'] = 'retire_endo.blade.php';
+				break;
+				case 15://Extension
+				$movement_type_details = $this->move_mod->get_extension_movement($action_id);
+					$data['record']['partners_movement_action_extension.id'] = $movement_type_details['id'];//id
+					$data['record']['partners_movement_action_extension.no_of_months'] = $movement_type_details['no_of_months'];//no_of_months
+					$data['record']['partners_movement_action_extension.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
+					$data['movement_file'] = 'extension.blade.php';
+				break;
+				case 17://Develop
+				$movement_type_details = $this->move_mod->get_extension_movement($action_id);
+					$data['record']['partners_movement_action_extension.id'] = $movement_type_details['id'];//id
+					$data['record']['partners_movement_action_extension.no_of_months'] = $movement_type_details['no_of_months'];//no_of_months
+					$data['record']['partners_movement_action_extension.end_date'] = date("F d, Y", strtotime($movement_type_details['end_date']));//end_date
+					$data['record']['partners_movement_action.grade'] = $action_details['grade'];
+					$data['movement_file'] = 'extension.blade.php';
+				break;
+			}
+		}
+		
+		$data['user_id'] = $this->user->user_id;
+
+		$this->response->count = ++$data['count'];
+		$this->load->helper('file');
+		$this->load->helper('form');
+		
+		$this->response->add_movement = $this->load->view('edit/forms/movement/nature.blade.php', $data, true);
+		$this->response->type_of_movement = $this->load->view('edit/forms/movement/'.$data['movement_file'], $data, true);
+		
+		$this->response->message[] = array(
+			'message' => '',
+			'type' => 'success'
+			);
+
+		$this->_ajax_return();
+	}
+
+    function download_movement_file($upload_id){   
+        $this->db->select("photo")
+        ->from("partners_movement_action_attachment")
+        ->where("movement_attachment_id = {$upload_id}");
+
+        $image_details = $this->db->get()->row_array();   
+        $path = base_url() . $image_details['photo'];
+        
+        header('Content-disposition: attachment; filename='.substr( $image_details['photo'], strrpos( $image_details['photo'], '/' )+1 ).'');
+        header('Content-type: txt/pdf');
+        readfile($path);
+    } 
+    	
 	function download_file($personal_id){	
 		$this->load->model('profile_model', 'profile_mod');	
 		$image_details = $this->profile_mod->get_partners_personal_image_details($this->user->user_id, $personal_id);

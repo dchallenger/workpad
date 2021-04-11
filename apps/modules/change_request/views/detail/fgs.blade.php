@@ -74,10 +74,12 @@
 											<!-- <td></td> -->
 											<td>{{ $request['partners_personal_request_key_value'] }}</td>
 											<td>
-												<div class="make-switch" data-off="danger" data-on="success" data-on-label="&nbsp;&nbsp;{{ lang('my_change_request.approved') }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" data-off-label="&nbsp;{{ lang('my_change_request.decline') }}&nbsp;">
-													<input type="hidden" name="personal_id[{{ $request['record_id'] }}]" value="{{ $request['status'] }}"/>
-													<input type="checkbox" class="dontserializeme toggle" name="temp-personal_id[]" value="{{ $request['record_id'] }}" {{ ($request['status'] == 3) ?  'checked="checked"' : '' }} />
-												</div>
+												@if ($can_approve)
+													<div class="make-switch" data-off="danger" data-on="success" data-on-label="&nbsp;&nbsp;{{ lang('my_change_request.approved') }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" data-off-label="&nbsp;{{ lang('my_change_request.decline') }}&nbsp;">
+														<input type="hidden" name="personal_id[{{ $request['record_id'] }}]" value="{{ $request['status'] }}"/>
+														<input type="checkbox" class="dontserializeme toggle" name="temp-personal_id[]" value="{{ $request['record_id'] }}" {{ ($request['status'] == 3) ?  'checked="checked"' : '' }} />
+													</div>
+												@endif
 											</td>
 										</tr>
 									@endforeach

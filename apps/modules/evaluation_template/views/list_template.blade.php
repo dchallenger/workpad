@@ -5,7 +5,6 @@
         </div>
     </td>
     <td>{{ $training_evaluation_template_title }}</td>
-    <td>{{ $training_evaluation_template_applicable_for }}</td>
     <td class="hidden-xs">{{ $training_evaluation_template_description}} </td> 
     <td>
         <div class="btn-group">

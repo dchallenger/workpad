@@ -1,6 +1,7 @@
 <?php
     $db->select('education_school_id,education_school');
     $db->where('deleted', '0');
+    $db->where('status_id', '1');
     $db->order_by('education_school');
     $education_school = $db->get('users_education_school');
     $education_school_options = array('' => '');
@@ -10,6 +11,7 @@
 
     $db->select('education_degree_obtained_id,education_degree_obtained');
     $db->where('deleted', '0');
+    $db->where('status_id', '1');
     $db->order_by('education_degree_obtained');
     $degree_obtained = $db->get('users_education_degree_obtained');
     $degree_obtained_options = array('' => '');

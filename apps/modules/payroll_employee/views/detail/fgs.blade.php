@@ -216,7 +216,7 @@
 				</div> 				
 			</div>	
 		</div>
-		<div class="form-group">
+		<div class="form-group hidden">
 			<label class="control-label col-md-3">Sensitivity</label>
 			<div class="col-md-7">							
 				<?php									                            		

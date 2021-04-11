@@ -91,7 +91,7 @@
                                         <div class="clearfix"></div>
                                     </div> -->
 
-                                    <div>
+                                    <div class="hidden">
                                         <div class="col-md-9 margin-bottom-10">
                                             <h4>{{ lang('partner_manager.specialization')}}</h4>
                                             <div class="text-muted small"></div>

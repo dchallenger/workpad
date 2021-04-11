@@ -663,8 +663,9 @@ function save_modal( fg )
 	});
 }
 
-function view_movement_details(action_id, type_id, cause){	
+function view_movement_details(movement_id, action_id, type_id, cause){	
 	var data = {
+		movement_id: movement_id,
 		type_id: type_id,
 		action_id: action_id,
 		cause: cause

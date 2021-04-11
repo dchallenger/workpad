@@ -17,7 +17,7 @@
 						<li class="hidden"><a href="{{ get_mod_route('my_change_request') }}">{{ lang('common.personal') }}</a></li>
 						<li class="active"><a>{{ lang('common.manage') }}</a></li>
 					</ul>
-					<div class="tab-content">
+					<div class="tab-content" style="padding-bottom:40px">
 						<div class="portlet margin-bottom-50 margin-top-20">
 							<div class="portlet-title">
 								<div class="caption" id="head-caption">{{ lang('my_change_request.update_history') }}</div>

@@ -39,4 +39,8 @@ $lang['user_manager'] = array(
 	'p_sbu_unit' => 'Manage and list sbu unit.',
 	'emp_level' => 'Level',
 	'p_emp_level' => 'Manage and list level.',	
+	'school' => 'School',
+	'p_school' => 'Manage and list school.',
+	'degree' => 'Degree',
+	'p_degree' => 'Manage and list degree.',		
 );

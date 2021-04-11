@@ -12,7 +12,7 @@
 				<input type="text" class="form-control" name="training_evaluation_template[title]" id="training_evaluation_template-title" value="{{ $record['training_evaluation_template.title'] }}" placeholder="Enter Evaluation Title" /> 				
 			</div>	
 		</div>			
-		<div class="form-group">
+		<div class="form-group hidden">
 			<label class="control-label col-md-3"><span class="required">* </span>Applicable For</label>
 			<div class="col-md-7">
 			<?php									                            		
@@ -48,11 +48,16 @@
 		<div class="tools"><a class="collapse" href="javascript:;"></a></div>
 	</div>
 	<div id="sectionsDiv" style="display:none;">
-		<p class="small margin-bottom-25">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt utdolore magna aliquam erat volutpat.</p>
+		<p class="small margin-bottom-25"></p>
 		<div class="portlet-body form">	
 			<div class="form-group">
-				<button type="button" class="btn green btn-sm pull-right">+ Add Section</button>
+				<button type="button" class="btn green btn-sm pull-right add_section">+ Add Section</button>
 			</div>
+			<br/>
+			<div class="portlet margin-top-25">
+				<div class="portlet-body" id="saved-sections">
+				</div>
+			</div>			
 		</div>
 	</div>
 </div>

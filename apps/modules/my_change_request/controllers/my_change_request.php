@@ -105,6 +105,7 @@ class My_change_request extends MY_PrivateController
 
 		$status = $this->input->post('status');
 		$classes = $this->input->post('key');
+		$remarks = $this->input->post('remarks');
 		$partner_id = get_partner_id( $this->user->user_id );
 		if(empty($partner_id)){
 			$partner_id = $this->get_partner_id( $this->user->user_id );
@@ -156,6 +157,7 @@ class My_change_request extends MY_PrivateController
 						$data['key_value'] = $value;
 						$data['status'] = $status;
 						$data['created_by'] = $this->user->user_id;
+						$data['remarks'] = $remarks[$class_id][$key_id];
 						
 						if(count($request_data) > 0){
 							foreach($request_data as $rdata){
@@ -179,12 +181,20 @@ class My_change_request extends MY_PrivateController
 							$action = 'update';
 
 							$previous_main_data = $this->db->get_where('partners_personal_request', $where)->row_array();							
+
+							$personal_id = $previous_main_data['personal_id'];
 						}
 						else{
 							$this->db->insert('partners_personal_request', $data);
 							$request_personal_id = $data['personal_id'] = $this->db->insert_id();
+
+							$personal_id =  $this->db->insert_id();
+
 							$action = 'insert';
 
+							$populate_personal_qry = "CALL sp_partners_personal_populate_approvers({$request_personal_id}, {$this->user->user_id})";
+							$result_insert_update = $this->db->query( $populate_personal_qry );
+							mysqli_next_result($this->db->conn_id);
 						}
 						$data['key_id'] = $key_id;
 
@@ -202,53 +212,47 @@ class My_change_request extends MY_PrivateController
 								$error = true;
 								goto stop;
 							}else{
-								if($if_for_approval['for_approval'] == 1){
-									$populate_personal_qry = "CALL sp_partners_personal_populate_approvers({$request_personal_id}, {$this->user->user_id})";
-									$result_insert_update = $this->db->query( $populate_personal_qry );
-									mysqli_next_result($this->db->conn_id);
-								}else{
-									//set to approve
-									$this->db->update('partners_personal_request', array('status' => 3), $where);
-									$partners_key = $this->db->get_where('partners_key', array('deleted' => 0, 'key_id' => $key_id))->row_array();
+								//set to approve
+								//$this->db->update('partners_personal_request', array('status' => 3), $where);
+								$partners_key = $this->db->get_where('partners_key', array('deleted' => 0, 'key_id' => $key_id))->row_array();
 
-									$sequence = 1;
-									$this->load->model('partners_model', 'partners_mod');		
-									$partners_personal = $this->partners_mod->get_partners_personal($this->user->user_id, 'partners_personal', $partners_key['key_code'], 1);
-									$check_on_personal = $this->db->get_where('partners_personal', array('partner_id' => $partner_id, 'key_id' => $key_id))->result_array();
-									
-									$main_record = array();
-									switch( true )
-									{
-										case count($check_on_personal) == 0:
-											$data_personal = $this->partners_mod->insert_partners_personal($this->user->user_id, $partners_key['key_code'], $value, 1, $partner_id);
-											$this->db->insert('partners_personal', $data_personal);
-											$this->response->action = 'insert';
-											break;
-										case count($check_on_personal) > 0:
-											$partners_personal = $check_on_personal[0];
-											$main_record['modified_by'] = $this->user->user_id;
-											$main_record['modified_on'] = date('Y-m-d H:i:s');
-											$main_record['key_value'] = $value;
-											$this->db->update( 'partners_personal', $main_record, array( 'personal_id' => $partners_personal['personal_id'] ) );
-											$this->response->action = 'update';
-											break;
-										default:
-											$this->response->message[] = array(
-												'message' => lang('common.inconsistent_data'),
-												'type' => 'error'
-											);
-											$error = true;
-											goto stop;
-									}
-
-									if( $this->db->_error_message() != "" ){
+								$sequence = 1;
+								$this->load->model('partners_model', 'partners_mod');		
+								$partners_personal = $this->partners_mod->get_partners_personal($this->user->user_id, 'partners_personal', $partners_key['key_code'], 1);
+								$check_on_personal = $this->db->get_where('partners_personal', array('partner_id' => $partner_id, 'key_id' => $key_id))->result_array();
+								
+								$main_record = array();
+								switch( true )
+								{
+									case count($check_on_personal) == 0:
+										$data_personal = $this->partners_mod->insert_partners_personal($this->user->user_id, $partners_key['key_code'], $value, 1, $partner_id);
+										$this->db->insert('partners_personal', $data_personal);
+										$this->response->action = 'insert';
+										break;
+									case count($check_on_personal) > 0:
+										$partners_personal = $check_on_personal[0];
+										$main_record['modified_by'] = $this->user->user_id;
+										$main_record['modified_on'] = date('Y-m-d H:i:s');
+										$main_record['key_value'] = $value;
+										$this->db->update( 'partners_personal', $main_record, array( 'personal_id' => $partners_personal['personal_id'] ) );
+										$this->response->action = 'update';
+										break;
+									default:
 										$this->response->message[] = array(
-											'message' => $this->db->_error_message(),
+											'message' => lang('common.inconsistent_data'),
 											'type' => 'error'
 										);
 										$error = true;
 										goto stop;
-									}
+								}
+
+								if( $this->db->_error_message() != "" ){
+									$this->response->message[] = array(
+										'message' => $this->db->_error_message(),
+										'type' => 'error'
+									);
+									$error = true;
+									goto stop;
 								}
 							}
 						}
@@ -257,8 +261,8 @@ class My_change_request extends MY_PrivateController
 
 			            if(in_array($status, array(2))){
 			                // INSERT NOTIFICATIONS FOR APPROVERS
-			                $this->response->notified = $this->mod->notify_approvers( $request_personal_id, $data );
-			                $this->response->notified = $this->mod->notify_filer( $request_personal_id, $data );
+			                $this->response->notified = $this->mod->notify_approvers( $request_personal_id, $data, $personal_id );
+			                $this->response->notified = $this->mod->notify_filer( $request_personal_id, $data, $personal_id );
 			            }
 					}
 				}

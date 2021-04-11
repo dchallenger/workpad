@@ -170,6 +170,7 @@
 	</div>
 </div>
 
+<div class="modal fade modal-container-action" aria-hidden="true" data-width="800" ></div>
 <div class="modal fade modal-container-partners" tabindex="-1" aria-hidden="true" data-width="500" ></div>
 <!-- END PAGE CONTENT-->
 
@@ -198,6 +199,6 @@
 	<script src="{{ theme_path() }}scripts/app.js"></script>   
 	<script src="{{ theme_path() }}scripts/ui-extended-modals.js"></script> 
     <script src="{{ theme_path() }}scripts/form-components.js"></script>    
-	<script type="text/javascript" src="{{ theme_path() }}modules/partners/view_custom.js"></script>     
+	<script type="text/javascript" src="{{ theme_path() }}modules/partners_immediate/view_custom.js"></script>     
 	@stop
 

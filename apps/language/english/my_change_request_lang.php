@@ -25,5 +25,6 @@ $lang['my_change_request'] = array(
 	'current' => 'Current',
 	'approved' => 'Approved',
 	'decline' => 'Decline',
-	'save_request' => 'Save Request'
+	'save_request' => 'Save Request',
+	'remarks' => 'Remarks',
 );

@@ -571,7 +571,6 @@ class Annual_manpower_planning extends MY_PrivateController
 			$users = $this->db->get_where("users_profile", array('user_id' => $this->user->user_id))->row_array();
 			$data['record']['recruitment_manpower_plan.company_id'] = $users['company_id'];
 			$data['record']['recruitment_manpower_plan.company'] = $users['company'];
-			$data['record']['recruitment_manpower_plan.department_id'] = $users['department_id'];
 			
 			$dept = $this->db->get_where("users_department", array('department_id' => $users['department_id']));
 			$immediate = '';

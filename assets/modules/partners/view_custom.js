@@ -49,9 +49,10 @@ jQuery(document).ready(function() {
 });
 
 
-function view_movement_details(action_id, type_id, cause){	
+function view_movement_details(movement_id, action_id, type_id, cause){	
 	var data = {
 		type_id: type_id,
+		movement_id: movement_id,
 		action_id: action_id,
 		cause: cause
 	};

@@ -28,9 +28,9 @@ class policies_procedures_model extends Record
 		$this->primary_key = 'resource_policy_id';
 		$this->table = 'resources_policies';
 		$this->icon = 'fa-folder';
-		$this->short_name = 'Policies and Procedure';
-		$this->long_name  = 'Policies and Procedure';
-		$this->description = '1';
+		$this->short_name = 'Policies and Procedure / Memorandum';
+		$this->long_name  = 'Policies and Procedure / Memorandum';
+		$this->description = '';
 		$this->path = APPPATH . 'modules/policies_procedures/';
 
 		parent::__construct();

@@ -28,7 +28,7 @@ class Financial_metric_planning extends MY_PrivateController
 			$_POST['performance_financial_metric_planning']['financial_metric_kpi_ids'] = '';
 
 		$w_error = 0;
-		if (isset($_POST['performance_financial_metric_planning']['weight'])) {
+/*		if (isset($_POST['performance_financial_metric_planning']['weight'])) {
 			foreach ($_POST['performance_financial_metric_planning']['weight'] as $key => $value) {
 				if ($value == '') {
 		            $this->response->message[] = array(
@@ -38,7 +38,7 @@ class Financial_metric_planning extends MY_PrivateController
 		            $w_error = 1;
 				}
 			}
-		}
+		}*/
 
 		if (isset($_POST['performance_financial_metric_planning']['target'])) {
 			foreach ($_POST['performance_financial_metric_planning']['target'] as $key => $value) {

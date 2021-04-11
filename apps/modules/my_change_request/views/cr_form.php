@@ -47,7 +47,7 @@
 </div>
 <div class="modal-footer margin-top-0">
     <button type="button" data-dismiss="modal" class="btn btn-default btn-sm"> {{ lang('common.cancel') }}</button>
-    <button class="btn blue btn-sm" type="button" onclick="save_request(1)" > {{ lang('common.save_draft') }}</button>  
+    <!-- <button class="btn blue btn-sm" type="button" onclick="save_request(1)" > {{ lang('common.save_draft') }}</button>   -->
     <butoon type="button" class="btn green btn-sm" onclick="save_request(2)"> {{ lang('common.submit') }}</button>
 </div>
 

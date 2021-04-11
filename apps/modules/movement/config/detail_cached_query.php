@@ -3,6 +3,7 @@ $config["detail_cached_query"] = 'SELECT `ww_partners_movement`.`movement_id` as
 	ww_partners_movement_action_moving.further_reason as "partners_movement_action_moving_further_reason", 
 	ww_partners_movement_reason.reason as "partners_movement_action_moving_reason_id", 
 	IF(ww_partners_movement_action_moving.blacklisted = 1, "Yes", "No") as "partners_movement_action_moving_blacklisted", 
+	IF(ww_partners_movement_action_moving.eligible_for_rehire = 1, "Yes", "No") as "partners_movement_action_moving_eligible_for_rehire", 
 	DATE_FORMAT(ww_partners_movement_action_moving.end_date, \'%M %d, %Y\') as "partners_movement_action_moving_end_date", 
 	ww_partners_movement_action_extension.end_date as "partners_movement_action_extension_end_date", 
 	ww_partners_movement_action_extension.no_of_months as "partners_movement_action_extension_no_of_months", 

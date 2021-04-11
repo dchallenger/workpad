@@ -1151,7 +1151,7 @@
 							</td>
 							<td>
 								<div class="btn-group">
-									<a  href="javascript:view_movement_details(<?php echo $movement['action_id'] ?>, <?php echo $movement['type_id'] ?>, '<?php echo $movement['cause'] ?>');" class="btn btn-xs text-muted" ><i class="fa fa-search"></i> {{ lang('common.view') }}</a>		
+									<a  href="javascript:view_movement_details(<?php echo $movement['movement_id'] ?>, <?php echo $movement['action_id'] ?>, <?php echo $movement['type_id'] ?>, '<?php echo $movement['cause'] ?>');" class="btn btn-xs text-muted" ><i class="fa fa-search"></i> {{ lang('common.view') }}</a>		
 								</div>
 							</td>
 						</tr>

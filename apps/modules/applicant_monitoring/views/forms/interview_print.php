@@ -45,36 +45,35 @@
                 <td colspan="5" style="border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center"><b>Rating Scale</b></td>
             </tr>
             <tr>
-                <td style="width:25%;border-left: 1px solid #000;border-right: 1px solid #000;">&nbsp;</td>
-                <td style="width:15%;border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center"><b>1 <br> Well Below Standard</b></td>
-                <td style="width:15%;border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center"><b>2 <br> Below Standard</b></td>
-                <td style="width:15%;border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center"><b>3 <br> Meets Standard</b></td>
-                <td style="width:15%;border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center"><b>4 <br> Above Standard</b></td>
-                <td style="width:15%;border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center"><b>5 <br> Well Above Standard</b></td>
+                <td style="width:50%;border-bottom: 1px solid #000;border-left: 1px solid #000;border-right: 1px solid #000;" rowspan="2">Interview Tip: Ask candidate to share relevant past behavior: <br>*Situation - Describe the whole situation. <br>*Action - What exactly did you do? <br>*Result- What was the outcome/result?</td>
+                <td style="width:10%;border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center"><b>1 <br> Well Below Standard</b></td>
+                <td style="width:10%;border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center"><b>2 <br> Below Standard</b></td>
+                <td style="width:10%;border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center"><b>3 <br> Meets Standard</b></td>
+                <td style="width:10%;border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center"><b>4 <br> Above Standard</b></td>
+                <td style="width:10%;border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center"><b>5 <br> Well Above Standard</b></td>
             </tr>
             <tr>
-                <td style="width:25%;border-left: 1px solid #000;border-bottom: 1px solid #000;border-right: 1px solid #000;">&nbsp;</td>
-                <td style="width:15%;border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center"><b>Score</b></td>
-                <td colspan="2" style="width:15%;border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center"><b>HR Comments</b></td>
-                <td colspan="2" style="width:15%;border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center">Date : {{interviewer_date}}</td>
+                <td style="border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center"><b>Score</b></td>
+                <td colspan="2" style="border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center"><b>HR Comments</b></td>
+                <td colspan="2" style="border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center">Date : {{interviewer_date}}</td>
             </tr>
             {{comments}}
             <tr>
                 <td style="width:25%;border-left: 1px solid #000;border-bottom: 1px solid #000;border-right: 1px solid #000;"><b>Total Score</b><br> (Passing Score: 10)</td>
                 <td style="width:15%;border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center">{{total_score}}</td>
-                <td style="border-bottom: 1px solid #000;border-right: 1px solid #000;" colspan="5">&nbsp;</td>
+                <td style="border-bottom: 1px solid #000;" colspan="4">&nbsp;</td>
             </tr>
             <tr>
-                <td style="width:25%;border-left: 1px solid #000;border-bottom: 1px solid #000;border-right: 1px solid #000;"><b>Results</b></td>
-                <td colspan="5" style="width:15%;border-bottom: 1px solid #000;border-right: 1px solid #000;">&nbsp;&nbsp;{{recommendation}}</td>
+                <td style="border-left: 1px solid #000;border-bottom: 1px solid #000;border-right: 1px solid #000;"><b>Results</b></td>
+                <td colspan="5" style="border-bottom: 1px solid #000;border-right: 1px solid #000;">&nbsp;&nbsp;{{recommendation}}</td>
             </tr>
             <tr>
-                <td style="width:25%;border-left: 1px solid #000;border-bottom: 1px solid #000;border-right: 1px solid #000;"><b>Other Comments</b></td>
-                <td colspan="5" style="width:15%;border-bottom: 1px solid #000;border-right: 1px solid #000;">&nbsp;&nbsp;{{remarks}}</td>
+                <td style="border-left: 1px solid #000;border-bottom: 1px solid #000;border-right: 1px solid #000;"><b>Other Comments</b></td>
+                <td colspan="5" style="border-bottom: 1px solid #000;border-right: 1px solid #000;">&nbsp;&nbsp;{{remarks}}</td>
             </tr>
             <tr>
-                <td style="width:25%;border-left: 1px solid #000;border-bottom: 1px solid #000;border-right: 1px solid #000;"><b>Interviewer Name and Signature</b></td>
-                <td colspan="5" style="width:15%;border-bottom: 1px solid #000;border-right: 1px solid #000;">&nbsp;&nbsp;{{interviewer}}</td>
+                <td style="border-left: 1px solid #000;border-bottom: 1px solid #000;border-right: 1px solid #000;"><b>Interviewer Name and Signature</b></td>
+                <td colspan="5" style="border-bottom: 1px solid #000;border-right: 1px solid #000;">&nbsp;&nbsp;{{interviewer}}</td>
             </tr>            
         </table>       
     </body>

@@ -168,7 +168,7 @@ class Applicant_monitoring extends MY_PrivateController
 				if($is_interviewer){
 					$qry .= " LEFT JOIN {$this->db->dbprefix}recruitment_request_approver rra on rra.request_id = a.request_id ";
 				}
-				$qry .= " WHERE a.status_id = {$_step->status_id} AND a.request_id = {$request_id} and a.deleted = 0";
+				$qry .= " WHERE a.status_id = {$_step->status_id} AND b.status_id < 11 AND a.request_id = {$request_id} and a.deleted = 0";
 				
 				if($is_interviewer){ $qry .= " AND (rra.approver_id = ".$this->user->user_id. " OR rr.created_by = ".$this->user->user_id.") GROUP BY a.request_id";}
 
@@ -742,6 +742,8 @@ class Applicant_monitoring extends MY_PrivateController
 
 		$vars['bi'] = $this->mod->get_bi($process_id);
 
+		$vars['interview'] = $this->mod->get_interview($process_id);
+
 		$userinfo_qry = $this->db->get_where('users',array('user_id' => $this->user->user_id));
 
 		$vars['userinfo'] = $userinfo_qry->row();
@@ -820,6 +822,7 @@ class Applicant_monitoring extends MY_PrivateController
 	function get_interview_form()
 	{
 		$this->_ajax_only();
+		$keys = array();
 
 		$status_id = 1;
 		$vars['schedule_id'] = $schedule_id = $this->input->post('schedule_id');
@@ -1302,6 +1305,18 @@ class Applicant_monitoring extends MY_PrivateController
 		}	
 
 		$process_id = $this->input->post('process_id');
+
+		$bi = $this->mod->get_backgrounds($process_id);
+
+		if (!$bi) {
+			$this->response->pending = true;
+			$this->response->message[] = array(
+				'message' => 'Background Investigation not yet done.',
+				'type' => 'warning'
+			);
+			$this->_ajax_return();
+		}
+
 		$this->db->limit(1);
 		$process = $this->db->get_where('recruitment_process', array('process_id' => $process_id))->row();
 		$update_data = array('status_id' => 6,
@@ -1462,6 +1477,15 @@ class Applicant_monitoring extends MY_PrivateController
 
 		$exam = $this->mod->get_exams($process_id);
 
+		if (!$exam) {
+			$this->response->pending = true;
+			$this->response->message[] = array(
+				'message' => 'Exam not yet save. Please add and save',
+				'type' => 'warning'
+			);
+			$this->_ajax_return();
+		}
+
 		$interview = $this->mod->get_interview($process_id);
 
 		$this->db->limit(1);
@@ -1512,6 +1536,18 @@ class Applicant_monitoring extends MY_PrivateController
 		$this->_ajax_only();
 
 		$process_id = $this->input->post('process_id');
+
+		$exam = $this->mod->get_exams($process_id);
+
+		if (!$exam) {
+			$this->response->pending = true;
+			$this->response->message[] = array(
+				'message' => 'Exam not yet save. Please add and save',
+				'type' => 'warning'
+			);
+			$this->_ajax_return();
+		}
+
 		$this->db->limit(1);
 		$process = $this->db->get_where('recruitment_process', array('process_id' => $process_id))->row();
 		$update_data = array('status_id' => 5,
@@ -2154,13 +2190,13 @@ class Applicant_monitoring extends MY_PrivateController
     function get_applicants(){
         $this->_ajax_only();
         $position = '';
-        $position_result = $this->db->get_where('users_position',array('position' => $this->input->post('position')));
+        $position_result = $this->db->get_where('users_position',array('position_id' => $this->input->post('position_id')));
         if ($position_result && $position_result->num_rows() > 0){
         	$position = $position_result->row()->position;
         }
 
-        $applicants =  $this->mod->get_applicants($this->input->post('position'));
-        $this->response->applicants = '<option value="">Select..</option>';
+        $applicants =  $this->mod->get_applicants($this->input->post('request_id'));
+        $this->response->applicants = '<option value=""></option>';
         if(!empty($applicants)){
         	$this->response->applicants .= '<optgroup label="'.$position.'">';
         	foreach ($applicants as $key => $applicant) {
@@ -2173,7 +2209,7 @@ class Applicant_monitoring extends MY_PrivateController
         if(!empty($applicants_other_position)){
         	$this->response->applicants .= '<optgroup label="Other Position">';
         	foreach ($applicants_other_position as $key1 => $applicant_oth) {
-	        	$this->response->applicants .= '<option value="'.$applicant_oth['recruit_id'].'" >'.$applicant_oth['firstname'] .' '. $applicant_oth['lastname'] .'</option>';
+	        	$this->response->applicants .= '<option value="'.$applicant_oth['recruit_id'].'" >'.$applicant_oth['firstname'] .' '. $applicant_oth['lastname'] .' ('.$applicant_oth['oth_position'].')</option>';
 	        }	
 	        $this->response->applicants .= '</optgroup>';        	
         }
@@ -4711,7 +4747,11 @@ class Applicant_monitoring extends MY_PrivateController
 
 				$total_score += $row->key_value;
 	        	$html .= '<tr>
-	                <td style="border-bottom: 1px solid #000;border-left: 1px solid #000;border-right: 1px solid #000;">'.$row->key_name.'</td>
+	                <td style="border-bottom: 1px solid #000;border-left: 1px solid #000;border-right: 1px solid #000;">';
+	                	$html .= '<b>'.$row->key_name.'</b>';
+	                	if ($row->description)
+	                		$html .= '<p>'.$row->description.'</p>';
+	                $html .='</td>
 	                <td style="border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center">'.$row->key_value.'</td>
 	                <td colspan="4" style="border-bottom: 1px solid #000;border-right: 1px solid #000;">'.$row->other_remarks.'</td>
 	            </tr>';

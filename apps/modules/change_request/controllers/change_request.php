@@ -78,6 +78,7 @@ class Change_request extends MY_PrivateController
 		}
 
 		$where = array('user_id' => $user_id, 
+					'status' => 3,
 					'created_on' => $created_on);
 		$this->mod->change_status($user_id, $created_on, $status);
 
@@ -90,46 +91,67 @@ class Change_request extends MY_PrivateController
 		$users_profile = $this->db->get_where('users_profile', array('user_id' => $user_id))->row_array();
 		$check_if_exists = $this->db->get_where($this->mod->table, $where)->result_array();
 
-		foreach($check_if_exists as $check_if_exist){
-			$partners_key = $this->db->get_where('partners_key', array('deleted' => 0, 'key_id' => $check_if_exist['key_id']))->row_array();
+		if (!empty($check_if_exists)) {
+			foreach($check_if_exists as $check_if_exist){
+				$partners_key = $this->db->get_where('partners_key', array('deleted' => 0, 'key_id' => $check_if_exist['key_id']))->row_array();
 
-			$sequence = 1;
-			$this->load->model('partners_model', 'partners_mod');		
-			$partners_personal = $this->partners_mod->get_partners_personal($users_profile['user_id'], 'partners_personal', $partners_key['key_code'], 1);
-			$check_on_personal = $this->db->get_where('partners_personal', array('partner_id' => $users_profile['partner_id'], 'key_id' => $check_if_exist['key_id']))->result_array();
+				$sequence = 1;
+				$this->load->model('partners_model', 'partners_mod');		
+				$partners_personal = $this->partners_mod->get_partners_personal($users_profile['user_id'], 'partners_personal', $partners_key['key_code'], 1);
+				$check_on_personal = $this->db->get_where('partners_personal', array('partner_id' => $users_profile['partner_id'], 'key_id' => $check_if_exist['key_id']))->result_array();
 
-			$main_record = array();
-			switch( true )
-			{
-				case count($check_on_personal) == 0:
-					$data_personal = $this->partners_mod->insert_partners_personal($users_profile['user_id'], $partners_key['key_code'], $check_if_exist['key_value'], 1, $users_profile['partner_id']);
-					$this->db->insert('partners_personal', $data_personal);
-					$this->response->action = 'insert';
-					break;
-				case count($check_on_personal) > 0:
-					$partners_personal = $partners_personal[0];
-					$main_record['modified_by'] = $this->user->user_id;
-					$main_record['modified_on'] = date('Y-m-d H:i:s');
-					$main_record['key_value'] = $check_if_exist['key_value'];
-					$this->db->update( 'partners_personal', $main_record, array( 'personal_id' => $partners_personal['personal_id'] ) );
-					$this->response->action = 'update';
-					break;
-				default:
+				$main_record = array();
+				if (!in_array($check_if_exist['key_id'],array(212))) {			
+					switch( true )
+					{
+						case count($check_on_personal) == 0:
+							$data_personal = $this->partners_mod->insert_partners_personal($users_profile['user_id'], $partners_key['key_code'], $check_if_exist['key_value'], 1, $users_profile['partner_id']);
+							$this->db->insert('partners_personal', $data_personal);
+							$this->response->action = 'insert';
+
+					        //create system logs
+					        $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, 'partners_personal', array(), $data_personal);
+							break;
+						case count($check_on_personal) > 0:
+							$partners_personal = $partners_personal[0];
+							$main_record['modified_by'] = $this->user->user_id;
+							$main_record['modified_on'] = date('Y-m-d H:i:s');
+							$main_record['key_value'] = $check_if_exist['key_value'];
+							$this->db->update( 'partners_personal', $main_record, array( 'personal_id' => $partners_personal['personal_id'] ) );
+							$this->response->action = 'update';
+
+					        //create system logs
+					        $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, 'partners_personal', $partners_personal, $main_record);
+
+							break;
+						default:
+							$this->response->message[] = array(
+								'message' => lang('common.inconsistent_data'),
+								'type' => 'error'
+							);
+							$error = true;
+							goto stop;
+					}
+				} else {
+					if (in_array($check_if_exist['key_id'],array(212))) {
+						$main_record['birth_date'] = ($check_if_exist['key_value'] && $check_if_exist['key_value'] != '' ? date('Y-m-d',strtotime($check_if_exist['key_value'])) : $users_profile->birth_date);
+						$this->db->update( 'users_profile', $main_record, array( 'user_id' => $user_id));
+
+				        //create system logs
+				        $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'users_profile', array(), $main_record);							
+					}
+				}
+
+				$this->response->notified = $this->mod->notify_filer( $user_id, $status);		        
+
+				if( $this->db->_error_message() != "" ){
 					$this->response->message[] = array(
-						'message' => lang('common.inconsistent_data'),
+						'message' => $this->db->_error_message(),
 						'type' => 'error'
 					);
 					$error = true;
 					goto stop;
-			}
-
-			if( $this->db->_error_message() != "" ){
-				$this->response->message[] = array(
-					'message' => $this->db->_error_message(),
-					'type' => 'error'
-				);
-				$error = true;
-				goto stop;
+				}
 			}
 		}
 
@@ -170,34 +192,48 @@ class Change_request extends MY_PrivateController
 		foreach ($details as $personal_id => $status) {
 			$this->mod->change_status_detail($personal_id, $status);
 			$this->db->limit(1);
-			$request = $this->db->get_where($this->mod->table, array('personal_id' => $personal_id))->row_array();
-			$partners_key = $this->db->get_where('partners_key', array('deleted' => 0, 'key_id' => $request['key_id']))->row_array();
-	
-			$partners_personal = $this->partners_mod->get_partners_personal($users_profile['user_id'], 'partners_personal', $partners_key['key_code'], 1);
-			$check_on_personal = $this->db->get_where('partners_personal', array('partner_id' => $users_profile['partner_id'], 'key_id' => $request['key_id']))->result_array();
-			$main_record = array();
-			switch( true )
-			{
-				case count($check_on_personal) == 0:
-					$data_personal = $this->partners_mod->insert_partners_personal($users_profile['user_id'], $partners_key['key_code'], $request['key_value'], 1, $users_profile['partner_id']);
-					$this->db->insert('partners_personal', $data_personal);
-					$this->response->action = 'insert';
-					break;
-				case count($check_on_personal) > 0:
-					$partners_personal = $partners_personal[0];
-					$main_record['modified_by'] = $this->user->user_id;
-					$main_record['modified_on'] = date('Y-m-d H:i:s');
-					$main_record['key_value'] = $request['key_value'];
-					$this->db->update( 'partners_personal', $main_record, array( 'personal_id' => $partners_personal['personal_id'] ) );
-					$this->response->action = 'update';
-					break;
-				default:
-					$this->response->message[] = array(
-						'message' => lang('common.inconsistent_data'),
-						'type' => 'error'
-					);
-					$error = true;
-					goto stop;
+			$request = $this->db->get_where($this->mod->table, array('personal_id' => $personal_id, 'status' => 3))->row_array();
+
+			if (!empty($request)) {
+				$partners_key = $this->db->get_where('partners_key', array('deleted' => 0, 'key_id' => $request['key_id']))->row_array();
+		
+				$partners_personal = $this->partners_mod->get_partners_personal($users_profile['user_id'], 'partners_personal', $partners_key['key_code'], 1);
+				$check_on_personal = $this->db->get_where('partners_personal', array('partner_id' => $users_profile['partner_id'], 'key_id' => $request['key_id']))->result_array();
+				$main_record = array();
+
+				if (!in_array($request['key_id'],array(212))) {			
+					switch( true )
+					{
+						case count($check_on_personal) == 0:
+							$data_personal = $this->partners_mod->insert_partners_personal($users_profile['user_id'], $partners_key['key_code'], $request['key_value'], 1, $users_profile['partner_id']);
+							$this->db->insert('partners_personal', $data_personal);
+							$this->response->action = 'insert';
+							break;
+						case count($check_on_personal) > 0:
+							$partners_personal = $partners_personal[0];
+							$main_record['modified_by'] = $this->user->user_id;
+							$main_record['modified_on'] = date('Y-m-d H:i:s');
+							$main_record['key_value'] = $request['key_value'];
+							$this->db->update( 'partners_personal', $main_record, array( 'personal_id' => $partners_personal['personal_id'] ) );
+							$this->response->action = 'update';
+							break;
+						default:
+							$this->response->message[] = array(
+								'message' => lang('common.inconsistent_data'),
+								'type' => 'error'
+							);
+							$error = true;
+							goto stop;
+					}
+				} else {
+					if (in_array($request['key_id'],array(212))) {
+						$main_record['birth_date'] = ($request['key_value'] && $request['key_value'] != '' ? date('Y-m-d',strtotime($request['key_value'])) : $users_profile->birth_date);
+						$this->db->update( 'users_profile', $main_record, array( 'user_id' => $user_id));
+
+				        //create system logs
+				        $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'users_profile', array(), $main_record);							
+					}
+				}
 			}
 
 			if( $this->db->_error_message() != "" ){
@@ -387,6 +423,7 @@ class Change_request extends MY_PrivateController
 			$data['created_on'] = $result[0]['partners_personal_request_created_on'];
 			$data['status'] = $result[0]['status'];
 			$data['record'] = $result;
+			$data['can_approve'] = $this->permission['approve'];
 			$this->load->vars( $data );
 			
 			if( !$new ){

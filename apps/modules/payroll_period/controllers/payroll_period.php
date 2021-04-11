@@ -314,7 +314,7 @@ class Payroll_period extends MY_PrivateController
 		
 		$this->db->query("CALL sp_payroll_period(".$period_id.", '".$sensID."');");
 
-		$this->db->free_db_resource();
+		//$this->db->free_db_resource();
 
 		$this->response->message[] = array(
 			'message' => 'Period successfully processed, please confirm by creating neccesary reports.',

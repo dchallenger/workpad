@@ -45,16 +45,18 @@
 										{{ form_dropdown('filter_val[]',$department, '', 'class="form-control select2me div_dept" data-placeholder="Select..." multiple id="department"') }}
 									</div>
 								</div>								
-							</div>
-							<div class="col-md-2">
+							</div>						
+						</div>
+						<div class="row">
+							<div class="col-md-5">
 								<div class="form-group">
 									<label class="control-label col-md-3">&nbsp;</label>
 									<div class="col-md-9">
 										<button type="button" class="btn green btn-sm generate_table_organization">Submit</button>
 									</div>
 								</div>
-							</div>							
-						</div>                    	
+							</div>								
+						</div>
 					</div>
                 </form>
 			</div>

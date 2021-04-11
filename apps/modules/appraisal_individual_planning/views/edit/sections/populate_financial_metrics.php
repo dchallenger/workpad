@@ -28,13 +28,13 @@ if ($financial_metric_details && $financial_metric_details->num_rows() > 0) {
 				<?php } ?>
 			</td>
 			<td width="" rowspan="">
-				<textarea class="form-control" rows="4" name="field[<?php echo $balance_score_card['scorecard_id'] ?>][<?php echo $columns[2]['section_column_id'] ?>][]"><?php echo $row->financial_metrics_kpi ?></textarea>
+				<textarea readonly class="form-control" rows="4" name="field[<?php echo $balance_score_card['scorecard_id'] ?>][<?php echo $columns[2]['section_column_id'] ?>][]"><?php echo $row->financial_metrics_kpi ?></textarea>
 			</td>
 			<td width="">
 				<input type="text" question="<?php echo $balance_score_card['scorecard_id'] ?>" value="<?php echo $row->weight ?>" class="form-control weight" name="field[<?php echo $balance_score_card['scorecard_id'] ?>][<?php echo $columns[3]['section_column_id'] ?>][]" data-inputmask="'alias': 'deciaml', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false">
 			</td>
 			<td width="">
-				<input type="text" question="<?php echo $balance_score_card['scorecard_id'] ?>" value="<?php echo $row->value ?>" class="form-control target" name="field[<?php echo $balance_score_card['scorecard_id'] ?>][<?php echo $columns[4]['section_column_id'] ?>][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false">
+				<input readonly type="text" question="<?php echo $balance_score_card['scorecard_id'] ?>" value="<?php echo $row->value ?>" class="form-control target" name="field[<?php echo $balance_score_card['scorecard_id'] ?>][<?php echo $columns[4]['section_column_id'] ?>][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false">
 			</td>
 			<td width="" rowspan="">
 				<textarea class="form-control" rows="4" name="field[<?php echo $balance_score_card['scorecard_id'] ?>][<?php echo $columns[5]['section_column_id'] ?>][]">&nbsp;</textarea>

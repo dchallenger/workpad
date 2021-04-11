@@ -36,6 +36,7 @@ class dashboard_model extends Record
 		parent::__construct();
 	}
 
+	//WHERE recipient_id = '$userID' AND message_type NOT IN ('Admin','Partners','Personnel','System','Time Record','Code of Conduct','Movement','Signatories','Clearance','Recruitment','Performance Appraisal','Loan Application Record')
 	function getDashboardFeeds($userID, $start, $limit){ 
 
 		$data = array();
@@ -46,7 +47,7 @@ class dashboard_model extends Record
 				LEFT JOIN {$this->db->dbprefix}users_profile b on b.user_id = a.user_id
 				LEFT JOIN {$this->db->dbprefix}users_company c on c.company_id = b.company_id
 				LEFT JOIN {$this->db->dbprefix}business_group d on d.group_id = c.business_group_id
-				WHERE recipient_id = '$userID' AND message_type NOT IN ('Admin','Partners','Personnel','System','Time Record','Code of Conduct','Movement','Signatories','Clearance','Recruitment','Performance Appraisal','Loan Application Record')
+				WHERE recipient_id = '$userID' AND message_type IN ('Announcement','Birthday','Company News')
 				LIMIT $limit OFFSET $start;";
 
 		$result = $this->db->query($qry);

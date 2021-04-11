@@ -2,6 +2,12 @@ $(document).ready(function(){
 	if( $('#record_id').val() > 0 ){
 		$('#sectionsDiv').show('fast');
 	}
+
+	$('.add_section').click(function() {
+		section_form();
+	});
+
+	get_sections();
 });
 
 function save_record( form, action, callback )
@@ -54,41 +60,104 @@ function save_record( form, action, callback )
 
 var headeditor = null;
 var footeditor = null;
-function section_form( section_id )
+function section_form( section_id = '')
 {
-	// var question = "Are you sure you want to add a new section?";
-	// if(section_id != "")
-	// {
-	// 	question = "Are you sure you want to edit this section?"
-	// }
+	$.ajax({
+		url: base_url + module.get('route') + '/get_section_form',
+		type:"POST",
+		async: false,
+		dataType: "json",
+		data: 'template_id='+$('#record_id').val()+'&section_id='+section_id,
+		success: function ( response ) {
+			if( typeof(response.section_form) != 'undefined' )
+			{
+				$('.modal-container').attr('data-width', '800');
+				$('.modal-container').html(response.section_form);
+				$('.modal-container').modal();
+				//init_section_type_change();
+				//$(":input").inputmask();
+				//headeditor = CKEDITOR.replace( 'header' );
+				//footeditor = CKEDITOR.replace( 'footer' );
+			}	
+		}
+	});
+}
 
-	// bootbox.confirm(question, function(confirm) {
-	// 	if( confirm )
-	// 	{
-			$.blockUI({ message: loading_message(), 
+
+function save_section()
+{
+	$.blockUI({ message: '<div>Saving section, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />', 
+		onBlock: function(){
+			$.ajax({
+				url: base_url + module.get('route') + '/save_section',
+				type:"POST",
+				async: false,
+				data: $('#section-form').serialize(),
+				dataType: "json",
+				beforeSend: function(){
+				},
+				success: function ( response ) {
+					handle_ajax_message( response.message );
+					if(response.close_modal)
+						$('.modal-container').modal('hide');	
+
+					get_sections();
+				}
+			});
+		},
+		baseZ: 20000
+	});
+	$.unblockUI();
+}
+
+function get_sections()
+{
+	$('#saved-sections').block({ message: '<div>Loading sections, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />', 
+		onBlock: function(){
+			$.ajax({
+				url: base_url + module.get('route') + '/get_sections',
+				type:"POST",
+				async: false,
+				data: 'evaluation_template_id='+$('#record_id').val()+'&type=edit',
+				dataType: "json",
+				beforeSend: function(){
+				},
+				success: function ( response ) {
+					handle_ajax_message( response.message );
+					
+					if( typeof(response.sections) != 'undefined' )
+					{
+						$('#saved-sections').html(response.sections);
+					}
+					
+				}
+			});
+		}
+	});
+	$('#saved-sections').unblock();	
+}
+
+function delete_section( template_section_id )
+{
+	bootbox.confirm("Are you sure you want to delete section?", function(confirm) {
+		if( confirm )
+		{
+			$.blockUI({ message: '<div>Deleting, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />', 
 				onBlock: function(){
 					$.ajax({
-						url: base_url + module.get('route') + '/get_section_form',
+						url: base_url + module.get('route') + '/delete_section',
 						type:"POST",
 						async: false,
 						dataType: "json",
-						data: 'template_id='+$('#record_id').val()+'&section_id='+section_id,
+						data: 'template_section_id='+template_section_id,
 						success: function ( response ) {
-							if( typeof(response.section_form) != 'undefined' )
-							{
-								$('.modal-container').attr('data-width', '800');
-								$('.modal-container').html(response.section_form);
-								$('.modal-container').modal();
-								init_section_type_change();
-								$(":input").inputmask();
-								headeditor = CKEDITOR.replace( 'header' );
-								footeditor = CKEDITOR.replace( 'footer' );
-							}	
+							handle_ajax_message( response.message );
+							get_sections();
 						}
 					});
 				}
 			});
 			$.unblockUI();
-		// }
-	// });	
+		}
+	});
 }

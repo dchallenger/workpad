@@ -35,4 +35,14 @@ class evaluation_template_model extends Record
 
 		parent::__construct();
 	}
+
+	public function get_sections($evaluation_template_id = 0)
+	{
+		$this->db->where('training_evaluation_template_section.evaluation_template_id',$evaluation_template_id);
+		$this->db->where('training_evaluation_template_section.deleted',0);
+		$this->db->join('training_evaluation_template_section_type','training_evaluation_template_section.section_type_id = training_evaluation_template_section_type.section_type_id','LEFT');
+		$result = $this->db->get('training_evaluation_template_section');
+
+		return $result;
+	}
 }

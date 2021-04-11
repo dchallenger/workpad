@@ -1,7 +1,7 @@
 <div class="form-actions fluid">
   <div class="row" align="center">
     <div class="col-md-11">
-    	@if($status < 3 )
+    	@if($status < 3 && $can_approve)
       		<a type="button" class="btn green btn-sm" href="javascript:save_request_detail()"><i class="fa fa-check"></i> {{ lang('my_change_request.save_request') }}</a>
       	@endif
       	<a class="btn default btn-sm" href="{{ $mod->url }}">{{ lang('common.back') }}</a>

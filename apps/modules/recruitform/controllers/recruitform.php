@@ -812,7 +812,7 @@ class Recruitform extends MY_publicController
 		//start saving with main table
 		if (isset($post[$this->mod->table])) {
 			$main_record = $post[$this->mod->table];
-			unset($main_record['request_id']);
+			//unset($main_record['request_id']);
 			$main_record['status_id'] = 11;
 			$record = $this->db->get_where( $this->mod->table, array( $this->mod->primary_key => $this->record_id ) );
 			switch( true )

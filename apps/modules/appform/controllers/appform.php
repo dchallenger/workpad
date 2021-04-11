@@ -200,7 +200,7 @@ class Appform extends MY_publicController
 		if (isset($post[$this->app->table])) {
 			$previous_main_data = array();	
 			$main_record = $post[$this->app->table];
-			unset($main_record['request_id']);
+			//unset($main_record['request_id']);
 			$main_record['status_id'] = 11;
 			$record = $this->db->get_where( $this->app->table, array( $this->app->primary_key => $this->record_id ) );
 

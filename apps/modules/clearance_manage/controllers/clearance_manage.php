@@ -282,6 +282,10 @@ class Clearance_manage extends MY_PrivateController
 				}
 
 				if ($to_email){
+
+					$this->mod->notify_hr($record->row()->clearance_id,$clearance_record);
+					$this->mod->notify_filer($record->row()->clearance_id,$clearance_record);
+
 					$this->db->query("CALL sp_partners_clearance_action_email( {$record->row()->clearance_id} )");
 					mysqli_next_result($this->db->conn_id);
 

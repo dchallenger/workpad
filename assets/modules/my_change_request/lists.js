@@ -104,7 +104,12 @@ function add_class()
                     if( typeof(response.class_draft) != 'undefined' )
                     {
                         $('#draft-keys').append( response.class_draft );
-                    }  
+                    } 
+
+                    $('.bday').parent('.date-picker').datepicker({
+                        rtl: App.isRTL(),
+                        autoclose: true
+                    });
                 }
             });
         }

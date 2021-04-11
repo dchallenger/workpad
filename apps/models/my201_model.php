@@ -197,6 +197,10 @@ class my201_model extends Record
 				$this->load->helper('form');
 				return $this->load->view('key_templates/gender', array('key' => $key, 'value' => $value), true);
 				break;
+			case 'bday':
+				$this->load->helper('form');
+				return $this->load->view('key_templates/date_picker', array('key' => $key, 'value' => $value), true);
+				break;				
 			default:
 				return $this->load->view('key_templates/textfield', array('key' => $key, 'value' => $value), true);
 				break;
@@ -243,7 +247,7 @@ class my201_model extends Record
 
     }
 
-    function notify_approvers( $partner_id=0, $form=array())
+    function notify_approvers( $partner_id=0, $form=array(), $personal_id=0)
 	{
 		$notified = array();
 
@@ -276,9 +280,9 @@ class my201_model extends Record
 				'message_type' => 'Partners',
 				'user_id' => $partner_id,
 				'display_name' => $this->get_display_name($partner_id),
-				'feed_content' => $form_status.'change request for '.$keys['key_label'].": ".$form['key_value'],
+				'feed_content' => $form_status.' change request for '.$keys['key_label'].": ".$form['key_value'],
 				'recipient_id' => $approver->approver_id,
-				'uri' => str_replace(base_url(), '', $this->update201->url).'/detail/'.strtotime($requests['personal_id'])
+				'uri' => str_replace(base_url(), '', $this->update201->url).'/detail/'.$personal_id
 			);
 			$this->db->insert('system_feeds', $insert);
 			$id = $this->db->insert_id();
@@ -292,7 +296,7 @@ class my201_model extends Record
 		return $notified;
 	}
 
-	function notify_filer( $partner_id=0, $form=array())
+	function notify_filer( $partner_id=0, $form=array(), $personal_id=0)
 	{
 		$notified = array();
 

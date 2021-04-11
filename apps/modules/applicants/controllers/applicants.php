@@ -1019,6 +1019,7 @@ class Applicants extends MY_PrivateController
 			$data['record']['salary_pay_mode'] = "";
 			$data['record']['currently_employed'] = "";
 			$data['record']['how_hiring_heard'] = "";
+			$data['record']['referred_by'] = "";
 			$data['record']['sourcing_tools'] = "";
 			$data['record']['resume'] = "";
 			$data['record']['recruit_status'] = "";

@@ -6,6 +6,8 @@
 	<div class="portlet-body form">		
 		<div class="row">
 			<div class="col-md-12">
+				<input type="hidden" id="action_id" name="action_id" value="<?=$movement_details[0]['action_id']?>" />
+				<input type="hidden" id="type_id" name="type_id" value="<?=$movement_details[0]['type_id']?>" />					
 				<div class="form-group">
 					<label class="col-md-4 text-muted text-right">
 						Employee:
@@ -204,7 +206,11 @@
 							<small class="text-muted">{{$record['partners_movement_approver2_comment']}}</small>
 						@endif							
 					</div>	
-				</div>																											
+				</div>
+				<div style="border-bottom:1px solid #eee;padding-bottom:8px;">Employee Movement Details</div>
+				<div style="padding-top:10px" id="movement_type_container">
+
+				</div>
 			</div>
 		</div>
 	</div>

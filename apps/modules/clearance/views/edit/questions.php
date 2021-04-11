@@ -5,6 +5,9 @@ $disabled = 'disabled';
 $count = (isset($count) ? $count : 0);
 	foreach( $records as $value)
 	{
+		if (str_contains($value['item'], '{{company name}}')) {
+			$value['item'] = str_replace('{{company name}}', $company_name, $value['item']);
+		}
 ?>
 		<div class="panel panel-info">
 			<div class="panel-heading">

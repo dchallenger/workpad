@@ -395,7 +395,7 @@ class Loan_application_manage extends MY_PrivateController
             $data['feed_content']   = $notif_message;                                                           // THE MAIN FEED BODY
             $data['recipient_id']   = $recipient;                                                               // TO WHOM THIS POST IS INTENDED TO
             $data['status']         = 'info';                                                                   // TO WHOM THIS POST IS INTENDED TO
-            $data['message_type']   = 'Loan Application';    
+            $data['message_type']   = 'Loan Application Record';    
             $data['loan_application_id'] = $this->input->post('loan_application_id');                                                               // DANGER, INFO, SUCCESS & WARNING
 
             // ADD NEW DATA FEED ENTRY

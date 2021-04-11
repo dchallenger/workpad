@@ -41,11 +41,11 @@ $config['field_validations']['payroll_partners.minimum_takehome'][] = array(
 	'label'   => 'Minimum Takehome',
 	'rules'   => 'numeric'
 );
-$config['field_validations']['payroll_partners.sensitivity'][] = array(
+/*$config['field_validations']['payroll_partners.sensitivity'][] = array(
 	'field'   => 'payroll_partners[sensitivity]',
 	'label'   => 'Sensitivity',
 	'rules'   => 'required'
-);
+);*/
 $config['field_validations']['payroll_partners.sss_no'][] = array(
 	'field'   => 'payroll_partners[sss_no]',
 	'label'   => 'SSS No.',

@@ -181,7 +181,11 @@
 				</tbody>
 				</table>										
 			</div>
-		</div>							
+		</div>
+		<div style="border-bottom:1px solid #eee;padding-bottom:8px;">Employee Movement Details</div>
+
+		<div style="padding-top:10px" id="movement_type_container">
+		</div>
 	</div>
 </div>
 <br>

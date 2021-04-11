@@ -402,12 +402,14 @@ function save_partner( partner )
 									success: function ( response ) {
 										$('#'+div_list).html();
 							  			$('#'+div_list).hide().html(response.lists).fadeIn('fast');
+
+							  			document.location = base_url + '/dashboard';
 									}
 								});
 							}
 
 							$('#form-1').trigger("reset");
-							self.location.reload();
+							document.location = base_url + '/dashboard';
 						});
 
 						

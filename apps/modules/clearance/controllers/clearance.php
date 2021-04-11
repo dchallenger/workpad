@@ -517,8 +517,10 @@ class Clearance extends MY_PrivateController
 				$user_for_clearance = $user_clearance->row()->full_name;
 			}
 
+			// change inner join to left join to receive signatories even without accountabilities.
 			$signatories_qry = "SELECT * FROM {$this->db->dbprefix}partners_clearance_signatories pcs
-						   INNER JOIN ww_partners_clearance_signatories_accountabilities pcsa ON pcs.clearance_signatories_id = pcsa.clearance_signatories_id
+						   -- INNER JOIN ww_partners_clearance_signatories_accountabilities pcsa ON pcs.clearance_signatories_id = pcsa.clearance_signatories_id
+						   LEFT JOIN ww_partners_clearance_signatories_accountabilities pcsa ON pcs.clearance_signatories_id = pcsa.clearance_signatories_id
 						   LEFT JOIN {$this->db->dbprefix}users u ON pcs.user_id = u.user_id
 						   WHERE pcs.deleted = 0
 						   AND clearance_id = {$this->clearance_id}
@@ -832,12 +834,18 @@ class Clearance extends MY_PrivateController
 		$sign_record['records'] = array();
 		$record_id = $_POST['clearance_id'];
 
+		$user_info = $this->mod->get_user_info($record_id);
+
 		$sign_table = 'partners_clearance_exit_interview_layout_item';
 		$sign_key = 'exit_interview_layout_id';
 		$record = $this->db->get_where( $sign_table, array( $sign_key => $this->input->post('exit_interview_layout_id'), 'deleted' => 0) );
 
 		$sign_record['records'] = $record->result_array();
 		$sign_record['from_template'] = 1;
+		$sign_record['company_name'] = '';
+
+		if ($user_info)
+			$sign_record['company_name'] = $user_info['company'];
 
 		if ($this->input->post('template_only') && $this->input->post('template_only') == 1){
 			$sign_record['count'] = $this->input->post('count');
@@ -1169,6 +1177,9 @@ class Clearance extends MY_PrivateController
 				}
 			}
 		}
+
+		if ($main_record['exit_interviewed'] == 1)
+			$this->mod->notify_hr($this->record_id,$clearance_record);
 
 		if( $this->db->_error_message() != "" ){
 			$this->response->message[] = array(

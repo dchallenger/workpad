@@ -106,10 +106,16 @@
     ?>
 
             <tr>
-                <td width="20%" class="active" style="font-size:13px !important;">
-                    <?php if($key['show_key_label']) echo $key['key_label']; ?>
+                <td width="40%" class="active" style="font-size:13px !important;">
+                    <?php if($key['show_key_label']) { ?>
+                        <b><?php echo $key['key_label'] ?></b>
+                    <?php } ?>
+                    
+                    <?php if($key['description']) { ?>
+                        <p><?php echo $key['description'] ?></p>
+                    <?php } ?>
                 </td>
-                <td width="40%">
+                <td width="20%">
                 <?php  
                     echo $value['key_value'];
                 ?>

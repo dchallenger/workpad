@@ -1,6 +1,6 @@
 <tr class="record">
     <td>
-        <a class="text-success" href="{{ $edit_url }}">{{ $key_label }}</a>
+        {{ $key_label }}
     </td>
     <td>
         <?php
@@ -29,6 +29,7 @@
 
         {{ $key_value }}
     </td>
+    <td>{{ $remarks }}</td>
     <td>
         <?php
             switch( $partners_personal_request_status )
@@ -59,21 +60,5 @@
         </span>
         <br>
         <span class="text-muted small">{{ date( 'Y', strtotime( $partners_personal_request_created_on ) ) }}</span>
-    </td>
-    <td>
-        @if( $partners_personal_request_status == "Draft" )
-            <div class="btn-group">
-                <a class="btn btn-xs text-muted" onclick="show_cr_form()"><i class="fa fa-pencil"></i> {{ lang('common.edit') }}</a>
-            </div>
-        @endif
-        
-        @if( !empty($options) && $partners_personal_request_status_id < 3)
-<!--             <div class="btn-group">
-                <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> {{ lang('common.options') }}</a>
-                <ul class="dropdown-menu pull-right">
-                    {{ $options }}
-                </ul>
-            </div> -->
-        @endif
     </td>
 </tr>
