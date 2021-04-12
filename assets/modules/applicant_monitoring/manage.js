@@ -46,7 +46,8 @@ function get_steps()
 		$('a[year="'+year+'"]').addClass('blue').removeClass('default');
 	}
 
-	$('div.steps-container').block({ message: loading_message(), 
+	//$('div.steps-container').block({ message: loading_message(), 
+	$.blockUI({ message: loading_message(), 		
 		onBlock: function(){
 			$.ajax({
 				url: base_url + module.get('route') + '/get_steps',
@@ -63,9 +64,10 @@ function get_steps()
 					$('div.steps-container').append(response.steps);
 				}
 			});
-		}
+		},
+		baseZ: 999999999
 	});
-	$('div.steps-container').unblock();
+	$.unblockUI();
 }
 
 function filter_detail( request_id )
