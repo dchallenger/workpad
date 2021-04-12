@@ -40,15 +40,15 @@ if( $saved_scheds ):
                 ?>
             </td>
             <td>
-                <?php if(($sched->interviewer == $login_user && $interview_success != 1) || $edit_remarks):?>
-                <div class="btn-group">
+                <?php /*if(($sched->interviewer == $login_user && $interview_success != 1) || $edit_remarks):*/?>
+<!--                 <div class="btn-group">
                     <a class="btn btn-xs text-muted" href="javascript:edit_interview_result(<?php echo $sched->schedule_id?>);"><i class="fa fa-pencil"></i> <?=lang('common.edit')?></a>
-                </div>
-                <?php else:?>
+                </div> -->
+                <?php /*else:*/?>
                 <div class="btn-group">
                     <a class="btn btn-xs text-muted" href="javascript:view_interview_result(<?php echo $sched->schedule_id?>);"><i class="fa fa-search"></i> <?=lang('common.view')?></a>
                 </div>
-                <?php endif;?>
+                <?php /*endif;*/?>
                 <div class="btn-group">
                     <a class="btn btn-xs text-muted" href="javascript:print_interview(<?php echo $sched->process_id?>);"><i class="fa fa-print"></i> <?=lang('applicant_monitoring.print')?></a>
                 </div>

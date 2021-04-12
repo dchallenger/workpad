@@ -1293,9 +1293,13 @@ class Applicant_monitoring extends MY_PrivateController
 	{
 		$this->_ajax_only();
 
-		$result_id = $this->input->post('result_id');
-		if($result_id == 0)
-		{
+		$process_id = $this->input->post('process_id');
+
+		/*$result_id = $this->input->post('result_id');*/
+
+		$interview = $this->mod->get_interview($process_id,8);
+
+		if(count($interview) < 2){
 			$this->response->pending = true;
 			$this->response->message[] = array(
 				'message' => 'Interview is not yet passed',
@@ -1303,8 +1307,6 @@ class Applicant_monitoring extends MY_PrivateController
 			);
 			$this->_ajax_return();
 		}	
-
-		$process_id = $this->input->post('process_id');
 
 		$bi = $this->mod->get_backgrounds($process_id);
 

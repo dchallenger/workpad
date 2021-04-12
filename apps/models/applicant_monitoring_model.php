@@ -171,11 +171,14 @@ class applicant_monitoring_model extends Record
             return false;               
     }
 
-    function get_interview( $process_id )
+    function get_interview( $process_id, $result_id = 0 )
     {
         $qry = "select *
         FROM {$this->db->dbprefix}recruitment_process_interview
         WHERE deleted = 0 and process_id = {$process_id}";
+
+        if ($result_id)
+            $qry .= " AND result_id = {$result_id}";
 
         $interview = $this->db->query( $qry );
         if( $interview->num_rows() > 0)
