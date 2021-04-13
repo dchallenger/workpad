@@ -362,7 +362,7 @@
                                 @endif
 
                                 @if(isset($other_config['enable_captcha']))
-                                <div class="form-group">
+                                <div class="form-group hidden">
                                     <label class="control-label col-md-3">{{ lang('system_settings.enable_captcha') }}</label>
                                     <div class="col-md-9">
                                         <div class="make-switch" data-on="success" data-off="warning">
@@ -375,7 +375,7 @@
                                 @endif
 
                                 @if(isset($other_config['enable_geolocation']))
-                                <div class="form-group">
+                                <div class="form-group hidden">
                                     <label class="control-label col-md-3">{{ lang('system_settings.enable_geolocation') }}</label>
                                     <div class="col-md-9">
                                         <div class="make-switch" data-on="success" data-off="warning">
@@ -508,7 +508,7 @@
                                         onclick="save_record( $(this).closest('form'), ''); return false;">
                                         <i class="fa fa-check"></i> {{ lang('system_settings.submit') }}
                                     </button>
-                                    <button type="button" class="btn default">{{ lang('system_settings.cancel') }}</button>
+                                    <a href="{{ $mod->url }}" class="btn default">{{ lang('system_settings.cancel') }}</a>
                                 </div>
                             </div>
                         </form>
