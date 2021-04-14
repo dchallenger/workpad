@@ -1,3 +1,14 @@
+<?php
+    $db->select('religion_id,religion');
+    $db->where('deleted', '0');
+    $db->order_by('religion');
+    $options = $db->get('religion');
+    $partners_religion_options = array('' => '');
+    foreach($options->result() as $option) {
+        $partners_religion_options[$option->religion_id] = $option->religion;
+    }   
+?>
+
 <!-- Personal Information -->
 <div class="portlet">
 	<div class="portlet-title">
@@ -13,7 +24,7 @@
             	@if(in_array('gender', $partners_keys))
 					<div class="col-md-12">
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3">{{ lang('my201.gender') }}</label>
+							<label class="control-label col-md-3 col-sm-3">{{ lang('my201.gender') }}<span class="required">*</span></label>
 							<div class="col-md-5">
 		                        <?php
 		                            $users_profile_gender_options = array('Male' => lang('common.male'), 'Female' => lang('common.female'));
@@ -32,7 +43,7 @@
 				@if(in_array('bday', $partners_keys))
 				<div class="col-md-12">
 					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3 ">{{ lang('my201.bday') }}</label>
+						<label class="control-label col-md-3 col-sm-3 ">{{ lang('my201.bday') }}<span class="required">*</span></label>
 						<div class="col-md-5">
 	                    	<div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
 	                            <input type="text" class="form-control" {{ ($is_editable['bday'] == 1) ? '' : 'readonly="readonly"' }} name="users_profile[birth_date]" id="users_profile-birth_date" value="{{ $profile_birthdate }}" placeholder="Enter Birthday" >
@@ -55,16 +66,19 @@
 					</div>
 				@endif
 
-				@if(in_array('religion', $partners_keys))
-					<div class="col-md-12">
-						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3">{{ lang('my201.religion') }}</label>
-							<div class="col-md-5">
-		                        <input type="text" class="form-control" {{ ($is_editable['religion'] == 1) ? '' : 'readonly="readonly"' }} name="partners_personal[religion]" id="partners_personal-religion" value="{{ $religion }}" placeholder="Enter Birth Place"/>
-		                    </div>
-						</div>
-					</div>
-				@endif
+                @if(in_array('religion', $partners_keys))
+	                <div class="form-group">
+	                    <label class="control-label col-md-3">{{ lang('my201.religion') }}</label>
+	                    <div class="col-md-5">
+	                       <div class="input-group">
+	                            <span class="input-group-addon">
+	                               <i class="fa fa-user"></i>
+	                             </span>
+	                        {{ form_dropdown('partners_personal[religion]',$partners_religion_options, $religion, 'class="form-control select2me" data-placeholder="Select..."') }}
+	                        </div>
+	                    </div>
+	                </div>
+                @endif
 
 				@if(in_array('nationality', $partners_keys))
 					<div class="col-md-12">
@@ -90,13 +104,26 @@
 		                </div>
 	                </div>
                 @endif
+                @if(in_array('marriage_date', $partners_keys))
+	                <div class="form-group">
+	                    <label class="control-label col-md-3">{{ lang('partners.date_marriage') }}</label>
+	                    <div class="col-md-5">
+	                        <div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
+	                            <input type="text" class="form-control" name="partners_personal[marriage_date]" id="partners_personal-birth_date" value="{{ $marriage_date }}" placeholder="Enter {{ lang('partners.date_marriage') }}" >
+	                            <span class="input-group-btn">
+	                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+	                            </span>
+	                        </div>
+	                    </div>
+	                </div>
+                @endif                
                 @if(in_array('solo_parent', $partners_keys))
                 	<div class="col-md-12">
 		                <div class="form-group">
 		                    <label class="control-label col-md-3">{{ lang('my201.solo_parent') }}</label>
 		                    <div class="col-md-5">
 		                        <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
-		                            <input type="checkbox"  {{ ($is_editable['solo_parent'] == 1) ? '' : 'disabled' }}  {{ ( $personal_solo_parent ) ? 'checked="checked"' : '' }} name="partners_personal[solo_parent][temp]" id="partners_personal-solo_parent-temp" class="dontserializeme toggle"/>
+		                            <input type="checkbox" {{ ( $personal_solo_parent ) ? 'checked="checked"' : '' }} name="partners_personal[solo_parent][temp]" id="partners_personal-solo_parent-temp" class="dontserializeme toggle"/>
 		                            <input type="hidden" name="partners_personal[solo_parent]" id="partners_personal-solo_parent" value="{{ ( $personal_solo_parent ) ? 1 : 0 }}" />
 		                        </div> 
 		                    </div>
@@ -154,6 +181,14 @@
 						</div>
 					</div>
                 @endif
+                @if(in_array('blood_type', $partners_keys))
+                <div class="form-group hidden-sm hidden-xs">
+                    <label class="control-label col-md-3">{{ lang('partners.blood_type') }}</label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="partners_personal[blood_type]" id="partners_personal-blood_type" value="{{ $blood_type }}" placeholder="Enter {{ lang('partners.blood_type') }}"/>
+                    </div>
+                </div>
+                @endif                  
                 @if(in_array('interests_hobbies', $partners_keys))
 					<div class="col-md-12">
 						<div class="form-group">

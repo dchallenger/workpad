@@ -78,6 +78,33 @@
                         </div>
                     </div>
                     @endif
+                    @if(in_array('employment-reason-for-leaving', $partners_keys))
+                        <div class="form-group">
+                            <label class="control-label col-md-3">{{ lang('partners.reason_leaving') }}</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="partners_personal_history[employment-reason-for-leaving][]" id="partners_personal_history-employment-reason-for-leaving" 
+                                value="<?php echo (isset($employment['employment-reason-for-leaving']) ? $employment['employment-reason-for-leaving'] : ""); ?>" placeholder="Enter {{lang('partners.reason_leaving')}}"/>
+                            </div>
+                        </div>
+                    @endif
+                    @if(in_array('employment-latest-salary', $partners_keys))
+                        <div class="form-group">
+                            <label class="control-label col-md-3">{{ lang('partners.latest_salary') }}</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="partners_personal_history[employment-latest-salary][]" id="partners_personal_history-employment-latest-salary" 
+                                value="<?php echo (isset($employment['employment-latest-salary']) ? $employment['employment-latest-salary'] : ""); ?>" placeholder="{{ lang('partners.latest_salary') }}" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>
+                            </div>
+                        </div>
+                    @endif
+                    @if(in_array('employment-supervisor', $partners_keys))
+                        <div class="form-group">
+                            <label class="control-label col-md-3">{{ lang('partners.name_immediate_superior') }}</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="partners_personal_history[employment-supervisor][]" id="partners_personal_history-employment-supervisor" 
+                                value="<?php echo (isset($employment['employment-supervisor']) ? $employment['employment-supervisor'] : ""); ?>" placeholder="{{ lang('partners.name_immediate_superior') }}"/>
+                            </div>
+                        </div>                    
+                    @endif                        
                     @if(in_array('employment-month-hired', $partners_keys))
                     <div class="form-group">
                         <label class="control-label col-md-3">{{ lang('my201.hire_date') }}<span class="required">*</span></label>

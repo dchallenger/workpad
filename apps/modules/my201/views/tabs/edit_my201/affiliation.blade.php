@@ -61,7 +61,7 @@
 	            @endif
 	            @if(in_array('affiliation-position', $partners_keys))
                 <div class="form-group">
-                    <label class="control-label col-md-3">{{ lang('my201.position') }}<span class="required">*</span></label>
+                    <label class="control-label col-md-3">{{ lang('partners.position') }}<span class="required">*</span></label>
                     <div class="col-md-6">
                         <input type="text" {{ ($is_editable['affiliation-position'] == 1) ? '' : 'readonly="readonly"' }} class="form-control" name="partners_personal_history[affiliation-position][]" id="partners_personal_history-affiliation-position" 
                         value="<?php echo (isset($affiliation['affiliation-position']) ? $affiliation['affiliation-position'] : ""); ?>" placeholder="{{ lang('common.enter') }} {{ lang('my201.position') }}"/>
@@ -70,7 +70,7 @@
                 @endif
 	            
                 <div class="form-group">
-                    <label class="control-label col-md-3">{{ lang('my201.start_date') }}<span class="required">*</span></label>
+                    <label class="control-label col-md-3">{{ lang('partners.start_date') }}<span class="required">*</span></label>
                     <div class="col-md-9">
                     	@if(in_array('affiliation-month-start', $partners_keys))
                         <div class="input-group input-medium pull-left">
@@ -91,7 +91,7 @@
                 </div>
 	            
                 <div class="form-group">
-                    <label class="control-label col-md-3">{{ lang('my201.end_date') }}<span class="required">*</span></label>
+                    <label class="control-label col-md-3">{{ lang('partners.end_date') }}<span class="required">*</span></label>
                     <div class="col-md-9">
                     	@if(in_array('affiliation-month-end', $partners_keys))
                         <div class="input-group input-medium pull-left">

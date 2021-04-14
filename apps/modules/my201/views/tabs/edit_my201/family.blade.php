@@ -1,4 +1,4 @@
-<?php $editable = false?>
+<?php $editable = true?>
 <div class="portlet">
     <div class="portlet-title">
         <div class="caption" id="family-category">{{ lang('my201.family') }}</div>
@@ -8,7 +8,6 @@
     </div>
      @if(in_array('family-relationship', $partners_keys))
         @if($is_editable['family-relationship'])
-            <?php $editable = true?>
 		    <div class="portlet-body form">
 		        <div class="form-horizontal">
 		            <div class="form-body">
@@ -130,16 +129,39 @@
                             </div>
          
                             @if(in_array('family-dependent', $partners_keys))
-                            <div class="form-group">
+                            <div class="form-group hidden">
                                 <label class="control-label col-md-3">Dependent</label>
                                 <div class="col-md-5">
                                     <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
-                                        <input type="checkbox" disabled  value="1" {{ ( isset($family['family-dependent']) ? $family['family-dependent'] : "" ) ? '' : 'checked="checked"' }} name="partners_personal_history[family-dependent][temp][]" id="partners_personal_history-family-dependent-temp" class="dontserializeme toggle dependent"/>
+                                        <input type="checkbox" disabled  value="1" name="partners_personal_history[family-dependent][temp][]" id="partners_personal_history-family-dependent-temp" class="dontserializeme toggle dependent"/>
                                         <input type="hidden" name="partners_personal_history[family-dependent][]" id="partners_personal_history-family-dependent" value="{{ ( isset($family['family-dependent']) ? $family['family-dependent'] : '' ) ? 0 : 1 }}"/>
                                     </div> 
                                 </div>
                             </div>
                             @endif
+
+                            @if(in_array('family-dependent-hmo', $partners_keys))
+                            <div class="form-group">
+                                <label class="control-label col-md-3">{{$partners_labels['family-dependent-hmo']}}</label>
+                                <div class="col-md-5">
+                                    <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
+                                        <input type="checkbox" value="1" @if( isset($family['family-dependent-hmo']) ? $family['family-dependent-hmo'] : "" ) checked="checked" @endif name="partners_personal_history[family-dependent-hmo][temp][]" id="partners_personal_history-family-dependent-hmo-temp" class="dontserializeme toggle dependent"/>
+                                        <input type="hidden" name="partners_personal_history[family-dependent-hmo][]" id="partners_personal_history-family-dependent-hmo" value="@if( isset($family['family-dependent-hmo'])) 1 else 0 @endif"/>
+                                    </div> 
+                                </div>
+                            </div>                            
+                            @endif
+                            @if(in_array('family-dependent-insurance', $partners_keys))
+                            <div class="form-group">
+                                <label class="control-label col-md-3">{{$partners_labels['family-dependent-insurance']}}</label>
+                                <div class="col-md-5">
+                                    <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
+                                        <input type="checkbox" value="1" @if( isset($family['family-dependent-insurance']) ? $family['family-dependent-insurance'] : "" ) checked="checked" @endif name="partners_personal_history[family-dependent-insurance][temp][]" id="partners_personal_history-family-dependent-insurance-temp" class="dontserializeme toggle dependent"/>
+                                        <input type="hidden" name="partners_personal_history[family-dependent-insurance][]" id="partners_personal_history-family-dependent-insurance" value="@if( isset($family['family-dependent-insurance'])) 1 else 0 @endif"/>
+                                    </div> 
+                                </div>
+                            </div>                            
+                            @endif                               
                         </div>
                     </div>
                 </div>

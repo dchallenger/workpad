@@ -1,3 +1,36 @@
+<?php
+    $db->select('city_id,city');
+    $db->where('deleted', '0');
+    $db->order_by('city');
+    $options = $db->get('cities');
+    $partners_city_options = array('' => '');
+    foreach($options->result() as $option) {
+        $partners_city_options[$option->city_id] = $option->city;
+    }
+
+    $db->select('country_id,short_name');
+    $db->where('deleted', '0');
+    $db->order_by('short_name');
+    $options = $db->get('countries');
+
+    $partners_country_options = array('' => '');
+    foreach($options->result() as $option) {
+        $partners_country_options[$option->country_id] = $option->short_name;
+    }
+
+    $db->select('relationship_id,relationship');
+    $db->where('deleted', '0');
+    $db->order_by('relationship');
+    $options = $db->get('relationship');
+    $relationship_options = array('' => '');
+    foreach($options->result() as $option) {
+        $relationship_options[$option->relationship] = $option->relationship;
+    }        
+?>
+
+<!-- put this line if need editable or not -->
+<!-- {{ $is_editable['address_1'] == 1 ? '' : 'readonly="readonly"' }} -->
+
 <!-- Contact Information -->
 <div class="portlet">
 	<div class="portlet-title">
@@ -8,181 +41,171 @@
 	</div>
 	<div class="portlet-body form">
 		<!-- START FORM -->
-		<div class="form-horizontal" >
+		<div class="form-horizontal">
 			<div class="form-body">
-				@if(in_array('phone', $partners_keys))
-	                <div id="personal_phone">
-	                    <?php $phone_count = count($profile_telephones); 
-	                        if($phone_count > 0){
-	                        $count_phone = 0;
-	                    ?>
-	                    <input type="hidden" name="phone_count" id="phone_count" value="{{ $phone_count }}" />
-	                    <input type="hidden" name="phone_counting" id="phone_counting" value="{{ $phone_count }}" />
-	                    <?php
-	                        foreach($profile_telephones as $telephone){
-	                            if(!empty($telephone)){ 
-	                            $count_phone++;
-	                    ?>
-	                        <div class="form-group hidden-sm hidden-xs" id="phone-count-<?php echo $count_phone; ?>">
-	                            <label class="control-label col-md-3">{{ lang('my201.phone') }} 
-	                                <span class="phone_count_display" id="phone_display_count-<?php echo $count_phone; ?>"><?php echo ($count_phone > 1) ? $count_phone : "" ?></span>
-	                            </label>
-	                            <div class="col-md-5">
-	                                 <div class="input-group">
-	                                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-	                                    <input type="text" class="form-control" {{ $is_editable['phone'] == 1 ? '' : 'readonly="readonly"' }} maxlength="16" name="partners_personal[phone][]" id="partners_personal-phone" placeholder="Enter Telephone Number" value="{{ $telephone }}">
-	                                 </div>
-	                            </div>
-	                           	@if($is_editable['phone'] == 1)
-		                            <span class="hidden-xs hidden-sm add_delete_phone" >
-		                                @if($phone_count > 1)
-		                                    <a class="btn btn-default action_phone" id="delete_phone-<?php echo $count_phone; ?>" onclick="remove_form(this.id, 'phone')"  ><i class="fa fa-trash-o"></i></a>
-		                                @endif
-		                                @if($phone_count == $count_phone)
-		                                    <a class="btn btn-default action_phone add_phone" id="add_phone" onclick="add_form('contact_phone', 'phone')" ><i class="fa fa-plus"></i></a>
-		                            	@endif
-		                            </span>
-	                            @endif
-	                             
-	                        </div>
-	                    <?php 
-	                            }
-	                        }
-	                    }else{
-	                    ?>
-	                    <input type="hidden" name="phone_count" id="phone_count" value="1" />
-	                    <input type="hidden" name="phone_counting" id="phone_counting" value="1" />
-	                    <div class="form-group hidden-sm hidden-xs" id="phone-count-1">
-	                        <label class="control-label col-md-3">{{ lang('my201.phone') }} 
-	                                <span class="phone_count_display" id="phone_display_count-1"></span>
-	                        </label>
-	                            <div class="col-md-5">
-	                               <div class="input-group">
-	                                <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-	                                <input type="text" class="form-control" {{ $is_editable['phone'] == 1 ? '' : 'readonly="readonly"' }} maxlength="16" name="partners_personal[phone][]" id="partners_personal[phone]" placeholder="Enter Telephone Number" value="">
-	                            </div>
-	                        </div>
-	                        @if($is_editable['phone'] == 1)
-		                        <span class="hidden-xs hidden-sm add_delete_phone">
-		                            <a class="btn btn-default action_phone add_phone" id="add_phone" onclick="add_form('contact_phone', 'phone')"><i class="fa fa-plus"></i></a>
-		                        </span>
-		                    @endif
-	                    </div>
-	                    <?php
-	                    }
-	                    ?>  
-	                </div>
+                <div>Present Address:</div>
+                <br>
+                @if(in_array('address_1', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.address') }}</label>
+                    <div class="col-md-5">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                               <i class="fa fa-map-marker"></i>
+                            </span>
+                        	<input type="text" class="form-control" name="partners_personal[address_1]" id="partners_personal-address_1" value="{{ $address_1 }}" placeholder="Enter Address"/>
+                        </div>
+                    </div>
+                </div>
+                @endif
+                @if(in_array('city_town', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.city') }}</label>
+                    <div class="col-md-5">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            {{ form_dropdown('partners_personal[city_town]',$partners_city_options, $city, 'class="form-control select2me" data-placeholder="Select..." id="partners_personal-present_city"') }}
+                        </div>
+                    </div>
+                </div>
+                @endif
+                @if(in_array('country', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.country') }}</label>
+                    <div class="col-md-5">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            {{ form_dropdown('partners_personal[country]',$partners_country_options, $country, 'class="form-control select2me" data-placeholder="Select..." id="partners_personal-present_country"') }}
+                        </div>
+                    </div>
+                </div>
+                @endif
+                @if(in_array('zip_code', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.zip') }}</label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="partners_personal[zip_code]" id="partners_personal-zip_code" value="{{ $zip_code }}" placeholder="Enter Zipcode"/>
+                    </div>
+                </div>
                 @endif
 
+                <div>Permanent Address: <span>&nbsp;&nbsp;<input type="checkbox" id="same_present" value="1">Same as Present Address</span></div>
+                <br>
+                @if(in_array('permanent_address', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.address') }}</label>
+                    <div class="col-md-5">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                               <i class="fa fa-map-marker"></i>
+                            </span>
+                        <input type="text" class="form-control" name="partners_personal[permanent_address]" id="partners_personal-permanent_address" value="{{ $permanent_address }}" placeholder="Enter Address"/>
+                         </div>
+                    </div>
+                </div>
+                @endif
+                @if(in_array('permanent_city_town', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.city') }}</label>
+                    <div class="col-md-5">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            {{ form_dropdown('partners_personal[permanent_city_town]',$partners_city_options, $permanent_city_town, 'class="form-control select2me" data-placeholder="Select..." id="partners_personal-permanent_city"') }}
+                        </div>
+                    </div>
+                </div>
+                @endif
+                @if(in_array('permanent_country', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.country') }}</label>
+                    <div class="col-md-5">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            {{ form_dropdown('partners_personal[permanent_country]',$partners_country_options, $permanent_country, 'class="form-control select2me" data-placeholder="Select..." id="partners_personal-permanent_country"') }}
+                        </div>
+                    </div>
+                </div>
+                @endif
+                @if(in_array('permanent_zipcode', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.zip') }}</label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="partners_personal[permanent_zipcode]" id="partners_personal-permanent_zipcode" value="{{ $permanent_zipcode }}" placeholder="Enter Zipcode"/>
+                    </div>
+                </div>
+                @endif 
+
+                <div>Office:</div>
+                <br>                            
+                @if(in_array('phone', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.phone') }}</label>
+                    <div class="col-md-5">
+                        <div class="input-group"><span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                            <input type="text" class="form-control" name="partners_personal[phone]" id="partners_personal-profile_telephones" value="{{ $office_telephones }}" placeholder="Enter Telephone Number" data-inputmask="'mask': '9', 'repeat': 10, 'greedy' : false"/>
+                        </div>                            
+                    </div>
+                </div>
+                @endif
                 @if(in_array('mobile', $partners_keys))
-	                <div id="personal_mobile">  
-	                    <?php $mobile_count = count($profile_mobiles); 
-	                        if($mobile_count > 0){
-	                    ?>
-	                    <input type="hidden" name="mobile_count" id="mobile_count" value="{{ $mobile_count }}" />
-	                    <input type="hidden" name="mobile_counting" id="mobile_counting" value="{{ $mobile_count }}" />
-	                    <?php 
-	                            $count_mobile = 0;
-	                            foreach($profile_mobiles as $mobile){ 
-	                                if(!empty($mobile)){ 
-	                                $count_mobile++;
-	                    ?>
-	                        <div class="form-group hidden-sm hidden-xs" id="mobile-count-<?php echo $count_mobile; ?>">
-	                            <label class="control-label col-md-3">Mobile 
-	                                <span class="mobile_count_display" id="mobile_display_count-<?php echo $count_mobile; ?>">
-	                            <?php echo ($count_mobile > 1) ? $count_mobile : "" ?>
-	                                </span>
-	                            </label>
-	                            <div class="col-md-5">
-	                                 <div class="input-group">
-	                                    <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
-	                                    <input type="text" class="form-control" {{ $is_editable['mobile'] == 1 ? '' : 'readonly="readonly"' }} maxlength="16" name="partners_personal[mobile][]" id="partners_personal-mobile" placeholder="Enter Mobile Number" value="{{ $mobile }}">
-	                                 </div>
-	                            </div>
-	                        	@if($is_editable['mobile'] == 1)
-		                            <span class="hidden-xs hidden-sm add_delete_mobile">
-		                                @if($mobile_count > 1)
-		                                <a class="btn btn-default action_mobile" id="delete_mobile-<?php echo $count_mobile; ?>" onclick="remove_form(this.id, 'mobile')" ><i class="fa fa-trash-o"></i></a>
-		                                @endif
-		                                @if($mobile_count == $count_mobile)
-		                                <a class="btn btn-default action_mobile add_mobile" id="add_mobile" onclick="add_form('contact_mobile', 'mobile')"><i class="fa fa-plus"></i></a>
-		                            	@endif
-		                            </span>
-	                            @endif
-	                        </div>
-		                <?php   	}
-		                        }
-		                    }else{
-		                ?>
-		                <input type="hidden" name="mobile_count" id="mobile_count" value="1" />
-		                <input type="hidden" name="mobile_counting" id="mobile_counting" value="1" />
-		                <div class="form-group hidden-sm hidden-xs" id="mobile-count-1">
-		                    <label class="control-label col-md-3">{{ lang('my201.mobile') }} 
-		                                <span class="mobile_count_display" id="mobile_display_count-1"></span></label>
-		                        <div class="col-md-5">
-		                           <div class="input-group">
-		                            <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
-		                            <input type="text" class="form-control" {{ $is_editable['mobile'] == 1 ? '' : 'readonly="readonly"' }} maxlength="16" name="partners_personal[mobile][]" id="partners_personal-mobile" placeholder="Enter Mobile Number" value="">
-		                        </div>
-		                    </div>
-		                    @if($is_editable['mobile'] == 1)
-		                    <span class="hidden-xs hidden-sm add_delete_mobile">
-		                        <a class="btn btn-default action_mobile add_mobile" id="add_mobile" onclick="add_form('contact_mobile', 'mobile')"><i class="fa fa-plus"></i></a>
-		                    </span>
-		                    @endif
-		                </div>
-		                <?php
-		                    }
-		                ?>
-		            </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.mobile') }}</label>
+                    <div class="col-md-5">
+                        <div class="input-group"><span class="input-group-addon"><i class="fa fa-mobile"></i></span>                            
+                            <input type="text" class="form-control" name="partners_personal[mobile]" id="partners_personal-profile_mobiles" value="{{ $office_mobiles }}" placeholder="Enter Mobile Number" data-inputmask="'mask': '9', 'repeat': 12, 'greedy' : false"/>
+                        </div>
+                    </div>
+                </div>
                 @endif
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.email') }}</label>
+                    <div class="col-md-5">
+                        <div class="input-group"><span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>                            
+                            <input type="text" class="form-control" name="users[email]" id="users-email" value="{{ $profile_email }}" placeholder="Enter Email Address"/>
+                        </div>
+                    </div>
+                </div>
 
-	            <div class="col-md-12">
-					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3">{{ lang('my201.email') }}</label>
-						<div class="col-md-5">
-	                        <input type="text" class="form-control" {{ $is_editable['mobile'] == 1 ? '' : 'readonly="readonly"' }} id="users-email" value="{{ $profile_email }}"/>
-	                    </div>
-					</div>
-				</div>
-				@if(in_array('address_1', $partners_keys))
-					<div class="col-md-12">
-						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3">{{ lang('my201.address') }}</label>
-							<div class="col-md-5">
-								<div class="input-group">
-		                            <span class="input-group-addon">
-		                               <i class="fa fa-map-marker"></i>
-		                             </span>
-			                        <textarea class="form-control" name="partners_personal[address_1]" {{ $is_editable['address_1'] == 1 ? '' : 'readonly="readonly"' }} id="users-address_1" >{{ $complete_address }}</textarea>
-			                    </div>
-		                    </div>
-						</div>
-					</div>
-				@endif
-				@if(in_array('city_town', $partners_keys))
-					<div class="col-md-12">
-						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3">{{ lang('my201.city') }}</label>
-							<div class="col-md-5">
-				                <input type="text" class="form-control" name="partners_personal[city_town]"  {{ $is_editable['city_town'] == 1 ? '' : 'readonly="readonly"' }} id="partners_personal-city_town" value="{{ $profile_live_in }}"/>
-				            </div>
-						</div>
-					</div>
-				@endif
-
-				@if(in_array('zip_code', $partners_keys))
-					<div class="col-md-12">
-						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3">{{ lang('my201.zip') }}</label>
-							<div class="col-md-5">
-				                <input type="text" class="form-control" name="partners_personal[zip_code]" {{ $is_editable['zip_code'] == 1 ? '' : 'readonly="readonly"' }} id="partners_personal-zip_code" value="{{ $zip_code }}"/>
-				            </div>
-						</div>
-					</div>
-				@endif
-			</div>
-		</div>
+                <div>Personal:</div>
+                <br>
+                @if(in_array('personal_phone', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.phone') }}</label>
+                    <div class="col-md-5">
+                        <div class="input-group"><span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                            <input type="text" class="form-control" name="partners_personal[personal_phone]" id="partners_personal-personal_telephone" value="{{ $personal_telephone }}" placeholder="Enter Telephone Number" data-inputmask="'mask': '9', 'repeat': 10, 'greedy' : false"/>
+                        </div>
+                    </div>
+                </div>
+                @endif
+                @if(in_array('personal_mobile', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.mobile') }}</label>
+                    <div class="col-md-5">
+                        <div class="input-group"><span class="input-group-addon"><i class="fa fa-mobile"></i></span>                            
+                            <input type="text" class="form-control" name="partners_personal[personal_mobile]" id="partners_personal-personal_mobile" value="{{ $personal_mobile }}" placeholder="Enter Mobile Number" data-inputmask="'mask': '9', 'repeat': 12, 'greedy' : false"/>
+                        </div>
+                    </div>
+                </div>
+                @endif
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.email') }}</label>
+                    <div class="col-md-5">
+                        <div class="input-group"><span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>                            
+                            <input type="text" class="form-control" name="partners_personal[personal_email]" id="users-personal_email" value="{{ $personal_email }}" placeholder="Enter Email Address"/>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
 	</div>
 </div>
 
@@ -215,9 +238,9 @@
 						<div class="col-md-5">
                             <div class="input-group">
                                 <span class="input-group-addon">
-                                   <i class="fa fa-group"></i>
-                                 </span>
-                           		<input type="text" class="form-control" {{ $is_editable['emergency_relationship'] == 1 ? '' : 'readonly="readonly"' }} name="partners_personal[emergency_relationship]" id="partners_personal-emergency_relationship" value="{{ $emergency_relationship }}" placeholder="{{ lang('common.enter') }} {{ lang('my201.relationship') }}"/>
+                                    <i class="fa fa-list-ul"></i>
+                                </span>
+                                {{ form_dropdown('partners_personal[emergency_relationship]',$relationship_options, $emergency_relationship, 'class="form-control select2me" data-placeholder="Select..."') }}
                             </div>
                         </div>
 					</div>
@@ -226,7 +249,7 @@
 			@if(in_array('emergency_phone', $partners_keys))
 				<div class="col-md-12">
 					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.phone') }} :</label>
+						<label class="control-label col-md-3 col-sm-3 text-right">{{ lang('my201.phone') }} :</label>
 						<div class="col-md-5">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-phone"></i></span>
@@ -239,7 +262,7 @@
 			@if(in_array('emergency_mobile', $partners_keys))
 				<div class="col-md-12">
 					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.mobile') }} :</label>
+						<label class="control-label col-md-3 col-sm-3 text-right">{{ lang('my201.mobile') }} :</label>
 						<div class="col-md-5">
 	                        <div class="input-group">
 	                            <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
@@ -252,52 +275,48 @@
 			@if(in_array('emergency_address', $partners_keys))
 				<div class="col-md-12">
 					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.address') }} :</label>
+						<label class="control-label col-md-3 col-sm-3 text-right">{{ lang('my201.address') }} :</label>
 						<div class="col-md-5">
 	                        <div class="input-group">
 	                            <span class="input-group-addon">
 	                               <i class="fa fa-map-marker"></i>
 	                             </span>
-	                        	<textarea class="form-control"  {{ $is_editable['emergency_address'] == 1 ? '' : 'readonly="readonly"' }} name="partners_personal[emergency_address]" id="partners_personal-emergency_address" placeholder="{{ lang('common.enter') }} {{ lang('my201.address') }}"/>{{ $emergency_address }}</textarea>
+	                             <input type="text" {{ $is_editable['emergency_address'] == 1 ? '' : 'readonly="readonly"' }} class="form-control" name="partners_personal[emergency_address]" id="partners_personal-emergency_address" value="{{ $emergency_address }}" placeholder="{{ lang('common.enter') }} {{ lang('my201.address') }}"/>
 	                         </div>
 	                    </div>
 					</div>
 				</div>
 			@endif
-			@if(in_array('emergency_city', $partners_keys))
-				<div class="col-md-12">
-					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.city') }} :</label>
-						<div class="col-md-5">
-	                        <div class="input-group">
-	                            <span class="input-group-addon">
-	                               <i class="fa fa-map-marker"></i>
-	                             </span>
-	                        <input type="text" class="form-control" {{ $is_editable['emergency_city'] == 1 ? '' : 'readonly="readonly"' }} name="partners_personal[emergency_city]" id="partners_personal-emergency_city" value="{{ $emergency_city }}" placeholder="{{ lang('common.enter') }} {{ lang('my201.city') }}"/>
-	                         </div>
-	                    </div>
-					</div>
-				</div>
-			@endif
-			@if(in_array('emergency_country', $partners_keys))
-				<div class="col-md-12">
-					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.country') }} :</label>
-						<div class="col-md-5">
-	                        <div class="input-group">
-	                            <span class="input-group-addon">
-	                               <i class="fa fa-map-marker"></i>
-	                             </span>
-	                        <input type="text" class="form-control" {{ $is_editable['emergency_country'] == 1 ? '' : 'readonly="readonly"' }} name="partners_personal[emergency_country]" id="partners_personal-emergency_country" value="{{ $emergency_country }}" placeholder="{{ lang('common.enter') }} {{ lang('my201.country') }}"/>
-	                        </div>
-	                    </div>
-					</div>
-				</div>
-			@endif
+            @if(in_array('emergency_city', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('my201.city') }}</label>
+                    <div class="col-md-5">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            {{ form_dropdown('partners_personal[emergency_city]',$partners_city_options, $emergency_city, 'class="form-control select2me" data-placeholder="Select..."') }}
+                        </div>
+                    </div>
+                </div>
+            @endif
+            @if(in_array('emergency_country', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('my201.country') }}</label>
+                    <div class="col-md-5">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            {{ form_dropdown('partners_personal[emergency_country]',$partners_country_options, $emergency_country, 'class="form-control select2me" data-placeholder="Select..."') }}
+                        </div>
+                    </div>
+                </div>
+            @endif
 			@if(in_array('emergency_zip_code', $partners_keys))
 				<div class="col-md-12">
 					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('my201.zip') }} :</label>
+						<label class="control-label col-md-3 col-sm-3 text-right">{{ lang('my201.zip') }} :</label>
 						 <div class="col-md-5">
 	                        <input type="text" class="form-control" {{ $is_editable['emergency_country'] == 1 ? '' : 'readonly="readonly"' }} name="partners_personal[emergency_zip_code]" id="partners_personal-emergency_zip_code" value="{{ $emergency_zip_code }}" placeholder="{{ lang('common.enter') }} {{ lang('my201.zip') }}"/>
 	                    </div>

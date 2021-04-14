@@ -1,3 +1,14 @@
+<?php
+    $db->select('city_id,city');
+    $db->where('deleted', '0');
+    $db->order_by('city');
+    $options_cities = $db->get('cities');
+
+    $db->select('country_id,short_name');
+    $db->where('deleted', '0');
+    $db->order_by('short_name');
+    $options_countries = $db->get('countries'); 
+?>
 <div class="portlet">
 	<div class="portlet-title">
 		<!-- <div class="caption" id="education-category">Company Name</div> -->
@@ -58,14 +69,23 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3">City</label>
+                    <label class="control-label col-md-3">City/Town</label>
                     <div class="col-md-6">
                         <div class="input-group">
                             <span class="input-group-addon">
-                               <i class="fa fa-map-marker"></i>
-                             </span>
-                        <input type="text" class="form-control" name="partners_personal_history[reference-city][]" id="partners_personal_history-reference-city" placeholder="Enter City"/>
-                         </div>
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            <select  class="form-control form-select" data-placeholder="Select..." name="partners_personal_history[reference-city][]" id="partners_personal_history-reference-city">
+                                <option value=""></option>
+                            <?php
+                                foreach($options_cities->result() as $option) {
+                            ?>
+                                    <option value="<?php echo $option->city_id ?>"><?php echo $option->city ?></option>
+                            <?php
+                                }
+                            ?>                                
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -73,12 +93,21 @@
                     <div class="col-md-6">
                         <div class="input-group">
                             <span class="input-group-addon">
-                               <i class="fa fa-map-marker"></i>
-                             </span>
-                        <input type="text" class="form-control" name="partners_personal_history[reference-country][]" id="partners_personal_history-reference-country" placeholder="Enter Country"/>
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            <select  class="form-control form-select" data-placeholder="Select..." name="partners_personal_history[reference-country][]" id="partners_personal_history-reference-country">
+                                <option value=""></option>
+                            <?php
+                                foreach($options_countries->result() as $option) {
+                            ?>
+                                    <option value="<?php echo $option->country_id ?>"><?php echo $option->short_name ?></option>
+                            <?php
+                                }
+                            ?>                                
+                            </select>                                                   
                         </div>
                     </div>
-                </div>
+                </div>                
                 <div class="form-group">
                     <label class="control-label col-md-3">Zipcode</label>
                     <div class="col-md-6">
@@ -90,3 +119,14 @@
 		</div>
 	</div>
 </div>
+
+<script language="javascript">
+    $(document).ready(function(){
+        $(":input").inputmask();
+        
+        $('.form-select').select2({
+            placeholder: "Select an option",
+            allowClear: true        
+        });     
+    });
+</script>

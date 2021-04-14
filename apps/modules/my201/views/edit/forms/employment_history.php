@@ -29,6 +29,27 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="control-label col-md-3"><?php echo lang('partners.reason_leaving') ?></label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" name="partners_personal_history[employment-reason-for-leaving][]" id="partners_personal_history-employment-reason-for-leaving" 
+                value="" placeholder="Enter <?php echo lang('partners.reason_leaving') ?>"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3"><?php echo lang('partners.latest_salary') ?></label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" name="partners_personal_history[employment-latest-salary][]" id="partners_personal_history-employment-latest-salary" 
+                value="" placeholder="<?php echo lang('partners.latest_salary') ?>" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3"><?php echo lang('partners.name_immediate_superior') ?></label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" name="partners_personal_history[employment-supervisor][]" id="partners_personal_history-employment-supervisor" 
+                value="" placeholder="<?php echo lang('partners.name_immediate_superior') ?>"/>
+            </div>
+        </div>        
+        <div class="form-group">
             <label class="control-label col-md-3">Date Hired<span class="required">*</span></label>
             <div class="col-md-9">
                 <div class="input-group input-medium pull-left">

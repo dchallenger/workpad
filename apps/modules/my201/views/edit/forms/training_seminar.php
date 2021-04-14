@@ -26,6 +26,30 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-md-3"><?php echo lang('partners.training_provider') ?></label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="partners_personal_history[training-provider][]" id="partners_personal_history-training-provider" 
+                            value="<?php echo (isset($training['training-provider']) ? $training['training-provider'] : ""); ?>" placeholder="Enter <?php echo lang('partners.training_provider')?>"/>
+                        </div>
+                    </div>   
+                    <div class="form-group">
+                        <label class="control-label col-md-3"><?php echo lang('partners.training_cost') ?></label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="partners_personal_history[training-cost][]" id="partners_personal_history-training-cost" 
+                            value="<?php echo (isset($training['training-cost']) ? $training['training-cost'] : ""); ?>" placeholder="Enter <?php echo lang('partners.training_cost')?>" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3"><?php echo lang('partners.budgeted') ?></label>
+                        <div class="col-md-6">
+                            <div class="make-switch" data-on="success" data-off="danger" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
+                                <input type="checkbox" value="1" checked="checked" name="partners_personal_history[training-budgeted][temp][]" id="partners_personal_history-training-budgeted-temp" class="dontserializeme toggle"/>
+                                <input type="hidden" name="partners_personal_history[training-budgeted][]" id="partners_personal_history-training-budgeted" 
+                                value="1"/>
+                            </div> 
+                        </div>
+                    </div>                      
+                    <div class="form-group">
                         <label class="control-label col-md-3">Start Date<span class="required">*</span></label>
                         <div class="col-md-9">
                             <div class="input-group input-medium pull-left">
@@ -71,13 +95,29 @@
                             <span class="pull-left"><input type="text" class="form-control input-small" maxlength="4" name="partners_personal_history[training-end-year][]" id="partners_personal_history-training-end-year" placeholder="Year"></span>
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Remarks</label>
+                        <div class="col-md-6">
+                            <textarea rows="3" class="form-control"name="partners_personal_history[training-remarks][]" id="partners_personal_history-training-remarks" ></textarea>
+                        </div>
+                    </div> 
                 </div>
             </div>
         </div>
     </div>
 <script language="javascript">
     $(document).ready(function(){
+        $('.make-switch').not(".has-switch")['bootstrapSwitch']();
         $('select.form-select').select2();
+
+        $('#partners_personal_history-training-budgeted-temp').change(function(){
+            if( $(this).is(':checked') ){
+                $(this).parent().next().val(1);
+            }
+            else{
+                $(this).parent().next().val(0);
+            }
+        }); 
+        $('label[for="partners_personal_history-training-budgeted-temp"]').css('margin-top', '0'); 
     });
 </script>

@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3">Date Started<span class="required">*</span></label>                    
+                    <label class="control-label col-md-3">Start Date<span class="required">*</span></label>                    
                     <div class="col-md-9">
                         <div class="input-group input-medium pull-left">
                             <select  class="form-control form-select" data-placeholder="Select Month.." name="partners_personal_history[affiliation-month-start][]" id="partners_personal_history-affiliation-month-start">
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3">Date End<span class="required">*</span></label>
+                    <label class="control-label col-md-3">End Date<span class="required">*</span></label>
                     <div class="col-md-9">
                     <div class="input-group input-medium pull-left">
                         <select  class="form-control form-select" data-placeholder="Select Month.." name="partners_personal_history[affiliation-month-end][]" id="partners_personal_history-affiliation-month-end">

@@ -1,9 +1,16 @@
 $(document).ready(function() {
+	FormComponents.init();
+
+	$(":input").inputmask();
+
     var service = get_service(  $('#partners-effectivity_date').val() );
     $('span.calculatedservice').html(service+"&nbsp;&nbsp;years of service")  	
     	
 	$('.make-switch').not(".has-switch")['bootstrapSwitch']();
 	$('label[for="partners_personal_history-family-dependent-temp"]').css('margin-top', '0');
+    $('label[for="partners_personal_history-family-dependent-hmo-temp"]').css('margin-top', '0');
+    $('label[for="partners_personal_history-family-dependent-insurance-temp"]').css('margin-top', '0');
+
 	$('.dependent').change(function(){
 	    if( $(this).is(':checked') ){
 	    	$(this).parent().next().val(1);
@@ -24,6 +31,104 @@ $(document).ready(function() {
 	$('.form-undo').click(function() {
 		$('form').submit();
 	})
+
+	$('.select2me').select2({
+		placeholder: "Select an option",
+		allowClear: true		
+	});
+
+	$('#same_present').live('click', function() {
+		var pres_address = $('#partners_personal-address_1').val();
+		var pres_city = $('#partners_personal-present_city').val();
+		var pres_country = $('#partners_personal-present_country').val();
+		var pres_zipcode = $('#partners_personal-zip_code').val();
+
+		if ($('#same_present').is(':checked')) {
+			$('#partners_personal-permanent_address').val(pres_address);
+			$('#partners_personal-permanent_city').val(pres_city);
+			$('#partners_personal-permanent_country').val(pres_country);
+			$('#partners_personal-permanent_zipcode').val(pres_zipcode);
+
+			$('#partners_personal-permanent_city').select2().trigger('change');
+			$('#partners_personal-permanent_zipcode').select2().trigger('change');
+		}
+		else {
+			$('#partners_personal-permanent_address').val('');
+			$("#partners_personal-permanent_city").select2("val", "");
+			$("#partners_personal-permanent_country").select2("val", "");
+			$('#partners_personal-permanent_zipcode').val('');			
+		}
+	});	
+
+	$('#partners_personal-solo_parent-temp').change(function(){
+	    if( $(this).is(':checked') )
+	        $('#partners_personal-solo_parent').val('1');
+	    else
+	        $('#partners_personal-solo_parent').val('0');
+	});
+	$('label[for="partners_personal-solo_parent-temp"]').css('margin-top', '0');		
+
+	if (jQuery().datepicker) {
+	    $('#partners_personal-birth_date').parent('.date-picker').datepicker({
+	        rtl: App.isRTL(),
+	        autoclose: true
+	    });
+	    $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
+	}
+
+    $('#partners_personal_history-training-budgeted-temp').change(function(){
+        if( $(this).is(':checked') ){
+            $(this).parent().next().val(1);
+        }
+        else{
+            $(this).parent().next().val(0);
+        }
+    }); 
+	$('label[for="partners_personal_history-training-budgeted-temp"]').css('margin-top', '0');
+
+	$('#partners_personal_history-test-result-temp').change(function(){
+	    if( $(this).is(':checked') )
+	        $('#partners_personal_history-test-result').val('1');
+	    else
+	        $('#partners_personal_history-test-result').val('0');
+	});
+	$('label[for="partners_personal_history-test-result-temp"]').css('margin-top', '0');
+
+	$('#partners_personal_history-licensure-attach-fileupload').fileupload({
+        url: base_url + module.get('route') + '/single_upload',
+        autoUpload: true,
+    }).bind('fileuploadadd', function (e, data) {
+        $.blockUI({ message: '<div>Attaching file, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />' });
+    }).bind('fileuploaddone', function (e, data) {
+        $.unblockUI();
+        var file = data.result.file;
+        if(file.error != undefined && file.error != "")
+        {
+            notify('error', file.error);
+        }
+        else{
+            $('#partners_personal_history-licensure-attach').val(file.url);
+            $('#partners_personal_history-licensure-attach-container .fileupload-preview').html(file.name);
+            $('#partners_personal_history-licensure-attach-container .fileupload-new').each(function(){ $(this).css('display', 'none') });
+            $('#partners_personal_history-licensure-attach-container .fileupload-exists').each(function(){ $(this).css('display', 'inline-block') });
+        }
+    }).bind('fileuploadfail', function (e, data) {
+        $.unblockUI();
+        notify('error', data.errorThrown);
+    });
+
+    $('#partners_personal_history-licensure-attach-container .fileupload-delete').click(function(){
+        $('#partners_personal_history-licensure-attach').val('');
+        $('#partners_personal_history-licensure-attach-container .fileupload-preview').html('');
+        $('#partners_personal_history-licensure-attach-container .fileupload-new').each(function(){ $(this).css('display', 'inline-block') });
+        $('#partners_personal_history-licensure-attach-container .fileupload-exists').each(function(){ $(this).css('display', 'none') });
+    });
+
+    if( $('#partners_personal_history-licensure-attach').val() != "" )
+    {
+        $('#partners_personal_history-licensure-attach-container .fileupload-new').each(function(){ $(this).css('display', 'none') });
+        $('#partners_personal_history-licensure-attach-container .fileupload-exists').each(function(){ $(this).css('display', 'inline-block') });
+    }	
 });
 
 function view_personal_details(modal_form, key_class, sequence){	
@@ -155,6 +260,8 @@ function add_form(add_form, mode, sequence){
 				$('#personal_'+mode).append(response.add_form);
 				// handleSelect2();
 				FormComponents.init();
+
+				$(":input").inputmask();						
 			}
 
 		}
@@ -172,4 +279,44 @@ function _calculateAge(birthday, count) { // birthday is a date
         age--;
     }
 	$( "#partners_personal_history-family-age"+count ).val(age);
+}
+
+function view_movement_details(movement_id, action_id, type_id, cause){	
+	var data = {
+		movement_id: movement_id,
+		type_id: type_id,
+		action_id: action_id,
+		cause: cause
+	};
+	
+	$.ajax({
+	url: base_url + module.get('route') + '/get_action_movement_details',
+	type:"POST",
+	async: false,
+	data: data,
+	dataType: "json",
+	beforeSend: function(){
+				$('body').modalmanager('loading');
+			},
+			success: function ( response ) {
+
+				for( var i in response.message )
+				{
+					if(response.message[i].message != "")
+					{
+						var message_type = response.message[i].type;
+						notify(response.message[i].type, response.message[i].message);
+					}
+				}
+
+				if( typeof(response.add_movement) != 'undefined' )
+				{	
+					$('.modal-container-action').html(response.add_movement);
+					$('.move_action_modal').append(response.type_of_movement);	
+					$('.modal-container-action').modal('show');	
+					// FormComponents.init();
+				}
+
+			}
+	});	
 }

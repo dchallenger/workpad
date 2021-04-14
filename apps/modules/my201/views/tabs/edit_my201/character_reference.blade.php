@@ -1,20 +1,40 @@
-<?php $editable = false?>
+<?php
+    $db->select('city_id,city');
+    $db->where('deleted', '0');
+    $db->order_by('city');
+    $options = $db->get('cities');
+    $partners_city_options = array('' => '');
+    foreach($options->result() as $option) {
+        $partners_city_options[$option->city_id] = $option->city;
+    }
 
-	<div class="portlet">
-		<div class="portlet-title">
-			<div class="caption" id="education-category">{{ lang('my201.character_ref') }}</div>
-			@if(in_array('reference-name', $partners_keys))
-                @if($is_editable['reference-name'])
-                <?php $editable = true?>
-                    <div class="actions">
-        	            <a class="btn btn-default" onclick="add_form('character_references', 'reference')">
-        	                <i class="fa fa-plus"></i>
-        	            </a>
-        			</div>
-                @endif
+    $db->select('country_id,short_name');
+    $db->where('deleted', '0');
+    $db->order_by('short_name');
+    $options = $db->get('countries');
+
+    $partners_country_options = array('' => '');
+    foreach($options->result() as $option) {
+        $partners_country_options[$option->country_id] = $option->short_name;
+    }
+
+    $editable = false    
+?>
+
+<div class="portlet">
+	<div class="portlet-title">
+		<div class="caption" id="education-category">{{ lang('my201.character_ref') }}</div>
+		@if(in_array('reference-name', $partners_keys))
+            @if($is_editable['reference-name'])
+                <div class="actions">
+    	            <a class="btn btn-default" onclick="add_form('character_references', 'reference')">
+    	                <i class="fa fa-plus"></i>
+    	            </a>
+    			</div>
             @endif
-        </div>
-	</div>
+        @endif
+    </div>
+</div>
 
 <!-- Previous Character reference : start doing the loop-->
 <div id="personal_reference">
@@ -104,34 +124,28 @@
                     </div>
                 </div>
             @endif
-            @if(in_array('reference-city', $partners_keys))
-                <div class="form-group">
-                    <label class="control-label col-md-3">{{ lang('my201.city') }}</label>
-                    <div class="col-md-6">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                               <i class="fa fa-map-marker"></i>
-                             </span>
-                        	<input type="text" {{ ($is_editable['reference-city'] == 1) ? '' : 'readonly="readonly"' }} class="form-control" name="partners_personal_history[reference-city][]" id="partners_personal_history-reference-city" 
-                        	value="<?php echo (isset($reference['reference-city']) ? $reference['reference-city'] : ""); ?>" placeholder="{{ lang('common.enter') }} {{ lang('my201.city') }}"/>
-                         </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">{{ lang('partners.city') }}</label>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-list-ul"></i>
+                        </span>
+                        {{ form_dropdown('partners_personal_history[reference-city][]',$partners_city_options, $reference['reference-city'], 'class="form-control select2me" data-placeholder="Select..." ($is_editable["reference-address"] == 1) ? "" : disabled') }}
                     </div>
                 </div>
-            @endif
-            @if(in_array('reference-country', $partners_keys))
-                <div class="form-group">
-                    <label class="control-label col-md-3">{{ lang('my201.country') }}</label>
-                    <div class="col-md-6">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                               <i class="fa fa-map-marker"></i>
-                             </span>
-	                        <input type="text" {{ ($is_editable['reference-country'] == 1) ? '' : 'readonly="readonly"' }} class="form-control" name="partners_personal_history[reference-country][]" id="partners_personal_history-reference-country" 
-	                        value="<?php echo (isset($reference['reference-country']) ? $reference['reference-country'] : ""); ?>" placeholder="{{ lang('common.enter') }} {{ lang('my201.country') }}"/>
-                        </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">{{ lang('partners.country') }}</label>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-list-ul"></i>
+                        </span>
+                        {{ form_dropdown('partners_personal_history[reference-country]',$partners_country_options, $reference['reference-country'], 'class="form-control select2me" data-placeholder="Select..." ($is_editable["reference-address"] == 1) ? "" : disabled') }}
                     </div>
                 </div>
-            @endif
+            </div>            
             @if(in_array('reference-zipcode', $partners_keys))
                 <div class="form-group">
                     <label class="control-label col-md-3">{{ lang('my201.zip') }}</label>

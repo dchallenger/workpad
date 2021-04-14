@@ -1,21 +1,20 @@
-    <?php $editable = false?>
-    <div class="portlet">
-    	<div class="portlet-title">
-    		<div class="caption" id="education-category">{{ lang('my201.licensure') }}</div>
-
-            @if(in_array('licensure-number', $partners_keys))
-                @if($is_editable['licensure-number'])
-                <?php $editable = true?>
-                		<div class="actions">
-                            <a class="btn btn-default" onclick="add_form('licensure_examination', 'licensure')">
-                                <i class="fa fa-plus"></i>
-                            </a>
-                		</div>
-                	
-                @endif
+<?php $editable = false?>
+<div class="portlet">
+	<div class="portlet-title">
+		<div class="caption" id="education-category">{{ lang('my201.licensure') }}</div>
+        @if(in_array('licensure-number', $partners_keys))
+            @if($is_editable['licensure-number'])
+            <?php $editable = true?>
+            		<div class="actions">
+                        <a class="btn btn-default" onclick="add_form('licensure_examination', 'licensure')">
+                            <i class="fa fa-plus"></i>
+                        </a>
+            		</div>
+            	
             @endif
-            </div>
+        @endif
     </div>
+</div>
 
 
 <div id="personal_licensure">
@@ -66,7 +65,7 @@
                 @endif
                 @if(in_array('licensure-number', $partners_keys))
                 <div class="form-group">
-                    <label class="control-label col-md-3">{{ lang('my201.license_no') }}</label>
+                    <label class="control-label col-md-3">{{ lang('partners.license_no') }}</label>
                     <div class="col-md-6">
                         <input type="text" {{ ($is_editable['licensure-number'] == 1) ? '' : 'readonly="readonly"' }} class="form-control" name="partners_personal_history[licensure-number][]" id="partners_personal_history-licensure-number" 
                         value="<?php echo (isset($licensure['licensure-number']) ? $licensure['licensure-number'] : ""); ?>" placeholder="Enter License Number"/>
@@ -75,7 +74,7 @@
                 @endif
                 @if(in_array('licensure-year-taken', $partners_keys))
                 <div class="form-group">
-                    <label class="control-label col-md-3">{{ lang('my201.date_taken') }}<span class="required">*</span></label>
+                    <label class="control-label col-md-3">{{ lang('partners.date_taken') }}</label>
                         <div class="col-md-9">
                             <div class="input-group input-medium pull-left">
                                 <?php $licensure_month_taken = (isset($licensure['licensure-month-taken']) ? $licensure['licensure-month-taken'] : ""); 
@@ -91,6 +90,21 @@
                         </div>
                 </div>
                 @endif
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('applicants.validity_until') }}</label>
+                        <div class="col-md-9">
+                            <div class="input-group input-medium pull-left">
+                                <?php $disabled = ($is_editable['licensure-year-taken'] == 1) ? '' : 'disabled'; ?>
+                                <?php $licensure_month_validity_until = (isset($licensure['licensure-month-validity-until']) ? $licensure['licensure-month-validity-until'] : ""); ?>
+                        {{ form_dropdown('partners_personal_history[licensure-month-validity-until][]',$months_options, $licensure_month_validity_until, 'class="form-control select2me" '.$disabled.' data-placeholder="Select..."') }}
+                            </div>
+                            <span class="pull-left padding-left-right-10">-</span>
+                            <span class="pull-left">
+                                <input type="text" {{ ($is_editable['licensure-year-taken'] == 1) ? '' : 'readonly="readonly"' }} class="form-control input-small" maxlength="4" name="partners_personal_history[licensure-year-validity-until][]" id="partners_personal_history-licensure-year-validity-until" 
+                            value="<?php echo (isset($licensure['licensure-year-validity-until']) ? $licensure['licensure-year-validity-until'] : ""); ?>"placeholder="Year" data-inputmask="'mask': '9999'">
+                            </span>                            
+                        </div>
+                </div>                  
                 @if(in_array('licensure-remarks', $partners_keys))
                 <div class="form-group">
                     <label class="control-label col-md-3">{{ lang('common.remarks') }}</label>
@@ -99,6 +113,70 @@
                     </div>
                 </div>
                 @endif
+                <div class="form-group">
+                    <label class="control-label col-md-3">Attachment</label>
+                    <div class="col-md-6">
+                        <div data-provides="fileupload" class="fileupload fileupload-new" id="partners_personal_history-licensure-attach-container">
+                            <input type="hidden" name="partners_personal_history[licensure-attach][]" id="partners_personal_history-licensure-attach" value="<?php echo (isset($licensure['licensure-attach']) ? $licensure['licensure-attach'] : ""); ?>"/>
+                            <div class="input-group">
+                                @if ($is_editable['licensure-year-taken'] == 1)
+                                <span class="input-group-btn">
+                                <span class="btn default btn-file">
+                                    <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Select file</span>
+                                    <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+                                    <input type="file" id="partners_personal_history-licensure-attach-fileupload" type="file" name="files[]">
+                                </span>
+                                <a data-dismiss="fileupload" class="btn red fileupload-exists fileupload-delete"><i class="fa fa-trash-o"></i> Remove</a>
+                                @endif
+                                <ul class="padding-none margin-top-11">
+                                    <!-- <i class="fa fa-file fileupload-exists"></i>  -->
+                                    <span class="fileupload-preview">
+                                        <!-- @if( isset($f_info['name'] ) ) {{ basename($f_info['name']) }} @endif -->
+
+                                        <?php
+                                        $attach_file = (isset($licensure['licensure-attach']) ? $licensure['licensure-attach'] : ""); 
+                                        if (!empty($attach_file)){
+                                            $file = FCPATH . urldecode( $attach_file );
+                                            if( file_exists( $file ) )
+                                            {
+                                                $f_info = get_file_info( $file );
+                                                $f_type = filetype( $file );
+
+    /*                                            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                                                $f_type = finfo_file($finfo, $file);*/
+
+                                                switch( $f_type )
+                                                {
+                                                    case 'image/jpeg':
+                                                    $icon = 'fa-picture-o';
+                                                    break;
+                                                    case 'video/mp4':
+                                                    $icon = 'fa-film';
+                                                    break;
+                                                    case 'audio/mpeg':
+                                                    $icon = 'fa-volume-up';
+                                                    break;
+                                                    default:
+                                                    $icon = 'fa-file-text-o';
+                                                }
+                                                $filepath = base_url()."partners/download_file/".$details_data_id[1]['licensure-attach'];
+                                                $file_view = base_url().$licensure['licensure-attach'];
+
+                                                echo '<li class="padding-3" style="list-style:none;"><a href="'.$filepath.'">
+                                                <span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
+                                                <span>'. basename($f_info['name']) .'</span>
+                                                </a>
+                                                </li>';
+                                            }
+                                        }
+                                        ?>
+                                    </span>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>                
 			</div>
 		</div>
 	</div>

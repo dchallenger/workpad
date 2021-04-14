@@ -10,8 +10,10 @@
 				<li><a data-toggle="tab" href="#historical_tab3"><i class="fa fa-list"></i>{{ lang('my201.character_ref') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab4"><i class="fa fa-list"></i>{{ lang('my201.licensure') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab5"><i class="fa fa-list"></i>{{ lang('my201.training') }}</a></li>
+				<li><a data-toggle="tab" href="#historical_tab16"><i class="fa fa-list"></i>{{ lang('partners.test_profile') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab6"><i class="fa fa-list"></i>{{ lang('my201.skills') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab7"><i class="fa fa-list"></i>{{ lang('my201.affiliation') }}</a></li>
+				<li><a data-toggle="tab" href="#historical_tab10"><i class="fa fa-list"></i>{{ lang('partners.medical_records') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab8"><i class="fa fa-list"></i>{{ lang('my201.accountabilities') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab9"><i class="fa fa-files-o"></i>{{ lang('my201.attachments') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab17"><i class="fa fa-list"></i>Movement</a></li>
@@ -47,6 +49,12 @@
 					@include('tabs/edit_my201/training')
 				</form>
 			</div>
+			<div class="tab-pane" id="historical_tab16">
+	        	<form class="form-horizontal" id="form-16" partner_id="16" method="POST">
+					<!-- Previous Trainings : start doing the loop-->
+					@include('tabs/edit_my201/test')
+				</form>
+			</div>			
 			<div class="tab-pane" id="historical_tab6">
 				<!--Skills--> 
 				<form id="form-10" class="form-horizontal" method="POST" partner_id="10">
@@ -59,6 +67,12 @@
 					@include('tabs/edit_my201/affiliation')
 				</form>
 			</div>
+			<div class="tab-pane" id="historical_tab10">
+	        	<form class="form-horizontal" id="form-11" partner_id="18" method="POST">
+					<!-- Previous Trainings : start doing the loop-->
+					@include('tabs/edit_my201/medical')
+				</form>
+			</div>				
 			<div class="tab-pane" id="historical_tab8">
                 <div class="portlet">
                 	<div class="portlet-title">
@@ -199,7 +213,7 @@
 							</td>
 							<td>
 								<div class="btn-group">
-									<a  href="javascript:view_movement_details(<?php echo $movement['action_id'] ?>, <?php echo $movement['type_id'] ?>, '<?php echo $movement['cause'] ?>');" class="btn btn-xs text-muted" ><i class="fa fa-search"></i> {{ lang('common.view') }}</a>		
+									<a  href="javascript:view_movement_details(<?php echo $movement['movement_id'] ?>, <?php echo $movement['action_id'] ?>, <?php echo $movement['type_id'] ?>, '<?php echo $movement['cause'] ?>');" class="btn btn-xs text-muted" ><i class="fa fa-search"></i> {{ lang('common.view') }}</a>		
 								</div>
 							</td>
 						</tr>

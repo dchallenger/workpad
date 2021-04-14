@@ -1,4 +1,27 @@
-<?php $editable = false?>
+<?php
+    $db->select('education_school_id,education_school');
+    $db->where('deleted', '0');
+    $db->where('status_id', '1');
+    $db->order_by('education_school');
+    $education_school = $db->get('users_education_school');
+    $education_school_options = array('' => '');
+    foreach($education_school->result() as $option) {
+        $education_school_options[$option->education_school_id] = $option->education_school;
+    }
+
+    $db->select('education_degree_obtained_id,education_degree_obtained');
+    $db->where('deleted', '0');
+    $db->where('status_id', '1');
+    $db->order_by('education_degree_obtained');
+    $degree_obtained = $db->get('users_education_degree_obtained');
+    $degree_obtained_options = array('' => '');
+    foreach($degree_obtained->result() as $degree_option) {
+        $degree_obtained_options[$degree_option->education_degree_obtained_id] = $degree_option->education_degree_obtained;
+    }
+
+    $editable = true;
+?>
+
 @if(in_array('education-type', $partners_keys))
  	@if($is_editable['education-type'])
  	<?php $editable = true?>
@@ -118,28 +141,39 @@
                     </div>
                     @endif
                     <?php if(in_array(strtolower($education_type), $type_with_degree)) { ?>
-                    @if(in_array('education-degree', $partners_keys))
                     <div class="form-group">
-                        <label class="control-label col-md-3">{{ lang('my201.degree') }}<span class="required">*</span></label>
+                        <label class="control-label col-md-3">{{ lang('partners.degree') }}</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" {{ ($is_editable['education-degree'] == 1) ? '' : 'readonly="readonly"' }}  name="partners_personal_history[education-degree][]" id="partners_personal_history-education-degree" 
-                            value="<?php echo (isset($education['education-degree']) ? $education['education-degree'] : ""); ?>" placeholder="{{ lang('common.enter') }} {{ lang('my201.degree') }}"/>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-list-ul"></i>
+                                </span>                            
+                                {{ form_dropdown('partners_personal_history[education-degree][]',$degree_obtained_options, (isset($education['education-degree']) ? $education['education-degree'] : ''), 'class="form-control select2me" data-placeholder="Select..."') }}
+                            </div>
                         </div>
                     </div>
-                    @endif
                     <?php 
                     }else{
                     ?>
                     <div class="form-group" style="display:none;">
-                        <label class="control-label col-md-3">{{ lang('my201.start_year') }}<span class="required">*</span></label>
+                        <label class="control-label col-md-3">{{ lang('partners.start_year') }}<span class="required">*</span></label>
                         <div class="col-md-6">
                             <input type="hidden" class="form-control" name="partners_personal_history[education-degree][]" id="partners_personal_history-education-degree" 
-                            value="" placeholder="{{ lang('common.enter') }} {{ lang('my201.degree') }}"/>
+                            value="" placeholder="{{ lang('common.enter') }} {{ lang('partners.degree') }}"/>
                         </div>
                     </div>
                     <?php
                         } 
                     ?>
+                    @if(in_array('education-honors_awards', $partners_keys))
+                    <div class="form-group">
+                        <label class="control-label col-md-3">{{ lang('partners.honors_receive') }}</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="partners_personal_history[education-honors_awards][]" id="partners_personal_history-education-honors_awards" 
+                            value="<?php echo (isset($education['education-honors_awards']) ? $education['education-honors_awards'] : ""); ?>" placeholder="{{ lang('common.enter') }} {{ lang('partners.honors_receive') }}"/>
+                        </div>
+                    </div>                    
+                    @endif
                     @if(in_array('education-status', $partners_keys))
                     <div class="form-group">
                         <label class="control-label col-md-3">{{ lang('common.status') }}<span class="required">*</span></label>
