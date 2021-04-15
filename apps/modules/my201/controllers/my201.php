@@ -183,9 +183,9 @@ class My201 extends MY_PrivateController
 		$data['record']['bank_account_number_savings'] = (count($bank_account_number_savings) == 0 ? " " : ($bank_account_number_savings[0]['key_value'] == "" ? "" : $bank_account_number_savings[0]['key_value']));		
 		$bank_account_number_current = $this->mod->get_partners_personal($this->user->user_id, 'bank_account_number_current');
 		$data['record']['bank_account_number_current'] = (count($bank_account_number_current) == 0 ? " " : ($bank_account_number_current[0]['key_value'] == "" ? "" : $bank_account_number_current[0]['key_value']));		
-		$bank_number_savings = $this->mode->get_partners_personal($this->user->user_id, 'bank_account_number_savings');
+		$bank_number_savings = $this->mod->get_partners_personal($this->user->user_id, 'bank_account_number_savings');
 		$data['record']['bank_number_savings'] = (count($bank_number_savings) == 0 ? " " : ($bank_number_savings[0]['key_value'] == "" ? "" : $bank_number_savings[0]['key_value']));
-		$bank_number_current = $this->mode->get_partners_personal($this->user->user_id, 'bank_account_number_current');
+		$bank_number_current = $this->mod->get_partners_personal($this->user->user_id, 'bank_account_number_current');
 		$data['record']['bank_number_current'] = (count($bank_number_current) == 0 ? " " : ($bank_number_current[0]['key_value'] == "" ? "" : $bank_number_current[0]['key_value']));		
 		$payroll_bank_account_number = $this->mod->get_partners_personal($this->user->user_id, 'payroll_bank_account_number');
 		$data['record']['payroll_bank_account_number'] = (count($payroll_bank_account_number) == 0 ? " " : ($payroll_bank_account_number[0]['key_value'] == "" ? "" : $payroll_bank_account_number[0]['key_value']));
