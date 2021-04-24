@@ -110,6 +110,17 @@ function add_class()
                         rtl: App.isRTL(),
                         autoclose: true
                     });
+                    
+                    $('.make-switch').not(".has-switch")['bootstrapSwitch']();
+
+                    $('.dependent').change(function(){
+                        if( $(this).is(':checked') ){
+                            $(this).parent().next().val(1);
+                        }
+                        else{
+                            $(this).parent().next().val(0);
+                        }
+                    });                                        
                 }
             });
         }
@@ -143,7 +154,7 @@ function init_city()
         $('#citiesTags .ui-autocomplete-input').hide();
     }
 
-    $('select.select2mecity').select2({
+    $('select.select2me').select2({
         placeholder: "Select an option",
         allowClear: true
     });
@@ -165,7 +176,7 @@ function init_country()
         $('#countryTags .ui-autocomplete-input').hide();
     }
 
-    $('select.select2mecountry').select2({
+    $('select.select2me').select2({
         placeholder: "Select an option",
         allowClear: true
     });

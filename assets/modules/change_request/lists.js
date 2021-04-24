@@ -37,7 +37,7 @@ function save_request_detail()
     });  
 }
 
-function change_status( user_id, created_on, status)
+function change_status( user_id, key_id, status)
 {
 	switch( status )
 	{
@@ -58,7 +58,7 @@ function change_status( user_id, created_on, status)
 					$.ajax({
 						url: base_url + module.get('route') + '/change_status',
 						type:"POST",
-						data: {user_id:user_id, created_on:created_on, status:status},
+						data: {user_id:user_id, key_id:key_id, status:status},
 						async: false,
 						dataType: "json",
 						success: function ( response ) {

@@ -370,6 +370,9 @@ class Report_generator extends MY_PrivateController
                 $data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);
                 break;
             case 'DAILY TIME RECORD': //Bank Remittance
+                $button = array('xls' => 0, 'csv' => 1, 'pdf' => 0, 'txt' => 0);
+                $data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);
+                break;            
             case 'EXCEPTION_REPORT': //Bank Remittance
             case 'PENDING_TRANSACTIONS':
             case 'TOTAL_HOURS_WORK_PER_LOCATION':
@@ -1016,6 +1019,46 @@ class Report_generator extends MY_PrivateController
         }
     }
 
+    function update_user_filter()
+    {
+        $this->_ajax_only();
+
+        $company = $this->input->post('company');
+        $division = $this->input->post('division');
+        $department = $this->input->post('department');
+        $employment_type = $this->input->post('employment_type');
+
+        $filter = '';
+
+        $company_comma = ($company ? implode(',', $company) : '');
+        $division_comma = ($division ? implode(',', $division) : '');
+        $department_comma = ($department ? implode(',', $department) : '');
+        $employment_type_comma = ($employment_type ? implode(',', $employment_type) : '');
+
+        if ($company_comma != '')
+            $filter = ' AND b.company_id IN ('.$company_comma.') ';
+
+        if ($division_comma != '')
+            $filter .= ' AND b.division_id IN ('.$division_comma.') ';
+
+        if ($department_comma != '')
+            $filter .= ' AND b.department_id IN ('.$department_comma.') ';
+
+        if ($employment_type_comma != '')
+            $filter .= ' AND c.employment_type_id IN ('.$employment_type_comma.') ';
+
+        $filter_result = $this->db->query('SELECT b.user_id,a.full_name
+                                         FROM ww_users a, ww_users_profile b,ww_partners c
+                                         WHERE a.user_id=b.user_id AND a.user_id=c.user_id '.$filter.' ORDER BY a.full_name');
+
+        $this->response->users = '';
+        foreach( $filter_result->result() as $user )
+        {
+            $this->response->users .= '<option value="'.$user->user_id.'">'.$user->full_name.'</option>';
+        }
+        $this->_ajax_return();  
+    }
+
     function export()
     {
         $this->_ajax_only();
@@ -1402,13 +1445,15 @@ class Report_generator extends MY_PrivateController
         $params['vars']['username'] = $user['lastname'] .', '. $user['firstname'] . ' ' .$user['middlename'];
         $this->load->vars($params);
 
+        $filter_var = $this->input->post('filter_var');
+
         if( $result->num_rows() > 0 )
         {
             if ( $_POST['file'] == 'excel') {
                 switch ( $this->input->post( 'record_id' ) ) {
                     
                     default:
-                        $filename = $this->mod->export_excel( $report['main'], $report['columns'], $result, $complete_filter);
+                        $filename = $this->mod->export_excel( $report['main'], $report['columns'], $result, $complete_filter,$filter_var);
                         break;
                 }
             }

@@ -62,6 +62,9 @@
 						</thead>
 						<tbody>
 							@foreach( $editable_filters->result() as $filter )
+			                	@if($filter->label_column == 'employment_type')
+			                		$filter->label_column = 'level';
+			                	@endif							
 								<?php switch( $filter->uitype_id ):
 				                	case 1:
 				                		$label = explode( '_', $filter->label_column );

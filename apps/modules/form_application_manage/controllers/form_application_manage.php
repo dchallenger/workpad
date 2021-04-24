@@ -624,6 +624,14 @@ class Form_application_manage extends MY_PrivateController
                 $this->form_manage->remove_additiona_leave($form_name);
             }
 
+
+            $audit_log_data['forms_id'] = $this->input->post('formid');
+            $audit_log_data['approver'] = $current_user->full_name;
+            $audit_log_data['action'] = $action;
+            $audit_log_data['forms'] = $form_name['form'];
+
+            $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', $this->mod->table, array(), $audit_log_data);
+
             // determines to where the action was 
             // performed and used by after_save to
             // know which notification to broadcast

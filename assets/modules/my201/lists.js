@@ -1,6 +1,18 @@
 $(document).ready(function() {
     var service = get_service(  $('#partners-effectivity_date').val() );
-    $('span.calculatedservice').html(service+"&nbsp;&nbsp;years of service")    
+    $('span.calculatedservice').html(service+"&nbsp;&nbsp;years of service")
+
+    var sbu_unit_ids = $('#partners-sbu_unit').val();
+    $.ajax({
+        url: base_url + module.get('route') + '/get_sbu_unit_percentage',
+        type:"POST",
+        async: false,
+        data: 'sbu_unit_ids='+sbu_unit_ids,
+        dataType: "json",
+        success: function ( response ) {
+            $('.total_percentage').html(response.total_perentage);
+        }
+    });         
 });
 
 function show_cr_form()
@@ -51,7 +63,18 @@ function add_class()
                             rtl: App.isRTL(),
                             autoclose: true
                         });
-                    }                    
+                    }
+                    
+                    $('.make-switch').not(".has-switch")['bootstrapSwitch']();
+
+                    $('.dependent').change(function(){
+                        if( $(this).is(':checked') ){
+                            $(this).parent().next().val(1);
+                        }
+                        else{
+                            $(this).parent().next().val(0);
+                        }
+                    });                     
                 }
             });
         }

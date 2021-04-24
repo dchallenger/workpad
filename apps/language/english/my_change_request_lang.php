@@ -4,6 +4,7 @@ $lang['my_change_request'] = array(
 	'info201' => '201 Info',
 	'change_to' => 'Changed to',
 	'change_request' => 'Change Request',
+	'request' => 'Request',
 	'select_add' => 'Select Item and Add.',
 	'status' => 'Status',
 	'date_created' => 'Date Created',

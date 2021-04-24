@@ -37,11 +37,11 @@ class my201_model extends Record
 	}
 	function get_profile_header_details($user_id=0){
 
-		$this->db->select('title, lastname, firstname, middlename, suffix, users_position.position, users_profile.project_id as project_id, users_profile.v_project as project,
-			department, v_project_hr as project_hr, sbu_unit, v_coordinator as coordinator, v_credit_setup as credit_setup, branch, ww_users_company.company, email, birth_date, photo, job_level, 
+		$this->db->select('title, lastname, firstname, middlename, suffix, users_position.position, users.role_id, partners.old_new, partners.v_job_grade as job_grade, users_profile.project_id as project_id, users_profile.v_project as project,
+			department, v_project_hr as project_hr, users_profile.sbu_unit_id, users_profile.project_id, sbu_unit, v_coordinator as coordinator, v_credit_setup as credit_setup, branch, ww_users_company.company, email, birth_date, photo, job_level, 
 			location, id_number, biometric, shift, calendar, employment_status, effectivity_date, regularization_date,old_new,
 			original_hired_date,employment_end_date,last_promotion_date,users_division.division, users_division.cost_center_code, users_profile.reports_to_id as immediate, group, role,
-			maidenname, nickname, partners_employment_type.employment_type, partners_classification.classification, resigned_date, start_date, end_date')
+			maidenname, nickname, partners_employment_type.employment_type, partners_classification.classification, resigned_date, users_profile.start_date, users_profile.end_date, users_profile.coordinator_id')
 	    ->from('users')
 	    ->join('users_profile', 'users.user_id = users_profile.user_id', 'left')
 	    ->join('users_position', 'users_profile.position_id = users_position.position_id', 'left')
@@ -198,8 +198,22 @@ class my201_model extends Record
 				return $this->load->view('key_templates/gender', array('key' => $key, 'value' => $value), true);
 				break;
 			case 'bday':
+			case 'family-birthdate':
 				$this->load->helper('form');
 				return $this->load->view('key_templates/date_picker', array('key' => $key, 'value' => $value), true);
+				break;
+			case 'family-dependent-insurance':
+			case 'family-dependent-hmo':
+				$this->load->helper('form');
+				return $this->load->view('key_templates/yes_no', array('key' => $key, 'value' => $value), true);
+				break;
+			case 'family-relationship':
+				$this->load->helper('form');
+				return $this->load->view('key_templates/family_relationship', array('key' => $key, 'value' => $value), true);
+				break;
+			case 'religion':
+				$this->load->helper('form');
+				return $this->load->view('key_templates/religion', array('key' => $key, 'value' => $value), true);
 				break;				
 			default:
 				return $this->load->view('key_templates/textfield', array('key' => $key, 'value' => $value), true);

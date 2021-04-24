@@ -138,7 +138,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row hidden">
 							<div class="col-md-12">
 								<div class="form-group">
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted">Classification :</label>
@@ -387,9 +387,12 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
+									<input type="hidden" value="{{$sbu_unit_id}}" id="partners-sbu_unit">
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners_immediate.sbu_unit') }} :</label>
 									<div class="col-md-7 col-sm-7">
 										<span id="role-permission">{{$sbu_unit}}</span>
+										<br>
+										<span class="text-muted small">Total Percentage : <span class="total_percentage"></span></span>										
 									</div>
 								</div>
 							</div>

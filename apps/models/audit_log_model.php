@@ -53,7 +53,7 @@ class audit_log_model extends Record
 		$qry .= " AND {$this->db->dbprefix}{$this->table}.item_name NOT IN ('key','key_id','sequence')";
 
 		$qry .= ' '. $filter;
-		$qry .= " GROUP BY modules,item_name,original_value,new_value";
+		$qry .= " GROUP BY modules,item_name,original_value,new_value,date_time";
 		$qry .= " ORDER BY {$this->db->dbprefix}{$this->table}.date_time DESC";
 		$qry .= " LIMIT $limit OFFSET $start";
 

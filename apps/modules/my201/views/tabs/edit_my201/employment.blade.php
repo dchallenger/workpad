@@ -50,6 +50,29 @@
 					</div>
 				</div>
 
+                <div class="form-group ">
+                    <label class="control-label col-md-3">{{ lang('partners.role') }}<span class="required">*</span></label>
+                    <div class="col-md-5">
+                    	<?php 	$db->select('role_id,role');
+                                $db->where('role_id >', 1);
+                    			$db->where('deleted', '0');
+                                $db->order_by('role');
+                    			$options = $db->get('roles');
+
+								$users_role_id_options = array('' => '');
+	                            foreach($options->result() as $option)
+	                            {
+	                            	$users_role_id_options[$option->role_id] = $option->role;
+	                            } ?>
+	                    <div class="input-group">
+							<span class="input-group-addon">
+	                            <i class="fa fa-list-ul"></i>
+	                        </span>
+	                    {{ form_dropdown('users[role_id]',$users_role_id_options, $role_id, 'class="form-control select2me" data-placeholder="Select..." disabled') }}
+	                    </div>
+	                </div>	
+                </div>
+
 				<div class="col-md-12">
 					<div class="form-group">
 						<label class="control-label col-md-3 col-sm-3">{{ lang('my201.id_no') }} </label>
@@ -111,19 +134,6 @@
 		                </div>
 					</div>
 				</div>
-				<div class="col-md-12">
-					<div class="form-group">
-						<label class="control-label col-md-3 col-sm-3">{{ lang('my201.type') }} </label>
-						<div class="col-md-5">
-	                    	<div class="input-group">
-	                    		<span class="input-group-addon">
-		                            <i class="fa fa-list-ul"></i>
-		                        </span>
-		                     <input type="text" disabled class="form-control" id="employment-type" value="{{ $type }}" >
-		                    </div>
-		                </div>
-					</div>
-				</div>
 				@if( in_array('job_class', $partners_keys ))
 					<div class="col-md-12">
 						<div class="form-group">
@@ -141,6 +151,35 @@
 					</div>
 				@endif
 
+		        @if( in_array( 'job_level', $partners_keys ))
+		            <div class="col-md-12">
+		                <div class="form-group">
+		                    <label class="control-label col-md-3 col-sm-3">{{ lang('partners.rank') }} </label>
+		                    <div class="col-md-5">
+		                    	<div class="input-group">
+		                    		<span class="input-group-addon">
+			                            <i class="fa fa-list-ul"></i>
+			                        </span>
+			                     <input type="text" disabled class="form-control" id="shift" value="{{ $job_grade }}" >
+			                    </div>
+			                </div>
+		                </div>
+		            </div>
+		        @endif
+
+				<div class="col-md-12">
+					<div class="form-group">
+						<label class="control-label col-md-3 col-sm-3">{{ lang('partners.level') }} </label>
+						<div class="col-md-5">
+	                    	<div class="input-group">
+	                    		<span class="input-group-addon">
+		                            <i class="fa fa-list-ul"></i>
+		                        </span>
+		                     <input type="text" disabled class="form-control" id="employment-type" value="{{ $type }}" >
+		                    </div>
+		                </div>
+					</div>
+				</div>
 		        @if( in_array( 'job_rank_level', $partners_keys ))
 		            <div class="col-md-12">
 		                <div class="form-group">
@@ -153,22 +192,6 @@
 				                     <input type="text" disabled class="form-control" id="shift" value="{{ $record['job_rank_level'] }}" >
 				                    </div>
 				                </div>
-		                </div>
-		            </div>
-		        @endif
-        
-		        @if( in_array( 'job_level', $partners_keys ))
-		            <div class="col-md-12">
-		                <div class="form-group">
-		                    <label class="control-label col-md-3 col-sm-3">{{ lang('my201.job_level') }} </label>
-		                    <div class="col-md-5">
-		                    	<div class="input-group">
-		                    		<span class="input-group-addon">
-			                            <i class="fa fa-list-ul"></i>
-			                        </span>
-			                     <input type="text" disabled class="form-control" id="shift" value="{{ $record['job_level'] }}" >
-			                    </div>
-			                </div>
 		                </div>
 		            </div>
 		        @endif
@@ -236,6 +259,20 @@
 					</div>
 				@endif
 
+		        @if(in_array('original_date_hired', $partners_keys))
+					<div class="col-md-12">
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3">{{ lang('my201.ohire_date') }} </label>
+							<div class="col-md-5">
+		                   		<div class="input-group input-medium ">
+										<input type="text" class="form-control" id="partners-original_date_hired" value="{{ $original_date_hired }}" disabled >
+		                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		                        </div>
+							</div>
+						</div>
+					</div>
+		    	@endif
+
 				<div class="col-md-12">
 					<div class="form-group">
 						<label class="control-label col-md-3 col-sm-3">{{ lang('my201.hire_date') }} </label>
@@ -244,9 +281,24 @@
 									<input type="text" class="form-control" id="partners-effectivity_date" value="{{ $date_hired }}" disabled >
 	                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 	                        </div>
+	                        <span class="text-muted small calculatedservice"></span>
 	                    </div>
 					</div>
 				</div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.regularization_date') }}</label>
+                    <div class="col-md-5">
+                        <div class="input-group input-medium">
+                            <?php if($regularization_date == 'January 01, 1970') { ?>
+                                <input type="text" class="form-control" name="partners[regularization_date]" id="partners-regularization_date" value="" placeholder="{{ lang('common.enter') }} {{ lang('partners.regularization_date') }}" >
+                            <?php } else { ?>
+                                <input type="text" class="form-control" name="partners[regularization_date]" id="partners-regularization_date" value="{{ $regularization_date }}" disabled>
+                            <?php } ?>
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
 
 				@if(in_array('probationary_date', $partners_keys))
 					<div class="col-md-12">
@@ -255,21 +307,6 @@
 							<div class="col-md-5">
 		                   		<div class="input-group input-medium ">
 										<input type="text" class="form-control" id="partners-probationary_date" value="{{ $probationary_date }}" disabled >
-		                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-		                        </div>
-		            		<span class="text-muted small">End date of employment/contract service</span>
-							</div>
-						</div>
-					</div>
-		    	@endif
-
-		        @if(in_array('original_date_hired', $partners_keys))
-					<div class="col-md-12">
-						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3">{{ lang('my201.ohire_date') }} </label>
-							<div class="col-md-5">
-		                   		<div class="input-group input-medium ">
-										<input type="text" class="form-control" id="partners-original_date_hired" value="{{ $original_date_hired }}" disabled >
 		                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 		                        </div>
 							</div>
@@ -304,6 +341,15 @@
 						</div>
 					</div>
 		        @endif
+                <div class="form-group">
+                    <label class="col-md-3 control-label">{{ lang('partners.benefit_package') }}</label>
+                    <div class="col-md-5">
+                        <div class="radio-list">
+                            <label class="radio-inline"><input class="form-filter option" type="radio" name="partners[old_new]" id="optionsRadios2" value="0" @if ($old_new == 0) checked="" @endif disabled>Old</label>
+                            <label class="radio-inline"><input class="form-filter option" type="radio" name="partners[old_new]" id="optionsRadios2" value="1" @if ($old_new == 1) checked="" @endif disabled>New</label>
+                        </div>                        
+                    </div>
+                </div>  		        
 			</div>
 		</div>
 	</div>
@@ -357,11 +403,50 @@
 	                    		<span class="input-group-addon">
 		                            <i class="fa fa-list-ul"></i>
 		                        </span>
-		                     <input type="text" disabled class="form-control" id="division" value="{{ $division }}" >
+		                     	<input type="text" disabled class="form-control" id="division" value="{{ $division }}" >
 		                    </div>
 		                </div>
 					</div>
 				</div>
+                @if(in_array('department', $partners_keys))
+                <div class="col-md-12">
+	                <div class="form-group">
+	                    <label class="control-label col-md-3">{{ lang('partners.dept') }}<span class="required">*</span></label>
+	                    <div class="col-md-5">
+	                    	<div class="input-group">
+	                    		<span class="input-group-addon">
+		                            <i class="fa fa-list-ul"></i>
+		                        </span>
+		                     	<input type="text" disabled class="form-control" id="agency_assignment" value="{{ $department }}" >
+		                    </div>
+		                </div>
+	                </div>
+            	</div>
+                @endif
+
+                @if(in_array('sbu_unit', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.sbu_unit') }}<span class="required">*</span></label>
+                    <div class="col-md-5">
+                        <?php   $db->select('sbu_unit_id,sbu_unit');
+                                $db->where('deleted', '0');
+                                $options = $db->get('users_sbu_unit');
+
+                                $users_sbu_unit_id_options = array('' => '');
+                                foreach($options->result() as $option)
+                                {
+                                    $users_sbu_unit_id_options[$option->sbu_unit_id] = $option->sbu_unit;
+                                } ?>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                        	{{ form_dropdown('users_profile[sbu_unit_id]',$users_sbu_unit_id_options, $sbu_unit_id, 'class="form-control select2me" data-placeholder="Select..." disabled') }}
+                        </div>
+                    </div>  
+                </div>
+                @endif
+
 		        @if(in_array('agency_assignment', $partners_keys))
 		            <div class="col-md-12">
 		                <div class="form-group">
@@ -392,6 +477,90 @@
 						</div>
 					</div>
 				@endif
+                <div class="form-group ">
+                    <label class="control-label col-md-3">{{ lang('partners.project_name') }}</label>
+                    <div class="col-md-5">
+                        <?php   
+                            $db->select('project_id,project');
+                            $db->where('deleted', '0');
+                            $options = $db->get('users_project');
+
+                            $users_project = array('' => '');
+                            foreach($options->result() as $option)
+                            {
+                                $users_project[$option->project_id] = $option->project;
+                            } 
+                        ?>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                        	{{ form_dropdown('users_profile[project_id]',$users_project, $project_id, 'class="form-control select2me" data-placeholder="Select..." disabled') }}
+                        </div>
+                    </div>  
+                </div>
+                @if(in_array('start_date', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.start_date') }}</label>
+                    <div class="col-md-5">
+                        <div class="input-group input-medium">
+                            <?php if($start_date == 'January 01, 1970') { ?>
+                                <input type="text" disabled class="form-control" name="users_profile[start_date]" id="users_profile-start_date" value="" placeholder="{{ lang('common.enter') }} {{ lang('partners.start_date') }}" >
+                            <?php } else { ?>
+                                <input type="text" disabled class="form-control" name="users_profile[start_date]" id="users_profile-start_date" value="{{ $start_date }}" placeholder="{{ lang('common.enter') }} {{ lang('partners.start_date') }}" >
+                            <?php } ?>                            
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
+                @endif  
+                @if(in_array('end_date', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.end_date') }}</label>
+                    <div class="col-md-5">
+                        <div class="input-group input-medium">
+                            <?php if($end_date == 'January 01, 1970') { ?>
+                                <input type="text" disabled class="form-control" name="users_profile[end_date]" id="users_profile-end_date" value="" placeholder="{{ lang('common.enter') }} {{ lang('partners.end_date') }}" >
+                            <?php } else { ?>
+                                <input type="text" disabled class="form-control" name="users_profile[end_date]" id="users_profile-end_date" value="{{ $end_date }}" placeholder="{{ lang('common.enter') }} {{ lang('partners.end_date') }}" >
+                            <?php } ?> 
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
+                @endif   
+                @if(in_array('work_schedule_coordinator', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.coordinator') }}</label>
+                    <div class="col-md-5">
+                        <?php   
+                            $db->select('user_id,display_name');
+                            $db->where('deleted', '0');
+                            $db->where('active', '1');
+                            $db->where('user_id <>', '1');
+                            $db->order_by('display_name');
+                            $options = $db->get('users');
+
+                            $users_coordinator_id_options = array('' => '');
+                            foreach($options->result() as $option)
+                            {
+                                $users_coordinator_id_options[$option->user_id] = $option->display_name;
+                            } 
+                        ?>                            
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-list-ul"></i>
+                            </span>
+                            <?php
+                                $coordinator_val = 1;
+                                if ($coordinator_id != '')
+                                    $coordinator_val = explode(',', $coordinator_id);
+                            ?>
+                            {{ form_multiselect('users_profile[coordinator_id][]',$users_coordinator_id_options, $coordinator_val, 'class="form-control select2me" id="users_profile-coordinator_id" data-placeholder="Select..." disabled') }}
+                        </div>              
+                    </div>  
+                </div>
+                @endif                 				
 			</div>
 		</div>
 	</div>

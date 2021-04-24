@@ -11,3 +11,8 @@ $config['field_validations']['users_sbu_unit.sbu_unit'][] = array(
 	'label'   => 'SBU Unit',
 	'rules'   => 'V'
 );
+$config['field_validations']['users_sbu_unit.percentage'][] = array(
+	'field'   => 'users_sbu_unit[percentage]',
+	'label'   => 'Percentage',
+	'rules'   => 'V'
+);

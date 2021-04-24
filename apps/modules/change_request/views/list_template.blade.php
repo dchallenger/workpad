@@ -1,9 +1,34 @@
+<?php
+    switch ($partners_personal_request_key_code) {
+        case 'email':
+            $partners_personal_request_key_class = 'Office Email';
+            break;
+        case 'phone':
+            $partners_personal_request_key_class = 'Office Phone';
+            break;
+        case 'mobile':
+            $partners_personal_request_key_class = 'Office Mobile';
+            break;
+        case 'personal_email':
+            $partners_personal_request_key_class = 'Personal Email';
+            break;                      
+        case 'personal_phone':
+            $partners_personal_request_key_class = 'Personal Phone';
+            break;
+        case 'personal_mobile':
+            $partners_personal_request_key_class = 'Personal Mobile';
+            break;                      
+    }
+?>
 <tr class="record">
     <td>
-        <a class="text-success" href="{{ $edit_url }}">{{ $partners_personal_request_employee_id }}</a>
+        <span class="text-success">{{ $partners_personal_request_employee_id }}</span>
         <br>
         <span class="text-muted small">{{ $partners_personal_request_id_number }}</span>
     </td>
+    <td>
+        <span class="text-success">{{ $partners_personal_request_key_class }}</span>
+    </td>    
     <td>
         {{ date( 'M-d', strtotime( $partners_personal_request_created_on ) ) }}
         <span class="text-muted small">

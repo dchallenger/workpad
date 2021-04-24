@@ -69,6 +69,28 @@
 								</thead>
 								<tbody>
 									@foreach($record as $request)
+										<?php
+											switch ($request['key_code']) {
+												case 'phone':
+													$request['label'] = 'Office Phone';
+													break;
+												case 'mobile':
+													$request['label'] = 'Office Mobile';
+													break;
+												case 'email':
+													$request['label'] = 'Office Email';
+													break;
+												case 'personal_phone':
+													$request['label'] = 'Personal Phone';
+													break;
+												case 'personal_mobile':
+													$request['label'] = 'Personal Mobile';
+													break;
+												case 'personal_email':
+													$request['label'] = 'Personal Email';
+													break;					
+											}
+										?>									
 										<tr>
 											<td>{{ $request['label'] }}</td> 
 											<!-- <td></td> -->

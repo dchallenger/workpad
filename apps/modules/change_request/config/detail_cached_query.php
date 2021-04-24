@@ -10,6 +10,7 @@ $config["detail_cached_query"] = 'SELECT
 CONCAT(up.firstname, " ", up.lastname) as employee_name,
 up.company as company,
 ud.department as department,
+pk.key_code as key_code,
 pk.key_label as label,
 `ww_partners_personal_request`.`key_value` as partners_personal_request_key_value
 FROM (`ww_partners_personal_request`)

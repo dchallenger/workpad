@@ -37,18 +37,29 @@
 	                @endif
 	                @if( $editable_filters->num_rows() > 0 )
 		                @foreach( $editable_filters->result() as $filter )
-							<?php switch( $filter->uitype_id ):
-			                	case 1:
-			                	case 9:
-			                		$label = explode( '_', $filter->label_column );
-			                		$label = ucwords( implode( ' ', $label ) );
-			                		break;
-			                	default:
-			                		$label = explode( '.', $filter->column );
-			                		$label = explode( '_', $label[1] );
-			                		$label = ucwords( implode( ' ', $label ) );
-			                		$value = $filter->filter;
-			            	endswitch; ?>
+							<?php 
+								switch( $filter->uitype_id ):
+				                	case 1:
+				                	case 9:
+				                		$label = explode( '_', $filter->label_column );
+				                		$label = ucwords( implode( ' ', $label ) );
+				                		break;
+				                	default:
+				                		$label = explode( '.', $filter->column );
+				                		$label = explode( '_', $label[1] );
+				                		$label = ucwords( implode( ' ', $label ) );
+				                		$value = $filter->filter;
+				            	endswitch; 
+
+				            	switch ($label) {
+				            		case 'Employment Type':
+				            			$label = 'Level';
+				            			break;
+				            		case 'Full Name':
+				            			$label = 'Employee';
+				            			break;				            			
+				            	}
+			            	?>
 
 							<tr>
 								<input type="hidden" class="<?php echo ($filter->required == 1 ? 'required' : '' ) ?>" label="<?php echo $label ?>" form-name="filter[<?php echo $filter->filter_id ?>]">

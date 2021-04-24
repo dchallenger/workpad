@@ -57,7 +57,7 @@ class change_request_model extends Record
 			$qry .= " AND (ppa.user_id = ".$this->user->user_id .")";
 		}
 		$qry .= ' '. $filter;
-		$qry .= " GROUP BY {$this->db->dbprefix}{$this->table}.status, {$this->db->dbprefix}{$this->table}.created_on ORDER BY {$this->db->dbprefix}{$this->table}.created_on desc";
+		$qry .= " GROUP BY {$this->db->dbprefix}{$this->table}.status, {$this->db->dbprefix}{$this->table}.created_on,{$this->db->dbprefix}{$this->table}.key_id, {$this->db->dbprefix}{$this->table}.user_id ORDER BY {$this->db->dbprefix}{$this->table}.created_on desc";
 		$qry .= " LIMIT $limit OFFSET $start";
 		
 		$this->load->library('parser');
@@ -101,9 +101,9 @@ class change_request_model extends Record
 		return $notified;
 	}
 
-	function change_status($user_id, $created_on, $status)
+	function change_status($user_id, $key_id, $status)
 	{
-		$this->db->update( $this->table, array('status' => $status), array('user_id' => $user_id, 'created_on' => $created_on) );
+		$this->db->update( $this->table, array('status' => $status), array('user_id' => $user_id, 'key_id' => $key_id) );
 	}
 
 	function change_status_detail($record_id, $status)

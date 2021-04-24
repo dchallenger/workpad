@@ -129,21 +129,27 @@
                 <div class="form-group">
                     <label class="control-label col-md-3">{{ lang('partners.sbu_unit') }}<span class="required">*</span></label>
                     <div class="col-md-5">
-                        <?php   $db->select('sbu_unit_id,sbu_unit');
+                        <?php   $db->select('sbu_unit_id,sbu_unit,percentage');
                                 $db->where('deleted', '0');
                                 $options = $db->get('users_sbu_unit');
 
                                 $users_sbu_unit_id_options = array('' => '');
                                 foreach($options->result() as $option)
                                 {
-                                    $users_sbu_unit_id_options[$option->sbu_unit_id] = $option->sbu_unit;
+                                    $users_sbu_unit_id_options[$option->sbu_unit_id] = $option->sbu_unit .' ('.$option->percentage.'%)';
                                 } ?>
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-list-ul"></i>
                             </span>
-                        {{ form_dropdown('users_profile[sbu_unit_id]',$users_sbu_unit_id_options, $record['users_profile.sbu_unit_id'], 'class="form-control select2me" data-placeholder="Select..."') }}
+                            <?php
+                                $sbu_unit_val = 1;
+                                if (!empty($record['users_profile.sbu_unit_id']))
+                                    $sbu_unit_val = explode(',', $record['users_profile.sbu_unit_id']);
+                            ?>
+                            {{ form_multiselect('users_profile[sbu_unit_id][]',$users_sbu_unit_id_options, $sbu_unit_val, 'class="form-control select2me" id="users_profile-sbu_unit" data-placeholder="Select..."') }}
                         </div>
+                        <span class="text-muted small">Total Percentage : <span class="total_percentage"></span></span>
                     </div>  
                 </div>
                 @endif

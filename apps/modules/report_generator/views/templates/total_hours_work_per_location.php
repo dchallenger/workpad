@@ -10,8 +10,10 @@
 			$date_range = array();
 			if (!empty($filter)) {
 				foreach ($filter as $key => $value) {
-					if(strtotime($value))
-						$date_range[] = $value;
+					if (!is_array($value)) {
+						if(strtotime($value))
+							$date_range[] = $value;
+					}
 				}
 			}		
 		?>

@@ -28,17 +28,33 @@ function init_filter_ui()
         secondStep: 1
     });
 
-    $('.multiple_dropdown_tags').select2({
+/*    $('.multiple_dropdown_tags').select2({
         placeholder: "Select...",
         allowClear: true
-    });
+    });*/
 
-	$('.company').change(function(){
-		//update_department( $(this).val() );
+	var company = '';
+	var division = '';
+	var department = '';
+	var employment_type = '';
+	$('#company,#division,#department,#employment_type').change(function(){
+		company = $('#company').val();
+		division = $('#division').val();
+		department = $('#department').val();
+		employment_type = $('#employment_type').val();
+
+		var filter = {company:company,division:division,department:department,employment_type:employment_type};
+
+		update_user_filter(filter);
 	});
-    // $('.multiple_dropdown').multiselect();
-    // $('.ui-multiselect').css('width', '280px');
-    // $('.ui-multiselect-menu').css('width', '280px');
+
+    //$('.multiple_dropdown_tags').multiselect({});
+
+    $(".multiple_dropdown_tags").multiselect({
+        selectedList: 1
+    }).multiselectfilter();	
+/*    $('.ui-multiselect').css('width', '280px');
+    $('.ui-multiselect-menu').css('width', '280px');*/
 }
 
 function update_department( company_id )
@@ -69,6 +85,30 @@ function update_department( company_id )
 	else{
 		$('select[name="department_id"]').html('');
 	}		
+}
+
+function update_user_filter( filter='' )
+{
+	if( filter != "" )
+	{
+		$.ajax({
+		    url: base_url + module.get('route') + '/update_user_filter',
+		    type: "POST",
+		    async: false,
+		    data: filter,
+		    dataType: "json",
+		    beforeSend: function () {
+	    		// $("#dept_loader").show();
+	    		// $("#department_div").hide();
+		    },
+		    success: function (response) {
+		    	if ($('#full_name').length) {
+			    	$('#full_name').html(response.users);
+			    	$('#full_name').multiselect("refresh");
+		    	}
+		    }
+		});	
+	}	
 }
 
 function export_to( form, file )

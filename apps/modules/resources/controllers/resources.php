@@ -106,7 +106,7 @@ class Resources extends MY_PrivateController
 		}
 
         $partner_record = "SELECT up.*, ud.department as dept, u.login, upos.position, p.effectivity_date as date_hired, 
-        				p.employment_type,ppp.address,ppp.city_town,uc.address as company_address,
+        				p.employment_type,ppp.present_address,ppp.present_city_town,uc.address as company_address,
         				p.resigned_date, uc.company as comp, (aes_decrypt(`pp`.`salary`, encryption_key()) * 1) as 'basic', 
         				IF(`ub`.`company_coe` IS NOT NULL,`ub`.`company_coe`,`uc`.`company`) AS company_coe, uc.print_logo 
         				FROM {$this->db->dbprefix}users_profile up
@@ -164,8 +164,8 @@ class Resources extends MY_PrivateController
 	        $pdata['hrd_position'] = $hrd['position'];
 	        $pdata['unit'] = $unit;
 	        $pdata['stikcer_number'] = $sticker_no;
-	        $pdata['address'] = $partner_record['address'];
-	        $pdata['city'] = $partner_record['city_town'];
+	        $pdata['address'] = $partner_record['present_address'];
+	        $pdata['city'] = $partner_record['present_city_town'];
 
 	        $allowances = "SELECT SUM(aes_decrypt(`pere`.`amount`, encryption_key()) * 1) AS total_alowance FROM {$this->db->dbprefix}payroll_entry_recurring per
 	        			   LEFT JOIN {$this->db->dbprefix}payroll_entry_recurring_employee pere ON per.recurring_id = pere.recurring_id

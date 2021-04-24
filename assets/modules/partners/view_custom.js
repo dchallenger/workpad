@@ -1,6 +1,18 @@
 $(document).ready(function(){
     var service = get_service(  $('#partners-effectivity_date').val() );
-    $('span.calculatedservice').html(service+"&nbsp;&nbsp;years of service")  	
+    $('span.calculatedservice').html(service+"&nbsp;&nbsp;years of service")
+
+	var sbu_unit_ids = $('#partners-sbu_unit').val();
+	$.ajax({
+		url: base_url + module.get('route') + '/get_sbu_unit_percentage',
+		type:"POST",
+		async: false,
+		data: 'sbu_unit_ids='+sbu_unit_ids,
+		dataType: "json",
+		success: function ( response ) {
+			$('.total_percentage').html(response.total_perentage);
+		}
+	});		
 });
 
 function view_personal_details(modal_form, key_class, sequence){	

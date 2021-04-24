@@ -57,20 +57,26 @@
         $count_family++;
 
         //date in mm/dd/yyyy format; or it can be in other formats as well
-        if($family['family-birthdate'] == "" || $family['family-birthdate'] == '0000-00-00'){
-            $family['family-birthdate']  = "";
-            $family_age = "";
-        }else{
-            $birthDate = date('m/d/Y', strtotime($family['family-birthdate']));
-            //explode the date to get month, day and year
-            $birthDate = explode("/", $birthDate);
-            //get age from date or birthdate
-            $family_age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
-                    ? ((date("Y") - $birthDate[2]) - 1)
-                    : (date("Y") - $birthDate[2]));
+        if (isset($family['family-birthdate'])) {
+            if($family['family-birthdate'] == "" || $family['family-birthdate'] == '0000-00-00'){
+                $family['family-birthdate']  = "";
+                $family_age = "";
+            }else{
+                $birthDate = date('m/d/Y', strtotime($family['family-birthdate']));
+                //explode the date to get month, day and year
+                $birthDate = explode("/", $birthDate);
+                //get age from date or birthdate
+                $family_age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
+                        ? ((date("Y") - $birthDate[2]) - 1)
+                        : (date("Y") - $birthDate[2]));
 
-            $family['family-birthdate']  = date('F d, Y', strtotime($family['family-birthdate'] ));
+                $family['family-birthdate']  = date('F d, Y', strtotime($family['family-birthdate'] ));
+            }
         }
+        else {
+            $family_age = "";
+            $family['family-birthdate']  = "";            
+        }            
         ?>
         <div class="portlet">
             @if($editable)

@@ -81,12 +81,6 @@
 		<!-- </a> -->
 	</td>
 	<td>
-    	<?php
-			$href = get_mod_route('appraisal_individual_rate') . '/review_admin/'.$record_id.'/'.$user_id;
-		?>		
-        <div class="btn-group">
-        	<a class="small text-muted" href="{{ $href }}"><i class="fa fa-search"></i> {{ lang('common.view') }}</a>
-        </div>
         @if(in_array($performance_appraisal_performance_status_id,array(2,14)) && $hr_appraisal_admin && $status_id == 1)
 	        <div class="btn-group">
 	        	<?php
@@ -94,6 +88,19 @@
 				?>
 	            <a class="small text-muted" href="{{ $href }}"><i class="fa fa-pencil"></i> Edit</a>
 	        </div>
-	    @endif        
+	    @endif    
+
+    	<?php
+			$href = get_mod_route('appraisal_individual_rate') . '/review_admin/'.$record_id.'/'.$user_id;
+		?>
+        <div class="btn-group">
+            <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> Options</a>
+            <ul class="dropdown-menu pull-right">
+                <li><a class="small text-muted" href="{{ $href }}"><i class="fa fa-search"></i> {{ lang('common.view') }}</a></li>
+                @if($performance_appraisal_performance_status_id == 4)
+                	<li><a class="small text-muted" href="javascript:void(0)" onclick="print_appraisal({{$record_id}})"><i class="fa fa-print"></i> {{ lang('common.print_only') }}</a></li>
+                @endif
+            </ul>
+        </div>    
     </td>
 </tr>

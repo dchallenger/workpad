@@ -234,12 +234,16 @@ function update_department( company_id )
 		    beforeSend: function () {
 	    		$("#dept_loader").show();
 	    		$("#department_div").hide();
+	    		$("#partners_div").hide();
 		    },
 		    success: function (response) {
 		    	$('select[name="department_id"]').html(response.departments);
+		    	$('select[name="user_id"]').html('');
+		    	$('select[name="user_id"]').html(response.employees);
 	    		$("#dept_loader").hide();
 	    		$("#department_div").show();
-		    	$('select[name="user_id"]').html('');
+	    		$("#partners_div").show();
+		    	//$('select[name="user_id"]').html('');
 		    }
 		});	
 	}

@@ -35,6 +35,19 @@ $(document).ready(function(){
 		window.location.reload();
 	});
 
+	$('#users_profile-sbu_unit').change(function() {
+		var sbu_unit_ids = $(this).val();
+		$.ajax({
+			url: base_url + module.get('route') + '/get_sbu_unit_percentage',
+			type:"POST",
+			async: false,
+			data: 'sbu_unit_ids='+sbu_unit_ids,
+			dataType: "json",
+			success: function ( response ) {
+				$('.total_percentage').html(response.total_perentage);
+			}
+		});		
+	});
 /*	$('#partners_personal-city_town').select2({
 	    placeholder: "Select an option",
 	    allowClear: true
@@ -44,6 +57,8 @@ $(document).ready(function(){
 	    placeholder: "Select an option",
 	    allowClear: true
 	});*/
+
+	$('#users_profile-sbu_unit').trigger('change');
 
 	$('#same_present').live('click', function() {
 		var pres_address = $('#partners_personal-address_1').val();
@@ -74,7 +89,7 @@ $(document).ready(function(){
 			autoclose: true
 		});
     $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
-}
+	}
 
 	if (jQuery().datepicker) {
 		$('#partners-effectivity_date').parent('.date-picker').datepicker({

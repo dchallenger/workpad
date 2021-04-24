@@ -235,7 +235,7 @@
                 </div>
                 @endif
 
-                <div class="form-group">
+                <div class="form-group hidden">
                     <label class="control-label col-md-3">Classification</label>
                     <div class="col-md-5">
                         <?php   $db->select('classification_id,classification');
@@ -256,6 +256,7 @@
                         </div>
                     </div>  
                 </div>
+
                 @if(in_array('original_date_hired', $partners_keys))
                 <div class="form-group">
                     <label class="control-label col-md-3">{{ lang('partners.ohire_date') }}</label>

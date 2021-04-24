@@ -108,6 +108,7 @@ class My201 extends MY_PrivateController
 		$data['branch'] = $profile_header_details['branch'] == "" ? "n/a" : $profile_header_details['branch'];
 		$data['group'] = $profile_header_details['group'] == "" ? "n/a" : $profile_header_details['group'];
         $data['cost_center_code'] = ($profile_header_details['cost_center_code'] == "" ? "n/a" : $profile_header_details['cost_center_code']);
+        $data['sbu_unit_id'] = ($profile_header_details['sbu_unit_id'] == "" ? "n/a" : $profile_header_details['sbu_unit_id']);
         $data['sbu_unit'] = ($profile_header_details['sbu_unit'] == "" ? "n/a" : $profile_header_details['sbu_unit']);
 		/***** CONTACTS TAB *****/
 		//Personal Contact
@@ -553,6 +554,24 @@ class My201 extends MY_PrivateController
 			echo $this->load->blade('record_listing_custom')->with( $this->load->get_cached_vars() );
 	}
 
+	function get_sbu_unit_percentage()
+	{
+		$this->load->model('partners_model', 'partner');
+		
+		$this->_ajax_only();
+
+        $sbu_unit_ids = $this->input->post('sbu_unit_ids');
+        $total_percentage = $this->partner->get_sum_sbu_percentage($sbu_unit_ids);
+
+        $this->response->total_perentage = $total_percentage .'%';
+        $this->response->message[] = array(
+            'message' => '',
+            'type' => 'success'
+        );
+
+	    $this->_ajax_return();
+	}
+
 	function format_phone($phone){
 	    $phone = preg_replace("/[^0-9]/", "", $phone);
 
@@ -625,9 +644,32 @@ class My201 extends MY_PrivateController
 		foreach( $key_classes as $row )
 		{
 			//check wether key_class has active request
-			if( !$this->mod->has_active_request( $row->key_class_id, $this->user->user_id ) )
-				$data['key_classes'][$row->key_class_id] = $row->key_class; 
+			if( !$this->mod->has_active_request( $row->key_class_id, $this->user->user_id ) ) {
+				switch ($row->key_class_code) {
+					case 'email':
+						$row->key_class = 'Office Email';
+						break;
+					case 'phone':
+						$row->key_class = 'Office Phone';
+						break;
+					case 'mobile':
+						$row->key_class = 'Office Mobile';
+						break;
+					case 'personal_email':
+						$row->key_class = 'Personal Email';
+						break;						
+					case 'personal_phone':
+						$row->key_class = 'Personal Phone';
+						break;
+					case 'personal_mobile':
+						$row->key_class = 'Personal Mobile';
+						break;						
+				}
+				$data['key_classes'][$row->key_class_id] = $row->key_class;
+			}
 		}
+
+		asort($data['key_classes']);
 
 		$drafts = $this->mod->get_user_editable_keys_draft( $this->user->user_id );
 		$draft = array();
@@ -709,7 +751,7 @@ class My201 extends MY_PrivateController
 				$data['key_value'] = $value;
 				$data['status'] = $status;
 				$data['created_by'] = $this->user->user_id;
-				$data['remarks'] = $remarks[$class_id][$key_id];
+				$data['remarks'] = $remarks[$class_id];
 
 				$check_on_personal = $this->db->get_where('partners_personal', array('partner_id' => $partner_id, 'key_id' => $key_id));
 
@@ -1042,9 +1084,17 @@ class My201 extends MY_PrivateController
 		$data['position'] = $profile_header_details['position'] == "" ? "n/a" : $profile_header_details['position'];
 		$data['permission'] = $profile_header_details['role'] == "" ? "n/a" : $profile_header_details['role'];
 		$data['id_number'] = $profile_header_details['id_number'] == "" ? "n/a" : $profile_header_details['id_number'];
+		$data['role_id'] = $profile_header_details['role_id'] == "" ? "n/a" : $profile_header_details['role_id'];
+		$data['job_grade'] = $profile_header_details['job_grade'] == "" ? "n/a" : $profile_header_details['job_grade'];
+		$data['sbu_unit_id'] = $profile_header_details['sbu_unit_id'] == "" ? "n/a" : $profile_header_details['sbu_unit_id'];
+		$data['project_id'] = $profile_header_details['project_id'] == "" ? "n/a" : $profile_header_details['project_id'];
+		$data['start_date'] = $profile_header_details['start_date'] == "" ? "" : $profile_header_details['start_date'];
+		$data['end_date'] = $profile_header_details['end_date'] == "" ? "" : $profile_header_details['end_date'];
+		$data['coordinator_id'] = $profile_header_details['coordinator_id'] == "" ? "" : $profile_header_details['coordinator_id'];
+		$data['old_new'] = $profile_header_details['old_new'] == "" ? "n/a" : $profile_header_details['old_new'];
 		$data['biometric'] = $profile_header_details['biometric'] == "" ? "n/a" : $profile_header_details['biometric'];
 		$data['shift'] = $profile_header_details['shift'] == "" ? "n/a" : $profile_header_details['shift'];
-		$data['regularization_date'] = $profile_header_details['regularization_date'] == "" ? "n/a" : date("F d, Y", strtotime($profile_header_details['regularization_date']));
+		$data['regularization_date'] = $profile_header_details['regularization_date'] == "" ? "" : date("F d, Y", strtotime($profile_header_details['regularization_date']));
 		//Employment Information
 		$data['status'] = $profile_header_details['employment_status'] == "" ? "n/a" : $profile_header_details['employment_status'];
 		$data['type'] = $profile_header_details['employment_type'] == "" ? "n/a" : $profile_header_details['employment_type'];
@@ -1065,13 +1115,13 @@ class My201 extends MY_PrivateController
         $competency_level = $this->mod->get_partners_personal($this->user->user_id, 'competency_level');
         $data['record']['competency_level'] = (count($competency_level) == 0 ? " " : ($competency_level[0]['key_value'] == "" ? "" : $competency_level[0]['key_value']));  
 
-		$data['date_hired'] = ($profile_header_details['effectivity_date'] == "" ? "n/a" : (date("F d, Y", strtotime($profile_header_details['effectivity_date']))));
+		$data['date_hired'] = ($profile_header_details['effectivity_date'] == "" ? "" : (date("F d, Y", strtotime($profile_header_details['effectivity_date']))));
 		$probationary_date = $this->mod->get_partners_personal($this->user->user_id, 'probationary_date');
-			$data['probationary_date'] = (count($probationary_date) == 0 ? "n/a" : ($probationary_date[0]['key_value'] == "" ? "n/a" : date("F d, Y", strtotime($probationary_date[0]['key_value']))));
+			$data['probationary_date'] = (count($probationary_date) == 0 ? "" : ($probationary_date[0]['key_value'] == "" ? "n/a" : date("F d, Y", strtotime($probationary_date[0]['key_value']))));
 		$original_date_hired = $this->mod->get_partners_personal($this->user->user_id, 'original_date_hired');
-			$data['original_date_hired'] = (count($original_date_hired) == 0 ? "n/a" : ($original_date_hired[0]['key_value'] == "" ? "n/a" : date("F d, Y", strtotime($original_date_hired[0]['key_value']))));
+			$data['original_date_hired'] = (count($original_date_hired) == 0 ? "" : ($original_date_hired[0]['key_value'] == "" ? "n/a" : date("F d, Y", strtotime($original_date_hired[0]['key_value']))));
 		$last_probationary = $this->mod->get_partners_personal($this->user->user_id, 'last_probationary');
-			$data['last_probationary'] = (count($last_probationary) == 0 ? "n/a" : ($last_probationary[0]['key_value'] == "" ? "n/a" : date("F d, Y", strtotime($last_probationary[0]['key_value']))));
+			$data['last_probationary'] = (count($last_probationary) == 0 ? "" : ($last_probationary[0]['key_value'] == "" ? "n/a" : date("F d, Y", strtotime($last_probationary[0]['key_value']))));
 		$last_salary_adjustment = $this->mod->get_partners_personal($this->user->user_id, 'last_salary_adjustment');
 			$data['last_salary_adjustment'] = (count($last_salary_adjustment) == 0 ? "n/a" : ($last_salary_adjustment[0]['key_value'] == "" ? "n/a" : date("F d, Y", strtotime($last_salary_adjustment[0]['key_value']))));
 		//Work Assignment

@@ -9,6 +9,12 @@
 			<div class="col-md-7">							
 				<input type="text" disabled="disabled" class="form-control" name="users_sbu_unit[sbu_unit]" id="users_sbu_unit-sbu_unit" value="{{ $record['users_sbu_unit_sbu_unit'] }}" placeholder="Enter SBU Unit"/> 				
 			</div>	
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3"><span class="required">* </span>{{ lang('sbu_unit.percentage') }}</label>				
+			<div class="col-md-7">							
+				<input type="text" disabled="disabled" class="form-control" name="users_sbu_unit[percentage]" id="users_sbu_unit-percentage" value="{{ $record['users_sbu_unit_percentage'] }}" placeholder="Enter Percentage"/> 				
+			</div>	
 		</div>			
 		<div class="form-group">
 			<label class="control-label col-md-3">{{ lang('sbu_unit.active') }}</label>

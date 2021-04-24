@@ -39,7 +39,7 @@ class profile_model extends Record
 
 	function get_profile_header_details($user_id=0){
 		$this->db->select('title, lastname, firstname, middlename, suffix, users_position.position, users_profile.project_id as project_id, users_profile.v_project as project,
-			department, v_project_hr as project_hr, sbu_unit, v_coordinator as coordinator, v_credit_setup as credit_setup, branch, ww_users_company.company, email, birth_date, photo, job_level, 
+			department, v_project_hr as project_hr, sbu_unit_id, sbu_unit, v_coordinator as coordinator, v_credit_setup as credit_setup, branch, ww_users_company.company, email, birth_date, photo, job_level, 
 			location, id_number, biometric, shift, calendar, employment_status, effectivity_date, regularization_date,old_new,
 			original_hired_date,employment_end_date,last_promotion_date,users_division.division, users_division.cost_center_code, users_profile.reports_to_id as immediate, group, role,
 			maidenname, nickname, partners_employment_type.employment_type, partners_classification.classification, resigned_date, start_date, end_date')		
@@ -158,7 +158,7 @@ class profile_model extends Record
 	function get_user_editable_key_classes()
 	{
 
-		$this->db->order_by('key_class', 'asc');
+		$this->db->order_by('key_class_code', 'asc');
 		$classes = $this->db->get_where('partners_key_class', array('deleted' => 0, 'user_edit_change_request' => 1));
 		if( $classes->num_rows() > 0 )
 			return $classes->result();
@@ -211,9 +211,23 @@ class profile_model extends Record
 				return $this->load->view('key_templates/gender', array('key' => $key, 'value' => $value), true);
 				break;
 			case 'bday':
+			case 'family-birthdate':
 				$this->load->helper('form');
 				return $this->load->view('key_templates/date_picker', array('key' => $key, 'value' => $value), true);
-				break;					
+				break;
+			case 'family-dependent-insurance':
+			case 'family-dependent-hmo':
+				$this->load->helper('form');
+				return $this->load->view('key_templates/yes_no', array('key' => $key, 'value' => $value), true);
+				break;
+			case 'family-relationship':
+				$this->load->helper('form');
+				return $this->load->view('key_templates/family_relationship', array('key' => $key, 'value' => $value), true);
+				break;
+			case 'religion':
+				$this->load->helper('form');
+				return $this->load->view('key_templates/religion', array('key' => $key, 'value' => $value), true);
+				break;				
 			default:
 				return $this->load->view('key_templates/textfield', array('key' => $key, 'value' => $value), true);
 				break;

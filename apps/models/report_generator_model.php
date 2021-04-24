@@ -762,25 +762,28 @@ class report_generator_model extends Record
 			foreach( $result->result() as $row )
 				$com[$row->$department][$row->$user_id][] = $row; 
 
+			$ctr = 2;
 			foreach( $com as $dept => $emp ) {
-				$ctr = 3;
-				
+				$ctr++; // department
+
 				$content->getActiveSheet()->getStyle("A".$ctr.":F".$ctr."")->applyFromArray($style_center);
 				$content->getActiveSheet()->getStyle("A".$ctr.":F".$ctr."")->getFont()->setBold(true);
 
 				$ctr++; // department
-
 				$content->getActiveSheet()->getStyle("A".$ctr.":F".$ctr."")->getFont()->setBold(true);
 
 				foreach( $emp as $num => $rows ) {
-					foreach( $rows as $row ) {
+					foreach ($rows as $num1 => $rows1) {
 						$ctr++;
+						$content->getActiveSheet()->getStyle("C".$ctr."")->applyFromArray($style_right);
+						$content->getActiveSheet()->getStyle("E".$ctr."")->applyFromArray($style_right);
 					}
 					$ctr++;
+					$content->getActiveSheet()->getStyle("C".$ctr.":F".$ctr."")->getFont()->setBold(true);
 					$content->getActiveSheet()->getStyle("C".$ctr."")->applyFromArray($style_right);
-					$content->getActiveSheet()->getStyle("E".$ctr."")->applyFromArray($style_right);
-					$content->getActiveSheet()->getStyle("C".$ctr.":F".$ctr."")->getFont()->setBold(true);					
+					$content->getActiveSheet()->getStyle("E".$ctr."")->applyFromArray($style_right);					
 				}
+				$content->getActiveSheet()->getStyle("C".$ctr.":F".$ctr."")->getFont()->setBold(true);
 			}
 
 			$content->getActiveSheet()->getStyle("A3:F".$ctr)->applyFromArray($border_style);			
@@ -819,14 +822,18 @@ class report_generator_model extends Record
 			$content->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
 			$content->getActiveSheet()->getColumnDimension('L')->setAutoSize(true);
 			$content->getActiveSheet()->getColumnDimension('M')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('N')->setAutoSize(true);
 
 			$content->getActiveSheet()->getStyle("A1:A2")->applyFromArray($style_center);
-			$content->getActiveSheet()->mergeCells('A1:M1');
-			$content->getActiveSheet()->mergeCells('A2:M2');
+			$content->getActiveSheet()->getStyle("A3:N3")->applyFromArray($style_center);
+			$content->getActiveSheet()->mergeCells('A1:N1');
+			$content->getActiveSheet()->mergeCells('A2:N2');
 
-			$content->getActiveSheet()->getStyle("A1:M3")->getFont()->setBold(true);
+			$content->getActiveSheet()->getStyle("A1:N3")->getFont()->setBold(true);
 
-			$content->getActiveSheet()->getStyle("A3:M".($result->num_rows()+3))->applyFromArray($border_style);			
+			$content->getActiveSheet()->getStyle("A3:N".($result->num_rows()+3))->applyFromArray($border_style);
+
+			$content->getActiveSheet()->getStyle("A".($result->num_rows()+4).":N".($result->num_rows()+4))->getFont()->setBold(true);
 		}
 
 		if (isset($exc_report_header)) {
@@ -840,7 +847,9 @@ class report_generator_model extends Record
 			$content->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
 
 			$content->getActiveSheet()->getStyle("A1:A2")->applyFromArray($style_center);
+			$content->getActiveSheet()->getStyle("A3:H3")->applyFromArray($style_center);
 			$content->getActiveSheet()->getStyle("A1:A2")->getFont()->setBold(true);			
+			$content->getActiveSheet()->getStyle("A3:H3")->getFont()->setBold(true);
 			$content->getActiveSheet()->mergeCells('A1:H1');
 			$content->getActiveSheet()->mergeCells('A2:H2');
 
@@ -869,6 +878,34 @@ class report_generator_model extends Record
 		}
 
 		if (isset($total_hours_work_per_location_header)) {
+			$total = array();
+			$location = "Location";
+			$hours_work = "Hours Work";
+			$absent = "Absent";
+			$late = "Late";
+			$ut = "Ut";
+			$ot = "Ot";
+			$total_hours_work = 0;
+			$total_absent = 0;
+			$total_late = 0;
+			$total_ut = 0;
+			$total_ot = 0;
+
+			$result = $result->result();
+			foreach ($result as $row) {
+				$total_hours_work += $row->$hours_work;
+				$total_absent = $row->$absent;
+				$total_late = $row->$late;
+				$total_ut = $row->$ut;
+				$total_ot = $row->$ot;
+
+				$total[$row->$location][$hours_work] = $total_hours_work;
+				$total[$row->$location][$absent] = $total_absent;
+				$total[$row->$location][$late] = $total_late;
+				$total[$row->$location][$ut] = $total_ut;
+				$total[$row->$location][$ot] = $total_ot;
+			}
+
 			$content->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
 			$content->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
 			$content->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
@@ -877,12 +914,13 @@ class report_generator_model extends Record
 			$content->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
 
 			$content->getActiveSheet()->getStyle("A1:A2")->applyFromArray($style_center);
+			$content->getActiveSheet()->getStyle("A3:F3")->applyFromArray($style_center);
 			$content->getActiveSheet()->mergeCells('A1:F1');
 			$content->getActiveSheet()->mergeCells('A2:F2');
 
 			$content->getActiveSheet()->getStyle("A1:F3")->getFont()->setBold(true);
 
-			$content->getActiveSheet()->getStyle("A3:F".($result->num_rows()))->applyFromArray($border_style);			
+			$content->getActiveSheet()->getStyle("A3:F".(count($total) + 3))->applyFromArray($border_style);			
 		}
 
 		if (isset($lbr_header)) {
@@ -1699,7 +1737,7 @@ class report_generator_model extends Record
                 $pdf->SetPrintFooter(false);
                 $pdf->SetMargins(PDF_MARGIN_LEFT, 10, PDF_MARGIN_RIGHT);
                 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER+30);
-                $html = $this->load->view("templates/timekeeping_daily_time_record", array('columns' => $columns,'result' => $result, 'first_period' => $first_period, 'second_period' => $second_period, 'r_company' => $report_company, 'r_department' => $report_department), true);
+                $html = $this->load->view("templates/timekeeping_daily_time_record_summary_oclp_pdf", array('filter' => $filter, 'columns' => $columns,'result' => $result, 'first_period' => $first_period, 'second_period' => $second_period, 'r_company' => $report_company, 'r_department' => $report_department), true);
                 $pdf->AddPage('L', 'LEGAL', true); 
             	break;
             case 'DAILY TIME RECORD OPTIMUM':
@@ -2155,10 +2193,15 @@ class report_generator_model extends Record
 		$this->load->helper('file');
 		$path = 'uploads/reports/' . $report->report_code .'/pdf/';
 		$this->check_path( $path );
+		
+		$main_path = PPATH . 'uploads/reports/' . $report->report_code .'/pdf/';
+
 		$filename = $path . strtotime(date('Y-m-d H:i:s')) . '-' . $report->report_code . ".pdf";
 		
+		$main_filename = $main_path . strtotime(date('Y-m-d H:i:s')) . '-' . $report->report_code . ".pdf";
+
 		$pdf->writeHTML($html, true, false, false, false, '');
-		$pdf->Output($filename, 'F');
+		$pdf->Output($main_filename, 'F');
 
 		return $filename;
 	}

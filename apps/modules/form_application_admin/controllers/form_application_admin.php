@@ -566,6 +566,16 @@ class Form_application_admin extends MY_PrivateController
                 }
             }
             
+            $this->load->model('form_application_manage_model', 'dash_mod');
+            $form_name_audit      = $this->dash_mod->get_form_information($this->input->post('formid'));
+
+            $audit_log_data['forms_id'] = $this->input->post('formid');
+            $audit_log_data['approver'] = $this->current_user['lastname']. ", ". $this->current_user['firstname'];
+            $audit_log_data['action'] = $action;
+            $audit_log_data['forms'] = $form_name_audit['form'];
+
+            $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', $this->mod->table, array(), $audit_log_data);
+
             // determines to where the action was 
             // performed and used by after_save to
             // know which notification to broadcast

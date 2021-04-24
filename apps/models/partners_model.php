@@ -184,6 +184,23 @@ class partners_model extends Record
 	    	return array();
 	}
 
+	function get_partners_personal_history($user_id=0, $key=''){
+		$this->db->select('personal_id, sequence, key_value')
+	    ->from('partners_personal_history')
+	    ->join('partners', 'partners_personal_history.partner_id = partners.partner_id', 'left')
+	    ->where("partners.user_id = $user_id")
+	    ->where("partners.deleted = 0")
+	    ->where("partners_personal_history.key = '$key'")
+	    ->order_by("sequence", "desc");
+
+	    $partners_personal = $this->db->get('');	
+	    
+		if( $partners_personal->num_rows() > 0 )
+	    	return $partners_personal->result_array();
+	    else
+	    	return array();
+	}
+
 	function create_movement($partner, $movement_type_code)
 	{
 		$movement_type = $this->db->get_where('partners_movement_type', array('type_code' => $movement_type_code))->row_array();
@@ -227,6 +244,22 @@ class partners_model extends Record
 				$movement_action_transfer_id = $this->db->insert_id();
 		}
 
+	}
+
+	function get_sum_sbu_percentage($sbu_unit_ids='')
+	{
+		$qry = "SELECT SUM(percentage) AS total_percentage FROM {$this->db->dbprefix}users_sbu_unit
+				WHERE FIND_IN_SET(sbu_unit_id,'{$sbu_unit_ids}')";
+
+		$result = $this->db->query( $qry );				
+
+		if ($result && $result->num_rows() > 0)
+			$total_percentage = $result->row()->total_percentage;
+		else
+			$total_percentage = 0;
+
+
+		return $total_percentage;
 	}
 
 	function get_signatories($user_id)

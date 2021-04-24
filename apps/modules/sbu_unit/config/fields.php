@@ -16,6 +16,21 @@ $config['fields'][1]['users_sbu_unit.status_id'] = array(
 	'active' => '1',
 	'encrypt' => 0
 );
+$config['fields'][1]['users_sbu_unit.percentage'] = array(
+	'f_id' => 1,
+	'fg_id' => 1,
+	'label' => 'Percentage',
+	'description' => '',
+	'table' => 'users_sbu_unit',
+	'column' => 'percentage',
+	'uitype_id' => 1,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 2,
+	'datatype' => 'V',
+	'active' => '1',
+	'encrypt' => 0
+);
 $config['fields'][1]['users_sbu_unit.sbu_unit'] = array(
 	'f_id' => 1,
 	'fg_id' => 1,

@@ -314,6 +314,20 @@ class Admin_timerecord extends MY_PrivateController
 		{
 			$this->response->departments .= '<option value="'.$department->department_id.'">'.$department->department.'</option>';
 		}
+
+
+		if($this->input->post('company_id') != "")
+				$this->db->where('users_profile.company_id', $this->input->post('company_id'));
+			
+		$this->db->join('partners', 'partners.user_id = users_profile.user_id', 'left');
+		$employees = $this->db->get('users_profile');
+
+		$this->response->employees = '<option value="">Select employee...</option>';
+		foreach( $employees->result() as $employee )
+		{
+			$this->response->employees .= '<option value="'.$employee->user_id.'">'.$employee->alias.'</option>';
+		}
+
 		$this->_ajax_return();	
 	}
 

@@ -642,6 +642,7 @@ class Partners extends MY_PrivateController
         $data['cost_center_code'] = ($profile_header_details['cost_center_code'] == "" ? "n/a" : $profile_header_details['cost_center_code']);
 		$data['department'] = ($profile_header_details['department'] == "" ? "n/a" : $profile_header_details['department']);
 		$data['sbu_unit'] = ($profile_header_details['sbu_unit'] == "" ? "n/a" : $profile_header_details['sbu_unit']);
+		$data['sbu_unit_id'] = ($profile_header_details['sbu_unit_id'] == "" ? "n/a" : $profile_header_details['sbu_unit_id']);
 		$data['group'] = ($profile_header_details['group'] == "" ? "n/a" : $profile_header_details['group']);
 
 		/***** CONTACTS TAB *****/
@@ -1884,6 +1885,7 @@ class Partners extends MY_PrivateController
 				$partners_personal_table = "partners_personal";
 				$other_tables['users_profile'] = $post['users_profile'];
 				$other_tables['users_profile']['coordinator_id'] = !empty($post['users_profile']['coordinator_id']) ? implode(',', $post['users_profile']['coordinator_id']) : "";
+				$other_tables['users_profile']['sbu_unit_id'] = !empty($post['users_profile']['sbu_unit_id']) ? implode(',', $post['users_profile']['sbu_unit_id']) : "";
 				$other_tables['users_profile']['start_date'] = !empty($post['users_profile']['start_date']) ? date('Y-m-d', strtotime($post['users_profile']['start_date'])) : "";
 				$other_tables['users_profile']['end_date'] = !empty($post['users_profile']['end_date']) ? date('Y-m-d', strtotime($post['users_profile']['end_date'])) : "";
 				$other_tables['partners'] = $post['partners'];
@@ -2592,6 +2594,11 @@ class Partners extends MY_PrivateController
 			switch( true )
 			{
 				case $record->num_rows() == 0:
+					//add birthday as default password
+/*					$this->load->library('phpass');
+					$hash = $this->phpass->hash( $main_record['birth_date'] );
+					$main_record['hash'] = $hash;*/
+
 					//add mandatory fields
 					$main_record['created_by'] = $this->user->user_id;
 					$this->db->insert($this->mod->table, $main_record);
@@ -3441,6 +3448,22 @@ class Partners extends MY_PrivateController
         $project_code = $this->db->get_where('users_project', array('project_id' => $project_id))->row()->project_code;
 
         $this->response->project_code = $project_code;
+        $this->response->message[] = array(
+            'message' => '',
+            'type' => 'success'
+        );
+
+	    $this->_ajax_return();
+	}
+
+	function get_sbu_unit_percentage()
+	{
+		$this->_ajax_only();
+
+        $sbu_unit_ids = $this->input->post('sbu_unit_ids');
+        $total_percentage = $this->mod->get_sum_sbu_percentage($sbu_unit_ids);
+
+        $this->response->total_perentage = $total_percentage .'%';
         $this->response->message[] = array(
             'message' => '',
             'type' => 'success'

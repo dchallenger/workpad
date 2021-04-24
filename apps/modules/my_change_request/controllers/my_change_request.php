@@ -37,9 +37,32 @@ class My_change_request extends MY_PrivateController
 		foreach( $key_classes as $row )
 		{
 			//check wether key_class has active request
-			if( !$this->profile->has_active_request( $row->key_class_id, $this->user->user_id ) )
-				$data['key_classes'][$row->key_class_id] = $row->key_class; 
+			if( !$this->profile->has_active_request( $row->key_class_id, $this->user->user_id ) ) {
+				switch ($row->key_class_code) {
+					case 'email':
+						$row->key_class = 'Office Email';
+						break;
+					case 'phone':
+						$row->key_class = 'Office Phone';
+						break;
+					case 'mobile':
+						$row->key_class = 'Office Mobile';
+						break;
+					case 'personal_email':
+						$row->key_class = 'Personal Email';
+						break;						
+					case 'personal_phone':
+						$row->key_class = 'Personal Phone';
+						break;
+					case 'personal_mobile':
+						$row->key_class = 'Personal Mobile';
+						break;						
+				}
+				$data['key_classes'][$row->key_class_id] = $row->key_class;
+			}
 		}
+
+		asort($data['key_classes']);
 
 		$drafts = $this->profile->get_user_editable_keys_draft( $this->user->user_id );
 		$draft = array();
@@ -83,6 +106,7 @@ class My_change_request extends MY_PrivateController
 		$this->load->model('profile_model', 'profile');
 
 		$keys = $this->profile->get_user_editable_keys( $key_class_id );
+
 		$temp = array();
 		foreach( $keys as $key )
 		{
@@ -157,7 +181,7 @@ class My_change_request extends MY_PrivateController
 						$data['key_value'] = $value;
 						$data['status'] = $status;
 						$data['created_by'] = $this->user->user_id;
-						$data['remarks'] = $remarks[$class_id][$key_id];
+						$data['remarks'] = $remarks[$class_id];
 						
 						if(count($request_data) > 0){
 							foreach($request_data as $rdata){

@@ -235,6 +235,7 @@ class Partners_immediate extends MY_PrivateController
 		$data['group'] = $profile_header_details['group'] == "" ? "n/a" : $profile_header_details['group'];
         $data['cost_center_code'] = ($profile_header_details['cost_center_code'] == "" ? "n/a" : $profile_header_details['cost_center_code']);
         $data['sbu_unit'] = ($profile_header_details['sbu_unit'] == "" ? "n/a" : $profile_header_details['sbu_unit']);
+        $data['sbu_unit_id'] = ($profile_header_details['sbu_unit_id'] == "" ? "n/a" : $profile_header_details['sbu_unit_id']);
 		/***** CONTACTS TAB *****/
 		//Personal Contact
 		$address_1 = $this->profile_mod->get_partners_personal($user_id, 'address_1');
@@ -640,6 +641,24 @@ class Partners_immediate extends MY_PrivateController
 		$this->load->helper('file');
 		$this->load->vars($data);
 		echo $this->load->blade('edit.detail_custom')->with( $this->load->get_cached_vars() );
+	}
+
+	function get_sbu_unit_percentage()
+	{
+		$this->_ajax_only();
+
+		$this->load->model('partners_model', 'partner');
+
+        $sbu_unit_ids = $this->input->post('sbu_unit_ids');
+        $total_percentage = $this->partner->get_sum_sbu_percentage($sbu_unit_ids);
+
+        $this->response->total_perentage = $total_percentage .'%';
+        $this->response->message[] = array(
+            'message' => '',
+            'type' => 'success'
+        );
+
+	    $this->_ajax_return();
 	}
 
 	function view_personal_details(){
