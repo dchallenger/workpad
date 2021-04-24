@@ -1,6 +1,8 @@
 $(document).ready(function(){
+    $(":input").inputmask();
+
     count_confirmed();
-    
+
     $('#sessionsDiv').show('fast');
 
     if (jQuery().datepicker) {
@@ -80,13 +82,13 @@ $(document).ready(function(){
         allowClear: true
     });
 
-    $('#training_calendar-company_id,#training_calendar-location_id,#training_calendar-branch_id,#training_calendar-department_id,#training_calendar-employees').multiselect();    
+    $('#training_calendar-company_id,#training_calendar-location_id,#training_calendar-division_id,#training_calendar-department_id,#training_calendar-employees').multiselect();    
 
     $('#training_calendar-course_id').live('change',function(){
         get_training_course_info();
     });
 
-    $('#training_calendar-location_id,#training_calendar-company_id,#training_calendar-department_id,#training_calendar-branch_id').live('change',function (){
+    $('#training_calendar-location_id,#training_calendar-company_id,#training_calendar-department_id,#training_calendar-division_id').live('change',function (){
         get_employees();
     })
 
@@ -103,7 +105,7 @@ $(document).ready(function(){
         }
     });  
 
-    $('#participants-no_show').change(function(){
+    $('.participants-no_show').change(function(){
         if( $(this).is(':checked') ){
             $(this).closest('td').find('.participants-no_show-val').val('1');
         }
@@ -158,10 +160,13 @@ $(document).ready(function(){
     });
 
     $('.cost, .pax').live('change',function(){
+        var sub_total = '';
 
         var sub_cost = $(this).parents('div.add_more_training_cost').find('.cost').val();
         var sub_pax = $(this).parents('div.add_more_training_cost').find('.pax').val();
-        var sub_total = ( sub_cost * sub_pax ).toFixed(2)
+
+        if (!isNaN(sub_cost) || !isNaN(sub_pax))
+            sub_total = ( sub_cost * sub_pax ).toFixed(2)
 
         $(this).parents('div.add_more_training_cost').find('.total').val( sub_total );
 
@@ -248,10 +253,47 @@ $(document).ready(function(){
             }
 
         });
-    });                 
+    });
+
+/*    $('.close_training').click('function', () {
+        var training_calendar_id = $(this).data('record_id');
+
+        bootbox.confirm("Are you sure you want to close this training calendar?", function(confirm) {
+            if( confirm )
+            {
+                $.blockUI({ message: saving_message(),
+                    onBlock: function(){
+                        //var data = form.find(":not('.dontserializeme')").serialize();
+                        var data = 'training_calendar_id=' + training_calendar_id;
+                        $.ajax({
+                            url: base_url + module.get('route') + '/close_calendar',
+                            type:"POST",
+                            data: data,
+                            dataType: "json",
+                            async: false,
+                            success: function ( response ) {
+                                handle_ajax_message( response.message );
+
+                                if( response.saved )
+                                {
+                                    document.location = base_url + module.get('route');
+                                }
+                            }
+                        });
+                    },
+                    baseZ: 300000000
+                });
+                $.unblockUI();
+            }
+        });
+    });*/
+
+    $('#training_calendar-location_id,#training_calendar-company_id,#training_calendar-department_id,#training_calendar-division_id').trigger('change')
 });
 
 function add_participants(){
+    var record_id = $('#record_id').val();
+
     if( ( $('#training_calendar-employees').val() == null ) ){
         notify('error', 'Please select an employee');
         return false;
@@ -261,7 +303,7 @@ function add_participants(){
             url: base_url + module.get('route') + '/add_participants',
             dataType: 'json',
             type:"POST",
-            data: 'user_id='+$('#training_calendar-employees').val(),
+            data: 'calendar_id='+record_id+'&user_id='+$('#training_calendar-employees').val(),
             success: function (response) {
 
                 $('#form-list').append(response.content_list);
@@ -284,9 +326,9 @@ function add_participants(){
                     },                              
                     success: function ( response ) {
                         $.unblockUI(); 
-                        $('#training_calendar-employees option').remove();
+/*                        $('#training_calendar-employees option').remove();
                         $('#training_calendar-employees').append(response.employees);
-                        $("#training_calendar-employees").multiselect("refresh"); 
+                        $("#training_calendar-employees").multiselect("refresh"); */
                         $('.make-switch').not(".has-switch")['bootstrapSwitch']();
 
                         $('.participants-nominate').change(function(){
@@ -298,7 +340,7 @@ function add_participants(){
                             }
                         });  
 
-                        $('#participants-no_show').change(function(){
+                        $('.participants-no_show').change(function(){
                             if( $(this).is(':checked') ){
                                 $(this).closest('td').find('.participants-no_show-val').val('1');
                             }
@@ -308,7 +350,7 @@ function add_participants(){
                         });                         
                     }
                 });
-                $("#training_calendar-employees").multiselect("uncheckAll"); 
+                /*$("#training_calendar-employees").multiselect("uncheckAll"); */
             }
         });
     }
@@ -332,15 +374,16 @@ $('.delete-participant').live('click',function(){
 });
 
 function get_employees(){
+    var record_id = $('#record_id').val();
     var location_id = $('#training_calendar-location_id').val();
     var company_id = $('#training_calendar-company_id').val();
-    var branch_id = $('#training_calendar-branch_id').val();
+    var division_id = $('#training_calendar-division_id').val();
     var department_id = $('#training_calendar-department_id').val();
     $.ajax({
         url: base_url + module.get('route') + '/get_employees',
         type: 'post',
         dataType: 'json',
-        data: 'location_id='+ location_id +'&company_id='+ company_id +'&branch_id=' + branch_id + '&department_id=' + department_id,
+        data: 'record_id='+ record_id +'&location_id='+ location_id +'&company_id='+ company_id +'&division_id=' + division_id + '&department_id=' + department_id,
         beforeSend:function() {
         },
         success: function (response) {
@@ -354,6 +397,7 @@ function get_employees(){
                 };*/
             };
             $('#training_calendar-employees').multiselect("refresh");
+            $("#training_calendar-employees").multiselect().multiselectfilter();
         }
     });
 }
@@ -393,8 +437,10 @@ function get_training_course_info(){
 
             //if( module.get_value('view') == 'edit' ){
 
-                $('input[name="training_calendar[calendar_type_id]"]').val(response.training_provider);
-                $('input[name="training_calendar[training_category_id]"]').val(response.training_category);
+                $('#training_calendar-training_provider').val(response.training_provider);
+                $('#training_calendar-training_provider_id').val(response.training_provider_id);
+                $('#training_calendar-training_category').val(response.training_category);
+                $('#training_calendar-training_category_id').val(response.training_category_id);
 
            // }
            /* else if( module.get_value('view') == 'detail' ){
@@ -507,6 +553,9 @@ function calculate_total_cost_pax(){
     $('.pax').each(function(){
         pax += parseFloat($(this).val());
     });
+
+    if (isNaN(total) || isNaN(pax))
+        return false;
 
     $.ajax({
         url: url,

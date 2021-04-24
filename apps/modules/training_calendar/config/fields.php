@@ -85,13 +85,13 @@ $config['fields'][1]['training_calendar.publish_date'] = array(
 	'active' => '1',
 	'encrypt' => 0
 );
-$config['fields'][1]['training_calendar.feedback_category_id'] = array(
+$config['fields'][1]['training_calendar.evaluation_template_id'] = array(
 	'f_id' => 15,
 	'fg_id' => 1,
 	'label' => 'Evaluation Form',
 	'description' => '',
 	'table' => 'training_calendar',
-	'column' => 'feedback_category_id',
+	'column' => 'evaluation_template_id',
 	'uitype_id' => 10,
 	'display_id' => 3,
 	'quick_edit' => 1,
@@ -101,11 +101,11 @@ $config['fields'][1]['training_calendar.feedback_category_id'] = array(
 	'encrypt' => 0,
 	'searchable' => array(
 		'type_id' => '1',
-		'table' => 'training_feedback_category',
+		'table' => 'training_evaluation_template',
 		'multiple' => 0,
 		'group_by' => '',
-		'label' => 'feedback_category',
-		'value' => 'feedback_category_id',
+		'label' => 'title',
+		'value' => 'evaluation_template_id',
 		'textual_value_column' => ''
 	)
 );

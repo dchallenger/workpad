@@ -43,27 +43,36 @@
 		<div class="caption">Feedback Questionnaire</div>
 		<div class="tools"><a class="collapse" href="javascript:;"></a></div>
 	</div>
-		<div class="portlet-body form">	
+	<div class="portlet-body form">	
+		<div>
+			<b>
+				<span>1 - Needs improvement</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<span>2 - Fair</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<span>3 - Satisfactory</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<span>4 - Good</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<span>5- Excellent</span>
+			</b>
+		</div><br/>
 		<table class="table table-striped table-bordered table-advance table-hover">
 		    <tbody>
 			<?php 
 				if( $feedback_questionnaire_item_count > 0 ){
-					$current_score_type = 0;
+					$current_section_type = 0;
 					$current_feedback_category = 0;
 					foreach( $feedback_questionnaire_items as $questionnaire_info ){
-						if( $current_feedback_category != $questionnaire_info['feedback_category_id'] ){
+						if( $current_feedback_category != $questionnaire_info['evaluation_template_id'] ){
 			?>
 				<tr>
 			        <th style="vertical-align:middle; text-align:left; font-weight:bold;" colspan="7" class="odd">
-			        	<?= $questionnaire_info['feedback_category'] ?>
+			        	<?= $questionnaire_info['title'] ?>
 			        </th>
 			    </tr>
 				<?php
-					$current_score_type = 0;
+					$current_section_type = 0;
 				 	}
 
-					if( $questionnaire_info['score_type'] == 1 ) { // 5-point scale
-						if( $current_score_type == $questionnaire_info['score_type'] ){
+					if( $questionnaire_info['section_type_id'] == 1 ) { // 5-point scale
+						if( $current_section_type == $questionnaire_info['section_type_id'] ){
 							$qi1 = isset($questionnaire_info['score']) && $questionnaire_info['score'] == 1.00 ? "checked" : '';
 							$qi2 = isset($questionnaire_info['score']) && $questionnaire_info['score'] == 2.00 ? "checked" : '';
 							$qi3 = isset($questionnaire_info['score']) && $questionnaire_info['score'] == 3.00 ? "checked" : '';
@@ -71,12 +80,12 @@
 							$qi5 = isset($questionnaire_info['score']) && $questionnaire_info['score'] == 5.00 ? "checked" : '';
 						?>
 							<tr>
-					            <td style="text-align:left; vertical-align:top;" colspan="2"><?= $questionnaire_info['feedback_item'] ?></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="1" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi1; ?> /></label></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="2" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi2; ?> /></label></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="3" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi3; ?> /></label></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="4" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi4; ?> /></label></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="5" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi5; ?> /></label></td> 
+					            <td style="text-align:left; vertical-align:top;" colspan="2"><?= $questionnaire_info['template_section'] ?></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="5" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi5; ?> /></label></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="4" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi4; ?> /></label></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="3" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi3; ?> /></label></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="2" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi2; ?> /></label></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="1" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi1; ?> /></label></td>					            
 					        </tr>
 						<?php
 						}
@@ -86,19 +95,19 @@
 						        <th style="vertical-align:middle; width:40%;" class="odd" colspan="2">
 						        </th>
 						        <th style="vertical-align:middle; width:12%; text-align:center;" class="odd">
-						        	Strongly Agree
+						        	Excellent
 						        </th>
 						        <th style="vertical-align:middle; width:12%; text-align:center;" class="odd">
-						        	Agree
+						        	Good
 						        </th>
 						        <th style="vertical-align:middle; width:12%; text-align:center;" class="odd">
-						        	Neutral
+						        	Satisfactory
 						        </th>
 						        <th style="vertical-align:middle; width:12%; text-align:center;" class="odd">
-						        	Disagree
+						        	Fair
 						        </th>
 						        <th style="vertical-align:middle; width:12%; text-align:center;" class="odd">
-						        	Strongly Disagree
+						        	Needs improvement
 						        </th>
 						    </tr>
 						    <?php 
@@ -109,26 +118,26 @@
 								$qi5 = isset($questionnaire_info['score']) && $questionnaire_info['score'] == 5.00 ? "checked" : '';
 						    ?>
 					    	<tr>
-	 							<td style="text-align:left; vertical-align:top;" colspan="2"><?= $questionnaire_info['feedback_item'] ?></td>
-   					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="1" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi1; ?> /></label></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="2" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi2; ?> /></label></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="3" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi3; ?> /></label></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="4" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi4; ?> /></label></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="5" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi5; ?> /></label></td> 
+	 							<td style="text-align:left; vertical-align:top;" colspan="2"><?= $questionnaire_info['template_section'] ?></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="5" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi5; ?> /></label></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="4" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi4; ?> /></label></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="3" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi3; ?> /></label></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="2" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi2; ?> /></label></td>					            					            					             
+   					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="1" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi1; ?> /></label></td>
 				            </tr>
 						<?php
 						}
 					} 
-					elseif( $questionnaire_info['score_type'] == 2 ){ // Yes or No
-						if( $current_score_type == $questionnaire_info['score_type'] ){
+					elseif( $questionnaire_info['section_type_id'] == 2 ){ // Yes or No
+						if( $current_section_type == $questionnaire_info['section_type_id'] ){
 
 						$yes = isset($questionnaire_info['score']) && $questionnaire_info['score'] == 5.00 ? "checked" : '';
 						$no = isset($questionnaire_info['score']) && $questionnaire_info['score'] == 0 ? "checked" : '';
 						?>
 							<tr>
-					            <td style="text-align:left; vertical-align:top;" colspan="2"><?= $questionnaire_info['feedback_item'] ?></td>
-					            <td style="text-align:left;"><input type="radio" value="5" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $yes; ?>/>Yes</td>
-					            <td style="text-align:left;" colspan="5"><input type="radio" value="0" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php $no; ?>/>No</td>
+					            <td style="text-align:left; vertical-align:top;" colspan="2"><?= $questionnaire_info['template_section'] ?></td>
+					            <td style="text-align:left;"><input type="radio" value="5" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $yes; ?>/>Yes</td>
+					            <td style="text-align:left;" colspan="5"><input type="radio" value="0" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php $no; ?>/>No</td>
 					        </tr>
 						<?php
 						}
@@ -142,20 +151,20 @@
 						$no = isset($questionnaire_info['score']) && $questionnaire_info['score'] == 0 ? "checked" : '';
 					    ?>
 					    	<tr>
-					            <td style="text-align:left; vertical-align:top;" colspan="2"><?= $questionnaire_info['feedback_item'] ?></td>
-					            <td style="text-align:left;"><input type="radio" value="5" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $yes; ?>/>Yes</td>
-					            <td style="text-align:left;" colspan="5"><input type="radio" value="0" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php $no; ?>/>No</td>
+					            <td style="text-align:left; vertical-align:top;" colspan="2"><?= $questionnaire_info['template_section'] ?></td>
+					            <td style="text-align:left;"><input type="radio" value="5" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $yes; ?>/>Yes</td>
+					            <td style="text-align:left;" colspan="5"><input type="radio" value="0" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php $no; ?>/>No</td>
 					        </tr>
 					    <?php
 						}
 					}
-					elseif( $questionnaire_info['score_type'] == 3 ){ // Essay
-						if( $current_score_type == $questionnaire_info['score_type'] ){
+					elseif( $questionnaire_info['section_type_id'] == 3 ){ // Essay
+						if( $current_section_type == $questionnaire_info['section_type_id'] ){
 						?>
 							<tr>
-					            <td style="text-align:left; vertical-align:top;"><?= $questionnaire_info['feedback_item'] ?></td>
+					            <td style="text-align:left; vertical-align:top;"><?= $questionnaire_info['template_section'] ?></td>
 					            <?php $questionnaire_info_remarks = isset($questionnaire_info['remarks'])  ? $questionnaire_info['remarks'] : ''; ?>
-					            <td style="text-align:left;" colspan="6"><textarea class="form-control" style="width:100%;" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]"><?php echo $questionnaire_info_remarks; ?></textarea></td>
+					            <td style="text-align:left;" colspan="6"><textarea class="form-control" style="width:100%;" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]"><?php echo $questionnaire_info_remarks; ?></textarea></td>
 					        </tr>
 						<?php
 						}
@@ -165,15 +174,15 @@
 						        <th style="vertical-align:middle; width:100%;" colspan="7" class="odd"></th>
 						    </tr>
 					    	<tr>
-					            <td style="text-align:left; vertical-align:top;"><?= $questionnaire_info['feedback_item'] ?></td>
+					            <td style="text-align:left; vertical-align:top;"><?= $questionnaire_info['template_section'] ?></td>
 					            <?php $questionnaire_info_remarks = isset($questionnaire_info['remarks'])  ? $questionnaire_info['remarks'] : ''; ?>
-					            <td style="text-align:left;" colspan="6"><textarea class="form-control" style="width:100%;" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]"><?php echo $questionnaire_info_remarks; ?></textarea></td>
+					            <td style="text-align:left;" colspan="6"><textarea class="form-control" style="width:100%;" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]"><?php echo $questionnaire_info_remarks; ?></textarea></td>
 					        </tr>
 						<?php
 						}
 					}
-					elseif( $questionnaire_info['score_type'] == 4 ){ // 6-point scale
-						if( $current_score_type == $questionnaire_info['score_type'] ){
+					elseif( $questionnaire_info['section_type_id'] == 4 ){ // 6-point scale
+						if( $current_section_type == $questionnaire_info['section_type_id'] ){
 							$qi0 = isset($questionnaire_info['score']) && $questionnaire_info['score'] == 0.00 ? "checked" : '';
 							$qi1 = isset($questionnaire_info['score']) && $questionnaire_info['score'] == 1.00 ? "checked" : '';
 							$qi2 = isset($questionnaire_info['score']) && $questionnaire_info['score'] == 2.00 ? "checked" : '';
@@ -182,13 +191,13 @@
 							$qi5 = isset($questionnaire_info['score']) && $questionnaire_info['score'] == 5.00 ? "checked" : '';
 						?>
 							<tr>
-					            <td style="text-align:left; vertical-align:top;"><?= $questionnaire_info['feedback_item'] ?></td>  
-					        	<td style="text-align:center;"><label class="radio-inline"><input type="radio" value="1" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi0; ?> /></label></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="1" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi1; ?> /></label></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="2" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi2; ?> /></label></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="3" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi3; ?> /></label></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="4" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi4; ?> /></label></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="5" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi5; ?> /></label></td> 
+					            <td style="text-align:left; vertical-align:top;"><?= $questionnaire_info['template_section'] ?></td>  
+					        	<td style="text-align:center;"><label class="radio-inline"><input type="radio" value="1" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi0; ?> /></label></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="1" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi1; ?> /></label></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="2" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi2; ?> /></label></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="3" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi3; ?> /></label></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="4" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi4; ?> /></label></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="5" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi5; ?> /></label></td> 
 					        </tr>
 						<?php
 						}
@@ -225,19 +234,19 @@
 							$qi5 = isset($questionnaire_info['score']) && $questionnaire_info['score'] == 5.00 ? "checked" : '';
 						    ?>
 					    	<tr>
-					            <td style="text-align:left; vertical-align:top;"><?= $questionnaire_info['feedback_item'] ?></td>
-								<td style="text-align:center;"><label class="radio-inline"><input type="radio" value="1" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi0; ?> /></label></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="1" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi1; ?> /></label></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="2" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi2; ?> /></label></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="3" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi3; ?> /></label></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="4" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi4; ?> /></label></td>
-					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="5" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi5; ?> /></label></td>  
+					            <td style="text-align:left; vertical-align:top;"><?= $questionnaire_info['template_section'] ?></td>
+								<td style="text-align:center;"><label class="radio-inline"><input type="radio" value="1" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi0; ?> /></label></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="1" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi1; ?> /></label></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="2" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi2; ?> /></label></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="3" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi3; ?> /></label></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="4" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi4; ?> /></label></td>
+					            <td style="text-align:center;"><label class="radio-inline"><input type="radio" value="5" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi5; ?> /></label></td>  
 					        </tr>
 						<?php
 						}
 					}
-					elseif( $questionnaire_info['score_type'] == 5 ){ // 4-point scale
-						if( $current_score_type == $questionnaire_info['score_type'] ){
+					elseif( $questionnaire_info['section_type_id'] == 5 ){ // 4-point scale
+						if( $current_section_type == $questionnaire_info['section_type_id'] ){
 
 						$qi1 = isset($questionnaire_info['score']) && $questionnaire_info['score'] == 1.25 ? "checked" : '';
 						$qi2 = isset($questionnaire_info['score']) && $questionnaire_info['score'] == 2.5 ? "checked" : '';
@@ -245,11 +254,11 @@
 						$qi4 = isset($questionnaire_info['score']) && $questionnaire_info['score'] == 5 ? "checked" : '';
 						?>
 							<tr>
-					            <td style="text-align:left; vertical-align:top;" colspan="3"><?= $questionnaire_info['feedback_item'] ?></td>
-					            <td style="text-align:center;"><input type="radio" value="1.25" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi1; ?> /></td>
-					            <td style="text-align:center;"><input type="radio" value="2.5" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi2; ?>/></td>
-					            <td style="text-align:center;"><input type="radio" value="3.75" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi3; ?>/></td>
-					            <td style="text-align:center;"><input type="radio" value="5" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi4; ?>/></td>
+					            <td style="text-align:left; vertical-align:top;" colspan="3"><?= $questionnaire_info['template_section'] ?></td>
+					            <td style="text-align:center;"><input type="radio" value="1.25" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi1; ?> /></td>
+					            <td style="text-align:center;"><input type="radio" value="2.5" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi2; ?>/></td>
+					            <td style="text-align:center;"><input type="radio" value="3.75" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi3; ?>/></td>
+					            <td style="text-align:center;"><input type="radio" value="5" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi4; ?>/></td>
 					        </tr>
 						<?php
 						}
@@ -278,33 +287,33 @@
 							$qi4 = isset($questionnaire_info['score']) && $questionnaire_info['score'] == 5 ? "checked" : '';
 						    ?>
 					    	<tr>
-	 							<td style="text-align:left; vertical-align:top;" colspan="3"><?= $questionnaire_info['feedback_item'] ?></td>
-					            <td style="text-align:center;"><input type="radio" value="1.25" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi1; ?> /></td>
-					            <td style="text-align:center;"><input type="radio" value="2.5" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi2; ?>/></td>
-					            <td style="text-align:center;"><input type="radio" value="3.75" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi3; ?>/></td>
-					            <td style="text-align:center;"><input type="radio" value="5" class="feedback_average" name="feedback_item[<?= $questionnaire_info['feedback_item_id'] ?>]" <?php echo $qi4; ?>/></td>
+	 							<td style="text-align:left; vertical-align:top;" colspan="3"><?= $questionnaire_info['template_section'] ?></td>
+					            <td style="text-align:center;"><input type="radio" value="1.25" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi1; ?> /></td>
+					            <td style="text-align:center;"><input type="radio" value="2.5" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi2; ?>/></td>
+					            <td style="text-align:center;"><input type="radio" value="3.75" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi3; ?>/></td>
+					            <td style="text-align:center;"><input type="radio" value="5" class="feedback_average" name="template_section[<?= $questionnaire_info['template_section_id'] ?>]" <?php echo $qi4; ?>/></td>
 					        </tr>
 						<?php
 						}
 					} 
-					$current_score_type = $questionnaire_info['score_type'];
-					$current_feedback_category = $questionnaire_info['feedback_category_id'];
+					$current_section_type = $questionnaire_info['section_type_id'];
+					$current_feedback_category = $questionnaire_info['evaluation_template_id'];
 					}
 				}
 			?>
 		    </tbody>
 		</table>
-			<div class="form-group">
-				<label class="control-label col-md-3">Total Score</label>
-				<div class="col-md-7">
-					<input type="text" class="form-control" name="training_feedback[total_score]" id="training_library-library" value="{{ $record['training_feedback.total_score'] }}" readonly /> 
-				</div>	
-			</div>			
-			<div class="form-group">
-				<label class="control-label col-md-3">Average Score</label>
-				<div class="col-md-7">
-					<input type="text" class="form-control" name="training_feedback[average_score]" id="training_library-library" value="{{ $record['training_feedback.average_score'] }}" readonly/> 
-				</div>	
-			</div>
+		<div class="form-group">
+			<label class="control-label col-md-3">Total Score</label>
+			<div class="col-md-7">
+				<input type="text" class="form-control" name="training_feedback[total_score]" id="total_score" value="{{ $record['training_feedback.total_score'] }}" readonly /> 
+			</div>	
+		</div>			
+		<div class="form-group">
+			<label class="control-label col-md-3">Average Score</label>
+			<div class="col-md-7">
+				<input type="text" class="form-control" name="training_feedback[average_score]" id="average_score" value="{{ $record['training_feedback.average_score'] }}" readonly/> 
+			</div>	
 		</div>
+	</div>
 </div>

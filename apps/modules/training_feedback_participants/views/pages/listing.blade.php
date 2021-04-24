@@ -11,7 +11,7 @@
 					<input type="hidden" name="calendar_id" value="{{ $calendar_id }}" />
 					<div class="caption"><i class="fa {{ $mod->icon}}"></i>{{ lang('common.list') }} {{ $mod->short_name }}</div>
 					<div class="caption" id="head-caption">&nbsp;</div>
-					<div class="actions">
+					<div class="actions hidden">
 						@if( isset( $permission['add']) && $permission['add'] )
 							<a id="goadd" href="{{ $mod->url }}/add" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
 						@endif
@@ -24,11 +24,11 @@
 					<table id="record-table" class="table table-condensed table-striped table-hover">
 	                    <thead>
 	                        <tr>
-	                            <th width="1%" class="hidden-xs">
+<!-- 	                            <th width="1%" class="hidden-xs">
 	                                <div>
 	                                    <span><input type="checkbox" class="group-checkable" data-set=".record-checker"></span>
 	                                </div>
-	                            </th>
+	                            </th> -->
 	                            @include('list_template_header')
 	                            <th width="20%">
 	                                {{ lang('common.actions') }}

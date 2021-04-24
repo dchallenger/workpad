@@ -13,6 +13,7 @@
             <!-- BEGIN FORM-->
             <!-- <form class="form-horizontal session_form" id="session-form"> -->
                 <input type="hidden" name="training_calendar_id" value="<?php echo ( isset($training_calendar_id) && !empty($training_calendar_id)) ? $training_calendar_id : ''; ?>" />
+                <input type="hidden" name="session[calendar_session_id][<?php echo $session_count; ?>]" value="<?php echo ( isset($session) && !empty($session)) ? $session['calendar_session_id'] : ''; ?>" />
                 
                 <div class="form-body">
                     <div class="form-group">

@@ -7,8 +7,7 @@
    <td>{{ $training_employee_database_employee}}</td>
 <td>{{ $training_employee_database_position}}</td>
 <td>{{ $training_employee_database_department}}</td>
-<td>{{ $training_employee_database_training_balance}}</td>
-<td>{{ $training_employee_database_daily_training_cost}}</td>
+<td>{{ $training_employee_database_training_course}}</td>
 <td>{{ $training_employee_database_start_date}}</td>
 <td>{{ $training_employee_database_end_date}}</td>
     <td>

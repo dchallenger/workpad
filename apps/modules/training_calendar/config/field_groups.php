@@ -22,7 +22,7 @@ $config['fieldgroups'][1] = array(
 				'training_calendar.registration_date',
 				'training_calendar.cost_per_pax',
 				'training_calendar.last_registration_date',
-				'training_category.feedback_category_id',
+				'training_category.training_provider_id',
 				'training_calendar.publish_date',
 				'training_calendar.training_revalida_master_id',
 				'training_calendar.with_certification',

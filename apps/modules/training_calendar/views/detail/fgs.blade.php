@@ -76,7 +76,7 @@
 			<div class="form-group">
 				<label class="control-label col-md-3">Training Category</label>
 				<div class="col-md-7">							
-					<input disabled="disabled" type="text" class="form-control" name="training_calendar[training_category_id]" id="training_calendar-training_category_id" value="<?php echo !empty($record['training_calendar.course_id']) ?$training_category : ''; ?>" placeholder="Enter Training Category" /> 				
+					<input disabled="disabled" type="text" class="form-control" name="training_calendar[training_category_id]" id="training_calendar-training_category_id" value="<?php echo !empty($record['training_calendar.course_id']) ? $training_category : ''; ?>" placeholder="Enter Training Category" /> 				
 				</div>	
 			</div>
 
@@ -157,26 +157,26 @@
 	        </div>
 
 	        <div class="form-group">
-				<label class="control-label col-md-3">Evaluation Form</label>
+				<label class="control-label col-md-3"><span class="required">* </span>Evaluation Form</label>
 				<div class="col-md-7"><?php									                            		
-				$db->select('feedback_category_id,feedback_category');
-				$db->order_by('feedback_category', '0');
+				$db->select('evaluation_template_id,title');
+				$db->order_by('title', '0');
 				$db->where('deleted', '0');
-				$options = $db->get('training_feedback_category'); 	                            
-				$training_calendar_feedback_category_id_options = array();
+				$options = $db->get('training_evaluation_template'); 	                            
+				$training_evaluation_template_id_options = array();
 	            		foreach($options->result() as $option)
 	            		{
-	        				$training_calendar_feedback_category_id_options[$option->feedback_category_id] = $option->feedback_category;
+	        				$training_evaluation_template_id_options[$option->evaluation_template_id] = $option->title;
 	            		} ?>							
 
 	            	<div class="input-group">
 						<span class="input-group-addon">
 	                    <i class="fa fa-list-ul"></i>
 	                    </span>
-	                    {{ form_dropdown('training_calendar[feedback_category_id][]',$training_calendar_feedback_category_id_options, explode(',', $record['training_calendar.feedback_category_id']), 'disabled="disabled" class="select2me form-control " data-placeholder="Select Feedback Category" id="training_calendar-feedback_category_id" multiple') }}
+	                    {{ form_dropdown('training_calendar[evaluation_template_id][]',$training_evaluation_template_id_options, explode(',', $record['training_calendar.evaluation_template_id']), 'disabled="disabled" class="select2me form-control " data-placeholder="Select Feedback Category" id="training_calendar-feedback_category_id" multiple') }}
 	                </div> 			
 	            </div>	
-			</div>
+			</div>			
 
 			<div class="form-group">
 	            <label class="control-label col-md-3">Publish Date</label>
@@ -190,7 +190,7 @@
 	            </div>
 	        </div>
 
-	        <div class="form-group">
+	        <div class="form-group hidden">
 				<label class="control-label col-md-3">Level 2 and 3 Evaluation</label>
 				<div class="col-md-7"><?php									                            		
 				$db->select('training_revalida_master_id,revalida_type');
@@ -319,7 +319,7 @@
 						?>
 
 										<tr>
-								    		<td style="text-align:center">
+<!-- 								    		<td style="text-align:center">
 								    			<?php
 				                                    $training_cost_options = array('' => 'Select');
 				                                    $training_costs = $db->get_where( 'training_source', array('deleted' => 0) );
@@ -328,7 +328,8 @@
 				                                        $training_cost_options[$row->source_id] =  $row->source;
 				                                    }
 				                                ?>
-								    		<?php echo  $training_cost_options[$row->source_id];  ?></td>
+								    		<?php echo  $training_cost_options[$row->source_id];  ?></td> -->
+								    		<td style="text-align:center"><?php echo $training_cost['cost_name'];  ?></td>
 								    		<td style="text-align:center"><?php echo $training_cost['remarks'];  ?></td>
 								    		<td style="text-align:center"><?php echo $training_cost['cost'];  ?></td>
 								    		<td style="text-align:center"><?php echo $training_cost['pax'];  ?></td>
@@ -366,6 +367,7 @@
 					<tbody id="form-list">
 						<?php
 							if ($record['record_id'] != ''){
+								$db->where('training_calendar_participant.deleted',0);
 								$db->where('training_calendar_id',$record['record_id']);
 								$db->join('partners','training_calendar_participant.user_id = partners.user_id','left');
 								$list_participants = $db->get('training_calendar_participant');
@@ -413,7 +415,7 @@
 				<div class="col-md-2">
 				    <label for="date" class="label-desc gray">Total Confirmed:</label>
 				    <div class="text-input-wrap">  
-						<input class="form-control total_confirmed" name="total_confirmed" id="" readonly value="" placeholder="Total Confirmed" type="text">
+						<input class="form-control" name="total_confirmed" id="" readonly value="{{$record['training_calendar.confirmed']}}" placeholder="Total Confirmed" type="text">
 				    </div>                                    
 				</div>
 			</fieldset>		              

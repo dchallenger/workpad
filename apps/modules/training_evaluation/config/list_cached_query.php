@@ -12,8 +12,9 @@ CONCAT( `t1`.`course` ) AS training_subject,
 `t2`.`instructor` as `instructor`
 FROM (`ww_training_calendar`)
 LEFT JOIN `ww_training_calendar_session` t2 ON `t2`.`training_calendar_id`=`ww_training_calendar`.`training_calendar_id`
-LEFT JOIN `ww_training_employee_database` t3 ON `t3`.`calendar_id`=`ww_training_calendar`.`training_calendar_id`
+LEFT JOIN `ww_training_employee_database` t3 ON `t3`.`training_calendar_id`=`ww_training_calendar`.`training_calendar_id`
 LEFT JOIN `ww_training_course` t1 ON `t1`.`course_id`=`ww_training_calendar`.`course_id`
 LEFT JOIN `ww_training_feedback` ON `ww_training_feedback`.`training_calendar_id` = `ww_training_calendar`.`training_calendar_id`
+LEFT JOIN `ww_training_calendar_participant` t4 ON `t4`.`training_calendar_id`=`ww_training_calendar`.`training_calendar_id`
 WHERE (`ww_training_calendar`.`closed` =  1)
 ';

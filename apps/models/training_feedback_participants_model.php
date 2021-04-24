@@ -63,6 +63,8 @@ class training_feedback_participants_model extends Record
 			$qry .= " AND {$this->db->dbprefix}{$this->table}.user_id = {$this->user->user_id}";
         }
 
+		$qry .= " AND {$this->db->dbprefix}{$this->table}.participant_status_id = 2";	
+
 		$qry .= ' '. $filter;
 		$qry .= " LIMIT $limit OFFSET $start";
 
@@ -176,5 +178,45 @@ class training_feedback_participants_model extends Record
 				}
 			}
 		}
-	}	
+	}
+
+	function notify_hr( $calendar_participant_id=0, $participant_user_id=0)
+	{	
+		$qry = "SELECT  *
+				FROM {$this->db->dbprefix}roles r 
+				WHERE FIND_IN_SET(31,profile_id)";
+
+		$roles_result = $this->db->query($qry);
+
+		$notified = array();		
+		
+		if ($roles_result && $roles_result->num_rows() > 0) {
+			$role_id = $roles_result->row()->role_id;
+
+			$this->db->where('role_id',$role_id);
+			$users = $this->db->get('users');
+
+			if ($users && $users->num_rows() > 0) {
+
+				foreach ($users->result() as $row) {
+					//insert notification
+					$insert = array(
+						'status' => 'info',
+						'message_type' => 'Training Request',
+						'user_id' => $participant_user_id,
+						'feed_content' => 'Submitted training evaluation for Validation',//.'.<br><br>Reason: '.$form['reason'],
+						'recipient_id' => $row->user_id,
+						'uri' => str_replace(base_url(), '', $this->mod->url).'/detail/'.$calendar_participant_id
+					);
+
+					$this->db->insert('system_feeds', $insert);
+					$id = $this->db->insert_id();
+					$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $row->user_id));
+					$notified[] = $row->user_id;
+				}
+			}
+		}
+
+		return $notified;
+	}
 }

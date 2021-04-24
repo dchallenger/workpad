@@ -25,7 +25,7 @@
 
 				                    <hr />
 
-									<div class="hidden">
+									<div>
 										<div class="col-md-9 margin-bottom-10">
 											<h4>{{ lang('training.training_eval_master')}}</h4>
 											<div class="text-muted small"></div>
@@ -91,7 +91,7 @@
 										<div class="clearfix"></div>
 									</div>
 
-									<div>
+									<div class="hidden">
 										<div class="col-md-9 margin-bottom-10">
 											<h4>{{ lang('training.training_lib')}}</h4>
 											<div class="text-muted small"></div>
@@ -113,7 +113,7 @@
 										<div class="clearfix"></div>
 									</div>
 
-									<div>
+									<div class="hidden">
 										<div class="col-md-9 margin-bottom-10">
 											<h4>{{ lang('training.training_fac')}}</h4>
 											<div class="text-muted small"></div>
@@ -124,7 +124,7 @@
 										<div class="clearfix"></div>
 									</div>
 
-									<div>
+									<div class="hidden">
 										<div class="col-md-9 margin-bottom-10">
 											<h4>{{ lang('training.training_cost')}}</h4>
 											<div class="text-muted small"></div>

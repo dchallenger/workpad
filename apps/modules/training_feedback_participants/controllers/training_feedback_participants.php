@@ -19,9 +19,11 @@ class Training_feedback_participants extends MY_PrivateController
 		echo $this->load->blade('pages.listing', $calendar)->with( $this->load->get_cached_vars() );
 	}
 
-	public function get_list($calendar_id)
+	public function get_list()
 	{
-		$this->_ajax_only();
+		$last = $this->uri->total_segments();
+		$calendar_id = $this->uri->segment($last);		
+
 		if( !$this->permission['list'] )
 		{
 			$this->response->message[] = array(
@@ -113,9 +115,22 @@ class Training_feedback_participants extends MY_PrivateController
 			$this->session->set_userdata('search', $searches);
 		}
 		
+		$search = $search ."||". $calendar_id;
+
 		$page = ($page-1) * 10;
 		$records = $this->mod->_get_list($page, 10, $search, $filter, $trash, $calendar_id);
 		return $records;
+	}
+
+	public function add( $record_id = '', $child_call = false )
+	{
+		if( !$this->permission['add'] )
+		{
+			echo $this->load->blade('pages.insufficient_permission')->with( $this->load->get_cached_vars() );
+			die();
+		}
+
+		$this->_edit( $child_call, true );
 	}
 
 	public function edit( $record_id = "", $child_call = false )
@@ -133,6 +148,7 @@ class Training_feedback_participants extends MY_PrivateController
 	{
 		$record_check = false;
 		$this->record_id = $data['record_id'] = '';
+		$feedback_id = 0;
 
 		if( !$new ){
 			if( !$this->_set_record_id() )
@@ -142,44 +158,42 @@ class Training_feedback_participants extends MY_PrivateController
 			}
 
 			$this->record_id = $data['record_id'] = $_POST['record_id'];
+
+			$calendar_participant_info = $this->mod->get_calendar_participant_info($this->record_id);
+
+			$training_feedback_info = $this->mod->get_training_feedback_info($calendar_participant_info['training_calendar_id'],$calendar_participant_info['user_id']);
+
+			$feedback_id = (isset($training_feedback_info['feedback_id']) ? $training_feedback_info['feedback_id'] : 0);
 		}
 
 		//Get Participant and Calendar Details
-		$this->db->select('training_calendar.feedback_category_id');
-		$this->db->join('training_calendar','training_calendar.training_calendar_id = training_feedback.training_calendar_id','left');
-		$this->db->where('training_feedback.feedback_id',$this->record_id);
-		$participant_details = $this->db->get('training_feedback')->row();
 
-		//Get Feedback Questionnaire Items
-		$answer_details_count = $this->db->get_where('training_feedback_score',array('feedback_id' => $this->record_id ))->num_rows();
+		if ($this->record_id != '')
+			$this->db->where('training_calendar_participant.calendar_participant_id',$this->record_id);
 
-		if( $answer_details_count > 0 ){
-			$this->db->select('training_feedback_category.feedback_category_id, training_feedback_category.feedback_category, training_feedback_item.*');
-			$this->db->join('training_feedback_item','training_feedback_item.feedback_category_id = training_feedback_category.feedback_category_id','left');
-			$this->db->where_in('training_feedback_category.feedback_category_id',explode(',',$participant_details->feedback_category_id));
-			$this->db->where('training_feedback_item.inactive = 0');
-			$this->db->order_by('training_feedback_item.feedback_category_id','ASC');
-			$this->db->order_by('training_feedback_item.feedback_item_no','ASC');
-			$questionnaire_details = $this->db->get('training_feedback_category');
-		} else {
-			$this->db->select('training_feedback_category.feedback_category_id, training_feedback_category.feedback_category, training_feedback_item.*');
-			$this->db->join('training_feedback_item','training_feedback_item.feedback_category_id = training_feedback_category.feedback_category_id','left');
-			$this->db->where_in('training_feedback_category.feedback_category_id',explode(',',$participant_details->feedback_category_id));
-			$this->db->where('training_feedback_item.inactive = 0');
-			$this->db->order_by('training_feedback_item.feedback_category_id','ASC');
-			$this->db->order_by('training_feedback_item.feedback_item_no','ASC');
-			$questionnaire_details = $this->db->get('training_feedback_category');
+		$this->db->select('training_calendar.evaluation_template_id');
+		$this->db->join('training_calendar','training_calendar.training_calendar_id = training_calendar_participant.training_calendar_id','left');		
+		$this->db->join('training_feedback','training_calendar.training_calendar_id = training_feedback.training_calendar_id','left');
+		$result = $this->db->get('training_calendar_participant');
+
+		if ($result && $result->num_rows() > 0) {
+			$participant_details = $result->row();
+
+			$this->db->select('training_evaluation_template.evaluation_template_id, training_evaluation_template.title, training_evaluation_template_section.*');
+			$this->db->join('training_evaluation_template_section','training_evaluation_template_section.evaluation_template_id = training_evaluation_template.evaluation_template_id','left');
+			$this->db->where_in('training_evaluation_template.evaluation_template_id',explode(',',$participant_details->evaluation_template_id));
+			$this->db->where('training_evaluation_template_section.deleted = 0');
+			$this->db->order_by('training_evaluation_template_section.evaluation_template_id');
+			$this->db->order_by('training_evaluation_template_section.sequence','ASC');
+			$questionnaire_details = $this->db->get('training_evaluation_template');
 		}
 
-
-
 		$data['feedback_questionnaire_item_count'] = $questionnaire_details->num_rows();
+		$data['feedback_questionnaire_items'] = $questionnaire_details->result_array();
 
-		if( $questionnaire_details->num_rows() > 0 ){
-			$data['feedback_questionnaire_items'] = $questionnaire_details->result_array();
+		if( $questionnaire_details->num_rows() > 0 && $feedback_id){
 			foreach( $data['feedback_questionnaire_items'] as $key => $val ){
-				$feedback_questionnaire_score = $this->db->get_where('training_feedback_score',array('feedback_id'=>$this->record_id, 'feedback_item_id'=> $data['feedback_questionnaire_items'][$key]['feedback_item_id'] ));
-				
+				$feedback_questionnaire_score = $this->db->get_where('training_feedback_score',array('feedback_id'=>$feedback_id, 'template_section_id'=> $data['feedback_questionnaire_items'][$key]['template_section_id'] ));				
 
 				if( $feedback_questionnaire_score->num_rows() > 0 ){
 					$feedback_questionnaire_score_info = $feedback_questionnaire_score->row();
@@ -218,6 +232,118 @@ class Training_feedback_participants extends MY_PrivateController
 				$this->load->helper('form');
 				$this->load->helper('file');
 				echo $this->load->blade('pages.edit')->with( $this->load->get_cached_vars() );
+			}
+		}
+		else
+		{
+			$this->load->vars( $data );
+			if( !$child_call ){
+				echo $this->load->blade('pages.error', array('error' => $record_check))->with( $this->load->get_cached_vars() );
+			}
+		}
+	}
+
+	public function detail( $record_id, $child_call = false )
+	{
+		if( !$this->permission['detail'] )
+		{
+			echo $this->load->blade('pages.insufficient_permission')->with( $this->load->get_cached_vars() );
+			die();
+		}
+
+		$this->_detail( $child_call );
+	}
+
+	private function _detail( $child_call, $new = false )
+	{
+		$record_check = false;
+		$this->record_id = $data['record_id'] = '';	
+
+		if( !$new )
+		{
+			if( !$this->_set_record_id() )
+			{
+				echo $this->load->blade('pages.insufficient_data')->with( $this->load->get_cached_vars() );
+				die();
+			}
+
+			$this->record_id = $data['record_id'] = $_POST['record_id'];
+
+			$calendar_participant_info = $this->mod->get_calendar_participant_info($this->record_id);
+
+			$training_feedback_info = $this->mod->get_training_feedback_info($calendar_participant_info['training_calendar_id'],$calendar_participant_info['user_id']);
+
+			$feedback_id = $training_feedback_info['feedback_id'];			
+		}
+
+		$this->record_id = $data['record_id'] = $_POST['record_id'];
+
+		//Get Participant and Calendar Details
+
+		if ($this->record_id != '')
+			$this->db->where('training_calendar_participant.calendar_participant_id',$this->record_id);
+
+		$this->db->select('training_calendar.evaluation_template_id');
+		$this->db->join('training_calendar','training_calendar.training_calendar_id = training_calendar_participant.training_calendar_id','left');		
+		$this->db->join('training_feedback','training_calendar.training_calendar_id = training_feedback.training_calendar_id','left');
+		$result = $this->db->get('training_calendar_participant');
+
+		if ($result && $result->num_rows() > 0) {
+			$participant_details = $result->row();
+
+			$this->db->select('training_evaluation_template.evaluation_template_id, training_evaluation_template.title, training_evaluation_template_section.*');
+			$this->db->join('training_evaluation_template_section','training_evaluation_template_section.evaluation_template_id = training_evaluation_template.evaluation_template_id','left');
+			$this->db->where_in('training_evaluation_template.evaluation_template_id',explode(',',$participant_details->evaluation_template_id));
+			$this->db->where('training_evaluation_template_section.deleted = 0');
+			$this->db->order_by('training_evaluation_template_section.evaluation_template_id');
+			$this->db->order_by('training_evaluation_template_section.sequence','ASC');
+			$questionnaire_details = $this->db->get('training_evaluation_template');			
+		}
+
+		$data['feedback_questionnaire_item_count'] = $questionnaire_details->num_rows();
+
+		if( $questionnaire_details->num_rows() > 0 && $feedback_id){
+			$data['feedback_questionnaire_items'] = $questionnaire_details->result_array();
+			foreach( $data['feedback_questionnaire_items'] as $key => $val ){
+				$feedback_questionnaire_score = $this->db->get_where('training_feedback_score',array('feedback_id'=>$feedback_id, 'template_section_id'=> $data['feedback_questionnaire_items'][$key]['template_section_id'] ));				
+
+				if( $feedback_questionnaire_score->num_rows() > 0 ){
+					$feedback_questionnaire_score_info = $feedback_questionnaire_score->row();
+
+					$data['feedback_questionnaire_items'][$key]['score'] = $feedback_questionnaire_score_info->score;
+					$data['feedback_questionnaire_items'][$key]['remarks'] = $feedback_questionnaire_score_info->remarks;
+				}
+			}
+		}
+				
+		$record_check = $this->mod->_exists( $this->record_id );
+		if( $new || $record_check === true )
+		{
+			$result = $this->mod->_get( 'detail', $this->record_id );
+			if( $new )
+			{
+				$field_lists = $result->list_fields();
+				foreach( $field_lists as $field )
+				{
+					$data['record'][$field] = '';
+				}
+			}
+			else{
+				$record = $result->row_array();
+				foreach( $record as $index => $value )
+				{
+					$record[$index] = trim( $value );	
+				}
+				$data['record'] = $record;
+			}
+
+			$this->record = $data['record'];
+			$this->load->vars( $data );
+
+			if( !$child_call ){
+				$this->load->helper('form');
+				$this->load->helper('file');
+				echo $this->load->blade('pages.detail')->with( $this->load->get_cached_vars() );
 			}
 		}
 		else
@@ -270,60 +396,46 @@ class Training_feedback_participants extends MY_PrivateController
 	public function save($child_call = false)
 	{
 		$this->_ajax_only();
-		$this->record_id = $this->input->post('record_id');
-
+		$calendar_participant_id = $this->input->post('record_id');
+		$calendar_participant_info = $this->mod->get_calendar_participant_info($calendar_participant_id);
 		$training_feedback_data = array();
-		if( $this->record_id ){
+		$feedback_id = 0;
+
+		if (!empty($calendar_participant_info)) {
+			$training_calendar_id = $calendar_participant_info['training_calendar_id'];
+			$user_id = $calendar_participant_info['user_id'];
+
 			$scores = $this->input->post('training_feedback');
 			$training_feedback_data = array(
-				'feedback_status_id' => 3,
+				'training_calendar_id' => $training_calendar_id,
+				'user_id' => $user_id,
+				'feedback_status_id' => $this->input->post('status_id'),
 				'total_score' => $scores['total_score'],
 				'average_score' => $scores['average_score']
 			);
-			$this->db->where('feedback_id', $this->record_id);
-			$this->db->update('training_feedback', $training_feedback_data);
+
+			$info = array(
+					'training_calendar_id' => $training_calendar_id,
+					'user_id' => $user_id,
+					'training_feedback_data' => $training_feedback_data
+				);
+
+			$feedback_id = $this->mod->update_insert_feedback($info);
 		}
 
-		
+		if ($feedback_id) {
+			$template_section = $this->input->post('template_section');
 
-		$this->db->where('feedback_id',$this->input->post('record_id'));
-		$this->db->delete('training_feedback_score');
-		$this->db->select('users.full_name, training_calendar.feedback_category_id');
-		$this->db->join('training_calendar','training_calendar.training_calendar_id = training_feedback.training_calendar_id','left');
-		$this->db->join('users','users.user_id = training_feedback.employee_id','left');
-		$this->db->where('training_feedback.feedback_id', $this->record_id);
-		$participant_details = $this->db->get('training_feedback')->row();
-
-		$this->db->select('training_feedback_category.feedback_category_id, training_feedback_category.feedback_category, training_feedback_item.*');
-		$this->db->join('training_feedback_item','training_feedback_item.feedback_category_id = training_feedback_category.feedback_category_id','left');
-		$this->db->where_in('training_feedback_category.feedback_category_id',explode(',',$participant_details->feedback_category_id));
-		$this->db->order_by('training_feedback_item.feedback_item_no','ASC');
-		$questionnaire_list = $this->db->get('training_feedback_category');
-		$questionnaire_details = $questionnaire_list->result();
-
-		$feedback_item = $this->input->post('feedback_item');
-
-		foreach( $questionnaire_details as $questionnaire_detail_info ){
-
-			if( in_array( $questionnaire_detail_info->score_type, array(1,2,4,5) ) ){
-
-				$data = array(
-					'feedback_id' => $this->record_id,
-					'feedback_item_id' => $questionnaire_detail_info->feedback_item_id,
-					'score' => isset($feedback_item[$questionnaire_detail_info->feedback_item_id]) ? $feedback_item[$questionnaire_detail_info->feedback_item_id] : null
-				);
-				
-			}
-			else{
-				$data = array(
-					'feedback_id' => $this->record_id,
-					'feedback_item_id' => $questionnaire_detail_info->feedback_item_id,
-					'remarks' => isset($feedback_item[$questionnaire_detail_info->feedback_item_id]) ? $feedback_item[$questionnaire_detail_info->feedback_item_id] : null
+			$info = array(
+					'feedback_id' => $feedback_id,
+					'template_section' => $template_section
 				);
 
-			}
-			$this->db->insert('training_feedback_score',$data);
+			$this->mod->update_insert_feedback_score($info);
 
+			if ($user_id == $this->user->user_id) {
+				$this->mod->notify_hr($calendar_participant_id, $user_id);
+			}
 		}
 
 		$this->response->message[] = array(

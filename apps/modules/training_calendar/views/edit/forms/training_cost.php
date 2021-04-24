@@ -7,10 +7,11 @@
 					        </div>
 					            <div class="portlet-body form">
 					                <!-- BEGIN FORM-->
+					                	<input type="hidden" name="training_cost[calendar_budget_id][<?php echo $cost_count; ?>]" value="<?php echo ( isset($training_cost) && !empty($training_cost)) ? $training_cost['calendar_budget_id'] : ''; ?>" />
 					                    <div class="form-body">
 					                        <div class="form-group">
 					                            <label class="control-label col-md-3">Training Cost Name <span class="required">*</span></label>
-					                            <div class="col-md-7">
+<!-- 					                            <div class="col-md-7">
 					                            	<?php
 					                                    $training_cost_options = array('' => 'Select');
 					                                    $training_costs = $db->get_where( 'training_source', array('deleted' => 0) );
@@ -20,7 +21,10 @@
 					                                    }
 					                                ?>
 					                                <?php echo form_dropdown("training_cost[source_id][$cost_count]",$training_cost_options, '', 'class="form-control"'); ?>
-					                            </div>
+					                            </div> -->
+					                            <div class="col-md-7">
+					                                <input type="text" class="form-control"  name="training_cost[cost_name][<?php echo $cost_count; ?>]">
+					                            </div>					                            
 					                        </div>
 
 					                        <div class="form-group">

@@ -35,4 +35,28 @@ class training_calendar_model extends Record
 
 		parent::__construct();
 	}
+
+	function get_training_calendar_details($training_calendar_id)
+	{
+		$this->db->where('training_calendar_id',$training_calendar_id);
+		$this->db->where('deleted',0);
+		$result = $this->db->get('training_calendar');
+		if ($result && $result->num_rows() > 0)
+			return $result->row_array();
+		else
+			return array();
+	}
+
+	// return user id in training calendar participant in comma delimited format
+	function get_training_calendar_participant_user_id($training_calendar_id)
+	{
+		$this->db->select('GROUP_CONCAT(user_id) AS user_ids',true);
+		$this->db->where('training_calendar_id',$training_calendar_id);
+		$this->db->where('deleted',0);
+		$result = $this->db->get('training_calendar_participant');
+		if ($result && $result->num_rows() > 0)
+			return $result->row_array();
+		else
+			return array();
+	}	
 }
