@@ -90,7 +90,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 	<!-- END CORE PLUGINS -->
 	<!-- BEGIN PAGE LEVEL PLUGINS -->
 	<script src="{{ theme_path() }}plugins/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script>	
-	<script src="{{ theme_path() }}plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
+	<script src="{{ theme_path() }}plugins/backstretch/jquery.backstretch.js" type="text/javascript"></script>
 	<script type="text/javascript" src="{{ theme_path() }}plugins/select2/select2.min.js"></script>     
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->

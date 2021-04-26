@@ -29,9 +29,9 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>{{ date('F d, Y', strtotime($record['training_feedback_start_date'])) }}</td>
-					<td>{{ date('H:i a', strtotime($record['training_feedback_start_time'])) }}</td>
-					<td>{{ date('H:i a', strtotime($record['training_feedback_end_time'])) }}</td>
+					<td>{{ general_date($record['training_feedback_start_date']) }}</td>
+					<td>{{ general_time($record['training_feedback_start_time']) }}</td>
+					<td>{{ general_time($record['training_feedback_end_time']) }}</td>
 					<td>{{ $record['training_feedback_instructor'] }}</td>
 				</tr>
 			</tbody>

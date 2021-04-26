@@ -71,7 +71,7 @@
    * ========================= */
   var styles = {
       wrap: {
-          left: 0
+          left: 200
         , top: 0
         , overflow: 'hidden'
         , margin: 0
