@@ -427,6 +427,16 @@ class Training_calendar extends MY_PrivateController
 
     	$post = $_POST;
 
+    	if (empty($post['session'])) {
+
+			$this->response->message[] = array(
+				'message' => 'Training session should not be empty.',
+				'type' => 'error'
+			);
+
+			$this->_ajax_return();			    		
+    	}
+
 		$training_calendar = $post['training_calendar'];
 
 		$record_id = $post['record_id'];
