@@ -2,6 +2,7 @@
 $config["list_cached_query"] = 'SELECT 
 `ww_training_calendar`.`training_calendar_id` as record_id,
 `ww_training_calendar`.`topic` as training_calendar_topic, 
+`t3`.`training_course` as "training_course",
 CONCAT( `t1`.`course` ) AS training_subject, 
 `ww_training_calendar`.`training_calendar_id`, 
 `ww_training_feedback`.`feedback_id`,

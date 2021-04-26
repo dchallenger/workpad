@@ -532,6 +532,16 @@ function general_date($date) {
 	}
 }
 
+function general_time($time) {
+	$invalid_date = ['00:00:00',"",'January 01, 1970','1970-01-01'];
+
+	if (in_array($time, $invalid_date))
+		return '';
+	else {
+		return date('H:i a',strtotime($time));
+	}
+}
+
 function general_date_w_day($date) {
 	$invalid_date = ['1970-01-01 00:00:00',"",'0000-00-00 00:00:00','January 01, 1970','1970-01-01'];
 

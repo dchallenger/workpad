@@ -1,4 +1,4 @@
-<th width="20%">Topic</th>
+<th width="20%">Training Course</th>
 <th width="20%">Training Subject</th>
 <th width="15%">Start Date</th>
 <th width="15%">End Date</th>

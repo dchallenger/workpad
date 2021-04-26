@@ -8,8 +8,8 @@
 <td>{{ $training_employee_database_position}}</td>
 <td>{{ $training_employee_database_department}}</td>
 <td>{{ $training_employee_database_training_course}}</td>
-<td>{{ $training_employee_database_start_date}}</td>
-<td>{{ $training_employee_database_end_date}}</td>
+<td>{{ general_date($training_employee_database_start_date)}}</td>
+<td>{{ general_date($training_employee_database_end_date)}}</td>
     <td>
         <div class="btn-group">
             <!-- <a class="btn btn-xs text-muted" href="{{ $edit_url }}"><i class="fa fa-pencil"></i> Edit</a> -->
