@@ -89,7 +89,7 @@
 				<div class="col-md-7">
 					<div class="make-switch" data-on-label="&nbsp;{{ lang('users.option_yes') }}&nbsp;" data-off-label="&nbsp;{{ lang('users.option_no') }}&nbsp;">
 						<input type="checkbox" disabled="disabled" value="1" @if( $record['users.active'] ) checked="checked" @endif name="users[active][temp]" id="users-active-temp" class="dontserializeme toggle"/>
-						<input type="hidden" name="users[active]" id="users-active" value="@if( $record['users.active'] ) 1 else 0 @endif"/>
+						<input type="hidden" name="users[active]" id="users-active" value="@if( $record['users.active'] ) 1 @else 0 @endif"/>
 					</div>
 				</div>
 			</div>

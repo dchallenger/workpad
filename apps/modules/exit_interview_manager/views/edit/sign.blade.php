@@ -17,7 +17,7 @@
                             <div class="col-md-4">                          
                                 <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
                                     <input type="checkbox" value="1" @if( $wiht_yes_no == 1 ) checked="checked" @endif name="partners_clearance_exit_interview_layout_item[wiht_yes_no][temp]" id="partners_clearance_exit_interview_layout_item-wiht_yes_no-temp" class="dontserializeme toggle"/>
-                                    <input type="hidden" name="partners_clearance_exit_interview_layout_item[wiht_yes_no]" id="partners_clearance_exit_interview_layout_item-wiht_yes_no" value="@if( $wiht_yes_no ) 1 else 0 @endif"/>
+                                    <input type="hidden" name="partners_clearance_exit_interview_layout_item[wiht_yes_no]" id="partners_clearance_exit_interview_layout_item-wiht_yes_no" value="@if( $wiht_yes_no ) 1 @else 0 @endif"/>
                                 </div>           
                             </div>  
                         </div>

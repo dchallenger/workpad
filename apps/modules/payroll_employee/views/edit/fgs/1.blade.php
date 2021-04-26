@@ -94,7 +94,7 @@
 				<label class="control-label col-md-3">Fixed Rate</label>
 				<div class="col-md-7">							<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 						    	<input type="checkbox" value="1" @if( $record['payroll_partners.fixed_rate'] ) checked="checked" @endif name="payroll_partners[fixed_rate][temp]" id="payroll_partners-fixed_rate-temp" class="dontserializeme toggle"/>
-						    	<input type="hidden" name="payroll_partners[fixed_rate]" id="payroll_partners-fixed_rate" value="@if( $record['payroll_partners.fixed_rate'] ) 1 else 0 @endif"/>
+						    	<input type="hidden" name="payroll_partners[fixed_rate]" id="payroll_partners-fixed_rate" value="@if( $record['payroll_partners.fixed_rate'] ) 1 @else 0 @endif"/>
 							</div> 				</div>	
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>Sensitivity</label>
@@ -123,13 +123,13 @@
 				<label class="control-label col-md-3">Attendance Base</label>
 				<div class="col-md-7">							<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 						    	<input type="checkbox" value="1" @if( $record['payroll_partners.attendance_base'] ) checked="checked" @endif name="payroll_partners[attendance_base][temp]" id="payroll_partners-attendance_base-temp" class="dontserializeme toggle"/>
-						    	<input type="hidden" name="payroll_partners[attendance_base]" id="payroll_partners-attendance_base" value="@if( $record['payroll_partners.attendance_base'] ) 1 else 0 @endif"/>
+						    	<input type="hidden" name="payroll_partners[attendance_base]" id="payroll_partners-attendance_base" value="@if( $record['payroll_partners.attendance_base'] ) 1 @else 0 @endif"/>
 							</div> 				</div>	
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3">On Hold</label>
 				<div class="col-md-7">							<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 						    	<input type="checkbox" value="1" @if( $record['payroll_partners.on_hold'] ) checked="checked" @endif name="payroll_partners[on_hold][temp]" id="payroll_partners-on_hold-temp" class="dontserializeme toggle"/>
-						    	<input type="hidden" name="payroll_partners[on_hold]" id="payroll_partners-on_hold" value="@if( $record['payroll_partners.on_hold'] ) 1 else 0 @endif"/>
+						    	<input type="hidden" name="payroll_partners[on_hold]" id="payroll_partners-on_hold" value="@if( $record['payroll_partners.on_hold'] ) 1 @else 0 @endif"/>
 							</div> 				</div>	
 			</div>			</div>
 </div>

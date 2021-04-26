@@ -45,7 +45,7 @@
 			<div class="col-md-7">							
 				<div class="make-switch" data-on-label="&nbsp;{{ lang('group.option_yes') }}&nbsp;" data-off-label="&nbsp;{{ lang('group.option_no') }}&nbsp;">
 			    	<input disabled="disabled" type="checkbox" value="1" @if( $record['users_group.status_id'] ) checked="checked" @endif name="users_group[status_id][temp]" id="users_group-status_id-temp" class="dontserializeme toggle"/>
-			    	<input disabled="disabled" type="hidden" name="users_group[status_id]" id="users_group-status_id" value="@if( $record['users_group.status_id'] ) 1 else 0 @endif"/>
+			    	<input disabled="disabled" type="hidden" name="users_group[status_id]" id="users_group-status_id" value="@if( $record['users_group.status_id'] ) 1 @else 0 @endif"/>
 				</div> 				
 			</div>	
 		</div>	

@@ -85,14 +85,14 @@
 			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>Minimum Trainee Capacity</label>
 				<div class="col-md-7">							
-					<input type="text" class="form-control" name="training_calendar[training_capacity]" id="training_calendar-training_capacity" value="{{ $record['training_calendar.training_capacity'] }}" placeholder="Enter Minimum Trainee Capacity" /> 				
+					<input type="text" class="form-control" name="training_calendar[training_capacity]" id="training_calendar-training_capacity" value="{{ $record['training_calendar.training_capacity'] }}" placeholder="Enter Minimum Trainee Capacity" data-inputmask="'mask': '9', 'repeat': 2, 'greedy' : false"/> 				
 				</div>	
 			</div>
 
 			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>Maximum Trainee Capacity</label>
 				<div class="col-md-7">							
-					<input type="text" class="form-control" name="training_calendar[min_training_capacity]" id="training_calendar-min_training_capacity" value="{{ $record['training_calendar.min_training_capacity'] }}" placeholder="Enter Maximum Trainee Capacity" /> 				
+					<input type="text" class="form-control" name="training_calendar[min_training_capacity]" id="training_calendar-min_training_capacity" value="{{ $record['training_calendar.min_training_capacity'] }}" placeholder="Enter Maximum Trainee Capacity" data-inputmask="'mask': '9', 'repeat': 2, 'greedy' : false"/> 				
 				</div>	
 			</div>
 
@@ -142,7 +142,7 @@
 	        <div class="form-group">
 				<label class="control-label col-md-3">Cost Per Pax</label>
 				<div class="col-md-7">							
-					<input type="text" class="form-control" name="training_calendar[cost_per_pax]" id="training_calendar-cost_per_pax" value="{{ $record['training_calendar.cost_per_pax'] }}" placeholder="Enter Cost Per Pax" /> 				
+					<input type="text" class="form-control" name="training_calendar[cost_per_pax]" id="training_calendar-cost_per_pax" value="{{ $record['training_calendar.cost_per_pax'] }}" placeholder="Enter Cost Per Pax" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/> 				
 				</div>	
 			</div>
 

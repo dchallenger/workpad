@@ -67,7 +67,7 @@
                     <div class="col-md-5">
                         <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
                             <input type="checkbox" value="1" @if( $personal_solo_parent ) checked="checked" @endif name="partners_personal[solo_parent][temp]" id="partners_personal-solo_parent-temp" class="dontserializeme toggle"/>
-                            <input type="hidden" name="partners_personal[solo_parent]" id="partners_personal-solo_parent" value="@if( $personal_solo_parent ) 1 else 0 @endif"/>
+                            <input type="hidden" name="partners_personal[solo_parent]" id="partners_personal-solo_parent" value="@if( $personal_solo_parent ) 1 @else 0 @endif"/>
                         </div> 
                     </div>
                 </div>

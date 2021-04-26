@@ -21,7 +21,7 @@
 			<div class="col-md-7">							
 				<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 			    	<input type="checkbox" value="1" @if( $record['users_project.status_id'] ) checked="checked" @endif name="users_project[status_id][temp]" id="users_project-status_id-temp" class="dontserializeme toggle"/>
-			    	<input type="hidden" name="users_project[status_id]" id="users_project-status_id" value="@if( $record['users_project.status_id'] ) 1 else 0 @endif"/>
+			    	<input type="hidden" name="users_project[status_id]" id="users_project-status_id" value="@if( $record['users_project.status_id'] ) 1 @else 0 @endif"/>
 				</div> 	
 			</div> 			
 		</div>	

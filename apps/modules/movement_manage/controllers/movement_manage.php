@@ -708,14 +708,15 @@ class Movement_manage extends MY_PrivateController
 				goto stop;
 			}
 
-			$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, $this->mod->table, $previous_main_data, $main_record);
-
 			if (isset($post['type_category_id'])){
 				$this->db->update('partners_movement_action', array('type_category_id' => $post['type_category_id']), array( 'movement_id' => $this->record_id ) );
 			}
 					
 			//partners_movement_action
 			$movement_action = $post['partners_movement_action'];	
+
+			$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, $this->mod->table, $previous_main_data, $main_record, $movement_action['user_id']);
+
 			$attachement = (isset($movement_action['photo']) ? $movement_action['photo'] : array());
 			$filename = (isset($movement_action['filename']) ? $movement_action['filename'] : array());
 			$type = (isset($movement_action['type']) ? $movement_action['type'] : array());
@@ -762,7 +763,7 @@ class Movement_manage extends MY_PrivateController
 					goto stop;
 			}
 
-			$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, 'partners_movement_action', $previous_main_data, $movement_action);
+			$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, 'partners_movement_action', $previous_main_data, $movement_action, $movement_action['user_id']);
 
 			// save movement attachement multiple
 			if (!empty($attachement)){

@@ -88,7 +88,7 @@
                             <div class="col-md-8">
                                 <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
                                     <input type="checkbox" value="1" @if( $is_immediate ) checked="checked" @endif name="partners_clearance_layout_sign[is_immediate][temp]" id="partners_clearance_layout_sign-is_immediate-temp" class="dontserializeme toggle"/>
-                                    <input type="hidden" name="partners_clearance_layout_sign[is_immediate]" id="partners_clearance_layout_sign-is_immediate" value="@if( $is_immediate ) 1 else 0 @endif"/>
+                                    <input type="hidden" name="partners_clearance_layout_sign[is_immediate]" id="partners_clearance_layout_sign-is_immediate" value="@if( $is_immediate ) 1 @else 0 @endif"/>
                                 </div> 
                             </div>
                         </div>

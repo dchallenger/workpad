@@ -13,7 +13,7 @@
 				<label class="control-label col-md-3">Is Active</label>
 				<div class="col-md-7">							<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 						    	<input type="checkbox" value="1" @if( $record['performance_setup_scorecard.status_id'] ) checked="checked" @endif name="performance_setup_scorecard[status_id][temp]" id="performance_setup_scorecard-status_id-temp" class="dontserializeme toggle"/>
-						    	<input type="hidden" name="performance_setup_scorecard[status_id]" id="performance_setup_scorecard-status_id" value="@if( $record['performance_setup_scorecard.status_id'] ) 1 else 0 @endif"/>
+						    	<input type="hidden" name="performance_setup_scorecard[status_id]" id="performance_setup_scorecard-status_id" value="@if( $record['performance_setup_scorecard.status_id'] ) 1 @else 0 @endif"/>
 							</div> 				</div>	
 			</div>	</div>
 </div>

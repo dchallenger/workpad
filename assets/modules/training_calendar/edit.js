@@ -132,6 +132,7 @@ $(document).ready(function(){
                 $('.cost_count').val( item_count + 1 );
                 $('.form-multiple-add-training-cost').append(response);
 
+                $(":input").inputmask();
             }
 
         });

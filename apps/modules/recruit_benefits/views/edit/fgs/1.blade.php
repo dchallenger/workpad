@@ -29,7 +29,7 @@
 				<label class="control-label col-md-3">Is Active</label>
 				<div class="col-md-7">							<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 						    	<input type="checkbox" value="1" @if( $record['recruitment_benefit_package.status_id'] ) checked="checked" @endif name="recruitment_benefit_package[status_id][temp]" id="recruitment_benefit_package-status_id-temp" class="dontserializeme toggle"/>
-						    	<input type="hidden" name="recruitment_benefit_package[status_id]" id="recruitment_benefit_package-status_id" value="@if( $record['recruitment_benefit_package.status_id'] ) 1 else 0 @endif"/>
+						    	<input type="hidden" name="recruitment_benefit_package[status_id]" id="recruitment_benefit_package-status_id" value="@if( $record['recruitment_benefit_package.status_id'] ) 1 @else 0 @endif"/>
 							</div> 				</div>	
 			</div>	</div>
 </div>

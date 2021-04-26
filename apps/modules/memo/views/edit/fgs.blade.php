@@ -87,20 +87,20 @@
 				<label class="control-label col-md-3">{{ lang('memo.publish') }}</label>
 				<div class="col-md-7">							<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 						    	<input type="checkbox" value="1" @if( $record['memo.publish'] ) checked="checked" @endif name="memo[publish][temp]" id="memo-publish-temp" class="dontserializeme toggle"/>
-						    	<input type="hidden" name="memo[publish]" id="memo-publish" value="@if( $record['memo.publish'] ) 1 else 0 @endif"/>
+						    	<input type="hidden" name="memo[publish]" id="memo-publish" value="@if( $record['memo.publish'] ) 1 @else 0 @endif"/>
 							</div> 				</div>	
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3">{{ lang('memo.allow_comments') }}</label>
 				<div class="col-md-7">							<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 						    	<input type="checkbox" value="1" @if( $record['memo.comments'] ) checked="checked" @endif name="memo[comments][temp]" id="memo-comments-temp" class="dontserializeme toggle"/>
-						    	<input type="hidden" name="memo[comments]" id="memo-comments" value="@if( $record['memo.comments'] ) 1 else 0 @endif"/>
+						    	<input type="hidden" name="memo[comments]" id="memo-comments" value="@if( $record['memo.comments'] ) 1 @else 0 @endif"/>
 							</div> 				</div>	
 			</div>
 			<div class="form-group">
 				<label class="control-label col-md-3">{{ lang('memo.email_recipients') }}</label>
 				<div class="col-md-7">							<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 						    	<input type="checkbox" value="1" @if( $record['memo.email'] ) checked="checked" @endif name="memo[email][temp]" id="memo-email-temp" class="dontserializeme toggle"/>
-						    	<input type="hidden" name="memo[email]" id="memo-email" value="@if( $record['memo.email'] ) 1 else 0 @endif"/>
+						    	<input type="hidden" name="memo[email]" id="memo-email" value="@if( $record['memo.email'] ) 1 @else 0 @endif"/>
 							</div> 				</div>	
 			</div>
 			@if(!empty($record_id))

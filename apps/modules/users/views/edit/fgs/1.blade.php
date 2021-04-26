@@ -54,7 +54,7 @@
 				<label class="control-label col-md-3">Active</label>
 				<div class="col-md-7">							<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 						    	<input type="checkbox" value="1" @if( $record['users.active'] ) checked="checked" @endif name="users[active][temp]" id="users-active-temp" class="dontserializeme toggle"/>
-						    	<input type="hidden" name="users[active]" id="users-active" value="@if( $record['users.active'] ) 1 else 0 @endif"/>
+						    	<input type="hidden" name="users[active]" id="users-active" value="@if( $record['users.active'] ) 1 @else 0 @endif"/>
 							</div> 				</div>	
 			</div>	</div>
 </div>

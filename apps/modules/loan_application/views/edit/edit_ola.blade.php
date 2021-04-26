@@ -133,7 +133,7 @@
 		                    <div class="col-md-6">
 		                        <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 		                            <input type="checkbox" value="0" @if( $record['partners_loan_application_omnibus.loan_with_outstanding'] ) checked="checked" @endif name="loan_application[loan_with_outstanding][temp]" id="loan_with_outstanding-temp" class="toggle"/>
-		                            <input type="hidden" name="loan_application[loan_with_outstanding]" id="loan_with_outstanding" value="@if( $record['partners_loan_application_omnibus.loan_with_outstanding'] ) 1 else 0 @endif"/>
+		                            <input type="hidden" name="loan_application[loan_with_outstanding]" id="loan_with_outstanding" value="@if( $record['partners_loan_application_omnibus.loan_with_outstanding'] ) 1 @else 0 @endif"/>
 		                        </div> 
 		                    </div>
 		                </div>

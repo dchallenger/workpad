@@ -119,7 +119,7 @@
                                 <div class="col-md-5">
                                     <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
                                         <input type="checkbox" value="1" @if( isset($family['family-dependent-hmo']) ? $family['family-dependent-hmo'] : "" ) checked="checked" @endif name="recruitment_personal_history[family-dependent-hmo][temp][]" id="recruitment_personal_history-family-dependent-hmo-temp" class="dontserializeme toggle dependent"/>
-                                        <input type="hidden" name="recruitment_personal_history[family-dependent-hmo][]" id="recruitment_personal_history-family-dependent-hmo" value="@if( isset($family['family-dependent-hmo'])) 1 else 0 @endif"/>
+                                        <input type="hidden" name="recruitment_personal_history[family-dependent-hmo][]" id="recruitment_personal_history-family-dependent-hmo" value="@if( isset($family['family-dependent-hmo'])) 1 @else 0 @endif"/>
                                     </div> 
                                 </div>
                             </div>                            
@@ -128,7 +128,7 @@
                                 <div class="col-md-5">
                                     <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
                                         <input type="checkbox" value="1" @if( isset($family['family-dependent-insurance']) ? $family['family-dependent-insurance'] : "" ) checked="checked" @endif name="recruitment_personal_history[family-dependent-insurance][temp][]" id="recruitment_personal_history-family-dependent-insurance-temp" class="dontserializeme toggle dependent"/>
-                                        <input type="hidden" name="recruitment_personal_history[family-dependent-insurance][]" id="recruitment_personal_history-family-dependent-insurance" value="@if( isset($family['family-dependent-insurance'])) 1 else 0 @endif"/>
+                                        <input type="hidden" name="recruitment_personal_history[family-dependent-insurance][]" id="recruitment_personal_history-family-dependent-insurance" value="@if( isset($family['family-dependent-insurance'])) 1 @else 0 @endif"/>
                                     </div> 
                                 </div>
                             </div>                            

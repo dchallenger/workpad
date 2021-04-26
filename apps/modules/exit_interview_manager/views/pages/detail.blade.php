@@ -86,7 +86,7 @@
                                 <div class="col-md-5">
                                     <div class="make-switch" data-on-label="&nbsp;{{ lang('exit_interview.option_yes') }}&nbsp;" data-off-label="&nbsp;{{ lang('exit_interview.option_no') }}&nbsp;">
                                         <input type="checkbox" disabled="disabled" value="1" @if( $record['default'] ) checked="checked" @endif name="partners_clearance_exit_interview_layout[default][temp]" id="partners_clearance_exit_interview_layout-default-temp" class="dontserializeme toggle"/>
-                                        <input type="hidden" disabled="disabled" name="partners_clearance_exit_interview_layout[default]" id="partners_clearance_exit_interview_layout-default" value="@if( $record['default'] ) 1 else 0 @endif"/>
+                                        <input type="hidden" disabled="disabled" name="partners_clearance_exit_interview_layout[default]" id="partners_clearance_exit_interview_layout-default" value="@if( $record['default'] ) 1 @else 0 @endif"/>
                                     </div> 
                                 </div>
                             </div>

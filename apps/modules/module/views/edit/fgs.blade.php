@@ -45,7 +45,7 @@
                         <div class="col-md-7">
                             <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
                                 <input type="checkbox" value="1" @if( $record['modules.disabled'] ) checked="checked" @endif name="modules[disabled][temp]" id="modules-disabled-temp" class="dontserializeme toggle"/>
-                                <input type="hidden" value="@if( $record['modules.disabled'] ) 1 else 0 @endif" name="modules[disabled]" id="modules-disabled"/>
+                                <input type="hidden" value="@if( $record['modules.disabled'] ) 1 @else 0 @endif" name="modules[disabled]" id="modules-disabled"/>
                             </div>
                             <small class="help-block"></small>
                         </div>

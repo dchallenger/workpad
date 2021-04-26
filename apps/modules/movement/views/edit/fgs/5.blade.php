@@ -17,7 +17,7 @@
 				<label class="control-label col-md-3">Blacklisted</label>
 				<div class="col-md-7">							<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 						    	<input type="checkbox" value="1" @if( $record['partners_movement_action_moving.blacklisted'] ) checked="checked" @endif name="partners_movement_action_moving[blacklisted][temp]" id="partners_movement_action_moving-blacklisted-temp" class="dontserializeme toggle"/>
-						    	<input type="hidden" name="partners_movement_action_moving[blacklisted]" id="partners_movement_action_moving-blacklisted" value="@if( $record['partners_movement_action_moving.blacklisted'] ) 1 else 0 @endif"/>
+						    	<input type="hidden" name="partners_movement_action_moving[blacklisted]" id="partners_movement_action_moving-blacklisted" value="@if( $record['partners_movement_action_moving.blacklisted'] ) 1 @else 0 @endif"/>
 							</div> 				</div>	
 			</div>			
 			<div class="form-group">

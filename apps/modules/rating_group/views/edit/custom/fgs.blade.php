@@ -27,7 +27,7 @@
 			<div class="col-md-7">
 				<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 			    	<input type="checkbox" value="1" @if( $record['performance_setup_rating_group.status_id'] ) checked="checked" @endif name="performance_setup_rating_group[status_id][temp]" id="performance_setup_rating_group-status_id-temp" class="dontserializeme toggle"/>
-			    	<input type="hidden" name="performance_setup_rating_group[status_id]" id="performance_setup_rating_group-status_id" value="@if( $record['performance_setup_rating_group.status_id'] ) 1 else 0 @endif"/>
+			    	<input type="hidden" name="performance_setup_rating_group[status_id]" id="performance_setup_rating_group-status_id" value="@if( $record['performance_setup_rating_group.status_id'] ) 1 @else 0 @endif"/>
 				</div>
 			</div>
 		</div>
@@ -85,7 +85,7 @@
 								<td>
 									<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 										<input type="checkbox" value="1" @if( $value['status_id'] ) checked="checked" @endif name="performance_setup_rating_score[status_id][temp][]" id="performance_setup_rating_score-status_id-temp" class="dontserializeme toggle score_stat"/>
-										<input type="hidden" name="performance_setup_rating_score[status_id][]" id="performance_setup_rating_score-status_id" value="@if( $value['status_id'] ) 1 else 0 @endif" class="score_status_id"/>
+										<input type="hidden" name="performance_setup_rating_score[status_id][]" id="performance_setup_rating_score-status_id" value="@if( $value['status_id'] ) 1 @else 0 @endif" class="score_status_id"/>
 									</div>
 									<!-- <select  class="form-control select2me input-sm" data-placeholder="Select..." name="performance_setup_rating_score[status_id][]" id="performance_setup_rating_score-status_id">
 										<option value="1" @if($value['status_id'] == 1) {{"selected"}} @endif>Yes</option>

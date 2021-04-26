@@ -37,8 +37,8 @@ WHERE (
 	IF(ww_training_calendar.with_certification = 1, "Yes", "No") like "%{$search}%" OR 
 	T17.revalida_type like "%{$search}%" OR 
 	DATE_FORMAT(ww_training_calendar.publish_date, \'%M %d, %Y\') like "%{$search}%" OR 
-	t3.provider like "%{$search}%" OR 
-	t4.category like "%{$search}%" OR 
+	T3.provider like "%{$search}%" OR 
+	T4.category like "%{$search}%" OR 
 	DATE_FORMAT(ww_training_calendar.last_registration_date, \'%M %d, %Y\') like "%{$search}%" OR 
 	ww_training_calendar.cost_per_pax like "%{$search}%" OR 
 	DATE_FORMAT(ww_training_calendar.registration_date, \'%M %d, %Y\') like "%{$search}%" OR 

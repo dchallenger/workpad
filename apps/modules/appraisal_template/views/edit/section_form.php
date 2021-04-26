@@ -100,7 +100,7 @@
                             <div class="col-md-7">                          
                                 <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
                                     <input type="checkbox" value="1" @if( $is_core ) checked="checked" @endif name="is_core-tmp" id="is_core-temp" class="dontserializeme toggle"/>
-                                    <input type="hidden" name="is_core" id="is_core" value="@if( $is_core ) 1 else 0 @endif"/>
+                                    <input type="hidden" name="is_core" id="is_core" value="@if( $is_core ) 1 @else 0 @endif"/>
                                 </div>              
                             </div>  
                         </div>  

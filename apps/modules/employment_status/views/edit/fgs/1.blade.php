@@ -15,7 +15,7 @@
 			<div class="col-md-7">							
 				<div class="make-switch" data-on-label="&nbsp;{{ lang('employment_status.option_yes') }}&nbsp;" data-off-label="&nbsp;{{ lang('employment_status.option_no') }}&nbsp;">
 			    	<input type="checkbox" value="1" @if( $record['partners_employment_status.active'] ) checked="checked" @endif name="partners_employment_status[active][temp]" id="partners_employment_status-active-temp" class="dontserializeme toggle"/>
-			    	<input type="hidden" name="partners_employment_status[active]" id="partners_employment_status-active" value="@if( $record['partners_employment_status.active'] ) 1 else 0 @endif"/>
+			    	<input type="hidden" name="partners_employment_status[active]" id="partners_employment_status-active" value="@if( $record['partners_employment_status.active'] ) 1 @else 0 @endif"/>
 				</div> 				
 			</div>	
 		</div>	

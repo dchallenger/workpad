@@ -341,7 +341,7 @@
                     <div class="col-md-5">
                         <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
                             <input type="checkbox" value="1" @if( $personal_home_leave ) checked="checked" @endif name="partners_personal[home_leave][temp]" id="partners_personal-home_leave-temp" class="dontserializeme toggle"/>
-                            <input type="hidden" name="partners_personal[home_leave]" id="partners_personal-home_leave" value="@if( $personal_home_leave ) 1 else 0 @endif"/>
+                            <input type="hidden" name="partners_personal[home_leave]" id="partners_personal-home_leave" value="@if( $personal_home_leave ) 1 @else 0 @endif"/>
                         </div> 
                     </div>
                 </div>

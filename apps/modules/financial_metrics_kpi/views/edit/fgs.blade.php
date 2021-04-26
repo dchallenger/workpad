@@ -17,7 +17,7 @@
 			<div class="col-md-7">
 				<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 					<input type="checkbox" value="1" @if( $record['performance_setup_financial_metrics_kpi.status_id'] || empty($record_id) ) checked="checked" @endif name="performance_setup_financial_metrics_kpi[status_id][temp]" id="performance_setup_financial_metrics_kpi-status_id-temp" class="dontserializeme toggle"/>
-					<input type="hidden" name="performance_setup_financial_metrics_kpi[status_id]" id="performance_setup_financial_metrics_kpi-status_id" value="@if( $record['performance_setup_financial_metrics_kpi.status_id'] || empty($record_id) ) 1 else 0 @endif"/>
+					<input type="hidden" name="performance_setup_financial_metrics_kpi[status_id]" id="performance_setup_financial_metrics_kpi-status_id" value="@if( $record['performance_setup_financial_metrics_kpi.status_id'] || empty($record_id) ) 1 @else 0 @endif"/>
 				</div>
 			</div>
 		</div>		

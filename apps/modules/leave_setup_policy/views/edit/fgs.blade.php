@@ -185,7 +185,7 @@
                 <div class="col-md-5">
                     <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
                     	<input type="checkbox" value="1" @if( $record['time_form_balance_setup_policy.prorated'] ) checked="checked" @endif name="partners_personal[home_leave][temp]" id="partners_personal-home_leave-temp" class="dontserializeme toggle"/>
-                        <input type="hidden" name="time_form_balance_setup_policy[prorated]" id="partners_personal-home_leave" value="@if( $record['time_form_balance_setup_policy.prorated'] ) 1 else 0 @endif"/>
+                        <input type="hidden" name="time_form_balance_setup_policy[prorated]" id="partners_personal-home_leave" value="@if( $record['time_form_balance_setup_policy.prorated'] ) 1 @else 0 @endif"/>
                     </div> 
                 </div>
             </div>

@@ -77,7 +77,7 @@
 			<div class="col-md-6">
             <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
                 <input type="checkbox" value="1" @if( $record['time_shift_weekly.default'] ) checked="checked" @endif name="shift_weekly[time_shift_weekly.default]" id="shift_weekly-default-temp" class="dontserializeme toggle"/>
-                <input type="hidden" value="@if( $record['time_shift_weekly.default'] ) 1 else 0 @endif" name="time_shift_weekly[default]" id="shift_weekly-default"/>
+                <input type="hidden" value="@if( $record['time_shift_weekly.default'] ) 1 @else 0 @endif" name="time_shift_weekly[default]" id="shift_weekly-default"/>
             </div>
 			</div>
 		</div>   

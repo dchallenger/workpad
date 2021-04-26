@@ -44,7 +44,7 @@
 					                        <div class="form-group">
 					                            <label class="control-label col-md-3">No. of Pax <span class="required">*</span></label>
 					                            <div class="col-md-7">
-					                                <input type="text" class="form-control pax"  name="training_cost[pax][<?php echo $cost_count; ?>]" data-inputmask="'alias': 'integer', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false">
+					                                <input type="text" class="form-control pax"  name="training_cost[pax][<?php echo $cost_count; ?>]" data-inputmask="'mask': '9', 'repeat': 2, 'greedy' : false">
 					                            </div>
 					                        </div>
 

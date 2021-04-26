@@ -93,7 +93,7 @@
 				<label class="control-label col-md-3">Is Bonus</label>
 				<div class="col-md-7">							<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 						    	<input type="checkbox" disabled="disabled" value="1" @if( $record['payroll_transaction.is_bonus'] ) checked="checked" @endif name="payroll_transaction[is_bonus][temp]" id="payroll_transaction-is_bonus-temp" class="dontserializeme toggle"/>
-						    	<input type="hidden" disabled="disabled" name="payroll_transaction[is_bonus]" id="payroll_transaction-is_bonus" value="@if( $record['payroll_transaction.is_bonus'] ) 1 else 0 @endif"/>
+						    	<input type="hidden" disabled="disabled" name="payroll_transaction[is_bonus]" id="payroll_transaction-is_bonus" value="@if( $record['payroll_transaction.is_bonus'] ) 1 @else 0 @endif"/>
 							</div> 				</div>	
 			</div>			</div>
 </div>

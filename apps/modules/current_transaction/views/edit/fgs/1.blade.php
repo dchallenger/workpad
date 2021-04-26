@@ -69,7 +69,7 @@ WHERE a.deleted = 0")); 	                            $payroll_current_transactio
 				<label class="control-label col-md-3">On Hold</label>
 				<div class="col-md-7">							<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 						    	<input type="checkbox" value="1" @if( $record['payroll_current_transaction.on_hold'] ) checked="checked" @endif name="payroll_current_transaction[on_hold][temp]" id="payroll_current_transaction-on_hold-temp" class="dontserializeme toggle"/>
-						    	<input type="hidden" name="payroll_current_transaction[on_hold]" id="payroll_current_transaction-on_hold" value="@if( $record['payroll_current_transaction.on_hold'] ) 1 else 0 @endif"/>
+						    	<input type="hidden" name="payroll_current_transaction[on_hold]" id="payroll_current_transaction-on_hold" value="@if( $record['payroll_current_transaction.on_hold'] ) 1 @else 0 @endif"/>
 							</div> 				</div>	
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3">Remarks</label>

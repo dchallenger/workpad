@@ -1105,35 +1105,35 @@ class Record extends MY_Model
 		return true;
 	}
 
-	function audit_logs($user_id, $module, $action, $field="", $previous_val="", $new_val=""){
+	function audit_logs($user_id, $module, $action, $field="", $previous_val="", $new_val="", $employee_id = ""){
 		//check if new value is array
 		if(is_array($new_val)){
 			$exclude_fields = array('created_by', 'created_on', 'modified_by', 'modified_on');
 			foreach($new_val as $index_field => $new_value){
 				if(!count($previous_val) > 0){
 					if($action == 'delete' || $action == 'restore'){
-						$this->system_logs($user_id, $module, $action, $field, $new_value, '');
+						$this->system_logs($user_id, $module, $action, $field, $new_value, $employee_id);
 						$this->user_logs($user_id, $module, $action, $field, $new_value, '');
 					}else{//insert
 						if(!in_array($index_field, $exclude_fields) && $new_value != ""){
-							$this->system_logs($user_id, $module, $action, $index_field, '', $new_value);
+							$this->system_logs($user_id, $module, $action, $index_field, '', $new_value, $employee_id);
 							$this->user_logs($user_id, $module, $action, $index_field, '', $new_value);
 						}
 					}
 				}else{
 					if(isset($previous_val[$index_field]) && strtolower($previous_val[$index_field]) !== strtolower($new_value) && $new_value !== "" && !in_array($index_field, $exclude_fields)){
-						$this->system_logs($user_id, $module, $action, $index_field, $previous_val[$index_field], $new_value);
+						$this->system_logs($user_id, $module, $action, $index_field, $previous_val[$index_field], $new_value, $employee_id);
 						$this->user_logs($user_id, $module, $action, $index_field, $previous_val[$index_field], $new_value);
 					}
 				}
 			}
 		}else{
-			$this->system_logs($user_id, $module, $action, $field, $previous_val, $new_val);
+			$this->system_logs($user_id, $module, $action, $field, $previous_val, $new_val, $employee_id);
 			$this->user_logs($user_id, $module, $action, $field, $previous_val, $new_val);
 		}
 	}
 
-	function system_logs($user_id, $module, $action, $field, $previous_val, $new_val){
+	function system_logs($user_id, $module, $action, $field, $previous_val, $new_val, $employee_id = ""){
 		//$this->db_which();
 
 		//
@@ -1205,7 +1205,8 @@ class Record extends MY_Model
 							'transaction' => $action,
 							'original_value' => $previous_val,
 							'new_value' => $new_val,
-							'user_id' => $user_id
+							'user_id' => $user_id,
+							'employee_id' => $employee_id
 			);
 
 		$this->db->insert('audit_log_trail',$log_arr);

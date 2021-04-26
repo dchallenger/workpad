@@ -108,7 +108,7 @@
 								<td>
 									<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 										<input type="checkbox" value="1" @if( $value['status_id'] ) checked="checked" @endif name="recruitment_benefit[status_id][temp][]" id="recruitment_benefit-status_id-temp" class="dontserializeme toggle benefit_stat"/>
-										<input type="hidden" name="recruitment_benefit[status_id][]" id="recruitment_benefit-status_id" value="@if( $value['status_id'] ) 1 else 0 @endif" class="score_status_id"/>
+										<input type="hidden" name="recruitment_benefit[status_id][]" id="recruitment_benefit-status_id" value="@if( $value['status_id'] ) 1 @else 0 @endif" class="score_status_id"/>
 									</div>
 									<!-- <select  class="form-control select2me input-sm" data-placeholder="Select..." name="recruitment_benefit[status_id][]" id="recruitment_benefit-status_id">
 										<option value="1" @if($value['status_id'] == 1) {{"selected"}} @endif>Yes</option>

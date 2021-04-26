@@ -212,7 +212,7 @@
 			<div class="col-md-7">	
 				<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 					<input type="checkbox" disabled="disabled" value="1" @if( $record['payroll_partners.fixed_rate'] ) checked="checked" @endif name="payroll_partners[fixed_rate][temp]" id="payroll_partners-fixed_rate-temp" class="dontserializeme toggle"/>
-					<input type="hidden" disabled="disabled" name="payroll_partners[fixed_rate]" id="payroll_partners-fixed_rate" value="@if( $record['payroll_partners.fixed_rate'] ) 1 else 0 @endif"/>
+					<input type="hidden" disabled="disabled" name="payroll_partners[fixed_rate]" id="payroll_partners-fixed_rate" value="@if( $record['payroll_partners.fixed_rate'] ) 1 @else 0 @endif"/>
 				</div> 				
 			</div>	
 		</div>
@@ -251,7 +251,7 @@
 			<div class="col-md-7">	
 				<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 					<input type="checkbox" disabled="disabled" value="1" @if( $record['payroll_partners.attendance_base'] ) checked="checked" @endif name="payroll_partners[attendance_base][temp]" id="payroll_partners-attendance_base-temp" class="dontserializeme toggle"/>
-					<input type="hidden" disabled="disabled" name="payroll_partners[attendance_base]" id="payroll_partners-attendance_base" value="@if( $record['payroll_partners.attendance_base'] ) 1 else 0 @endif"/>
+					<input type="hidden" disabled="disabled" name="payroll_partners[attendance_base]" id="payroll_partners-attendance_base" value="@if( $record['payroll_partners.attendance_base'] ) 1 @else 0 @endif"/>
 				</div>				
 			</div>	
 		</div>
@@ -260,7 +260,7 @@
 			<div class="col-md-7">							
 				<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 			    	<input type="checkbox" disabled="disabled" value="0" @if( $record['payroll_partners.whole_half'] == 0 ) checked="checked" @endif name="payroll_partners[whole_half][temp]" id="payroll_partners-whole_half-temp" class="dontserializeme toggle"/>
-			    	<input type="hidden" disabled="disabled" name="payroll_partners[whole_half]" id="payroll_partners-whole_half" value="@if( $record['payroll_partners.whole_half'] ) 1 else 0 @endif"/>
+			    	<input type="hidden" disabled="disabled" name="payroll_partners[whole_half]" id="payroll_partners-whole_half" value="@if( $record['payroll_partners.whole_half'] ) 1 @else 0 @endif"/>
 				</div> 				
 			</div>	
 		</div>
@@ -269,7 +269,7 @@
 			<div class="col-md-7">							
 				<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 			    	<input type="checkbox" disabled="disabled" value="0" @if( $record['payroll_partners.payout_schedule'] == 0 ) checked="checked" @endif name="payroll_partners[payout_schedule][temp]" id="payroll_partners-payout_schedule-temp" class="dontserializeme toggle"/>
-			    	<input type="hidden" disabled="disabled" name="payroll_partners[payout_schedule]" id="payroll_partners-payout_schedule" value="@if( $record['payroll_partners.payout_schedule'] ) 1 else 0 @endif"/>
+			    	<input type="hidden" disabled="disabled" name="payroll_partners[payout_schedule]" id="payroll_partners-payout_schedule" value="@if( $record['payroll_partners.payout_schedule'] ) 1 @else 0 @endif"/>
 				</div> 				
 			</div>	
 		</div>
@@ -278,7 +278,7 @@
 			<div class="col-md-7">							
 				<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 			    	<input type="checkbox" disabled="disabled" value="1" @if( $record['payroll_partners.on_hold'] ) checked="checked" @endif name="payroll_partners[on_hold][temp]" id="payroll_partners-on_hold-temp" class="dontserializeme toggle"/>
-			    	<input type="hidden" disabled="disabled" name="payroll_partners[on_hold]" id="payroll_partners-on_hold" value="@if( $record['payroll_partners.on_hold'] ) 1 else 0 @endif"/>
+			    	<input type="hidden" disabled="disabled" name="payroll_partners[on_hold]" id="payroll_partners-on_hold" value="@if( $record['payroll_partners.on_hold'] ) 1 @else 0 @endif"/>
 				</div> 				
 			</div>	
 		</div>
@@ -287,7 +287,7 @@
 			<div class="col-md-7">							
 				<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 			    	<input type="checkbox" disabled="disabled" value="1" @if( $record['payroll_partners.non_swipe'] ) checked="checked" @endif name="payroll_partners[non_swipe][temp]" id="payroll_partners-non_swipe-temp" class="dontserializeme toggle"/>
-			    	<input type="hidden" disabled="disabled" name="payroll_partners[non_swipe]" id="payroll_partners-non_swipe" value="@if( $record['payroll_partners.non_swipe'] ) 1 else 0 @endif"/>
+			    	<input type="hidden" disabled="disabled" name="payroll_partners[non_swipe]" id="payroll_partners-non_swipe" value="@if( $record['payroll_partners.non_swipe'] ) 1 @else 0 @endif"/>
 				</div> 				
 			</div>	
 		</div>																		

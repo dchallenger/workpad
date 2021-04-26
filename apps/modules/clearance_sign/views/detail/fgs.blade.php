@@ -70,7 +70,7 @@
                         <div class="col-md-5">
 	                        <div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;{{ lang('clearance_signatories.option_no') }}&nbsp;">
 	                            <input type="checkbox" value="1" @if( $record['default'] ) checked="checked" @endif name="partners_clearance_layout[default][temp]" id="partners_clearance_layout-default-temp" class="dontserializeme toggle"/>
-	                            <input type="hidden" name="partners_clearance_layout[default]" id="partners_clearance_layout-default" value="@if( $record['default'] ) 1 else 0 @endif"/>
+	                            <input type="hidden" name="partners_clearance_layout[default]" id="partners_clearance_layout-default" value="@if( $record['default'] ) 1 @else 0 @endif"/>
 	                        </div> 
                         </div>
                     </div>

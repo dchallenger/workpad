@@ -329,7 +329,7 @@
 								<td>
 									<div class="make-switch" data-on-label="&nbsp;{{ lang('performance_appraisal.on') }}&nbsp;" data-off-label="&nbsp;{{ lang('performance_appraisal.off') }}&nbsp;"  data-on="success" data-off="warning">
 										<input type="checkbox" value="1" @if( $value['status_id'] ) checked="checked" @endif name="performance_appraisal_reminder[status_id][temp][]" id="performance_appraisal_reminder-status_id-temp" class="dontserializeme toggle reminder_stat"/>
-										<input type="hidden" name="performance_appraisal_reminder[status_id][]" id="performance_appraisal_reminder-status_id" value="@if( $value['status_id'] ) 1 else 0 @endif" class="score_status_id"/>
+										<input type="hidden" name="performance_appraisal_reminder[status_id][]" id="performance_appraisal_reminder-status_id" value="@if( $value['status_id'] ) 1 @else 0 @endif" class="score_status_id"/>
 									</div>
 								</td>
 								<td>

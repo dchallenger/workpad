@@ -2724,7 +2724,7 @@ class Partners extends MY_PrivateController
 				goto stop;
 			}
 
-			$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, $this->mod->table, $previous_main_data, $main_record);
+			$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, $this->mod->table, $previous_main_data, $main_record, $this->record_id);
 		}
 
 		foreach( $other_tables as $table => $data )
@@ -2773,7 +2773,7 @@ class Partners extends MY_PrivateController
 			}
 
 			//create system logs
-			$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $other_action, $table, $previous_other_data, $data);			
+			$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $other_action, $table, $previous_other_data, $data, $this->record_id);			
 		}
 
 		//personal profile

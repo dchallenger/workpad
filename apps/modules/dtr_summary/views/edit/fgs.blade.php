@@ -65,7 +65,7 @@
 				<label class="control-label col-md-3">Absent</label>
 				<div class="col-md-7">							<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 						    	<input type="checkbox" value="1" @if( $record['time_record_summary.absent'] ) checked="checked" @endif name="time_record_summary[absent][temp]" id="time_record_summary-absent-temp" class="dontserializeme toggle"/>
-						    	<input type="hidden" name="time_record_summary[absent]" id="time_record_summary-absent" value="@if( $record['time_record_summary.absent'] ) 1 else 0 @endif"/>
+						    	<input type="hidden" name="time_record_summary[absent]" id="time_record_summary-absent" value="@if( $record['time_record_summary.absent'] ) 1 @else 0 @endif"/>
 							</div> 				</div>	
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3">Paid Leaves</label>
