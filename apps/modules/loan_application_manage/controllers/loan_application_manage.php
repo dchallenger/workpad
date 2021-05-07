@@ -402,6 +402,13 @@ class Loan_application_manage extends MY_PrivateController
             $latest = $this->mod->newPostData($data, 'appforms');
             $this->response->target = $latest;
 
+            $audit_log_data['loan_application_id'] = $this->input->post('loan_application_id');
+            $audit_log_data['approver'] = $current_user->full_name;
+            $audit_log_data['action'] = $action;
+            $audit_log_data['loan_application'] = $loan_application_info['loan_type'];
+
+            $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', $this->mod->table, array(), $audit_log_data);
+
             // determines to where the action was 
             // performed and used by after_save to
             // know which notification to broadcast

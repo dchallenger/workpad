@@ -203,6 +203,8 @@ class Shift extends MY_PrivateController
 		$main_record['class_id'][] = $this->record_id;
 		$main_record['value'][] = $post['value'];
 		
+		$previous_main_data = array();
+
 		switch( true )
 		{				
 			case $shift_record->num_rows() == 0:
@@ -216,6 +218,8 @@ class Shift extends MY_PrivateController
 				break;
 			case $shift_record->num_rows() == 1:
 		
+				$previous_main_data = $shift_record->row_array();
+
 				$shift_value = json_decode($shift_record->row()->shift, true);
 				
 				if(isset($shift_value['class_id'])){
@@ -239,6 +243,8 @@ class Shift extends MY_PrivateController
 				$error = true;
 				goto stop;
 		}
+
+		$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, $table, $previous_main_data['shift'], $values);
 
 		$this->mod->_save_shift_class_company($this->record_id, $shift_id, $post['value']);
 

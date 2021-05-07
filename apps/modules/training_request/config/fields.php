@@ -1,8 +1,48 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 $config['fields'] = array();
+$config['fields'][1]['training_application.include_idp'] = array(
+	'f_id' => 16,
+	'fg_id' => 1,
+	'label' => 'Include in IDP?',
+	'description' => '',
+	'table' => 'training_application',
+	'column' => 'include_idp',
+	'uitype_id' => 3,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 9,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 0
+);
+$config['fields'][4]['training_application.training_calendar_id'] = array(
+	'f_id' => 15,
+	'fg_id' => 4,
+	'label' => 'Training Calendar',
+	'description' => '',
+	'table' => 'training_application',
+	'column' => 'training_calendar_id',
+	'uitype_id' => 4,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 2,
+	'datatype' => 'required',
+	'active' => '1',
+	'encrypt' => 0,
+	'searchable' => array(
+		'type_id' => '1',
+		'table' => 'training_calendar',
+		'multiple' => 0,
+		'group_by' => '',
+		'label' => 'training_title',
+		'value' => 'training_calendar_id',
+		'textual_value_column' => ''
+	)
+);
+
 $config['fields'][4]['training_application.attachment'] = array(
-	'f_id' => 2,
+	'f_id' => 14,
 	'fg_id' => 4,
 	'label' => 'Attachment',
 	'description' => '',

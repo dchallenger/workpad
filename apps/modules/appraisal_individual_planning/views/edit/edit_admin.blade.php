@@ -280,7 +280,7 @@
 										<tbody>
 											@if(isset($template_section) && $template_section->num_rows() > 0)
 												@foreach($template_section->result_array() as $key1 => $val1)
-													@if($val1['parent_id'] > 0 && $val1['is_core'] == 0) <!-- just remove && $val1['is_core'] == 0 to display all section even core competencies -->
+													@if($val1['parent_id'] > 0 && $val1['is_core'] == 0 && $val1['section_type_id'] != 9) <!-- just remove && $val1['is_core'] == 0 to display all section even core competencies -->
 														@if($val1['is_core'] == 0)
 															<tr>
 																<td colspan="5" class="bold">

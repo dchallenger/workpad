@@ -4,8 +4,8 @@
             <input type="checkbox" class="record-checker checkboxes" value="<?php echo $record_id; ?>" />
         </div>
     </td>
-    <td>{{ $training_calendar_course_id }} </td>
-    <td>{{ $training_calendar_topic }}</td>
+    <td>{{ $training_calendar_training_title }} </td>
+    <td>{{ $training_calendar_course_id }}</td>
     <td class="hidden-xs">{{ $training_calendar_last_registration_date }} </td> 
     <td class="hidden-xs">{{  ($training_calendar_status == 0) ? 'open' : 'closed' }} </td> 
     <td>

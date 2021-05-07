@@ -117,6 +117,16 @@ class Holiday extends MY_PrivateController
 		$holiday_info['legal']			= $legal;
 		$holiday_info['locations']		= isset($_POST['time_holiday_location']) ? implode(",",$_POST['time_holiday_location']['location_id']) : '';
 		$holiday_info['location_count']		= $location_count;
+
+		$previous_main_data = array();
+		$action = 'insert';
+
+		$record = $this->db->get_where( $this->mod->table, array( $this->mod->primary_key => $this->record_id ) );
+
+		if ($record && $record->num_rows() > 0) {
+			$previous_main_data = $record->row_array();
+			$action = 'update';
+		}
 		
 		$this->response->record_id = $this->record_id = $this->mod->_save($record_id, $holiday_info);
 		if( !is_integer($this->response->record_id ) )
@@ -129,6 +139,7 @@ class Holiday extends MY_PrivateController
 			$this->_ajax_return();	
 		}
 
+		$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $action, $this->mod->table, $previous_main_data, $holiday_info);				
 
 		if( empty($record_id) ){
 			$this->response->record_id = $this->record_id = $this->db->insert_id();

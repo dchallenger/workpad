@@ -249,6 +249,8 @@ class Clearance_manage extends MY_PrivateController
 				$this->db->update( 'partners_clearance_signatories', $main_record, array( 'clearance_signatories_id' => $this->record_id ) );
 				$this->response->action = 'update';
 
+				$previous_main_data = $record->row_array();
+				$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, 'partners_clearance_signatories', $previous_main_data, $main_record, '');
 /*				$attachment_info = array(
 											'clearance_signatories_id' => $this->record_id,
 											'attachments' => $main_record['attachments'],

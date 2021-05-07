@@ -72,7 +72,29 @@ $(document).ready(function(){
 
     $('#training_application-training_course_id').live('change',function(){
         get_training_course_info($(this).val());
-    });    
+    });
+
+    if ($('#training_application-training_calendar').val() != '') {
+        var training_calendar_id = $('#training_application-training_calendar').val();
+
+        $('.min_capacity').show();
+        $('.max_capacity').show();
+
+        var url = base_url + module.get('route') + '/get_training_calendar_info';
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            type:"POST",
+            data: 'training_calendar_id='+training_calendar_id,
+            success: function (response) {
+                if (response.message[0].type == 'success') {
+                    $('#training_calendar-min_training_capacity').val(response.calendar_info.training_capacity);
+                    $('#training_calendar-max_training_capacity').val(response.calendar_info.min_training_capacity);
+
+                }
+            }
+        });         
+    }    
 });
 
 

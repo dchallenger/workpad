@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $(":input").inputmask();
+    /*$(":input").inputmask();*/
 });
 
 function save_record( form, status_id, status )

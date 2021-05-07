@@ -1,3 +1,4 @@
+<?php $current_schedule_tmp_array = array(); ?>
 
 <form class="form-horizontal" name="edit-mtf-list" id="form-calman-mplist" fg_id="calman-mplist">
 
@@ -19,11 +20,18 @@
 
                         <div id="available_schedules" class="list-group">
 
-                            <?php for($i=0; $i < count( $currentday_schedules ); $i++){ ?>
-                                <a href="javascript:;" class="list-group-item small available_scheds" data-shift-id="<?php echo $currentday_schedules[$i]['form_id']; ?>">
-                                    <?php echo $currentday_schedules[$i]['title']; ?>
-                                </a>
-                            <?php } ?>                        
+                            <?php 
+                                for($i=0; $i < count( $currentday_schedules ); $i++){ 
+                                    if (!in_array($currentday_schedules[$i]['title'], $current_schedule_tmp_array)) {
+                                        array_push($current_schedule_tmp_array, $currentday_schedules[$i]['title']);
+                            ?>
+                                        <a href="javascript:;" class="list-group-item small available_scheds" data-shift-id="<?php echo $currentday_schedules[$i]['form_id']; ?>">
+                                            <?php echo $currentday_schedules[$i]['title']; ?>
+                                        </a>
+                            <?php 
+                                    }
+                                } 
+                            ?>                        
                         </div>
                     </div>
                 </div>

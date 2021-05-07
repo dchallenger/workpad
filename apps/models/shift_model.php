@@ -172,6 +172,8 @@ class shift_model extends Record
 				
 				$this->db->update('time_shift_class_company', $main_record, array( 'id' => $shift_class_company_record['id'] ) );
 				$record_id = $shift_class_company_record['id'];
+
+				$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'time_shift_class_company', $shift_class_company_record, $main_record);
 			}else{
 				$main_record = array('shift_id' => $shift_id, 'class_id' => $class_id, 'company_id' => $company_id, 'class_value' => $class_value);
 				if($company_details !== false){
@@ -179,6 +181,8 @@ class shift_model extends Record
 				}
 				$this->db->insert('time_shift_class_company', $main_record);
 				$record_id = $this->db->insert_id();
+
+				$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'time_shift_class_company', array(), $main_record);
 			}
 		}
 		

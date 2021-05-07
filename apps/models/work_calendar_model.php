@@ -109,7 +109,7 @@ class work_calendar_model extends Record
 		return $data;		
 	}
 
-	public function get_searched_partner($manager_id, $keyword, $role_id, $shift_id = '', $date = ''){ 
+	public function get_searched_partner($manager_id, $keyword, $role_id, $shift_id = '', $date = '', $date_from = '', $date_to = ''){ 
 
 		$data = array();
 		$admin_list = array("2", "6");
@@ -157,15 +157,20 @@ class work_calendar_model extends Record
 					  AND alias LIKE '%" . $keyword . "%' ";
 		}
 
-		$qry .= " AND IF(IFNULL(tr.`aux_shift_id`,0)=0,tr.`shift_id`,tr.`aux_shift_id`)= ".$shift_id."";
+		if ($shift_id != '')
+			$qry .= " AND IF(IFNULL(tr.`aux_shift_id`,0)=0,tr.`shift_id`,tr.`aux_shift_id`)= ".$shift_id."";
 
-		$qry .= " AND tr.`date`= '".$date."'";
+		if ($date != '')
+			$qry .= " AND tr.`date`= '".$date."'";
 
-		$qry .= "	ORDER BY display_name ASC";  
+		if ($date_from != '' && $date_to != '')
+			$qry .= " AND tr.`date` BETWEEN '".$date_from."' AND '".$date_to."'";
+
+		$qry .= " GROUP BY p.user_id ORDER BY display_name ASC";  
 
 		$result = $this->db->query($qry);
 
-		if($result->num_rows() > 0)
+		if($result && $result->num_rows() > 0)
 		{			
 			foreach($result->result_array() as $row){
 				$data[] = $row;

@@ -1,4 +1,6 @@
 
+<?php $current_schedule_tmp_array = array(); ?>
+
 <form class="form-horizontal" name="edit-mtf-list" id="form-calman-mplist" fg_id="calman-mplist">
 
     <div class="modal-header">
@@ -14,16 +16,23 @@
                 <div class="portlet">
                     <div class="portlet-body" >
 
+                        <input type="hidden" name="current_date" id="current_date" value="<?php echo date("Y-m-d", strtotime($start_date) ); ?>">
                         <input type="hidden" name="date[start]" value="<?php echo date("Y-m-d", strtotime($start_date) ); ?>">
                         <input type="hidden" name="date[end]" value="<?php echo date("Y-m-d", strtotime($end_date) ); ?>">
 
                         <div id="available_schedules" class="list-group">
 
-                            <?php for($i=0; $i < count( $currentday_schedules ); $i++){ ?>
-                                <a href="javascript:;" class="list-group-item small available_scheds" data-shift-id="<?php echo $currentday_schedules[$i]['form_id']; ?>">
-                                    <?php echo $currentday_schedules[$i]['title']; ?>
-                                </a>
-                            <?php } ?>                        
+                            <?php 
+                                for($i=0; $i < count( $currentday_schedules ); $i++){ 
+                                    if (!in_array($currentday_schedules[$i]['title'], $current_schedule_tmp_array)) {
+                                        array_push($current_schedule_tmp_array, $currentday_schedules[$i]['title']);
+                            ?>
+                                        <a href="javascript:;" class="list-group-item small available_scheds" data-shift-id="<?php echo $currentday_schedules[$i]['form_id']; ?>">
+                                            <?php echo $currentday_schedules[$i]['title']; ?>
+                                        </a>
+                            <?php   }
+                                } 
+                            ?>                        
                         </div>
                     </div>
                 </div>
@@ -130,7 +139,7 @@
 
                                             <?php for($j=0; $j < count( $shifts ); $j++){ ?>
                                             
-                                            <option value="<?php echo $shifts[$j]['shift_id']; ?>">
+                                            <option value="<?php echo $shifts[$j]['shift_id']; ?>" <?php echo ($shifts[$j]['shift_id'] == $shift_id ? 'selected="selected"' : '') ?>>
                                                 <?php echo $shifts[$j]['shift']; ?>
                                             </option>
 
@@ -177,9 +186,14 @@
 
     var getSearchData = function(keyword){
 
+        var shift_id_selected = $('#shift_id').val();
+        var date_from = $('input[name="date[start]"]').val();
+        var date_to = $('input[name="date[end]"]').val();
+        var current_date = $('#current_date').val();
+
         if(gsd_is_processing) return;
 
-        var data = {keyword: keyword};
+        var data = {keyword:keyword, date_from:date_from, date_to:date_to, current_date_shift:shift_id_selected, current_date:current_date};
 
         $.ajax({
             url: base_url + module.get('route') + '/get_search_data',
@@ -262,7 +276,10 @@
 
         $(".available_scheds").on('click', function(){
 
-            var request_data = {shift_id: $(this).data('shift-id'), date: $("#current_date").val()}
+            var date_from = $('input[name="date[start]"]').val();
+            var date_to = $('input[name="date[end]"]').val();
+
+            var request_data = {shift_id: $(this).data('shift-id'), date: $("#current_date").val(), date_from:date_from, date_to:date_to}
 
             $.ajax({
                 url: base_url + module.get('route') + '/get_available_schedules',

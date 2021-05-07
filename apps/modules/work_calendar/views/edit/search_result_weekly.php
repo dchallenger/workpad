@@ -23,7 +23,7 @@
         </td> 
                                     
         <td>
-            <?php echo $partners[$i]['shift']; ?>
+            <?php echo $partners[$i]['calendar']; ?>
         </td>
                                     
         <td>

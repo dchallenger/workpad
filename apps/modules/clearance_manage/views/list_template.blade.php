@@ -32,7 +32,7 @@
 	<td>
 		@if( $clearance_status_id <= 3 )
 			<div class="btn-group">
-				<a class="btn btn-xs text-muted" href="{{$edit_url}}"><i class="fa fa-pencil"></i> {{ $clearance_status_id }}</a>
+				<a class="btn btn-xs text-muted" href="{{$edit_url}}"><i class="fa fa-pencil"></i> {{ lang('common.edit') }}</a>
 			</div>
 		@endif
 		<div class="btn-group">

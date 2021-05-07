@@ -1,5 +1,8 @@
-
-
+$(document).ready(function () {
+    $('.select2me').select2({
+        placeholder: "Select an option",
+        allowClear: true
+    });
 
     $('#config-general-header_logo').fileupload({ 
         url: base_url + module.get('route') + '/single_upload_header',
@@ -77,3 +80,4 @@
         $('#print_logo-photo-container .fileupload-new').each(function(){ $(this).css('display', 'none') });
         $('#print_logo-photo-container .fileupload-exists').each(function(){ $(this).css('display', 'inline-block') });
     }
+})    

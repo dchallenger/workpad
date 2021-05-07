@@ -9,6 +9,8 @@ ww_training_application.total_training_hour as "training_application_total_train
 ww_training_application.venue as "training_application_venue",
 ww_training_application.training_provider as "training_application_training_provider",
 ww_training_application.training_course_id as "training_application_training_course_id",
+ww_training_application.training_calendar_id as "training_application_training_calendar_id",
+ww_training_application.include_idp as "training_application_include_idp",
 ww_training_application.hr_remarks as "training_application_hr_remarks", 
 ww_training_application.status_id as "training_application_status_id", 
 ww_training_application_status.training_application_status as "training_application_training_application_status",

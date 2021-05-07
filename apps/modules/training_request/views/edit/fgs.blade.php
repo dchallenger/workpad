@@ -4,7 +4,25 @@
 		<div class="tools"><a class="collapse" href="javascript:;"></a></div>
 	</div>
 	<div class="portlet-body form">
-				<div class="form-group">
+		<div class="form-group">
+			<label class="control-label col-md-3">Training Calendar</label>
+			<div class="col-md-7">
+				<?php
+					$db->select('training_calendar_id,training_title');
+                    $db->order_by('training_title', '0');
+                    $db->where('deleted', '0');
+                    $options = $db->get('training_calendar');
+                    $training_application_training_calendar_options = array('' => '');
+                    foreach($options->result() as $option) {
+                  		$training_application_training_calendar_options[$option->training_calendar_id] = $option->training_title;
+                } ?>
+                <div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
+                    {{ form_dropdown('training_application[training_calendar_id]',$training_application_training_calendar_options, $record['training_application.training_calendar_id'], 'class="form-control select2me" data-placeholder="Select..." id="training_application-training_calendar"') }}
+                </div>
+            </div>	
+		</div>		
+		<div class="form-group">
 			<label class="control-label col-md-3"><span class="required">* </span>Training Type</label>
 			<div class="col-md-7">
 				<?php
@@ -80,6 +98,18 @@
                 </div>
             </div>	
 		</div>
+		<div class="form-group min_capacity" style="display:none">
+			<label class="control-label col-md-3">Minimum Trainee Capacity</label>
+			<div class="col-md-7">							
+				<input type="text" class="form-control" name="training_application[training_capacity]" id="training_calendar-min_training_capacity" value="" placeholder="Enter Minimum Trainee Capacity" readonly/> 				
+			</div>	
+		</div>
+		<div class="form-group max_capacity" style="display:none">
+			<label class="control-label col-md-3">Maximum Trainee Capacity</label>
+			<div class="col-md-7">							
+				<input type="text" class="form-control" name="training_application[max_training_capacity]" id="training_calendar-max_training_capacity" value="" placeholder="Enter Maximum Trainee Capacity" readonly/> 				
+			</div>	
+		</div>		
 		<div class="form-group">
 			<label class="control-label col-md-3">Venue</label>
 			<div class="col-md-7">
@@ -98,6 +128,15 @@
 				<input type="text" class="form-control" name="training_application[total_investment_pgsa]" id="training_application-total_investment_pgsa" value="{{ $record['training_application.total_investment_pgsa'] }}" placeholder="Enter Estimate Investment (Subject for revision by HR):" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>
 			</div>	
 		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3">Include in IDP?:</label>
+			<div class="col-md-7">							
+				<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
+			    	<input type="checkbox" value="1" @if( $record['training_application.include_idp'] ) checked="checked" @endif name="training_application[include_idp][temp]" id="training_application-include_idp-temp" class="dontserializeme toggle"/>
+			    	<input type="hidden" name="training_application[include_idp]" id="training_application-include_idp" value="<?php echo $record['training_application.include_idp'] ? 1 : 0 ?>"/>
+				</div> 				
+			</div>				
+		</div>		
 		<div class="form-group">
 			<label class="control-label col-md-3">Areas for Development</label>
 			<div class="col-md-7">

@@ -35,7 +35,6 @@ class Work_calendar extends MY_PrivateController
 
 		$this->_ajax_only();
 
-
 		// final
 		$partners = isset($_POST['user_id']) ? $_POST['user_id'] : '';
 		$shift_id = isset($_POST['shift_id']) ? $_POST['shift_id'] : '';
@@ -45,6 +44,9 @@ class Work_calendar extends MY_PrivateController
 
 		//double check if date is set
 		$start_date = $start_date == '' ? $_POST['current_date'] : $start_date;
+
+        if ($end_date == '')
+            $end_date = $start_date;
 
 		if( !$partners ){
 
@@ -57,88 +59,80 @@ class Work_calendar extends MY_PrivateController
 			die();				
 		}
 
-		if(isset($_POST['shift_id'])){ 
+        $startdate = $start_date;
 
-			foreach($partners as $index => $id){
-				$this->mod->update_partner_work_schedule( date("Y-m-d", strtotime($start_date)), $partners[$index], $shift_id[$index]);	
-
-                //saving of history for audit
-                $schedule_history = array(
-                                        'user_id' => $partners[$index],
-                                        'from_date' => $start_date,
-                                        'to_date' => $start_date,
-                                        'shift_id' => $shift_id[$index],
-                                        'created_by' => $this->user->user_id
-                                      );
-
-                $this->db->insert('time_record_schedule_history',$schedule_history);
-			}
-		}
-		else{ 
-
-            $startdate = $start_date;
-
-            foreach($partners as $index => $id)
-            {
-                $start_date = $startdate;
-
-                while (strtotime($start_date) <= strtotime($end_date)) 
-                {
-					// IF SHIFT ID NOT BLANK??? SAVE? IF YES CONTINUE NEXT LOOP!!!
-                    if (isset($shift_id[$index])){
-                        $data_restDay = array();
-                        $qry_restDay = "SELECT ts.shift_id, week_name, tswc.shift_id , tswc.week_no, tswc.calendar_id  
-                                            FROM {$this->db->dbprefix}time_shift ts
-                                            LEFT JOIN {$this->db->dbprefix}time_shift_weekly_calendar tswc 
-                                            ON ts.default_calendar = tswc.calendar_id
-                                            WHERE tswc.shift IN ('OFF','RESTDAY')"; //restday shift
-                        $qry_restDay .= " AND ts.shift_id = {$shift_id[$index]} ";
-                        $qry_restDay .= " AND tswc.week_name = '".date('l', strtotime($start_date))."'";
-                        $result_restDay = $this->db->query($qry_restDay); 
-
-                        if(!$result_restDay->num_rows() > 0)
-                        {
-                            $this->mod->update_partner_work_schedule( date("Y-m-d", strtotime($start_date)), $partners[$index], $shift_id[$index]);
-                        }  
-                    }
-                    elseif (isset($calendar_id[$index])){
-                        $this->mod->update_partner_work_schedule_weekly( date("Y-m-d", strtotime($start_date)), $partners[$index], $calendar_id[$index]);
-                    } 
+        foreach($partners as $index => $id)
+        {
+            $start_date = $startdate;
             
-                    $start_date = date ("Y-m-d", strtotime("+1 day", strtotime($start_date)));
+            while (strtotime($start_date) <= strtotime($end_date)) 
+            {
 
-				} // end while
+                $previous_main_data = array();
+                $action = 'insert';
 
+                $record = $this->db->get_where( 'time_record', array( 'user_id' => $partners[$index], 'date' => date("Y-m-d", strtotime($start_date)) ) );
 
-                $start_date = $startdate;
-
-                if (isset($shift_id[$index]))
-                {
-                    $schedule_history = array(
-                                                'coordinator_id' => $this->user->user_id,
-                                                'user_id' => $partners[$index],
-                                                'from_date' => $start_date,
-                                                'to_date' => $end_date,
-                                                'shift_id' => $shift_id[$index],
-                                                'created_by' => $this->user->user_id
-                                              );
+                if ($record && $record->num_rows() > 0) {
+                    $previous_main_data = $record->row_array();
+                    $action = 'update';
                 }
-                elseif (isset($calendar_id[$index]))
-                {
-                    $schedule_history = array(
-                                                'coordinator_id' => $this->user->user_id,
-                                                'user_id' => $partners[$index],
-                                                'from_date' => $start_date,
-                                                'to_date' => $end_date,
-                                                'calendar_id' => $calendar_id[$index],
-                                                'created_by' => $this->user->user_id
-                                              );
+
+				// IF SHIFT ID NOT BLANK??? SAVE? IF YES CONTINUE NEXT LOOP!!!
+                if (isset($shift_id[$index])){
+                    $data_restDay = array();
+                    $qry_restDay = "SELECT ts.shift_id, week_name, tswc.shift_id , tswc.week_no, tswc.calendar_id  
+                                        FROM {$this->db->dbprefix}time_shift ts
+                                        LEFT JOIN {$this->db->dbprefix}time_shift_weekly_calendar tswc 
+                                        ON ts.default_calendar = tswc.calendar_id
+                                        WHERE tswc.shift IN ('OFF','RESTDAY')"; //restday shift
+                    $qry_restDay .= " AND ts.shift_id = {$shift_id[$index]} ";
+                    $qry_restDay .= " AND tswc.week_name = '".date('l', strtotime($start_date))."'";
+                    $result_restDay = $this->db->query($qry_restDay); 
+
+                    if(!$result_restDay->num_rows() > 0)
+                    {
+                        $this->mod->update_partner_work_schedule( date("Y-m-d", strtotime($start_date)), $partners[$index], $shift_id[$index]);
+                    }  
                 }
-                $this->db->insert('time_record_schedule_history',$schedule_history);
+                elseif (isset($calendar_id[$index])){
+                    $this->mod->update_partner_work_schedule_weekly( date("Y-m-d", strtotime($start_date)), $partners[$index], $calendar_id[$index]);
+                } 
+        
+                $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'time_record', $previous_main_data, array('aux_shift_id' => $shift_id[$index]));             
 
-			} //foreach $partners
+                $start_date = date ("Y-m-d", strtotime("+1 day", strtotime($start_date)));
 
-		}
+			} // end while
+
+
+            $start_date = $startdate;
+
+            if (isset($shift_id[$index]))
+            {
+                $schedule_history = array(
+                                            'coordinator_id' => $this->user->user_id,
+                                            'user_id' => $partners[$index],
+                                            'from_date' => $start_date,
+                                            'to_date' => $end_date,
+                                            'shift_id' => $shift_id[$index],
+                                            'created_by' => $this->user->user_id
+                                          );
+            }
+            elseif (isset($calendar_id[$index]))
+            {
+                $schedule_history = array(
+                                            'coordinator_id' => $this->user->user_id,
+                                            'user_id' => $partners[$index],
+                                            'from_date' => $start_date,
+                                            'to_date' => $end_date,
+                                            'calendar_id' => $calendar_id[$index],
+                                            'created_by' => $this->user->user_id
+                                          );
+            }
+            $this->db->insert('time_record_schedule_history',$schedule_history);
+
+		} //foreach $partners
 
 		$this->response->message[] = array(
 		    'message' => 'Partner schedule added and or updated successfully!',
@@ -179,8 +173,8 @@ class Work_calendar extends MY_PrivateController
 
         $data['currentday_schedules'] = 
         	$this->mod->get_work_calendar_details(
-        		date("Y-m-d", strtotime($this->input->post('date'))), 
-        		date("Y-m-d", strtotime($this->input->post('date'))), 
+        		date("Y-m-d", strtotime($this->input->post('date_from'))), 
+        		date("Y-m-d", strtotime($this->input->post('date_to'))), 
         		$this->session->userdata('user')->user_id);
 
         //edit_assigned_partners_rows_only
@@ -323,8 +317,8 @@ class Work_calendar extends MY_PrivateController
 
 			        $data['currentday_schedules'] = 
 			        	$this->mod->get_work_calendar_details(
-			        		date("Y-m-d", strtotime($this->input->post('date'))), 
-			        		date("Y-m-d", strtotime($this->input->post('date'))), 
+			        		date("Y-m-d", strtotime($this->input->post('date_from'))), 
+			        		date("Y-m-d", strtotime($this->input->post('date_to'))), 
 			        		$this->session->userdata('user')->user_id);
 
 	        		$data['start_date']= $this->input->post('date_from');
@@ -413,7 +407,8 @@ class Work_calendar extends MY_PrivateController
             $user = $this->config->item('user'); 
             $role_id = $user['role_id'];
 
-
+            $date_from = ($this->input->post('date_from') ? date("Y-m-d", strtotime($this->input->post('date_from'))) : '');
+            $date_to = ( $this->input->post('date_to') ? date("Y-m-d", strtotime($this->input->post('date_to'))) : '');
             // if current user is a manager and has full access
             // to this module's record then don't load any data.
             // let 'em use search functionality to see it
@@ -421,13 +416,9 @@ class Work_calendar extends MY_PrivateController
                 $manager_id = '0';
             }*/
 
-            $data['currentday_schedules'] = 
-                $this->mod->get_work_calendar_details(
-                    date("Y-m-d", strtotime($this->input->post('date'))), 
-                    date("Y-m-d", strtotime($this->input->post('date'))), 
-                    $this->session->userdata('user')->user_id);
+            $data['currentday_schedules'] = $this->mod->get_work_calendar_details($date_from,$date_to,$this->session->userdata('user')->user_id);
 
-            $data['partners']= $manager_id !== '0' ? $this->mod->get_searched_partner($manager_id, $search_keyword, $role_id, $this->input->post('current_date_shift'), $this->input->post('current_date')) : array(); 
+            $data['partners']= $manager_id !== '0' ? $this->mod->get_searched_partner($manager_id, $search_keyword, $role_id, $this->input->post('current_date_shift'), '', $date_from, $date_to) : array(); 
 
             if ($this->input->post('type') == 'shift'){
                 $view['content'] = $this->load->view('edit/search_result', $data, true);
@@ -446,7 +437,8 @@ class Work_calendar extends MY_PrivateController
             $user = $this->config->item('user'); 
             $role_id = $user['role_id'];
 
-
+            $date_from = date("Y-m-d", strtotime($this->input->post('date_from')));
+            $date_to = date("Y-m-d", strtotime($this->input->post('date_to')));
             // if current user is a manager and has full access
             // to this module's record then don't load any data.
             // let 'em use search functionality to see it
@@ -454,13 +446,9 @@ class Work_calendar extends MY_PrivateController
                 $manager_id = '0';
             }*/
 
-            $data['currentday_schedules'] = 
-                $this->mod->get_work_calendar_details(
-                    date("Y-m-d", strtotime($this->input->post('date'))), 
-                    date("Y-m-d", strtotime($this->input->post('date'))), 
-                    $this->session->userdata('user')->user_id);
+            $data['currentday_schedules'] = $this->mod->get_work_calendar_details($date_from, $date_to, $this->session->userdata('user')->user_id);
 
-            $data['partners']= $manager_id !== '0' ? $this->mod->get_searched_partner($manager_id, '', $role_id, $this->input->post('current_date_shift'), $this->input->post('current_date')) : array(); 
+            $data['partners']= $manager_id !== '0' ? $this->mod->get_searched_partner($manager_id, '', $role_id, $this->input->post('current_date_shift'), '', $date_from, $date_to) : array(); 
 
             if ($this->input->post('type') == 'shift'){
                 $view['content'] = $this->load->view('edit/search_result', $data, true);

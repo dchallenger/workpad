@@ -1,5 +1,11 @@
 @extends('layouts.master')
 
+@section('page_styles')
+	@parent	
+	<link href="{{ theme_path() }}plugins/select2/select2_metro.css" rel="stylesheet" type="text/css"/>
+	<link href="{{ theme_path() }}plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
+	@stop
+
 @section('page_content')
 	@parent
    
@@ -56,6 +62,7 @@
 
 @section('page_plugins')
 	@parent
+	<script src="{{ theme_path() }}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript" ></script>
 	<script type="text/javascript" src="{{ theme_path() }}plugins/jquery.infiniteScroll.js"></script>
 	<script type="text/javascript" src="{{ theme_path() }}modules/common/lists.js"></script>
 @stop

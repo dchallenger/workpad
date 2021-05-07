@@ -140,7 +140,7 @@ $show_add = false;
 					</tr>
 				@endforeach
 			@else
-				<tr class="">
+				<tr class="hidden">
 					<?php
 						if (isset($template_section_column) && !empty($template_section_column))
 						{

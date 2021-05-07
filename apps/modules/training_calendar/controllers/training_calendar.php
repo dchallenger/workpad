@@ -425,6 +425,79 @@ class Training_calendar extends MY_PrivateController
    	function save($child_call = false){
     	$this->_ajax_only();
 
+		$validation_rules[] = 		
+		array(
+			'field' => 'training_calendar[planned]',
+			'label' => 'Planned',
+			'rules' => 'required'
+			);
+		$validation_rules[] = 		
+		array(
+			'field' => 'training_calendar[with_certification]',
+			'label' => 'Certification',
+			'rules' => 'required'
+			);
+		$validation_rules[] = 		
+		array(
+			'field' => 'training_calendar[evaluation_template_id][]',
+			'label' => 'Evaluation Form',
+			'rules' => 'required'
+			);
+		$validation_rules[] = 		
+		array(
+			'field' => 'training_calendar[tba]',
+			'label' => 'To Be Announce',
+			'rules' => 'required'
+			);
+		$validation_rules[] = 		
+		array(
+			'field' => 'training_calendar[min_training_capacity]',
+			'label' => 'Maximum Trainee Capacity',
+			'rules' => 'required'
+			);
+		$validation_rules[] = 		
+		array(
+			'field' => 'training_calendar[training_capacity]',
+			'label' => 'Minimum Trainee Capacity',
+			'rules' => 'required'
+			);
+		$validation_rules[] = 		
+		array(
+			'field' => 'training_calendar[calendar_type_id]',
+			'label' => 'Training Type',
+			'rules' => 'required'
+			);
+		$validation_rules[] = 		
+		array(
+			'field' => 'training_calendar[course_id]',
+			'label' => 'Course',
+			'rules' => 'required'
+			);	
+		$validation_rules[] = 
+		array(
+			'field' => 'training_calendar[training_title]',
+			'label' => 'Training Title',
+			'rules' => 'required'
+			);
+
+		if( sizeof( $validation_rules ) > 0 )
+		{
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules( $validation_rules );
+			if ($this->form_validation->run() == false)
+			{
+				foreach( $this->form_validation->get_error_array() as $f => $f_error )
+				{
+					$this->response->message[] = array(
+						'message' => $f_error,
+						'type' => 'warning'
+						);  
+				}
+
+				$this->_ajax_return();
+			}
+		}
+								
     	$post = $_POST;
 
     	if (empty($post['session'])) {
@@ -457,7 +530,7 @@ class Training_calendar extends MY_PrivateController
 		$training_calendar['publish_date'] = ($training_calendar['publish_date'] != '' ? date('Y-m-d',strtotime($training_calendar['publish_date'])) : '');
 		$training_calendar['revalida_date'] = ($training_calendar['revalida_date'] != '' ? date('Y-m-d',strtotime($training_calendar['revalida_date'])) : '');
 		$training_calendar['confirmed'] = ($post['total_confirmed'] != '' ? $post['total_confirmed'] : '' );
-		$training_calendar['evaluation_template_id'] = $commaList = ($training_calendar['evaluation_template_id'] != '' ? implode(',', $training_calendar['evaluation_template_id']) : '');
+		$training_calendar['evaluation_template_id'] = $commaList = (isset($training_calendar['evaluation_template_id']) && $training_calendar['evaluation_template_id'] != '' ? implode(',', $training_calendar['evaluation_template_id']) : '');
 
 		//unset($training_calendar['provider']);
 		
@@ -628,6 +701,24 @@ class Training_calendar extends MY_PrivateController
                 $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'training_calendar_participant', array(), $data);
 			}
 
+			//send notification if status is enrolled
+			$this->load->model('training_request_confirmation_model', 'mod_conf');			
+
+			if ($participant_info['status'] == 1) {
+				//insert notification
+				$insert = array(
+					'status' => 'info',
+					'message_type' => 'Training Request',
+					'user_id' => $participant_info['id'],
+					'feed_content' => 'Training Request for Confirmation',
+					'recipient_id' => $participant_info['id'],
+					'uri' => str_replace(base_url(), '', $this->mod_conf->url).'/detail/'.$record_id
+				);
+
+				$this->db->insert('system_feeds', $insert);
+				$id = $this->db->insert_id();
+				$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $participant_info['id']));
+			}
 		}
     }
 
@@ -664,6 +755,8 @@ class Training_calendar extends MY_PrivateController
 
 		foreach( $data as $session ){
 			$session['session_date'] = ($session['session_date'] != '' ? date('Y-m-d',strtotime($session['session_date'])) : '');
+			$session['sessiontime_from'] = ($session['sessiontime_from'] != '' ? date('H:i:s',strtotime($session['sessiontime_from'])) : '');
+			$session['sessiontime_to'] = ($session['sessiontime_to'] != '' ? date('H:i:s',strtotime($session['sessiontime_to'])) : '');
 
 			$this->db->where('training_calendar_id',$session['training_calendar_id']);
 			$this->db->where('calendar_session_id',$session['calendar_session_id']);

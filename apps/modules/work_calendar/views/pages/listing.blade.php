@@ -31,8 +31,8 @@
 						</div>
 						<div class="col-md-3 col-sm-12">
 							<!-- BEGIN DRAGGABLE EVENTS PORTLET-->    
-							<h4>{{ lang('work_calendar.weekly') }}</h4>
-							<div id="event_box_weekly"></div>
+							<h4 class="hidden">{{ lang('work_calendar.weekly') }}</h4>
+							<div class="hidden" id="event_box_weekly"></div>
 
 							<h4>{{ lang('work_calendar.shift_sched') }}</h4>
 							<div id="event_box"></div>

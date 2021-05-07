@@ -257,12 +257,18 @@ class Clearance extends MY_PrivateController
 					$this->response->record_id = $this->record_id = $this->db->insert_id();
 				}
 				$this->response->action = 'insert';
+
+				$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, $sign_table, array(), $main_record, $movement_action['user_id']);
+
 				break;
 			case $record->num_rows() == 1:
 				// $main_record['modified_by'] = $this->user->user_id;
 				// $main_record['modified_on'] = date('Y-m-d H:i:s');
 				$this->db->update( $sign_table, $main_record, array( $sign_key => $this->record_id ) );
 				$this->response->action = 'update';
+
+				$previous_main_data = $record->row_array();
+				$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, $sign_table, $previous_main_data, $main_record, $movement_action['user_id']);
 				break;
 			default:
 				$this->response->message[] = array(
@@ -369,6 +375,10 @@ class Clearance extends MY_PrivateController
 			case $record->num_rows() == 1:
 				$this->db->update( $this->mod->table, $main_record, array( $this->mod->primary_key => $this->record_id ) );
 				$this->response->action = 'update';
+
+				$previous_main_data = $record->row_array();
+				$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, $this->mod->table, $previous_main_data, $main_record, $previous_main_data['user_id']);
+
 				break;
 			default:
 				$this->response->message[] = array(
@@ -430,6 +440,8 @@ class Clearance extends MY_PrivateController
 							$this->response->record_id = $this->clearance_signatories_id = $this->db->insert_id();
 						}
 						$this->response->action = 'insert';
+
+						$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, $sign_table, array(), $signatories_info, '');						
 						break;
 					case $record->num_rows() == 1:
 						$signatories_info = array(
@@ -440,6 +452,9 @@ class Clearance extends MY_PrivateController
 						$this->db->update( $sign_table, $signatories_info, array( $sign_key => $clearance_signatories_record->clearance_signatories_id ) );
 						$this->clearance_signatories_id = $clearance_signatories_record->clearance_signatories_id;
 						$this->response->action = 'update';
+
+						$previous_main_data = $record->row_array();
+						$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, $sign_table, $previous_main_data, $signatories_info, '');												
 						break;
 					default:
 						$this->response->message[] = array(
@@ -996,12 +1011,17 @@ class Clearance extends MY_PrivateController
 					$this->response->record_id = $this->record_id = $this->db->insert_id();
 				}
 				$this->response->action = 'insert';
+
+				$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, $sign_table, array(), $main_record, '');
 				break;
 			case $record->num_rows() == 1:
 				// $main_record['modified_by'] = $this->user->user_id;
 				// $main_record['modified_on'] = date('Y-m-d H:i:s');
 				$this->db->update( $sign_table, $main_record, array( $sign_key => $this->record_id ) );
 				$this->response->action = 'update';
+
+				$previous_main_data = $record->row_array();
+				$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, $sign_table, $previous_main_data, $main_record, '');
 				break;
 			default:
 				$this->response->message[] = array(
@@ -1095,6 +1115,8 @@ class Clearance extends MY_PrivateController
 		$to_delete_existing_exit_interview_answer = 0;
 		if ($record && $record->num_rows() > 0) {
 			$clearance_record = $record->row();
+			$previous_main_data = $record->row_array();
+
 			if (isset($post['partners_clearance']) && $post['partners_clearance']['exit_interview_layout_id'] != $clearance_record->exit_interview_layout_id)
 				$to_delete_existing_exit_interview_answer = 1;
 		}
@@ -1106,6 +1128,8 @@ class Clearance extends MY_PrivateController
 				// $main_record['modified_on'] = date('Y-m-d H:i:s');
 				$this->db->update( $this->mod->table, $main_record, array( $this->mod->primary_key => $this->record_id ) );
 				$this->response->action = 'update';
+
+				$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, $this->mod->table, $previous_main_data, $main_record, $previous_main_data['user_id']);				
 				break;
 			default:
 				$this->response->message[] = array(

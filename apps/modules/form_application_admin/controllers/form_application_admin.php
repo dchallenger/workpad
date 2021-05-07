@@ -2104,6 +2104,8 @@ class Form_application_admin extends MY_PrivateController
                 if( $this->db->_error_message() == "" )
                 {
                     $forms_id = $this->record_id = $this->db->insert_id();
+
+                    $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', $this->mod->table, array(), $main_record[$this->mod->table],$main_record[$this->mod->table]['user_id']);
                 }
                 break;
             case $record->num_rows() == 1:
@@ -2116,6 +2118,10 @@ class Form_application_admin extends MY_PrivateController
                 // }
 
                 $this->db->update( $this->mod->table, $main_record[$this->mod->table], array( $this->mod->primary_key => $forms_id) );
+
+                $previous_main_data = $this->db->get_where($this->mod->table, array($this->mod->primary_key => $forms_id))->row_array();
+
+                $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', $this->mod->table, array(), $main_record[$this->mod->table],$main_record[$this->mod->table]['user_id']);                
                 // $this->db->update( 'time_forms', $main_record, array( 'forms_id' => $forms_id ) );
                 break;
             default:

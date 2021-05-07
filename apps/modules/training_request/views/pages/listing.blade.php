@@ -17,12 +17,15 @@
 							@if($allow_admin)
 							<li><a href="{{ get_mod_route('training_request_admin') }}">Admin</a></li>
 							@endif
+							@if($allow_training_confirmation)
+							<li><a href="{{ get_mod_route('training_request_confirmation') }}">Training Confirmation</a></li>
+							@endif							
 						</ul>
 					</div>
 				</div>
 				<br>
 				<div class="portlet-title">
-					<div class="caption"><i class="fa {{ $mod->icon}}"></i>List of Performance Appraisal Periods </div>
+					<div class="caption"><i class="fa {{ $mod->icon}}"></i>List of Training Request </div>
 					<div class="caption" id="head-caption">&nbsp;</div>
 					<div class="actions">
 						@if( isset( $permission['add']) && $permission['add'] )

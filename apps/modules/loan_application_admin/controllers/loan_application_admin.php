@@ -400,6 +400,8 @@ class Loan_application_admin extends MY_PrivateController
                 if( $this->db->_error_message() == "" )
                 {
                     $loan_application_id = $this->record_id = $this->db->insert_id();
+
+                    $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', $this->mod->table, array(), $main_record[$this->mod->table],$main_record[$this->mod->table]['user_id']);
                 }
                 break;
             case $record->num_rows() == 1:
@@ -412,6 +414,10 @@ class Loan_application_admin extends MY_PrivateController
 
 
                 $this->db->update( $this->mod->table, $main_record[$this->mod->table], array( $this->mod->primary_key => $loan_application_id) );
+
+                $previous_main_data = $record->row_array();
+
+                $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', $this->mod->table, array(), $main_record[$this->mod->table],$main_record[$this->mod->table]['user_id']);                                
                 break;
             default:
                 $this->response->message[] = array(

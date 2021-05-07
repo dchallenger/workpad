@@ -11,6 +11,7 @@ DATE_FORMAT(ww_training_calendar.last_registration_date, \'%M %d, %Y\') as "trai
 ww_training_calendar.cost_per_pax as "training_calendar_cost_per_pax", 
 DATE_FORMAT(ww_training_calendar.registration_date, \'%M %d, %Y\') as "training_calendar_registration_date", 
 ww_training_calendar.topic as "training_calendar_topic", 
+ww_training_calendar.training_title as "training_calendar_training_title", 
 ww_training_calendar.venue as "training_calendar_venue", 
 ww_training_calendar.equipment as "training_calendar_equipment", 
 IF(ww_training_calendar.tba = 1, "Yes", "No") as "training_calendar_tba", 

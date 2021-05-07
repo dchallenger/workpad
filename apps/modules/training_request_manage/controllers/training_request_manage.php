@@ -18,9 +18,11 @@ class Training_request_manage extends MY_PrivateController
         }
         
         $permission = parent::_check_permission('training_request_manage');
-        $data['allow_manage'] = ($permission != 0 ? $permission['list'] : $permission);;
+        $data['allow_manage'] = ($permission != 0 ? $permission['list'] : $permission);
         $permission = parent::_check_permission('training_request_admin');
-        $data['allow_admin'] = ($permission != 0 ? $permission['list'] : $permission);;
+        $data['allow_admin'] = ($permission != 0 ? $permission['list'] : $permission);
+        $permission = parent::_check_permission('training_request_confirmation');
+        $data['allow_training_confirmation'] = ($permission != 0 ? $permission['list'] : $permission);
         $data['status'] = $this->mod_personal->get_status();
 
         $this->load->vars($data);
@@ -203,6 +205,28 @@ class Training_request_manage extends MY_PrivateController
     {
         $this->_ajax_only();
 
+        $calendar_id = $_POST['training_application']['training_calendar_id'];
+
+        //get total confirm on training calendar to validate
+        if ($calendar_id != '') {
+            $query = "SELECT COUNT(*) total_confirm FROM ww_training_calendar_participant c 
+                WHERE c.training_calendar_id  = " . $calendar_id . " AND participant_status_id = 2";
+
+            $total_confirm_result = $this->db->query($query);
+
+            if ($total_confirm_result && $total_confirm_result->num_rows() > 0) {
+                $total_confirm = $total_confirm_result->row();
+
+                if ((int)$total_confirm->total_confirm >= (int)$_POST['training_application']['max_training_capacity']){
+                    $this->response->message[] = array(
+                        'message' => 'Maximum training capacity has been filled already.',
+                        'type' => 'error'
+                    );
+                    $this->_ajax_return();  
+                }
+            }
+        }
+
         if( !$this->_set_record_id() )
         {
             $this->response->message[] = array(
@@ -240,6 +264,46 @@ class Training_request_manage extends MY_PrivateController
         {
             $this->_ajax_return();
         }
+
+    }
+
+    public function get_training_calendar_info(){
+        $this->_ajax_only();
+
+        if( $this->input->post('training_calendar_id') ){
+
+            $training_calendar_id = $this->input->post('training_calendar_id');
+
+            $query = "SELECT * FROM ww_training_calendar c 
+                WHERE c.training_calendar_id  = " . $training_calendar_id . " ";
+
+            $training_calendar_info = $this->db->query($query);
+
+            if($training_calendar_info->num_rows() > 0){
+
+                $this->response->calendar_info = $training_calendar_info->row_array();
+            }
+
+            $query = "SELECT MIN(session_date) date_from,MAX(session_date) date_to,SUM(TIMESTAMPDIFF(HOUR, sessiontime_from, sessiontime_to)) total_training_hours FROM ww_training_calendar_session c 
+                WHERE c.training_calendar_id  = " . $training_calendar_id . " ";
+
+            $training_calendar_session_info = $this->db->query($query);            
+
+            if($training_calendar_session_info->num_rows() > 0){
+                $session = $training_calendar_session_info->row_array();
+
+                $this->response->calendar_info['date_from'] = $session['date_from'];
+                $this->response->calendar_info['date_to'] = $session['date_to'];
+                $this->response->calendar_info['total_training_hours'] = $session['total_training_hours'];
+            }
+
+            $this->response->message[] = array(
+                'message' => 'Succesfully called!',
+                'type' => 'success'
+            );            
+        }
+
+        $this->_ajax_return();
 
     }
 

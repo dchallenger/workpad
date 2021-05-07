@@ -6,6 +6,12 @@
 		</div>
 		<div class="portlet-body form">
 			<div class="form-group">
+				<label class="control-label col-md-3">Training Title</label>
+				<div class="col-md-7">							
+					<input disabled="disabled" type="text" class="form-control" name="training_calendar[training_title]" id="training_calendar-training_title" value="{{ $record['training_calendar.training_title'] }}" placeholder="Enter Training Title" /> 				
+				</div>	
+			</div>			
+			<div class="form-group">
 					<label class="control-label col-md-3">Training Course</label>
 					<div class="col-md-7"><?php									                            		
 					$db->select('course_id,course');

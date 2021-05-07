@@ -26,12 +26,26 @@ class Weeklyshift extends MY_PrivateController
 
 			foreach( $shift_weekly['shift'] as $week_no => $shift_id ){
 
+				$this->db->where('calendar_id',$record_id);
+				$this->db->where('week_no',$week_no);
+				$result = $this->db->get('time_shift_weekly_calendar');
+				if ($result && $result->num_rows() > 0)
+					$previous_main_data = $result->row_array();
+				else
+					$previous_main_data = array();
+
 				$time_shift_insert = $this->mod->call_sp_time_shift_insert($record_id,$week_no,$shift_id);
 
 				if(!$time_shift_insert){
 					$error = true;
 				}
 
+				$data = array(
+								'week_no' => $week_no,
+								'shift_id' => $shift_id
+							  );
+
+				$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, 'time_shift_weekly_calendar', $previous_main_data, $data);				
 			}
 
 			if( $error ){
