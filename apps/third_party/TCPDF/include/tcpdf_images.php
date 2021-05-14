@@ -162,8 +162,16 @@ class TCPDF_IMAGES {
 	public static function _parsejpeg($file) {
 		// check if is a local file
 		if (!@TCPDF_STATIC::file_exists($file)) {
-			return false;
+			//return false;
+
+			//added tirso garcia
+			// try to encode spaces on filename
+			$tfile = str_replace(' ', '%20', $file);
+			if (@TCPDF_STATIC::file_exists($tfile)) {
+				$file = $tfile;
+			}
 		}
+
 		$a = getimagesize($file);
 		if (empty($a)) {
 			//Missing or incorrect image file

@@ -208,7 +208,7 @@ class Training_request_manage extends MY_PrivateController
         $calendar_id = $_POST['training_application']['training_calendar_id'];
 
         //get total confirm on training calendar to validate
-        if ($calendar_id != '') {
+        if ($calendar_id != '' && $calendar_id > 0) {
             $query = "SELECT COUNT(*) total_confirm FROM ww_training_calendar_participant c 
                 WHERE c.training_calendar_id  = " . $calendar_id . " AND participant_status_id = 2";
 

@@ -178,15 +178,16 @@ var submitObservation = function () {
     });
 }
 
-function print_appraisal (record_id)
+function print_appraisal (record_id,user_id)
 {
     var data = {
-        record_id:record_id
+        record_id:record_id,
+        user_id:user_id
         }
     $.blockUI({ message: '<div>Loading, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />', 
         onBlock: function(){
             $.ajax({
-                url: base_url + module.get('route') + '/print_appraisal',
+                url: base_url + 'appraisal/individual_rate/print_appraisal',
                 type:"POST",
                 async: false,
                 data: data,

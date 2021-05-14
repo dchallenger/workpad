@@ -178,6 +178,7 @@ function get_idp()
                             $('.modal-container').modal('hide');
                         });
                     }
+                    $('.modal-container').modal('hide');
                 }
             });
         }

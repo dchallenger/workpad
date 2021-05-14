@@ -88,7 +88,7 @@ class appraisal_individual_rate_model extends Record
 
 	function get_appraisee( $appraisal_id, $user_id )
 	{
-		$qry = "select a.*, a.status_id as period_status, b.*, b.status_id as performance_status_id, IFNULL(paah.employment_type,c.employment_type) AS employment_type,IFNULL(paah.job_level,c.v_job_grade) as v_job_grade, c.effectivity_date, IFNULL(paah.company,d.company) AS company, IFNULL(paah.position,d.v_position) as position, i.full_name as immediate, h.position as immediate_position,
+		$qry = "select a.*, a.status_id as period_status, b.*, b.status_id as performance_status_id, IFNULL(paah.employment_type,c.employment_type) AS employment_type,IFNULL(paah.job_level,c.v_job_grade) as v_job_grade, c.effectivity_date, IFNULL(paah.company,d.company) AS company, IFNULL(paah.position,d.v_position) as position, i.full_name as immediate, h.position as immediate_position,uc.print_logo,
 		IFNULL(paah.reports_to,d.v_reports_to) as v_reports_to, IFNULL(paah.department,d.v_department) as v_department, IFNULL(paah.dept_head,j.immediate) as dept_head, IFNULL(paah.division,d.v_division) as v_division, IFNULL(paah.div_head,k.immediate) as div_head, c.position_classification, a.created_on as appraisal_created_on
 		FROM {$this->db->dbprefix}performance_appraisal a
 		LEFT JOIN {$this->db->dbprefix}performance_appraisal_applicable b ON b.appraisal_id = a.appraisal_id
@@ -100,6 +100,7 @@ class appraisal_individual_rate_model extends Record
 		LEFT JOIN {$this->db->dbprefix}users i ON i.user_id = d.reports_to_id
 		LEFT JOIN {$this->db->dbprefix}users_department j ON j.department_id = d.department_id
 		LEFT JOIN {$this->db->dbprefix}users_division k ON k.division_id = d.division_id		
+		INNER JOIN {$this->db->dbprefix}users_company uc ON d.company_id = uc.company_id
 		WHERE a.appraisal_id = {$appraisal_id} AND b.user_id = {$user_id}";
 
 		$appraisee = $this->db->query( $qry );

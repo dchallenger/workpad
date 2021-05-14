@@ -98,7 +98,7 @@
             <ul class="dropdown-menu pull-right">
                 <li><a class="small text-muted" href="{{ $href }}"><i class="fa fa-search"></i> {{ lang('common.view') }}</a></li>
                 @if($performance_appraisal_performance_status_id == 4)
-                	<li><a class="small text-muted" href="javascript:void(0)" onclick="print_appraisal({{$record_id}})"><i class="fa fa-print"></i> {{ lang('common.print_only') }}</a></li>
+                	<li><a class="small text-muted" href="javascript:void(0)" onclick="print_appraisal({{$record_id}},{{$user_id}})"><i class="fa fa-print"></i> {{ lang('common.print_only') }}</a></li>
                 @endif
             </ul>
         </div>    

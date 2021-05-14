@@ -519,6 +519,19 @@ function date_local_timezone($date, $timezone)
 	return $datetime->format('Y-m-d H:i:s');
 }
 
+function general_short_date($date) {
+	$invalid_date = ['1970-01-01 00:00:00',"",'0000-00-00 00:00:00','January 01, 1970','1970-01-01'];
+
+	if (in_array($date, $invalid_date))
+		return '';
+	else {
+		if ($date < '1900-01-01')
+			return '';
+		else
+			return date('M d, Y',strtotime($date));
+	}
+}
+
 function general_date($date) {
 	$invalid_date = ['1970-01-01 00:00:00',"",'0000-00-00 00:00:00','January 01, 1970','1970-01-01'];
 
