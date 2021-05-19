@@ -240,6 +240,7 @@ class Mrf_manage extends MY_PrivateController
 		
 		if( is_array( $filter_by ) )
 		{
+			$filter = [];
 			foreach( $filter_by as $filter_by_key => $filter_value )
 			{
 				if( $filter_value != "" ) 
