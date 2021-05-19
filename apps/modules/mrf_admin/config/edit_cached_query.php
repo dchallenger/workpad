@@ -1,5 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 $config["edit_cached_query"] = 'SELECT `ww_recruitment_request`.`request_id` as record_id, 
+`ww_recruitment_request`.`other_course` as "recruitment_request.other_course",
 `ww_recruitment_request`.`plan_code` as "recruitment_request.plan_code",
 `ww_recruitment_request`.`created_on` as "recruitment_request.created_on",
 `ww_recruitment_request`.`position_id` as "recruitment_request.position_id",

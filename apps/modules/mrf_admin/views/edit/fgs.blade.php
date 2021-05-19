@@ -645,10 +645,10 @@
 	</div>
 </div>
 @endif
-@if( $record['recruitment_request.status_id'] >= 3 )
+@if( $record['recruitment_request.status_id'] >= 2 )
 <div class="portlet">
 	<div class="portlet-title">
-		<div class="caption">HRA Remarks</div>
+		<div class="caption">HR Remarks</div>
 		<div class="tools">
 			<a href="javascript:;" class="collapse"></a>
 		</div>
@@ -666,7 +666,7 @@
                         	<span class="required">*</span>
                         </label>
                         <div class="col-md-5">
-                            <textarea <?php if($record['recruitment_request.status_id'] == 7) echo "disabled" ?> class="form-control" rows="2" name="recruitment_request[hr_remarks]">{{ $record['recruitment_request.hr_remarks'] }}</textarea>
+                            <textarea <?php if($record['recruitment_request.status_id'] != 9) echo "disabled" ?> class="form-control" rows="2" name="recruitment_request[hr_remarks]">{{ $record['recruitment_request.hr_remarks'] }}</textarea>
                         </div>
                     </div>
 					@if( in_array($record['recruitment_request.status_id'], array(7,5)) )

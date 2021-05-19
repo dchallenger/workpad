@@ -1,6 +1,6 @@
 <div class="form-group">
     <label class="control-label col-md-3">{{ $key->key_label }}</label>
-    <div class="col-md-7">
+    <div class="col-md-5">
 		@if(!$record['disabled'])
     	<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 	    	<input type="checkbox" value="1" <?php if( $key->key_value ) echo 'checked="checked"'?>class="dontserializeme toggle"/>

@@ -79,6 +79,13 @@ class division_model extends Record
 	    return $user_details->row();
 	}
 
+	function get_divhead( $division_id )
+	{
+		$this->db->limit(1);
+		$div = $this->db->get_where( $this->table, array( $this->primary_key => $division_id ) )->row();
+		return $div->immediate;
+	}
+
 	public function get_division() {
 		$this->db->where('deleted',0);
 		$result = $this->db->get('users_division');

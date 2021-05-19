@@ -4,6 +4,11 @@ $(document).ready(function(){
 		validate_department();
 	});
 
+	$('#recruitment_manpower_plan-division_id').change(function(){
+		update_divhead( $(this).val() );
+	});
+
+
 	$('#recruitment_manpower_plan-company_id').change(function(){
 		validate_department();
 	});
@@ -102,6 +107,32 @@ function update_depthead( department_id )
 					success: function ( response ) {
 						handle_ajax_message( response.message );
 						$('#recruitment_manpower_plan-departmenthead').val(response.depthead);
+					}
+				});
+			}
+		});
+		$('#recruitment_manpower_plan-departmenthead').unblock();
+	}
+	else{
+		$('#recruitment_manpower_plan-departmenthead').val('');
+	}
+}
+
+function update_divhead( division_id )
+{
+	if($('#recruitment_manpower_plan-division_id').val() != "" )
+	{
+		$('#recruitment_manpower_plan-divisionhead').block({ message: '<div>Updating, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />',
+			onBlock: function(){
+				$.ajax({
+					url: base_url + module.get('route') + '/get_divhead',
+					type:"POST",
+					data: {division_id:division_id},
+					dataType: "json",
+					async: false,
+					success: function ( response ) {
+						handle_ajax_message( response.message );
+						$('#recruitment_manpower_plan-divisionhead').val(response.divhead);
 					}
 				});
 			}

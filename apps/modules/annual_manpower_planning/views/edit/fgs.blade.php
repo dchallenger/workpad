@@ -31,6 +31,32 @@
             </div>	
 		</div>
 
+		<div class="form-group">
+			<label class="control-label col-md-4"><span class="required">* </span>{{ lang('annual_manpower_planning.division') }} </label>
+			<div class="col-md-5"><?php
+				$db->select('division_id,division,company_initial');
+				$db->order_by('division', '0');
+				$db->where('users_division.deleted', '0');
+				$db->join('users_company','users_division.company_id=users_company.company_id');
+				$options = $db->get('users_division');
+				$recruitment_manpower_plan_division_id_options = array('' => '');
+				foreach($options->result() as $option)
+				{
+					$recruitment_manpower_plan_division_id_options[$option->division_id] = $option->division. ' ('.$option->company_initial.')';
+				} ?>							
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
+					{{ form_dropdown('recruitment_manpower_plan[division_id]',$recruitment_manpower_plan_division_id_options, $record['recruitment_manpower_plan.division_id'], 'class="form-control select2me" data-placeholder="Select..." id="recruitment_manpower_plan-division_id" '.$record['disabled'].'') }}
+				</div> 				
+			</div>	
+		</div>	
+
+		<div class="form-group">
+			<label class="control-label col-md-4">{{ lang('annual_manpower_planning.division_head') }}</label>
+			<div class="col-md-5">
+				<input type="text" class="form-control dontserializeme" name="recruitment_manpower_plan[divisionhead]" id="recruitment_manpower_plan-divisionhead" readonly value="{{ $record['recruitment_manpower_plan.divisionhead'] }}" placeholder="Enter Division Head" />
+			</div>	
+		</div>
 
 		<div class="form-group">
 			<label class="control-label col-md-4"><span class="required">* </span>{{ lang('annual_manpower_planning.dept') }} </label>

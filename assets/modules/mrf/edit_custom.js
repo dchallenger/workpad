@@ -60,6 +60,17 @@ $(document).ready(function(){
 
 	$('#recruitment_request-budgeted').trigger('change');
 
+	$('.course').live('change',function() {
+		if ($(this).val() == 99999)
+			$('.others_course').show()
+		else {
+			$('.others_course').val('');
+			$('.others_course').hide();
+		}
+	});
+
+	$('.course').trigger('change');
+
 	if( $('#recruitment_request-department_id').val() ){
 		get_dept_immediate( $('#recruitment_request-department_id').val() );
 	}

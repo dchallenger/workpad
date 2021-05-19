@@ -6,11 +6,10 @@ T3.department as "recruitment_manpower_plan_department_id",
 ww_recruitment_manpower_plan.manpower_plan_status_id as "recruitment_manpower_plan_status_id",
 T4.status as "recruitment_manpower_plan_status", 
 ww_recruitment_manpower_plan.user_id as "recruitment_manpower_plan_user_id", 
-ww_recruitment_manpower_plan.created_by as "recruitment_manpower_plan_created_by",
 T5.full_name as "created_by",
 ww_recruitment_manpower_plan.attachment as "recruitment_manpower_plan_attachment", 
 `ww_recruitment_manpower_plan`.`created_on` as "recruitment_manpower_plan_created_on", 
-`ww_recruitment_manpower_plan`.`created_by` as "recruitment_manpower_plan_created_by", 
+`ww_recruitment_manpower_plan`.`display_name` as "recruitment_manpower_plan_created_by", 
 `ww_recruitment_manpower_plan`.`modified_on` as "recruitment_manpower_plan_modified_on", 
 `ww_recruitment_manpower_plan`.`modified_by` as "recruitment_manpower_plan_modified_by"
 FROM (`ww_recruitment_manpower_plan`)

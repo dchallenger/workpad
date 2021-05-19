@@ -1,10 +1,6 @@
 $(document).ready(function(){
 $(":input").inputmask();
-$('#recruitment_manpower_plan-company_id').select2({
-    placeholder: "Select an option",
-    allowClear: true
-});
-$('#recruitment_manpower_plan-department_id').select2({
+$('.select2me').select2({
     placeholder: "Select an option",
     allowClear: true
 });

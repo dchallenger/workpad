@@ -688,3 +688,19 @@ $config['fields'][2]['recruitment_request.budget_to'] = array(
 	'active' => '1',
 	'encrypt' => 0
 );
+
+$config['fields'][1]['recruitment_request.other_course'] = array(
+    'f_id' => 4,
+    'fg_id' => 1,
+    'label' => 'Other Course',
+    'description' => '',
+    'table' => 'recruitment_request',
+    'column' => 'other_course',
+    'uitype_id' => 1,
+    'display_id' => 3,
+    'quick_edit' => 1,
+    'sequence' => 1,
+    'datatype' => '',
+    'active' => '1',
+    'encrypt' => 0
+);

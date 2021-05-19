@@ -164,6 +164,18 @@ class Annual_manpower_planning extends MY_PrivateController
 		$this->_ajax_return();
 	}
 
+	function get_divhead()
+	{
+		$this->_ajax_only();
+		$this->load->model('division_model');
+		$this->response->divhead = $this->division_model->get_divhead( $this->input->post('division_id') );
+		$this->response->message[] = array(
+			'message' => '',
+			'type' => 'success'
+		);
+		$this->_ajax_return();
+	}
+
 	function validate_department()
 	{
 		$this->_ajax_only();
@@ -579,7 +591,7 @@ class Annual_manpower_planning extends MY_PrivateController
 				$immediate = $dept_info->immediate;
 			}
 
-			$data['record']['recruitment_manpower_plan.departmenthead'] = $immediate;
+			//$data['record']['recruitment_manpower_plan.departmenthead'] = $immediate;
 
 			$data['record']['disabled'] = "";
 			$data['record']['readonly'] = "";

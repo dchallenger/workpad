@@ -41,6 +41,30 @@ $config['fields'][1]['recruitment_manpower_plan.company_id'] = array(
 		'textual_value_column' => ''
 	)
 );
+$config['fields'][1]['recruitment_manpower_plan.division_id'] = array(
+	'f_id' => 3,
+	'fg_id' => 1,
+	'label' => 'Division ',
+	'description' => '',
+	'table' => 'recruitment_manpower_plan',
+	'column' => 'division_id',
+	'uitype_id' => 4,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 3,
+	'datatype' => 'required',
+	'active' => '1',
+	'encrypt' => 0,
+	'searchable' => array(
+		'type_id' => '1',
+		'table' => 'users_division',
+		'multiple' => 0,
+		'group_by' => '',
+		'label' => 'division',
+		'value' => 'division_id',
+		'textual_value_column' => ''
+	)
+);
 $config['fields'][1]['recruitment_manpower_plan.department_id'] = array(
 	'f_id' => 3,
 	'fg_id' => 1,

@@ -3,7 +3,6 @@ $config["detail_cached_query"] = 'SELECT `ww_recruitment_manpower_plan`.`plan_id
 ww_recruitment_manpower_plan.year as "recruitment_manpower_plan_year", 
 ww_users_company.company as "recruitment_manpower_plan_company_id", 
 ww_users_department.department as "recruitment_manpower_plan_department_id", 
-ww_recruitment_manpower_plan.created_by as "recruitment_manpower_plan_created_by", 
 ww_recruitment_manpower_plan.attachment as "recruitment_manpower_plan_attachment", 
 `ww_recruitment_manpower_plan`.`created_on` as "recruitment_manpower_plan_created_on", 
 `ww_recruitment_manpower_plan`.`created_by` as "recruitment_manpower_plan_created_by", 
@@ -12,7 +11,7 @@ ww_recruitment_manpower_plan.attachment as "recruitment_manpower_plan_attachment
 ww_recruitment_manpower_plan.year as "recruitment_manpower_plan_year", 
 ww_users_company.company as "recruitment_manpower_plan_company_id", 
 ww_users_department.department as "recruitment_manpower_plan_department_id", 
-ww_recruitment_manpower_plan.created_by as "recruitment_manpower_plan_created_by", 
+ww_recruitment_manpower_plan.display_name as "recruitment_manpower_plan_created_by", 
 ww_recruitment_manpower_plan.attachment as "recruitment_manpower_plan_attachment"
 FROM (`ww_recruitment_manpower_plan`)
 LEFT JOIN `ww_users_company` ON `ww_users_company`.`company_id` = `ww_recruitment_manpower_plan`.`company_id`

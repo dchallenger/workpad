@@ -1,6 +1,11 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 $config['field_validations'] = array();
+$config['field_validations']['recruitment_manpower_plan.division_id'][] = array(
+	'field'   => 'recruitment_manpower_plan[division_id]',
+	'label'   => 'Division',
+	'rules'   => 'required'
+);
 $config['field_validations']['recruitment_manpower_plan.department_id'][] = array(
 	'field'   => 'recruitment_manpower_plan[department_id]',
 	'label'   => 'Department',

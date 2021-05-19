@@ -11,6 +11,7 @@ $config['fieldgroups'][1] = array(
 	'fields' => array(
 		'recruitment_manpower_plan.year',
 		'recruitment_manpower_plan.company_id',
+		'recruitment_manpower_plan.division_id',		
 		'recruitment_manpower_plan.department_id',
 		'recruitment_manpower_plan.departmenthead',
 		'recruitment_manpower_plan.created_by',

@@ -9,6 +9,7 @@ $config['fieldgroups'][1] = array(
 	'sequence' => 1,
 	'active' => 1,
 	'fields' => array(
+		'recruitment_request.other_course',
 		'recruitment_request.company_id',
         'recruitment_request.document_no',
         'recruitment_request.plan_code',

@@ -1,8 +1,8 @@
 <?php
 $lang['mrf_manage'] = array(
 	'partners' => 'Partner',
-	'mrf_form' => 'Personnel Requisition Form - Manage',
-	'mrf_list' => 'List of Personnel Requisition - Manage',
+	'mrf_form' => 'Manpower Requisition Form - Manage',
+	'mrf_list' => 'List of Manpower Requisition - Manage',
 	'dept' => 'Department',
 	'date_needed' => 'Date Needed',
 	'qty' => 'Quantity',

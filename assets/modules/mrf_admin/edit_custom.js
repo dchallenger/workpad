@@ -43,6 +43,17 @@ $(document).ready(function(){
 		show_hide_contract_duration( $(this).val() );
 	});
 
+	$('.course').live('change',function() {
+		if ($(this).val() == 99999)
+			$('.others_course').show()
+		else {
+			$('.others_course').val('');
+			$('.others_course').hide();
+		}
+	});
+
+	$('.course').trigger('change');
+	
 /*	show_hide_budget_from_to( $('#recruitment_request-budgeted').val() );
 	$('#recruitment_request-budgeted').change(function(){
 		show_hide_budget_from_to( $(this).val() );

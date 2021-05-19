@@ -321,7 +321,7 @@ class Training_request extends MY_PrivateController
             $this->response->user_id = $this->user->user_id;
 
             $this->response->message[] = array(
-                'message' => 'IDP does not exist',
+                'message' => 'No record for IDP found!',
                 'type' => 'warning'
             );                        
         }

@@ -95,7 +95,7 @@
 								<span class="input-group-addon">
 	                            <i class="fa fa-list-ul"></i>
 	                            </span>
-	                            {{ form_dropdown('training_course[position_id][]',$training_course_position_id_options, explode(',', $record['training_course.position_id']), 'class="select2me form-control " data-placeholder="Select Positions" id="training_course-position_id" multiple') }}
+	                            {{ form_dropdown('training_course[position_id][]',$training_course_position_id_options, explode(',', $record['training_course.position_id']), 'class="form-control " data-placeholder="Select Positions" id="training_course-position_id" multiple') }}
 	                        </div> 			
 	                    </div>	
 			</div> 
