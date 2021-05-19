@@ -351,7 +351,7 @@ class Mrf extends MY_PrivateController
 			$data['user_id'] = $user_id;
 			$data['approver'] = $check->result_array();
 			
-			$partner_record = "SELECT up.*, ud.department as dept, uc.company as comp, ud.immediate 
+			$partner_record = "SELECT up.*, ud.department as dept, uc.company as comp, ud.immediate
 							FROM {$this->db->dbprefix}users_profile up
 							INNER JOIN {$this->db->dbprefix}users_company uc ON up.company_id = uc.company_id
 							INNER JOIN {$this->db->dbprefix}users_department ud ON up.department_id = ud.department_id
@@ -367,9 +367,12 @@ class Mrf extends MY_PrivateController
 				$data['record']['recruitment_request.department_id'] = '';//$arPartner_record['department_id'];	
 				$data['record']['recruitment_request.immediate'] = '';//$arPartner_record['immediate'];
 				$data['record']['recruitment_request.company_id'] = '';//$arPartner_record['company_id'];
+				$data['record']['recruitment_request.div_head'] = '';
 			}else{
 				$department = $this->db->get_where('users_department', array('department_id' => $data['record']['recruitment_request.department_id']));
+				$division = $this->db->get_where('users_division', array('division_id' => $data['record']['recruitment_request.division_id']));
 				$data['record']['recruitment_request.immediate'] = $department->row()->immediate;
+				$data['record']['recruitment_request.div_head'] = $division->row()->immediate;
 			}
 			
 			
@@ -809,6 +812,32 @@ class Mrf extends MY_PrivateController
 	    	}
 
 			$this->response->immediate = $dep_head_fullname;
+			$this->response->retrieved_immediate = true;
+		}
+
+		$this->response->message[] = array(
+			'message' => '',
+			'type' => 'success'
+			);
+
+        $this->_ajax_return();
+	}
+
+	function get_div_immediate(){
+		$this->_ajax_only();
+
+		$div_id = $this->input->post('div_id');
+
+		$this->db->select('*')
+	    ->from('users_division')
+    	->where("division_id = {$div_id}");
+
+    	$division_info = $this->db->get('');
+
+		if( $division_info && $division_info->num_rows() > 0 ){
+    		$div_info = $division_info->row_array();
+
+			$this->response->immediate = $div_info['immediate'];
 			$this->response->retrieved_immediate = true;
 		}
 

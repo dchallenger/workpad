@@ -69,6 +69,12 @@
 			</div>	
 		</div>
 		<div class="form-group">
+			<label class="control-label col-md-3">{{ lang('mrf.div_head') }}</label>
+			<div class="col-md-5">
+				<input type="text" class="form-control dontserializeme" value="{{ $record['recruitment_request.div_head'] }}" readonly id="recruitment_request-div_head" /> 
+			</div>	
+		</div>		
+		<div class="form-group">
 			<label class="control-label col-md-3">
 				<span class="required">* </span>{{ lang('mrf.dept') }}
 			</label>

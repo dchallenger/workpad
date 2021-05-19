@@ -69,7 +69,13 @@
 					{{ form_dropdown('recruitment_request[division_id]',$recruitment_request_division_id_options, $record['recruitment_request.division_id'], 'class="form-control select2me" data-placeholder="Select..." id="recruitment_request-division_id" '.$record['disabled']) }}
 				</div>
 			</div>	
-		</div>		
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3">{{ lang('mrf.div_head') }}</label>
+			<div class="col-md-5">
+				<input type="text" class="form-control dontserializeme" value="{{ $record['recruitment_request.div_head'] }}" readonly id="recruitment_request-div_head" /> 
+			</div>	
+		</div>			
 		<div class="form-group">
 			<label class="control-label col-md-3">
 				<span class="required">* </span>{{ lang('mrf.dept') }}

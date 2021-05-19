@@ -80,6 +80,10 @@ $(document).ready(function(){
 		get_dept_immediate( $(this).val() );
 	});
 
+	$('#recruitment_request-division_id').change(function(){
+		get_div_immediate( $(this).val() );
+	});
+
 	show_hide_contract_duration( $('#recruitment_request-employment_status_id').val() );
 	$('#recruitment_request-employment_status_id').change(function(){
 		show_hide_contract_duration( $(this).val() );
@@ -266,6 +270,30 @@ function get_dept_immediate(dept_id){
 				$('#recruitment_request-immediate').val(response.immediate);
 			}else{
 				$('#recruitment_request-immediate').val('');
+			}
+		}
+	});	
+}
+
+function get_div_immediate(div_id){
+	var data = {
+		div_id: div_id
+	};
+	$.ajax({
+		url: base_url + module.get('route') + '/get_div_immediate',
+		type:"POST",
+		async: false,
+		data: data,
+		dataType: "json",
+		beforeSend: function(){
+		},
+		success: function ( response ) {
+
+			if( typeof(response.retrieved_immediate) != 'undefined' )
+			{	
+				$('#recruitment_request-div_head').val(response.immediate);
+			}else{
+				$('#recruitment_request-div_head').val('');
 			}
 		}
 	});	

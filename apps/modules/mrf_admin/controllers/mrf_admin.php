@@ -358,7 +358,9 @@ class Mrf_admin extends MY_PrivateController
 			//$data['record']['recruitment_request.company_id'] = $partner_record['company_id'];
 			//$data['record']['recruitment_request.department_id'] = $partner_record['department_id'];
 			$department = $this->db->get_where('users_department', array('department_id' => $data['record']['recruitment_request.department_id']));
-			$data['record']['recruitment_request.immediate'] = $department->row()->immediate;			
+			$division = $this->db->get_where('users_division', array('division_id' => $data['record']['recruitment_request.division_id']));
+			$data['record']['recruitment_request.immediate'] = $department->row()->immediate;
+			$data['record']['recruitment_request.div_head'] = $division->row()->immediate;
 			$data['record']['company'] = $partner_record['comp'];
 
 			$data['record']['disabled'] = "";

@@ -33,6 +33,7 @@ $lang['mrf'] = array(
 	'yes' => 'Yes',
 	'no' => 'No',
 	'select_file' => 'Select File',
+	'div_head' => 'Division Head',
 	'dept_head' => 'Department Head',
 	'replace_of' => 'Replacement of',
 	'purpose' => 'Purpose',
