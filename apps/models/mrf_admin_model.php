@@ -443,4 +443,297 @@ class mrf_admin_model extends Record
     	
     	return false;
     }
+
+    function change_status( $record_id=0, $status_id=0, $comment="", $hr_admin = 0)
+    {
+        $response = new stdClass();
+        $req = $this->db->get_where('recruitment_request', array('request_id' => $record_id))->row();
+        $req_by = $this->db->get_where('users', array('user_id' => $req->user_id))->row();
+
+        //get approvers
+        $where = array(
+            'request_id' => $record_id
+        );
+        $this->db->order_by('sequence');
+        $approvers = $this->db->get_where('recruitment_request_approver', $where)->result();
+        $fstapprover = $approvers[0];
+        $no_approvers = sizeof($approvers);
+        $condition = $approvers[0]->condition;
+
+        $this->load->library('parser');
+        $this->parser->set_delimiters('{{', '}}');
+                
+        $response->redirect = false;
+        $this->load->model('system_feed');
+        $modified_on = date('Y-m-d H:i:s');
+        switch( $status_id )
+        {
+            case 3: //approved
+                //bring it up
+                foreach(  $approvers as $index => $approver )
+                {
+                    $this->db->update('recruitment_request_approver', array('status_id' => 3,'comment'=>$comment,'modified_on'=>$modified_on,'status'=>"Approved"), array('id' => $approver->id));
+
+                    $feed = array(
+                        'status' => 'info',
+                        'message_type' => 'Recruitment',
+                        'user_id' => $req->user_id,
+                        'feed_content' => 'Filed recruitment request has been approved by HR.',
+                        'uri' => $this->mod->route . '/view/'.$record_id,
+                        'recipient_id' => $approver->approver_id
+                    );
+                    $recipients = array($approver->approver_id);
+                    $this->system_feed->add( $feed, $recipients );
+
+                    $response->notify[] = $approver->approver_id;
+
+                     // start email to approver
+                    $approvers_user_info = $this->db->get_where('users', array('user_id' => $approver->approver_id));
+                    if ($approvers_user_info && $approvers_user_info->num_rows() > 0){
+                        $approvers_details = $approvers_user_info->row();
+                        $approver_fullname = $approvers_details->full_name;
+                    }          
+                                      
+                    $sendmrfdata['requestor'] = $req_by->full_name;
+                    $sendmrfdata['approver'] = $approver_fullname;
+                    $sendmrfdata['status'] = 'Approved';
+
+                    $mrf_send_template = $this->db->get_where( 'system_template', array( 'code' => 'MRF-HR-SEND-APPROVED') )->row_array();
+                    $msg = $this->parser->parse_string($mrf_send_template['body'], $sendmrfdata, TRUE); 
+                    $subject = $this->parser->parse_string($mrf_send_template['subject'], $sendmrfdata, TRUE); 
+
+                    $this->db->query("INSERT INTO {$this->db->dbprefix}system_email_queue (`to`, `subject`, body)
+                             VALUES('{$approvers_details->email}', '{$subject}', '".$this->db->escape_str($msg)."') ");
+                    //create system logs
+                    $insert_array = array(
+                        'to' => $approvers_details->email, 
+                        'subject' => $subject, 
+                        'body' => $msg
+                        );
+                    $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'system_email_queue', array(), $insert_array);
+                }
+
+                $response->redirect = true;
+                break;
+            case 6: //cancel
+                $feed = array(
+                    'status' => 'info',
+                    'message_type' => 'Recruitment',
+                    'user_id' => $req->user_id,
+                    'feed_content' => 'The Personnel Requisition Form you requested has been cancelled by HR.',
+                    'uri' => get_mod_route( 'mrf', '', false) . '/edit/'.$record_id,
+                    'recipient_id' => $req->user_id
+                );
+
+                $recipients = array($req->user_id);
+                $this->system_feed->add( $feed, $recipients );
+                $response->notify[] = $req->user_id;
+                $response->redirect = true;
+
+                 // start email to requestor
+                $sendmrfdata['requestor'] = $req_by->full_name;
+                $sendmrfdata['approver'] = 'HR';
+                $sendmrfdata['status'] = 'Disapproved';
+
+                $mrf_send_template = $this->db->get_where( 'system_template', array( 'code' => 'MRF-SEND-CANCEL-APPROVED') )->row_array();
+                $msg = $this->parser->parse_string($mrf_send_template['body'], $sendmrfdata, TRUE); 
+                $subject = $this->parser->parse_string($mrf_send_template['subject'], $sendmrfdata, TRUE); 
+
+                $this->db->query("INSERT INTO {$this->db->dbprefix}system_email_queue (`to`, `subject`, body)
+                         VALUES('{$req_by->email}', '{$subject}', '".$this->db->escape_str($msg)."') ");
+                //create system logs
+                $insert_array = array(
+                    'to' => $req_by->email, 
+                    'subject' => $subject, 
+                    'body' => $msg
+                    );
+                $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'system_email_queue', array(), $insert_array);            
+
+                foreach(  $approvers as $index => $approver ) {
+                    $where = array(
+                        'request_id' => $record_id,
+                        'user_id' => $req->user_id,
+                        'approver_id' => $approver->approver_id
+                    );
+                    $this->db->update('recruitment_request_approver', array('status_id' => 6,'modified_on'=>$modified_on,'status'=>"Cancel"), $where);
+                    if( $this->db->affected_rows() == 1 )
+                    {
+                         // start email to approver
+                        $approvers_user_info = $this->db->get_where('users', array('user_id' => $approver->approver_id));
+                        if ($approvers_user_info && $approvers_user_info->num_rows() > 0){
+                            $approvers_details = $approvers_user_info->row();
+                            $approver_fullname = $approvers_details->full_name;
+                        }          
+                                          
+                        $sendmrfdata['requestor'] = $req_by->full_name;
+                        $sendmrfdata['approver'] = 'HR';
+
+                        $mrf_send_template = $this->db->get_where( 'system_template', array( 'code' => 'MRF-SEND-CANCEL') )->row_array();
+                        $msg = $this->parser->parse_string($mrf_send_template['body'], $sendmrfdata, TRUE); 
+                        $subject = $this->parser->parse_string($mrf_send_template['subject'], $sendmrfdata, TRUE); 
+
+                        $this->db->query("INSERT INTO {$this->db->dbprefix}system_email_queue (`to`, `subject`, body)
+                                 VALUES('{$approvers_details->email}', '{$subject}', '".$this->db->escape_str($msg)."') ");
+                        //create system logs
+                        $insert_array = array(
+                            'to' => $approvers_details->email, 
+                            'subject' => $subject, 
+                            'body' => $msg
+                            );
+                        $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'system_email_queue', array(), $insert_array);
+                    }
+                }
+                break;
+           case 7: // validated
+                $where = array(
+                    'request_id' => $record_id,
+                    'user_id' => $req->user_id,
+                    'approver_id' => $this->user->user_id
+                );
+                $this->db->update('recruitment_request_approver', array('status_id' => 7,'comment'=>$comment,'modified_on'=>$modified_on,'status'=>"Validated"), $where);
+                if( $this->db->affected_rows() == 1 )
+                {
+                    $feed = array(
+                        'status' => 'info',
+                        'message_type' => 'Recruitment',
+                        'user_id' => $req->user_id,
+                        'feed_content' => 'The Personnel Requisition Form you requested has been validated.',
+                        'uri' => get_mod_route( 'mrf', '', false) . '/edit/'.$record_id,
+                        'recipient_id' => $req->user_id
+                    );
+
+                    $recipients = array($req->user_id);
+                    $this->system_feed->add( $feed, $recipients );
+                    $response->notify[] = $req->user_id;
+                    $response->redirect = true;
+
+                    // start email to requestor
+                    $approvers_user_info = $this->db->get_where('users', array('user_id' => $this->user->user_id));
+                    if ($approvers_user_info && $approvers_user_info->num_rows() > 0){
+                        $approvers_details = $approvers_user_info->row();
+                        $approver_fullname = $approvers_details->full_name;
+                    }          
+                                      
+                    $sendmrfdata['requestor'] = $req_by->full_name;
+                    $sendmrfdata['approver'] = $approver_fullname;
+
+                    $mrf_send_template = $this->db->get_where( 'system_template', array( 'code' => 'MRF-SEND-APPROVER') )->row_array();
+                    $msg = $this->parser->parse_string($mrf_send_template['body'], $sendmrfdata, TRUE); 
+                    $subject = $this->parser->parse_string($mrf_send_template['subject'], $sendmrfdata, TRUE); 
+
+                    $this->db->query("INSERT INTO {$this->db->dbprefix}system_email_queue (`to`, `subject`, body)
+                             VALUES('{$approvers_details->email}', '{$subject}', '".$this->db->escape_str($msg)."') ");
+                    //create system logs
+                    $insert_array = array(
+                        'to' => $approvers_details->email, 
+                        'subject' => $subject, 
+                        'body' => $msg
+                        );
+                    $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'system_email_queue', array(), $insert_array);                 
+                }                
+            case 8: // disapproved
+                $feed = array(
+                    'status' => 'info',
+                    'message_type' => 'Recruitment',
+                    'user_id' => $req->user_id,
+                    'feed_content' => 'The Personnel Requisition Form you requested has been disapproved by HR.',
+                    'uri' => get_mod_route( 'mrf', '', false) . '/edit/'.$record_id,
+                    'recipient_id' => $req->user_id
+                );
+
+                $recipients = array($req->user_id);
+                $this->system_feed->add( $feed, $recipients );
+                $response->notify[] = $req->user_id;
+                $response->redirect = true;
+
+                 // start email to requestor
+                $sendmrfdata['requestor'] = $req_by->full_name;
+                $sendmrfdata['approver'] = 'HR';
+                $sendmrfdata['status'] = 'Disapproved';
+
+                $mrf_send_template = $this->db->get_where( 'system_template', array( 'code' => 'MRF-HR-SEND-APPROVED') )->row_array();
+                $msg = $this->parser->parse_string($mrf_send_template['body'], $sendmrfdata, TRUE); 
+                $subject = $this->parser->parse_string($mrf_send_template['subject'], $sendmrfdata, TRUE); 
+
+                $this->db->query("INSERT INTO {$this->db->dbprefix}system_email_queue (`to`, `subject`, body)
+                         VALUES('{$req_by->email}', '{$subject}', '".$this->db->escape_str($msg)."') ");
+
+                foreach(  $approvers as $index => $approver ) {
+                    $where = array(
+                        'request_id' => $record_id,
+                        'user_id' => $req->user_id,
+                        'approver_id' => $approver->approver_id
+                    );
+                    $this->db->update('recruitment_request_approver', array('status_id' => 8,'comment'=>$comment,'modified_on'=>$modified_on,'status'=>"Disapproved"), $where);
+                    if( $this->db->affected_rows() == 1 )
+                    {
+                        $this->db->update('recruitment_request', array('status_id' => $status_id, 'hr_approved' => $this->user->user_id, 'date_disapproved' => date('Y-m-d H:i:s')), array('request_id' => $record_id));                   
+                        // start email to requestor
+                        $approvers_user_info = $this->db->get_where('users', array('user_id' => $approver->approver_id));
+                        if ($approvers_user_info && $approvers_user_info->num_rows() > 0){
+                            $approvers_details = $approvers_user_info->row();
+                            $approver_fullname = $approvers_details->full_name;
+                        }          
+                                          
+                        $sendmrfdata['requestor'] = $req_by->full_name;
+                        $sendmrfdata['approver'] = $approver_fullname;
+                        $sendmrfdata['status'] = 'Disapproved';
+
+                        $mrf_send_template = $this->db->get_where( 'system_template', array( 'code' => 'MRF-HR-SEND-APPROVED') )->row_array();
+                        $msg = $this->parser->parse_string($mrf_send_template['body'], $sendmrfdata, TRUE); 
+                        $subject = $this->parser->parse_string($mrf_send_template['subject'], $sendmrfdata, TRUE); 
+
+                        $this->db->query("INSERT INTO {$this->db->dbprefix}system_email_queue (`to`, `subject`, body)
+                                 VALUES('{$approvers_details->email}', '{$subject}', '".$this->db->escape_str($msg)."') ");
+                        //create system logs
+                        $insert_array = array(
+                            'to' => $approvers_details->email, 
+                            'subject' => $subject, 
+                            'body' => $msg
+                            );
+                        $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'system_email_queue', array(), $insert_array);                 
+                    }
+                }
+        }
+    
+        if( $status_id == 3 )
+        {
+            $feed = array(
+                'status' => 'info',
+                'message_type' => 'Recruitment',
+                'user_id' => $req->user_id,
+                'feed_content' => 'The Personnel Requisition Form you requested has been approved by HR.',
+                'uri' => get_mod_route( 'mrf', '', false) . '/edit/'.$record_id,
+                'recipient_id' => $req->user_id
+            );
+
+            $recipients = array($req->user_id);
+            $this->system_feed->add( $feed, $recipients );
+            $response->notify[] = $req->user_id;
+
+             // start email to requestor
+            $sendmrfdata['requestor'] = $req_by->full_name;
+            $sendmrfdata['approver'] = 'HR';
+            $sendmrfdata['status'] = 'Approved';
+
+            $mrf_send_template = $this->db->get_where( 'system_template', array( 'code' => 'MRF-SEND-CANCEL-APPROVED') )->row_array();
+            $msg = $this->parser->parse_string($mrf_send_template['body'], $sendmrfdata, TRUE); 
+            $subject = $this->parser->parse_string($mrf_send_template['subject'], $sendmrfdata, TRUE); 
+
+            $this->db->query("INSERT INTO {$this->db->dbprefix}system_email_queue (`to`, `subject`, body)
+                     VALUES('{$req_by->email}', '{$subject}', '".$this->db->escape_str($msg)."') ");
+
+            $this->db->update('recruitment_request', array('status_id' => $status_id, 'hr_approved' => $this->user->user_id, 'date_approved' => date('Y-m-d H:i:s')), array('request_id' => $record_id));
+
+            if( $this->db->_error_message() != "" )
+            {
+                $response->message[] = array(
+                    'message' => $this->db->_error_message(),
+                    'type' => 'error'
+                );
+            }
+        }
+
+        return $response;
+    }    
 }

@@ -72,7 +72,7 @@ $config['fields'][2]['time_form_balance.previous'] = array(
 	'display_id' => 3,
 	'quick_edit' => 1,
 	'sequence' => 4,
-	'datatype' => 'required',
+	'datatype' => '',
 	'active' => '1',
 	'encrypt' => 0
 );

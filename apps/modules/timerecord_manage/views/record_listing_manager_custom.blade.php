@@ -93,7 +93,7 @@
 	    </div>
 
 
-	    <div class="col-md-3 by_date_filter hidden">
+<!-- 	    <div class="col-md-3 by_date_filter hidden">
 	        <div class="portlet" style="margin-top:13px;">
 
 	            <div class="portlet-title" style="margin-bottom:3px;">
@@ -107,7 +107,7 @@
 	            </div>
 
 	        </div>
-	    </div>
+	    </div> -->
 
 
 	    <div class="col-md-3 visible-lg visible-md by_employee_filter">
@@ -163,10 +163,10 @@
 	                </div>
 	            </div>
 
-	            <div class="portlet-title margin-top-20" style="margin-bottom:3px;">
+	            <div class="portlet-title margin-top-20 hidden" style="margin-bottom:3px;">
 	                <div class="caption">Link</div>
 	            </div>
-	            <div class="portlet-body">
+	            <div class="portlet-body hidden">
 	                
 	                <div class="margin-top-10">
 	                    <a href="{{ get_mod_route('my_calendar') }}" class="label label-success">My Calendar</a>

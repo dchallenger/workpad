@@ -5,7 +5,7 @@
 	</div>
 		<div class="portlet-body form">		
 			<div class="form-group">
-				<label class="control-label col-md-3">Company</label>
+				<label class="control-label col-md-3"><span class="required">* </span>Company</label>
 				<div class="col-md-7">
 					<?php $company = $mod->_get_shift_options( $record_id, true , true, 2); ?>
                     <div class="input-group">

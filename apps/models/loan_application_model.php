@@ -28,8 +28,8 @@ class loan_application_model extends Record
 		$this->primary_key = 'loan_application_id';
 		$this->table = 'partners_loan_application';
 		$this->icon = '';
-		$this->short_name = 'Automated Process Workflow';
-		$this->long_name  = 'Automated Process Workflow';
+		$this->short_name = 'HR Online Services';
+		$this->long_name  = 'HR Online Services';
 		$this->description = '';
 		$this->path = APPPATH . 'modules/loan_application/';
 

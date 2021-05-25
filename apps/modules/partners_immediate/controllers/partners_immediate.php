@@ -230,7 +230,7 @@ class Partners_immediate extends MY_PrivateController
         $data['credit_setup'] = ($profile_header_details['credit_setup'] == "" ? "n/a" : $profile_header_details['credit_setup']);
         $data['start_date'] = valid_date($profile_header_details['start_date']);
         $data['end_date'] = valid_date($profile_header_details['end_date']);           
-		$data['division'] = $profile_header_details['division'] == "" ? "n/a" : $profile_header_details['division'];
+		$data['division'] = $profile_header_details['division'] == "" ? "n/a" : $profile_header_details['division']. ' ('.get_division_code($profile_header_details['division_code'],'-').')';
 		$data['department'] = $profile_header_details['department'] == "" ? "n/a" : $profile_header_details['department'];
 		$data['group'] = $profile_header_details['group'] == "" ? "n/a" : $profile_header_details['group'];
         $data['cost_center_code'] = ($profile_header_details['cost_center_code'] == "" ? "n/a" : $profile_header_details['cost_center_code']);

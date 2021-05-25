@@ -31,6 +31,7 @@
 				<div class="form-group">
                     <div id="department_div">
                         <select id="department_id" name="department_id" class="form-control select2me" data-placeholder="Select..."> 
+                            <option value="">Select department...</option>
                         </select>
                     </div>
                     <div id="dept_loader" style="display: none;">
@@ -53,7 +54,7 @@
                             $users = $db->get('users');
                         ?>                        
                         <select id="user_id" name="user_id" class="form-control select2me" data-placeholder="Select...">
-                            <option value="">Select user...</option>
+                            <option value="">Select employee...</option>
                             <?php
                                 foreach( $users->result() as $user )
                                 {

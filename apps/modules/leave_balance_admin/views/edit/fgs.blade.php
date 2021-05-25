@@ -74,7 +74,7 @@
 	                   	 		</div> 				
 	                    	</div>	
 			</div>			<div class="form-group">
-				<label class="control-label col-md-3"><span class="required">* </span>Previous Credit</label>
+				<label class="control-label col-md-3">Previous Credit</label>
 				<div class="col-md-7">							<input type="text" class="form-control" name="time_form_balance[previous]" id="time_form_balance-previous" value="{{ $record['time_form_balance.previous'] }}" placeholder="Enter Previous Credit" /> 				</div>	
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>Current Credit</label>

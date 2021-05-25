@@ -51,11 +51,7 @@
         	}
         ?>
 		<span class="badge {{ $badge }}">
-            @if(strtolower($recruitment_request_status) == 'validated')
-            Ongoing
-            @else
             {{ $recruitment_request_status }}
-            @endif
         </span> 
     </td>
     <td>

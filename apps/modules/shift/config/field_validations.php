@@ -1,6 +1,11 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 $config['field_validations'] = array();
+$config['field_validations']['time_shift.company_id'][] = array(
+	'field'   => 'time_shift[company_id]',
+	'label'   => 'Company',
+	'rules'   => 'required'
+);
 $config['field_validations']['time_shift.shift'][] = array(
 	'field'   => 'time_shift[shift]',
 	'label'   => 'Shift',

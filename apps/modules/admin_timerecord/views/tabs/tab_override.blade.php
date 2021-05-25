@@ -69,7 +69,7 @@
                     <th width="16%" class="hidden-xs">Shift</th>
                     <th width="17%">{{ lang('admin_timerecord.in') }}</th>
                     <th width="17%">{{ lang('admin_timerecord.out') }}</th>
-                    <th width="16%">{{ lang('admin_timerecord.leave_forms') }}</th>                    
+                    <!-- <th width="16%">{{ lang('admin_timerecord.leave_forms') }}</th>                     -->
                     <th width="14%" class="hidden-xs">{{ lang('admin_timerecord.actions') }}</th>
                 </tr>
             </thead>

@@ -18,13 +18,13 @@
 		</div>			
 		<div class="form-group">
 			<label class="control-label col-md-3">{{ lang('department.division') }}</label>
-			<div class="col-md-7"><?php	                            	                            		$db->select('division_id,division');
+			<div class="col-md-7"><?php	                            	                            		$db->select('division_id,division,division_code');
                             			                            		$db->where('deleted', '0');
                             		$options = $db->get('users_division');
-									$users_department_division_id_options = array('' => lang('users.select'));                            		
+									$users_department_division_id_options = array('' => '');                            		
 									foreach($options->result() as $option)
                             		{
-                            				                            				$users_department_division_id_options[$option->division_id] = $option->division;
+                            				                            				$users_department_division_id_options[$option->division_id] = $option->division . ' ('.get_division_code($option->division_code,'-').')';
                             				                            		} ?>							
        			<div class="input-group">
 					<span class="input-group-addon">
@@ -40,8 +40,10 @@
 										$db->select('user_id,display_name');
 	                            		$db->where('deleted', '0');
 	                            		$db->where('active', '1');
+	                            		$db->where('user_id >', '1');
+	                            		$db->order_by('display_name');
 	                            		$options = $db->get('users');
-										$users_department_immediate_id_options = array('' => lang('users.select'));	                            		
+										$users_department_immediate_id_options = array('' => '');	                            		
 										foreach($options->result() as $option)
 	                            		{
 	                            				                            				$users_department_immediate_id_options[$option->user_id] = $option->display_name;

@@ -62,13 +62,13 @@
 
 			<div class="form-group">
 				<label class="control-label col-md-3">Division</label>
-				<div class="col-md-7"><?php                                                        		$db->select('division_id,division');
+				<div class="col-md-7"><?php                                                        		$db->select('division_id,division,division_code');
                             		                            		$db->where('deleted', '0');
                             		$options = $db->get('users_division');
 									$time_form_class_policy_division_id_options = array();
                             		foreach($options->result() as $option)
                             		{
-                            			                            				$time_form_class_policy_division_id_options[$option->division_id] = $option->division;
+                            			                            				$time_form_class_policy_division_id_options[$option->division_id] = $option->division. ' ('.get_division_code($option->division_code,'-').')';
                             			                            		} ?>							<div class="input-group">
 								<span class="input-group-addon">
 	                            <i class="fa fa-list-ul"></i>

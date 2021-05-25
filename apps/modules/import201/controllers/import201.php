@@ -4396,6 +4396,84 @@ class Import201 extends MY_PrivateController
 		echo "Done.";	
 	}
 
+	function update_role(){
+		$this->load->library('excel');
+
+		$objReader = new PHPExcel_Reader_Excel5;
+
+		if (!$objReader) {
+			show_error('Could not get reader.');
+		}
+
+		$objReader->setReadDataOnly(true);
+		$objPHPExcel = $objReader->load('D:\oclp new version\role for import template(1).xls');
+		$rowIterator = $objPHPExcel->getActiveSheet()->getRowIterator();
+	
+		$ctr = 0;	
+		$import_data = array();
+
+		foreach($rowIterator as $row){
+			$cellIterator = $row->getCellIterator();
+			$cellIterator->setIterateOnlyExistingCells(false); // Loop all cells, even if it is not set
+			
+			$rowIndex = $row->getRowIndex();
+			
+			// Build the array to insert and check for validation errors as well.
+			foreach ($cellIterator as $cell) {
+				$import_data[$ctr][] = $cell->getCalculatedValue();
+			}
+
+			if ($rowIndex == 1) {
+
+				foreach ($import_data as $row) {
+					foreach ($row as $cell => $value) {
+						switch ($value) {														
+							case 'ID Number':
+								$valid_cells[] = 'id_number';
+								break;
+							case 'Role':
+								$valid_cells[] = 'role_id';
+								break;																
+						}
+					}
+				}
+
+				unset($import_data[$ctr]);
+			}
+
+			$ctr++;
+		}
+
+
+		$ctr = 0;
+
+		// Remove non-matching cells.
+		foreach ($import_data as $row) {		
+			$arr_field_val = array();
+			$user_id = '';
+			$role_id = '';
+			foreach ($valid_cells as $key => $value) {
+				switch ($value) {
+					case 'id_number':
+						$result_partner = $this->db->get_where('partners',array('id_number' => $row[$key]));
+						if ($result_partner && $result_partner->num_rows() > 0)
+							$user_id = $result_partner->row()->user_id;
+						break;
+					case 'role_id':
+						$result_role = $this->db->get_where('roles',array('role' => $row[$key]));
+						if ($result_role && $result_role->num_rows() > 0)
+							$role_id = $result_role->row()->role_id;
+						break;
+				}
+			}
+
+			$this->db->where('user_id',$user_id);
+			$this->db->update('users',array('role_id' => $role_id));
+		}
+
+		echo "Done.";	
+	}
+
 	function import_movement(){
 		$this->load->library('excel');
 
@@ -4477,7 +4555,7 @@ class Import201 extends MY_PrivateController
 		// Remove non-matching cells.
 		foreach ($import_data as $row) {		
 			$arr_field_val = array();
-			$user_id = 0
+			$user_id = 0;
 			foreach ($valid_cells_movement as $key => $value) {
 				switch ($value) {
 					case 'id_number':
@@ -4707,7 +4785,7 @@ class Import201 extends MY_PrivateController
 	{
 		switch ($field_name) {
 			case 'department':
-				$result = $this->db->get_where('users_department',array('department' => $val);
+				$result = $this->db->get_where('users_department',array('department' => $val));
 				if ($result && $result->num_rows() > 0){
 					$department_result = $result->row();
 					$value['id'] = $department_result->department_id;

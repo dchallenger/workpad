@@ -7,6 +7,7 @@ class Mrf_admin extends MY_PrivateController
 		$this->load->model('mrf_admin_model', 'mod');
 		parent::__construct();
         $this->lang->load( 'mrf' );
+        $this->lang->load( 'mrf_manage' );
 	}
 
 	public function index()
@@ -429,7 +430,14 @@ class Mrf_admin extends MY_PrivateController
 			$rec['quickedit_url'] = 'javascript:quick_edit( '. $record['record_id'] .' )';
 		}	
 
-				$rec['options'] .= '<li><a href="javascript: ajax_export('.$record['record_id'].')"><i class="fa fa-print"></i> Print</a></li>';
+		switch( $record['recruitment_request_status_id'] )
+		{
+			case 2:
+				$rec['options'] .= '<li><a href="javascript: change_status('.$record['record_id'].', 3 )"><i class="fa fa-check"></i> '. lang('mrf_manage.approved') .'</a></li>';
+				break;
+		}
+
+		$rec['options'] .= '<li><a href="javascript: ajax_export('.$record['record_id'].')"><i class="fa fa-print"></i> Print</a></li>';
 
 		if(!($record['recruitment_request_status_id']>1)){
 			if( isset($this->permission['delete']) && $this->permission['delete'] )
@@ -458,8 +466,9 @@ class Mrf_admin extends MY_PrivateController
 
 	function save( $child_call = false )
 	{ 
-        if($_POST['recruitment']['status_id'] == 7 || $_POST['recruitment']['status_id'] == 2){ //validated
-        	$_hr_remarks = trim($_POST['recruitment_request']['hr_remarks']);
+		if (in_array($_POST['recruitment']['status_id'], array(2,3,6,7))) {
+        //if($_POST['recruitment']['status_id'] == 7 || $_POST['recruitment']['status_id'] == 2){ //validated
+        	$_hr_remarks = (isset($_POST['recruitment_request']['hr_remarks']) && trim($_POST['recruitment_request']['hr_remarks']) ? trim($_POST['recruitment_request']['hr_remarks']) : '') ;
         	if( empty($_hr_remarks) ){
                 $this->response->message[] = array(
                     'message' => 'HR Remarks is required.',
@@ -467,14 +476,6 @@ class Mrf_admin extends MY_PrivateController
                 );  
                 $this->_ajax_return(); 
         	}
-/*            $_hr_assigned = trim($_POST['recruitment_request']['hr_assigned']);
-            if( empty($_hr_assigned) ){
-                $this->response->message[] = array(
-                    'message' => 'HR Assign is required.',
-                    'type' => 'warning'
-                );  
-                $this->_ajax_return(); 
-            }*/
 			$_POST['recruitment_request']['hr_remarks_by'] = $this->user->user_id;
 			$_POST['recruitment_request']['hr_remarks_on'] = date('Y-m-d H:i:s');
 			if(isset($this->record_id))
@@ -486,57 +487,14 @@ class Mrf_admin extends MY_PrivateController
 			{
 				if( isset($_POST['recruitment']['status_id']) ){
 					$this->db->update('recruitment_request', array('status_id' => $_POST['recruitment']['status_id']), array('request_id' => $this->record_id));			
+
+					if (in_array($_POST['recruitment']['status_id'], array(3,6))) {
+						$status_id = $_POST['recruitment']['status_id'];
+						$comment = (isset($_POST['recruitment']['comment']) ? $_POST['recruitment']['comment'] : '');
+
+						$response = $this->mod->change_status($this->record_id, $status_id, $comment);					
+					}
                 }
-
- /*               $request_details = $this->db->get_where('recruitment_request', array('request_id' => $this->record_id))->row();	
-                $this->load->model('system_feed');
-                $feed = array(
-                            'status' => 'info',
-                            'message_type' => 'Comment',
-                            'user_id' => $this->user->user_id,
-                            'feed_content' => 'You have been assigned for Personnel Requisition - '. $request_details->document_no,
-                            'uri' => get_mod_route('applicant_monitoring', '', false),
-                            'recipient_id' => $_hr_assigned
-                        );
-
-                $recipients = array($_hr_assigned);
-		        $this->system_feed->add( $feed, $recipients );
-
-                $req = $this->db->get_where('recruitment_request', array('request_id' => $this->record_id))->row();
-                // $hr_assigned = $this->db->get_where('users', array('user_id' => $req->hr_assigned))->row();
-                //get assigned recruitment staff
-                $hr_assigned_details = $this->db->get_where('users', array('user_id' => $req->hr_assigned))->row();
-                
-                $sendmrfdata['assigned'] = $hr_assigned_details->full_name;
-                $sendmrfdata['document_no'] = $req->document_no;
-
-                $this->load->library('parser');
-                $this->parser->set_delimiters('{{', '}}');
-
-                // start email to approver
-                $mrf_send_template = $this->db->get_where( 'system_template', array( 'code' => 'MRF-SEND-ASSIGN') )->row_array();
-                $msg = $this->parser->parse_string($mrf_send_template['body'], $sendmrfdata, TRUE); 
-                $subject = $this->parser->parse_string($mrf_send_template['subject'], $sendmrfdata, TRUE); 
-
-                $this->db->query("INSERT INTO {$this->db->dbprefix}system_email_queue (`to`, `subject`, body)
-                         VALUES('{$hr_assigned_details->email}', '{$subject}', '".@mysql_real_escape_string($msg)."') ");
-                //create system logs
-                $insert_array = array(
-                    'to' => $hr_assigned_details->email, 
-                    'subject' => $subject, 
-                    'body' => $msg
-                    );
-                $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'system_email_queue', array(), $insert_array); 
-
-                if( $this->db->_error_message() != "" ){
-                    $this->response->message[] = array(
-                        'message' => 'Error occured in sending email. Kindly contact System Admin',
-                        'type' => 'error'
-                    );
-                    $this->_ajax_return();
-                }*/
-                // end email to approver
-
 			}
         }else{//close
         	$_closing_remarks = trim($_POST['recruitment_request']['closing_remarks']);
@@ -578,22 +536,7 @@ class Mrf_admin extends MY_PrivateController
             
                 $this->response->notify[] =  $req->user_id;
                 // end notif to approver              
-
-                 // start email to approver
-/*                $sendmrfdata['validator'] = $validator['full_name'];
-
-                $mrf_send_template = $this->db->get_where( 'system_template', array( 'code' => 'MRF-SEND-VALIDATOR') )->row_array();
-                $msg = $this->parser->parse_string($mrf_send_template['body'], $sendmrfdata, TRUE); 
-                $subject = $this->parser->parse_string($mrf_send_template['subject'], $sendmrfdata, TRUE); 
-
-                $this->db->query("INSERT INTO {$this->db->dbprefix}system_email_queue (`to`, `subject`, body)
-                         VALUES('{$validator['email']}', '{$subject}', '".@mysql_real_escape_string($msg)."') ");
-                //create system logs
-                $insert_array = array(
-                    'to' => $validator['email'], 
-                    'subject' => $subject, 
-                    'body' => $msg
-                    );	*/			
+	
 				if( isset($_POST['recruitment']['status_id']) ){
 					$this->db->update('recruitment_request', array('status_id' => $_POST['recruitment']['status_id']), array('request_id' => $this->record_id));			
 				}
@@ -609,4 +552,17 @@ class Mrf_admin extends MY_PrivateController
 		$this->_ajax_return();
 	}
 
+	function change_status()
+	{
+		$this->_ajax_only();
+		$record_id = $this->input->post('record_id');
+		$status_id = $this->input->post('status_id');
+		$response = $this->mod->change_status($record_id, $status_id, '', $this->permission['process']);
+		$this->response = (object) array_merge((array)$this->response, (array)$response);
+		$this->response->message[] = array(
+			'message' => '',
+			'type' => 'success'
+		);
+		$this->_ajax_return();
+	}
 }

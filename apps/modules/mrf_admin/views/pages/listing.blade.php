@@ -76,7 +76,7 @@
 	<script src="{{ theme_path() }}plugins/select2/select2.min.js" type="text/javascript" ></script>
 	<script src="{{ theme_path() }}plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript" ></script>
 	<script type="text/javascript" src="{{ theme_path() }}plugins/jquery.infiniteScroll.js"></script>
-	<!-- <script type="text/javascript" src="{{ theme_path() }}modules/common/lists.js"></script> -->
+	<script type="text/javascript" src="{{ theme_path() }}modules/common/lists.js"></script>
 	<script type="text/javascript" src="{{ theme_path() }}modules/mrf_admin/edit_custom.js"></script>
 	<script type="text/javascript" src="{{ theme_path() }}plugins/bootstrap-switch/static/js/bootstrap-switch.min.js"></script>
 	<script src="{{ theme_path() }}scripts/ui-extended-modals.js"></script> 

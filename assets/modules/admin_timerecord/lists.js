@@ -1,14 +1,14 @@
 $(document).ready(function(){
+    $('select.select2me').select2();
 
-        $('select.select2me').select2();
-        $("input.datetime").datetimepicker({
-            isRTL: App.isRTL(),
-            format: "mm/dd/yyyy - hh:ii",
-            autoclose: true,
-            todayBtn: false,
-            pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left"),
-            minuteStep: 1
-        });
+    $("input.datetime").datetimepicker({
+        isRTL: App.isRTL(),
+        format: "mm/dd/yyyy - hh:ii",
+        autoclose: true,
+        todayBtn: false,
+        pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left"),
+        minuteStep: 1
+    });
 
 	$('select[name="company_id"]').change(function(){
 		update_department( $(this).val() );
@@ -202,7 +202,7 @@ function save_timerecord(record_id, type){
 				success: function ( response ) {
 					handle_ajax_message( response.message );
 
-				    $('#time_shift_id-'+record_id).html($('#time_shift_id-'+record_id).val());
+				    //$('#time_shift_id-'+record_id).html($('#time_shift_id-'+record_id).val());
 				    $('#timein-'+record_id).html($('#timein-'+record_id).val());
 				    $('#timeout-'+record_id).html($('#timeout-'+record_id).val());
 
@@ -257,30 +257,25 @@ function update_employee()
 	var company_id = $('select[name="company_id"]').val();
 	var department_id = $('select[name="department_id"]').val();
 	var status_id = $('span.status-filter.label-success').attr('status_id');
-	if( department_id != "" )
-	{
-		$("#list-table").hide();
-		$('select[name="user_id"]').select2("val","");
-		$.ajax({
-		    url: base_url + module.get('route') + '/update_employees',
-		    type: "POST",
-		    async: false,
-		    data: {company_id: company_id, department_id: department_id, status_id:status_id},
-		    dataType: "json",
-		    beforeSend: function () {
-	    		$("#partners_loader").show();
-	    		$("#partners_div").hide();
-		    },
-		    success: function (response) {
-		    	$('select[name="user_id"]').html(response.employees);
-	    		$("#partners_loader").hide();
-	    		$("#partners_div").show();
-		    }
-		});	
-	}
-	else{
-		$('select[name="user_id"]').html('');
-	}		
+	
+	$("#list-table").hide();
+	$('select[name="user_id"]').select2("val","");
+	$.ajax({
+	    url: base_url + module.get('route') + '/update_employees',
+	    type: "POST",
+	    async: false,
+	    data: {company_id: company_id, department_id: department_id, status_id:status_id},
+	    dataType: "json",
+	    beforeSend: function () {
+    		$("#partners_loader").show();
+    		$("#partners_div").hide();
+	    },
+	    success: function (response) {
+	    	$('select[name="user_id"]').html(response.employees);
+    		$("#partners_loader").hide();
+    		$("#partners_div").show();
+	    }
+	});			
 }
 
 function get_period_list(from, to){

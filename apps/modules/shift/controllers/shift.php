@@ -244,7 +244,7 @@ class Shift extends MY_PrivateController
 				goto stop;
 		}
 
-		$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, $table, $previous_main_data['shift'], $values);
+		$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $this->response->action, $table, (isset($previous_main_data['shift']) ? $previous_main_data['shift'] : array()), $values);
 
 		$this->mod->_save_shift_class_company($this->record_id, $shift_id, $post['value']);
 

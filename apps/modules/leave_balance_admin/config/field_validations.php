@@ -21,11 +21,6 @@ $config['field_validations']['time_form_balance.current'][] = array(
 	'label'   => 'Current Credit',
 	'rules'   => 'V'
 );
-$config['field_validations']['time_form_balance.previous'][] = array(
-	'field'   => 'time_form_balance[previous]',
-	'label'   => 'Previous Credit',
-	'rules'   => 'required'
-);
 $config['field_validations']['time_form_balance.form_id'][] = array(
 	'field'   => 'time_form_balance[form_id]',
 	'label'   => 'Leave Type',

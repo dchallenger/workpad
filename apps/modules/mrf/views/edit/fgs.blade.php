@@ -57,7 +57,7 @@
 					$recruitment_request_division_id_options = array('' => '');
 					foreach($options->result() as $option)
 					{
-						$recruitment_request_division_id_options[$option->division_id] = $option->division .' ('.$option->division_code.')';
+						$recruitment_request_division_id_options[$option->division_id] = $option->division . ' ('.get_division_code($option->division_code,'-').')';
 					} 
 				?>
 				<div class="input-group">

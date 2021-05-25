@@ -934,3 +934,16 @@ function get_first_letter($string = '') {
 
 	return $f_letter_combine;
 }
+
+function get_division_code($div_code = '',$separator = '-')
+{
+	$new_div_code = '';
+	if ($div_code != '') {
+		if ($separator != '')
+			$new_div_code = trim(explode($separator, $div_code)[0]);
+		else
+			$new_div_code = trim($div_code);
+	}
+
+	return $new_div_code;
+}

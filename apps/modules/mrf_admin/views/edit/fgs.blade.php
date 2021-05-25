@@ -59,7 +59,7 @@
 					$recruitment_request_division_id_options = array('' => '');
 					foreach($options->result() as $option)
 					{
-						$recruitment_request_division_id_options[$option->division_id] = $option->division .' ('.$option->division_code.')';
+						$recruitment_request_division_id_options[$option->division_id] = $option->division . ' ('.get_division_code($option->division_code,'-').')';
 					} 
 				?>
 				<div class="input-group">
@@ -672,7 +672,7 @@
                         	<span class="required">*</span>
                         </label>
                         <div class="col-md-5">
-                            <textarea <?php if($record['recruitment_request.status_id'] != 9) echo "disabled" ?> class="form-control" rows="2" name="recruitment_request[hr_remarks]">{{ $record['recruitment_request.hr_remarks'] }}</textarea>
+                            <textarea <?php if(!in_array($record['recruitment_request.status_id'],array(2,3,9))) echo "disabled" ?> class="form-control" rows="2" name="recruitment_request[hr_remarks]">{{ $record['recruitment_request.hr_remarks'] }}</textarea>
                         </div>
                     </div>
 					@if( in_array($record['recruitment_request.status_id'], array(7,5)) )

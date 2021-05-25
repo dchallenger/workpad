@@ -11,13 +11,13 @@
 				<div class="col-md-7">							<input type="text" disabled="disabled" class="form-control" name="users_department[department_code]" id="users_department-department_code" value="{{ $record['users_department.department_code'] }}" placeholder="Enter Department Code"/> 				</div>	
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3">{{ lang('department.division') }}</label>
-				<div class="col-md-7"><?php	                            	                            		$db->select('division_id,division');
+				<div class="col-md-7"><?php	                            	                            		$db->select('division_id,division,division_code');
 	                            			                            		$db->where('deleted', '0');
 	                            		$options = $db->get('users_division');
-										$users_department_division_id_options = array('' => lang('users.select'));
+										$users_department_division_id_options = array('' => '');
 	                            		foreach($options->result() as $option)
 	                            		{
-	                            				                            				$users_department_division_id_options[$option->division_id] = $option->division;
+	                            				                            				$users_department_division_id_options[$option->division_id] = $option->division. ' ('.get_division_code($option->division_code,'-').')';
 	                            				                            		} ?>							<div class="input-group">
 								<span class="input-group-addon">
 	                            <i class="fa fa-list-ul"></i>

@@ -118,7 +118,7 @@
             </span>
         </div> 
     </td>
-    <td style="display:block; text-align:center; margin:0 auto;">
+    <td style="display:block; text-align:center; margin:0 auto;" class="hidden">
         <?php 
             if ($form_code != '' || $form_code != null){
         ?>
@@ -138,7 +138,7 @@
         ?>
     </td>
     <td>
-        <a href="<?php echo site_url('time/applicationadmin/edit') ?>" class="btn btn-success btn-sm">
+        <a href="<?php echo site_url('time/applicationadmin/edit') ?>" class="btn btn-success btn-sm hidden">
             <?php echo lang('admin_timerecord.apply') ?>
         </a>      
         <button type="button" class="btn green btn-sm" onclick="save_timerecord( <?php echo $record_id;?>, 'by_date' )"><i class="fa fa-check"></i> {{ lang('common.save') }} </button>
@@ -176,7 +176,7 @@
             });
         });
 
-        $('input.datetimein').asyncEach(function(){
+/*        $('input.datetimein').asyncEach(function(){
             $(this).datetimepicker('setStartDate', '<?php echo $timein_date;?>');
         });
         $('input.datetimein').asyncEach(function(){
@@ -188,7 +188,7 @@
         });
         $('input.datetimeout').asyncEach(function(){
             $(this).datetimepicker('setEndDate', '<?php echo $timeout_date2;?>');
-        });
+        });*/
 
         // $('select.select2me').select2();
         // $("input.datetime").datetimepicker({

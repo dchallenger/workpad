@@ -163,14 +163,14 @@
 							<label class="control-label col-md-4">Division</label>
 							<div class="col-md-6">
 								<?php
-									$db->select('division_id,division');
+									$db->select('division_id,division,division_code');
 									$db->where('deleted', '0');
                             		$options = $db->get('users_division');
 
 									$division_id_options = array();
                             		foreach($options->result() as $option)
                             		{
-                            			$division_id_options[$option->division_id] = $option->division;
+                            			$division_id_options[$option->division_id] = $option->division. ' ('.get_division_code($option->division_code,'-').')';
                             		} 
                             	?>
 	                            <div class="input-group">

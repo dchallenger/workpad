@@ -231,15 +231,15 @@ class mrf_manage_model extends Record
 	                $sendmrfdata['requestor'] = $req_by->full_name;
 	                $sendmrfdata['approver'] = $approver_fullname;
 
-                    $mrf_send_template = $this->db->get_where( 'system_template', array( 'code' => 'MRF-SEND-APPROVER') )->row_array();
+                    $mrf_send_template = $this->db->get_where( 'system_template', array( 'code' => 'MRF-SEND-CANCEL') )->row_array();
                     $msg = $this->parser->parse_string($mrf_send_template['body'], $sendmrfdata, TRUE); 
                     $subject = $this->parser->parse_string($mrf_send_template['subject'], $sendmrfdata, TRUE); 
 
                     $this->db->query("INSERT INTO {$this->db->dbprefix}system_email_queue (`to`, `subject`, body)
-                             VALUES('{$approvers_details->email}', '{$subject}', '".$this->db->escape_str($msg)."') ");
+                             VALUES('{$req_by->email}', '{$subject}', '".$this->db->escape_str($msg)."') ");
                     //create system logs
                     $insert_array = array(
-                        'to' => $approvers_details->email, 
+                        'to' => $req_by->email, 
                         'subject' => $subject, 
                         'body' => $msg
                         );

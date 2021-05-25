@@ -23,7 +23,8 @@
 							<div class="form-group">
                                 <label class="control-label col-md-4">Company</label>
                                 <div class="col-md-8">
-                                    <input type="text" value="<?php echo $record['time_period_company_id']?>" id="time_period_company_id" readonly="" class="form-control">
+                                	<input type="hidden" value="<?php echo $record['time_period_company_id']?>" id="time_period_company_id" readonly="" class="form-control">
+                                    <input type="text" value="<?php echo $record['time_period_company']?>" id="time_period_company" readonly="" class="form-control">
                             	</div>
                             </div>                            
                             
@@ -113,9 +114,10 @@
         source: function(query, process) {
             employees = [];
             map = {};
-            
-            $.getJSON(base_url + module.get('route') + '/user_lists_typeahead', function(data){
-                var users = data.users;
+            data = {company_id:$('#time_period_company_id').val()};
+
+            $.getJSON(base_url + module.get('route') + '/user_lists_typeahead', data, function(result){
+                var users = result.users;
                 for( var i in users)
                 {
                     employee = users[i];

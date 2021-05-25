@@ -134,10 +134,13 @@ class timerecord_manage_model extends Record
 		$userids = array();
 		$subordinates = $this->getAllSubordinates();
 
-		foreach($subordinates as $subordinate){
+		foreach($subordinates['direct'] as $key => $subordinate){
 			$userids[] = $subordinate['partner_id'];
 		}
 
+		foreach($subordinates['subordinates'] as $key => $subordinate){
+			$userids[] = $subordinate['partner_id'];
+		}
 		
 		$qry = "SELECT * FROM time_record_list 
 				LEFT JOIN users ON time_record_list.user_id = users.user_id

@@ -173,8 +173,8 @@ class Leave_filed extends MY_PrivateController
 		$this->record_id = $data['record_id'] = $_POST['record_id'];
 
 		$this->load->model('form_application_model', 'formapp');
-		$data['leave_balance'] = $this->formapp->get_leave_balance($this->user->user_id, date('Y'), 0);
- 		
+		$data['leave_balance'] = $this->formapp->get_leave_balance($this->user->user_id, date('Y-m-d'), 0);
+
  		$upload_forms = $this->formapp->get_forms_upload($this->record_id);
         $all_uploaded = array();
         foreach( $upload_forms as $upload_form )

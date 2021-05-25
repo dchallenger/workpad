@@ -4,13 +4,12 @@
         <!-- <span style="{{ ($is_assigned) ? 'display:none' : '' }}"> -->
         <?php 
         	switch( $record['recruitment_request.status_id'] ):
-/*        		case '':
             case 2: ?>
                     <button type="button" class="btn green btn-sm" onclick="save_record( $(this).closest('form'), '3')"><i class="fa fa-check"></i> {{ lang('mrf_admin.approved') }}</button>
                     @if( !empty( $record_id ) )
-                      <button type="button" class="btn red btn-sm" onclick="save_record( $(this).closest('form'), '6')"> {{ lang('common.cancel') }}</button>
+                      <button type="button" class="btn red btn-sm" onclick="save_record( $(this).closest('form'), '8')"> Disapproved</button>
                     @endif <?php
-                    break;*/
+                    break;
             case 3: ?>
               <button type="button" class="btn green btn-sm" onclick="save_record( $(this).closest('form'), '7')"><i class="fa fa-check"></i> Validate Request</button>
         <?php

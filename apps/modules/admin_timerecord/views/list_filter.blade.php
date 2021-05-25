@@ -47,10 +47,10 @@
     </div>
 </div>
 
-<div class="portlet-title margin-top-20" style="margin-bottom:3px;">
+<div class="portlet-title margin-top-20 hidden" style="margin-bottom:3px;">
     <div class="caption">{{ lang('admin_timerecord.link') }}</div>
 </div>
-<div class="portlet-body">
+<div class="portlet-body hidden">
     
     <div class="margin-top-10">
         <a href="{{ get_mod_route('my_calendar') }}" class="label label-success">{{ lang('admin_timerecord.my_calendar') }}</a>

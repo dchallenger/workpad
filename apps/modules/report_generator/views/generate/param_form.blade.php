@@ -95,12 +95,19 @@
 					                			$db->order_by($d_label, 'ASC');	
 					                		}
 											
-											$db->select($d_label.','.$d_value);
+											if ($filter->table == 'users_division' || $filter->table == 'ww_users_division')
+												$db->select($d_label.','.$d_value.',division_code');
+											else
+												$db->select($d_label.','.$d_value);
+
 											$rows = $db->get( $filter->table )->result();
 											
 											foreach( $rows as $row )
 											{
-												$options[$row->$d_value] = $row->$d_label;
+												if ($filter->table == 'users_division' || $filter->table == 'ww_users_division')
+													$options[$row->$d_value] = $row->$d_label. ' ('.get_division_code($row->division_code,'-').')';
+												else
+													$options[$row->$d_value] = $row->$d_label;												
 											}
 											echo form_dropdown('filter['.$filter->filter_id.']', $options, '', 'class="form-control select2me '.$d_label.'" data-placeholder="Select..."');
 					                		break;
@@ -150,14 +157,21 @@
 					                			$db->order_by($d_label, 'ASC');	
 					                		}
 											
-											$db->select($d_label.','.$d_value);
+											if ($filter->table == 'users_division' || $filter->table == 'ww_users_division')
+												$db->select($d_label.','.$d_value.',division_code');
+											else
+												$db->select($d_label.','.$d_value);
+
 											$rows = $db->get( $filter->table )->result();
 											
 											$options = array();
 											// $options['all'] = "All";
 											foreach( $rows as $row )
 											{
-												$options[$row->$d_value] = $row->$d_label;
+												if ($filter->table == 'users_division' || $filter->table == 'ww_users_division')
+													$options[$row->$d_value] = $row->$d_label. ' ('.get_division_code($row->division_code,'-').')';
+												else
+													$options[$row->$d_value] = $row->$d_label;
 											}
 											echo form_dropdown('filter['.$filter->filter_id.'][]', $options, '', 'class="form-control select2me multiple_dropdown_tags '.$d_label.'" multiple="multiple" data-placeholder="Select..." id="'.$d_label.'"');
 					                		break;

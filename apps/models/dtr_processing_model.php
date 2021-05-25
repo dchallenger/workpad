@@ -39,7 +39,7 @@ class dtr_processing_model extends Record
 		parent::__construct();
 	}
 
-	function getUsersTagList(){
+	function getUsersTagList($company_id = 0){
 
 		$data = array();
 
@@ -53,6 +53,12 @@ class dtr_processing_model extends Record
 
 		if ($qry_category != ''){
 			$qry .= ' AND ' . $qry_category;
+		}
+
+		if ($company_id && $qry_category == ''){
+			$qry .= ' WHERE u.company_id = ' . $company_id;
+		} elseif ($company_id && $qry_category != '') {
+			$qry .= ' AND u.company_id = ' . $company_id;
 		}
 
 		$result = $this->db->query($qry);

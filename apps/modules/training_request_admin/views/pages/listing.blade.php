@@ -17,6 +17,9 @@
 							@if($allow_admin)
 							<li class="active"><a href="{{ get_mod_route('training_request_admin') }}">Admin</a></li>
 							@endif
+							@if($allow_training_confirmation)
+							<li><a href="{{ get_mod_route('training_request_confirmation') }}">Training Confirmation</a></li>
+							@endif								
 						</ul>
 					</div>
 				</div>

@@ -245,7 +245,8 @@ class Dtr_processing extends MY_PrivateController
 	function user_lists_typeahead()
 	{
 		$this->_ajax_only();
-		$this->response->users = $this->mod->getUsersTagList();
+
+		$this->response->users = $this->mod->getUsersTagList($this->input->get('company_id'));
 		$this->_ajax_return();
 	}	
 }

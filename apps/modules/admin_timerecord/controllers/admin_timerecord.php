@@ -356,7 +356,7 @@ class Admin_timerecord extends MY_PrivateController
 
 		$this->db->join('partners', 'partners.user_id = users_profile.user_id', 'left');
 		$employees = $this->db->get('users_profile');
-
+		
 		$this->response->last_db = $this->db->last_query();
 		// $employees = $this->db->get_where('users', array('deleted' => 0, 'company_id' => $this->input->post('company_id'), 'department_id' => $this->input->post('department_id')));
 		$this->response->employees = '<option value="">Select employee...</option>';
