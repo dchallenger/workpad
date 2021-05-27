@@ -24,6 +24,7 @@
                             $qry_category = $mod->get_role_category();
                             $db->order_by('users.full_name', 'asc');
                             $db->where('partners.deleted', 0);
+                            $db->where('users.user_id >', 1);
                             $db->where('users.active', 1);
                             if ($qry_category != ''){
                                 $db->where($qry_category, '', false);
@@ -33,7 +34,7 @@
                             $db->from('partners');
                             $partners = $db->get();
                         ?>
-                        <select name="period_user_id" id="period_user_id" class="form-control select2me col-md-4" data-placeholder="Select partner...">
+                        <select name="period_user_id" id="period_user_id" class="form-control select2me col-md-4" data-placeholder="Select employee...">
                             <option value=""></option>
                             <?php
                                 foreach( $partners->result() as $partner )

@@ -67,9 +67,9 @@
 	</style>
 @stop
 
-<div id="calman_form" class="modal fade" tabindex="-1" data-width="400"></div>
-<div id="calman_list" class="modal fade" tabindex="-1" data-width="800"></div>
-<div id="calman_view" class="modal fade" tabindex="-1" data-width="800"></div>
+<div id="calman_form" class="modal fade" tabindex="-1" data-width="400" data-max-height="400"></div>
+<div id="calman_list" class="modal fade" tabindex="-1" data-width="800" data-max-height="400"></div>
+<div id="calman_view" class="modal fade" tabindex="-1" data-width="800" data-max-height="400"></div>
 
 
 

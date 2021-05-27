@@ -126,17 +126,17 @@
                 @endif
 
                 @if(in_array('sbu_unit', $partners_keys))
-                <div class="form-group">
+<!--                 <div class="form-group">
                     <label class="control-label col-md-3">{{ lang('partners.sbu_unit') }}<span class="required">*</span></label>
                     <div class="col-md-5">
-                        <?php   $db->select('sbu_unit_id,sbu_unit,percentage');
+                        <?php   $db->select('sbu_unit_id,sbu_unit');
                                 $db->where('deleted', '0');
                                 $options = $db->get('users_sbu_unit');
 
                                 $users_sbu_unit_id_options = array('' => '');
                                 foreach($options->result() as $option)
                                 {
-                                    $users_sbu_unit_id_options[$option->sbu_unit_id] = $option->sbu_unit .' ('.$option->percentage.'%)';
+                                    $users_sbu_unit_id_options[$option->sbu_unit_id] = $option->sbu_unit;
                                 } ?>
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -149,9 +149,8 @@
                             ?>
                             {{ form_multiselect('users_profile[sbu_unit_id][]',$users_sbu_unit_id_options, $sbu_unit_val, 'class="form-control select2me" id="users_profile-sbu_unit" data-placeholder="Select..."') }}
                         </div>
-                        <span class="text-muted small">Total Percentage : <span class="total_percentage"></span></span>
                     </div>  
-                </div>
+                </div> -->
                 @endif
 
                 @if(in_array('branch', $partners_keys))
@@ -346,15 +345,6 @@
                     </div>
                 </div>
                 @endif                                                               
-            </div>
-            <div class="form-actions fluid">
-                <div class="row" align="center">
-                    <div class="col-md-12">
-                        <button class="btn green btn-sm" type="button" onclick="save_partner( $(this).parents('form') )"><i class="fa fa-check"></i> {{ lang('common.save') }}</button>
-                        <button class="btn blue btn-sm form-undo" type="submit"><i class="fa fa-undo"></i> {{ lang('common.reset') }}</button>                               
-                        <a href="<?php echo $back_url;?>" class="btn default btn-sm">{{ lang('common.back_to_list') }}</a>
-                    </div>
-                </div>
             </div>
         </div>
 	</div>

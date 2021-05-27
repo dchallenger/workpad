@@ -92,10 +92,13 @@ class work_calendar_model extends Record
 		return $data;		
 	}
 
-	public function get_partners( $manager_id, $role_id ){
-		
+	public function get_partners( $manager_id, $role_id, $company_id = 0 ){
+
+		if ($company_id == '')
+			$company_id = 0;
+					
 		$data = array();
-		$qry = "CALL sp_partners_subordinates('$manager_id', '$role_id');";  //die($qry);
+		$qry = "CALL sp_partners_subordinates('$manager_id', '$role_id', '$company_id');";  //die($qry);
 		$result = $this->db->query($qry);
 
 		if($result->num_rows() > 0)
@@ -180,10 +183,13 @@ class work_calendar_model extends Record
 		return $data;			
 	}
 
-	public function get_assigned_partners($manager_id, $date, $shift_id, $role_id){
+	public function get_assigned_partners($manager_id, $date, $shift_id, $role_id, $company_id = 0){
 		
+		if ($company_id == '')
+			$company_id = 0;
+
 		$data = array();
-		$qry = "CALL sp_time_calendar_manager_list('$manager_id','$date', '$shift_id', '$role_id')"; //die($qry);
+		$qry = "CALL sp_time_calendar_manager_list('$manager_id','$date', '$shift_id', '$role_id', '$company_id')"; //die($qry);
 		$result = $this->db->query($qry); 
 
 		if($result->num_rows() > 0)

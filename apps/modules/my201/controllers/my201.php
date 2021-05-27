@@ -110,6 +110,7 @@ class My201 extends MY_PrivateController
         $data['cost_center_code'] = ($profile_header_details['cost_center_code'] == "" ? "n/a" : $profile_header_details['cost_center_code']);
         $data['sbu_unit_id'] = ($profile_header_details['sbu_unit_id'] == "" ? "n/a" : $profile_header_details['sbu_unit_id']);
         $data['sbu_unit'] = ($profile_header_details['sbu_unit'] == "" ? "n/a" : $profile_header_details['sbu_unit']);
+        $data['sbu_unit_details'] = ($profile_header_details['sbu_unit_details'] == "" ? "n/a" : $profile_header_details['sbu_unit_details']);
 		/***** CONTACTS TAB *****/
 		//Personal Contact
 		$address_1 = $this->mod->get_partners_personal($this->user->user_id, 'address_1');
@@ -1087,6 +1088,9 @@ class My201 extends MY_PrivateController
 		$data['role_id'] = $profile_header_details['role_id'] == "" ? "n/a" : $profile_header_details['role_id'];
 		$data['job_grade'] = $profile_header_details['job_grade'] == "" ? "n/a" : $profile_header_details['job_grade'];
 		$data['sbu_unit_id'] = $profile_header_details['sbu_unit_id'] == "" ? "n/a" : $profile_header_details['sbu_unit_id'];
+		$data['sbu_unit'] = $profile_header_details['sbu_unit'] == "" ? "n/a" : $profile_header_details['sbu_unit'];
+		$data['sbu_unit_details'] = $profile_header_details['sbu_unit_details'] == "" ? "n/a" : $profile_header_details['sbu_unit_details'];
+
 		$data['project_id'] = $profile_header_details['project_id'] == "" ? "n/a" : $profile_header_details['project_id'];
 		$data['start_date'] = $profile_header_details['start_date'] == "" ? "" : $profile_header_details['start_date'];
 		$data['end_date'] = $profile_header_details['end_date'] == "" ? "" : $profile_header_details['end_date'];

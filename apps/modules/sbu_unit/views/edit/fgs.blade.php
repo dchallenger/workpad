@@ -10,7 +10,7 @@
 				<input type="text" class="form-control" name="users_sbu_unit[sbu_unit]" id="users_sbu_unit-sbu_unit" value="{{ $record['users_sbu_unit.sbu_unit'] }}" placeholder="Enter SBU Unit"/> 				
 			</div>	
 		</div>
-		<div class="form-group">
+		<div class="form-group hidden">
 			<label class="control-label col-md-3"><span class="required">* </span>{{ lang('sbu_unit.percentage') }}</label>				
 			<div class="col-md-7">							
 				<input type="text" class="form-control" name="users_sbu_unit[percentage]" id="users_sbu_unit-percentage" value="{{ $record['users_sbu_unit.percentage'] }}" placeholder="Enter Percentage"/> 				

@@ -13,18 +13,32 @@
     <div class="modal-body padding-bottom-0">
         <div class="row">
             <div class="col-md-3">
+                <?php if ($hr_admin) { ?>
+                <div class="portlet">
+                    <div class="portlet-body" >
+                        <h4><span style="color:red">* </span>Company</h4>
+                            <?php                                                                     
+                                $company_options = array('' => '');
+                                foreach($company->result() as $option){
+                                    $company_options[$option->company_id] = $option->company;
+                                } 
+                            ?>
+                            <?php echo form_dropdown('company',$company_options, '', 'class="form-control select2me" data-placeholder="Select company" id="company_id"') ?>
+                    </div>
+                </div>
+                <?php } ?>  
                 <div class="portlet">
                     <div class="portlet-body" >
 
                         <input type="hidden" name="current_date" id="current_date" value="<?php echo date("Y-m-d", strtotime($start_date) ); ?>">
                         <input type="hidden" name="date[start]" value="<?php echo date("Y-m-d", strtotime($start_date) ); ?>">
                         <input type="hidden" name="date[end]" value="<?php echo date("Y-m-d", strtotime($end_date) ); ?>">
-
+                        <h4>Shift</h4>
                         <div id="available_schedules" class="list-group">
 
                             <?php 
                                 for($i=0; $i < count( $currentday_schedules ); $i++){ 
-                                    if (!in_array($currentday_schedules[$i]['title'], $current_schedule_tmp_array)) {
+                                    if ($currentday_schedules[$i]['title'] != 'It\'s your Birthday' && !in_array($currentday_schedules[$i]['title'], $current_schedule_tmp_array)) {
                                         array_push($current_schedule_tmp_array, $currentday_schedules[$i]['title']);
                             ?>
                                         <a href="javascript:;" class="list-group-item small available_scheds" data-shift-id="<?php echo $currentday_schedules[$i]['form_id']; ?>">
@@ -158,7 +172,7 @@
 
     <div class="modal-footer margin-top-0">
         <button type="button" data-dismiss="modal" class="btn btn-default btn-sm">Close</button>
-        <button type="button" class="btn green btn-sm" onclick="save_calendar( $(this).parents('form') )">Save changes</button>
+        <button type="button" class="btn green btn-sm" onclick="save_calendar( $(this).parents('form') )">Save</button>
     </div>
 </form>
 
@@ -238,6 +252,11 @@
 
     jQuery(document).ready(function() {
 
+        $('.select2me').select2({
+            placeholder: "Select an option",
+            allowClear: true
+        });
+
         jQuery('select.selectM3').select2();
         jQuery("select.shiftSelect").select2();
 
@@ -276,10 +295,18 @@
 
         $(".available_scheds").on('click', function(){
 
+            $('#shift_id').val($(this).data('shift-id'));
+
             var date_from = $('input[name="date[start]"]').val();
             var date_to = $('input[name="date[end]"]').val();
 
-            var request_data = {shift_id: $(this).data('shift-id'), date: $("#current_date").val(), date_from:date_from, date_to:date_to}
+            var request_data = {
+                shift_id: $(this).data('shift-id'), 
+                date: $("#current_date").val(), 
+                date_from:date_from, 
+                date_to:date_to,
+                company_id: $('#company_id').val()                
+            }
 
             $.ajax({
                 url: base_url + module.get('route') + '/get_available_schedules',
@@ -312,6 +339,52 @@
             });         
         });
         
+
+        $("#company_id").on('change', function(){
+            var date_from = $('input[name="date[start]"]').val();
+            var date_to = $('input[name="date[end]"]').val();
+
+            var request_data = {
+                shift_id: $(this).data('shift-id'), 
+                date: $("#current_date").val(), 
+                date_from:date_from, 
+                date_to:date_to,
+                company_id: $(this).val()                
+            }
+
+            $.ajax({
+                url: base_url + module.get('route') + '/get_available_schedules',
+                type: "POST",
+                async: false,
+                data: request_data,
+                dataType: "json",
+                beforeSend: function () {
+                    blockMe();
+                },
+                success: function (response) {
+                    console.log('done');
+
+                    unBlockMe();
+
+                    if (typeof (response.rows) != 'undefined') {
+
+                        $("#partners-list-table tbody").empty();
+                        $('#partners-list-table > tbody:last').append(response.rows);
+
+                        customHandleUniform();
+
+                        /*$('.selectM3').select2('destroy');   
+                        $('.selectM3').select2();*/                     
+                    }
+
+                    for (var i in response.message) {
+                        if (response.message[i].message != "") {
+                            notify(response.message[i].type, response.message[i].message);
+                        }
+                    }
+                }
+            });         
+        });
 
         $("#search-partner").on('keyup', function(e){
 

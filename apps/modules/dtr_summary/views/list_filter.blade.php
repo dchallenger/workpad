@@ -4,15 +4,19 @@
 <div class="portlet-body">
     <span class="small text-muted">{{ lang('dtr_summary.show_inclusive_date_last5') }}</span>
     <div id="period-filter-container" class="margin-top-10">
-    	<?php foreach( $payroll_dates as $ppf ){
-			$date = $ppf['payroll_date']. ', '. $ppf['period_year'];
-			$date = date('Y-m-d', strtotime($date));
-			echo '<span 
-					payroll_date="'.$date.'"  
-					class="event-block label label-default external-event period-filter">'
-					.$ppf['payroll_date'].
-				'</span>';
-		} ?>
+    	<?php 
+            $ctr = 1;
+            foreach( $payroll_dates as $ppf ){
+    			$date = $ppf['payroll_date']. ', '. $ppf['period_year'];
+    			$date = date('Y-m-d', strtotime($date));
+    			echo '<span 
+    					payroll_date="'.$date.'"  
+    					class="event-block label '.($ctr == 1 ? 'label-success' : 'label-default').' external-event period-filter">'
+    					.$ppf['payroll_date'].
+    				'</span>';
+                $ctr++;
+		    } 
+        ?>
 
     </div>
 </div>

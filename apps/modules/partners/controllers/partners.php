@@ -642,6 +642,7 @@ class Partners extends MY_PrivateController
         $data['cost_center_code'] = ($profile_header_details['cost_center_code'] == "" ? "n/a" : $profile_header_details['cost_center_code']);
 		$data['department'] = ($profile_header_details['department'] == "" ? "n/a" : $profile_header_details['department']);
 		$data['sbu_unit'] = ($profile_header_details['sbu_unit'] == "" ? "n/a" : $profile_header_details['sbu_unit']);
+		$data['sbu_unit_details'] = ($profile_header_details['sbu_unit_details'] == "" ? "n/a" : $profile_header_details['sbu_unit_details']);
 		$data['sbu_unit_id'] = ($profile_header_details['sbu_unit_id'] == "" ? "n/a" : $profile_header_details['sbu_unit_id']);
 		$data['group'] = ($profile_header_details['group'] == "" ? "n/a" : $profile_header_details['group']);
 
@@ -1886,6 +1887,8 @@ class Partners extends MY_PrivateController
 				$other_tables['users_profile'] = $post['users_profile'];
 				$other_tables['users_profile']['coordinator_id'] = !empty($post['users_profile']['coordinator_id']) ? implode(',', $post['users_profile']['coordinator_id']) : "";
 				$other_tables['users_profile']['sbu_unit_id'] = !empty($post['users_profile']['sbu_unit_id']) ? implode(',', $post['users_profile']['sbu_unit_id']) : "";
+				$other_tables['users_profile']['sbu_unit'] = !empty($post['users_profile']['sbu_unit']) ? implode(',', $post['users_profile']['sbu_unit']) : "";
+				$other_tables['users_profile']['sbu_unit_details'] = !empty($post['users_profile']['sbu_unit_details']) ? implode(',', $post['users_profile']['sbu_unit_details']) : "";
 				$other_tables['users_profile']['start_date'] = !empty($post['users_profile']['start_date']) ? date('Y-m-d', strtotime($post['users_profile']['start_date'])) : "";
 				$other_tables['users_profile']['end_date'] = !empty($post['users_profile']['end_date']) ? date('Y-m-d', strtotime($post['users_profile']['end_date'])) : "";
 				$other_tables['partners'] = $post['partners'];

@@ -1,8 +1,8 @@
 
         <tr class="step1_interview">
             <td>
-                <div class="input-group date form_datetime"  data-date-start-date="+0d">                                       
-                    <input type="text" size="16" class="form-control sched_datetime" name="sched_date[]" />
+                <div class="input-group date date-picker form_datetime"  data-date-start-date="+0d">                                       
+                    <input type="text" size="16" class="form-control" name="sched_date[]" />
                     <span class="input-group-btn">
                         <button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
                     </span>

@@ -157,7 +157,7 @@
 
     <div class="modal-footer margin-top-0">
         <button type="button" data-dismiss="modal" class="btn btn-default btn-sm">Close</button>
-        <button type="button" class="btn green btn-sm" onclick="save_calendar( $(this).parents('form') )">Save changes</button>
+        <button type="button" class="btn green btn-sm" onclick="save_calendar( $(this).parents('form') )">Save</button>
     </div>
 </form>
 

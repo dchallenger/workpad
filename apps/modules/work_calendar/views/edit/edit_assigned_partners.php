@@ -1,5 +1,4 @@
 <form class="form-horizontal" name="edit-mtf-list" id="form-calman-mplist" fg_id="calman-mplist">
-
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
         <h4 class="modal-title">Employee List Form</h4> 
@@ -8,13 +7,26 @@
     <div class="modal-body padding-bottom-0">
         <div class="row">
             <div class="col-md-3">
+                <?php if ($hr_admin) { ?>
                 <div class="portlet">
                     <div class="portlet-body" >
-
+                        <h4><span style="color:red">* </span>Company</h4>
+                            <?php                                                                     
+                                $company_options = array('' => '');
+                                foreach($company->result() as $option){
+                                    $company_options[$option->company_id] = $option->company;
+                                } 
+                            ?>
+                            <?php echo form_dropdown('company',$company_options, '', 'class="form-control select2me" data-placeholder="Select company" id="company_id"') ?>
+                    </div>
+                </div>
+                <?php } ?>
+                <div class="portlet">
+                    <div class="portlet-body" >
                         <input type="hidden" name="current_date" id="current_date" value="<?php echo date("Y-m-d", strtotime($date) ); ?>">
                         <input type="hidden" name="current_date_shift" id="current_date_shift" value="<?php echo $current_date_shift ?>">
                         <input type="hidden" name="update_shift" value="1">
-
+                        <h4>Shift Schedule</h4>
                         <div id="available_schedules" class="list-group">
 
                             <?php 
@@ -98,45 +110,51 @@
                             </thead>
                             <tbody>
 
-                                <?php for($i=0; $i < count( $partners ); $i++){ ?>
-                                <tr rel="0">
-                                    <td>
-                                        <input 
-                                            type="checkbox"                                            
-                                            name="user_id[<?php echo $i; ?>]"
-                                            id="chk_<?php echo $partners[$i]['user_id']; ?>" 
-                                            class="checkboxes" 
-                                            value="<?php echo $partners[$i]['user_id']; ?>" />
-                                    </td>
-                                    <td>
-                                        <span class="text-success"><?php echo $partners[$i]['display_name']; ?></span>
-                                        <br>
-                                       <a id="date_name" href="#" class="text-muted small">
-                                            <?php echo $partners[$i]['id_number']; ?>
-                                       </a>
-                                    </td> 
-                                    <td>
-                                        <?php echo $partners[$i]['shift']; ?>
-                                    </td>
-                                    <td>
-                                        <select  
-                                            name="shift_id[<?php echo $i; ?>]" 
-                                            id="select_<?php echo $partners[$i]['shift_id']; ?>"
-                                            data-select-id="<?php echo $partners[$i]['user_id']; ?>"
-                                            class="form-control shiftSelect" 
-                                            data-placeholder="Select...">
+                                <?php 
+                                    if (!$hr_admin || ($hr_admin &&  $company_id)) {
+                                        for($i=0; $i < count( $partners ); $i++) { 
+                                ?>
+                                            <tr rel="0">
+                                                <td>
+                                                    <input 
+                                                        type="checkbox"                                            
+                                                        name="user_id[<?php echo $i; ?>]"
+                                                        id="chk_<?php echo $partners[$i]['user_id']; ?>" 
+                                                        class="checkboxes" 
+                                                        value="<?php echo $partners[$i]['user_id']; ?>" />
+                                                </td>
+                                                <td>
+                                                    <span class="text-success"><?php echo $partners[$i]['display_name']; ?></span>
+                                                    <br>
+                                                   <a id="date_name" href="#" class="text-muted small">
+                                                        <?php echo $partners[$i]['id_number']; ?>
+                                                   </a>
+                                                </td> 
+                                                <td>
+                                                    <?php echo $partners[$i]['shift']; ?>
+                                                </td>
+                                                <td>
+                                                    <select  
+                                                        name="shift_id[<?php echo $i; ?>]" 
+                                                        id="select_<?php echo $partners[$i]['shift_id']; ?>"
+                                                        data-select-id="<?php echo $partners[$i]['user_id']; ?>"
+                                                        class="form-control shiftSelect" 
+                                                        data-placeholder="Select...">
 
-                                            <option value="" selected="selected">--</option>
+                                                        <option value="" selected="selected">--</option>
 
-                                            <?php for($j=0; $j < count( $shifts ); $j++){ ?>
-                                                <option value="<?php echo $shifts[$j]['shift_id']; ?>">
-                                                    <?php echo $shifts[$j]['shift']; ?>
-                                                </option>
-                                            <?php } ?>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <?php } ?>
+                                                        <?php for($j=0; $j < count( $shifts ); $j++){ ?>
+                                                            <option value="<?php echo $shifts[$j]['shift_id']; ?>">
+                                                                <?php echo $shifts[$j]['shift']; ?>
+                                                            </option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                <?php 
+                                        } 
+                                    }
+                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -147,7 +165,7 @@
 
     <div class="modal-footer margin-top-0">
         <button type="button" data-dismiss="modal" class="btn btn-default btn-sm close-modal">Close</button>
-        <button type="button" class="btn green btn-sm" onclick="save_calendar( $(this).parents('form') )">Save changes</button>
+        <button type="button" class="btn green btn-sm" onclick="save_calendar( $(this).parents('form') )">Save</button>
     </div>
 </form>
 
@@ -220,6 +238,11 @@
 
     jQuery(document).ready(function() { 
 
+        $('.select2me').select2({
+            placeholder: "Select an option",
+            allowClear: true
+        });
+
         customHandleUniform();
 
         $('.shiftSelect').on('change', function(){
@@ -260,7 +283,11 @@
 
             $('#current_date_shift').val($(this).data('shift-id'));
 
-            var request_data = {shift_id: $(this).data('shift-id'), date: $("#current_date").val()}
+            var request_data = {
+                shift_id: $(this).data('shift-id'), 
+                date: $("#current_date").val(),
+                company_id: $('#company_id').val()
+            }
 
             $.ajax({
                 url: base_url + module.get('route') + '/get_available_schedules',
@@ -295,6 +322,48 @@
                 }
             });         
         });
+
+        $("#company_id").on('change', function(){
+            var request_data = {
+                shift_id: $('#current_date_shift').val(), 
+                date: $("#current_date").val(),
+                company_id: $(this).val()
+            }
+
+            $.ajax({
+                url: base_url + module.get('route') + '/get_available_schedules',
+                type: "POST",
+                async: false,
+                data: request_data,
+                dataType: "json",
+                beforeSend: function () {
+                    blockMe();
+                },
+                success: function (response) {
+                    console.log('done');
+
+                    unBlockMe();
+
+                    if (typeof (response.rows) != 'undefined') {
+
+                        $("#partners-list-table tbody").empty();
+                        $('#partners-list-table > tbody:last').append(response.rows);
+
+                        customHandleUniform();
+
+                        /*$('.selectM3').select2('destroy');   
+                        $('.selectM3').select2();*/                     
+                    }
+
+                    for (var i in response.message) {
+                        if (response.message[i].message != "") {
+                            notify(response.message[i].type, response.message[i].message);
+                        }
+                    }
+                }
+            });         
+        });
+
 
         $("#search-partner").on('keyup', function(e){ console.log(e.keyCode);
 

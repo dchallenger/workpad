@@ -415,21 +415,6 @@
 								</div>
 							</div>
 						@endif
-						@if(in_array('sbu_unit', $partners_keys))
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<input type="hidden" value="{{$sbu_unit_id}}" id="partners-sbu_unit">
-									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.sbu_unit') }} :</label>
-									<div class="col-md-7 col-sm-7">
-										<span id="role-permission">{{$sbu_unit}}</span>
-										<br>
-										<span class="text-muted small">Total Percentage : <span class="total_percentage"></span></span>										
-									</div>
-								</div>
-							</div>
-						</div>						
-						@endif
 						@if(in_array('section', $partners_keys))
 							<div class="row">
 								<div class="col-md-12">
@@ -532,6 +517,44 @@
 						</div>
 					</div>
 				</div>
+				<!-- sbu unit -->
+				<div class="portlet">
+					<div class="portlet-title">
+						<div class="caption">{{ lang('partners.sbu_unit') }}</div>
+						<div class="tools">
+							<a class="collapse" href="javascript:;"></a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.sbu_unit') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="reports-to">{{$sbu_unit}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+	                    <?php
+	                        $sbu_unit_details = explode(',', $sbu_unit_details);
+	                    ?>
+	                    @if(!empty($sbu_unit))
+	                        @foreach(explode(',',$sbu_unit) as $key => $val)
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $val }} :</label>
+											<div class="col-md-7 col-sm-7">
+												<span id="reports-to">@if($sbu_unit_details[$key] != 'n/a') {{$sbu_unit_details[$key]}}% @else {{$sbu_unit_details[$key]}} @endif</span>
+											</div>
+										</div>
+									</div>
+								</div>                
+	                        @endforeach
+	                    @endif						
+					</div>
+				</div>				
 			</div>
 			<div class="tab-pane" id="overview_tab17">
 				<!-- Cost Center Information -->

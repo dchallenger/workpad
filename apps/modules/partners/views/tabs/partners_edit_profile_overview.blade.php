@@ -27,6 +27,8 @@
 			@include('edit/custom_fgs/employment')
 			<!-- Work Assignment Information -->
 			@include('edit/custom_fgs/work_assignment')
+			<!-- SBU Unit -->
+			@include('edit/custom_fgs/sbu_unit')
 		</form>
 		</div>
 		<div class="tab-pane" id="overview_tab17">

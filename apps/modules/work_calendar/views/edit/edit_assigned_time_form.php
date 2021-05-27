@@ -74,7 +74,7 @@
             </div>
         </div>        <div class="modal-footer">
             <button type="button" data-dismiss="modal" class="btn btn-default btn-sm" onclick="customCloseButtonCallback();">Close</button>
-            <button type="button" class="btn green btn-sm" onclick="save_fg( $(this).parents('form') )">Save changes</button>
+            <button type="button" class="btn green btn-sm" onclick="save_fg( $(this).parents('form') )">Save</button>
         </div>
     </div>
 </form>

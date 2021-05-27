@@ -104,9 +104,9 @@
         Calendar.init();
     }
 
-    $('#calman_form').on('hidden.bs.modal', function () {
+/*    $('#calman_form').on('hidden.bs.modal', function () {
         close_this();
-    })
+    })*/
 
     $(document).ready(function(){
         

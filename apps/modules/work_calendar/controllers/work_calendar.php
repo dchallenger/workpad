@@ -169,7 +169,8 @@ class Work_calendar extends MY_PrivateController
         		$this->session->userdata('user')->user_id
         		, date("Y-m-d", strtotime($this->input->post('date')))
         		, $this->input->post('shift_id')
-                , $role_id);
+                , $role_id
+                , $this->input->post('company_id'));
 
         $data['currentday_schedules'] = 
         	$this->mod->get_work_calendar_details(
@@ -177,8 +178,11 @@ class Work_calendar extends MY_PrivateController
         		date("Y-m-d", strtotime($this->input->post('date_to'))), 
         		$this->session->userdata('user')->user_id);
 
+        $data['company_id'] = ($this->input->post('company_id') && $this->input->post('company_id') != '' ? $this->input->post('company_id') : 0);
+        $data['hr_admin'] = $this->permission['process'];
         //edit_assigned_partners_rows_only
         $this->response->rows = $this->load->view('edit/edit_assigned_partners_rows_only', $data, true);
+
         $this->response->available_scheds = $this->load->view('edit/edit_assigned_partners_scheds_only', $data, true);
 
         $this->response->message[] = array(
@@ -226,6 +230,10 @@ class Work_calendar extends MY_PrivateController
         		date("Y-m-d", strtotime($this->input->post('date'))), 
         		$this->session->userdata('user')->user_id);
 
+        $data['company'] = $this->mod->get_company();
+
+        $data['company_id'] = 0;
+        $data['hr_admin'] = $this->permission['process'];
         $view['content'] = $this->load->view('edit/edit_assigned_partners', $data, true);
         
         //$this->response->edit_assigned_partners = $this->load->view('templates/modal', $view, true);
@@ -326,8 +334,13 @@ class Work_calendar extends MY_PrivateController
 	        		$data['shift_id']= $this->input->post('shift_id');
                     $data['type']= $this->input->post('type');
  
-        			$data['partners']= $manager_id !== '0' ? $this->mod->get_partners($manager_id, $role_id) : array(); 
-                    
+                    $data['partners']= $manager_id !== '0' ? $this->mod->get_partners($manager_id, $role_id) : array(); 
+
+                    $data['company'] = $this->mod->get_company();
+
+                    $data['company_id'] = ($this->input->post('company_id') && $this->input->post('company_id') != '' ? $this->input->post('company_id') : 0);
+                    $data['hr_admin'] = $this->permission['process'];
+
                     if ($this->input->post('type') == 'shift'){
                         $view['content'] = $this->load->view('edit/edit_manage_partners_list', $data, true);
                     }

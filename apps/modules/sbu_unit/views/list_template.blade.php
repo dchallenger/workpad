@@ -14,9 +14,9 @@
     <td>
         <a id="users_sbu_unit_sbu_unit" href="<?php echo $edit_url; ?>" class="text-success"><?php echo $users_sbu_unit_sbu_unit; ?></a>
     </td>
-    <td>
+<!--     <td>
         <a id="users_sbu_unit_percentage" href="<?php echo $edit_url; ?>" class="text-success"><?php echo $users_sbu_unit_percentage; ?></a>
-    </td>    
+    </td>     -->
     <td class="hidden-xs">
         <span id="users_sbu_unit_status_id" <?php echo $users_sbu_unit_status_id == 'Active' ? 'class="badge badge-success"' : 'class="badge badge-error"' ; ?> ><?php echo $users_sbu_unit_status_id; ?></span>
     </td>    

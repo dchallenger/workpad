@@ -36,17 +36,27 @@ $(document).ready(function(){
 	});
 
 	$('#users_profile-sbu_unit').change(function() {
-		var sbu_unit_ids = $(this).val();
-		$.ajax({
-			url: base_url + module.get('route') + '/get_sbu_unit_percentage',
-			type:"POST",
-			async: false,
-			data: 'sbu_unit_ids='+sbu_unit_ids,
-			dataType: "json",
-			success: function ( response ) {
-				$('.total_percentage').html(response.total_perentage);
-			}
-		});		
+        $("#users_profile-sbu_unit option").each(function(){
+            var optionValue = $(this).val();
+            var optionText = $(this).text();
+
+			if ($("#users_profile-sbu_unit option[value="+optionValue+"]:selected").length > 0) {
+                var html ='<div class="form-group" data-sbu="'+optionText+'">\
+                    <label class="control-label col-md-3">'+optionText+' (%)</label>\
+                    <div class="col-md-5">\
+                        <input type="text" class="form-control" name="users_profile[sbu_unit_details][]" id="users_profile-sbu_unit_details" value="" data-inputmask="\'mask\': \'9\', \'repeat\': 3, \'greedy\' : false" placeholder="Enter Percentage"/>\
+                    </div>\
+                </div>';
+
+				if ($("div[data-sbu='" + optionText +"']").length < 1) {
+					$('#sbu_container').append(html);
+					$(":input").inputmask();
+				}
+    		} else {
+    			if ($("div[data-sbu='" + optionText +"']").length > 0)
+    				$("div[data-sbu='" + optionText +"']").remove();
+    		}
+        });	
 	});
 /*	$('#partners_personal-city_town').select2({
 	    placeholder: "Select an option",

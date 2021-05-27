@@ -90,6 +90,7 @@ class timerecord_model extends Record
 				FROM time_period_list  tpl 
 				JOIN users_profile up ON up.company_id =  tpl.`company_id`  
 				AND up.`user_id` = '".$this->user->user_id."'
+				ORDER BY tpl.from DESC
 				LIMIT 5";
 
 		$result = $this->db->query( $qry );

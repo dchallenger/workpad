@@ -198,6 +198,11 @@ var Calendar = function () {
 							        }
 								}
 
+                                $('.modal')
+                                    .on('hide.bs.modal', function (){
+                                        $('#calman_view').html('');
+                                    }); 
+
 								handle_ajax_message( response.message );
 							}
 						});
@@ -261,31 +266,44 @@ var Calendar = function () {
 						},
 						success: function ( response ) {	
 
-                        var scrollPos = 0;
+                            var scrollPos = 0;
 
-                        $('.modal')
-                            .on('show.bs.modal', function (){
-                                scrollPos = $('body').scrollTop();
-                                $('body').css({
-                                    overflow: 'hidden',
-                                    position: 'fixed',
-                                    top : -scrollPos
-                                });
-                            })
-                            .on('hide.bs.modal', function (){
-                                $('body').css({
-                                    overflow: '',
-                                    position: '',
-                                    top: ''
-                                }).scrollTop(scrollPos);
-                            });	 
+                            $('#calman_view').html();
+                            $('#calman_view').html(response.edit_assigned_partners);
+                            $('#calman_view').modal('show');
 
-							$('#calman_view').html();
-							$('#calman_view').html(response.edit_assigned_partners);
-							$('#calman_view').modal('show');
+                            jQuery('.tooltips').tooltip();
+                            jQuery('select.selectM3').select2();
 
-							jQuery('.tooltips').tooltip();
-							jQuery('select.selectM3').select2();
+                            $('.modal')
+                                .on('hide.bs.modal', function (){
+                                    $('#calman_view').html('');
+                                }); 
+/*                            var scrollPos = 0;
+
+                            $('.modal')
+                                .on('show.bs.modal', function (){
+                                    scrollPos = $('body').scrollTop();
+                                    $('body').css({
+                                        overflow: 'hidden',
+                                        position: 'fixed',
+                                        top : -scrollPos
+                                    });
+                                })
+                                .on('hide.bs.modal', function (){
+                                    $('body').css({
+                                        overflow: '',
+                                        position: '',
+                                        top: ''
+                                    }).scrollTop(scrollPos);
+                                });	 
+
+    							$('#calman_view').html();
+    							$('#calman_view').html(response.edit_assigned_partners);
+    							$('#calman_view').modal('show');
+
+    							jQuery('.tooltips').tooltip();
+    							jQuery('select.selectM3').select2();*/
 						}
 					});	
 
