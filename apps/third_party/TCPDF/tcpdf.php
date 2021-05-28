@@ -6877,9 +6877,17 @@ class TCPDF {
 				$exurl = $file;
 			}
 			// check if file exist and it is valid
-			if (!@TCPDF_STATIC::file_exists($file)) {
+/*			if (!@TCPDF_STATIC::file_exists($file)) {
 				return false;
+			}*/			
+			if (!@TCPDF_STATIC::file_exists($file)) {
+				// try to encode spaces on filename
+				$tfile = str_replace(' ', '%20', $file);
+				if (@TCPDF_STATIC::file_exists($tfile)) {
+					$file = $tfile;
+				}
 			}
+
 			if (($imsize = @getimagesize($file)) === FALSE) {
 				if (in_array($file, $this->imagekeys)) {
 					// get existing image data
