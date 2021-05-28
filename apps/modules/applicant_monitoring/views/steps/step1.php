@@ -8,7 +8,7 @@
 		<?php endif;?>
 	</div>
 	<div class="well margin-top-10"><?php
-		if( isset($recruit ) ):
+		if( $is_assigned && isset($recruit ) ):
 			foreach( $recruit as $rec ): ?>
 				<span class="margin-right-5">
 					<span class="btn default btn-xs movable-label">:</span>

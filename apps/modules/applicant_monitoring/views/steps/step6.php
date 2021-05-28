@@ -4,7 +4,7 @@
 		<p class="small"><?php echo $step->description?></p>
 	</div>
 	<div class="well margin-top-10"><?php
-		if( isset($recruit ) ):
+		if($is_assigned && isset($recruit ) ):
 			$button_color = 'btn-primary';		
 			foreach( $recruit as $rec ): 
 				$jo = $db->get_where('recruitment_process_offer', array('process_id' => $rec->process_id));

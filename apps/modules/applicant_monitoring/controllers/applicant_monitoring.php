@@ -20,6 +20,7 @@ class Applicant_monitoring extends MY_PrivateController
 		
 		//get all MRF
 		$vars['request_id'] = "";
+		
 		$vars['mrf'] = $this->mod->get_active_mrf_by_year();
 		if( sizeof( $vars['mrf'] ) > 0 )
 		{
@@ -155,6 +156,7 @@ class Applicant_monitoring extends MY_PrivateController
 			$mrf = $this->db->query( $qry )->row();
 			foreach($_steps->result() as $_step)
 			{
+				$step[$_step->status_id]['request_id'] = $request_id;
 				$step[$_step->status_id]['step'] = $_step;
 				$step[$_step->status_id]['is_assigned'] = $is_assigned;
 				$step[$_step->status_id]['is_interviewer'] = $is_interviewer;
@@ -166,11 +168,14 @@ class Applicant_monitoring extends MY_PrivateController
 						LEFT JOIN {$this->db->dbprefix}recruitment_request rr ON a.request_id = rr.request_id
 						LEFT JOIN {$this->db->dbprefix}recruitment_personal c on c.recruit_id = a.recruit_id and c.key = 'gender'";
 				if($is_interviewer){
-					$qry .= " LEFT JOIN {$this->db->dbprefix}recruitment_request_approver rra on rra.request_id = a.request_id ";
+					//$qry .= " LEFT JOIN {$this->db->dbprefix}recruitment_request_approver rra on rra.request_id = a.request_id ";
+					$qry .= " JOIN {$this->db->dbprefix}recruitment_process_schedule ps on a.process_id = ps.process_id AND ps.user_id = ".$this->user->user_id."";
 				}
 				$qry .= " WHERE a.status_id = {$_step->status_id} AND b.status_id < 11 AND a.request_id = {$request_id} and a.deleted = 0";
 				
-				if($is_interviewer){ $qry .= " AND (rra.approver_id = ".$this->user->user_id. " OR rr.created_by = ".$this->user->user_id.") GROUP BY a.request_id";}
+				//if($is_interviewer){ $qry .= " AND (rra.approver_id = ".$this->user->user_id. " OR rr.created_by = ".$this->user->user_id.") GROUP BY a.request_id";}
+
+				if($is_interviewer){ $qry .= " GROUP BY a.request_id";}
 
 				$recruits = $this->db->query( $qry );
 
@@ -186,6 +191,7 @@ class Applicant_monitoring extends MY_PrivateController
 
 			foreach($_steps->result() as $_step)
 			{
+				$step[$_step->status_id]['request_id'] = $request_id;
 				$step[$_step->status_id]['step'] = $_step;
 				$step[$_step->status_id]['is_interviewer'] = $is_interviewer;
 				$step[$_step->status_id]['is_assigned'] = $is_assigned;
@@ -197,7 +203,8 @@ class Applicant_monitoring extends MY_PrivateController
 						JOIN {$this->db->dbprefix}recruitment c on c.recruit_id = a.recruit_id
 						LEFT JOIN {$this->db->dbprefix}recruitment_personal d on d.recruit_id = a.recruit_id and d.key = 'gender'";
 				if($is_interviewer){ 
-					$qry .= " LEFT JOIN {$this->db->dbprefix}recruitment_request_approver rra on rra.request_id = a.request_id";
+					//$qry .= " LEFT JOIN {$this->db->dbprefix}recruitment_request_approver rra on rra.request_id = a.request_id";
+					$qry .= " JOIN {$this->db->dbprefix}recruitment_process_schedule ps on a.process_id = ps.process_id AND ps.user_id = ".$this->user->user_id."";
 				}
 				
 				$qry .= " WHERE a.status_id = {$_step->status_id} AND YEAR(b.created_on) = {$year} AND b.deleted = 0 AND a.deleted = 0 AND b.status_id <> 7";
@@ -206,7 +213,8 @@ class Applicant_monitoring extends MY_PrivateController
                      $qry .= " AND b.hr_assigned={$user_id}";
                 }
                 
-                if($is_interviewer){ $qry .= " AND (rra.approver_id = ".$this->user->user_id. " OR b.created_by = ".$this->user->user_id.") GROUP BY a.request_id"; }
+                //if($is_interviewer){ $qry .= " AND (rra.approver_id = ".$this->user->user_id. " OR b.created_by = ".$this->user->user_id.") GROUP BY a.request_id"; }
+                if($is_interviewer){ $qry .= " GROUP BY a.request_id"; }
 
                 $qry .= " ORDER BY b.created_on ASC";
      	
@@ -380,6 +388,13 @@ class Applicant_monitoring extends MY_PrivateController
 		$process_id = $this->input->post('process_id');
 		$this->response->saved = false;
 
+		$this->db->where('process_id',$process_id);
+		$process_result = $this->db->get('recruitment_process');
+		if ($process_result && $process_result->num_rows() > 0)
+			$recruit_id = $process_result->row()->recruit_id;
+		else
+			$recruit_id = 0;
+
 		//$checklists = $this->db->get_where('recruitment_employment_checklist', array('deleted' => 0))->result_array();
 		$completed = $_POST['completed'];
 		$attachment = $_POST['attachment'];
@@ -401,6 +416,77 @@ class Applicant_monitoring extends MY_PrivateController
 							);
 
 			$this->db->insert('recruitment_process_employment_checklist', $insert_list);
+
+			$recruitment_personal_info = array();
+			switch ($key) {
+				case 17://SSS ID
+					$recruitment_personal_info = array(
+														'recruit_id' => $recruit_id,
+														'key_id' => 110,
+														'key' => 'sss_number',
+														'sequence' => 1,
+														'key_name' => 'SSS Number',
+														'key_value' => ($number_value[$key] != '' ? $number_value[$key] : ''),
+														'created_by' => $this->user->user_id
+													);
+					
+					$this->db->where('recruit_id',$this->input->post('recruit_id'));
+					$this->db->where('key_id',110);
+					$pp = $this->db->get('recruitment_personal');
+
+					if ($pp && $pp->num_rows() > 0) {
+						$this->db->where('recruit_id',$this->input->post('recruit_id'));
+						$this->db->where('key_id',110);						
+						$this->db->update('recruitment_personal',$recruitment_personal_info);						
+					} else {
+						$this->db->insert('recruitment_personal',$recruitment_personal_info);
+					}
+					break;
+				case 18://Philhealth ID
+					$recruitment_personal_info = array(
+														'recruit_id' => $recruit_id,
+														'key_id' => 119,
+														'key' => 'philhealth_number',
+														'sequence' => 1,
+														'key_name' => 'Philhealth Number',
+														'key_value' => ($number_value[$key] != '' ? $number_value[$key] : ''),
+														'created_by' => $this->user->user_id
+													);
+					$this->db->where('recruit_id',$this->input->post('recruit_id'));
+					$this->db->where('key_id',119);
+					$pp = $this->db->get('recruitment_personal');
+
+					if ($pp && $pp->num_rows() > 0) {
+						$this->db->where('recruit_id',$this->input->post('recruit_id'));
+						$this->db->where('key_id',119);						
+						$this->db->update('recruitment_personal',$recruitment_personal_info);						
+					} else {
+						$this->db->insert('recruitment_personal',$recruitment_personal_info);
+					}					
+					break;
+				case 19://TIN ID
+					$recruitment_personal_info = array(
+														'recruit_id' => $recruit_id,
+														'key_id' => 116,
+														'key' => 'tin_number',
+														'sequence' => 1,
+														'key_name' => 'TIN Number',
+														'key_value' => ($number_value[$key] != '' ? $number_value[$key] : ''),
+														'created_by' => $this->user->user_id
+													);
+					$this->db->where('recruit_id',$this->input->post('recruit_id'));
+					$this->db->where('key_id',116);
+					$pp = $this->db->get('recruitment_personal');
+
+					if ($pp && $pp->num_rows() > 0) {
+						$this->db->where('recruit_id',$this->input->post('recruit_id'));
+						$this->db->where('key_id',116);						
+						$this->db->update('recruitment_personal',$recruitment_personal_info);						
+					} else {
+						$this->db->insert('recruitment_personal',$recruitment_personal_info);
+					}						
+					break;					
+			}
 			//create system logs
 			$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', 'recruitment_process_employment_checklist', array(), $insert_list);
 		}
@@ -3322,7 +3408,7 @@ class Applicant_monitoring extends MY_PrivateController
 				$error = true;
 			}
 
-			$system_series = $this->db->get_where('system_series', array('series_code' => 'AHI_ID_NUMBER'))->row();
+			$system_series = $this->db->get_where('system_series', array('series_code' => 'OCLP_ID_NUMBER'))->row();
 
 			if(!(empty($system_series))){
 			    // records have been returned
@@ -3528,19 +3614,6 @@ class Applicant_monitoring extends MY_PrivateController
 				}
 			}
 
-			$this->load->model('system_feed');
-
-			$feed = array(
-                'status' => 'info',
-                'message_type' => 'Personnel',
-                'user_id' => $this->user->user_id,
-                'feed_content' => $recruit->firstname.' '.$recruit->lastname.' now has a 201 record.',
-                'uri' => $this->mod->route,
-                'recipient_id' => $users_profile['reports_to_id']
-            );
-            $recipients = array($users_profile['reports_to_id']);
-            $this->system_feed->add( $feed, $recipients );
-
             if( $this->db->_error_message() != "" ){
 				$this->response->message[] = array(
 					'message' => $this->db->_error_message(),
@@ -3549,7 +3622,10 @@ class Applicant_monitoring extends MY_PrivateController
 				$error = true;
 			}
 
-            $this->response->notify[] = $users_profile['reports_to_id'];
+			$notify = $this->mod->notify_hr($recruit,$new_user_id);
+			$notify = $this->mod->notify_hr_recruitment($recruit,$new_user_id);
+
+            $this->response->notify = $notify;
 		}
 		else{
 		//get previous data for audit logs

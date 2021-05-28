@@ -56,10 +56,10 @@
                 ?>
                         <li><a data-toggle="tab" href="#tab_schedule"><?=lang('applicant_monitoring.schedule')?></a></li>
                         <li class="<?php if($process->status_id == 2 || ($process->status_id == 5 && $saved_scheds)) echo 'active' ?>"><a data-toggle="tab" href="#tab_interview"><?=lang('applicant_monitoring.interview')?></a></li>
-                        <?php if ($process->status_id >= 3 && $process->status_id != 5) { ?>
+                        <?php if ($process->status_id >= 3 && $process->status_id != 5 && (!$is_interviewer && $is_assigned)) { ?>
                             <li class="<?php if($process->status_id == 3) echo 'active' ?>"><a data-toggle="tab" href="#tab_examination">Examination</a></li>       
                             <li class="<?php if($process->status_id == 4) echo 'active' ?>"><a data-toggle="tab" href="#tab_bi">BI</a></li>                
-                        <?php } else if ($process->status_id == 5) {?>
+                        <?php } else if ($process->status_id == 5 && (!$is_interviewer && $is_assigned)) {?>
                                 <li class="<?php if($process->status_id == 4) echo 'active' ?>"><a data-toggle="tab" href="#tab_bi">BI</a></li>
                         <?php } ?>
                 <?php

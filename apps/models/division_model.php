@@ -92,7 +92,7 @@ class division_model extends Record
 		$division_option = array();
 		if ($result && $result->num_rows() > 0) {
 			foreach ($result->result() as $row) {
-				$division_option[$row->division_id] = $row->division;
+				$division_option[$row->division_id] = $row->division. ' ('.get_division_code($row->division_code,'-').')';
 			}
 		}
 

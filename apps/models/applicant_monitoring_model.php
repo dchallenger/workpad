@@ -36,6 +36,127 @@ class applicant_monitoring_model extends Record
 		parent::__construct();
 	}
 
+    function notify_hr( $applicant_info='', $new_user_id = '' )
+    {   
+        $this->load->library('parser');
+        $this->parser->set_delimiters('{{', '}}');
+
+        $this->load->model('partners_model', 'partners_model');
+
+/*        $qry = "SELECT  *
+                FROM {$this->db->dbprefix}roles r 
+                WHERE FIND_IN_SET(2,profile_id)";*/
+
+        $qry = "SELECT  *
+                FROM {$this->db->dbprefix}roles r 
+                WHERE role_id = 2";
+
+        $roles_result = $this->db->query($qry);
+
+        $notified = array();        
+        if ($roles_result && $roles_result->num_rows() > 0) {
+            $role_id = $roles_result->row()->role_id;
+
+            $this->db->where('role_id',$role_id);
+            $users = $this->db->get('users');
+
+            if ($users && $users->num_rows() > 0) {
+                foreach ($users->result() as $row) {
+                    //insert notification
+                    $insert = array(
+                        'status' => 'info',
+                        'message_type' => 'Recruitment',
+                        'user_id' => $this->user->user_id,
+                        'feed_content' => $applicant_info->firstname.' '.$applicant_info->lastname.' now has a 201 record.',
+                        'recipient_id' => $row->user_id,
+                        'uri' => str_replace(base_url(), '', $this->partners_model->url).'/detail/'.$new_user_id
+                    );
+
+                    $this->db->insert('system_feeds', $insert);
+                    $id = $this->db->insert_id();
+                    $this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $row->user_id));
+                    $notified[] = $row->user_id;
+
+                    //email hr
+                    $data['new_employee'] = $applicant_info->lastname.', '.$applicant_info->firstname;
+                    $data['hr'] = $row->full_name;            
+
+                    $create_201_template = $this->db->get_where( 'system_template', array( 'code' => 'CREATED-201-HR') )->row_array();
+
+                    $msg = $this->parser->parse_string($create_201_template['body'], $data, TRUE); 
+
+                    $subject = $this->parser->parse_string($create_201_template['subject'], $data, TRUE); 
+
+                    $this->db->query("INSERT INTO {$this->db->dbprefix}system_email_queue (`to`, `subject`, body)
+                             VALUES('{$row->email}', '{$subject}', '".$this->db->escape_str($msg)."') "); 
+                }
+            }
+        }
+
+        return $notified;
+    }
+
+    function notify_hr_recruitment( $applicant_info='', $new_user_id = '' )
+    {   
+        $this->load->library('parser');
+        $this->parser->set_delimiters('{{', '}}');
+
+        $this->load->model('mrf_admin_model', 'mrf_admin_model');
+
+/*        $qry = "SELECT  *
+                FROM {$this->db->dbprefix}roles r 
+                WHERE FIND_IN_SET(4,profile_id)";*/
+
+        $qry = "SELECT  *
+                FROM {$this->db->dbprefix}roles r 
+                WHERE role_id = 42";
+
+        $roles_result = $this->db->query($qry);
+        
+        $notified = array();        
+
+        if ($roles_result && $roles_result->num_rows() > 0) {
+            $role_id = $roles_result->row()->role_id;
+
+            $this->db->where('role_id',$role_id);
+            $users = $this->db->get('users');
+
+            if ($users && $users->num_rows() > 0) {
+                foreach ($users->result() as $row) {
+                    //insert notification
+                    $insert = array(
+                        'status' => 'info',
+                        'message_type' => 'Recruitment',
+                        'user_id' => $this->user->user_id,
+                        'feed_content' => $applicant_info->firstname.' '.$applicant_info->lastname.' now has a 201 record.',
+                        'recipient_id' => $row->user_id,
+                        'uri' => str_replace(base_url(), '', $this->mrf_admin_model->url)
+                    );
+
+                    $this->db->insert('system_feeds', $insert);
+                    $id = $this->db->insert_id();
+                    $this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $row->user_id));
+                    $notified[] = $row->user_id;
+
+                    //email hr
+                    $data['new_employee'] = $applicant_info->lastname.', '.$applicant_info->firstname;
+                    $data['hr'] = $row->full_name;            
+
+                    $create_201_template = $this->db->get_where( 'system_template', array( 'code' => 'CREATED-201-HR-RECRUITMENT') )->row_array();
+
+                    $msg = $this->parser->parse_string($create_201_template['body'], $data, TRUE); 
+
+                    $subject = $this->parser->parse_string($create_201_template['subject'], $data, TRUE); 
+
+                    $this->db->query("INSERT INTO {$this->db->dbprefix}system_email_queue (`to`, `subject`, body)
+                             VALUES('{$row->email}', '{$subject}', '".$this->db->escape_str($msg)."') "); 
+                }
+            }
+        }
+
+        return $notified;
+    }
+
     function get_partners_personal($user_id=0, $partners_personal_table='', $key='', $sequence=0){
         $this->db->select('personal_id, key_value')
         ->from($partners_personal_table)
@@ -1426,11 +1547,13 @@ class applicant_monitoring_model extends Record
         $mrf = array();
        
         $qry = "SELECT a.*, b.position,b.position AS position_sought -- , rra.approver_id
-        FROM {$this->db->dbprefix}recruitment_request a        
+        FROM {$this->db->dbprefix}recruitment_request a
+        LEFT JOIN {$this->db->dbprefix}recruitment_process rp on a.request_id = rp.request_id
         -- LEFT JOIN {$this->db->dbprefix}recruitment_request_approver rra on rra.request_id = a.request_id
         LEFT JOIN {$this->db->dbprefix}users_position b on b.position_id = a.position_id";
         if($is_interviewer){
-            $qry .= " LEFT JOIN {$this->db->dbprefix}recruitment_request_approver rra on rra.request_id = a.request_id ";
+            $qry .= " JOIN {$this->db->dbprefix}recruitment_process_schedule ps on rp.process_id = ps.process_id AND ps.user_id = ".$this->user->user_id."";
+            //$qry .= " LEFT JOIN {$this->db->dbprefix}recruitment_request_approver rra on rra.request_id = a.request_id ";
         }
         
         $qry .= " WHERE a.deleted=0 AND a.status_id IN (3,7) ";
@@ -1439,9 +1562,10 @@ class applicant_monitoring_model extends Record
              $qry .= " AND a.hr_assigned={$user_id}";
         }*/
         
-        if($is_interviewer){ $qry .= " AND (rra.approver_id = ".$this->user->user_id. " OR a.created_by = ".$this->user->user_id.") GROUP BY a.request_id"; }
+        //if($is_interviewer){ $qry .= " AND (rra.approver_id = ".$this->user->user_id. " OR a.created_by = ".$this->user->user_id." OR ) GROUP BY a.request_id"; }
 
-        $qry .= " ORDER BY YEAR(a.created_on) DESC, a.created_on ASC";
+        $qry .= " GROUP BY a.request_id ORDER BY YEAR(a.created_on) DESC, a.created_on ASC";
+
         $mrfs = $this->db->query( $qry );
         
         foreach( $mrfs->result() as $_mrf )

@@ -4,7 +4,7 @@
 		<p class="small"><?php echo $step->description?></p>
 	</div>
 	<div class="well margin-top-10"><?php
-		if( isset($recruit ) ):
+		if($is_assigned && isset($recruit ) ):
 			foreach( $recruit as $rec ): 
 				$this->db->limit(1);
 				$recruit_user = $this->db->get_where('users_profile', array('recruit_id' => $rec->recruit_id));
