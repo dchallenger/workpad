@@ -128,7 +128,7 @@
 		                    			";
 		                    $internal_sql = $db->query($internal_hiring_qry);
 		                    $internal_hiring_result = array();
-		                    if($internal_sql->num_rows() > 0){
+		                    if($internal_sql && $internal_sql->num_rows() > 0){
 		                    	$internal_hiring_result = $db->query($internal_hiring_qry)->result_array();
 		                    }
 		                
