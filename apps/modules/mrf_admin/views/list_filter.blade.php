@@ -54,7 +54,6 @@
 			<span class="filter-type event-block label label-success" filter_value="">{{ lang('common.all') }}</span>
 			<span class="filter-type event-block label label-default" filter_value="1">{{ lang('mrf_admin.external') }}</span>
 			<span class="filter-type event-block label label-default" filter_value="2">{{ lang('mrf_admin.internal') }}</span>
-			<span class="filter-type event-block label label-default" filter_value="3">{{ lang('mrf_admin.extern_intern') }}</span>
 		</div>
 	</div>
 </div>

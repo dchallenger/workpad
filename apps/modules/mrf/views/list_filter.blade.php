@@ -52,9 +52,8 @@
 		<span class="small text-muted">Filter by applicant type.</span>
 		<div class="margin-top-10">
 			<span class="filter-type event-block label label-success" filter_value="">{{ lang('common.all') }}</span>
-			<span class="filter-type event-block label label-default" filter_value="1">{{ lang('mrf.internal') }}</span>
-			<span class="filter-type event-block label label-default" filter_value="2">{{ lang('mrf.external') }}</span>
-			<span class="filter-type event-block label label-default" filter_value="3">{{ lang('mrf.external') }}/{{ lang('mrf.internal') }}</span>
+			<span class="filter-type event-block label label-default" filter_value="1">External</span>
+			<span class="filter-type event-block label label-default" filter_value="2">Internal</span>
 		</div>
 	</div>
 </div>

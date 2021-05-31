@@ -54,7 +54,6 @@
 			<span class="filter-type event-block label label-success" filter_value="">{{ lang('common.all') }}</span>
 			<span class="filter-type event-block label label-default" filter_value="1">External</span>
 			<span class="filter-type event-block label label-default" filter_value="2">Internal</span>
-			<span class="filter-type event-block label label-default" filter_value="3">External/Internal</span>
 		</div>
 	</div>
 </div>

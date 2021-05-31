@@ -46,7 +46,7 @@
 
 							<!-- END DRAGGABLE EVENTS PORTLET-->            
 						</div>
-						<div class="col-md-3 col-sm-12">
+						<div class="col-md-3 col-sm-12 hidden">
 							<!-- LINK TO MANAGE CALENDAR-->    
 							<h4>Link</h4>
 							<a rel="{{ get_mod_route('my_calendar') }}" href="{{ get_mod_route('my_calendar') }}"  class="label label-success">{{ lang('work_calendar.mycalendar_button') }}</a>				
