@@ -159,6 +159,6 @@ $lang['partners_immediate'] = array(
     'name_immediate_superior' => 'Name of Immediate Superior',	
     'training_provider' => 'Training Provider',
     'training_cost' => 'Training Cost',
-    'sbu_unit' => 'SBU Unit',
+    'sbu_unit' => 'SBU',
     'number_children' => 'Number of Children',
 );

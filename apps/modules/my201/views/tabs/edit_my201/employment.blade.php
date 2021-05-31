@@ -597,6 +597,12 @@
                     @endif
                 </div>                
                 @endif
+	            <div class="form-group total_percentage_container" style="display:@if(!empty($sbu_unit)) block @else none @endif">
+	                <label class="control-label col-md-3">Total (%)</label>
+	                <div class="col-md-5">
+	                    <input readonly type="text" class="form-control" name="" id="total_percentage" value="{{ array_sum($sbu_unit_details) }}"/>
+	                </div>
+	            </div>                  
 			</div>
 		</div>
 	</div>

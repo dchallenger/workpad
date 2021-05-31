@@ -25,8 +25,8 @@ class change_request_model extends Record
 		$this->mod_code = 'change_request';
 		$this->route = 'partners/201_update';
 		$this->url = site_url('partners/201_update');
-		$this->primary_key = 'personal_id';
-		$this->table = 'partners_personal_request';
+		$this->primary_key = 'personal_request_header_id';
+		$this->table = 'partners_personal_request_header';
 		$this->icon = 'fa-folder';
 		$this->short_name = 'Change Request';
 		$this->long_name  = 'Change Request';
@@ -57,15 +57,15 @@ class change_request_model extends Record
 			$qry .= " AND (ppa.user_id = ".$this->user->user_id .")";
 		}
 		$qry .= ' '. $filter;
-		$qry .= " GROUP BY {$this->db->dbprefix}{$this->table}.status, {$this->db->dbprefix}{$this->table}.created_on,{$this->db->dbprefix}{$this->table}.key_id, {$this->db->dbprefix}{$this->table}.user_id ORDER BY {$this->db->dbprefix}{$this->table}.created_on desc";
+		$qry .= " ORDER BY {$this->db->dbprefix}{$this->table}.created_on desc";
 		$qry .= " LIMIT $limit OFFSET $start";
 		
 		$this->load->library('parser');
 		$this->parser->set_delimiters('{$', '}');
 		$qry = $this->parser->parse_string($qry, array('search' => $search), TRUE);
 		
-// echo "<pre>";echo $qry;
 		$result = $this->db->query( $qry );
+
 		if($result->num_rows() > 0)
 		{			
 			foreach($result->result_array() as $row){
@@ -101,9 +101,37 @@ class change_request_model extends Record
 		return $notified;
 	}
 
-	function change_status($user_id, $key_id, $status)
+	public function get_change_request_info($personal_request_header_id = 0)
 	{
-		$this->db->update( $this->table, array('status' => $status), array('user_id' => $user_id, 'key_id' => $key_id) );
+		$this->db->select(
+							'personal_request_header_id,partners_personal_request_header.user_id,full_name as employee_name,
+							company,v_department as department,status,partners_personal_request_header.remarks,partners_personal_request_header.created_on
+						');
+		$this->db->where('personal_request_header_id',$personal_request_header_id);
+		$this->db->join('users_profile','partners_personal_request_header.user_id = users_profile.user_id');
+		$this->db->join('users','users.user_id = users_profile.user_id');
+		$result = $this->db->get('partners_personal_request_header');
+
+		if ($result && $result->num_rows() > 0)
+			return $result->row_array();
+		else
+			return array();
+	}
+
+	public function get_change_request_details($personal_request_header_id = 0)
+	{
+		$this->db->where('personal_request_header_id',$personal_request_header_id);
+		$this->db->join('partners_key','partners_key.key_id = partners_personal_request.key_id');
+		$result = $this->db->get('partners_personal_request');
+		if ($result && $result->num_rows() > 0)
+			return $result->result_array();
+		else
+			return array();
+	}
+
+	function change_status($personal_request_header_id, $status)
+	{
+		$this->db->update( $this->table, array('status' => $status), array('personal_request_header_id' => $personal_request_header_id) );
 	}
 
 	function change_status_detail($record_id, $status)

@@ -8,7 +8,7 @@
 			<input type="hidden" id="created_on" name="created_on" value="{{ $record['created_on'] }}">
 	    	<!-- BEGIN FORM-->
 	        <div class="form-body">
-			    @if( sizeof( $record ) > 0 )
+			    @if( !empty( $record ) )
 		    		<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
@@ -72,9 +72,7 @@
 								<thead>
 									<tr>
 										<th width="30%" class="padding-top-bottom-10" >{{ lang('my_change_request.item') }}</th>
-										<!-- <th width="30%" class="padding-top-bottom-10 hidden-xs" >{{ lang('my_change_request.current') }}</th> -->
 										<th width="30%" class="padding-top-bottom-10">{{ lang('my_change_request.request') }}</th>
-										<!-- <th width="20%" class="padding-top-bottom-10" >{{ lang('common.actions') }}</th> -->
 									</tr>
 								</thead>
 								<tbody>
@@ -113,16 +111,8 @@
 													@endif
 												@else
 													{{ $request['key_value'] }}												
-												@endif												
-											</td>
-<!-- 											<td>
-												@if ($can_approve)
-													<div class="make-switch" data-off="danger" data-on="success" data-on-label="&nbsp;&nbsp;{{ lang('my_change_request.approved') }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" data-off-label="&nbsp;{{ lang('my_change_request.decline') }}&nbsp;">
-														<input type="hidden" name="personal_id[{{ $request['record_id'] }}]" value="{{ $request['status'] }}"/>
-														<input type="checkbox" class="dontserializeme toggle" name="temp-personal_id[]" value="{{ $request['record_id'] }}" {{ ($request['status'] == 3) ?  'checked="checked"' : '' }} />
-													</div>
 												@endif
-											</td> -->
+											</td>
 										</tr>
 									@endforeach
 								</tbody>

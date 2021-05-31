@@ -24,6 +24,62 @@ class My_change_request extends MY_PrivateController
 		echo $this->load->blade('pages.listing')->with( $this->load->get_cached_vars() );
 	}
 
+	public function detail( $record_id, $child_call = false )
+	{
+
+		if( !$this->permission['detail'] )
+		{
+			echo $this->load->blade('pages.insufficient_permission')->with( $this->load->get_cached_vars() );
+			die();
+		}
+
+		$this->_detail( $record_id );
+	}
+
+	private function _detail( $record_id, $new = false)
+	{
+		$change_request_info_arr = $this->mod->get_change_request_info($record_id);
+
+		if(!empty($change_request_info_arr)){
+			$data['record'] = $change_request_info_arr;
+			$data['request_details'] = $this->mod->get_change_request_details($record_id);
+			$this->load->vars( $data );
+			
+			if( !$new ){
+				if( !IS_AJAX )
+				{
+					echo $this->load->blade('pages.detail')->with( $this->load->get_cached_vars() );
+				}
+				else{
+					$data['title'] = $this->mod->short_name .' - Detail';
+					$data['content'] = $this->load->blade('pages.detail')->with( $this->load->get_cached_vars() );
+
+					// $this->response->html = $this->load->view('templates/modal', $data, true);
+
+					$this->response->message[] = array(
+						'message' => '',
+						'type' => 'success'
+					);
+					$this->_ajax_return();
+				}
+			}
+		} else {
+			if( !$child_call ){
+				echo $this->load->blade('pages.error', array('error' => $record_check))->with( $this->load->get_cached_vars() );
+			}
+		}
+	}
+
+	function _list_options_active( $record, &$rec )
+	{
+		if( $this->permission['detail'] )
+		{
+			$rec['detail_url'] = $this->mod->url . '/detail/'.$record['record_id'];
+			$rec['view_url'] = '<a href="'.$rec['detail_url'].'" class="btn btn-xs text-muted"><i class="fa fa-search"></i> '. lang('common.view') .'</a>';
+			// $rec['view_url'] = '<a href="javascript: see_detail('.$record['partners_personal_request_user_id'].', \''.$record['partners_personal_request_key_id'].'\', '.$record['partners_personal_request_status_id'].')" class="btn btn-xs text-muted"><i class="fa fa-search"></i> View</a>';
+		}
+	}
+
 	function cr_form()
 	{
 		$this->_ajax_only();
@@ -162,14 +218,30 @@ class My_change_request extends MY_PrivateController
 		{
 			foreach( $classes as $class_id => $keys )
 			{
+				$ctr = 1;
+
+				$personal_request_header_info = array(
+														'user_id' => $this->user->user_id,
+														'key_class_id' => $class_id,
+														'sequence' => $ctr,
+														'status' => $status,
+														'remarks' => $remarks[$class_id]
+													);
+
+				$this->db->insert('partners_personal_request_header', $personal_request_header_info);
+				$personal_request_header_id = $this->db->insert_id();
+
+				$populate_personal_qry = "CALL sp_partners_personal_populate_approvers({$personal_request_header_id}, {$this->user->user_id})";
+				$result_insert_update = $this->db->query( $populate_personal_qry );
+				mysqli_next_result($this->db->conn_id);
+
 				$active = $this->profile->has_active_request( $class_id, $this->user->user_id );
 				$request_data = $this->profile->get_change_request_data( $class_id, $this->user->user_id );
 
-				$ctr = 1;
 				foreach($keys as $key_id => $value)
 				{
 					$value = trim($value);
-					if(!empty($value)){
+					if($value != ''){
 						$no_delete[] = $key_id;
 
 						$where = $data = array(
@@ -177,6 +249,7 @@ class My_change_request extends MY_PrivateController
 							'key_id' => $key_id
 						);
 
+						$data['personal_request_header_id'] = $personal_request_header_id;
 						$data['sequence'] = $ctr;
 						$data['key_value'] = $value;
 						$data['status'] = $status;
@@ -215,10 +288,6 @@ class My_change_request extends MY_PrivateController
 							$personal_id =  $this->db->insert_id();
 
 							$action = 'insert';
-
-							$populate_personal_qry = "CALL sp_partners_personal_populate_approvers({$request_personal_id}, {$this->user->user_id})";
-							$result_insert_update = $this->db->query( $populate_personal_qry );
-							mysqli_next_result($this->db->conn_id);
 						}
 						$data['key_id'] = $key_id;
 
@@ -226,7 +295,7 @@ class My_change_request extends MY_PrivateController
 				        $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $action, 'partners_personal_request', $previous_main_data, $data);				
 
 
-						if($status == 2){			
+/*						if($status == 2){			
 							if($this->db->_error_message() != "")
 							{
 								$this->response->message[] = array(
@@ -279,17 +348,15 @@ class My_change_request extends MY_PrivateController
 									goto stop;
 								}
 							}
-						}
+						}*/
 
-						$ctr++;
-
-			            if(in_array($status, array(2))){
-			                // INSERT NOTIFICATIONS FOR APPROVERS
-			                $this->response->notified = $this->mod->notify_approvers( $request_personal_id, $data, $personal_id );
-			                $this->response->notified = $this->mod->notify_filer( $request_personal_id, $data, $personal_id );
-			            }
-					}
+					}					
 				}
+	            if(in_array($status, array(2))){
+	                // INSERT NOTIFICATIONS FOR APPROVERS
+	                $this->response->notified = $this->mod->notify_approvers( $personal_request_header_id, $personal_request_header_info);
+	                //$this->response->notified = $this->mod->notify_filer( $personal_request_header_id, $personal_request_header_info);
+	            }				
 			}
 		}
 

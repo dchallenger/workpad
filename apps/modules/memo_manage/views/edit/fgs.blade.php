@@ -151,7 +151,7 @@
 									<a data-dismiss="fileupload" class="btn red fileupload-exists fileupload-delete"><i class="fa fa-trash-o"></i> Remove</a>
 									
 								</div>
-								<div class="help-block text-muted small">Allow only image and pdf files.</div>
+								<div class="help-block text-muted small">Allow only image files.</div>
 							</div> 				</div>	
 			</div>	</div>
 </div>

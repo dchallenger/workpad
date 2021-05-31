@@ -68,6 +68,7 @@ class dashboard_model extends Record
 		LEFT JOIN {$this->db->dbprefix}users_profile b on b.user_id = a.celebrant_id
 		LEFT JOIN {$this->db->dbprefix}users_company c on c.company_id = b.company_id
 		LEFT JOIN {$this->db->dbprefix}business_group d on d.group_id = c.business_group_id
+		WHERE a.birth_date >= CURDATE()
 		ORDER BY birth_date"; // WHERE user_id = '$userID';
 		$result = $this->db->query($qry);
 		
@@ -80,6 +81,20 @@ class dashboard_model extends Record
 			
 		$result->free_result();
 		return $data;	
+	}
+
+	function getTotalBirthdayToday() 
+	{
+		$qry = "SELECT *
+		FROM dashboard_birthday a
+		WHERE a.birth_date = CURDATE()";
+
+		$result = $this->db->query($qry);
+		
+		if ($result && $result->num_rows() > 0)
+			return $result->num_rows();		
+		else
+			return 0;
 	}
 
 	function getBirthdayGreetings($filter){

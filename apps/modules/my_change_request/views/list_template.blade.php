@@ -1,38 +1,11 @@
 <tr class="record">
     <td>
-        {{ $key_label }}
-    </td>
-    <td>
-        <?php
-            // switch( $key_code )
-            // {
-            //     case 'city_town':
-            //         $db->limit('1');
-            //         $city = $db->get_where('cities', array('city_id' => $key_value))->row();
-            //         $key_value = $city->city;
-            //         break;
-            //     case 'country':
-            //         $db->limit('1');
-            //         $country = $db->get_where('countries', array('country_id' => $key_value))->row();
-            //         $key_value = $country->long_name;
-            //         break;
-            //     case 'civil_status':
-            //         $db->limit('1');
-            //         $status = $db->get_where('partners_civil_status', array('civil_status_id' => $key_value))->row();
-            //         $key_value = $status->civil_status;
-            //         break;
-            //     case 'gender':
-            //         $key_value = ucfirst( $key_value );
-            //         break;
-            // }
-        ?>
-
-        {{ $key_value }}
+        {{ $key_class }}
     </td>
     <td>{{ $remarks }}</td>
     <td>
         <?php
-            switch( $partners_personal_request_status )
+            switch( $partners_personal_request_header_status )
             {
                 
                 case "For Approval":
@@ -51,14 +24,27 @@
                    
             }
         ?>
-        <span class="badge {{ $badge }}">{{ $partners_personal_request_status }}</span>
+        <span class="badge {{ $badge }}">{{ $partners_personal_request_header_status }}</span>
     </td>
     <td>
-        {{ date( 'M-d', strtotime( $partners_personal_request_created_on ) ) }}
+        {{ date( 'M-d', strtotime( $partners_personal_request_header_created_on ) ) }}
         <span class="text-muted small">
-            {{ date( 'D', strtotime( $partners_personal_request_created_on ) ) }}
+            {{ date( 'D', strtotime( $partners_personal_request_header_created_on ) ) }}
         </span>
         <br>
-        <span class="text-muted small">{{ date( 'Y', strtotime( $partners_personal_request_created_on ) ) }}</span>
+        <span class="text-muted small">{{ date( 'Y', strtotime( $partners_personal_request_header_created_on ) ) }}</span>
+    </td>
+    <td>
+        <div class="btn-group">
+            {{ $view_url }}
+        </div>
+        @if( !empty($options) )
+            <div class="btn-group">
+                <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> {{ lang('common.options') }}</a>
+                <ul class="dropdown-menu pull-right">
+                    {{ $options }}
+                </ul>
+            </div>
+        @endif
     </td>
 </tr>

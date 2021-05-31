@@ -28,7 +28,7 @@ class Memo extends MY_PrivateController
         $data['memo'] = isset($this->permission['list']) ? $this->permission['list'] : 0;
 
         $this->load->model('memo_manage_model', 'memo_manage');
-        $data['memo_manage'] = isset($permission[$this->memo_manage->mod_code]['list']) ? $permission[$this->memo_manage->mod_code]['list'] : 0;
+        $data['memo_manage'] = 0;//isset($permission[$this->memo_manage->mod_code]['list']) ? $permission[$this->memo_manage->mod_code]['list'] : 0;
      
         $this->load->vars($data);  
 		echo $this->load->blade('pages.listing')->with( $this->load->get_cached_vars() );
@@ -169,7 +169,7 @@ class Memo extends MY_PrivateController
 
 		if (!in_array($file_ext, $allowable_file_type)){			
 			$this->response->message[] = array(
-				'message' => 'Allow only image and pdf files.',
+				'message' => 'Allow only image files.',
 				'type' => 'warning'
 			);
 			$this->response->uploaded = false;
@@ -210,6 +210,9 @@ class Memo extends MY_PrivateController
 			$pdf_thumbName = substr($file->name, 0, strrpos( $file->name, '.'));
 			$pdf_dash = new imagick($base_path.$directory.'[0]');
 			$pdf_dash->setImageFormat($thumbFormat);
+			$pdf_dash->setImageCompression(imagick::COMPRESSION_JPEG); 
+			$pdf_dash->setImageCompressionQuality(100);			
+			$pdf_dash = $pdf_dash->flattenImages();
 			$pdf_dash->thumbnailImage( 480, 480);
 			// write to disk
 			$pdf_dash->writeImage($base_path.$dashboard_folder.$pdf_thumbName.'.'.$thumbFormat );

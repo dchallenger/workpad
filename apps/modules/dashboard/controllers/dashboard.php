@@ -46,7 +46,8 @@ class Dashboard extends MY_PrivateController{
 			$data 					= array();
 			$data['current_user'] 	= $this->session->userdata['user']->user_id;
 			$data['birthdays'] 		= $this->mod->getBirthdayFeeds($data['current_user']);		
-			
+			$data['count_bday_today'] = $this->mod->getTotalBirthdayToday();
+
 			$this->load->model('signatories_model', 'signatories');
 			$data['approver'] = $this->signatories->check_if_approver( $this->user->user_id );
 

@@ -1329,6 +1329,7 @@ class Clearance extends MY_PrivateController
         $partner_record = $this->db->query($partner_record)->row_array();
         // debug($partner_record); die;
 
+        $template_data['company_name'] = $partner_record['company'];
         $template_data['title'] = $partner_record['firstname']." ".$partner_record['middlename']." ".$partner_record['lastname'];
         $template_data['employee_no'] = $partner_record['login'];
         $template_data['employee_name'] = $partner_record['firstname']." ".substr($partner_record['middlename'],0, 1).". ".$partner_record['lastname'];

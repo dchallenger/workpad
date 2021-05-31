@@ -1,48 +1,18 @@
-<?php
-    switch ($partners_personal_request_key_code) {
-        case 'email':
-            $partners_personal_request_key_class = 'Office Email';
-            break;
-        case 'phone':
-            $partners_personal_request_key_class = 'Office Phone';
-            break;
-        case 'mobile':
-            $partners_personal_request_key_class = 'Office Mobile';
-            break;
-        case 'personal_email':
-            $partners_personal_request_key_class = 'Personal Email';
-            break;                      
-        case 'personal_phone':
-            $partners_personal_request_key_class = 'Personal Phone';
-            break;
-        case 'personal_mobile':
-            $partners_personal_request_key_class = 'Personal Mobile';
-            break;                      
-    }
-?>
 <tr class="record">
     <td>
-        <span class="text-success">{{ $partners_personal_request_employee_id }}</span>
+        <span class="text-success">{{ $partners_personal_request_header_employee_id }}</span>
         <br>
-        <span class="text-muted small">{{ $partners_personal_request_id_number }}</span>
+        <span class="text-muted small">{{ $partners_personal_request_header_id_number }}</span>
     </td>
     <td>
-        <span class="text-success">{{ $partners_personal_request_key_class }}</span>
+        <span class="text-success">{{ $partners_personal_request_header_key_class }}</span>
     </td>    
     <td>
-        {{ date( 'M-d', strtotime( $partners_personal_request_created_on ) ) }}
-        <span class="text-muted small">
-            {{ date( 'D', strtotime( $partners_personal_request_created_on ) ) }}
-        </span>
-        <br>
-        <span class="text-muted small">{{ date( 'Y', strtotime( $partners_personal_request_created_on ) ) }}</span>
-    </td>
-<!--     <td>
-        <span class="label label-info">{{ $partners_personal_request_changes }}</span>
-    </td> -->
+        <span class="text-success">{{ $partners_personal_request_header_remarks }}</span>
+    </td>      
     <td>
         <?php
-            switch( $partners_personal_request_status )
+            switch( $partners_personal_request_header_status )
             {
                 
                 case "For Approval":
@@ -61,8 +31,16 @@
                    
             }
         ?>
-        <span class="badge {{ $badge }}">{{ $partners_personal_request_status }}</span>
+        <span class="badge {{ $badge }}">{{ $partners_personal_request_header_status }}</span>
     </td>
+    <td>
+        {{ date( 'M-d', strtotime( $partners_personal_request_header_created_on ) ) }}
+        <span class="text-muted small">
+            {{ date( 'D', strtotime( $partners_personal_request_header_created_on ) ) }}
+        </span>
+        <br>
+        <span class="text-muted small">{{ date( 'Y', strtotime( $partners_personal_request_header_created_on ) ) }}</span>
+    </td>    
     <td>
         <div class="btn-group">
             {{ $view_url }}

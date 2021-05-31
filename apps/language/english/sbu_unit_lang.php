@@ -1,6 +1,6 @@
 <?php
 $lang['sbu_unit'] = array(
-	'sbu_unit' => 'SBU Unit',
+	'sbu_unit' => 'SBU',
 	'percentage' => 'Percentage',
 	'active' => 'Active',
 	'inactive' => 'Inactive',

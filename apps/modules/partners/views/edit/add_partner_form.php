@@ -459,7 +459,7 @@
                                     <!-- BEGIN FORM-->
                                     <div class="form-horizontal">
                                         <div class="form-group">
-                                            <label class="control-label col-md-3">Email<span class="required">*</span></label>
+                                            <label class="control-label col-md-3">Office Email<span class="required">*</span></label>
                                             <div class="col-md-8">
                                                 <input type="text" class="form-control" name="users[email]" id="users-email" placeholder="Enter Email"/>
                                             </div>

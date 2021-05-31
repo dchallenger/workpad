@@ -12,7 +12,7 @@ $(document).ready(function(){
     $('input[name="temp-personal_id[]"]').trigger('change');
 });
 
-function save_request_detail()
+function save_request_detail(record_id,status)
 {
     bootbox.confirm(lang.change_request.confirm_save_request, function(confirm) {
         if( confirm )
@@ -22,7 +22,8 @@ function save_request_detail()
                     $.ajax({
                         url: base_url + module.get('route') + '/save_request_detail',
                         type:"POST",
-                        data: $('form[name="change-request-form"]').find(":not('.dontserializeme')").serialize(),
+                        /*data: $('form[name="change-request-form"]').find(":not('.dontserializeme')").serialize(),*/
+                        data: {record_id:record_id, status:status},
                         async: false,
                         dataType: "json",
                         success: function ( response ) {
@@ -37,7 +38,7 @@ function save_request_detail()
     });  
 }
 
-function change_status( user_id, key_id, status)
+function change_status( record_id, status)
 {
 	switch( status )
 	{
@@ -58,7 +59,7 @@ function change_status( user_id, key_id, status)
 					$.ajax({
 						url: base_url + module.get('route') + '/change_status',
 						type:"POST",
-						data: {user_id:user_id, key_id:key_id, status:status},
+						data: {record_id:record_id, status:status},
 						async: false,
 						dataType: "json",
 						success: function ( response ) {

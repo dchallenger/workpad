@@ -546,12 +546,24 @@
 										<div class="form-group">
 											<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $val }} :</label>
 											<div class="col-md-7 col-sm-7">
-												<span id="reports-to">@if($sbu_unit_details[$key] != 'n/a') {{$sbu_unit_details[$key]}}% @else {{$sbu_unit_details[$key]}} @endif</span>
+												<span id="">@if($sbu_unit_details[$key] != 'n/a') {{$sbu_unit_details[$key]}}% @else {{$sbu_unit_details[$key]}} @endif</span>
 											</div>
 										</div>
 									</div>
 								</div>                
 	                        @endforeach
+	                        @if (array_sum($sbu_unit_details) > 0)
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">Total:</label>
+											<div class="col-md-7 col-sm-7">
+												<span>{{array_sum($sbu_unit_details)}}%</span>
+											</div>
+										</div>
+									</div>
+								</div>                         
+							@endif	                        
 	                    @endif						
 					</div>
 				</div>				
@@ -917,7 +929,7 @@
 					<div class="portlet-body form">
 						<!-- START FORM -->
                 	@if(in_array('taxcode', $partners_keys))
-                        <div class="row">
+                        <div class="row hidden">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label col-md-5 col-sm-5 text-right text-muted">{{ $partners_labels['taxcode'] }} :</label>

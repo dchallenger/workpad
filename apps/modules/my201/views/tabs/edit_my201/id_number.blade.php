@@ -10,7 +10,7 @@
 		<div class="form-horizontal">
             <div class="form-body">
                 @if(in_array('taxcode', $partners_keys))
-                    <div class="col-md-12">
+                    <div class="col-md-12 hidden">
                         <div class="form-group">
                             <label class="control-label col-md-5 col-sm-5">{{ $partners_labels['taxcode'] }} </label>
                             <div class="col-md-5">

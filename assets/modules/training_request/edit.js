@@ -1,4 +1,22 @@
 $(document).ready(function(){
+    $('#training_application-training_course_id').change(function() {
+        if ($(this).val() == 0)
+            $('.others_training_course').show();
+        else {
+            $('#training_course_others').val('');
+            $('.others_training_course').hide();
+        }
+    })
+
+    $('#training_application-training_provider').change(function() {
+        if ($(this).val() == 0)
+            $('.others_training_provider').show();
+        else {
+            $('#training_provider_others').val('');
+            $('.others_training_provider').hide();
+        }
+    })
+
     $('#training_application-include_idp-temp').change(function(){
         if( $(this).is(':checked') ) {
             $('#training_application-include_idp').val('1');

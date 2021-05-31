@@ -44,14 +44,20 @@
                             <div class="form-group" data-sbu="{{$val}}">
                                 <label class="control-label col-md-3">{{ $val }} (%)</label>
                                 <div class="col-md-5">
-                                    <input type="text" class="form-control" name="users_profile[sbu_unit_details][]" id="users_profile-sbu_unit_details" value="{{ $sbu_unit_details[$key] }}" data-inputmask="'mask': '9', 'repeat': 3, 'greedy' : false" placeholder="Enter Percentage"/>
+                                    <input type="text" class="form-control sbu_unit_val_percent" name="users_profile[sbu_unit_details][]" id="users_profile-sbu_unit_details" value="{{ $sbu_unit_details[$key] }}" data-inputmask="'mask': '9', 'repeat': 3, 'greedy' : false" placeholder="Enter Percentage"/>
                                 </div>
                             </div>                        
-                        @endforeach
+                        @endforeach                      
                     @endif
                 </div>
                 @endif                                                           
             </div>
+            <div class="form-group total_percentage_container" style="display:@if(!empty($record['users_profile.sbu_unit'])) block @else none @endif">
+                <label class="control-label col-md-3">Total (%)</label>
+                <div class="col-md-5">
+                    <input readonly type="text" class="form-control" name="" id="total_percentage" value="{{ array_sum($sbu_unit_details) }}"/>
+                </div>
+            </div>                       
             <div class="form-actions fluid">
                 <div class="row" align="center">
                     <div class="col-md-12">

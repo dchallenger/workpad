@@ -11,7 +11,7 @@
         <div class="form-horizontal">
             <div class="form-body">
 
-                <div class="form-group">
+                <div class="form-group hidden">
                     <label class="control-label col-md-5"><span class="required">* </span>Tax Code</label>
                     <div class="col-md-5">
                     <?php $db->select('taxcode_id,taxcode');

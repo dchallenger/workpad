@@ -18,7 +18,7 @@
 					<ul class="nav nav-tabs ">
 						<li class="active"><a>{{ lang('common.personal') }}</a></li>
 						@if( $approver )
-							<li><a href="{{ get_mod_route('change_request') }}">{{ lang('common.manage') }}</a></li>
+							<li class="hidden"><a href="{{ get_mod_route('change_request') }}">{{ lang('common.manage') }}</a></li>
 						@endif
 					</ul>
 					<div class="tab-content">

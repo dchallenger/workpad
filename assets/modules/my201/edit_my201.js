@@ -106,7 +106,59 @@ $(document).ready(function() {
 	});
 	$('label[for="partners_personal_history-test-result-temp"]').css('margin-top', '0');
 
-	$('#partners_personal_history-licensure-attach-fileupload').fileupload({
+    $('.test_attach').fileupload({ 
+        url: base_url + module.get('route') + '/single_upload',
+        autoUpload: true,
+        contentType: false,
+    }).bind('fileuploadadd', function (e, data) {
+        $.blockUI({ message: '<div>Attaching file, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />' });
+    }).bind('fileuploaddone', function (e, data) { 
+
+        $.unblockUI();
+        var file = data.result.file;
+        if(file.error != undefined && file.error != "")
+		{
+			notify('error', file.error);
+		}
+		else{
+            $(this).parent().parent().parent().children('span').children('span').children('span.fileupload-preview').html(file.name);
+            $(this).parent().children('span.fileupload-new').css('display', 'none');
+            $(this).parent().children('.fileupload-exists').css('display', 'inline-block');
+            $(this).parent().parent().children('.fileupload-delete').css('display', 'inline-block');
+        	$(this).parent().parent().parent().parent().children('input:hidden:first').val(file.url);
+        }
+    }).bind('fileuploadfail', function (e, data) { 
+        $.unblockUI();
+        notify('error', data.errorThrown);
+    });
+
+    $('.licensure_attach').fileupload({ 
+        url: base_url + module.get('route') + '/single_upload',
+        autoUpload: true,
+        contentType: false,
+    }).bind('fileuploadadd', function (e, data) {
+        $.blockUI({ message: '<div>Attaching file, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />' });
+    }).bind('fileuploaddone', function (e, data) { 
+
+        $.unblockUI();
+        var file = data.result.file;
+        if(file.error != undefined && file.error != "")
+		{
+			notify('error', file.error);
+		}
+		else{
+            $(this).parent().parent().parent().children('span').children('span').children('span.fileupload-preview').html(file.name);
+            $(this).parent().children('span.fileupload-new').css('display', 'none');
+            $(this).parent().children('.fileupload-exists').css('display', 'inline-block');
+            $(this).parent().parent().children('.fileupload-delete').css('display', 'inline-block');
+        	$(this).parent().parent().parent().parent().children('input:hidden:first').val(file.url);
+        }
+    }).bind('fileuploadfail', function (e, data) { 
+        $.unblockUI();
+        notify('error', data.errorThrown);
+    });
+    
+/*	$('#partners_personal_history-licensure-attach-fileupload').fileupload({
         url: base_url + module.get('route') + '/single_upload',
         autoUpload: true,
     }).bind('fileuploadadd', function (e, data) {
@@ -140,7 +192,7 @@ $(document).ready(function() {
     {
         $('#partners_personal_history-licensure-attach-container .fileupload-new').each(function(){ $(this).css('display', 'none') });
         $('#partners_personal_history-licensure-attach-container .fileupload-exists').each(function(){ $(this).css('display', 'inline-block') });
-    }	
+    }	*/
 });
 
 function view_personal_details(modal_form, key_class, sequence){	

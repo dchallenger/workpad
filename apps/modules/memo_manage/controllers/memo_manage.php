@@ -27,7 +27,7 @@ class Memo_manage extends MY_PrivateController
         $data['memo_manage'] = isset($this->permission['list']) ? $this->permission['list'] : 0;
 
         $this->load->model('memo_model', 'memo');
-        $data['memo'] = 0; //isset($permission[$this->memo->mod_code]['list']) ? $permission[$this->memo->mod_code]['list'] : 0;
+        $data['memo'] = isset($permission[$this->memo->mod_code]['list']) ? $permission[$this->memo->mod_code]['list'] : 0;
      
         $this->load->vars($data);  
 		echo $this->load->blade('pages.listing')->with( $this->load->get_cached_vars() );

@@ -480,7 +480,7 @@
 				                    		</span>
 
 				                    		@if(strtotime($birthdays[$i]['birth_date']) === strtotime(date('Y-m-d')))
-				                    		
+				                    		<span><small class="text-muted">({{ $birthdays[$i]['time_line'] }})</small></span>
 					                    		<a 
 					                    			class="btn default btn-sm pull-right greetings"
 					                    			data-celebrant-id="{{ $birthdays[$i]['celebrant_id'] }}"

@@ -167,7 +167,6 @@ function save_request(action)
                         }
                     });
                 },
-                baseZ: 300000000
             });
             $.unblockUI();
         }

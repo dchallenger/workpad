@@ -1,4 +1,4 @@
-<?php $editable = false?>
+<?php $editable = true?>
 <div class="portlet">
 	<div class="portlet-title">
 		<div class="caption" id="education-category">{{ lang('my201.affiliation') }}</div>

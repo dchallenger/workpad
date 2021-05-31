@@ -125,71 +125,42 @@
                         </div>
                     </div>
                 </div> -->
-
                 <div class="form-group">
                     <label class="control-label col-md-3">Attachment</label>
-                    <div class="col-md-6">
-                        <div data-provides="fileupload" class="fileupload fileupload-new" id="partners_personal_history-licensure-attach-container">
-                            <input type="hidden" name="partners_personal_history[licensure-attach][]" id="partners_personal_history-licensure-attach" value="<?php echo (isset($licensure['licensure-attach']) ? $licensure['licensure-attach'] : ""); ?>"/>
+                    <div class="col-md-9">
+                        <div class="fileupload fileupload-new" data-provides="fileupload" id="partners_personal_history-licensure-attachments-container">
+                        <!-- <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"> -->
+                            <?php 
+                                $docs = (isset($licensure['licensure-attach']) ? $licensure['licensure-attach'] : "");
+                                if(empty($docs)){
+                                    $filename = '';
+                                }else{
+                                    $filename = urldecode(basename($docs));
+                                }
+                            ?>
+
+                            <input type="hidden" name="partners_personal_history[licensure-attach][]" id="partners_personal_history-licensure-attachments" value="{{$docs}}">
+                        <!-- </div> -->
+                            <!-- <div class="fileupload-preview thumbnail " style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>                             -->
                             <div class="input-group">
                                 <span class="input-group-btn">
-                                <span class="btn default btn-file">
-                                    <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Select file</span>
-                                    <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
-                                    <input type="file" id="partners_personal_history-licensure-attach-fileupload" type="file" name="files[]">
-                                </span>
-                                <a data-dismiss="fileupload" class="btn red fileupload-exists fileupload-delete"><i class="fa fa-trash-o"></i> Remove</a>
-                                
-                                <ul class="padding-none margin-top-11">
-                                    <!-- <i class="fa fa-file fileupload-exists"></i>  -->
-                                    <span class="fileupload-preview">
-                                        <!-- @if( isset($f_info['name'] ) ) {{ basename($f_info['name']) }} @endif -->
-
-                                        <?php
-                                        $attach_file = (isset($licensure['licensure-attach']) ? $licensure['licensure-attach'] : ""); 
-                                        if (!empty($attach_file)){
-                                            $file = FCPATH . urldecode( $attach_file );
-                                            if( file_exists( $file ) )
-                                            {
-                                                $f_info = get_file_info( $file );
-                                                $f_type = filetype( $file );
-
-    /*                                            $finfo = finfo_open(FILEINFO_MIME_TYPE);
-                                                $f_type = finfo_file($finfo, $file);*/
-
-                                                switch( $f_type )
-                                                {
-                                                    case 'image/jpeg':
-                                                    $icon = 'fa-picture-o';
-                                                    break;
-                                                    case 'video/mp4':
-                                                    $icon = 'fa-film';
-                                                    break;
-                                                    case 'audio/mpeg':
-                                                    $icon = 'fa-volume-up';
-                                                    break;
-                                                    default:
-                                                    $icon = 'fa-file-text-o';
-                                                }
-                                                $filepath = base_url()."partners/download_file/".$details_data_id[1]['licensure-attach'];
-                                                $file_view = base_url().$licensure['licensure-attach'];
-
-                                                echo '<li class="padding-3" style="list-style:none;"><a href="'.$filepath.'">
-                                                <span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
-                                                <span>'. basename($f_info['name']) .'</span>
-                                                </a>
-                                                </li>';
-                                            }
-                                        }
-                                        ?>
+                                    <span class="uneditable-input">
+                                        <i class="fa fa-file fileupload-exists"></i> 
+                                        <span class="fileupload-preview">{{$filename}}</span>
                                     </span>
-                                </ul>
-
+                                </span>
+                                <div id="licensure-attachments-container">
+                                    <span class="btn default btn-file add_file">
+                                        <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Select image</span>
+                                        <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+                                        <input type="file" name="files[]" class="default file licensure_attach" id="partners_personal_history-licensure-attachments-fileupload" />
+                                    </span>
+                                    <a data-dismiss="fileupload" class="btn red fileupload-exists fileupload-delete"><i class="fa fa-trash-o"></i> Remove</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
 			</div>
 		</div>
 	</div>

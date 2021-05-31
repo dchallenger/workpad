@@ -224,6 +224,43 @@ class Training_request extends MY_PrivateController
 
         $calendar_id = $_POST['training_application']['training_calendar_id'];
 
+        if ($this->input->post('training_course_others') != '') {
+            $this->db->where('course',$this->input->post('training_course_others'));
+            $course = $this->db->get('training_course');
+
+            if ($course && $course->num_rows > 0) {
+                $this->response->message[] = array(
+                    'message' => 'Training course already exists!',
+                    'type' => 'warning'
+                ); 
+
+                $this->_ajax_return(); 
+            } else {
+                $this->db->insert('training_course',array('course' => $this->input->post('training_course_others')));
+                $course_id = $this->db->insert_id();
+
+                $_POST['training_application']['training_course_id'] = $course_id;
+            }
+        }
+
+        if ($this->input->post('training_provider_others') != '') {
+            $this->db->where('provider',$this->input->post('training_provider_others'));
+            $provider = $this->db->get('training_provider');
+            if ($provider && $provider->num_rows > 0) {
+                $this->response->message[] = array(
+                    'message' => 'Training provider already exists!',
+                    'type' => 'warning'
+                );   
+
+                $this->_ajax_return();                   
+            } else {
+                $this->db->insert('training_provider',array('provider' => $this->input->post('training_provider_others')));
+                $provider_id = $this->db->insert_id();
+
+                $_POST['training_application']['training_provider'] = $provider_id;
+            }
+        }   
+
         //get total confirm on training calendar to validate
         if ($calendar_id != '') {
             $query = "SELECT COUNT(*) total_confirm FROM ww_training_calendar_participant c 
@@ -283,6 +320,37 @@ class Training_request extends MY_PrivateController
                 $this->response->notified = $this->mod->notify_approvers( $this->record_id,$this->user->user_id);
             }
 
+/*            if ($this->input->post('training_course_others') != '') {
+                $this->db->where('course',$this->input->post('training_course_others'));
+                $course = $this->db->get('training_course');
+                if ($course && $course->num_rows > 0) {
+                    $this->response->message[] = array(
+                        'message' => 'Training course already exists!',
+                        'type' => 'warning'
+                    ); 
+                } else {
+                    $this->db->insert('training_course',array('course' => $this->input->post('training_course_others')));
+                    $course_id = $this->db->insert_id();
+
+                    $this->db->update('training_application', array('training_course_id' => $course_id), array('training_application_id' => $this->record_id));
+                }
+            }
+
+            if ($this->input->post('training_provider_others') != '') {
+                $this->db->where('provider',$this->input->post('training_provider_others'));
+                $provider = $this->db->get('training_provider');
+                if ($provider && $provider->num_rows > 0) {
+                    $this->response->message[] = array(
+                        'message' => 'Training provider already exists!',
+                        'type' => 'warning'
+                    );                     
+                } else {
+                    $this->db->insert('training_provider',array('provider' => $this->input->post('training_provider_others')));
+                    $provider_id = $this->db->insert_id();
+
+                    $this->db->update('training_application', array('training_provider' => $provider_id), array('training_application_id' => $this->record_id));
+                }
+            }  */          
         }
 
         

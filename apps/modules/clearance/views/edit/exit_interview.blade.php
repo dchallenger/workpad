@@ -118,7 +118,7 @@
 								<a class="collapse" href="javascript:;"></a>
 							</div>
 						</div>
-						<p class="margin-bottom-25 small">This section manage to add and edit items in exit interview questionaire.</p>
+						<p class="margin-bottom-25 small">This section manage to add and edit items in exit interview questionnaire.</p>
 
 						<div class="portlet-body">
 							<div class="clearfix hidden">

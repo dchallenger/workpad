@@ -449,7 +449,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row hidden">
+						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
 									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.attachment') }} :</label>

@@ -15,17 +15,17 @@ class Change_request extends MY_PrivateController
 		{
 			$rec['detail_url'] = $this->mod->url . '/detail/'.$record['record_id'];
 			$rec['view_url'] = '<a href="'.$rec['detail_url'].'" class="btn btn-xs text-muted"><i class="fa fa-search"></i> '. lang('common.view') .'</a>';
-			// $rec['view_url'] = '<a href="javascript: see_detail('.$record['partners_personal_request_user_id'].', \''.$record['partners_personal_request_key_id'].'\', '.$record['partners_personal_request_status_id'].')" class="btn btn-xs text-muted"><i class="fa fa-search"></i> View</a>';
+			// $rec['view_url'] = '<a href="javascript: see_detail('.$record['partners_personal_request_header_user_id'].', \''.$record['partners_personal_request_key_id'].'\', '.$record['partners_personal_request_status_id'].')" class="btn btn-xs text-muted"><i class="fa fa-search"></i> View</a>';
 		}
 
-		if( $this->permission['approve'] && $record['partners_personal_request_status_id'] == 2 )
+		if( $this->permission['approve'] && $record['partners_personal_request_header_status_id'] == 2 )
 		{
-			$rec['options'] .= '<li><a href="javascript: change_status('.$record['partners_personal_request_user_id'].', \''.$record['partners_personal_request_key_id'].'\', 3)"><i class="fa fa-check text-success"></i> '. lang('my_change_request.approved') .'</a></li>';
+			$rec['options'] .= '<li><a href="javascript: change_status('.$record['record_id'].', 3)"><i class="fa fa-check text-success"></i> '. lang('my_change_request.approved') .'</a></li>';
 		}
 
-		if(  $this->permission['decline'] && $record['partners_personal_request_status_id'] == 2 )
+		if(  $this->permission['decline'] && $record['partners_personal_request_header_status_id'] == 2 )
 		{
-			$rec['options'] .= '<li><a href="javascript: change_status('.$record['partners_personal_request_user_id'].', \''.$record['partners_personal_request_key_id'].'\', 4)"><i class="fa fa-times text-danger"></i> '. lang('my_change_request.decline') .'</a></li>';
+			$rec['options'] .= '<li><a href="javascript: change_status('.$record['record_id'].', 4)"><i class="fa fa-times text-danger"></i> '. lang('my_change_request.decline') .'</a></li>';
 		}
 	}
 
@@ -34,8 +34,7 @@ class Change_request extends MY_PrivateController
 		$this->_ajax_only();
 
 		$status = $this->input->post('status');
-		$user_id = $this->input->post('user_id');
-		$key_id = $this->input->post('key_id');
+		$personal_request_header_id = $this->input->post('record_id');
 
 		switch( true )
 		{
@@ -71,44 +70,44 @@ class Change_request extends MY_PrivateController
         //SAVING START   
         $error = false;
 		$transactions = true;
-		$this->user_id = 0;
 		if( $transactions )
 		{
 			$this->db->trans_begin();
 		}
 
-		$where = array('user_id' => $user_id, 
-					'status' => 3,
-					'key_id' => $key_id);
-		$this->mod->change_status($user_id, $key_id, $status);
+		$this->mod->change_status($personal_request_header_id, $status);
 
 		$action = 'update';
 		$previous_main_data = array();
 
         //create system logs
-        $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $action, 'partners_personal_request', $previous_main_data, array('status' => $status));								
+        $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $action, 'partners_personal_request_header', $previous_main_data, array('status' => $status));								
+
+		$this->db->join('partners_key','partners_personal_request.key_id = partners_key.key_id','left');
+		$partners_personal_request = $this->db->get_where('partners_personal_request', array('personal_request_header_id' => $personal_request_header_id))->result_array();
+
+		$this->db->join('partners_key_class','partners_personal_request_header.key_class_id = partners_key_class.key_class_id','left');
+		$partners_personal_request_header = $this->db->get_where('partners_personal_request_header', array('personal_request_header_id' => $personal_request_header_id))->row_array();
+
+		$user_id = $partners_personal_request_header['user_id'];
 
 		$users_profile = $this->db->get_where('users_profile', array('user_id' => $user_id))->row_array();
-		$check_if_exists = $this->db->get_where($this->mod->table, $where)->result_array();
 
 		$this->load->model('partners_model', 'partners_mod');		
 
-		if (!empty($check_if_exists)) {
-			foreach($check_if_exists as $check_if_exist){
-				$this->db->join('partners_key_class','partners_key.key_class_id = partners_key_class.key_class_id','left');
-				$partners_key = $this->db->get_where('partners_key', array('partners_key.deleted' => 0, 'partners_key.key_id' => $check_if_exist['key_id']))->row_array();
-
-				if (!in_array($partners_key['key_class_code'],array('family'))) {
+		if (!empty($partners_personal_request) && $status == 3) {
+			foreach($partners_personal_request as $key => $personal_request_info){
+				if ($partners_personal_request_header['key_class_id'] != 58) {
 					$sequence = 1;
-					$partners_personal = $this->partners_mod->get_partners_personal($users_profile['user_id'], 'partners_personal', $partners_key['key_code'], 1);
-					$check_on_personal = $this->db->get_where('partners_personal', array('partner_id' => $users_profile['partner_id'], 'key_id' => $check_if_exist['key_id']))->result_array();
+					$partners_personal = $this->partners_mod->get_partners_personal($users_profile['user_id'], 'partners_personal', $personal_request_info['key_code'], 1);
+					$check_on_personal = $this->db->get_where('partners_personal', array('partner_id' => $users_profile['partner_id'], 'key_id' => $personal_request_info['key_id']))->result_array();
 
 					$main_record = array();
-					if (!in_array($check_if_exist['key_id'],array(212,243))) {			
+					if (!in_array($personal_request_info['key_id'],array(212,243))) {			
 						switch( true )
 						{
 							case count($check_on_personal) == 0:
-								$data_personal = $this->partners_mod->insert_partners_personal($users_profile['user_id'], $partners_key['key_code'], $check_if_exist['key_value'], 1, $users_profile['partner_id']);
+								$data_personal = $this->partners_mod->insert_partners_personal($users_profile['user_id'], $personal_request_info['key_code'], $personal_request_info['key_value'], 1, $users_profile['partner_id']);
 								$this->db->insert('partners_personal', $data_personal);
 								$this->response->action = 'insert';
 
@@ -119,7 +118,7 @@ class Change_request extends MY_PrivateController
 								$partners_personal = $partners_personal[0];
 								$main_record['modified_by'] = $this->user->user_id;
 								$main_record['modified_on'] = date('Y-m-d H:i:s');
-								$main_record['key_value'] = $check_if_exist['key_value'];
+								$main_record['key_value'] = $personal_request_info['key_value'];
 								$this->db->update( 'partners_personal', $main_record, array( 'personal_id' => $partners_personal['personal_id'] ) );
 								$this->response->action = 'update';
 
@@ -136,16 +135,16 @@ class Change_request extends MY_PrivateController
 								goto stop;
 						}
 					} else {
-						if (in_array($check_if_exist['key_id'],array(212))) {
-							$main_record['birth_date'] = ($check_if_exist['key_value'] && $check_if_exist['key_value'] != '' ? date('Y-m-d',strtotime($check_if_exist['key_value'])) : $users_profile->birth_date);
+						if (in_array($personal_request_info['key_id'],array(212))) {
+							$main_record['birth_date'] = ($personal_request_info['key_value'] && $personal_request_info['key_value'] != '' ? date('Y-m-d',strtotime($personal_request_info['key_value'])) : $users_profile->birth_date);
 							$this->db->update( 'users_profile', $main_record, array( 'user_id' => $user_id));
 
 					        //create system logs
 					        $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'users_profile', array(), $main_record);							
 						}
-						if (in_array($check_if_exist['key_id'],array(243))) {
-							if ($check_if_exist['key_value'] != '') {
-								$main_record['email'] = $check_if_exist['key_value'];
+						if (in_array($personal_request_info['key_id'],array(243))) {
+							if ($personal_request_info['key_value'] != '') {
+								$main_record['email'] = $personal_request_info['key_value'];
 								$this->db->update( 'users', $main_record, array( 'user_id' => $user_id));
 
 						        //create system logs
@@ -154,17 +153,14 @@ class Change_request extends MY_PrivateController
 						}					
 					}
 				} else {
-					if ($partners_key['key_class_code'] == 'family')
-						$personal_history = $this->partners_mod->get_partners_personal_history($user_id,'family-relationship');
-					else
-						$personal_history = $this->partners_mod->get_partners_personal_history($user_id,$partners_key['key_code']);
+					$personal_history = $this->partners_mod->get_partners_personal_history($personal_request_info['user_id'],$personal_request_info['key_code']);
 
 					if (!empty($personal_history))
 						$sequence = $personal_history[0]['sequence'] + 1;
 					else
 						$sequence = 1;
 
-					$data_personal = $this->partners_mod->insert_partners_personal($users_profile['user_id'], $partners_key['key_code'], $check_if_exist['key_value'], $sequence, $users_profile['partner_id']);
+					$data_personal = $this->partners_mod->insert_partners_personal($users_profile['user_id'], $personal_request_info['key_code'], $personal_request_info['key_value'], $sequence, $users_profile['partner_id']);
 					$this->db->insert('partners_personal_history', $data_personal);
 
 					$this->response->action = 'insert';
@@ -444,16 +440,13 @@ class Change_request extends MY_PrivateController
 		$this->_detail( $record_id );
 	}
 
-	private function _detail( $personal_id, $new = false)
+	private function _detail( $record_id, $new = false)
 	{
-		$result = $this->mod->_get_info($personal_id);
+		$change_request_info_arr = $this->mod->get_change_request_info($record_id);
 
-		if( count($result) > 0 )
-		{
-			$data['user_id'] = $result[0]['user_id'];
-			$data['created_on'] = $result[0]['partners_personal_request_created_on'];
-			$data['status'] = $result[0]['status'];
-			$data['record'] = $result;
+		if(!empty($change_request_info_arr)){
+			$data['record'] = $change_request_info_arr;
+			$data['request_details'] = $this->mod->get_change_request_details($record_id);
 			$data['can_approve'] = $this->permission['approve'];
 			$this->load->vars( $data );
 			

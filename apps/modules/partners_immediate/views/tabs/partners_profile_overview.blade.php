@@ -7,9 +7,9 @@
 				</li>
 				<li><a data-toggle="tab" href="#overview_tab2"><i class="fa fa-phone"></i>{{ lang('partners_immediate.contacts') }}</a></li>
 				<li class="hidden"><a data-toggle="tab" href="#overview_tab17"><i class="fa fa-money"></i>{{ lang('partners.cost_center') }}</a></li>				
-				<li><a data-toggle="tab" href="#overview_tab15"><i class="fa fa-list"></i>{{ lang('partners.id_nos') }}</a></li>
-				<li><a data-toggle="tab" href="#overview_tab3"><i class="fa fa-user"></i>{{ lang('partners_immediate.personal') }}</a></li>
-				<li><a data-toggle="tab" href="#overview_tab14"><i class="fa fa-group"></i>{{ lang('partners_immediate.family') }}</a></li>
+				<li class="hidden"><a data-toggle="tab" href="#overview_tab15"><i class="fa fa-list"></i>{{ lang('partners.id_nos') }}</a></li>
+				<li class="hidden"><a data-toggle="tab" href="#overview_tab3"><i class="fa fa-user"></i>{{ lang('partners_immediate.personal') }}</a></li>
+				<li class="hidden"><a data-toggle="tab" href="#overview_tab14"><i class="fa fa-group"></i>{{ lang('partners_immediate.family') }}</a></li>
 			</ul>
 		</div>
 		<div class="tab-content col-lg-9 col-md-8" >
@@ -510,6 +510,18 @@
 									</div>
 								</div>                
 	                        @endforeach
+	                        @if (array_sum($sbu_unit_details) > 0)
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label col-md-3 col-sm-3 text-right text-muted">Total:</label>
+											<div class="col-md-7 col-sm-7">
+												<span>{{array_sum($sbu_unit_details)}}%</span>
+											</div>
+										</div>
+									</div>
+								</div>                         
+							@endif	 	                        
 	                    @endif						
 					</div>
 				</div>				

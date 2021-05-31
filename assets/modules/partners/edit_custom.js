@@ -44,7 +44,7 @@ $(document).ready(function(){
                 var html ='<div class="form-group" data-sbu="'+optionText+'">\
                     <label class="control-label col-md-3">'+optionText+' (%)</label>\
                     <div class="col-md-5">\
-                        <input type="text" class="form-control" name="users_profile[sbu_unit_details][]" id="users_profile-sbu_unit_details" value="" data-inputmask="\'mask\': \'9\', \'repeat\': 3, \'greedy\' : false" placeholder="Enter Percentage"/>\
+                        <input type="text" class="form-control sbu_unit_val_percent" name="users_profile[sbu_unit_details][]" id="users_profile-sbu_unit_details" value="" data-inputmask="\'mask\': \'9\', \'repeat\': 3, \'greedy\' : false" placeholder="Enter Percentage"/>\
                     </div>\
                 </div>';
 
@@ -52,11 +52,30 @@ $(document).ready(function(){
 					$('#sbu_container').append(html);
 					$(":input").inputmask();
 				}
+
+				if(!$('.total_percentage_container').is(':visible'))
+					$( ".total_percentage_container" ).show();
     		} else {
     			if ($("div[data-sbu='" + optionText +"']").length > 0)
     				$("div[data-sbu='" + optionText +"']").remove();
     		}
         });	
+	});
+
+	$('.sbu_unit_val_percent').live('keyup', function () {
+        var total_percentage = 0;
+        $('.sbu_unit_val_percent').each(function (index, element) {
+            if ($(element).val() != '' && !isNaN($(element).val())) {
+                total_percentage += parseFloat($(element).val());
+            }
+        });		
+
+        if (total_percentage > 100) {
+        	notify('error', 'Total percentage should not exceed with 100%');
+        	$(this).val('').focus();
+        }
+
+        $('#total_percentage').val(total_percentage);
 	});
 /*	$('#partners_personal-city_town').select2({
 	    placeholder: "Select an option",
@@ -222,6 +241,32 @@ $(document).ready(function(){
             notify('error', data.errorThrown);
         });
 
+        $('.licensure_attach').fileupload({ 
+            url: base_url + module.get('route') + '/single_upload',
+            autoUpload: true,
+            contentType: false,
+        }).bind('fileuploadadd', function (e, data) {
+            $.blockUI({ message: '<div>Attaching file, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />' });
+        }).bind('fileuploaddone', function (e, data) { 
+
+            $.unblockUI();
+            var file = data.result.file;
+            if(file.error != undefined && file.error != "")
+			{
+				notify('error', file.error);
+			}
+			else{
+	            $(this).parent().parent().parent().children('span').children('span').children('span.fileupload-preview').html(file.name);
+	            $(this).parent().children('span.fileupload-new').css('display', 'none');
+	            $(this).parent().children('.fileupload-exists').css('display', 'inline-block');
+	            $(this).parent().parent().children('.fileupload-delete').css('display', 'inline-block');
+            	$(this).parent().parent().parent().parent().children('input:hidden:first').val(file.url);
+            }
+        }).bind('fileuploadfail', function (e, data) { 
+            $.unblockUI();
+            notify('error', data.errorThrown);
+        });
+
         $('.fileupload-delete').click(function(){
             $(this).parent().parent().parent().children('input:hidden:first').val('');
             $(this).parent().parent().children('span').children('span').children('span.fileupload-preview').html('');
@@ -315,7 +360,7 @@ $(document).ready(function(){
 	    get_project_code($('#partners_personal_history-cost_center-cost_center'+id).val(), id);
 	});
 
-	$('#partners_personal_history-licensure-attach-fileupload').fileupload({
+/*	$('#partners_personal_history-licensure-attach-fileupload').fileupload({
         url: base_url + module.get('route') + '/single_upload',
         autoUpload: true,
     }).bind('fileuploadadd', function (e, data) {
@@ -349,7 +394,7 @@ $(document).ready(function(){
     {
         $('#partners_personal_history-licensure-attach-container .fileupload-new').each(function(){ $(this).css('display', 'none') });
         $('#partners_personal_history-licensure-attach-container .fileupload-exists').each(function(){ $(this).css('display', 'inline-block') });
-    }
+    }*/
 });
 
 function _calculateAge(birthday, count) { // birthday is a date

@@ -146,7 +146,7 @@
 								<li class="active">
 									<a data-toggle="tab" href="#profile_tab_1">Overview</a>
 								</li>
-								<li class="">
+								<li class="hidden">
 									<a data-toggle="tab" href="#profile_tab_2">Historical</a>
 								</li>
 							</ul>
@@ -156,7 +156,7 @@
 									@include('tabs/partners_profile_overview')
 								</div>
 								<!-- HISTORY -->
-								<div id="profile_tab_2" class="tab-pane">
+								<div id="profile_tab_2" class="tab-pane hidden">
 									@include('tabs/partners_profile_history')
 								</div>
 							</div>

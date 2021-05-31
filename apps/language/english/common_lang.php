@@ -49,6 +49,7 @@ $lang['common'] = array(
 	'send_approval' => 'Send for Approval',
 	'approve' => 'Approve',
 	'disapprove' => 'Disapprove',
+	'decline' => 'Decline',
 	'submit' => 'Submit',
 	'cancel_app' => 'Cancel this application',
 	'close_rep' => 'Cancel this report',

@@ -28,4 +28,5 @@ $lang['my_change_request'] = array(
 	'decline' => 'Decline',
 	'save_request' => 'Save Request',
 	'remarks' => 'Remarks',
+	'action' => 'Actions',
 );

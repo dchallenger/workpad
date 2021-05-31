@@ -261,13 +261,13 @@ class my201_model extends Record
 
     }
 
-    function notify_approvers( $partner_id=0, $form=array(), $personal_id=0)
+	function notify_approvers( $personal_request_header_id=0, $form=array())
 	{
 		$notified = array();
 
-		$personal_request_key = 'personal_request_id';
+		$personal_request_key = 'personal_request_header_id';
 		$this->db->order_by('sequence', 'asc');
-		$approvers = $this->db->get_where('approver_class_user', array('user_id' => $partner_id, 'class_id' => 16, 'deleted' => 0));
+		$approvers = $this->db->get_where('partners_personal_approver', array($personal_request_key => $personal_request_header_id, 'deleted' => 0));
 
 		$first = true;
 		foreach( $approvers->result() as $approver )
@@ -284,24 +284,24 @@ class my201_model extends Record
 
 			$form_status = "Filed";
 			
-			$requests = $this->db->get_where('partners_personal_request', array('user_id' => $form['user_id']))->row_array();
-			$keys = $this->db->get_where('partners_key', array('key_id'=> $form['key_id']))->row_array();
+			$this->db->join('partners_key_class','partners_personal_request_header.key_class_id=partners_key_class.key_class_id');
+			$requests = $this->db->get_where('partners_personal_request_header', array('personal_request_header_id' => $personal_request_header_id))->row_array();
 			
 			$this->load->model('change_request_model', 'update201');
 			//insert notification
 			$insert = array(
 				'status' => 'info',
 				'message_type' => 'Partners',
-				'user_id' => $partner_id,
-				'display_name' => $this->get_display_name($partner_id),
-				'feed_content' => $form_status.' change request for '.$keys['key_label'].": ".$form['key_value'],
-				'recipient_id' => $approver->approver_id,
-				'uri' => str_replace(base_url(), '', $this->update201->url).'/detail/'.$personal_id
+				'user_id' => $form['user_id'],
+				'display_name' => $this->get_display_name($form['user_id']),
+				'feed_content' => $form_status.' change request for '.$requests['key_class'],
+				'recipient_id' => $approver->user_id,
+				'uri' => str_replace(base_url(), '', $this->update201->url).'/detail/'.$personal_request_header_id
 			);
 			$this->db->insert('system_feeds', $insert);
 			$id = $this->db->insert_id();
-			$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $approver->approver_id));
-			$notified[] = $approver->approver_id;
+			$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $approver->user_id));
+			$notified[] = $approver->user_id;
 
 			$first = false;
 
@@ -310,7 +310,7 @@ class my201_model extends Record
 		return $notified;
 	}
 
-	function notify_filer( $partner_id=0, $form=array(), $personal_id=0)
+	function notify_filer( $personal_request_header_id=0, $form=array())
 	{
 		$notified = array();
 
@@ -320,16 +320,16 @@ class my201_model extends Record
 			$insert = array(
 				'status' => 'info',
 				'message_type' => 'Partners',
-				'user_id' => $partner_id,
+				'user_id' => $form['user_id'],
 				'feed_content' => $form_status.' change request',
-				'recipient_id' => $partner_id,
+				'recipient_id' => $form['user_id'],
 				'uri' => str_replace(base_url(), '', $this->url)
 			);
 
 			$this->db->insert('system_feeds', $insert);
 			$id = $this->db->insert_id();
-			$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $partner_id));
-			$notified[] = $partner_id;
+			$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $form['user_id']));
+			$notified[] = $form['user_id'];
 
 		return $notified;
 	}

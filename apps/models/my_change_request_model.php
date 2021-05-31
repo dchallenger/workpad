@@ -25,8 +25,8 @@ class my_change_request_model extends Record
 		$this->mod_code = 'my_change_request';
 		$this->route = 'account/201_update';
 		$this->url = site_url('account/201_update');
-		$this->primary_key = 'personal_id';
-		$this->table = 'partners_personal_request';
+		$this->primary_key = 'personal_request_header_id';
+		$this->table = 'partners_personal_request_header';
 		$this->icon = 'fa-folder';
 		$this->short_name = 'Change Request';
 		$this->long_name  = 'Change Request';
@@ -36,6 +36,33 @@ class my_change_request_model extends Record
 		parent::__construct();
 	}
 
+	public function get_change_request_info($personal_request_header_id = 0)
+	{
+		$this->db->select(
+							'personal_request_header_id,partners_personal_request_header.user_id,full_name as employee_name,
+							company,v_department as department,status,partners_personal_request_header.remarks,partners_personal_request_header.created_on
+						');
+		$this->db->where('personal_request_header_id',$personal_request_header_id);
+		$this->db->join('users_profile','partners_personal_request_header.user_id = users_profile.user_id');
+		$this->db->join('users','users.user_id = users_profile.user_id');
+		$result = $this->db->get('partners_personal_request_header');
+
+		if ($result && $result->num_rows() > 0)
+			return $result->row_array();
+		else
+			return array();
+	}
+
+	public function get_change_request_details($personal_request_header_id = 0)
+	{
+		$this->db->where('personal_request_header_id',$personal_request_header_id);
+		$this->db->join('partners_key','partners_key.key_id = partners_personal_request.key_id');
+		$result = $this->db->get('partners_personal_request');
+		if ($result && $result->num_rows() > 0)
+			return $result->result_array();
+		else
+			return array();
+	}
 
 	function _get_list($start, $limit, $search, $filter, $trash = false)
 	{
@@ -61,6 +88,7 @@ class my_change_request_model extends Record
 		$qry = $this->parser->parse_string($qry, array('search' => $search), TRUE);
 
 		$result = $this->db->query( $qry );
+
 		if($result->num_rows() > 0)
 		{			
 			foreach($result->result_array() as $row){
@@ -70,13 +98,13 @@ class my_change_request_model extends Record
 		return $data;
 	}
 
-	function notify_approvers( $forms_id=0, $form=array(), $personal_id=0)
+	function notify_approvers( $personal_request_header_id=0, $form=array())
 	{
 		$notified = array();
 
-		$personal_request_key = 'personal_request_id';
+		$personal_request_key = 'personal_request_header_id';
 		$this->db->order_by('sequence', 'asc');
-		$approvers = $this->db->get_where('partners_personal_approver', array($personal_request_key => $form[$this->primary_key], 'deleted' => 0));
+		$approvers = $this->db->get_where('partners_personal_approver', array($personal_request_key => $personal_request_header_id, 'deleted' => 0));
 
 		$first = true;
 		foreach( $approvers->result() as $approver )
@@ -93,19 +121,19 @@ class my_change_request_model extends Record
 
 			$form_status = "Filed";
 			
-			$requests = $this->db->get_where('partners_personal_request', array($this->primary_key => $form[$this->primary_key]))->row_array();
-			$keys = $this->db->get_where('partners_key', array('key_id'=> $form['key_id']))->row_array();
+			$this->db->join('partners_key_class','partners_personal_request_header.key_class_id=partners_key_class.key_class_id');
+			$requests = $this->db->get_where('partners_personal_request_header', array($this->primary_key => $personal_request_header_id))->row_array();
 			
 			$this->load->model('change_request_model', 'update201');
 			//insert notification
 			$insert = array(
 				'status' => 'info',
 				'message_type' => 'Partners',
-				'user_id' => $form['created_by'],
-				'display_name' => $this->get_display_name($form['created_by']),
-				'feed_content' => $form_status.' change request for '.$keys['key_label'].": ".$form['key_value'],
+				'user_id' => $form['user_id'],
+				'display_name' => $this->get_display_name($form['user_id']),
+				'feed_content' => $form_status.' change request for '.$requests['key_class'],
 				'recipient_id' => $approver->user_id,
-				'uri' => str_replace(base_url(), '', $this->update201->url).'/detail/'.$personal_id
+				'uri' => str_replace(base_url(), '', $this->update201->url).'/detail/'.$personal_request_header_id
 			);
 			$this->db->insert('system_feeds', $insert);
 			$id = $this->db->insert_id();
@@ -119,7 +147,7 @@ class my_change_request_model extends Record
 		return $notified;
 	}
 
-	function notify_filer( $forms_id=0, $form=array(), $personal_id=0)
+	function notify_filer( $personal_request_header_id=0, $form=array())
 	{
 		$notified = array();
 
@@ -129,16 +157,16 @@ class my_change_request_model extends Record
 			$insert = array(
 				'status' => 'info',
 				'message_type' => 'Partners',
-				'user_id' => $form['created_by'],
+				'user_id' => $form['user_id'],
 				'feed_content' => $form_status.' change request',
-				'recipient_id' => $form['created_by'],
+				'recipient_id' => $form['user_id'],
 				'uri' => str_replace(base_url(), '', $this->url)
 			);
 
 			$this->db->insert('system_feeds', $insert);
 			$id = $this->db->insert_id();
-			$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $form['created_by']));
-			$notified[] = $form['created_by'];
+			$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $form['user_id']));
+			$notified[] = $form['user_id'];
 
 		return $notified;
 	}

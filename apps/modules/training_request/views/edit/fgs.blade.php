@@ -73,31 +73,48 @@
 					$training_application_training_course_id_options = array('' => '');
                     foreach($options->result() as $option){
                     	$training_application_training_course_id_options[$option->course_id] = $option->course;
-                } ?>
+                	} 
+
+                	$training_application_training_course_id_options[0] = 'Others';
+                ?>
                 <div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
                     {{ form_dropdown('training_application[training_course_id]',$training_application_training_course_id_options, $record['training_application.training_course_id'], 'class="form-control select2me" data-placeholder="Select..." id="training_application-training_course_id"') }}
                 </div>
             </div>	
 		</div>
+		<div class="form-group others_training_course" style="display:none">
+			<label class="control-label col-md-3">&nbsp;</label>
+			<div class="col-md-7">							
+				<input type="text" class="form-control" name="training_course_others" id="training_course_others" value="" placeholder="Enter Other Training Course"/> 				
+			</div>	
+		</div>		
 		<div class="form-group">
 			<label class="control-label col-md-3">Training Provider</label>
 			<div class="col-md-7">
 				<?php
-				$db->select('provider_id,provider');
-                $db->order_by('provider', '0');
-                $db->where('deleted', '0');
-                $options = $db->get('training_provider');
-                $training_application_training_provider_options = array('' => '');
-                foreach($options->result() as $option) {
-					$training_application_training_provider_options[$option->provider_id] = $option->provider;
-               	} ?>
+					$db->select('provider_id,provider');
+	                $db->order_by('provider', '0');
+	                $db->where('deleted', '0');
+	                $options = $db->get('training_provider');
+	                $training_application_training_provider_options = array('' => '');
+	                foreach($options->result() as $option) {
+						$training_application_training_provider_options[$option->provider_id] = $option->provider;
+	               	} 
+					$training_application_training_provider_options[0] = 'Others';	               	
+               	?>
                	<div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
                     {{ form_dropdown('training_application[training_provider]',$training_application_training_provider_options, $record['training_application.training_provider'], 'class="form-control select2me" data-placeholder="Select..." id="training_application-training_provider"') }}
                 </div>
             </div>	
 		</div>
+		<div class="form-group others_training_provider" style="display:none">
+			<label class="control-label col-md-3">&nbsp;</label>
+			<div class="col-md-7">							
+				<input type="text" class="form-control" name="training_provider_others"  id="training_provider_others" value="" placeholder="Enter Other Training Provider"/> 				
+			</div>	
+		</div>			
 		<div class="form-group min_capacity" style="display:none">
 			<label class="control-label col-md-3">Minimum Trainee Capacity</label>
 			<div class="col-md-7">							

@@ -739,8 +739,25 @@ class My201 extends MY_PrivateController
 
 		foreach( $classes as $class_id => $keys )
 		{
-			$active = $this->mod->has_active_request( $class_id, $this->user->user_id );
 			$ctr = 1;
+
+			$personal_request_header_info = array(
+													'user_id' => $this->user->user_id,
+													'key_class_id' => $class_id,
+													'sequence' => $ctr,
+													'status' => $status,
+													'remarks' => $remarks[$class_id]
+												);
+
+			$this->db->insert('partners_personal_request_header', $personal_request_header_info);
+			$personal_request_header_id = $this->db->insert_id();
+
+			$populate_personal_qry = "CALL sp_partners_personal_populate_approvers({$personal_request_header_id}, {$this->user->user_id})";
+			$result_insert_update = $this->db->query( $populate_personal_qry );
+			mysqli_next_result($this->db->conn_id);
+
+			$active = $this->mod->has_active_request( $class_id, $this->user->user_id );
+
 			foreach($keys as $key_id => $value)
 			{
 				$where = $data = array(
@@ -748,6 +765,7 @@ class My201 extends MY_PrivateController
 					'key_id' => $key_id,
 				);
 
+				$data['personal_request_header_id'] = $personal_request_header_id;
 				$data['sequence'] = $ctr;
 				$data['key_value'] = $value;
 				$data['status'] = $status;
@@ -779,18 +797,17 @@ class My201 extends MY_PrivateController
 
 					$action = 'insert';
 
-					$personal_request_approver = $this->db->query("CALL sp_partners_personal_populate_approvers({$this->db->insert_id()}, ".$this->user->user_id.")");					
+					//$personal_request_approver = $this->db->query("CALL sp_partners_personal_populate_approvers({$this->db->insert_id()}, ".$this->user->user_id.")");					
 				}
 
 				$ctr++;
 
 		        //create system logs
 		        $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $action, 'partners_personal_request', $previous_main_data, $data);								
-
-				// INSERT NOTIFICATIONS FOR APPROVERS
-				$this->response->notified = $this->mod->notify_approvers( $this->user->user_id, $data, $personal_id );
-				$this->response->notified = $this->mod->notify_filer( $this->user->user_id, $data, $personal_id );		        
 			}
+			// INSERT NOTIFICATIONS FOR APPROVERS
+			$this->response->notified = $this->mod->notify_approvers( $personal_request_header_id, $personal_request_header_info);
+			//$this->response->notified = $this->mod->notify_filer( $this->user->user_id, $data, $personal_id );		        			
 		}
 
 		$this->response->message[] = array(
