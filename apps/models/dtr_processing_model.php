@@ -188,6 +188,7 @@ class dtr_processing_model extends Record
 		$qry = "SELECT a.status, COUNT(a.status) AS stat_count FROM `partners` a
 		LEFT JOIN {$this->db->dbprefix}users_profile b ON b.user_id = a.user_id 
 		WHERE b.company_id = {$company_id}
+		AND status_id > 0 
 		GROUP BY a.status";
 		$result = $this->db->query( $qry );
 		if( $result->num_rows() > 0 )

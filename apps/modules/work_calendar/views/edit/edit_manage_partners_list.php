@@ -33,7 +33,7 @@
                         <input type="hidden" name="current_date" id="current_date" value="<?php echo date("Y-m-d", strtotime($start_date) ); ?>">
                         <input type="hidden" name="date[start]" value="<?php echo date("Y-m-d", strtotime($start_date) ); ?>">
                         <input type="hidden" name="date[end]" value="<?php echo date("Y-m-d", strtotime($end_date) ); ?>">
-                        <h4>Shift</h4>
+                        <h4><span style="color:red">* </span>Shift</h4>
                         <div id="available_schedules" class="list-group">
 
                             <?php 

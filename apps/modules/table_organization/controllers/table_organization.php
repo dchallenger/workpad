@@ -51,15 +51,15 @@ class Table_organization extends MY_PrivateController
 				break;
 			case 3:
 				$parent_info = $this->mod->get_user_by_division($division);
-				$child_org = $this->mod->get_reports_to($parent_info,[9,8]);
+				$child_org = $this->mod->get_reports_to($parent_info,[10,9,8]);
 				break;				
 			case 4:
 				$parent_info = $this->mod->get_user_by_division($division);
-				$child_org = $this->mod->get_reports_to($parent_info,[9,8,7,6,5,4,3]);
+				$child_org = $this->mod->get_reports_to($parent_info,[10,9,8,7,6,5,4,3]);
 				break;
 			case 5:
 				$parent_info = $this->mod->get_user_by_department($department);
-				$child_org = $this->mod->get_reports_to($parent_info,[9,8,7,6,5,4,3]);
+				$child_org = $this->mod->get_reports_to($parent_info,[10,9,8,7,6,5,4,3]);
 				break;
 			default:
 				$parent_info = array();

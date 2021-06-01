@@ -79,6 +79,7 @@
 							</thead>
 							<tbody>
 								<?php
+									$total_count = 0;
 									$stat_count = $mod->_get_stat_count( $record_id );
 									foreach( $stat_count as $row )
 									{ ?>
@@ -94,8 +95,20 @@
 											<td style="text-align:right" class="small text-info"><?php echo $row->stat_count ?></td>
 										</tr>
 									<?php
+										$total_count += $row->stat_count;
 									}
 								?>
+								<tr>
+									<td class="small"><b>Total</b></td>
+									<td>
+										<div style="margin-bottom:0px;" class="progress">
+											<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+												<span class="sr-only"></span>
+											</div>
+										</div>
+									</td>
+									<td style="text-align:right" class="small text-info"><b><?php echo $total_count ?></b></td>
+								</tr>								
 							</tbody>
 						</table>
 					</div>
