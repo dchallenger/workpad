@@ -55,8 +55,6 @@ $(document).ready(function(){
         });*/
         $('body').removeClass("modal-open"); 
     }
-	
-	$(".make-switch").bootstrapSwitch();
   
 	$('#partners_movement_action_moving-blacklisted-temp').change(function(){
 		if( $(this).is(':checked') )
