@@ -225,7 +225,7 @@
                                         onclick="save_record( $(this).closest('form'), ''); return false;">
                                         <i class="fa fa-check"></i> {{ lang('system_settings.submit') }}
                                     </button>
-                                    <button type="button" class="btn default">{{ lang('common.back_to_list') }}</button>
+                                    <a href="{{ $mod->url }}" class="btn default">{{ lang('common.back_to_list') }}</a>
                                 </div>
                             </div>
                         </form>
@@ -326,7 +326,7 @@
                                         onclick="save_record( $(this).closest('form'), ''); return false;">
                                         <i class="fa fa-check"></i> {{ lang('system_settings.submit') }}
                                     </button>
-                                    <button type="button" class="btn default">{{ lang('common.back_to_list') }}</button>
+                                    <a href="{{ $mod->url }}" class="btn default">{{ lang('common.back_to_list') }}</a>
                                 </div>
                             </div>
                         </form>
