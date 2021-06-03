@@ -1,6 +1,6 @@
 <?php
 $lang['form_application_manage'] = array(
-	'employee' => 'Partners',
+	'employee' => 'Employee',
 	'form_type' => 'Form Type',
 	'from' => 'From',
 	'to' => 'To',

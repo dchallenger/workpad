@@ -54,9 +54,9 @@
         </tbody>
     </table>
 
-    <p>This certification is being issued to facilitate his travel to and from work and access through the PNP/AFP or any Government-designated checkpoints during the Modified Enhanced Community Quarantine.</p>
+    <p style="text-align:justify">This certification is being issued to facilitate his travel to and from work and access through the PNP/AFP or any Government-designated checkpoints during the Modified Enhanced Community Quarantine.</p>
 
-    <p>Issued on <?php echo $filled_date ?>, in the City of Pasig, Metro Manila, Philippines.</p>
+    <p style="text-align:justify">Issued on <?php echo $filled_date ?>, in the City of Pasig, Metro Manila, Philippines.</p>
     
     <div class="clearfix"><br/></div>
 

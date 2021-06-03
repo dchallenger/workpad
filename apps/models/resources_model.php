@@ -29,7 +29,7 @@ class resources_model extends Record
 		$this->table = 'partners_resources';
 		$this->icon = '';
 		$this->short_name = 'Resources';
-		$this->long_name  = 'Partners Resources';
+		$this->long_name  = 'Employees Resources';
 		$this->description = '';
 		$this->path = APPPATH . 'modules/resources/';
 

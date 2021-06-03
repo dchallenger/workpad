@@ -19,7 +19,7 @@ $lang['memo'] = array(
 	'enter_memo_detail' => 'Enter memorandum details',
 	'memo_body' => 'Memo Body',
 	'attachment' => 'Attachment',
-	'allow_files' => 'Allow only image files.',
+	'allow_files' => 'Allow only image and pdf files.',
 	'select_file' => 'Select File',
 	'file_del' => 'File attached is already deleted.'
 );

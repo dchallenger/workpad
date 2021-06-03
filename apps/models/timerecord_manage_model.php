@@ -134,12 +134,16 @@ class timerecord_manage_model extends Record
 		$userids = array();
 		$subordinates = $this->getAllSubordinates();
 
-		foreach($subordinates['direct'] as $key => $subordinate){
-			$userids[] = $subordinate['partner_id'];
+		if (isset($subordinates['direct'])) {
+			foreach($subordinates['direct'] as $key => $subordinate){
+				$userids[] = $subordinate['partner_id'];
+			}
 		}
 
-		foreach($subordinates['subordinates'] as $key => $subordinate){
-			$userids[] = $subordinate['partner_id'];
+		if (isset($subordinates['subordinates'])) {
+			foreach($subordinates['subordinates'] as $key => $subordinate){
+				$userids[] = $subordinate['partner_id'];
+			}
 		}
 		
 		$qry = "SELECT * FROM time_record_list 
@@ -150,7 +154,7 @@ class timerecord_manage_model extends Record
 
 		$result = $this->db->query( $qry );
 
-		if($result->num_rows() > 0){			
+		if($result && $result->num_rows() > 0){			
 			foreach($result->result_array() as $row){
 				$data[] = $row;
 			}
@@ -212,7 +216,7 @@ class timerecord_manage_model extends Record
 				ORDER BY partner_name ASC";
 		$result = $this->db->query( $qry );
 
-		if($result->num_rows() > 0){			
+		if($result && $result->num_rows() > 0){			
 			foreach($result->result_array() as $row){
 				$data['subordinates'][] = $row;
 			}

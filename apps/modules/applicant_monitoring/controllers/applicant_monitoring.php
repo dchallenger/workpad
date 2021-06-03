@@ -4823,7 +4823,7 @@ class Applicant_monitoring extends MY_PrivateController
 				$template_data['interviewer'] = $interviewer_val;
 				$template_data['interviewer_date'] = $interviewer_date_val;
 
-				$total_score += $row->key_value;
+				$total_score += (int)$row->key_value;
 	        	$html .= '<tr>
 	                <td style="border-bottom: 1px solid #000;border-left: 1px solid #000;border-right: 1px solid #000;">';
 	                	$html .= '<b>'.$row->key_name.'</b>';

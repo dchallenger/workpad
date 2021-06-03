@@ -193,6 +193,10 @@ class Training_request extends MY_PrivateController
         {
             $rec['detail_url'] = $this->mod->url . '/detail/' . $record['record_id'];
             $rec['options'] .= '<li><a href="'.$rec['detail_url'].'"><i class="fa fa-info"></i> View</a></li>';
+
+/*            if ($record['training_application_training_application_status_id'] > 2) {
+                $rec['options'] .= '<li><a href="javascript:void(0)" onclick="print_request('.$record['record_id'].')"><i class="fa fa-print"></i> Print</a></li>';                
+            }*/
         }
 
         if( isset( $this->permission['edit'] ) && $this->permission['edit'] )

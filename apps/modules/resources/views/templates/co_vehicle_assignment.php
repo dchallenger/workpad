@@ -12,11 +12,11 @@
     <div class="clearfix"><br/></div>
     <div class="clearfix"><br/></div>
 
-    <p>This is to certify that <b><?php echo $title ?></b> <b><?php echo $employee_name ?></b> is the assignee of a <?php echo $unit ?> with Conduction Sticker No. <?php echo $stikcer_number ?> owned by Ortigas & Company Limited Partnership.</p> 
+    <p style="text-align:justify">This is to certify that <b><?php echo $title ?></b> <b><?php echo $employee_name ?></b> is the assignee of a <?php echo $unit ?> with Conduction Sticker No. <?php echo $stikcer_number ?> owned by Ortigas & Company Limited Partnership.</p> 
 
-    <p>This certificate is being issued upon the request of <?php echo $title_lastname ?>  in support of <?php echo $his_her ?> <?php echo $purpose ?>.</p>
+    <p style="text-align:justify">This certificate is being issued upon the request of <?php echo $title_lastname ?>  in support of <?php echo $his_her ?> <?php echo $purpose ?>.</p>
 
-    <p>Issued on <?php echo $filled_date ?>, in the City of Pasig, Metro Manila, Philippines.</p>
+    <p style="text-align:justify">Issued on <?php echo $filled_date ?>, in the City of Pasig, Metro Manila, Philippines.</p>
     
     <div class="clearfix"><br/></div>
 

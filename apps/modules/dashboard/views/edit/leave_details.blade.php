@@ -6,7 +6,7 @@
         </div>
     </div>
 <?php if($form_id == 1 || $form_id == 2): ?> 
-    <div class='clearfix'>
+    <div class='clearfix hidden'>
         <label class='control-label col-md-3 text-muted small'><?php echo lang('dashboard.leave_sched') ?></label>
         <div class='col-md-9'>
             <span class="small"> <?php echo $scheduled; ?></span>

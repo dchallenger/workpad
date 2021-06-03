@@ -1554,11 +1554,11 @@ class Clearance extends MY_PrivateController
 
         	foreach ($result_p->result() as $row) {
 				$html .= '<tr>
-							<td width="20%"><center>'.$row->panel_title.'</center></td>
-							<td width="20%"><center>'.$row->accountabilities.'</center></td>
-							<td width="30%"><center>'.$row->remarks.'</center></td>
-							<td width="10%"><center>'.($row->status == 'Open' ? " " : $row->status).'</center></td>
-							<td width="20%"><center>'.ucwords($row->full_name).'</center></td>
+							<td width="20%" style="padding-top:10px"><center>'.$row->panel_title.'</center></td>
+							<td width="20%" style="padding-top:10px"><center>'.$row->accountabilities.'</center></td>
+							<td width="30%" style="padding-top:10px"><center>'.$row->remarks.'</center></td>
+							<td width="10%" style="padding-top:10px"><center>'.($row->status == 'Open' ? " " : $row->status).'</center></td>
+							<td width="20%" style="padding-top:10px"><center>'.ucwords($row->full_name).'</center></td>
 						</tr>';
 			}
 
@@ -1627,9 +1627,10 @@ class Clearance extends MY_PrivateController
         $this->load->model('partners_model', 'partners_mod');       
         $partners_personal = $this->partners_mod->get_partners_personal($partner_record['user_id'], 'partners_personal', 'address_1', 1);
         if(!empty($partners_personal)){
-            $address = $partners_personal[0]['key_value'];
+        	$address = '____________________________________________';
+            //$address = $partners_personal[0]['key_value'];
         } else {
-            $address = '_______________';
+            $address = '____________________________________________';
         }
 
         $nationality = $this->partners_mod->get_partners_personal($partner_record['user_id'], 'partners_personal', 'nationality', 1);
@@ -1652,8 +1653,8 @@ class Clearance extends MY_PrivateController
 		$template_data['logo'] = base_url().$partner_record['print_logo'];
 		$template_data['nationality'] = ($nationality[0]['key_value'] != '' ? $nationality[0]['key_value'] : 'Filipino');
 
-		$template_data['amount_words'] = ' ';
-		$template_data['amount'] = '0';
+		$template_data['amount_words'] = '______________________________________________';
+		$template_data['amount'] = 'Php __________';
 		$template_data['hrd'] = 'MARYBETH G. MONIS';
 
         $this->load->helper('file');

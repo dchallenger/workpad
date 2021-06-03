@@ -451,6 +451,7 @@ class Change_request extends MY_PrivateController
 			$this->load->vars( $data );
 			
 			if( !$new ){
+				$this->load->helper('file');
 				if( !IS_AJAX )
 				{
 					echo $this->load->blade('pages.detail')->with( $this->load->get_cached_vars() );

@@ -13,7 +13,7 @@
                             class="form-control select2me input-large"
                             >
                             
-                            <option value="">Choose a partner</option>
+                            <option value="">Choose a employee</option>
 
                             <?php for($j=0; $j < count( $partners ); $j++){ ?>
                                 <option value="<?php echo $partners[$j]['partner_id']; ?>">

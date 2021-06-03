@@ -3,6 +3,7 @@ $lang['birthdays'] = array(
 	'partners' => 'Partners ',
 	'celebrants' => 'Celebrants',
 	'user' => 'User',
+	'employee' => 'Employee',
 	'date' => 'Date',
 	'filter' => 'Filter',
 	'month_note' => 'Show list of birthday celebrants on the selected month.',

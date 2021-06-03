@@ -109,8 +109,57 @@
 													@else
 														No
 													@endif
-												@else
-													{{ $request['key_value'] }}												
+												@elseif (in_array($request['key_id'],array(244)))
+		                                            <?php 
+		                                                if( isset($request['key_value'])) {
+		                                                    $file = FCPATH . urldecode($request['key_value']);
+		                                                    if( file_exists( $file ) )
+		                                                    {
+		                                                        $f_info = get_file_info( $file );
+		                                                        $f_type = filetype( $file );
+
+		/*                                                        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+		                                                        $f_type = finfo_file($finfo, $file);*/
+		                                                        $is_image = false;
+		                                                        switch( $f_type )
+		                                                        {
+		                                                            case 'image/jpeg':
+		                                                            case 'image/jpg':
+		                                                            case 'image/bmp':
+		                                                            case 'image/png':
+		                                                            case 'image/gif':
+		                                                                $icon = 'fa-picture-o';
+		                                                                $is_image = true;
+		                                                                break;
+		                                                            case 'video/mp4':
+		                                                                $icon = 'fa-film';
+		                                                                break;
+		                                                            case 'audio/mpeg':
+		                                                                $icon = 'fa-volume-up';
+		                                                                break;
+		                                                            default:
+		                                                                $icon = 'fa-file-text-o';
+		                                                        }
+
+		                                                        $filepath = base_url()."my_change_request/download_file_directly/".urlencode(base64_encode($request['key_value']));
+		                                                        $file_view = base_url().$request['key_value'];
+		                                                        // $path = site_url() . 'uploads/' . $this->module_link . '/' . $file;
+		                                                        echo '<li class="padding-3 fileupload-delete-'.$request['key_value'].'" style="list-style:none;">';
+		                                                        if($is_image){
+		                                                            echo '<img src="'.$file_view.'" class="img-responsive" alt="" />';
+		                                                        }
+		                                                        echo '<a href="'.$filepath.'">
+		                                                            <span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
+		                                                            <span>'. basename($f_info['name']) .'</span>
+		                                                            </a>
+		                                                        </li>'
+		                                                        // <span class="padding-left-10"><a style="float: none;" data-dismiss="fileupload" class="close fileupload-delete" upload_id="'.$details['attachment-file'].'" href="javascript:void(0)"></a></span>
+		                                                        ;
+		                                                    }
+		                                                }
+		                                            ?>
+												@else						
+													{{ $request['key_value'] }}
 												@endif
 											</td>
 										</tr>

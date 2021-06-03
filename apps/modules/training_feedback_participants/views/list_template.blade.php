@@ -12,6 +12,9 @@
             <div class="btn-group">
                 <a class="btn btn-xs text-muted" href="{{ $detail_url }}"><i class="fa fa-info"></i> View</a>
             </div>
+            <div class="btn-group hidden">
+                <a class="btn btn-xs text-muted" href="javascript:void(0)" onclick="print_evaluation({{$record_id}})"><i class="fa fa-print"></i> {{ lang('common.print_only') }}</a>
+            </div>            
         @endif        
         <!-- <div class="btn-group">
             <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> Options</a>

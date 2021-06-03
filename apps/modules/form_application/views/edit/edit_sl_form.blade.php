@@ -88,7 +88,7 @@
 	<div class="portlet-body form" id="main_form">						
 		
 
-					<div class="form-group">
+					<div class="form-group hidden">
 						<label class="control-label col-md-4">{{ lang('form_application.schedule') }}<span class="required">* </span></label>
 						<div class="col-md-6">
 							<?php	                        

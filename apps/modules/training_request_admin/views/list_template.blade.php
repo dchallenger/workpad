@@ -32,5 +32,8 @@
         <div class="btn-group">
             <a href="{{ $detail_url }}" class="btn btn-xs text-muted"><i class="fa fa-search"></i> {{ lang('common.view') }}</a>
         </div>
+        <div class="btn-group">
+            <a class="btn btn-xs text-muted" href="javascript:void(0)" onclick="print_request({{$record_id}})"><i class="fa fa-print"></i> {{ lang('common.print_only') }}</a>
+        </div>          
     </td>
 </tr>

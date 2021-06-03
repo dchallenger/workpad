@@ -6,7 +6,7 @@
         </div>
     </div>     
 <?php if($form_id == 1 || $form_id == 2): ?> 
-    <div class='clearfix'>
+    <div class='clearfix hidden'>
         <label class='control-label col-md-3 text-muted text-left small'>{{ lang('form_application_manage.schedule') }}:</label>
         <div class='col-md-9'>
             <span> <?php echo ucfirst(strtolower($scheduled)); ?></span>

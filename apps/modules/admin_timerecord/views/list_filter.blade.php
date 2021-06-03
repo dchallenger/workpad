@@ -20,7 +20,7 @@
 <div class="portlet-body">
     <span class="small text-muted">{{ lang('admin_timerecord.filter_by_status') }}</span>
     <div id="status-container" class="margin-top-10">
-        <span status_id="" class="event-block label label-default status-filter">{{ lang('common.all') }}</span>
+        <span status_id="" class="event-block label label-success status-filter">{{ lang('common.all') }}</span>
         <?php
             $db->order_by('employment_status');
             // $db->where('employment_status_id < 8'); // included all status
@@ -28,7 +28,7 @@
             $statuses = $db->get_where('partners_employment_status', array('deleted' => 0));
             foreach( $statuses->result() as $row )
             { 
-                $success_class = $row->employment_status_id == 1 ? 'label-success' : 'label-default'; //default :regular
+                $success_class = $row->employment_status_id == 1 ? 'label-default' : 'label-default'; //default :regular
             ?>
                 <span status_id="<?php echo $row->employment_status_id?>" class="event-block label <?php echo $success_class; ?> status-filter"><?php echo $row->employment_status?></span>
             <?php

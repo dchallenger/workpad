@@ -446,4 +446,100 @@ class Training_feedback_participants extends MY_PrivateController
     	$this->_ajax_return();
 	}
 
+    function print_evaluation()
+    {
+        parent::edit('', true);
+
+        $record_id = $this->input->post('record_id');
+
+        $this->_ajax_only();
+        $user = $this->config->item('user');
+
+        $this->load->library('PDFm');
+        $mpdf = new PDFm();
+
+        //$mpdf = new PDFm(['debug' => true]);
+
+        //$mpdf->showImageErrors = true
+        
+        $mpdf->SetTitle( 'Training Evaluation' );
+        $mpdf->SetAutoPageBreak(true, 5);
+        $mpdf->SetAuthor( $user['lastname'] .', '. $user['firstname'] . ' ' .$user['middlename'] );  
+        $mpdf->SetDisplayMode('real', 'default');
+        $mpdf->AddPage();
+
+        $appraisee = $this->mod->get_appraisee( $record_id, $user_id );
+
+        $logo  = ''; 
+        if ($appraisee->print_logo != ''){
+            if( file_exists( $appraisee->print_logo ) ){
+                $logo = base_url().$appraisee->print_logo;
+            }
+        }
+
+        $vars['logo'] = $logo;
+
+        $first_approver = $this->mod->get_list_approver( $this->record_id, $user_id, 1);
+
+        $login_user_id = $first_approver->row()->approver_id;
+
+        // for oclp it was specific approver only, if hr appraisal admin then get first approver since it was specific
+        if ($this->permission['process']) {
+            $vars['list_approver'] = $approver_info = $this->mod->get_approver( $record_id, $user_id, $login_user_id);
+            $vars['hr_appraisal_admin'] = 1;
+        } else
+            $vars['list_approver'] = $approver_info = $this->mod->get_approver( $record_id, $user_id, $this->user->user_id);
+
+        $vars['approver_info'] = array();
+        if ($approver_info) {
+            $approver_info_arr = $approver_info->row_array();
+            $vars['approver_info'] = $approver_info_arr;
+        }
+
+        $vars['tenure'] = get_tenure($appraisee->effectivity_date);
+
+        $this->load->model('appraisal_template_model', 'template');
+        $vars['template'] = $this->template; 
+
+        $vars['transaction_type'] = '';
+        $vars['appraisal_id'] = $record_id;
+        $vars['balance_score_card'] = $this->individual_planning_model->get_balance_score_card();
+        $vars['template_section_column'] = $this->individual_planning_model->get_template_section_column();
+        $vars['planning_applicable_fields'] = $this->individual_planning_model->get_planning_applicable_fields($appraisee->planning_id,$appraisee->user_id);
+        $vars['appraisal_applicable_fields'] = $this->mod->get_appraisal_applicable_fields($record_id,$appraisee->user_id);
+        $vars['template_section'] = $this->individual_planning_model->get_template_section($appraisee->template_id);
+        $vars['library_competencies'] = $this->individual_planning_model->get_library_competencies();
+        $vars['appraisal_applicable_section_ratings'] = $this->mod->get_appraisal_applicable_section_ratings($record_id,$appraisee->user_id);
+        $vars['appraisal_applicable_score_library_ratings'] = $this->mod->get_appraisal_applicable_score_library_ratings($this->record_id,$appraisee->user_id);
+        $vars['readonly'] = '';
+        $vars['login_user_id'] = $login_user_id;
+        $vars['areas_development'] = $this->individual_planning_model->get_areas_for_development();
+        $vars['learning_mode'] = $this->individual_planning_model->get_learning_mode();
+        $vars['competencies'] = $this->individual_planning_model->get_competencies();
+        $vars['target_completion'] = $this->individual_planning_model->get_target_completion();
+
+        $record = $this->load->get_cached_vars();
+        $vars['record'] = $record['record'];
+
+        $this->load->vars( $vars );
+
+        $this->load->helper('form');
+        $this->load->helper('file');
+        $html = $this->load->view('pages/appraisal_print_template.blade.php',$vars,true); 
+
+        $this->load->helper('file');
+        $path = 'uploads/templates/performance/';
+        $this->check_path( $path );
+        $filename = $path .$appraisee->fullname. "-".'Performance Appraisal Form' .".pdf";
+
+        $mpdf->WriteHTML($html, 0, true, false);
+        $mpdf->Output($filename, 'F');
+
+        $this->response->filename = $filename;
+        $this->response->message[] = array(
+            'message' => 'File successfully loaded.',
+            'type' => 'success'
+        );
+        $this->_ajax_return();
+    }    
 }

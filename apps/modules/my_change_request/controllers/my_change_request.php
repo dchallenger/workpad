@@ -46,6 +46,7 @@ class My_change_request extends MY_PrivateController
 			$this->load->vars( $data );
 			
 			if( !$new ){
+				$this->load->helper('file');
 				if( !IS_AJAX )
 				{
 					echo $this->load->blade('pages.detail')->with( $this->load->get_cached_vars() );
@@ -431,4 +432,32 @@ class My_change_request extends MY_PrivateController
 		$partner_details = $sql_partner->row_array();
 		return $partner_details['partner_id'];
 	}
+
+	public function single_upload()
+	{
+		$this->_ajax_only();
+		define('UPLOAD_DIR', 'uploads/change_request/');
+		$this->load->library("UploadHandler");
+		$files = $this->uploadhandler->post();
+		$file = $files[0];
+		if( isset($file->error) && $file->error != "" )
+		{
+			$this->response->message[] = array(
+				'message' => $file->error,
+				'type' => 'error'
+			);	
+		}
+		$this->response->file = $file;
+		$this->_ajax_return();
+	}
+
+	function download_file_directly($attachment_file){	
+		$attach_file = base64_decode(urldecode($attachment_file));
+
+		$path = base_url() . $attach_file;
+		
+		header('Content-disposition: attachment; filename='.substr( $attach_file, strrpos( $attach_file, '/' )+1 ).'');
+		header('Content-type: txt/pdf');
+		readfile($path);
+	}	
 }

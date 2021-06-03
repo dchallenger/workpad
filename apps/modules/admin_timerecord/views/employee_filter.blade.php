@@ -30,8 +30,24 @@
 		<div class="col-md-4">
 				<div class="form-group">
                     <div id="department_div">
+                        <?php
+                            $qry_category = $mod->get_role_category();
+                            $db->where('users_department.deleted',0);
+                            $db->where('users_department.status_id',1);
+                            if ($qry_category != ''){
+                                $db->where($qry_category, '', false);
+                            }                               
+                            $db->order_by('department');
+                            $users_department = $db->get('users_department');
+                        ?>                         
                         <select id="department_id" name="department_id" class="form-control select2me" data-placeholder="Select..."> 
                             <option value="">Select department...</option>
+                            <?php
+                                foreach( $users_department->result() as $department )
+                                {
+                                    echo '<option value="'.$department->department_id.'">'. $department->department . '</option>';
+                                }
+                            ?>                               
                         </select>
                     </div>
                     <div id="dept_loader" style="display: none;">

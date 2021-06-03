@@ -12,11 +12,11 @@
     <div class="clearfix"><br/></div>
     <div class="clearfix"><br/></div>
 
-    <p>This is to certify that <b><?php echo $title ?></b> <b><?php echo $employee_name ?></b> has been engaged by <b><?php echo $company ?></b> since <b><?php echo $date_hired ?></b> as <?php echo $position ?> under <b><?php echo $division ?></b>.</p> 
+    <p style="text-align:justify">This is to certify that <b><?php echo $title ?></b> <b><?php echo $employee_name ?></b> has been engaged by <b><?php echo $company ?></b> since <b><?php echo $date_hired ?></b> as <?php echo $position ?> under <b><?php echo $division ?></b>.</p> 
 
-    <p>This certification is being issued upon the request of <?php echo $title_lastname ?>  in support of <?php echo $his_her ?> <?php echo $purpose ?>.</p>
+    <p style="text-align:justify">This certification is being issued upon the request of <?php echo $title_lastname ?>  in support of <?php echo $his_her ?> <?php echo $purpose ?>.</p>
 
-    <p>Issued on <?php echo $filled_date ?>, in the City of Pasig, Metro Manila, Philippines.</p>
+    <p style="text-align:justify">Issued on <?php echo $filled_date ?>, in the City of Pasig, Metro Manila, Philippines.</p>
     
     <div class="clearfix"><br/></div>
 

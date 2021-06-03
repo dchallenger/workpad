@@ -220,6 +220,10 @@ class profile_model extends Record
 				$this->load->helper('form');
 				return $this->load->view('key_templates/yes_no', array('key' => $key, 'value' => $value), true);
 				break;
+			case 'family-attachment':
+				$this->load->helper('form');
+				return $this->load->view('key_templates/attachment', array('key' => $key, 'value' => $value), true);
+				break;				
 			case 'family-relationship':
 				$this->load->helper('form');
 				return $this->load->view('key_templates/family_relationship', array('key' => $key, 'value' => $value), true);

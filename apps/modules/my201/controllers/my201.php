@@ -2084,5 +2084,23 @@ class My201 extends MY_PrivateController
 		$this->response->saved = !$error;
 		$this->_ajax_return();
 	}
+
+	public function single_upload()
+	{
+		$this->_ajax_only();
+		define('UPLOAD_DIR', 'uploads/change_request/');
+		$this->load->library("UploadHandler");
+		$files = $this->uploadhandler->post();
+		$file = $files[0];
+		if( isset($file->error) && $file->error != "" )
+		{
+			$this->response->message[] = array(
+				'message' => $file->error,
+				'type' => 'error'
+			);	
+		}
+		$this->response->file = $file;
+		$this->_ajax_return();
+	}	
 }
 

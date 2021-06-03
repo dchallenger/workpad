@@ -11,13 +11,13 @@
 			<div class="form-body">	                        	
                 @if(in_array('sbu_unit', $partners_keys))
                 <div class="form-group">
-                    <label class="control-label col-md-3">{{ lang('partners.sbu_unit') }}<span class="required">*</span></label>
+                    <label class="control-label col-md-3">{{ lang('partners.sbu_unit') }}</label>
                     <div class="col-md-5">
                         <?php   $db->select('sbu_unit_id,sbu_unit');
                                 $db->where('deleted', '0');
                                 $options = $db->get('users_sbu_unit');
 
-                                $users_sbu_unit_id_options = array('' => '');
+                                $users_sbu_unit_id_options = array();
                                 foreach($options->result() as $option)
                                 {
                                     $users_sbu_unit_id_options[$option->sbu_unit_id] = $option->sbu_unit;
@@ -27,7 +27,7 @@
                                 <i class="fa fa-list-ul"></i>
                             </span>
                             <?php
-                                $sbu_unit_val = 1;
+                                $sbu_unit_val = 0;
                                 if (!empty($record['users_profile.sbu_unit_id']))
                                     $sbu_unit_val = explode(',', $record['users_profile.sbu_unit_id']);
                             ?>

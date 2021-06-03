@@ -1,7 +1,7 @@
 <?php
 $lang['erequest_admin'] = array(
 	'reference' => 'References',
-	'partner_resource' => 'Partners Resources',
+	'partner_resource' => 'Employees Resources',
 	'listing_requisition' => 'Listing and Requisition',
 	'online_request' => 'Online Request',
 	'ol_list' => 'Online Request List',
@@ -22,8 +22,8 @@ $lang['erequest_admin'] = array(
 	'file_upload' => 'Files Upload',
 	'discussion_log' => 'Discussion Logs',
 	'write_comments' => 'Write your comments here',
-	'partner' => 'Partner',
-	'return_partner' => 'Return to Partner',
+	'partner' => 'Employee',
+	'return_partner' => 'Return to Employee',
 	'admin_sec' => 'Admin Section',
 	'note_admin_sec' => 'This section is for HR to fill thus, to complete the request.',
 	'req_docs' => 'Requested Documents',

@@ -65,19 +65,15 @@ class Resources extends MY_PrivateController
 
         ini_set('memory_limit', '1024M');   
         ini_set('max_execution_time', 1800);
-        $this->load->library('Pdf');
         $user = $this->config->item('user');
         
-        $pdf = new Pdf();
+        $this->load->library('PDFm');
+        $pdf = new PDFm();
+
         $pdf->SetTitle('Certificate of employment');
-        $pdf->SetFontSize(12,true);
-        $pdf->SetAutoPageBreak(true, 5);
+        $pdf->SetAutoPageBreak(true, 1);
         $pdf->SetAuthor( $user['lastname'] .', '. $user['firstname'] . ' ' .$user['middlename'] );  
         $pdf->SetDisplayMode('real', 'default');
-		$pdf->SetMargins(38.1, 30, 25.4, true);
-
-        $pdf->SetPrintHeader(false);
-        $pdf->SetPrintFooter(false);
 		
 		$user_id = $this->input->post('user_id');
 		$coe_type = $this->input->post('coe') ?? '';
@@ -218,8 +214,7 @@ class Resources extends MY_PrivateController
 	        $filename = $path . strtotime(date('Y-m-d H:i:s')) . '-' . "coe.pdf";
 	        $main_filename = $main_path . strtotime(date('Y-m-d H:i:s')) . '-' . "coe.pdf";
 
-	        $pdf->writeHTML($html, true, false, true, false, '');
-
+			$pdf->WriteHTML($html, 0, true, false);
 	        
 	        $pdf->Output($main_filename, 'F');
 

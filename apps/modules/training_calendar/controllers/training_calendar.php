@@ -807,6 +807,7 @@ class Training_calendar extends MY_PrivateController
 		{
 			$rec['detail_url'] = $this->mod->url . '/detail/' . $record['record_id'];
 			$rec['options'] .= '<li><a href="'.$rec['detail_url'].'"><i class="fa fa-info"></i> View</a></li>';
+			$rec['options'] .= '<li><a href="javascript:void(0)" onclick="print_calendar('.$record['record_id'].')"><i class="fa fa-print"></i> Print</a></li>';
 		}
 
 		if( isset( $this->permission['edit'] ) && $this->permission['edit'] )
@@ -1027,5 +1028,110 @@ class Training_calendar extends MY_PrivateController
 
         $this->_ajax_return(); 
 
-	}	
+	}
+
+    function print_calendar()
+    {
+        $this->_ajax_only();
+
+        $user = $this->config->item('user');
+
+        $record_id = $this->input->post('record_id');
+
+        $record = $this->mod->get_training_calendar_info( $record_id );
+
+        $vars['record'] = $record;
+        
+		$this->db->order_by('calendar_budget_id');
+		$training_costs = $this->db->get_where('training_calendar_budget', array('training_calendar_id' => $record_id));
+
+		if($training_costs->num_rows() > 0){
+			$training_cost_tab = $training_costs->result_array();
+		}
+
+		$training_cost_tab = array();
+
+		$vars['training_cost_tab'] = $training_cost_tab;
+
+		$session_tab = array();
+
+		$this->db->order_by('calendar_session_id');
+		$sessions = $this->db->get_where('training_calendar_session', array('training_calendar_id' => $record_id));
+
+		if($sessions->num_rows() > 0){
+			$session_tab = $sessions->result_array();
+		}
+
+		$vars['session_tab'] = $session_tab;
+
+        $this->load->library('PDFm');
+        $mpdf = new PDFm();
+
+        //$mpdf = new PDFm(['debug' => true]);
+
+        //$mpdf->showImageErrors = true
+        
+        $mpdf->SetTitle( 'Training Calendar' );
+        $mpdf->SetAutoPageBreak(true, 5);
+        $mpdf->SetAuthor( $user['lastname'] .', '. $user['firstname'] . ' ' .$user['middlename'] );  
+        $mpdf->SetDisplayMode('real', 'default');
+        $mpdf->AddPage();
+
+
+        $logo  = base_url().'uploads/company/print/ortigas_land_corporation (3).jpg';; 
+/*        if ($record['print_logo'] != ''){
+            if( file_exists( $record['print_logo'] ) ){
+                $logo = base_url().$record['print_logo'];
+            }
+        }*/
+
+        $vars['logo'] = $logo;
+
+        $this->load->vars( $vars );
+
+        $this->load->helper('form');
+        $this->load->helper('file');
+        $html = $this->load->view('pages/training_calendar.blade.php',$vars,true); 
+
+        $this->load->helper('file');
+        $path = 'uploads/templates/training/';
+        $this->check_path( $path );
+        $filename = $path .$record['course']. "-".'Training Calendar Form' .".pdf";
+
+        $mpdf->WriteHTML($html, 0, true, false);
+        $mpdf->Output($filename, 'F');
+
+        $this->response->filename = $filename;
+        $this->response->message[] = array(
+            'message' => 'File successfully loaded.',
+            'type' => 'success'
+        );
+        $this->_ajax_return();
+    }
+
+    private function check_path( $path, $create = true )
+    {
+        if( !is_dir( FCPATH . $path ) ){
+            if( $create )
+            {
+                $folders = explode('/', $path);
+                $cur_path = FCPATH;
+                foreach( $folders as $folder )
+                {
+                    $cur_path .= $folder;
+
+                    if( !is_dir( $cur_path ) )
+                    {
+                        mkdir( $cur_path, 0777, TRUE);
+                        $indexhtml = read_file( APPPATH .'index.html');
+                        write_file( $cur_path .'/index.html', $indexhtml);
+                    }
+
+                    $cur_path .= '/';
+                }
+            }
+            return false;
+        }
+        return true;
+    }	
 }

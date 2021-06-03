@@ -43,8 +43,8 @@
         </div>
 
         <div id="please_choose_by_date" class="well">
-            <p class="bold"><i class="fa fa-exclamation-triangle"></i> Select a partner.</p>
-            <span><p class="small margin-bottom-0">To start viewing partner/s DTR you must first choose a partner from the dropdown list.</p></span>
+            <p class="bold"><i class="fa fa-exclamation-triangle"></i> Select a employee.</p>
+            <span><p class="small margin-bottom-0">To start viewing employee/s DTR you must first choose a employee from the dropdown list.</p></span>
         </div>
 
         <div id="something_wrong_by_date" class="well" style="display:none;">

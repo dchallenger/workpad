@@ -195,5 +195,45 @@ class training_request_admin_model extends Record
     	}
 
     	return $response;
-	}		
+	}
+
+	function get_training_request_info($record_id)
+	{
+		$qry = 'SELECT 
+		`ww_training_application`.`training_application_id` as record_id, 
+		ww_users.full_name as "requested_by",
+		ww_training_calendar_type.calendar_type as "training_type", 
+		DATE_FORMAT(ww_training_application.date_from, \'%M %d, %Y\') as "date_from", 		
+		DATE_FORMAT(ww_training_application.date_to, \'%M %d, %Y\') as "date_to", 
+		ww_training_course.course as "training_course",
+		ww_training_provider.provider as "training_provider",
+		ww_training_application.venue as "venue",		
+		ww_training_application.total_training_hour as "total_training_hour", 
+		ww_training_application.total_investment_pgsa as "subject_revision", 
+		GROUP_CONCAT(`paad`.`appraisal_areas_development` SEPARATOR ", ") AS "areas_development",
+		GROUP_CONCAT(`tc`.`category` SEPARATOR ", ") AS "competency",
+		ww_training_application.note as "training_application_note",
+		ww_training_application.hr_remarks as "remarks",
+		ww_users_company.print_logo as "print_logo"
+		FROM (`ww_training_application`)
+		LEFT JOIN `ww_training_category` ON `ww_training_category`.`category_id` = `ww_training_application`.`competency`
+		LEFT JOIN `ww_performance_appraisal_areas_development` ON `ww_performance_appraisal_areas_development`.`appraisal_areas_development_id` = `ww_training_application`.`areas_development`
+		LEFT JOIN `ww_training_provider` ON `ww_training_provider`.`provider_id` = `ww_training_application`.`training_provider`
+		LEFT JOIN `ww_training_course` ON `ww_training_course`.`course_id` = `ww_training_application`.`training_course_id`
+		LEFT JOIN `ww_training_calendar_type` ON `ww_training_calendar_type`.`calendar_type_id` = `ww_training_application`.`training_type`
+		LEFT JOIN `ww_users` ON `ww_users`.`user_id` = `ww_training_application`.`user_id`
+		LEFT JOIN `ww_users_company` ON `ww_users`.`company_id` = `ww_users_company`.`company_id`
+		LEFT JOIN `ww_performance_appraisal_areas_development` `paad` ON FIND_IN_SET(paad.`appraisal_areas_development_id`, ww_training_application.`areas_development`)
+		LEFT JOIN `ww_training_category` `tc` ON FIND_IN_SET(tc.`category_id`, ww_training_application.`competency`)
+		WHERE `ww_training_application`.`training_application_id` = '.$record_id.'';
+
+		$result = $this->db->query($qry);
+
+		$info = array();
+		if ($result && $result->num_rows() > 0) {
+			$info = $result->row_array();
+		}
+
+		return $info;
+	}
 }

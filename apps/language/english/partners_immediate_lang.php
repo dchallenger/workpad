@@ -1,10 +1,10 @@
 <?php
 $lang['partners_immediate'] = array(
-	'partners' => 'Partners',
+	'partners' => 'Employees',
 	'manage_partners' => 'manage and list application partners.',
-	'list_partners' => 'List of Partners',
+	'list_partners' => 'List of Employees',
 	'livein' => 'Live in',
-	'partner' => 'Partner',
+	'partner' => 'Employee',
 	'civil_status' => 'Civil Status ',
 	'email' => 'Email',
 	'types' => 'Types',
@@ -18,7 +18,7 @@ $lang['partners_immediate'] = array(
 	'languages' => 'Language Known',
 	'dialects' => 'Dialect Known',
 	'no_dependents' => 'Number of Dependents',
-	'filter_by_emp_type' => 'Filter partner list by employee type.',
+	'filter_by_emp_type' => 'Filter employee list by employee type.',
 	'gen_info' => 'General Information',
 	'gen' => 'General',
 	'id_no' => 'ID Number',

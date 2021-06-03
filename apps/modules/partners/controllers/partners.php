@@ -1817,12 +1817,12 @@ class Partners extends MY_PrivateController
 					'label' => 'Department',
 					'rules' => 'required'
 					);
-				$validation_rules[] = 
+/*				$validation_rules[] = 
 				array(
 					'field' => 'users_profile[sbu_unit_id]',
 					'label' => 'SBU Unit',
 					'rules' => 'required'
-					);
+					);*/
 				$validation_rules[] = 
 				array(
 					'field' => 'users_profile[location_id]',

@@ -88,7 +88,7 @@
 										</div>
 									</div>
 									<?php } ?>
-	                                <div class="row">
+	                                <div class="row hidden">
 										<div class="col-md-12">
 											<div class="form-group">
 												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_manage.schedule') }} :</label>

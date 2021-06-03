@@ -15,11 +15,11 @@
 
     <h1><?php echo $employee_name ?></h1>
 
-    <p>is employed with <?php echo $company ?> as <?php echo $position ?>. <?php echo ucfirst($she_he) ?> is a regular employee since <?php echo $date_hired ?>.</p>
+    <p style="text-align:justify">is employed with <?php echo $company ?> as <?php echo $position ?>. <?php echo ucfirst($she_he) ?> is a regular employee since <?php echo $date_hired ?>.</p>
 
-    <p>This certification is being issued upon the request of <?php echo $firstname ?> as a requirement for <?php echo $his_her ?> <?php echo $purpose ?> only.</p>
+    <p style="text-align:justify">This certification is being issued upon the request of <?php echo $firstname ?> as a requirement for <?php echo $his_her ?> <?php echo $purpose ?> only.</p>
 
-    <p>Given this <?php echo $day ?> day of <?php echo $month_year ?>.</p>
+    <p style="text-align:justify">Given this <?php echo $day ?> day of <?php echo $month_year ?>.</p>
 	
 	<div class="clearfix"><br/></div>
 	<div class="clearfix"><br/></div>

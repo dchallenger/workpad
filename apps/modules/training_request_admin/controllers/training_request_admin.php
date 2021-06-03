@@ -339,4 +339,87 @@ class Training_request_admin extends MY_PrivateController
         header('Content-type: txt/pdf');
         readfile($path);
     }     
+
+    function print_request()
+    {
+        $this->_ajax_only();
+
+        $record_id = $this->input->post('record_id');
+
+        $record = $this->mod->get_training_request_info( $record_id );
+
+        $vars['record'] = $record;
+
+        $vars['approvers'] = $this->mod_personal->get_approvers($record_id);
+
+        $this->load->library('PDFm');
+        $mpdf = new PDFm();
+
+        //$mpdf = new PDFm(['debug' => true]);
+
+        //$mpdf->showImageErrors = true
+        
+        $mpdf->SetTitle( 'Training Request' );
+        $mpdf->SetAutoPageBreak(true, 5);
+        $mpdf->SetAuthor( $record['requested_by'] );  
+        $mpdf->SetDisplayMode('real', 'default');
+        $mpdf->AddPage();
+
+
+        $logo  = ''; 
+        if ($record['print_logo'] != ''){
+            if( file_exists( $record['print_logo'] ) ){
+                $logo = base_url().$record['print_logo'];
+            }
+        }
+
+        $vars['logo'] = $logo;
+
+        $this->load->vars( $vars );
+
+        $this->load->helper('form');
+        $this->load->helper('file');
+        $html = $this->load->view('pages/training_request.blade.php',$vars,true); 
+
+        $this->load->helper('file');
+        $path = 'uploads/templates/training/';
+        $this->check_path( $path );
+        $filename = $path .$record['requested_by']. "-".'Training Request Form' .".pdf";
+
+        $mpdf->WriteHTML($html, 0, true, false);
+        $mpdf->Output($filename, 'F');
+
+        $this->response->filename = $filename;
+        $this->response->message[] = array(
+            'message' => 'File successfully loaded.',
+            'type' => 'success'
+        );
+        $this->_ajax_return();
+    }
+
+    private function check_path( $path, $create = true )
+    {
+        if( !is_dir( FCPATH . $path ) ){
+            if( $create )
+            {
+                $folders = explode('/', $path);
+                $cur_path = FCPATH;
+                foreach( $folders as $folder )
+                {
+                    $cur_path .= $folder;
+
+                    if( !is_dir( $cur_path ) )
+                    {
+                        mkdir( $cur_path, 0777, TRUE);
+                        $indexhtml = read_file( APPPATH .'index.html');
+                        write_file( $cur_path .'/index.html', $indexhtml);
+                    }
+
+                    $cur_path .= '/';
+                }
+            }
+            return false;
+        }
+        return true;
+    }     
 }

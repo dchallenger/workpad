@@ -34,7 +34,7 @@
 								<thead>
 									<tr>
 										<th width="10%" class="hidden-xs"></th>
-										<th width="25%">{{ lang('birthdays.user') }}</th>
+										<th width="25%">{{ lang('birthdays.employee') }}</th>
 										<th width="25%" class="hidden-xs">{{ lang('birthdays.date') }}</th>
 										<th width="20%">{{ lang('common.status') }}</th>
 										<th width="20%">{{ lang('common.actions') }}</th>
