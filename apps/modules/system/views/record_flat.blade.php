@@ -491,7 +491,7 @@
                                                 $committee_rating_val = explode(',', $other_config['appraisal_committee_rating']);
                                             }*/
                                         ?>
-                                        {{ form_dropdown('appraisal_committee_rating',$user_options, $other_config['appraisal_committee_rating'][1], 'class="form-control" data-placeholder="Select..." id="user_id"') }}
+                                        {{ form_dropdown('appraisal_committee_rating',$user_options, $other_config['appraisal_committee_rating'][1], 'class="form-control selectM3" data-placeholder="Select..." id="user_id"') }}
                                     </div>
                                 </div>                                    
                             </div>

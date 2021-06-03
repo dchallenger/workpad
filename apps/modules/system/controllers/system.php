@@ -27,6 +27,7 @@ class System extends MY_PrivateController
 		$data['other_config'] = $this->mod->_get_config('other_settings'); 
 
 		$this->db->where('deleted',0);
+		$this->db->order_by('full_name');
 		$users = $this->db->get('users');
 
 		$data['users'] = $users;
