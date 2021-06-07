@@ -92,6 +92,37 @@ class hr_validation_model extends Record
 			mysqli_next_result($this->db->conn_id);
 			return $data;	
 		}
+	
+	function notify_filer( $forms_id=0, $form=array())
+	{
+		$this->load->model('form_application_model', 'fam');
+
+		$notified = array();
+
+        $this->lang->load( 'form_application' );
+		$form_status = $form['form_status_id'] == 2 ? "approved" : "disapproved";
+
+        $notif_message  = 'Filed: ' . $form['form'] . ' for ' . date('F j, Y', strtotime($form['date_from'])) . ' has been '.$form_status.'. by HR';
+        if(trim($form['hr_remarks']) != ""){
+            $notif_message  .= '<br><br>Remarks: '.$form['hr_remarks'];
+        }
+		//insert notification
+		$insert = array(
+			'status' => 'info',
+			'message_type' => 'Time Record',
+			'user_id' => $form['user_id'],
+			'feed_content' => $notif_message,
+			'recipient_id' => $form['user_id'],
+			'uri' => str_replace(base_url(), '', $this->fam->url).'/detail/'.$form['forms_id']
+		);
+
+		$this->db->insert('system_feeds', $insert);
+		$id = $this->db->insert_id();
+		$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $form['user_id']));
+		$notified[] = $form['user_id'];
+
+		return $notified;
+	}
 
 	function newPostData($data){
 
@@ -168,7 +199,8 @@ class hr_validation_model extends Record
 
 	public function get_forms_details($forms_id=0){		
 		$where = array('deleted' => 0);
-		if($forms_id != 0) {$where= array('deleted' => 0, 'forms_id' => $forms_id);}
+		if($forms_id != 0) {$where= array('time_forms.deleted' => 0, 'time_forms.forms_id' => $forms_id);}
+		$this->db->join('time_form','time_forms.form_id = time_form.form_id','left');		
 		$forms_details = $this->db->get_where('time_forms', $where);
 		
 		return $forms_details->row_array();

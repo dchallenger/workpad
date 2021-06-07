@@ -815,6 +815,8 @@ function convert_number_to_words($number) {
         1000000000000000000 => 'quintillion'
     );
     
+    $number = str_replace(',', '', $number);
+    
     if (!is_numeric($number)) {
         return false;
     }

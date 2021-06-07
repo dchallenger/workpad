@@ -1235,7 +1235,7 @@ class Partners extends MY_PrivateController
 			$data['profile_spouse'] = (count($spouse) == 0 ? " " : ($spouse[0]['key_value'] == "" ? "" : $spouse[0]['key_value']));
 
 			$solo_parent = $this->profile_mod->get_partners_personal($user_id, 'solo_parent');
-			$data['personal_solo_parent'] = (count($solo_parent) == 0 ? " " : ($solo_parent[0]['key_value'] == "" ? "" : $solo_parent[0]['key_value']));
+			$data['personal_solo_parent'] = (count($solo_parent) == 0 ? 0 : ($solo_parent[0]['key_value'] == "" ? 0 : $solo_parent[0]['key_value']));
 
 			$home_leave = $this->profile_mod->get_partners_personal($user_id, 'home_leave');
 			$data['personal_home_leave'] = (count($home_leave) == 0 ? " " : ($home_leave[0]['key_value'] == "" ? "" : $home_leave[0]['key_value']));

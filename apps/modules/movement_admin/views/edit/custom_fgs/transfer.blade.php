@@ -83,7 +83,9 @@
 					if($transfer_field['table_name'] == 'ww_users'){
 						$text_value = $option->display_name;
 					}elseif($transfer_field['table_name'] == 'ww_users_department'){
-						$text_value = $option->department_code .' - '. $option->$field_name;
+						$text_value = $option->$field_name;
+					}elseif($transfer_field['table_name'] == 'ww_users_division'){
+						$text_value = $option->$field_name.' ('.get_division_code($option->division_code,'-').')';
 					}else{
 						$text_value = $option->$field_name;
 					}								

@@ -32,6 +32,9 @@
 
 		<table align='center' cellpadding="2px" cellspacing="0" style='width: 100%; height: auto; background: #fff'>
 			<tbody>
+                <tr>
+                    <td align="left" colspan="2" style="<?php echo $bltr ?>"><b>Training Calendar Details<b></td>
+                </tr>                
 				<tr>
 					<td align="left" style="<?php echo $blt ?>;width:50%">Training Title</td>
 					<td style="<?php echo $bltr ?>;width:50%"><?php echo $record['training_title'] ?></td>
@@ -106,6 +109,116 @@
                 </tr>
 			</tbody>
 		</table>
+        <br>
+        <table align='center' cellpadding="2px" cellspacing="0" style='width: 100%; height: auto; background: #fff'>
+            <tbody>
+                <tr>
+                    <td align="left" colspan="7" style="<?php echo $bltr ?>"><b>Training Session<b></td>
+                </tr>
+                <?php 
+                    if (!empty($session_tab)) {
+                ?>
+                        <tr>
+                            <td align="center" style="<?php echo $blt ?>;width:10%"><b>Session No.</b></td>
+                            <td align="center" style="<?php echo $blt ?>;width:15%"><b>Instructor</b></td>
+                            <td align="center" style="<?php echo $blt ?>;width:15%"><b>Training Date</b></td>                    
+                            <td align="center" style="<?php echo $blt ?>;width:15%"><b>Session Time From</b></td>
+                            <td align="center" style="<?php echo $blt ?>;width:15%"><b>Session Time To</b></td>
+                            <td align="center" style="<?php echo $blt ?>;width:15%"><b>Break Time From</b></td>
+                            <td align="center" style="<?php echo $bltr ?>;width:15%"><b>Break Time To</b></td>
+                        </tr>
+                <?php 
+                        $last = 0;        
+                        foreach ($session_tab as $key => $session) {
+                            if ($key == end(array_keys($session_tab)))
+                                $last = 1;
+                ?>
+                            <tr>
+                                <td align="left" style="<?php echo (!$last ? $blt : $bltb) ?>;width:10%"><?php echo $session['session_no'] ?></td>
+                                <td align="left" style="<?php echo (!$last ? $blt : $bltb) ?>;width:15%"><?php echo $session['instructor'] ?></td>
+                                <td align="center" style="<?php echo (!$last ? $blt : $bltb) ?>;width:15%"><?php echo general_date($session['session_date']) ?></td>                    
+                                <td align="center" style="<?php echo (!$last ? $blt : $bltb) ?>;width:15%"><?php echo date('h:i A',strtotime($session['sessiontime_from']));  ?></td>
+                                <td align="center" style="<?php echo (!$last ? $blt : $bltb) ?>;width:15%"><?php echo date('h:i A',strtotime($session['sessiontime_to']));  ?></td>
+                                <td align="center" style="<?php echo (!$last ? $blt : $bltb) ?>;width:15%"><?php echo date('h:i A',strtotime($session['breaktime_from']));  ?></td>
+                                <td align="center" style="<?php echo (!$last ? $bltr : $bltrb) ?>;width:15%"><?php echo date('h:i A',strtotime($session['breaktime_to']));  ?></td>
+                            </tr>                                
+                <?php
+                        }                
+
+                    } 
+                ?>
+            </tbody>
+        </table>
+        <br>
+        <table align='center' cellpadding="2px" cellspacing="0" style='width: 100%; height: auto; background: #fff'>
+            <tbody>
+                <tr>
+                    <td align="left" colspan="7" style="<?php echo $bltr ?>"><b>Training Cost<b></td>
+                </tr>
+                <?php 
+                    if (!empty($training_cost_tab)) {
+                ?>
+                        <tr>
+                            <td align="center" style="<?php echo $blt ?>;width:20%"><b>Source</b></td>
+                            <td align="center" style="<?php echo $blt ?>;width:20%"><b>Remarks</b></td>
+                            <td align="center" style="<?php echo $blt ?>;width:20%"><b>Cost</b></td>                    
+                            <td align="center" style="<?php echo $blt ?>;width:20%"><b>No. of Pax</b></td>
+                            <td align="center" style="<?php echo $blt ?>;width:20%"><b>Total</b></td>
+                        </tr>
+                <?php 
+                        $last = 0;        
+                        foreach ($training_cost_tab as $key => $training_cost) {
+                            if ($key == end(array_keys($training_cost_tab)))
+                                $last = 1;
+                ?>
+                            <tr>
+                                <td align="left" style="<?php echo (!$last ? $blt : $bltb) ?>;width:20%"><?php echo $training_cost['cost_name'] ?></td>
+                                <td align="left" style="<?php echo (!$last ? $blt : $bltb) ?>;width:20%"><?php echo $training_cost['remarks'] ?></td>
+                                <td align="right" style="<?php echo (!$last ? $blt : $bltb) ?>;width:20%"><?php echo $training_cost['cost'] ?></td>
+                                <td align="center" style="<?php echo (!$last ? $blt : $bltb) ?>;width:20%"><?php echo $training_cost['pax'] ?></td>
+                                <td align="right" style="<?php echo (!$last ? $bltr : $bltrb) ?>;width:20%"><?php echo $training_cost['total'] ?></td>
+                            </tr>                                
+                <?php
+                        }                
+
+                    } 
+                ?>
+            </tbody>
+        </table>
+        <br>
+        <table align='center' cellpadding="2px" cellspacing="0" style='width: 100%; height: auto; background: #fff'>
+            <tbody>
+                <tr>
+                    <td align="left" colspan="7" style="<?php echo $bltr ?>"><b>Training Participants<b></td>
+                </tr>
+                <?php 
+                    if (!empty($participant_tab)) {
+                ?>
+                        <tr>
+                            <td align="center" style="<?php echo $blt ?>;width:25%"><b>Employee Name</b></td>
+                            <td align="center" style="<?php echo $blt ?>;width:25%"><b>Nominate</b></td>
+                            <td align="center" style="<?php echo $blt ?>;width:25%"><b>Status</b></td>                    
+                            <td align="center" style="<?php echo $blt ?>;width:25%"><b>Attendance</b></td>
+                        </tr>
+                <?php 
+                        $last = 0;        
+                        foreach ($participant_tab as $key => $participant) {
+                            if ($key == end(array_keys($participant_tab)))
+                                $last = 1;
+                ?>
+                            <tr>
+                                <td align="left" style="<?php echo (!$last ? $blt : $bltb) ?>;width:25%"><?php echo $participant['alias'] ?></td>
+                                <td align="center" style="<?php echo (!$last ? $blt : $bltb) ?>;width:25%"><?php echo ($participant['nominate'] ? 'Yes' : 'No') ?></td>
+                                <td align="center" style="<?php echo (!$last ? $blt : $bltb) ?>;width:25%"><?php echo $participant['participant_status'] ?></td>
+                                <td align="center" style="<?php echo (!$last ? $bltr : $bltrb) ?>;width:25%"><?php echo ($participant['no_show'] ? 'Yes' : 'No') ?></td>
+                            </tr>                                
+                <?php
+                        }                
+
+                    } 
+                ?>
+            </tbody>
+        </table>        
     </body>
 <!-- BEGIN BODY -->
 </html>

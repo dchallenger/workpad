@@ -35,8 +35,8 @@ class Movement_admin extends MY_PrivateController
 		$partners_movement_cause = $this->db->get_where('partners_movement_cause', array('deleted' => 0));
 		$data['partners_movement_cause'] = $partners_movement_cause->result();
 
-        $data['movement'] = isset($this->permission['list']) ? $this->permission['list'] : 0;
-        $data['movement_manage'] = isset($permission[$this->mvm->mod_code]['list']) ? $permission[$this->mvm->mod_code]['list'] : 0;
+        $data['movement'] = 0; //isset($this->permission['list']) ? $this->permission['list'] : 0;
+        $data['movement_manage'] = 0; //isset($permission[$this->mvm->mod_code]['list']) ? $permission[$this->mvm->mod_code]['list'] : 0;
         $data['movement_admin'] = isset($permission[$this->mva->mod_code]['list']) ? $permission[$this->mva->mod_code]['list'] : 0;
 
 		$this->load->vars( $data );
@@ -146,6 +146,10 @@ class Movement_admin extends MY_PrivateController
 		{
 			$rec['detail_url'] = $this->mod->url . '/detail/' . $record['record_id'];
 			$rec['options'] .= '<li><a href="'.$rec['detail_url'].'"><i class="fa fa-info"></i> View</a></li>';
+
+			if($record['partners_movement_status_id'] > 3){
+				$rec['options'] .= '<li><a href="javascript: ajax_export('.$record['record_id'].')"><i class="fa fa-print"></i> Print</a></li>';
+			}			
 		}
 
 		if( isset( $this->permission['edit'] ) && $this->permission['edit'] )
@@ -166,10 +170,6 @@ class Movement_admin extends MY_PrivateController
 				$rec['delete_url'] = $this->mod->url . '/delete/' . $record['record_id'];
 				$rec['options'] .= '<li><a href="javascript: delete_record('.$record['record_id'].')"><i class="fa fa-trash-o"></i> '.lang('common.delete').'</a></li>';
 			}
-		}
-
-		if($record['partners_movement_status_id'] > 3){
-			$rec['options'] .= '<li><a href="javascript: ajax_export('.$record['record_id'].')"><i class="fa fa-print"></i> Print</a></li>';
 		}
 	}
 

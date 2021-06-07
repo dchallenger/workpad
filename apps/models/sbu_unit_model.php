@@ -28,9 +28,9 @@ class sbu_unit_model extends Record
 		$this->primary_key = 'sbu_unit_id';
 		$this->table = 'users_sbu_unit';
 		$this->icon = 'fa-th-list';
-		$this->short_name = 'SBU Unit';
-		$this->long_name  = 'SBU Unit';
-		$this->description = 'Manage and list sbu unit.';
+		$this->short_name = 'SBU';
+		$this->long_name  = 'SBU';
+		$this->description = 'Manage and list sbu.';
 		$this->path = APPPATH . 'modules/sbu_unit/';
 
 		parent::__construct();

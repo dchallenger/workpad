@@ -1041,15 +1041,15 @@ class Training_calendar extends MY_PrivateController
         $record = $this->mod->get_training_calendar_info( $record_id );
 
         $vars['record'] = $record;
-        
+
+		$training_cost_tab = array();
+
 		$this->db->order_by('calendar_budget_id');
 		$training_costs = $this->db->get_where('training_calendar_budget', array('training_calendar_id' => $record_id));
 
 		if($training_costs->num_rows() > 0){
 			$training_cost_tab = $training_costs->result_array();
 		}
-
-		$training_cost_tab = array();
 
 		$vars['training_cost_tab'] = $training_cost_tab;
 
@@ -1063,6 +1063,20 @@ class Training_calendar extends MY_PrivateController
 		}
 
 		$vars['session_tab'] = $session_tab;
+
+		$participant_tab = array();
+
+		$this->db->where('training_calendar_participant.deleted',0);
+		$this->db->where('training_calendar_id',$record_id);
+		$this->db->join('partners','training_calendar_participant.user_id = partners.user_id','left');
+		$this->db->join('training_calendar_participant_status','training_calendar_participant.participant_status_id = training_calendar_participant_status.participant_status_id','left');
+		$list_participants = $this->db->get('training_calendar_participant');
+
+		if($list_participants->num_rows() > 0){
+			$participant_tab = $list_participants->result_array();
+		}
+
+		$vars['participant_tab'] = $participant_tab;
 
         $this->load->library('PDFm');
         $mpdf = new PDFm();

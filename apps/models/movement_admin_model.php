@@ -623,7 +623,7 @@ class movement_admin_model extends Record
 
 		$query = "SELECT 
 					CONCAT(up.lastname,', ',up.firstname,' ',SUBSTRING(up.middlename, 1, 1),'.') as fullname,p.id_number,
-					pm.hrd_remarks,uc.company,uc.company_code,ub.branch,pma.user_id,p.status,upos.position,
+					pm.hrd_remarks,uc.company,uc.company_code,ub.branch,pma.user_id,p.status,upos.position,pma.type,
 					uc.print_logo, udep.department,udep.immediate as dept_head,udiv.immediate as div_head,jgl.job_level,pma.display_name,u.full_name as reports_to,pma.effectivity_date,
 					pmr.remarks_print_report,pm.remarks as reason,p.effectivity_date as date_hired,sss_no,
 					pp.tin,pp.hdmf_no,pm.created_on,up.v_location as location,up.v_division as division,up.v_section as section
@@ -668,32 +668,44 @@ class movement_admin_model extends Record
 		$b_rb = 'border-right:1px solid black;border-bottom:1px solid black;';
 		$b_r = 'border-right:1px solid black;';
 		$b_b = 'border-bottom:1px solid black;';
+		$p_l_25px = 'padding-left:25px';
+		$atop = 'vertical-align:top';
 
 		$html = '<div style="font-size:10px;line-height: 18px;"><div align="center"><img src="'.base_url().$movement_info->print_logo.'"></div>';
 		$html .= '<h3 align="center">NOTICE OF PERSONNEL ACTION</h3>';
 
-		$html .= '<table width="100%" style="border:1px solid black;border-collapse:collapse;font-size:10px;">
+		$html .= '<table width="100%" cellpadding="3px" style="vertical-align:top;border:1px solid black;border-collapse:collapse;font-size:10px;">
 					<tbody>
 						<tr>
-							<td width="33%" style="'.$b_rb.'">NAME <br/>&nbsp;&nbsp;'.$movement_info->fullname.'</td>
-							<td width="33%" style="'.$b_rb.'">EMPLOYEE NO. <br/>&nbsp;&nbsp;'.$movement_info->id_number.'</td>
-							<td width="33%" style="'.$b_b.'">DATE PREPARED <br/>&nbsp;&nbsp;'.general_date($movement_info->created_on).'</td>
+							<td width="33%" style="'.$b_r.'">NAME</td>
+							<td width="33%" style="'.$b_r.'">EMPLOYEE NO.</td>
+							<td width="33%" style="'.$b_r.'">DATE PREPARED</td>
 						</tr>
 						<tr>
-							<td width="33%" style="'.$b_rb.'">POSITION <br/>&nbsp;&nbsp;'.$movement_info->position.'</td>
-							<td width="33%" style="'.$b_rb.'">DATE HIRED <br/>&nbsp;&nbsp;'.general_date($movement_info->date_hired).'</td>
-							<td width="33%" style="'.$b_b.'">AREA / LOCATION <br/>&nbsp;&nbsp;'.$movement_info->location.'</td>
+							<td width="33%" style="'.$p_l_25px.';'.$b_rb.'">'.$movement_info->fullname.'</td>
+							<td width="33%" style="'.$p_l_25px.';'.$b_rb.'">'.$movement_info->id_number.'</td>
+							<td width="33%" style="'.$p_l_25px.';'.$b_b.'">'.general_date($movement_info->created_on).'</td>
+						</tr>						
+						<tr>
+							<td width="33%" style="'.$b_r.'">POSITION</td>
+							<td width="33%" style="'.$b_r.'">DATE HIRED</td>
+							<td width="33%" style="'.$b_r.'">AREA / LOCATION</td>
 						</tr>
 						<tr>
-							<td width="33%" style="'.$b_rb.'">GROUP / DIVISION <br/>&nbsp;&nbsp;'.ucwords(strtolower($movement_info->division)).'</td>
-							<td width="33%" style="'.$b_rb.'">DEPARTMENT <br/>&nbsp;&nbsp;'.ucwords(strtolower($movement_info->department)).'</td>
-							<td width="33%" style="'.$b_b.'">SECTION <br/>&nbsp;&nbsp;'.($movement_info->section ? $movement_info->section : "&nbsp;").'</td>
+							<td width="33%" style="'.$p_l_25px.';'.$b_rb.'">'.$movement_info->position.'</td>
+							<td width="33%" style="'.$p_l_25px.';'.$b_rb.'">'.general_date($movement_info->date_hired).'</td>
+							<td width="33%" style="'.$p_l_25px.';'.$b_b.'">'.$movement_info->location.'</td>
+						</tr>						
+						<tr>
+							<td width="33%" style="'.$b_r.'">GROUP / DIVISION</td>
+							<td width="33%" style="'.$b_r.'">DEPARTMENT</td>
+							<td width="33%" style="'.$b_r.'">NATURE OF MOVEMENT</td>
 						</tr>
 						<tr>
-							<td width="33%" style="'.$b_rb.'">TIN / TAXCODE <br/>&nbsp;&nbsp;'.($movement_info->tin ? $movement_info->tin : "&nbsp;").'</td>
-							<td width="33%" style="'.$b_rb.'">SSS # <br/>&nbsp;&nbsp;'.($movement_info->sss_no ? $movement_info->sss_no : "&nbsp;").'</td>
-							<td width="33%" style="'.$b_b.'">PAG-IBIG NO. <br/>&nbsp;&nbsp;'.($movement_info->hdmf_no ? $movement_info->hdmf_no : "&nbsp;").'</td>
-						</tr>
+							<td width="33%" style="'.$p_l_25px.';'.$b_rb.'">'.ucwords(strtolower($movement_info->division)).'</td>
+							<td width="33%" style="'.$p_l_25px.';'.$b_rb.'">'.ucwords(strtolower($movement_info->department)).'</td>
+							<td width="33%" style="'.$p_l_25px.';'.$b_b.'">'.($movement_info->type ? $movement_info->type : "&nbsp;").'</td>
+						</tr>						
 						<tr>
 							<td width="100%" style="'.$b_b.'" colspan="3">&nbsp;</td>
 						</tr>
@@ -735,7 +747,7 @@ class movement_admin_model extends Record
 			$comp_effectivity_date = $row2->effectivity_date;
 		}
 
-		$html .= '<table width="100%" style="border:1px solid black;border-top:none;border-collapse:collapse;font-size:10px;">
+		$html .= '<table width="100%" cellpadding="3px" style="vertical-align:top; border:1px solid black;border-top:none;border-collapse:collapse;font-size:10px;">
 					<tbody>
 						<tr>
 							<td width="25%" style="'.$b_rb.'"><b>PARTICULARS</b></td>
@@ -850,7 +862,7 @@ class movement_admin_model extends Record
 			</table>';
 
 		$html .= '
-					<table width="100%" style="border:1px solid black;border-top:none;border-collapse:collapse;font-size:10px;">
+					<table width="100%" cellpadding="3px" style="border:1px solid black;border-top:none;border-collapse:collapse;font-size:10px;">
 						<tr>
 							<td width="25%" style="'.$b_rb.'">&nbsp;</td>
 							<td width="25%" style="'.$b_rb.'">&nbsp;</td>
@@ -878,7 +890,7 @@ class movement_admin_model extends Record
 					</table>
 				 ';
 
-		$html .= '<table width="100%" style="border:1px solid black;border-top:none;border-collapse:collapse;font-size:10px;">
+		$html .= '<table width="100%" cellpadding="3px" style="border:1px solid black;border-top:none;border-collapse:collapse;font-size:10px;">
 					<tbody>
 						<tr>
 							<td width="33%" style="border-right:1px solid black">Initiated by:</td>
@@ -890,6 +902,11 @@ class movement_admin_model extends Record
 							<td width="33%" style="border-right:1px solid black">&nbsp;</td>
 							<td width="33%" >&nbsp;</td>
 						</tr>
+						<tr>
+							<td width="33%" style="border-right:1px solid black">&nbsp;</td>	
+							<td width="33%" style="border-right:1px solid black">&nbsp;</td>
+							<td width="33%" >&nbsp;</td>
+						</tr>						
 						<tr>
 							<td width="33%" style="'.$b_r.'">'.$movement_info->reports_to.'</td>	
 							<td width="33%" style="'.$b_r.'">'.$movement_info->dept_head.'</td>
@@ -910,6 +927,11 @@ class movement_admin_model extends Record
 							<td width="33%" style="border-right:1px solid black">&nbsp;</td>
 							<td width="33%" >&nbsp;</td>
 						</tr>
+						<tr>
+							<td width="33%" style="border-right:1px solid black">&nbsp;</td>	
+							<td width="33%" style="border-right:1px solid black">&nbsp;</td>
+							<td width="33%" >&nbsp;</td>
+						</tr>						
 						<tr>
 							<td width="33%" style="'.$b_r.'">'.$movement_info->div_head.'</td>	
 							<td width="33%" style="'.$b_r.'"></td>

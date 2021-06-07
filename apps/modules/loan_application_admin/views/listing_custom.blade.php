@@ -154,6 +154,7 @@
 @section('page_plugins')
 	@parent
 	<script type="text/javascript" src="{{ theme_path() }}plugins/jquery.infiniteScroll.js"></script>
+	<script type="text/javascript" src="{{ theme_path() }}modules/loan_application_admin/lists.js"></script>
 	<script type="text/javascript" src="{{ theme_path() }}modules/common/lists.js"></script>
 @stop
 

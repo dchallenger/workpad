@@ -37,8 +37,8 @@ class Movement extends MY_PrivateController
 		$partners_movement_cause = $this->db->get_where('partners_movement_cause', array('deleted' => 0));
 		$data['partners_movement_cause'] = $partners_movement_cause->result();
 
-        $data['movement'] = isset($this->permission['list']) ? $this->permission['list'] : 0;
-        $data['movement_manage'] = isset($permission[$this->mvm->mod_code]['list']) ? $permission[$this->mvm->mod_code]['list'] : 0;
+        $data['movement'] = 0; //isset($this->permission['list']) ? $this->permission['list'] : 0;
+        $data['movement_manage'] = 0; //isset($permission[$this->mvm->mod_code]['list']) ? $permission[$this->mvm->mod_code]['list'] : 0;
         $data['movement_admin'] = isset($permission[$this->mva->mod_code]['list']) ? $permission[$this->mva->mod_code]['list'] : 0;
 
 		$this->load->vars( $data );

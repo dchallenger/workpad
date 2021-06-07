@@ -65,8 +65,12 @@ class Form_application extends MY_PrivateController
                     if (count($home_leave) > 0 && $home_leave[0]['key_value'] == 1){
                         $data['leave_forms'][$field['form_id']] = $field['form'];
                     }
-                }
-                else{
+                } elseif ($field['form_code'] == 'SIL') {
+                    $partners_info = $this->profile_mod->get_partner_details($this->user->user_id);
+                    if (!empty($partners_info) && $partners_info['status_id'] == 3) {
+                        $data['leave_forms'][$field['form_id']] = $field['form'];    
+                    }
+                } else{
                     $data['leave_forms'][$field['form_id']] = $field['form'];
                 }
             }else{

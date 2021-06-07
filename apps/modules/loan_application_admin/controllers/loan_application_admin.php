@@ -60,6 +60,9 @@ class Loan_application_admin extends MY_PrivateController
             }
 
             $rec['options'] .= '<li><a href="'.$rec['detail_url'].'"><i class="fa fa-info"></i> '.lang('loan_application.view').'</a></li>';
+            if( $record['loan_application_status_id'] >= 6 ){
+                $rec['options'] .= '<li><a href="javascript:void(0)" onclick="print_application('.$record['record_id'].')"><i class="fa fa-print"></i> Print</a></li>';
+            }
         }
 
         if( $this->permission['delete'] )
@@ -802,4 +805,121 @@ class Loan_application_admin extends MY_PrivateController
 
         $this->_ajax_return();
     }  	
+
+    function print_application()
+    {
+        $this->_ajax_only();
+
+        $user = $this->config->item('user');
+
+        $record_id = $this->input->post('record_id');
+
+        $record = $this->mod->get_loan_application_info( $record_id );
+
+        $vars['record'] = $record;
+
+        $approver_list = $this->app_personal->call_sp_approvers(strtoupper($record['loan_type_code']), $record['user_id']);
+
+        $approver1 = '';
+        $approver2 = '';
+        $approver3 = '';
+        $approver4 = '';
+        if (!empty($approver_list)) {
+            if (isset($approver_list[0]['lastname']))
+                $approver1 = $approver_list[0]['lastname'] .' ,'. $approver_list[0]['firstname'];
+            if (isset($approver_list[1]['lastname']))
+                $approver2 = $approver_list[1]['lastname'] .' ,'. $approver_list[1]['firstname'];            
+            if (isset($approver_list[2]['lastname']))
+                $approver3 = $approver_list[2]['lastname'] .' ,'. $approver_list[2]['firstname'];            
+            if (isset($approver_list[3]['lastname']))
+                $approver4 = $approver_list[3]['lastname'] .' ,'. $approver_list[3]['firstname'];                            
+        }
+
+        $vars['approver1'] = $approver1;
+        $vars['approver2'] = $approver2;
+        $vars['approver3'] = $approver3;
+        $vars['approver4'] = $approver4;        
+
+        $this->load->library('PDFm');
+        $mpdf = new PDFm();
+
+        //$mpdf = new PDFm(['debug' => true]);
+
+        //$mpdf->showImageErrors = true
+        
+        $mpdf->SetTitle( 'HR Online Services' );
+        $mpdf->SetAutoPageBreak(true, 5);
+        $mpdf->SetAuthor( $user['lastname'] .', '. $user['firstname'] . ' ' .$user['middlename'] );  
+        $mpdf->SetDisplayMode('real', 'default');
+        $mpdf->AddPage();
+
+
+        if ($record['print_logo'] != ''){
+            if( file_exists( $record['print_logo'] ) ){
+                $logo = base_url().$record['print_logo'];
+            }
+        }
+
+        $vars['logo'] = $logo;
+
+        $this->load->vars( $vars );
+
+        $this->load->helper('form');
+        $this->load->helper('file');
+
+        switch ($record['loan_type_id']) {
+            case 1:
+                $template = 'pages/loan_application_mobile.blade.php';
+                break;
+            case 2:
+                $template = 'pages/loan_application_omnibus.blade.php';
+                break;
+            case 3:
+                $template = 'pages/loan_application_car.blade.php';
+                break;
+        }
+
+        $html = $this->load->view($template,$vars,true); 
+
+        $this->load->helper('file');
+        $path = 'uploads/templates/loan_application/';
+        $this->check_path( $path );
+        $filename = $path .$record['loan_type_code'].".pdf";
+
+        $mpdf->WriteHTML($html, 0, true, false);
+        $mpdf->Output($filename, 'F');
+
+        $this->response->filename = $filename;
+        $this->response->message[] = array(
+            'message' => 'File successfully loaded.',
+            'type' => 'success'
+        );
+        $this->_ajax_return();
+    }
+
+    private function check_path( $path, $create = true )
+    {
+        if( !is_dir( FCPATH . $path ) ){
+            if( $create )
+            {
+                $folders = explode('/', $path);
+                $cur_path = FCPATH;
+                foreach( $folders as $folder )
+                {
+                    $cur_path .= $folder;
+
+                    if( !is_dir( $cur_path ) )
+                    {
+                        mkdir( $cur_path, 0777, TRUE);
+                        $indexhtml = read_file( APPPATH .'index.html');
+                        write_file( $cur_path .'/index.html', $indexhtml);
+                    }
+
+                    $cur_path .= '/';
+                }
+            }
+            return false;
+        }
+        return true;
+    }       
 }

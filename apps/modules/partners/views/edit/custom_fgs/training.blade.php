@@ -15,8 +15,8 @@
                         <div class="input-group">
                             <select  class="form-control select2me" data-placeholder="Select..." name="training_category" id="training_category">
                                 <option value=""></option>
-                                <option value="Training">{{ lang('partners.train') }}</option>
-                                <option value="Seminar">{{ lang('partners.seminar') }}</option>
+                                <option value="{{ lang('partners.train') }}">{{ lang('partners.train') }}</option>
+                                <option value="{{ lang('partners.seminar') }}">{{ lang('partners.seminar') }}</option>
                             </select>
 
                             <span class="input-group-btn">

@@ -14,7 +14,7 @@ class Leave_balance_admin extends MY_PrivateController
         $form_list = $this->my_calendar->get_form_policy_grant($this->user->user_id);
 
         $data['leave_forms'] = array();
-        $form_codes = array('SL', 'VL', 'EL');
+        $form_codes = array('SL', 'VL', 'EL','SLW','VVL','SIL');
         foreach($form_list as $index => $field )
         {
             if($field['is_leave'] == 1 AND in_array($field['form_code'], $form_codes)){

@@ -1,4 +1,4 @@
-<input type="hidden" name="partners_movement_action_moving[id]" id="partners_movement_action_moving-id">
+<input type="hidden" name="partners_movement_action_moving[id]" id="partners_movement_action_moving-id" value="<?php echo $record['partners_movement_action_moving.id']; ?>" />	
 <div class="form-group">
 	<label class="control-label col-md-3">Blacklisted
 	</label>

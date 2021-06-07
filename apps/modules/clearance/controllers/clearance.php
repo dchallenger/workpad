@@ -1713,9 +1713,12 @@ class Clearance extends MY_PrivateController
         $hr_supervisor = "SELECT full_name as hr_supervisor FROM {$this->db->dbprefix}users WHERE role_id = 2 LIMIT 1";
         $hr_supervisor = $this->db->query($hr_supervisor)->row_array();
 
+		$hrd = get_hr_head();
+
         $template_data['title'] = $partner_record['firstname']." ".$partner_record['middlename']." ".$partner_record['lastname'];
         $template_data['employee_name'] = $partner_record['firstname']." ".substr($partner_record['middlename'],0, 1).". ".$partner_record['lastname'];
         $template_data['position'] = ucwords($partner_record['position']);
+        $template_data['division'] = $partner_record['v_division'] ?? '';
         $template_data['date_hired'] =  ($partner_record['date_hired'] && $partner_record['date_hired'] != '0000-00-00' && $partner_record['date_hired'] != 'January 01, 1970' && $partner_record['date_hired'] != '1970-01-01') ? date('F d, Y', strtotime($partner_record['date_hired'])) : '';
         $template_data['resigned_date'] = ($partner_record['resigned_date'] && $partner_record['resigned_date'] != '0000-00-00' && $partner_record['resigned_date'] != 'January 01, 1970' && $partner_record['resigned_date'] != '1970-01-01') ? date('F d, Y', strtotime($partner_record['resigned_date'])) : '';
         $template_data['gender'] = $partner_record['title'];
@@ -1730,8 +1733,11 @@ class Clearance extends MY_PrivateController
         $template_data['her_his_caps'] = ($partner_record['title'] == 'Mr.') ? 'His' : 'Her';
         $template_data['she_he'] = ($partner_record['title'] == 'Mr.') ? 'he' : 'she';
         $template_data['his_her'] = ($partner_record['title'] == 'Mr.') ? 'his' : 'her';
+        $template_data['she_he_caps'] = ($partner_record['title'] == 'Mr.') ? 'He' : 'She';
+        $template_data['title_lastname'] = $partner_record['title'] ." ". $partner_record['lastname'] ?? '';
         $template_data['firstname'] = $partner_record['title'] ." ". $partner_record['lastname'];
-
+        $template_data['hrd'] = $hrd['full_name'];
+        $template_data['hrd_position'] = $hrd['position'];
         // debug($template_data);
 
         $this->load->helper('file');

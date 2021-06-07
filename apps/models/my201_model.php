@@ -81,6 +81,17 @@ class my201_model extends Record
 	    	return array();
 	}
 
+	public function get_partner_details($user_id=0){
+		$partner_details = array();
+
+		$sql_partner = $this->db->get_where('partners', array('user_id' => $user_id));
+		$partner_details = $sql_partner->row_array();
+		if(!empty($partner_details)){
+			return $partner_details;
+		}
+		return array();
+	}
+	
 	function get_partners_personal_history($user_id=0, $key_class_code=''){
 
 		$this->db->select('key, sequence, key_value, personal_id')

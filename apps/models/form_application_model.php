@@ -402,7 +402,8 @@ public function call_sp_time_calendar($date_from='', $date_to='', $user_id=0){
 
 	public function get_forms_details($forms_id=0){		
 		$where = array('deleted' => 0);
-		if($forms_id != 0) {$where= array('deleted' => 0, 'forms_id' => $forms_id);}
+		if($forms_id != 0) {$where= array('time_forms.deleted' => 0, 'time_forms.forms_id' => $forms_id);}
+		$this->db->join('time_form','time_forms.form_id = time_form.form_id','left');
 		$forms_details = $this->db->get_where('time_forms', $where);
 		
 		return $forms_details->row_array();

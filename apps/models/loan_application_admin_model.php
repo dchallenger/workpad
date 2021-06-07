@@ -74,6 +74,77 @@ class loan_application_admin_model extends Record
         return $data;
     }
 
+	function get_loan_application_info($record_id)
+	{
+		$qry = "SELECT 
+			pla.loan_application_id as record_id, 
+			pla.user_id as user_id,
+			pla.loan_application_status_id as status_id,
+			pla.loan_type_id as loan_type_id,
+			pla.loan_type_code as loan_type_code,
+			uc.print_logo,
+			pla.display_name as employee_name,
+			up.v_position as position,
+			p.v_job_grade as job_level,
+			DATE_FORMAT(pla.created_on, '%M %d, %Y') as date_requested, 
+			up.v_department as department,
+			up.v_division as division,
+			up.company as company,
+			pla.comment as partners_loan_comment, 
+			placa.loan_application_car_amortization as car_amortization, 
+			plac.car_type as car_car_type, 
+			DATE_FORMAT(plac.pay_period_to, '%M %d, %Y') as car_pay_period_to, 
+			DATE_FORMAT(plac.pay_period_from, '%M %d, %Y') as car_pay_period_from, 
+			CAST( AES_DECRYPT( plac.loan_amount, encryption_key()) AS CHAR) as car_loan_amount, 
+			CAST( AES_DECRYPT( plac.amount_amortization, encryption_key()) AS CHAR) as car_amount_amortization, 
+			plac.year_model as car_year_model, 
+			plac.loan_terms as car_loan_terms, 
+			plac.car_loan_application as car_car_loan_application, 
+			place.loan_application_car_entitlement_id as car_loan_application_car_entitlement_id, 
+			place.loan_application_car_entitlement as car_loan_application_car_entitlement, 
+			CAST( AES_DECRYPT( plao.loan_amount_to_deduct_per_day, encryption_key()) AS CHAR) as omnibus_loan_amount_to_deduct_per_day, 
+			CAST( AES_DECRYPT( plao.loan_amount_to_deduct, encryption_key()) AS CHAR) as omnibus_loan_amount_to_deduct, 
+			DATE_FORMAT(plao.loan_deduction_start, '%M %d, %Y') as omnibus_loan_deduction_start, 
+			DATE_FORMAT(plao.loan_deduction_end, '%M %d, %Y') as omnibus_loan_deduction_end, 
+			CAST( AES_DECRYPT( plao.loan_start_amortization, encryption_key()) AS CHAR) as omnibus_loan_start_amortization, 
+			plao.loan_terms as omnibus_loan_terms, 
+			CAST( AES_DECRYPT( plao.loan_amount, encryption_key()) AS CHAR) as omnibus_loan_amount, 
+			IF(plao.loan_with_outstanding = 1,'Yes','No') as omnibus_loan_with_outstanding,
+			CAST( AES_DECRYPT( plao.loan_balance_amount, encryption_key()) AS CHAR) as omnibus_loan_balance_amount, 
+			CAST( AES_DECRYPT( plao.loan_loanable_amount, encryption_key()) AS CHAR) as omnibus_loan_loanable_amount, 
+			plao.loan_purposes as omnibus_loan_purposes, 
+			plam.loan_application_mobile_special_feature_id as mobile_loan_application_mobile_special_feature_id, 
+			plam.loan_application_mobile_plan_limit_id as mobile_loan_application_mobile_plan_limit_id, 
+			plam.loan_application_mobile_enrollment_type_id as mobile_loan_application_mobile_enrollment_type_id,
+			plmet.loan_application_mobile_enrollment_type as mobile_loan_application_mobile_enrollment_type,
+			plampl.loan_application_mobile_plan_limit as mobile_loan_application_mobile_plan_limit,
+			plmsf.loan_application_mobile_special_feature as mobile_loan_application_mobile_special_feature,
+			ud.immediate as dept_head
+		FROM ww_partners_loan_application pla
+		LEFT JOIN ww_users_profile up ON pla.user_id = up.user_id
+		LEFT JOIN ww_partners p ON up.user_id = p.user_id
+		LEFT JOIN ww_users_company uc ON up.company_id = uc.company_id
+		LEFT JOIN ww_users_department ud ON up.department_id = ud.department_id
+		LEFT JOIN ww_partners_loan_application_car plac ON plac.loan_application_id = pla.loan_application_id
+		LEFT JOIN ww_partners_loan_application_omnibus plao ON plao.loan_application_id = pla.loan_application_id
+		LEFT JOIN ww_partners_loan_application_mobile plam ON plam.loan_application_id = pla.loan_application_id
+		LEFT JOIN ww_partners_loan_application_car_amortization placa ON placa.loan_application_car_amortization = plac.amortization
+		LEFT JOIN ww_partners_loan_application_car_entitlement place ON place.loan_application_car_entitlement_id = plac.loan_application_car_entitlement_id
+		LEFT JOIN ww_partners_loan_application_mobile_enrollment_type plmet ON plam.loan_application_mobile_enrollment_type_id = plmet.loan_application_mobile_enrollment_type_id
+		LEFT JOIN ww_partners_loan_application_mobile_plan_limit plampl ON plam.loan_application_mobile_plan_limit_id = plampl.loan_application_mobile_plan_limit_id
+		LEFT JOIN ww_partners_loan_application_mobile_special_feature plmsf ON plam.loan_application_mobile_special_feature_id = plmsf.loan_application_mobile_special_feature_id
+		WHERE pla.loan_application_id = {$record_id}";
+
+		$result = $this->db->query($qry);
+
+		$info = array();
+		if ($result && $result->num_rows() > 0) {
+			$info = $result->row_array();
+		}
+
+		return $info;		
+	}
+
 	public function get_loan_application_approver_info( $loan_application_id = 0, $user_id = 0 )
 	{
 		$loan_application = $this->db->query("SELECT * FROM loan_application_manage WHERE loan_application_id=".$loan_application_id." AND approver_id=".$user_id);

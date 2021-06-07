@@ -1948,6 +1948,9 @@ class Hr_validation extends MY_PrivateController
         }
        
         $record_id = $this->input->post('record_id');
+        
+        $form_details = $this->mod->get_forms_details($record_id);
+
         $validate_remarks = $this->input->post('validate_remarks');
         if($_POST['action'] == 'approve'){
             $status_update = 'succesfully validated.';
@@ -1956,12 +1959,21 @@ class Hr_validation extends MY_PrivateController
             $approver_record['hr_remarks'] = $validate_remarks;        
             $approver_record['date_invalid'] = date('Y-m-d H:i:s');         
             $this->db->update('time_forms', $approver_record,array( $this->mod->primary_key => $record_id ) );
+
+            $this->response->notified = $this->fam->notify_approvers( $record_id, $form_details );
+            $this->response->notified = $this->mod->notify_filer( $record_id, $form_details );            
+
+            $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', $this->mod->table, array(), $approver_record,$form_details['user_id']);
         }else{
             $status_update = 'set to invalid or disapprove.';
             $approver_record['form_status_id'] = 9;
             $approver_record['hr_remarks'] = $validate_remarks;   
             $approver_record['date_invalid'] = date('Y-m-d H:i:s');         
             $this->db->update('time_forms', $approver_record,array( $this->mod->primary_key => $record_id ));
+
+            $this->response->notified = $this->mod->notify_filer( $record_id, $form_details );            
+
+            $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', $this->mod->table, array(), $approver_record,$form_details['user_id']);
         }
 
         $form_record['modified_by'] = $this->user->user_id;

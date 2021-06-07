@@ -3502,7 +3502,8 @@ class Import201 extends MY_PrivateController
 		}
 
 		$objReader->setReadDataOnly(true);
-		$objPHPExcel = $objReader->load($this->filename);
+		//$objPHPExcel = $objReader->load($this->filename);
+		$objPHPExcel = $objReader->load('D:\oclp new version\New HRIS Training Records Upload 06042021.xls');
 		$rowIterator = $objPHPExcel->getActiveSheet()->getRowIterator();
 	
 		$ctr = 0;	
@@ -3593,13 +3594,18 @@ class Import201 extends MY_PrivateController
 				if ($row[$key] != '' && $value != 'id_number'){
 					switch ($value) {
 						case 'training-start-month':
-							$year_month_arr = explode('-', $row[$key]);
+							//$row[$key] = date ( 'Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($row[$key]));
+							$year_month = date ( 'F-Y', strtotime($row[$key]));
+
+							$year_month_arr = explode('-', $year_month);
 							$month = trim($year_month_arr[0]);
 							$year = trim($year_month_arr[1]);
 							$row[$key] = $month;
 							break;
 						case 'training-end-month':
-							$year_month_arr = explode('-', $row[$key]);
+							$year_month = date ( 'F-Y', strtotime($row[$key]));
+
+							$year_month_arr = explode('-', $year_month);
 							$month = trim($year_month_arr[0]);
 							$year = trim($year_month_arr[1]);
 							$row[$key] = $month;
