@@ -79,6 +79,7 @@ class loan_application_admin_model extends Record
 		$qry = "SELECT 
 			pla.loan_application_id as record_id, 
 			pla.user_id as user_id,
+			p.id_number,
 			pla.loan_application_status_id as status_id,
 			pla.loan_type_id as loan_type_id,
 			pla.loan_type_code as loan_type_code,
@@ -90,6 +91,7 @@ class loan_application_admin_model extends Record
 			up.v_department as department,
 			up.v_division as division,
 			up.company as company,
+			uc.company_initial,
 			pla.comment as partners_loan_comment, 
 			placa.loan_application_car_amortization as car_amortization, 
 			plac.car_type as car_car_type, 

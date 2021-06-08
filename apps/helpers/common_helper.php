@@ -888,10 +888,8 @@ function convert_number_to_words($number) {
 function currency_format($number,$remove_decimal = 1) {
 	$amount = str_replace(',', '', $number);
 	
-	if ($remove_decimal)
-		$amount = str_replace('.', '', $amount);
+	$amount = number_format(floatval($amount), 2);
 
-	$amount = number_format(floatval($amount), 2, '.', ',');
 	return $amount;
 }
 

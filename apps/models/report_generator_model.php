@@ -242,9 +242,15 @@ class report_generator_model extends Record
 					switch( $row->uitype_id )
 					{
 						case 3:
+							if ($value == '')
+								$value = date('Y-m-d');
+
 							$value = date('Y-m-d', strtotime( $value ));
 							break;
 						case 4:
+							if ($value == '')
+								$value = date('Y-m-d H:i:s');	
+													
 							$value = date('Y-m-d H:i:s', strtotime( $value ));
 							break;
 						case 5:
@@ -663,6 +669,18 @@ class report_generator_model extends Record
 				$lbr_header = 1;
 				$excel = $this->load->view("templates/leave_balance_report", array('columns' => $columns, 'result' => $result, 'query' => $query, 'report_name' => $report->report_name,'filter' => $filter, 'filter_var' => $filter_var), true);
 				break;
+			case 'EMPLOYEE_MOVEMENT':
+				$em_header = 1;
+				$excel = $this->load->view("templates/employee_movement", array('columns' => $columns, 'result' => $result, 'query' => $query, 'report_name' => $report->report_name,'filter' => $filter, 'filter_var' => $filter_var), true);
+				break;
+			case 'TRAINING_DATABASE':
+				$td_header = 1;
+				$excel = $this->load->view("templates/training_database", array('columns' => $columns, 'result' => $result, 'query' => $query, 'report_name' => $report->report_name,'filter' => $filter, 'filter_var' => $filter_var), true);
+				break;
+			case 'TRAINING_EVALUATION':
+				$teval_header = 1;
+				$excel = $this->load->view("templates/training_database", array('columns' => $columns, 'result' => $result, 'query' => $query, 'report_name' => $report->report_name,'filter' => $filter, 'filter_var' => $filter_var), true);
+				break;				
 			default:
 				$excel = $this->load->view("templates/excel", array('result' => $result), true);
 				break;
@@ -834,6 +852,76 @@ class report_generator_model extends Record
 			$content->getActiveSheet()->getStyle("A3:N".($result->num_rows()+3))->applyFromArray($border_style);
 
 			$content->getActiveSheet()->getStyle("A".($result->num_rows()+4).":N".($result->num_rows()+4))->getFont()->setBold(true);
+		}
+
+		if (isset($em_header)) {
+			$letters = $this->createColumnsArray('Z');
+			$index = 0;
+
+			for ($index; $index <= count($letters) - 1; $index++) {
+				$row = $letters[$index]."1";
+				
+				$content->getActiveSheet()->getColumnDimension($letters[$index])->setAutoSize(true);
+			}
+
+			$letters = $this->createColumnsArray('AF');
+			$index = 0;
+
+			for ($index; $index <= count($letters) - 1; $index++) {
+				$row = $letters[$index]."1";
+				
+				$content->getActiveSheet()->getColumnDimension($letters[$index])->setAutoSize(true);
+			}
+
+			$content->getActiveSheet()->getStyle("A1:A2")->applyFromArray($style_center);
+			$content->getActiveSheet()->getStyle("A3:N3")->applyFromArray($style_center);
+			$content->getActiveSheet()->mergeCells('A1:AF1');
+			$content->getActiveSheet()->mergeCells('A2:AF2');
+
+			$content->getActiveSheet()->getStyle("A1:AF3")->getFont()->setBold(true);
+
+			$content->getActiveSheet()->getStyle("A3:AF".($result->num_rows()+3))->applyFromArray($border_style);
+		}
+
+		if (isset($td_header)) {
+			$letters = $this->createColumnsArray('K');
+			$index = 0;
+
+			for ($index; $index <= count($letters) - 1; $index++) {
+				$row = $letters[$index]."1";
+				
+				$content->getActiveSheet()->getColumnDimension($letters[$index])->setAutoSize(true);
+			}
+
+			$content->getActiveSheet()->getStyle('J4:J'.($result->num_rows()+3))->getNumberFormat()->setFormatCode('#,##0.00');
+			$content->getActiveSheet()->getStyle("A1:K2")->applyFromArray($style_center);
+			$content->getActiveSheet()->getStyle("A3:K3")->applyFromArray($style_center);
+			$content->getActiveSheet()->mergeCells('A1:K1');
+			$content->getActiveSheet()->mergeCells('A2:K2');
+
+			$content->getActiveSheet()->getStyle("A1:K3")->getFont()->setBold(true);
+
+			$content->getActiveSheet()->getStyle("A3:K".($result->num_rows()+3))->applyFromArray($border_style);
+		}
+
+		if (isset($teval_header)) {
+			$letters = $this->createColumnsArray('K');
+			$index = 0;
+
+			for ($index; $index <= count($letters) - 1; $index++) {
+				$row = $letters[$index]."1";
+				
+				$content->getActiveSheet()->getColumnDimension($letters[$index])->setAutoSize(true);
+			}
+
+			$content->getActiveSheet()->getStyle("A1:K2")->applyFromArray($style_center);
+			$content->getActiveSheet()->getStyle("A3:K3")->applyFromArray($style_center);
+			$content->getActiveSheet()->mergeCells('A1:K1');
+			$content->getActiveSheet()->mergeCells('A2:K2');
+
+			$content->getActiveSheet()->getStyle("A1:K3")->getFont()->setBold(true);
+
+			$content->getActiveSheet()->getStyle("A3:K".($result->num_rows()+3))->applyFromArray($border_style);
 		}
 
 		if (isset($exc_report_header)) {

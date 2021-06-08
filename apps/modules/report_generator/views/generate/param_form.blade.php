@@ -8,6 +8,9 @@
 						<td>Operator</td>
 						<td>Filter</td>
 					</tr>
+					<tr>
+						<td colspan="3">Required <label class="control-label"><span class="required">*</span></label></td>
+					</tr>
 				</thead>
 				<tbody>
 					@if( $fixed_filters->num_rows() > 0 )

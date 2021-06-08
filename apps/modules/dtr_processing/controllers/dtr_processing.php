@@ -103,6 +103,15 @@ class Dtr_processing extends MY_PrivateController
 			$this->_ajax_return();
 		}
 
+		$main_record['period_id'] = $period_id;
+
+		if ($user_id > 0)
+			$main_record['user_id'] = $user_id;
+		else
+			$main_record['user_id'] = '';
+
+		$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', $this->mod->table, array(), $main_record,$user_id);
+
 		$this->db->query('CALL sp_time_period_process('.$period_id.','.$user_id.');');
 
 		$this->response->message[] = array(

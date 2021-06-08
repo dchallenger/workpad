@@ -83,6 +83,7 @@
 
 						if( typeof(response.quick_edit_form) != 'undefined' )
 						{
+							$('.modal-container').attr('data-width', '540');
 							$('.modal-container').html(response.quick_edit_form);
 							$('.modal-container').modal();
 

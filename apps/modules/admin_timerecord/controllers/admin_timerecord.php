@@ -457,6 +457,10 @@ class Admin_timerecord extends MY_PrivateController
 		$this->response->record_id = $this->record_id = $post['record_id'];
 		unset( $post['record_id'] );
 
+		$this->db->select('aux_shift_id,time_in,time_out,override,user_id');
+		$prev_record = $this->db->get_where( 'time_record', array( $this->mod->primary_key => $this->record_id ) );
+        $previous_main_data = $prev_record->row_array();	
+        
 		// echo "<pre>\n";
 		// print_r($post);
         /***** END Form Validation (hard coded) *****/
@@ -504,7 +508,9 @@ class Admin_timerecord extends MY_PrivateController
 			else{
 				 $this->db->trans_rollback();
 			}
-		}
+		}	
+
+		$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'ww_time_record', $previous_main_data, $main_record,(isset($previous_main_data['user_id']) ? $previous_main_data['user_id'] : ''));
 
 		if( !$error  )
 		{

@@ -5,19 +5,42 @@
 	}
 ?>
 <table cellspacing="0" cellpadding="1" border="1">
+	<tr>
+		<?php 
+			$date_range = array();
+			if (!empty($filter)) {
+				foreach ($filter as $key => $value) {
+					if (!is_array($value)) {
+						if(strtotime($value))
+							$date_range[] = $value;
+					}
+				}
+			}		
+		?>
+		<td><?php echo implode(' - ', $date_range) ?></td>
+	</tr>
 	<tr> <?php
 		foreach($columns as $column): ?>
 			<td><?php echo $column->alias?></td> <?php
 		endforeach; ?>
 	</tr><?php
+	
 	$result = $result->result();
+
+	$id_number_array = array();
+
+	$id_number = "Id Number";
+
 	foreach( $result as $row ) : ?>
 		<tr><?php
+			if (!in_array($row->$id_number, $id_number_array))
+				array_push($id_number_array, $row->$id_number);
+
 			foreach($columns as $column): 
 				$alias = $column->alias; ?>
-				<td><?php echo (in_array($row->$alias,array('1970-01-01','0000-00-00')) ? '' : $row->$alias) ?></td> <?php
-			endforeach; ?>
-		</tr> <?php
+				<td><?php echo $row->$alias?></td> <?php
+			endforeach; ?>           
+		</tr> <?php	
 	endforeach; ?>
 </table>
 <?php

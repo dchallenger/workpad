@@ -7,7 +7,7 @@
 	@foreach($signatory['class'] as $category => $categories)
 		<div class="row">
 			<div class="col-md-12 margin-bottom-10">
-				<strong>{{ $category }}</strong>
+				<strong>@if($category == 'Partners') Transactions @else {{ $category}} @endif</strong>
 			</div>
 			@foreach($categories as $class_id => $class)
 			<div class="row">

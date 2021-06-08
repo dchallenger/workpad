@@ -510,6 +510,9 @@ class Report_generator extends MY_PrivateController
                 $data['content'] = $this->load->blade('pages.param_form_custom')->with( $this->load->get_cached_vars() )->with('button', $button);
                 break;
             case 'TAX_COMPENSATION':
+            case 'EMPLOYEE_MOVEMENT':
+            case 'TRAINING_DATABASE':
+            case 'TRAINING_EVALUATION':
                 $button = array('xls' => 0, 'csv' => 1, 'pdf' => 1, 'txt' => 1);
                 $data['content'] = $this->load->blade('pages.param_form_custom')->with( $this->load->get_cached_vars() )->with('button', $button);
                 break;
@@ -720,7 +723,7 @@ class Report_generator extends MY_PrivateController
             //reset tables
             $this->db->where('report_id', $this->record_id);
             $this->db->delete('report_generator_role');
-            $roles = $_POST['report_generator']['roles'];
+            $roles = (isset($_POST['report_generator']['roles']) ? $_POST['report_generator']['roles'] : array());
             foreach( $roles as $role_id )
             {
                 $insert = array(
@@ -1410,7 +1413,19 @@ class Report_generator extends MY_PrivateController
                 }                
             }
         }
-        
+
+        foreach ($filter as $id => $value) {
+            if ($value->required) {
+                if (isset($post['filter'][$id]) && ($post['filter'][$id] == '' || empty($post['filter'][$id]))) {
+                    $this->response->message[] = array(
+                        'message' => 'Please input required fields',
+                        'type' => 'error'
+                    );
+                    $this->_ajax_return();
+                }
+            }
+        }
+
         $user = $this->config->item('user');
         $this->db->limit(1);
         $role_check = $this->db->get_where('report_generator_role', array('report_id' => $_POST['record_id'], 'role_id' => $user['role_id']))->num_rows();

@@ -1,7 +1,7 @@
 <?php
 $lang['dtr_summary'] = array(
 	'pay_dates' => 'Pay Dates',
-	'show_inclusive_date_last5' => ' Show inclusive date for the last 5 pay dates',
+	'show_inclusive_date_last5' => ' Show inclusive date for the last 6 pay dates',
 	'payroll' => 'Payroll',
 	'employee' => 'Employee',
 	'date' => 'Date',

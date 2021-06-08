@@ -1052,6 +1052,8 @@ function _save_signatory()
                     }
                    	
 					get_signatory();
+
+					$('#id').val('');
 					// window.location.reload();
 				}
 			});

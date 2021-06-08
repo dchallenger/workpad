@@ -42,36 +42,37 @@
                     <td style="width:7%"></td>
 				</tr>
                 <tr>
-                    <td align="left" style="width:12%">Position:</td>
-                    <td style="<?php echo $bb?>;<?php echo $tl?>;width:31%"><?php echo $record['position'] ?></td>
+                    <td align="left" style="width:12%">Emp No.:</td>
+                    <td style="<?php echo $bb?>;<?php echo $tl?>;width:31%"><?php echo $record['id_number'] ?></td>                    
+                    <td style="width:7%"></td>                    
+                    <td align="left" style="width:14%">Position:</td>
+                    <td style="<?php echo $bb?>;<?php echo $tl?>;width:29%"><?php echo $record['position'] ?></td>
                     <td style="width:7%"></td>
-                    <td align="left" style="width:14%">Department:</td>
-                    <td style="<?php echo $bb?>;<?php echo $tl?>;width:29%"><?php echo $record['department'] ?></td>                    
+                </tr>
+                <tr>
+                    <td align="left" style="width:12%">Department:</td>
+                    <td style="<?php echo $bb?>;<?php echo $tl?>;width:31%"><?php echo $record['department'] ?></td>                    
+                    <td style="width:7%"></td>                    
+                    <td align="left" style="width:14%">Job level:</td>
+                    <td style="<?php echo $bb?>;<?php echo $tl?>;width:29%"><?php echo $record['job_level'] ?></td>
                     <td style="width:7%"></td>
                 </tr>
                 <tr>
-                    <td align="left" style="width:12%">Job level:</td>
-                    <td style="<?php echo $bb?>;<?php echo $tl?>;width:31%"><?php echo $record['job_level'] ?></td>
-                    <td style="width:10%"></td>
-                    <td align="left" style="width:14%">Division:</td>
-                    <td style="<?php echo $bb?>;<?php echo $tl?>;width:29%"><?php echo $record['division'] ?></td>                    
-                    <td style="width:10%"></td>
+                    <td align="left" style="width:12%">Division:</td>
+                    <td style="<?php echo $bb?>;<?php echo $tl?>;width:31%"><?php echo $record['division'] ?></td>                    
+                    <td style="width:7%"></td>
+                    <td align="left" style="width:14%">Loan Amount:</td>
+                    <td style="<?php echo $bb?>;<?php echo $tl?>;width:29%"><?php echo $record['omnibus_loan_amount'] ?></td>
+                    <td style="width:7%"></td>
+
                 </tr>
                 <tr>
-                    <td align="left" style="width:12%">Loan Amount:</td>
-                    <td style="<?php echo $bb?>;<?php echo $tl?>;width:31%"><?php echo $record['omnibus_loan_amount'] ?></td>
-                    <td style="width:10%"></td>
-                    <td align="left" style="width:14%">Terms:</td>
-                    <td style="<?php echo $bb?>;<?php echo $tl?>;width:29%"><?php echo $record['omnibus_loan_terms'] ?></td>                    
-                    <td style="width:10%"></td>
-                </tr>
-                <tr>
-                    <td align="left" style="width:12%">Start of Amortization:</td>
-                    <td style="<?php echo $bb?>;<?php echo $tl?>;width:31%"><?php echo $record['omnibus_loan_start_amortization'] ?></td>
-                    <td style="width:10%"></td>
-                    <td align="left" style="width:14%"></td>
-                    <td style="width:29%">&nbsp;</td>                    
-                    <td style="width:10%"></td>
+                    <td align="left" style="width:12%">Terms:</td>
+                    <td style="<?php echo $bb?>;<?php echo $tl?>;width:31%"><?php echo $record['omnibus_loan_terms'] ?></td>                    
+                    <td style="width:7%"></td>                    
+                    <td align="left" style="width:14%">Start of Amortization:</td>
+                    <td style="<?php echo $bb?>;<?php echo $tl?>;width:29%"><?php echo $record['omnibus_loan_deduction_start'] ?></td>
+                    <td style="width:7%"></td>
                 </tr>
 			</tbody>
 		</table>
@@ -80,8 +81,8 @@
         <br>
         <p style="<?php echo $bb ?>">&nbsp;</p>
         <p align="center"><b>AUTHORITY TO DEDUCT</b></p>
-        <p style="text-align:justify">This is to acknowledge my availment of an Omnibus Loan from CAPITOL COMMONS CORP. in the amount of (P<?php echo $record['omnibus_loan_amount']?>) at zero interest, payable in equal semi-monthly installments equivalent to (P<?php echo $record['omnibus_loan_start_amortization'] ?>) per payday.</p>
-        <p style="text-align:justify">In payment for the above, I hereby authorize CCC to deduct the amount of semi-monthly installments from my salary effective <?php echo $record['omnibus_loan_deduction_start'] ?> payday until <?php echo $record['omnibus_loan_deduction_end'] ?>, or until the full amount has been paid, whichever comes first.</p>
+        <p style="text-align:justify">This is to acknowledge my availment of an Omnibus Loan from <?php echo $record['company']  ?>. in the amount of (P<?php echo $record['omnibus_loan_amount']?>) at zero interest, payable in equal semi-monthly installments equivalent to (P<?php echo $record['omnibus_loan_start_amortization'] ?>) per payday.</p>
+        <p style="text-align:justify">In payment for the above, I hereby authorize <?php echo $record['company_initial'] ?> to deduct the amount of semi-monthly installments from my salary effective <?php echo $record['omnibus_loan_deduction_start'] ?> payday until <?php echo $record['omnibus_loan_deduction_end'] ?>, or until the full amount has been paid, whichever comes first.</p>
         <p style="text-align:justify">In the event of my separation from the company, I agree that the remaining balance shall be deductible from my last salary and whatever applicable benefits due me from the company.</p>
         <br>
         <table align='center' cellpadding="4px" cellspacing="0" style='width: 100%; height: auto; background: #fff'>

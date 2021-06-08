@@ -60,7 +60,7 @@ class Loan_application_admin extends MY_PrivateController
             }
 
             $rec['options'] .= '<li><a href="'.$rec['detail_url'].'"><i class="fa fa-info"></i> '.lang('loan_application.view').'</a></li>';
-            if( $record['loan_application_status_id'] >= 6 ){
+            if( $record['loan_application_status_id'] >= 1 ){
                 $rec['options'] .= '<li><a href="javascript:void(0)" onclick="print_application('.$record['record_id'].')"><i class="fa fa-print"></i> Print</a></li>';
             }
         }
