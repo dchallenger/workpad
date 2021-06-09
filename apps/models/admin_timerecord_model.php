@@ -191,7 +191,7 @@ class Admin_timerecord_model extends Record
                 AND up.`user_id` = '".$user_id."'
                 WHERE NOW() BETWEEN `from` AND `to` OR `to` < NOW()
                 LIMIT 6
-                OFFSET 7";
+                OFFSET 8";
 
 		$lists = $this->db->query( $qry );
 		$options[] = '<option value=""></option>';
