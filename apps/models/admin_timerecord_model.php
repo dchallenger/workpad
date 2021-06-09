@@ -190,10 +190,14 @@ class Admin_timerecord_model extends Record
                 JOIN users_profile up ON up.company_id =  tpl.`company_id`  
                 AND up.`user_id` = '".$user_id."'
                 WHERE NOW() BETWEEN `from` AND `to` OR `to` < NOW()
+                ORDER BY `from` ASC
                 LIMIT 6
                 OFFSET 8";
 
 		$lists = $this->db->query( $qry );
+
+		debug($this->db->last_query());die();
+
 		$options[] = '<option value=""></option>';
 		foreach( $lists->result() as $row )
 		{
