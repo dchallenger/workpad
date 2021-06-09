@@ -196,8 +196,6 @@ class Admin_timerecord_model extends Record
 
 		$lists = $this->db->query( $qry );
 
-		debug($this->db->last_query());die();
-
 		$options[] = '<option value=""></option>';
 		foreach( $lists->result() as $row )
 		{
