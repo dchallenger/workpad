@@ -16,25 +16,43 @@
 					$user_id = $rec201->user_id;
 					$btn = "btn-success";
 				}
-				if($user_id == ''){?>
-
-				<span class="margin-right-5">
-					<span class="btn default btn-xs movable-label">:</span>
-					<a type="button" class="btn <?php echo $btn?> btn-xs onclick-name" href="javascript:create_201(<?php echo $rec->process_id?>, '<?php echo $user_id?>')">
-						<?php
-					switch( $rec->gender )
-					{
-						case 'Female':
-							echo '<i class="fa fa-female"></i>';
-							break;
-						default:
-							echo '<i class="fa fa-male"></i>';
-							break;
-					}
-					echo $rec->fullname?>
-					</a>
-				</span> 
-			<?php }
+				if($user_id == ''){
+					if(($is_assigned && !$is_recruitment_staff)): ?>
+						<span class="margin-right-5">
+							<span class="btn default btn-xs movable-label">:</span>
+							<a type="button" class="btn <?php echo $btn?> btn-xs onclick-name" href="javascript:create_201(<?php echo $rec->process_id?>, '<?php echo $user_id?>')">
+								<?php
+							switch( $rec->gender )
+							{
+								case 'Female':
+									echo '<i class="fa fa-female"></i>';
+									break;
+								default:
+									echo '<i class="fa fa-male"></i>';
+									break;
+							}
+							echo $rec->fullname?>
+							</a>
+						</span> 
+					<?php else: ?>
+						<span class="margin-right-5">
+							<span class="btn default btn-xs movable-label">:</span>
+							<span> <?php
+								switch( $rec->gender )
+								{
+									case 'Female':
+										echo '<i class="fa fa-female"></i>';
+										break;
+									default:
+										echo '<i class="fa fa-male"></i>';
+										break;
+								} ?>
+								<?php echo $rec->fullname?>
+							</span>
+						</span>					
+			<?php
+					endif;
+				}
 			endforeach;
 		endif;?>
 	</div>

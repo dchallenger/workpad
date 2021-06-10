@@ -450,7 +450,7 @@
 	                    <?php
 	                        $sbu_unit_details = explode(',', $sbu_unit_details);
 	                    ?>
-	                    @if(!empty($sbu_unit))
+	                    @if(!empty($sbu_unit) && $sbu_unit != 'n/a')
 	                        @foreach(explode(',',$sbu_unit) as $key => $val)
 								<div class="row">
 									<div class="col-md-12">

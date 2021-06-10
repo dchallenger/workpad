@@ -635,7 +635,7 @@
                             $show_hidden = (isset($accept_offer) && $accept_offer == 1) ? '' : 'hidden';
                         ?>
                         <span <?=$hidden?>>
-                            <button type="button" onclick="save_jo()" class="demo-loading-btn btn btn-info btn-sm"><?=lang('applicant_monitoring.save_jo_details')?></button>
+                            <button type="button" onclick="save_jo()" class="demo-loading-btn btn btn-success btn-sm"><?=lang('applicant_monitoring.save_jo_details')?></button>
                             <button id="email_job_offer" type="button" onclick="email_jo(<?php echo $process->process_id?>)" class="demo-loading-btn btn btn-warning btn-sm <?php echo $show_hidden;?>"><?=lang('applicant_monitoring.email_jo')?></button>
                             <button id="move_pre_em" class="demo-loading-btn btn btn-success btn-sm <?php echo $show_hidden;?>" onclick="move_to_preemp(<?php echo $process->process_id?>)" type="button">Move to Pre-Employment</button>
                         </span>

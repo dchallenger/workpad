@@ -137,6 +137,7 @@ class Applicant_monitoring extends MY_PrivateController
         $permission = $this->config->item('permission');
         $is_assigned = isset($permission[$this->mod->mod_code]['process']) ? $permission[$this->mod->mod_code]['process'] : 0;
         $is_interviewer = $this->mod->is_interviewer();
+        $is_recruitment_staff = ((isset($this->config->config['user']['role_id']) && $this->config->config['user']['role_id'] == 45) ? 1 : 0);
 
 		$request_id = $this->input->post('request_id');
 		$year = $this->input->post('year');
@@ -161,6 +162,7 @@ class Applicant_monitoring extends MY_PrivateController
 				$step[$_step->status_id]['is_assigned'] = $is_assigned;
 				$step[$_step->status_id]['is_interviewer'] = $is_interviewer;
 				$step[$_step->status_id]['recruit'] = array();
+				$step[$_step->status_id]['is_recruitment_staff'] = $is_recruitment_staff;
 
 				$qry = "select a.*, concat(b.firstname, ' ', b.lastname) as fullname, b.blacklisted, c.key_value as gender
 						FROM {$this->db->dbprefix}recruitment_process a
