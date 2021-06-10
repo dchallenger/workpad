@@ -211,7 +211,7 @@ class Applicants extends MY_PrivateController
         	$path = base_url().'uploads/templates/app_info_sheet/pdf/';
         	$filename = $path .$record['record_id']."-". $record['recruitment_lastname']. "-applicationInfoSheet.pdf";
 			// $rec['options'] .= '<li><a href="'. $filename .'" target="_blank" ><i class="fa fa-print"></i> Print</a></li>';
-			$rec['options'] .= '<li><a href="javascript: ajax_export('.$record['record_id'].',\''.$record['recruitment_lastname'].'\')"><i class="fa fa-print"></i> Print</a></li>';
+			//$rec['options'] .= '<li><a href="javascript: ajax_export('.$record['record_id'].',\''.$record['recruitment_lastname'].'\')"><i class="fa fa-print"></i> Print</a></li>';
 			$rec['options'] .= '<li><a href="javascript: delete_record('.$record['record_id'].')"><i class="fa fa-trash-o"></i> '.lang('common.delete').'</a></li>';
 		}
 	}

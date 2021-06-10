@@ -857,7 +857,7 @@
 
                     <div class="modal-footer margin-top-0">
                         <button class="btn btn-default btn-sm" data-dismiss="modal" type="button"><?=lang('common.close')?></button>
-                        <button type="button" onclick="save_pre_employment()" class="demo-loading-btn btn btn-info btn-sm"><?=lang('common.save')?></button>
+                        <button type="button" onclick="save_pre_employment()" class="demo-loading-btn btn btn-success btn-sm"><?=lang('common.save')?></button>
                         <?php $show_hidden = (isset($template_id) && !empty($template_id)) ? '' : 'hidden'; ?>
                         <button id="move_to_cs"<?=$hidden?> class="demo-loading-btn btn btn-success btn-sm <?php echo $show_hidden;?>" onclick="move_to_c201(<?php echo $process_id?>)" type="button"><?=lang('applicant_monitoring.move_to_201')?></button>
                     </div>

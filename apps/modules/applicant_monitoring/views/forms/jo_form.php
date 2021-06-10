@@ -746,11 +746,16 @@
                     date1.setMonth( (date1.getMonth() + 1 + duration)-12); 
                     date1.setFullYear( date1.getFullYear() + 1);
                     month = date1.getMonth();
+                } else if ((date1.getMonth() + 1 + duration) == 12) {
+                    date1.setMonth(date1.getMonth() + 1 + duration);
+                    date1.setFullYear( date1.getFullYear() - 1);
+                    month = 12 ;
                 } else {
                     date1.setMonth(date1.getMonth() + 1 + duration);
                     month = date1.getMonth();
                 }
-                 $('#jo-end_date').datepicker({
+
+                $('#jo-end_date').datepicker({
                         format: 'MM dd yyyy'
                     });
                 // Timeout is needed calendar does not update when two instances are open.
