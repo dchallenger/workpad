@@ -58,7 +58,7 @@
         <div class="btn-group">
             <a class="btn btn-xs text-muted" href="{{ $edit_url }}"><i class="fa fa-info"></i> {{ lang('common.view') }}</a>
         </div>
-        <div class="btn-group">
+        <div class="btn-group hidden">
             <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> {{ lang('common.options') }}</a>
             <ul class="dropdown-menu pull-right">
                 {{ $options }}

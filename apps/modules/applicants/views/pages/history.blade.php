@@ -701,61 +701,201 @@
                 </div> -->
             <!-- CS -->
             <!-- PRE-EMPLOYMENT -->
-            <div id="tab_preemp" class="tab-pane">
-                <div class="portlet">
-                    <div class="portlet-body" >
-                        <!-- Table -->
-                        <table class="table table-condensed table-striped table-hover" >
-                            <thead>
-                                <tr>                                        
-                                    <th width="47%" class="padding-top-bottom-10" >{{ lang('applicant_monitoring.requirements') }}</th>
-                                    <th width="32%" class="padding-top-bottom-10 ">{{ lang('applicant_monitoring.completed') }}</th>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>                     
-                                @foreach( $checklist->result() as $list )
-                                <tr rel="0">
-                                    <!-- this first column shows the year of this holiday item -->
-                                    <td>{{ $list->checklist  }}</td> 
-                                    <td>
-                                        @if($list->for_submission == 1)
-                                            @if($list->submitted)  
-                                             <span ><i class="fa fa-check text-success"></i> {{ lang('applicant_monitoring.done') }}</span>
-                                             @else
-                                             <span class="badge badge-danger" >No</span>
-                                            @endif
-                                        @else
-                                            <span ><i class="fa fa-check text-success"></i> {{ lang('applicant_monitoring.done') }}</span>
-                                        @endif
+                <div class="tab-pane" id="tab_preemp">
+                    <div class="portlet">
+                        <div class="portlet-body" >
+                            <?php
+                                if($process->status_id > 7){
+                                    $disabled = "disabled";  
+                                    $hidden = "style='display:none'"; 
+                                }                         
+                                else{
+                                    $disabled = "";  
+                                    $hidden = "";                                     
+                                }   
+                            ?>                            
+                            <form class="form-horizontal" name="preemp" method="post"> 
+                                <input type="hidden" value="<?php echo $process->process_id?>" name="process_id" id="process_id">                            
+                                <!-- Table -->
+                                <table class="table table-condensed table-striped table-hover" >
+                                    <thead>
+                                        <tr>                                        
+                                            <th width="35%" class="padding-top-bottom-10" colspan="2"><b><?=lang('applicant_monitoring.requirements')?></b></th>
+                                            <th width="22%" class="padding-top-bottom-10 "><b><?=lang('applicant_monitoring.attachment')?></b></th>                                            
+                                            <th width="15%" class="padding-top-bottom-10 "><b><?=lang('applicant_monitoring.completed')?></b></th>
+                                            <th width="23%" class="padding-top-bottom-10" ><b><?=lang('common.actions')?></b></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php 
+                                            $qry = "SELECT ec.checklist, ec.description, ec.checklist_id, pec.submitted, ec.for_submission, pec.date_submitted,
+                                            pec.created_on, pec.modified_on, pec.process_id, ec.print_function
+                                            FROM {$db->dbprefix}recruitment_employment_checklist ec
+                                            LEFT JOIN {$db->dbprefix}recruitment_process_employment_checklist pec
+                                            ON (pec.checklist_id = ec.checklist_id AND pec.process_id = {$process->process_id}) WHERE ec.checklist_category_id = 0 ORDER BY ec.checklist_id";
+                                            // echo "<pre>".$qry;
+                                            $checklist_top = $db->query($qry);
+                                            foreach( $checklist_top->result() as $list_top ):
+                                        ?>
+                                                <tr rel="0">
+                                                    <!-- this first column shows the year of this holiday item -->
+                                                    <td colspan="2">
+                                                        <?php echo $list_top->checklist ?>
+                                                        <?php if ($list_top->description != "") ?>
+                                                            <br><small class="help-block small"><?php echo $list_top->description ?></small>
+                                                    </td> 
+                                                    <td>&nbsp;</td>
+                                                    <td>
+                                                        <?php if($list_top->for_submission == 1){ ?>
+                                                            <div class="make-switch switch-small" data-off="danger" data-on="success" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;&nbsp;">
+                                                                <input type="checkbox" value="1" <?php if( $list_top->submitted ) echo 'checked="checked"'; ?> name="recruitment_process_employment_checklist[submitted][temp]" id="recruitment_process_employment_checklist-submitted-temp" class="dontserializeme toggle submitted-temp" data-checkId="<?php echo $list_top->checklist_id?>" data-processId="<?php echo $list_top->process_id?>" />
+                                                                <input type="hidden" name="completed[<?php echo $list_top->checklist_id ?>]" id="recruitment_process_employment_checklist-submitted" value="<?php echo ( $list_top->submitted ) ? 1 : 0 ; ?>"/>
+                                                            </div>
+                                                        <?php }else{ ?>
+                                                            <span ><i class="fa fa-check text-success"></i> <?=lang('applicant_monitoring.done')?></span>
+                                                        <?php } ?>
 
-                                        <small class="help-block small">
+                                                        <small class="help-block small hidden">
 
-                                        <?php if($list->submitted == 1){ 
-                                                if(strtotime($list->modified_on)){
-                                                    echo date('d M Y h:ia', strtotime($list->modified_on));
-                                                }else if(strtotime($list->created_on)){
-                                                    echo date('d M Y h:ia', strtotime($list->created_on));
-                                                }
-                                            }else{
-                                                if(strtotime($list->modified_on)){
-                                                    echo date('d M Y h:ia', strtotime($list->modified_on));
-                                                }
-                                            } ?>
+                                                        <?php if ($list_top->submitted == 1) { 
+                                                                if (strtotime($list_top->date_submitted)) {
+                                                                    echo general_date($list_top->date_submitted);
+                                                                } else if (strtotime($list_top->created_on)) {
+                                                                    echo general_date($list_top->created_on);
+                                                                }
+                                                            }
+                                                        ?>
+                                                        </small>
+                                                    </td>
 
-                                        </small>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                                    <td>
+                                                        <!-- <div class="btn-group">
+                                                            <a class="btn btn-xs text-muted" data-toggle="modal" href="#applicant_interview-result"><i class="fa fa-pencil"></i> Edit</a>
+                                                        </div> -->
+                                                        <?php if($list_top->print_function != '' && $list_top->print_function != NULL){ ?>
+                                                            <div class="btn-group">
+                                                                <a class="btn btn-xs text-muted" onclick="<?php echo $list_top->print_function ?>(<?php echo $process->process_id ?>)"><i class="fa fa-print"></i> <?=lang('applicant_monitoring.print')?></a>
+                                                            </div>
+                                                        <?php } else {?>
+                                                            <div class="input-group date date-picker" data-date-format="MM dd, yyyy">
+                                                                <input type="text" size="16" class="form-control" name="date_submitted[<?php echo $list_top->checklist_id ?>]" value="<?php echo general_date($list_top->date_submitted) ?>">
+                                                                <span class="input-group-btn">
+                                                                <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                                </span>
+                                                            </div>                                                
+                                                        <?php } ?>
+                                                    </td>
+                                                </tr>
+                                        <?php endforeach; ?>       
+                                                                                 
+                                        <?php
+                                            $ctr = 0;
+                                            $qry = "SELECT *
+                                            FROM {$db->dbprefix}recruitment_employment_checklist_category cat
+                                            ORDER BY cat.sorting";
+                                            // echo "<pre>".$qry;
+                                            $checklist_category = $db->query($qry);
+                                            foreach( $checklist_category->result() as $list_category ):
+                                        ?>
+                                                <tr>
+                                                    <td colspan="5"><b><?php echo $list_category->category ?></b></td>
+                                                </tr>
+
+                                                <?php 
+                                                    $qry = "SELECT ec.checklist, ec.description, ec.checklist_id, pec.number_value, pec.attachment, pec.submitted, ec.for_submission, pec.date_submitted,
+                                                    pec.created_on, pec.modified_on, pec.process_id, ec.print_function
+                                                    FROM {$db->dbprefix}recruitment_employment_checklist ec
+                                                    LEFT JOIN {$db->dbprefix}recruitment_employment_checklist_category ecc ON ecc.checklist_category_id = ec.checklist_category_id
+                                                    LEFT JOIN {$db->dbprefix}recruitment_process_employment_checklist pec
+                                                    ON (pec.checklist_id = ec.checklist_id AND pec.process_id = {$process->process_id}) WHERE ecc.checklist_category_id = {$list_category->checklist_category_id} ORDER BY ec.checklist_id";
+                                                    /*echo "<pre>".$qry;*/
+                                                    $checklist = $db->query($qry);
+                                                    foreach( $checklist->result() as $list ):
+                                                        $ctr++;
+                                                ?>
+                                                        <tr rel="0">
+                                                            <!-- this first column shows the year of this holiday item -->
+                                                            <td>&nbsp;</td>
+                                                            <td>
+                                                                <?php echo $list->checklist ?>
+                                                                <?php if ($list->description != "") ?>
+                                                                    <br><small class="help-block small"><?php echo $list->description ?></small>
+                                                            </td>
+                                                            <td>
+                                                                <?php 
+                                                                    if ($list->attachment != '') {
+                                                                        $file = FCPATH . urldecode( 'uploads/applicant_monitoring/' . $list->attachment );
+                                                                        if( file_exists( $file ) )
+                                                                        {
+                                                                            $f_info = get_file_info( $file );
+
+                                                                            $notification_link = base_url(). 'uploads/applicant_monitoring/' . $list->attachment;
+                                                                            echo '<div class="input-group">';
+                                                                            echo '<a href="'.$notification_link.'" class="pop-uri" target="_blank">'.basename($f_info['name']).'</a>';
+                                                                            echo '</div>';
+                                                                        }
+                                                                    }
+                                                                ?>                                                                
+                                                            </td>
+                                                            <td>
+                                                                <?php if($list->for_submission == 1){ ?>
+                                                                    <div class="make-switch switch-small" data-off="danger" data-on="success" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;&nbsp;">
+                                                                        <input type="checkbox" value="1" <?php if( $list->submitted ) echo 'checked="checked"'; ?> name="recruitment_process_employment_checklist[submitted][temp]" id="recruitment_process_employment_checklist-submitted-temp" class="dontserializeme toggle submitted-temp" data-checkId="<?php echo $list->checklist_id?>" data-processId="<?php echo $list->process_id?>" <?php echo $disabled?>/>
+                                                                        <input type="hidden" name="completed[<?php echo $list->checklist_id ?>]" id="recruitment_process_employment_checklist-submitted" value="<?php echo ( $list->submitted ) ? 1 : 0 ; ?>"/>
+                                                                    </div>
+                                                                <?php }else{ ?>
+                                                                    <span ><i class="fa fa-check text-success"></i> <?=lang('applicant_monitoring.done')?></span>
+                                                                <?php } ?>
+
+                                                                <small class="help-block small hidden">
+
+                                                                <?php if ($list->submitted == 1) { 
+                                                                        if (strtotime($list->date_submitted)) {
+                                                                            echo general_date($list->date_submitted);
+                                                                        } else if (strtotime($list->created_on)) {
+                                                                            echo general_date($list->created_on);
+                                                                        }
+                                                                    }
+                                                                ?>
+                                                                </small>
+                                                            </td>
+
+                                                            <td>
+                                                                <!-- <div class="btn-group">
+                                                                    <a class="btn btn-xs text-muted" data-toggle="modal" href="#applicant_interview-result"><i class="fa fa-pencil"></i> Edit</a>
+                                                                </div> -->
+                                                                <?php if($list->print_function != '' && $list->print_function != NULL){ ?>
+                                                                    <div class="btn-group">
+                                                                        <a class="btn btn-xs text-muted" onclick="<?php echo $list->print_function ?>(<?php echo $process->process_id ?>)"><i class="fa fa-print"></i> <?=lang('applicant_monitoring.print')?></a>
+                                                                    </div>
+                                                                <?php } else {?>
+                                                                    <div style="padding-bottom:2px">
+                                                                        <input class="form-control input-sm" type="text" name="number_value[<?php echo $list->checklist_id ?>]" value="<?php echo $list->number_value?>" placeholder="Input Form Number" <?php echo $disabled?>>
+                                                                    </div>                                                                 
+                                                                    <div class="input-group date date-picker" data-date-format="MM dd, yyyy">
+                                                                        <input type="text" size="16" class="form-control input-sm" name="date_submitted[<?php echo $list->checklist_id ?>]" value="<?php echo general_date($list->date_submitted) ?>" <?php echo $disabled?>>
+                                                                        <span class="input-group-btn">
+                                                                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                                        </span>
+                                                                    </div>                                                                     
+                                                                <?php } ?>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                            <?php endforeach; ?>
+                                            <input type="hidden" id="count_attachment" value="<?php echo $ctr ?>">
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer margin-top-0">
+                        <button class="btn btn-default btn-sm" data-dismiss="modal" type="button"><?=lang('common.close')?></button>
+                        <?php $show_hidden = (isset($template_id) && !empty($template_id)) ? '' : 'hidden'; ?>
+                        <button id="move_to_cs"<?=$hidden?> class="demo-loading-btn btn btn-success btn-sm <?php echo $show_hidden;?>" onclick="move_to_c201(<?php echo $process_id?>)" type="button"><?=lang('applicant_monitoring.move_to_201')?></button>
                     </div>
                 </div>
-
-                <div class="modal-footer margin-top-0">
-                    <button class="btn btn-default btn-sm" data-dismiss="modal" type="button">{{ lang('common.close') }}</button>
-                </div>
-            </div>
             <!-- PRE-EMPLOYMENT -->
 
         </div>

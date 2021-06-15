@@ -2454,7 +2454,11 @@ class Applicants extends MY_PrivateController
 	 	$recruit_details = $this->db->query($interview_qry)->row_array();
 	 	$template_data['dear'] = $recruit_details['firstname'].' '.$recruit_details['lastname'];
 		$template_data['recipients'] = $recruit_details['firstname'].' '.$recruit_details['lastname'];
-		$template_data['date'] = date('M d Y',strtotime($recruit_details['recruitment_date']));
+		$template_data['date'] = date('M d, Y',strtotime($recruit_details['recruitment_date']));
+		$template_data['firstname'] = $recruit_details['firstname'];
+		$template_data['middleinitial'] = empty($recruit_details['middlename']) ? " " : " ".ucfirst(substr($recruit_details['middlename'],0,1)).". ";
+		$template_data['lastname'] = $recruit_details['lastname'];
+		$template_data['nickname'] = $recruit_details['nickname'];
 
 	 	$request_qry = "SELECT * FROM {$this->db->dbprefix}recruitment_request rr 
 	 					LEFT JOIN {$this->db->dbprefix}users_company uc ON rr.company_id = uc.company_id
@@ -2462,53 +2466,74 @@ class Applicants extends MY_PrivateController
 	 					WHERE rr.request_id = {$recruit_details['request_id']}";
 	 	$request_details = $this->db->query($request_qry)->row_array();
 		$template_data['company_name'] = $request_details['company'];
-		$template_data['company_code'] = $request_details['company_code'];
+		$template_data['company_code'] = $request_details['company_initial'];
 		$template_data['department'] = $request_details['department'];
 		$template_data['logo'] = base_url().$request_details['print_logo'];
 		$template_data['section'] = 'RECRUITMENT';
 
-        $optional_requirements = $this->mrf_am->get_recruitment_request_key_value($recruit_details['request_id'], 'optional_requirements');
-        $optional_requirements = (count($optional_requirements) == 0 ? " " : ($optional_requirements[0]['key_value'] == "" ? "" : $optional_requirements[0]['key_value']));
-        $optional_requirements = unserialize($optional_requirements);
-        $template_data['optional_requirements1'] = $optional_requirements[0];
-        $template_data['optional_requirements2'] = $optional_requirements[1];
-        $template_data['optional_requirements3'] = $optional_requirements[2];
 		$position_where = array( 'recruit_id' => $recruit_details['recruit_id'], 'key' => 'position_sought');
 		$position_sought = $this->db->get_where( 'recruitment_personal', $position_where )->row_array();
 		$template_data['position'] = $position_sought['key_value'];
         // get recruitment interview details
-        $recruitment_process_interview_qry = "SELECT * FROM {$this->db->dbprefix}recruitment_process_interview rpi 
-                        LEFT JOIN {$this->db->dbprefix}recruitment_process rp ON rpi.process_id = rp.process_id
-                        WHERE rpi.process_id = {$process_id}";
+
+		$class_id = 0;
+		if (in_array($recruit_details['status_id'], array(2,5))) {
+			if ($recruit_details['status_id'] == 2)
+				$class_id = 21;
+			else
+				$class_id = 22;
+		} else {
+			if ($type == 2)
+				$class_id = 22;
+			else
+				$class_id = 21;
+		}
+
+        $recruitment_process_interview_qry = "SELECT * FROM {$this->db->dbprefix}recruitment_interview_key rik 
+                        LEFT JOIN {$this->db->dbprefix}recruitment_interview_details rid ON rik.key_id = rid.key_id
+                        LEFT JOIN {$this->db->dbprefix}recruitment_process_interview rpi ON rpi.id = rid.interview_id
+                        WHERE rpi.process_id = {$process_id} AND rik.key_class_id = {$class_id}
+                        ORDER BY rik.sort_order";
         $recruit_inteview_details = $this->db->query($recruitment_process_interview_qry);
+
+        $total_score = 0;
+		$template_data['recommendation'] = '';
+		$template_data['remarks'] = '';
+		$template_data['interviewer'] = '';
+		$template_data['interviewer_date'] = '';
         if ($recruit_inteview_details && $recruit_inteview_details->num_rows() > 0){
         	$html = '';
         	foreach ($recruit_inteview_details->result() as $row) {
 		        $recommendation = $this->monitoring->get_recruitment_interview_details($row->id, 'technical_recommendation');
-		        if (count($recommendation) > 0){
-		        	$recommendation_val = ($recommendation['key_value'] == "") ? "" : $recommendation['key_value'];
-		        	$remarks = $this->monitoring->get_recruitment_interview_details($row->id, 'remarks');
-		        	$remarks_val = ($remarks['key_value'] == "") ? "" : $remarks['key_value'];
-		        	$interviewer = $this->monitoring->get_recruitment_interview_details($row->id, 'interviewer');
-		        	$interviewer_val = ($interviewer['key_value'] == "") ? "" : $interviewer['key_value'];
-		        	$interviewer_date = $this->monitoring->get_recruitment_interview_details($row->id, 'interviewer_date');
-		        	$interviewer_date_val = ($interviewer_date['key_value'] == "") ? "" : $interviewer_date['key_value'];				        			        	
-		        	$html .= '<tr>
-		                <td style="border-right: 1px solid #000;border-bottom: 1px solid #000;width:70%">'.$remarks_val.'</td>
-		                <td style="width:30%;border-bottom: 1px solid #000;">
-		                    <u>&nbsp;&nbsp;&nbsp;'.($recommendation_val == 'Consider' ? "X" : "&nbsp;&nbsp;").'&nbsp;&nbsp;&nbsp;</u> consider <br>
-		                    <u>&nbsp;&nbsp;&nbsp;'.($recommendation_val == 'Hold' ? "X" : "&nbsp;&nbsp;").'&nbsp;&nbsp;&nbsp;</u> hold <br>
-		                    <u>&nbsp;&nbsp;&nbsp;'.($recommendation_val == 'Reject' ? "X" : "&nbsp;&nbsp;").'&nbsp;&nbsp;&nbsp;</u> reject <br><br><br><br>
-		                    By: <u>&nbsp;&nbsp;&nbsp;'.$interviewer_val.'&nbsp;&nbsp;&nbsp;</u> <br>
-		                    Date: <u>&nbsp;&nbsp;&nbsp;'.$interviewer_date_val.'&nbsp;&nbsp;&nbsp;</u>
-		                </td>
-		            </tr> ';
-		        }	        
+	        	$recommendation_val = ($recommendation['key_value'] == "") ? "" : $recommendation['key_value'];
+	        	$remarks = $this->monitoring->get_recruitment_interview_details($row->id, 'hrd_remarks');
+	        	$remarks_val = ($remarks['key_value'] == "") ? "" : $remarks['key_value'];
+	        	$interviewer = $this->monitoring->get_recruitment_interview_details($row->id, 'interviewer');
+	        	$interviewer_val = ($interviewer['key_value'] == "") ? "" : $interviewer['key_value'];
+	        	$interviewer_date = $this->monitoring->get_recruitment_interview_details($row->id, 'interviewer_date');
+	        	$interviewer_date_val = ($interviewer_date['key_value'] == "") ? "" : $interviewer_date['key_value'];
+
+				$template_data['recommendation'] = $recommendation_val;
+				$template_data['remarks'] = $remarks_val;
+				$template_data['interviewer'] = $interviewer_val;
+				$template_data['interviewer_date'] = $interviewer_date_val;
+
+				$total_score += (int)$row->key_value;
+	        	$html .= '<tr>
+	                <td style="border-bottom: 1px solid #000;border-left: 1px solid #000;border-right: 1px solid #000;">';
+	                	$html .= '<b>'.$row->key_name.'</b>';
+	                	if ($row->description)
+	                		$html .= '<p>'.$row->description.'</p>';
+	                $html .='</td>
+	                <td style="border-bottom: 1px solid #000;border-right: 1px solid #000;" align="center">'.$row->key_value.'</td>
+	                <td colspan="4" style="border-bottom: 1px solid #000;border-right: 1px solid #000;">'.$row->other_remarks.'</td>
+	            </tr>';
         	}
         }
 
         $template_data['comments'] = $html;
-
+        $template_data['total_score'] = $total_score;
+		
 		$template_data['system_url'] = $this->db->query("SELECT value FROM {$this->db->dbprefix}config WHERE `key` = 'URL' LIMIT  1")->row_array();
     	$template_data['system_title'] = $this->db->query("SELECT value FROM {$this->db->dbprefix}config WHERE `key` = 'application_title' LIMIT  1")->row_array();
     	$template_data['system_author'] = $this->db->query("SELECT value FROM {$this->db->dbprefix}config WHERE `key` = 'author' LIMIT  1")->row_array();
@@ -2557,7 +2582,7 @@ class Applicants extends MY_PrivateController
 
         $mpdf->SetTitle( 'Job Offer' );
         $mpdf->SetAutoPageBreak(true, 1);
-        $mpdf->SetMargins(0, 0, 40);
+        //$mpdf->SetMargins(0, 0, 40);
         $mpdf->SetAuthor( $user['lastname'] .', '. $user['firstname'] . ' ' .$user['middlename'] );  
         $mpdf->SetDisplayMode('real', 'default');
         $mpdf->AddPage();
@@ -2761,6 +2786,129 @@ class Applicants extends MY_PrivateController
 			'type' => 'success'
 		);
 		$this->_ajax_return();
-	}		
+	}
+
+	function print_emp_agree()
+	{
+		$this->_ajax_only();
+
+		$process_id = $this->input->post('process_id');
+		$jo = $this->db->get_where('recruitment_process_offer', array('process_id' => $process_id));
+
+		if($jo->num_rows() == 0){
+			$this->response->message[] = array(
+				'message' => 'Please fillout first Job Offer details before printing.',
+				'type' => 'warning'
+			);
+			$this->_ajax_return();
+		}
+
+    	$user = $this->config->item('user');
+
+        $this->load->library('PDFm');
+        $mpdf = new PDFm();
+
+        $mpdf->SetTitle( 'Employee Agreement' );
+        $mpdf->SetAutoPageBreak(true, 1);
+        $mpdf->SetAuthor( $user['lastname'] .', '. $user['firstname'] . ' ' .$user['middlename'] );  
+        $mpdf->SetDisplayMode('real', 'default');
+        $mpdf->AddPage();
+
+		$qry = "SELECT * FROM {$this->db->dbprefix}recruitment_process rp
+				LEFT JOIN applicant_details ad ON rp.recruit_id = ad.recruit_id
+				WHERE rp.process_id = {$process_id}";
+		$applicant_result = $this->db->query($qry);
+
+		if ($applicant_result && $applicant_result->num_rows() > 0){
+			$applicant = $applicant_result->row();
+		}
+
+		$this->db->select("CONCAT(title,' ',firstname,' ',lastname) as full_name",false);
+		$hrd_manager_result = $this->db->get_where('users_profile',array('position_id' => 21));
+
+		$qry = "SELECT * FROM ww_recruitment_process_offer WHERE process_id = {$process_id}";
+		$rec_process_result = $this->db->query($qry);
+
+		$start_date = '';
+		if ($rec_process_result && $rec_process_result->num_rows() > 0) {
+			$rec_process_info = $rec_process_result->row(); 
+			$start_date = date('d F Y',strtotime($rec_process_info->start_date));
+		}
+
+		if ($hrd_manager_result && $hrd_manager_result->num_rows() > 0){
+			$hrd_manager = $hrd_manager_result->row();
+		}
+
+		$template_data['cur_date'] = date('d F Y');
+		$template_data['applicant_full_name'] = $applicant->fullname;
+		$template_data['last_name'] = $applicant->title .' '. $applicant->lastname;
+		$template_data['applicant_address'] = $applicant->present_address_street;		
+		$template_data['position'] = $applicant->position;
+		$template_data['dept_head'] = $applicant->dept_head;
+		$template_data['div_head'] = $applicant->div_head;
+		$template_data['div_head_position'] = $applicant->div_head_position;
+		$template_data['rank'] = $applicant->rank;
+		$template_data['company'] = $applicant->company;
+		$template_data['start_date'] = $start_date;
+		$template_data['compensation'] = $this->get_benefit($process_id);
+		$template_data['hrd_manager'] = $hrd_manager->full_name;
+		$template_data['logo'] = base_url().$applicant->logo;
+
+	 	$comben_qry = "SELECT offben.* FROM {$this->db->dbprefix}recruitment_process_offer_compben offben
+					   WHERE offben.process_id = {$process_id} AND offben.benefit_id = 273";
+	 	$compben = $this->db->query($comben_qry)->row_array();
+		$template_data['basic_salary'] = currency_format($compben['amount'],0);
+
+		$template_data['system_url'] = $this->db->query("SELECT value FROM {$this->db->dbprefix}config WHERE `key` = 'URL' LIMIT  1")->row_array();
+    	$template_data['system_title'] = $this->db->query("SELECT value FROM {$this->db->dbprefix}config WHERE `key` = 'application_title' LIMIT  1")->row_array();
+    	$template_data['system_author'] = $this->db->query("SELECT value FROM {$this->db->dbprefix}config WHERE `key` = 'author' LIMIT  1")->row_array();
+        
+        $this->load->helper('file');
+		$this->load->library('parser');
+
+       	$mrf_template = $this->db->get_where( 'system_template', array( 'code' => 'EMPLOYMENT-AGREEMENT') )->row_array();
+		$this->parser->set_delimiters('{{', '}}');
+		$html = $this->parser->parse_string($mrf_template['body'], $template_data, TRUE);
+
+        $this->load->helper('file');
+        $path = 'uploads/templates/employment_agreement/pdf/';
+        $this->check_path( $path );
+        $filename = $path .$template_data['dear']."-".$template_data['position']. "-".' Employment Agreement' .".pdf";
+
+        $mpdf->WriteHTML($html, 0, true, false);
+        $mpdf->Output($filename, 'F');
+
+        $this->response->filename = $filename;
+		$this->response->message[] = array(
+			'message' => 'File successfully loaded.',
+			'type' => 'success'
+		);
+		$this->_ajax_return();
+	}
+
+	function get_benefit($process_id = 0) {
+		$benefit_html = '<table align="center" cellpadding="2px" cellspacing="0" style="border:1px solid #e4e4e4;width: 100%; height: auto; background: #fff; margin-bottom: 10px;">';
+
+    	$this->db->join('payroll_transaction','recruitment_process_offer_compben.benefit_id = payroll_transaction.transaction_id');
+    	$benefit_saved = $this->db->get_where('recruitment_process_offer_compben',array('process_id' => $process_id));
+    	if ($benefit_saved && $benefit_saved->num_rows() > 0){
+    		$total = 0;
+    		foreach ($benefit_saved->result() as $row) {
+    			$total += $row->amount;
+        		$benefit_html .= '<tr>
+                					<td style="border-bottom: 1px solid #e4e4e4;border-right: 1px solid #e4e4e4;width:50%" align="left">'.$row->transaction_label.'</td>
+                					<td style="border-bottom: 1px solid #e4e4e4;width:50%" align="left">'.number_format($row->amount, 2, '.', ',').'</td>
+            					</tr>';
+    		}
+    		$benefit_html .= '<tr>
+            					<td style="border-right: 1px solid #e4e4e4;width:50%" align="lect"><b>Gross Pay</b></td>
+            					<td style="width:50%" align="left">'.number_format($total, 2, '.', ',').'</td>
+        					</tr>';        		
+    	}
+
+        $benefit_html .= '</table>';	
+
+        return $benefit_html;	
+	}	
 
 }

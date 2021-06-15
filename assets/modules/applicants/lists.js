@@ -114,6 +114,33 @@ function print_interview (process_id)
 	});
 }
 
+function print_emp_agree (process_id)
+{
+	var data = {
+		process_id:process_id
+		}
+	$.blockUI({ message: '<div>'+lang.common.processing_message+'</div><img src="'+root_url+'assets/img/ajax-loading.gif" />', 
+		onBlock: function(){
+			$.ajax({
+				url: base_url + module.get('route') + '/print_emp_agree',
+				type:"POST",
+				async: false,
+				data: data,
+				dataType: "json",
+				success: function ( response ) {
+					if( response.filename != undefined )
+					{
+						window.open( root_url + response.filename );
+					}
+					$.unblockUI();
+					handle_ajax_message( response.message );
+				}
+			});
+		},
+		baseZ: 999999999
+	});
+}
+
 function history( process_id, user_id )
 {
 	$.blockUI({ message: loading_message(), 
