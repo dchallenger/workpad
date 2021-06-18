@@ -11,7 +11,7 @@
     <td>{{ general_time($sessiontime_from) }} @if(general_time($sessiontime_from) != '') - @endif {{ general_time($sessiontime_to) }}</td>
     <td>{{ $instructor}}</td>
     <td>
-         <a class="btn btn-xs text-muted feedback_participants" href="#" id="feedback_participants" calendar_id="<?php echo $record_id; ?>"><i class="fa fa-search"></i> Participants</a>
+         <a class="btn btn-xs text-muted feedback_participants" href="#" id="feedback_participants" calendar_id="<?php echo $record_id; ?>"><i class="fa fa-info"></i> Evaluate</a>
     </td>
 </tr>
 

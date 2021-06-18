@@ -167,7 +167,7 @@ $(document).ready(function(){
         var sub_pax = $(this).parents('div.add_more_training_cost').find('.pax').val();
 
         if (!isNaN(sub_cost) || !isNaN(sub_pax))
-            sub_total = ( sub_cost * sub_pax ).toFixed(2)
+            sub_total = ( parseFloat(sub_cost) * parseFloat(sub_pax) ).toFixed(2)
 
         $(this).parents('div.add_more_training_cost').find('.total').val( sub_total );
 

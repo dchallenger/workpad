@@ -1110,7 +1110,7 @@ class Training_calendar extends MY_PrivateController
         $this->load->helper('file');
         $path = 'uploads/templates/training/';
         $this->check_path( $path );
-        $filename = $path .$record['course']. "-".'Training Calendar Form' .".pdf";
+        $filename = $path .'Training Calendar Form - '. date('YmdHis') .".pdf";
 
         $mpdf->WriteHTML($html, 0, true, false);
         $mpdf->Output($filename, 'F');

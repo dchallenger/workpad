@@ -4,6 +4,7 @@ class My_change_request extends MY_PrivateController
 {
 	public function __construct()
 	{
+		$this->load->model('my_calendar_model', 'my_calendar');
 		$this->load->model('my_change_request_model', 'mod');
 		parent::__construct();
 	}
@@ -195,6 +196,15 @@ class My_change_request extends MY_PrivateController
 
 		$this->load->model('profile_model', 'profile');
 
+        // check approver
+        $approver_list = $this->my_calendar->call_sp_approvers('201REQ', $this->user->user_id);
+        if (empty($approver_list)) {
+            $this->response->message[] = array(
+                'message' => 'Please contact HR Admin. Approver has not been set.',
+                'type' => 'error'
+            );
+            $this->_ajax_return();            
+        }
 
         //SAVING START   
         $error = false;

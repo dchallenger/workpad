@@ -4,6 +4,7 @@ class Training_request extends MY_PrivateController
 {
 	public function __construct()
 	{
+        $this->load->model('my_calendar_model', 'my_calendar');
 		$this->load->model('training_request_model', 'mod');
         $this->load->model('training_request_manage_model', 'mod_manage');
 		parent::__construct();
@@ -225,6 +226,16 @@ class Training_request extends MY_PrivateController
     public function save( $child_call = false )
     {
         $this->_ajax_only();
+
+        // check approver
+        $approver_list = $this->my_calendar->call_sp_approvers('TREQ', $this->user->user_id);
+        if (empty($approver_list)) {
+            $this->response->message[] = array(
+                'message' => 'Please contact HR Admin. Approver has not been set.',
+                'type' => 'error'
+            );
+            $this->_ajax_return();            
+        }
 
         $calendar_id = $_POST['training_application']['training_calendar_id'];
 
