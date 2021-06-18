@@ -31,6 +31,11 @@ class Movement_admin extends MY_PrivateController
 		$partners_movement_type = $this->db->get_where('partners_movement_type', array('deleted' => 0));
 		$data['partners_movement_type'] = $partners_movement_type->result();
 
+		$this->db->order_by('status', 'asc');
+		$this->db->where_in('status_id',array(1,8,9,10,11,12));
+		$partners_movement_status = $this->db->get('partners_movement_status');
+		$data['partners_movement_status'] = $partners_movement_status->result();
+
 		$this->db->order_by('cause', 'asc');
 		$partners_movement_cause = $this->db->get_where('partners_movement_cause', array('deleted' => 0));
 		$data['partners_movement_cause'] = $partners_movement_cause->result();
@@ -190,6 +195,9 @@ class Movement_admin extends MY_PrivateController
 					if($filter_by_key == "type_id"){
 						$filter_by_key = 'ww_partners_movement_action.type_id';
 						$filter .= " AND FIND_IN_SET( {$filter_value}, {$filter_by_key} ) ";
+					}elseif ($filter_by_key == "status_id") {
+						$filter_by_key = 'ww_partners_movement.status_id';
+						$filter .= " AND FIND_IN_SET( {$filter_value}, {$filter_by_key} ) ";						
 					}else{
 						$filter .= ' AND '. $filter_by_key .' = "'.$filter_value.'"';
 					}	

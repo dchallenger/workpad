@@ -16,7 +16,20 @@
 	        @endforeach
 		</div>
 	</div>
-<br>
+	<br>
+	<div class="portlet-title" style="margin-bottom:3px;">
+		<div class="caption">Status </div>
+	</div>
+	<div class="portlet-body">
+		<span class="small text-muted margin-bottom-10">Filter movement list by status.</span>
+		<div class="margin-top-10">
+			<span class="filter-status event-block label label-success" filter_value="">All</span>
+			@foreach( $partners_movement_status as $movement_status )
+	        	<span href="javascript:void(0)" class="filter-status event-block label label-default" filter_value="{{ $movement_status->status_id }}">{{ $movement_status->status }}</span>
+	        @endforeach
+		</div>
+	</div>
+	<br>	
 	<div class="portlet-title" style="margin-bottom:3px;">
 		<div class="caption">Due To </div>
 	</div>

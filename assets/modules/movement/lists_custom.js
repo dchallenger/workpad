@@ -6,6 +6,13 @@ $(document).ready(function(e) {
 		$(this).addClass('label-success')
 		create_list2();
 	});
+	$('.filter-status').click(function(){
+		$('.filter-status').removeClass('label-success');
+		$('.filter-status').addClass('label-default');
+		$(this).removeClass('label-default');
+		$(this).addClass('label-success')
+		create_list2();
+	});	
 	$('.filter-due').click(function(){
 		$('.filter-due').removeClass('label-success');
 		$('.filter-due').addClass('label-default');
@@ -21,6 +28,7 @@ function create_list2()
 	var filter_by = {
 		type_id: $('.filter-type.label-success').attr('filter_value'),
 		due_to_id: $('.filter-due.label-success').attr('filter_value'),
+		status_id: $('.filter-status.label-success').attr('filter_value'),
 	}
 	var filter_value = $('.list-filter.active').attr('filter_value');
 	
