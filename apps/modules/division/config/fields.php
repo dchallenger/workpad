@@ -1,6 +1,30 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 $config['fields'] = array();
+$config['fields'][1]['users_division.company_id'] = array(
+	'f_id' => 3,
+	'fg_id' => 1,
+	'label' => 'Company',
+	'description' => '',
+	'table' => 'users_division',
+	'column' => 'company_id',
+	'uitype_id' => 4,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 3,
+	'datatype' => 'V',
+	'active' => '1',
+	'encrypt' => 0,
+	'searchable' => array(
+		'type_id' => '1',
+		'table' => 'users_company',
+		'multiple' => 0,
+		'group_by' => '',
+		'label' => 'company',
+		'value' => 'company_id',
+		'textual_value_column' => ''
+	)
+);
 $config['fields'][1]['users_division.division'] = array(
 	'f_id' => 1,
 	'fg_id' => 1,

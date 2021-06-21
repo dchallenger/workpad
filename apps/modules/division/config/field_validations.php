@@ -1,6 +1,11 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 $config['field_validations'] = array();
+$config['field_validations']['users_division.company_id'][] = array(
+	'field'   => 'users_division[company_id]',
+	'label'   => 'Company',
+	'rules'   => 'required'
+);
 $config['field_validations']['users_division.division'][] = array(
 	'field'   => 'users_division[division]',
 	'label'   => 'Division',

@@ -1,6 +1,7 @@
 <?php
 $lang['division'] = array(
 	'division_information' => 'Division Information',
+	'company' => 'Company',
 	'division' => 'Division',
 	'immediate' => 'Division Head',
 	'p_division' => 'Enter Division',

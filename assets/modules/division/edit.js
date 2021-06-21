@@ -8,6 +8,11 @@ $('#division-immediate_id').select2({
 		allowClear: true
 	});
 
+$('#division-company_id').select2({
+		placeholder: "Select an option",
+		allowClear: true
+	});
+
 $('#users_division-status_id-temp').change(function(){
 	if( $(this).is(':checked') )
 		$('#users_division-status_id').val('1');

@@ -3,7 +3,28 @@
 		<div class="caption">{{ lang('division.division_information') }}</div>
 		<div class="tools"><a class="collapse" href="javascript:;"></a></div>
 	</div>
-	<div class="portlet-body form">			
+	<div class="portlet-body form">
+		<div class="form-group">
+			<label class="control-label col-md-3">{{ lang('division.company') }}</label>
+				<div class="col-md-7">
+					<?php	                            	                            				
+						$db->select('company_id,company');
+		                $db->where('deleted', '0');
+	            		$options = $db->get('users_company');
+						$users_company_options = array('' => lang('users.select'));
+	            		foreach($options->result() as $option)
+	            		{
+	        				$users_company_options[$option->company_id] = $option->company;
+	            		} 
+            		?>							
+            		<div class="input-group">
+						<span class="input-group-addon">
+                            <i class="fa fa-list-ul"></i>
+                        </span>
+	                    {{ form_dropdown('users_division[company_id]',$users_company_options, $record['users_division.company_id'], 'disabled="disabled" class="form-control select2me" data-placeholder="Select..."') }}
+	                </div> 				
+	            </div>	
+		</div>			
 		<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>{{ lang('division.division') }}</label>
 				<div class="col-md-7">							
