@@ -75,9 +75,12 @@
                                         <span class="input-group-addon">
                                             <i class="fa fa-thumb-tack"></i>
                                         </span>
-                                            <?php 
-                                                $db->select('city_id,city'); 
-                                                $city_options = $db->get('cities'); 
+                                            <?php
+                                                $db->select('city_id,CONCAT (city,", ",province) as city',false);
+                                                $db->where('cities.deleted', '0');
+                                                $db->order_by('city');
+                                                $db->join('province','province.province_id = cities.province_id');
+                                                $city_options = $db->get('cities');
                                                 $users_company_city_id_options = array(); 
 
                                                 $users_company_city_id_options[''] = lang('company.select_city');

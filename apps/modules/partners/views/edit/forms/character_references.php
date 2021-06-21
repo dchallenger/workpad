@@ -1,7 +1,8 @@
 <?php
-    $db->select('city_id,city');
-    $db->where('deleted', '0');
+    $db->select('city_id,CONCAT (city,", ",province) as city',false);
+    $db->where('cities.deleted', '0');
     $db->order_by('city');
+    $db->join('province','province.province_id = cities.province_id');
     $options_cities = $db->get('cities');
 
     $db->select('country_id,short_name');

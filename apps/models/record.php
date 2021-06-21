@@ -145,7 +145,9 @@ class Record extends MY_Model
 
 	public function get_city($city_id = 0){
 		$city_val = '';
+		$this->db->select('city_id,CONCAT (city,", ",province) as city',false);
 		$this->db->where('city_id',$city_id);
+		$this->db->join('province','province.province_id = cities.province_id');
 		$city = $this->db->get('cities');
 		if ($city && $city->num_rows() > 0) {
 			$city_val = $city->row()->city;
