@@ -1398,6 +1398,8 @@ class Report_generator extends MY_PrivateController
         $post = $_POST;
         $report = $this->mod->get_report( $post['record_id'] );
         $filter_ctr = 1;
+        $filter = array();
+        $complete_filter = array();
 
         if(isset( $post['filter']) )
         {
