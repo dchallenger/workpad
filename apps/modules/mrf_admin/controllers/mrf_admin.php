@@ -73,7 +73,7 @@ class Mrf_admin extends MY_PrivateController
 		}
 
 		$data = array();
-		$data['pn'] = '';
+		$data['pn'] = array();
 		$data['sf'] = '';
 
 		// determine list request

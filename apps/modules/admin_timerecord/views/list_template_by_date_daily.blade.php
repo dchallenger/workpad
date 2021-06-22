@@ -114,7 +114,7 @@
     </td>
     
     <td>
-        <span id="time_name">{{$date_tag}}</span>
+        <span id="time_name">{{$employee_name}}</span>
         <span class="small text-muted">{{$day_tag}}</span>
         <br>
         <?php if($aux_shift_id <> 0) { ?>
@@ -226,45 +226,5 @@
         <?php
             } 
             ?>
-    </td>
-    
-    <!-- 
-    <td class="hidden-xs">
-        <div class="btn-group">
-            <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-hover="dropdown" data-toggle="dropdown-toggle"><i class="fa fa-pencil"></i> Leave</a>
-            <ul class="dropdown-menu pull-right">
-                <li class="small"><a data-toggle="modal" href="#sl_form"><i class="fa fa-medkit"></i> Sick Leave</a>
-                </li>
-                <li class="small"><a data-toggle="modal" href="#vl_form"><i class="fa fa-plane"></i> Annual Leave</a>
-                </li>
-                <li class="divider"></li>
-                <li class="small"><a data-toggle="modal" href="#el_form"><i class="fa fa-ambulance"></i> Emergency</a>
-                </li>
-                <li class="small"><a data-toggle="modal" href="#bl_form"><i class="fa fa-plus-square"></i> Bereavement</a>
-                </li>
-                <li class="divider"></li>
-                <li class="small"><a data-toggle="modal" href="#m_form"><i class="fa fa-stethoscope"></i> Maternity</a>
-                </li>
-                <li class="small"><a data-toggle="modal" href="#p_form"><i class="fa fa-hospital"></i> Paternity</a>
-                </li>
-            </ul>
-        </div>
-        <div class="btn-group">
-            <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-hover="dropdown" data-toggle="dropdown-toggle"><i class="fa fa-pencil"></i> Others</a>
-            <ul class="dropdown-menu pull-right">
-                <li class="small"><a data-toggle="modal" href="#cws_form"><i class="fa fa-clock-o"></i> Change Work</a>
-                </li>
-                <li class="small"><a data-toggle="modal" href="#bt_form"><i class="fa fa-plane"></i> Business Trip</a>
-                </li>
-                <li class="divider"></li>
-                <li class="small"><a data-toggle="modal" href="#bt_form"><i class="fa fa-money"></i> Overtime</a>
-                </li>
-                <li class="small"><a data-toggle="modal" href="#ut_form"><i class="fa fa-files-o"></i> Undertime</a>
-                </li>
-                <li class="small"><a href="#"><i class="fa fa-clock-o"></i> Dispute</a>
-                </li>
-            </ul>
-        </div>
-         -->
     </td>
 </tr>

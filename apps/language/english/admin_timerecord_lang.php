@@ -19,9 +19,11 @@ $lang['admin_timerecord'] = array(
 	'calendar_month' => 'Calendar Month',
 	'show_inclusive_date_month' => ' Show inclusive date per calendar month ',
 	'pay_dates' => 'Pay dates',
-	'show_inclusive_date_last5' => ' Show inclusive date for the last 5 pay dates',
+	'show_inclusive_date_last5' => ' Show inclusive date for the last 6 pay dates',
 	'link' => 'Link',
 	'my_calendar' => 'My Calendar',
 	'fetch_dep' => 'Fetching department(s)',
 	'fetch_partner' => 'Fetching partner(s)',
+	'company' => 'Company',
+	'filter_by_company' => 'Filter by company',
 );

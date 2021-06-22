@@ -3011,9 +3011,9 @@ class Form_application extends MY_PrivateController
                         if($filter_value > 0){
                             $fqry = "SELECT `record_id`,`period_id`,`period_year`,`payroll_date`,`from`,`to` 
                                         FROM time_period_list  tpl 
-                                        JOIN users_profile up ON up.company_id =  tpl.`company_id`  
-                                        AND up.`user_id` = '".$this->user->user_id."' 
-                                        AND tpl.record_id = ".$filter_value;
+                                        -- JOIN users_profile up ON up.company_id =  tpl.`company_id`  
+                                        -- AND up.`user_id` = '".$this->user->user_id."' 
+                                        WHERE tpl.record_id = ".$filter_value;
                             $fresult = $this->db->query($fqry)->row_array();
 
                             $filter .= " AND ( ({$this->db->dbprefix}{$this->mod->table}.date_from BETWEEN '{$fresult['from']}' AND '{$fresult['to']}')";

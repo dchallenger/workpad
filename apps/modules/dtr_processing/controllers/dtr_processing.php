@@ -108,7 +108,9 @@ class Dtr_processing extends MY_PrivateController
 		if ($user_id > 0)
 			$main_record['user_id'] = $user_id;
 		else
-			$main_record['user_id'] = '';
+			$main_record['user_id'] = 'ALL';
+
+		$main_record['process_date'] = date('Y-m-d H:i:s');
 
 		$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', $this->mod->table, array(), $main_record,$user_id);
 
@@ -118,6 +120,10 @@ class Dtr_processing extends MY_PrivateController
 			'message' => 'Period successfully processed, please confirm by creating neccesary reports.',
 			'type' => 'success'
 		);
+
+		$this->db->where('period_id',$period_id);
+		$this->db->update('time_period',array('processed_admin' => 1));
+
 		$this->_ajax_return();
 	}
 

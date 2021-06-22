@@ -214,8 +214,11 @@ class Admin_timerecord extends MY_PrivateController
                 $periods = $pay_dates->row_array();
             }
 			$records = $this->mod->_get_list_by_period($period_user_id, $periods['date_from'], $periods['date_to']);
-		}
-		else{
+		} else if ( in_array($type, array('daily')) ) {
+			$dateSelected 	= $this->input->post('value');
+			$company_id 	= $this->input->post('company_id');
+			$records = $this->mod->_get_list_by_date_all_employees($dateSelected,$company_id);
+		} else {
 			$records = $this->mod->_get_list($this->input->post('user_id'), $range, $date);
 		}
 		$this->response->records_retrieve = sizeof($records);
@@ -269,7 +272,9 @@ class Admin_timerecord extends MY_PrivateController
 	            $this->load->helper('form');
 	            $this->load->helper('file');
 				$this->response->list .= $this->load->blade('list_template_by_period', $record, true);
-			} else{
+			} else if (in_array($type, array('daily'))) {
+				$this->response->list .= $this->load->blade('list_template_by_date_daily', $record, true);
+			} else {
 				$this->response->list .= $this->load->blade('list_template_custom', $record, true);
 			}
 		}

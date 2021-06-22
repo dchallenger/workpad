@@ -121,15 +121,42 @@ class Admin_timerecord_model extends Record
 		return $data;
 	}
 
+	public function _get_list_by_date_all_employees($date, $company_id = ''){
+
+		$date = date("Y-m-d", strtotime($date));
+
+		$data = array();
+		
+		$qry = "SELECT *, full_name as employee_name FROM time_record_list 
+				LEFT JOIN users ON time_record_list.user_id = users.user_id
+				LEFT JOIN ww_users_profile up  ON time_record_list.user_id = up.user_id
+				WHERE time_record_list.`date` = '".$date."'";
+		//$qry .= " AND time_record_list.`date` BETWEEN '" . $date . "' AND '" . $date . "'";
+		if ($company_id != '')
+			$qry .= " AND users.`company_id` = " . $company_id . "";
+
+		$qry .= " ORDER BY users.`full_name` ASC"; 
+
+		$result = $this->db->query( $qry );
+
+		if($result && $result->num_rows() > 0)
+			return $result->result_array();
+		else
+			return array();
+	}
+
 	public function get_period_list( $user_id ){
 
 		$data = array();
 
 		$qry = "SELECT `record_id`,`period_id`,`period_year`,`payroll_date`,`from`,`to` 
 				FROM time_period_list  tpl 
-				JOIN users_profile up ON up.company_id =  tpl.`company_id`  
-				AND up.`user_id` = '".$user_id."' 
-				LIMIT 5";
+				-- JOIN users_profile up ON up.company_id =  tpl.`company_id`  
+				-- AND up.`user_id` = '".$user_id."' 
+                WHERE NOW() BETWEEN `from` AND `to` OR `to` < NOW()
+                GROUP BY `from`,`to`
+                LIMIT 6
+                OFFSET 8";
 
 		$result = $this->db->query( $qry );
 

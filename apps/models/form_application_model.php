@@ -898,9 +898,12 @@ public function call_sp_time_calendar($date_from='', $date_to='', $user_id=0){
 
 		$qry = "SELECT `record_id`,`period_id`,`period_year`,`payroll_date`,`from`,`to` 
 				FROM time_period_list  tpl 
-				JOIN users_profile up ON up.company_id =  tpl.`company_id`  
-				AND up.`user_id` = '".$this->user->user_id."'
-				LIMIT 5";
+				-- JOIN users_profile up ON up.company_id =  tpl.`company_id`  
+				-- AND up.`user_id` = '".$this->user->user_id."'
+                WHERE NOW() BETWEEN `from` AND `to` OR `to` < NOW()
+                GROUP BY `from`,`to`
+                LIMIT 6
+                OFFSET 8";
 
 		$result = $this->db->query( $qry );
 

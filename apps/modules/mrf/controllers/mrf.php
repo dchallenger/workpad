@@ -61,7 +61,7 @@ class Mrf extends MY_PrivateController
 	public function get_list()
 	{
 		$data = array();
-		$data['pn'] = '';
+		$data['pn'] = array();
 		$data['sf'] = '';
 
 		// determine list request

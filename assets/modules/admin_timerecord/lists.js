@@ -22,6 +22,43 @@ $(document).ready(function(){
 		get_list();
 	});
 
+	if (jQuery().datepicker) {
+	    $('#selected_date_daily').parent('.date-picker').datepicker({
+	        rtl: App.isRTL(),
+	        autoclose: true
+	    }).on('changeDate', function(ev,date) {
+			date_type = "daily";
+			date_value = $('#selected_date_daily').val();
+			company_id = $('span.company-filter.label-success').attr('company_id');;
+			get_list();	
+		});
+
+	    $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
+	}
+
+/*	$('#selected_date_daily').change(function(){
+		date_type = "daily";
+		date_value = $(this).val();
+		get_list();		
+	});*/
+
+	$('#tab_for_daily_review').on('click', function () {
+		$("#override_expand").removeClass('col-md-12');
+		$("#override_expand").addClass('col-md-9');		
+		$(".by_employee_filter").show("fast");
+		$(".by_employee_filter").removeClass('hidden');	
+		$('#calendar_date_container').hide();
+		$('#payroll_date_container').hide();
+		$('#status_container').hide();
+		$('#company_container').show();
+
+		company_id = $('span.company-filter.label-success').attr('company_id');;
+
+		date_type = "daily";
+		date_value = $("#selected_date_daily").val();
+		get_list();
+	});
+
 	$(".month-nav").on('click', function(){
 		date_type = "month";
 		date_value = $(this).data('month');
@@ -37,6 +74,18 @@ $(document).ready(function(){
 	$(".year-filter").live('click', function(){
 		date_type = "year";
 		date_value = $(this).data('year-value');
+		get_list();
+	});	
+
+	$(".company-filter").live('click', function(){
+		$(".company-filter").removeClass('label-success');
+		$(".company-filter").addClass('label-default');
+
+		$(this).removeClass('label-default');
+		$(this).addClass("label-success");
+
+		company_id = $('span.company-filter.label-success').attr('company_id');;
+
 		get_list();
 	});	
 
@@ -147,8 +196,13 @@ $(document).ready(function(){
 	$("#tab_for_review").live('click', function(){
 		$("#override_expand").removeClass('col-md-12');
 		$("#override_expand").addClass('col-md-9');
+		$('#calendar_date_container').show();
+		$('#payroll_date_container').show();
+		$('#status_container').show();
+		$('#company_container').hide();
 		$(".by_employee_filter").show("fast");
 		$(".by_employee_filter").removeClass('hidden');
+		date_type = "current";
 		// $(".by_date_filter").hide();
 		// $(".by_date_filter").addClass('hidden');
 		// get_list_by_date('by_date', $("#selected_date").val(), -1, -1);
@@ -308,11 +362,12 @@ function get_period_list(from, to){
 
 var date_type = "current";
 var date_value = "";
+var company_id = '';
 
 function get_list(){
 
 	var user_id = $('select[name="user_id"]').val();
-	var request_data = {type: date_type, value: date_value, user_id: user_id};
+	var request_data = {type: date_type, value: date_value, user_id: user_id, company_id: company_id};
 
 	$.ajax({
 	    url: base_url + module.get('route') + '/get_list',
@@ -324,9 +379,20 @@ function get_list(){
 
 	    	// need to do something 
 	    	// on before send?
-	    	$("#no_record").hide();
-	    	$("#list-table").hide();
-	    	$("#loader").show();
+			if (date_type == 'daily')
+				$(".no_record_bydate_daily").hide();
+			else
+				$(".no_record_bydate").hide();	
+
+	    	if (date_type == 'daily')
+	    		$("#list-table-daily").hide();
+	    	else
+	    		$("#list-table").hide();
+
+			if (date_type == 'daily')
+				$("#loader_bydate_daily").show();
+			else
+				$("#loader_bydate").show();
 	    },
 	    success: function (response) { //return;
 
@@ -334,17 +400,26 @@ function get_list(){
 
 			setTimeout(function(){
 				
-				$("#loader").hide();
+				if (date_type == 'daily')
+					$("#loader_bydate_daily").hide();
+				else
+					$("#loader_bydate").hide();
 
 			    if(response.list.length){
 		    		$("table.table tbody tr").remove();
 		    		$("table.table tbody").append(response.list);
 	    			initPopup();
-		    		$("#list-table").show();
+	    			if (date_type == 'daily')
+	    				$("#list-table-daily").show();
+	    			else
+		    			$("#list-table").show();
 		    	}
 		    	else{
 		    		//console.log('show no record...');
-		    		$("#no_record").show();
+					if (date_type == 'daily')
+						$(".no_record_bydate_daily").show();
+					else
+						$(".no_record_bydate").show();		    		
 		    	}
     	
 		    	// update nav values
@@ -367,7 +442,7 @@ function get_list(){
 }
 
 
-function get_form_details(form_id, forms_id, date){
+function get_form_details(form_id, forms_id, date, elem){
     $.ajax({
         url: base_url + module.get('route') + '/get_form_details',
         type:"POST",
@@ -379,7 +454,7 @@ function get_form_details(form_id, forms_id, date){
 	    	$("#loader_form").show();
 	    },
         success: function ( response ) {
-            $('#manage_dialog-'+forms_id+'-'+date).attr('data-content', response.form_details);
+            $(elem).closest('#manage_dialog-'+forms_id+'-'+date).attr('data-content', response.form_details);
 			setTimeout(function(){
 	    		$("#loader_form").hide();
 	    		$('#time_forms_info').removeClass('hidden');

@@ -35,22 +35,22 @@
 	            </div>
 				<div class="portlet-body">
 					<ul class="nav nav-tabs ">
-						<li class="active">
-						<a data-toggle="tab" href="#review_tab" id="tab_for_review">
-						Review
-						</a></li>
-						<li class="">
-						<a data-toggle="tab" href="#override_tab" id="tab_for_override">
-						Override</a></li>
-						<li class="">
-						<a data-toggle="tab" href="#period_override_tab" id="tab_for_period_override">
-						Period Override</a></li>
+						<li class="active"><a data-toggle="tab" href="#review_tab" id="tab_for_review">Review</a></li>
+						<li class="hidden"><a data-toggle="tab" href="#daily_review_tab" id="tab_for_daily_review">Daily Review</a></li>
+						<li class=""><a data-toggle="tab" href="#override_tab" id="tab_for_override">Override</a></li>
+						<li class=""><a data-toggle="tab" href="#period_override_tab" id="tab_for_period_override">Period Override</a></li>
 					</ul>
 
 					<div class="tab-content">
 						<div id="review_tab" class="tab-pane active">
 							@include('tabs/tab_review')
 						</div>
+						<div id="daily_review_tab" class="tab-pane">
+							<div class="margin-bottom-15">
+								<span class="small text-muted">Select date to view dtr of all employees.</span>
+							</div>							
+							@include('tabs/tab_daily_review')
+						</div>						
 						<!-- HISTORY -->
 						<div id="override_tab" class="tab-pane">
 							<div class="margin-bottom-15">

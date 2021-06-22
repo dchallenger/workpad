@@ -1,14 +1,16 @@
 <tr class="record">
 	<td>
-		<a class="text-success" data-toggle="modal" href="#process" id="period_year">{{ $period_year }}</a>
+		<span class="text-success">{{ $period_year }}</span>
 		<br>
 		<span class="small text-muted" id="period_month">{{ $period_month }}</span>
 	</td>
 	<td>
-		<span class="small text-muted" id="count">{{ $proces_status }}</span>
+		<span class="small text-muted text-success" id="count">{{ $proces_status }}</span>
+		<br>
+		<span class="small text-muted">@if($process_admin) Processed @endif</span>		
 	</td>
 	<td>
-		<a class="text-success" data-toggle="modal" href="#process" id="period_from">{{ $payroll_date }}</a>
+		<span class="text-success">{{ $payroll_date }}</span>
 		<br>
 		<span class="small text-muted" id="company_name">{{ $company }}</span>
 	</td>

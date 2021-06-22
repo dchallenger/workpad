@@ -123,7 +123,7 @@
             if ($form_code != '' || $form_code != null){
         ?>
                 <span class="badge badge-success custom_popover" 
-                    onclick="get_form_details(<?php echo $form_id ?>, <?php echo $forms_id ?>, '<?php echo $date ?>')" 
+                    onclick="get_form_details(<?php echo $form_id ?>, <?php echo $forms_id ?>, '<?php echo $date ?>',this)" 
                     style="cursor: pointer;"
                     data-placement="bottom"
                     data-original-title="<?php echo $form_code ?> <a href='#' class='close close-pop pull-right' style='margin-top:5px'><i class='fa fa-times'></i></a>"
