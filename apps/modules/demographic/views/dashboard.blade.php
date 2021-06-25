@@ -164,7 +164,7 @@
 									<div class="col-md-12">
 										<div id="chart_type_per_status" class="chart" style="width: 100%; min-height: 1px;"></div>
 										<br/>
-										<div class="table-responsive">
+										<div class="table-scrollable">
 											<table id="chart_type_per_status_table" class="table table-bordered table-hover small">
 												<thead>
 													<tr>

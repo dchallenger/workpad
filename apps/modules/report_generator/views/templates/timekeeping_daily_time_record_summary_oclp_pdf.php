@@ -1,3 +1,5 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
 <div align="center">
 	<?php
 		if( !empty( $header->template ) )
