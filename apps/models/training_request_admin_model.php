@@ -123,7 +123,15 @@ class training_request_admin_model extends Record
                 	$approvers_details = $approvers_user_info->row();
                 	$approver_fullname = $approvers_details->full_name;
                 }          
-                                  
+
+		        $logo  = ''; 
+		        if ($this->config->item('system')['print_logo'] != ''){
+		            if( file_exists( $this->config->item('system')['print_logo'] ) ){
+		                $logo = base_url().$this->config->item('system')['print_logo'];
+		            }
+		        }
+		
+				$sendtrqdata['system_logo'] = $logo;	                                  
                 $sendtrqdata['requestor'] = $req_by->full_name;
                 $sendtrqdata['approver'] = $approver_fullname;
 				$sendtrqdata['status'] = 'Approved';
@@ -173,7 +181,15 @@ class training_request_admin_model extends Record
                 	$approvers_details = $approvers_user_info->row();
                 	$approver_fullname = $approvers_details->full_name;
                 }          
-                                  
+
+		        $logo  = ''; 
+		        if ($this->config->item('system')['print_logo'] != ''){
+		            if( file_exists( $this->config->item('system')['print_logo'] ) ){
+		                $logo = base_url().$this->config->item('system')['print_logo'];
+		            }
+		        }
+		
+				$sendtrqdata['system_logo'] = $logo;	                                  
                 $sendtrqdata['requestor'] = $req_by->full_name;
                 $sendtrqdata['approver'] = $approver_fullname;
 				$sendtrqdata['status'] = 'Disapproved';

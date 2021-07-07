@@ -44,20 +44,23 @@
 		@endif -->
 	</td>
 	<td>
+    	<?php
+			$href_view = get_mod_route('appraisal_individual_planning') . '/review_admin/'.$record_id.'/'.$user_id;
+
+			$href_edit = get_mod_route('appraisal_individual_planning') . '/edit_admin/'.$record_id.'/'.$user_id;
+		?>   		
         <div class="btn-group">
-        	<?php
-				$href = get_mod_route('appraisal_individual_planning') . '/review_admin/'.$record_id.'/'.$user_id;
-			?>
-            <a class="small text-muted" href="{{ $href }}"><i class="fa fa-search"></i> View</a>
+        	<a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> Options</a>
+            <ul class="dropdown-menu pull-right">
+                <li><a class="small text-muted" href="{{ $href_view }}"><i class="fa fa-search"></i> View</a></li>
+                @if($performance_planning_performance_status_id == 4 && $hr_appraisal_admin && $status_id == 1)
+                	<li><a class="small text-muted" href="{{ $href_edit }}"><i class="fa fa-pencil"></i> Edit</a></li>
+                @endif
+                @if($performance_planning_performance_status_id == 4)
+                	<li class="hidden"><a class="small text-muted" href="javascript:void(0)" onclick="print_appraisal_planning({{$record_id}},{{$user_id}})"><i class="fa fa-print"></i> {{ lang('common.print_only') }}</a></li>
+                @endif                
+            </ul>   
         </div>
-        @if($performance_planning_performance_status_id == 4 && $hr_appraisal_admin && $status_id == 1)
-	        <div class="btn-group">
-	        	<?php
-					$href = get_mod_route('appraisal_individual_planning') . '/edit_admin/'.$record_id.'/'.$user_id;
-				?>
-	            <a class="small text-muted" href="{{ $href }}"><i class="fa fa-pencil"></i> Edit</a>
-	        </div>
-	    @endif
 <!--         <div class="btn-group">
             <a class="btn btn-xs text-muted" href="#" data-close-others="true" data-toggle="dropdown"><i class="fa fa-gear"></i> Options</a>
             <ul class="dropdown-menu pull-right">

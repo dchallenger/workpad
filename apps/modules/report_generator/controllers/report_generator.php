@@ -2689,4 +2689,32 @@ class Report_generator extends MY_PrivateController
         }
         $this->_ajax_return();  
     }
+
+    function export_approver() {
+        $excel = $this->load->view("templates/approver",array(),true);
+
+        $this->load->helper('file');
+        $path = 'uploads/reports/approver/excel/';
+        $this->check_path( $path );
+        $filename = $path . strtotime(date('Y-m-d H:i:s')) . '-approver.xlsx';
+        $tmpfile = $path . strtotime(date('Y-m-d H:i:s')) . ".html";
+        write_file( $tmpfile, $excel);
+
+        $this->load->library('excel');
+
+        $reader = new PHPExcel_Reader_HTML(); 
+        $content = $reader->load($tmpfile);
+
+        $content->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+        $content->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+        $content->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+
+        $objWriter = PHPExcel_IOFactory::createWriter($content, 'Excel2007');
+        $objWriter->save( $filename );
+
+        // Delete temporary file
+        unlink($tmpfile);
+
+        return $filename;        
+    }
 }

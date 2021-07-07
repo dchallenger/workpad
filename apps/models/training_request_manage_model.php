@@ -137,7 +137,15 @@ class training_request_manage_model extends Record
 			                	$approvers_details = $approvers_user_info->row();
 			                	$approver_fullname = $approvers_details->full_name;
 			                }          
-			                                  
+
+					        $logo  = ''; 
+					        if ($this->config->item('system')['print_logo'] != ''){
+					            if( file_exists( $this->config->item('system')['print_logo'] ) ){
+					                $logo = base_url().$this->config->item('system')['print_logo'];
+					            }
+					        }
+					
+							$sendtrqdata['system_logo'] = $logo;			                                  
 			                $sendtrqdata['requestor'] = $req_by->full_name;
 			                $sendtrqdata['approver'] = $approver_fullname;
 
@@ -201,7 +209,15 @@ class training_request_manage_model extends Record
 	                	$approvers_details = $approvers_user_info->row();
 	                	$approver_fullname = $approvers_details->full_name;
 	                }          
-	                                  
+
+			        $logo  = ''; 
+			        if ($this->config->item('system')['print_logo'] != ''){
+			            if( file_exists( $this->config->item('system')['print_logo'] ) ){
+			                $logo = base_url().$this->config->item('system')['print_logo'];
+			            }
+			        }
+			
+					$sendtrqdata['system_logo'] = $logo;	                                  
 	                $sendtrqdata['requestor'] = $req_by->full_name;
 	                $sendtrqdata['approver'] = $approver_fullname;
 					$sendtrqdata['status'] = 'Disapproved';
@@ -287,6 +303,14 @@ class training_request_manage_model extends Record
                 $response->notify[] = $req->user_id;
 
                 //email
+		        $logo  = ''; 
+		        if ($this->config->item('system')['print_logo'] != ''){
+		            if( file_exists( $this->config->item('system')['print_logo'] ) ){
+		                $logo = base_url().$this->config->item('system')['print_logo'];
+		            }
+		        }
+		
+				$sendtrqdata['system_logo'] = $logo;	                
                 $sendtrqdata['requestor'] = $req_by->full_name;
                 $sendtrqdata['approver'] = 'all approver(s)';
 				$sendtrqdata['status'] = 'Approved';

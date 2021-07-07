@@ -548,7 +548,7 @@
 						@else
 							@if($appraisee->performance_status_id == 14) <!-- current status is committee rating which is 14 -->
 								<button type="button" class="btn blue btn-sm" onclick="change_status_admin( $(this).closest('form'), 14)"><i class="fa fa-check"></i> Save as Draft</button>
-								<button type="button" class="btn yellow btn-sm" onclick="change_status_admin( $(this).closest('form'), 2)"><i class="fa fa-check"></i> Send to Approver</button>
+								<button type="button" class="btn green btn-sm" onclick="change_status_admin( $(this).closest('form'), 2)"><i class="fa fa-check"></i> Send to Approver</button>
 								<button type="button" class="btn green btn-sm" onclick="change_status_admin( $(this).closest('form'), 4)"><i class="fa fa-check"></i> Approved</button>
 							@endif
 							@if($appraisee->performance_status_id == 2) <!-- if for approval and need to overrride status by hr admin like moved to committee rating-->

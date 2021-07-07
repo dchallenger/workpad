@@ -158,6 +158,14 @@ class training_request_model extends Record
             	$approver_fullname = $approvers_details->full_name;
             }
 
+	        $logo  = ''; 
+	        if ($this->config->item('system')['print_logo'] != ''){
+	            if( file_exists( $this->config->item('system')['print_logo'] ) ){
+	                $logo = base_url().$this->config->item('system')['print_logo'];
+	            }
+	        }
+	
+			$data['system_logo'] = $logo;
             $data['requestor'] = $req_by->full_name;
             $data['approver'] = $approver_fullname;            
 
@@ -240,7 +248,14 @@ class training_request_model extends Record
 		            	$hr_details = $hr_user_info->row();
 		            	$hr_fullname = $hr_details->full_name;
 		            }
-
+			        $logo  = ''; 
+			        if ($this->config->item('system')['print_logo'] != ''){
+			            if( file_exists( $this->config->item('system')['print_logo'] ) ){
+			                $logo = base_url().$this->config->item('system')['print_logo'];
+			            }
+			        }
+			
+					$data['system_logo'] = $logo;
 		            $data['requestor'] = $req_by->full_name;
 		            $data['approver'] = $hr_fullname;            
 

@@ -28,11 +28,13 @@ $show_add = false;
 				<th class="bold">Self Rating</th>
 				<th class="bold">% Achieved</th>
 				<th class="bold">% Weight Average</th>
+				<th class="bold hidden">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Remarks &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 				@if(!$self_rating && $list_approver && $list_approver->num_rows() > 0)
 					@foreach($list_approver->result() as $row)
 						<th class="bold">Coach Rating</th>
 						<th class="bold">% Achieved</th>
-						<th class="bold">% Weight Average</th>					
+						<th class="bold">% Weight Average</th>
+						<th class="bold hidden">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Remarks &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 					@endforeach
 				@endif
 			</tr>
@@ -78,9 +80,11 @@ $show_add = false;
 									$self_rate_val = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][100][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][100][1] : '';
 									$self_achieve_val = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][101][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][101][1] : '';
 									$self_weight_ave_val = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][102][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][102][1] : '';
+									$self_remarks = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][106][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][106][1] : '';
 									$coach_rate_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][103][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][103][1] : '';
 									$coach_achieve_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][104][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][104][1] : '';
 									$coach_weight_ave_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][105][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][105][1] : '';									
+									$coach_remarks = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][107][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][107][1] : '';
 
 									$disabled = '';
 									if (($performance_status_id != 14 && !$hr_appraisal_admin) || ($hr_appraisal_admin && $performance_status_id == 2))
@@ -89,11 +93,13 @@ $show_add = false;
 								<td><input {{$disabled}} type="text" question="{{ $val['scorecard_id'] }}" value="{{ $self_rate_val }}" class="form-control none_core_self_rating" name="field_appraisal[{{ $appraisee_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][100][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false"></td>
 								<td><input disabled type="text" question="{{ $val['scorecard_id'] }}" value="{{ $self_achieve_val }}" class="form-control self_achieved" name="field_appraisal[{{ $appraisee_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][101][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false"></td>
 								<td><input disabled type="text" question="{{ $val['scorecard_id'] }}" value="{{ $self_weight_ave_val }}" class="form-control self_weight_average" name="field_appraisal[{{ $appraisee_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][102][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false"></td>
+								<td class="hidden"><textarea {{$disabled}} class="form-control" rows="4" name="field_appraisal[{{ $appraisee_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][106][]">{{ $self_remarks }}</textarea></td>
 								@if(!$self_rating && $list_approver && $list_approver->num_rows() > 0)
 									@foreach($list_approver->result() as $row)
 										<td><input {{ $disabled }} type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_rate_val }}" class="form-control none_core_coach_rating" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][103][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>
 										<td><input readonly='readonly' type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_achieve_val }}" class="form-control coach_achieved" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][104][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>
 										<td><input readonly='readonly' type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_weight_ave_val }}" class="form-control coach_weight_average " name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][105][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>					
+										<td class="hidden"><textarea {{$disabled}} class="form-control" rows="4" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][107][]">{{ $coach_remarks }}</textarea></td>
 									@endforeach
 								@endif								
 						<?php
@@ -159,9 +165,11 @@ $show_add = false;
 											$self_rate_val = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][100][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][100][$key1] : '';
 											$self_achieve_val = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][101][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][101][$key1] : '';
 											$self_weight_ave_val = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][102][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][102][$key1] : '';
+											$self_remarks = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][106][$key1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][106][$key1] : '';
 											$coach_rate_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][103][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][103][$key1] : '';
 											$coach_achieve_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][104][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][104][$key1] : '';
-											$coach_weight_ave_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][105][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][105][$key1] : '';									
+											$coach_weight_ave_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][105][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][105][$key1] : '';
+											$coach_remarks = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][107][$key1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][107][$key1] : '';
 
 											$disabled = '';
 											if (($performance_status_id != 14 && !$hr_appraisal_admin) || ($hr_appraisal_admin && $performance_status_id == 2))
@@ -169,12 +177,14 @@ $show_add = false;
 										?>	
 										<td><input type="text" question="{{ $val['scorecard_id'] }}" value="{{ $self_rate_val }}" class="form-control none_core_self_rating" name="field_appraisal[{{ $appraisee_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][100][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false"></td>
 										<td><input disabled type="text" question="{{ $val['scorecard_id'] }}" value="{{ $self_achieve_val }}" class="form-control self_achieved" name="field_appraisal[{{ $appraisee_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][101][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false"></td>
-										<td><input disabled type="text" question="{{ $val['scorecard_id'] }}" value="{{ $self_weight_ave_val }}" class="form-control self_weight_average" name="field_appraisal[{{ $appraisee_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][102][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false"></td>										
+										<td><input disabled type="text" question="{{ $val['scorecard_id'] }}" value="{{ $self_weight_ave_val }}" class="form-control self_weight_average" name="field_appraisal[{{ $appraisee_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][102][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false"></td>
+										<td class="hidden"><textarea class="form-control" rows="4" name="field_appraisal[{{ $appraisee_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][106][]">{{ $self_remarks }}</textarea></td>
 										@if(!$self_rating && $list_approver && $list_approver->num_rows() > 0)
 											@foreach($list_approver->result() as $row)
 												<td><input {{ $disabled }} type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_rate_val }}" class="form-control none_core_coach_rating" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][103][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>
 												<td><input readonly='readonly' type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_achieve_val }}" class="form-control coach_achieved" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][104][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>
-												<td><input readonly='readonly' type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_weight_ave_val }}" class="form-control coach_weight_average" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][105][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>					
+												<td><input readonly='readonly' type="text" question="{{ $val['scorecard_id'] }}" value="{{ $coach_weight_ave_val }}" class="form-control coach_weight_average" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][105][]" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false"></th>
+												<td class="hidden"><textarea {{$disabled}} class="form-control" rows="4" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $val['scorecard_id'] }}][107][]">{{ $coach_remarks }}</textarea></td>
 											@endforeach
 										@endif											
 								<?php										

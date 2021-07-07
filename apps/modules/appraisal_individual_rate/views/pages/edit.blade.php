@@ -11,7 +11,11 @@
         <div class="col-md-12">
 			<form class="form-horizontal" id="self-review">
 				<input type="hidden" id="record_id" name="record_id" value="{{ $record_id }}">
-				@include('edit/fgs')
+				@if(empty($planning_applicable_fields))
+					@include('pages/no_performance_planning')
+				@else
+					@include('edit/fgs')
+				@endif
 			</form>
        	</div>  		
 	</div>

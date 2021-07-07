@@ -85,7 +85,7 @@
 							<div class="form-group">
 								<label class="control-label col-md-4">{{ lang('form_application.date_time') }}<span class="required">* </span></label>
 								<div class="col-md-6">							
-									<div class="input-group date form_datetime" data-date-format="MM dd, yyyy - HH:ii p">
+									<div class="input-group date date-picker" data-date-format="MM dd, yyyy - HH:ii p">
 										<input type="text" class="form-control" name="ut_time_in_out" id="ut_time_in_out" value="<?php echo $ut_time_in_out; ?>" placeholder="">
 										<span class="input-group-btn">
 											<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>

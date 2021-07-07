@@ -513,6 +513,15 @@ class Performance_appraisal extends MY_PrivateController
                     $employee_info = $this->db->get_where( 'users' , array( 'user_id' => $user_id ) )->row_array();
                     $send_appraisal['appraisee'] = $employee_info['full_name'];
 
+			        $logo  = ''; 
+			        if ($this->config->item('system')['print_logo'] != ''){
+			            if( file_exists( $this->config->item('system')['print_logo'] ) ){
+			                $logo = base_url().$this->config->item('system')['print_logo'];
+			            }
+			        }
+			
+					$send_appraisal['system_logo'] = $logo;	                     
+
 
                     $target_settings_send_template = $this->db->get_where( 'system_template', array( 'code' => 'PERFORMANCE-APPRAISAL-PERION-CREATED-SEND-EMPLOYEE') )->row_array();
                     $msg = $this->parser->parse_string($target_settings_send_template['body'], $send_appraisal, TRUE); 

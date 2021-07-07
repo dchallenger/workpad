@@ -105,7 +105,7 @@ class appraisal_individual_planning_model extends Record
 
 	function get_appraisee( $planning_id, $user_id )
 	{
-		$qry = "select a.*, a.created_on as planning_created_on, b.*, b.status_id as performance_status_id,IFNULL(ppah.employment_type,c.employment_type) AS employment_type,IFNULL(ppah.job_level,c.v_job_grade) as v_job_grade, c.alias, c.effectivity_date, IFNULL(ppah.company,d.company) AS company, IFNULL(ppah.position,d.v_position) as position, i.full_name as immediate, h.position as immediate_position,
+		$qry = "select a.*, a.created_on as planning_created_on, b.*, b.status_id as performance_status_id,IFNULL(ppah.employment_type,c.employment_type) AS employment_type,IFNULL(ppah.job_level,c.v_job_grade) as v_job_grade, c.alias, c.effectivity_date, IFNULL(ppah.company,d.company) AS company, IFNULL(ppah.position,d.v_position) as position, i.full_name as immediate, h.position as immediate_position,uc.print_logo,
 		IFNULL(ppah.reports_to,d.v_reports_to) as v_reports_to, IFNULL(ppah.department,d.v_department) as v_department, IFNULL(ppah.dept_head,j.immediate) as dept_head, IFNULL(ppah.division,d.v_division) as v_division, IFNULL(ppah.div_head,k.immediate) as div_head, c.position_classification
 		FROM {$this->db->dbprefix}performance_planning a
 		LEFT JOIN {$this->db->dbprefix}performance_planning_applicable b ON b.planning_id = a.planning_id
@@ -118,6 +118,7 @@ class appraisal_individual_planning_model extends Record
 		LEFT JOIN {$this->db->dbprefix}users_department j ON j.department_id = d.department_id
 		LEFT JOIN {$this->db->dbprefix}users_division k ON k.division_id = d.division_id
 		LEFT JOIN {$this->db->dbprefix}users_position_classification l ON c.position_classification_id = l.position_classification_id
+		INNER JOIN {$this->db->dbprefix}users_company uc ON d.company_id = uc.company_id
 		WHERE b.planning_id = {$planning_id} AND b.user_id = {$user_id}";
 
 		$appraisee = $this->db->query( $qry );

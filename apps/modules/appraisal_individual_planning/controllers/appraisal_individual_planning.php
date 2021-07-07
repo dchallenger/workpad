@@ -4,6 +4,7 @@ class Appraisal_individual_planning extends MY_PrivateController
 {
 	public function __construct()
 	{
+        $this->load->model('my_calendar_model', 'my_calendar');        
 		$this->load->model('appraisal_individual_planning_model', 'mod');
 		parent::__construct();
         $this->lang->load('appraisal_individual_planning');
@@ -454,7 +455,17 @@ class Appraisal_individual_planning extends MY_PrivateController
     }
 
     private function _change_status_partner()
-    {        
+    {
+        // check approver
+        $approver_list = $this->my_calendar->call_sp_approvers('PPA', $this->user->user_id);
+        if (empty($approver_list)) {
+            $this->response->message[] = array(
+                'message' => 'Please contact HR Admin. Approver has not been set.',
+                'type' => 'error'
+            );
+            $this->_ajax_return();            
+        }
+                            
         $this->load->model('system_feed');        
 
         $this->load->library('parser');
@@ -540,6 +551,15 @@ class Appraisal_individual_planning extends MY_PrivateController
                         $approver_recepient = $approver->approver_id;
                         $sendtargetsettings['approver'] = $approver_info->full_name;
 
+                        $logo  = ''; 
+                        if ($this->config->item('system')['print_logo'] != ''){
+                            if( file_exists( $this->config->item('system')['print_logo'] ) ){
+                                $logo = base_url().$this->config->item('system')['print_logo'];
+                            }
+                        }
+                
+                        $sendtargetsettings['system_logo'] = $logo;                           
+
                         $target_settings_send_template = $this->db->get_where( 'system_template', array( 'code' => 'PERFORMANCE-TARGET-SETTINGS-SEND-APPROVER') )->row_array();
                         $msg = $this->parser->parse_string($target_settings_send_template['body'], $sendtargetsettings, TRUE); 
                         $subject = $this->parser->parse_string($target_settings_send_template['subject'], $sendtargetsettings, TRUE); 
@@ -592,6 +612,14 @@ class Appraisal_individual_planning extends MY_PrivateController
 
                             $appraisee_recepient = $this->input->post('user_id');
                             $sendtargetsettings['recepient'] = $appraisee_info->full_name;
+                            $logo  = ''; 
+                            if ($this->config->item('system')['print_logo'] != ''){
+                                if( file_exists( $this->config->item('system')['print_logo'] ) ){
+                                    $logo = base_url().$this->config->item('system')['print_logo'];
+                                }
+                            }
+                    
+                            $sendtargetsettings['system_logo'] = $logo; 
 
                             $target_settings_send_template = $this->db->get_where( 'system_template', array( 'code' => 'PERFORMANCE-TARGET-SETTINGS-SEND-APPROVED') )->row_array();
                             $msg = $this->parser->parse_string($target_settings_send_template['body'], $sendtargetsettings, TRUE); 
@@ -632,6 +660,14 @@ class Appraisal_individual_planning extends MY_PrivateController
 
                             $approver_recepient = $approver->approver_id;
                             $sendtargetsettings['approver'] = $approver_info->full_name;
+                            $logo  = ''; 
+                            if ($this->config->item('system')['print_logo'] != ''){
+                                if( file_exists( $this->config->item('system')['print_logo'] ) ){
+                                    $logo = base_url().$this->config->item('system')['print_logo'];
+                                }
+                            }
+                    
+                            $sendtargetsettings['system_logo'] = $logo; 
 
                             $target_settings_send_template = $this->db->get_where( 'system_template', array( 'code' => 'PERFORMANCE-TARGET-SETTINGS-SEND-APPROVER') )->row_array();
                             $msg = $this->parser->parse_string($target_settings_send_template['body'], $sendtargetsettings, TRUE); 
@@ -751,6 +787,16 @@ class Appraisal_individual_planning extends MY_PrivateController
                     // email to employee or appraisee            
                     $employee = $this->input->post('user_id');
                     $sendtargetsettings['appraisee'] = $appraisee->alias;
+                    
+                    $logo  = ''; 
+
+                    if ($this->config->item('system')['print_logo'] != ''){
+                        if( file_exists( $this->config->item('system')['print_logo'] ) ){
+                            $logo = base_url().$this->config->item('system')['print_logo'];
+                        }
+                    }
+            
+                    $sendtargetsettings['system_logo'] = $logo; 
 
                     $target_settings_send_template = $this->db->get_where( 'system_template', array( 'code' => 'PERFORMANCE-TARGET-SETTINGS-SEND-EMPLOYEE') )->row_array();
                     $msg = $this->parser->parse_string($target_settings_send_template['body'], $sendtargetsettings, TRUE); 
@@ -920,6 +966,16 @@ class Appraisal_individual_planning extends MY_PrivateController
 
                         $approver_recepient = $approver->approver_id;
                         $sendtargetsettings['approver'] = $approver_info->full_name;
+
+                        $logo  = ''; 
+
+                        if ($this->config->item('system')['print_logo'] != ''){
+                            if( file_exists( $this->config->item('system')['print_logo'] ) ){
+                                $logo = base_url().$this->config->item('system')['print_logo'];
+                            }
+                        }
+                
+                        $sendtargetsettings['system_logo'] = $logo;                         
 
                         $target_settings_send_template = $this->db->get_where( 'system_template', array( 'code' => 'PERFORMANCE-TARGET-SETTINGS-SEND-APPROVER') )->row_array();
                         $msg = $this->parser->parse_string($target_settings_send_template['body'], $sendtargetsettings, TRUE); 
@@ -1829,5 +1885,108 @@ class Appraisal_individual_planning extends MY_PrivateController
         }
 
         $rec['review_url'] = $this->mod->url . '/review/' . $record['record_id'];        
-    }    
+    }
+
+
+    function print_appraisal_planning()
+    {
+        parent::edit('', true);
+
+        $record_id = $this->input->post('record_id');
+        $user_id = $this->input->post('user_id');
+
+        $this->_ajax_only();
+        $user = $this->config->item('user');
+
+        $this->load->library('PDFm');
+        $mpdf = new PDFm();
+
+        //$mpdf = new PDFm(['debug' => true]);
+
+        //$mpdf->showImageErrors = true
+        
+        $mpdf->SetTitle( 'Performance Appraisal' );
+        $mpdf->SetAutoPageBreak(true, 5);
+        $mpdf->SetAuthor( $user['lastname'] .', '. $user['firstname'] . ' ' .$user['middlename'] );  
+        $mpdf->SetDisplayMode('real', 'default');
+        $mpdf->AddPage();
+
+        $appraisee = $vars['appraisee'] = $this->mod->get_appraisee( $record_id, $user_id );
+
+        $logo  = ''; 
+        if ($appraisee->print_logo != ''){
+            if( file_exists( $appraisee->print_logo ) ){
+                $logo = base_url().$appraisee->print_logo;
+            }
+        }
+
+        $vars['logo'] = $logo;
+
+        $vars['tenure'] = get_tenure($appraisee->effectivity_date);
+
+        $this->load->model('appraisal_template_model', 'template');
+        $vars['template'] = $this->template; 
+
+        $vars['planning_id'] = $appraisee->planning_id;
+        $vars['balance_score_card'] = $this->mod->get_balance_score_card();
+        $vars['template_section_column'] = $this->mod->get_template_section_column();
+        $vars['planning_applicable_fields'] = $this->mod->get_planning_applicable_fields($appraisee->planning_id,$appraisee->user_id);
+        $vars['template_section'] = $this->mod->get_template_section($appraisee->template_id);
+        $vars['library_competencies'] = $this->mod->get_library_competencies();
+        $vars['tenure'] = get_tenure($appraisee->effectivity_date);
+        $vars['areas_development'] = $this->mod->get_areas_for_development();
+        $vars['learning_mode'] = $this->mod->get_learning_mode();
+        $vars['competencies'] = $this->mod->get_competencies();
+        $vars['target_completion'] = $this->mod->get_target_completion();
+
+        $record = $this->load->get_cached_vars();
+        $vars['record'] = $record['record'];
+
+        $this->load->vars( $vars );
+
+        $this->load->helper('form');
+        $this->load->helper('file');
+        $html = $this->load->view('pages/appraisal_planning_print_template.blade.php',$vars,true); 
+
+        $this->load->helper('file');
+        $path = 'uploads/templates/performance/';
+        $this->check_path( $path );
+        $filename = $path .$appraisee->fullname. "-".'Performance Appraisal Planning Form' .".pdf";
+
+        $mpdf->WriteHTML($html, 0, true, false);
+        $mpdf->Output($filename, 'F');
+
+        $this->response->filename = $filename;
+        $this->response->message[] = array(
+            'message' => 'File successfully loaded.',
+            'type' => 'success'
+        );
+        $this->_ajax_return();
+    }     
+
+    private function check_path( $path, $create = true )
+    {
+        if( !is_dir( FCPATH . $path ) ){
+            if( $create )
+            {
+                $folders = explode('/', $path);
+                $cur_path = FCPATH;
+                foreach( $folders as $folder )
+                {
+                    $cur_path .= $folder;
+
+                    if( !is_dir( $cur_path ) )
+                    {
+                        mkdir( $cur_path, 0777, TRUE);
+                        $indexhtml = read_file( APPPATH .'index.html');
+                        write_file( $cur_path .'/index.html', $indexhtml);
+                    }
+
+                    $cur_path .= '/';
+                }
+            }
+            return false;
+        }
+        return true;
+    }      
 }

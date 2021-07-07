@@ -494,7 +494,15 @@ class Mrf_manage extends MY_PrivateController
                 
                 $this->db->where_in('role_id', array($role_ids));
                 $validators_details = $this->db->get('users')->result_array();*/
-                
+
+		        $logo  = ''; 
+		        if ($this->config->item('system')['print_logo'] != ''){
+		            if( file_exists( $this->config->item('system')['print_logo'] ) ){
+		                $logo = base_url().$this->config->item('system')['print_logo'];
+		            }
+		        }
+		
+				$sendmrfdata['system_logo'] = $logo;                
                 $sendmrfdata['requestor'] = $req_by->full_name;
                 $sendmrfdata['approver'] = $approvers_details->full_name;
 

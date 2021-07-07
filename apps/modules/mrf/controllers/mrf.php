@@ -555,6 +555,14 @@ class Mrf extends MY_PrivateController
 	                }
 		        }
 
+		        $logo  = ''; 
+		        if ($this->config->item('system')['print_logo'] != ''){
+		            if( file_exists( $this->config->item('system')['print_logo'] ) ){
+		                $logo = base_url().$this->config->item('system')['print_logo'];
+		            }
+		        }
+		
+				$sendmrfdata['system_logo'] = $logo;	    
                 $sendmrfdata['requestor'] = $req_by->full_name;
                 $sendmrfdata['approver'] = $approver_fullname;
 

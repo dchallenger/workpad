@@ -563,6 +563,14 @@ class Clearance extends MY_PrivateController
 					$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $signatories_user->user_id));					
 
                     // email to approver
+			        $logo  = ''; 
+			        if ($this->config->item('system')['print_logo'] != ''){
+			            if( file_exists( $this->config->item('system')['print_logo'] ) ){
+			                $logo = base_url().$this->config->item('system')['print_logo'];
+			            }
+			        }
+			
+					$sendclearancedata['system_logo'] = $logo;	                    
                     $sendclearancedata['resign_employee'] = $user_for_clearance;
                     $sendclearancedata['approver'] = $signatories_user->full_name;
 
