@@ -191,7 +191,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<!-- [7] LEAVE CONVERSION -->
-					<div>
+					<div class="hidden">
 						<div class="col-md-9 margin-bottom-10">
 							<h4><?php echo lang('dashboard.pay_leave_convert') ?></h4>
 							<div class="text-muted small"><?php echo lang('dashboard.pay_leave_convert') ?></div>

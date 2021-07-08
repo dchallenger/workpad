@@ -113,7 +113,7 @@
 										<div class="clearfix"></div>
 									</div>
 
-									<div class="{{ $payroll_view_permission['leave_conversion'] ? '' : 'hidden' }}">
+									<div class="hidden">
 										<div class="col-md-9 margin-bottom-10">
 											<h4>{{ lang('dashboard.pay_leave_convert')}}</h4>
 											<div class="text-muted small"></div>
