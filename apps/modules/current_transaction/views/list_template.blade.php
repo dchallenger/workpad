@@ -61,17 +61,17 @@
         <span class="text {{ $status }}">{{ $payroll_current_transaction_transaction_label }}</span><br>
         <span class="text-muted small">{{ $payroll_current_transaction_payroll_date }} {{ $payroll_current_transaction_payroll_date_year }}</span>
   </td>
-    <td class="text-right text-muted">
+    <td class="text-muted">
 
         {{ number_format(trim($payroll_current_transaction_quantity), 2, '.', ',') }}
     </td>
-    <td class="text-right text-muted">
+    <td class="text-muted">
         {{ number_format(trim($payroll_current_transaction_unit_rate), 2, '.', ',') }}
     </td>
-    <td class="text-right">
+    <td class="">
         {{ number_format(trim($payroll_current_transaction_amount), 2, '.', ',') }}
     </td>
-    <td class="text-right">
+    <td class="">
         <div class="btn-group">
             <a class="btn btn-xs text-muted" href="{{ $edit_url }}"><i class="fa fa-pencil"></i> Edit</a>
         </div>

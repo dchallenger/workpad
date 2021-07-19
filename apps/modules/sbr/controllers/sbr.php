@@ -10,6 +10,8 @@ class Sbr extends MY_PrivateController
 
 	function _list_options_active( $record, &$rec )
 	{
+		$rec['process_url'] = '';
+		
 		if( isset($this->permission['process']) && $this->permission['process'] )
 		{
 			$rec['process_url'] = 'javascript:quick_edit( '. $record['record_id'] .' )';

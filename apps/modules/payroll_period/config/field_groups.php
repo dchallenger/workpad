@@ -14,6 +14,7 @@ $config['fieldgroups'][1] = array(
 		'payroll_period.posting_date',
 		'payroll_period.include_basic_and_allowances',
 		'payroll_period.include_13th_month_pay',
+		'payroll_period.annualization',
 		'payroll_period.apply_to_id',
 		'payroll_period.period_processing_type_id',
 		'payroll_period.payroll_schedule_id',

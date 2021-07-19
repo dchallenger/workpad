@@ -72,7 +72,7 @@
 	                                </div>
 	                            </th -->
 	                            @include('list_template_header')
-	                            <th width="15%" class="text-center">
+	                            <th width="15%" class="">
 	                                {{ lang('common.actions') }}
 	                            </th>
 	                        </tr>

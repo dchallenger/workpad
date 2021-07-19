@@ -55,6 +55,7 @@ function quick_edit( record_id )
     $.unblockUI();  
 }
 
+
 function process_form( record_id )
 {
     $.ajax({
@@ -80,7 +81,7 @@ function process_sbr( record_id )
     $.ajax({
         url: base_url + module.get('route') + '/process',
         type:"POST",
-        data: $('#form-period-options').serialize() + '&record_id=' + record_id,
+        data: $('#form-sbr').serialize() + '&record_id=' + record_id,
         dataType: "json",
         async: false,
         beforeSend: function(){

@@ -16,6 +16,21 @@ $config['fields'][1]['payroll_period.posting_date'] = array(
 	'active' => '1',
 	'encrypt' => 0
 );
+$config['fields'][1]['payroll_period.annualization'] = array(
+	'f_id' => 11,
+	'fg_id' => 1,
+	'label' => 'Annualization',
+	'description' => '',
+	'table' => 'payroll_period',
+	'column' => 'annualization',
+	'uitype_id' => 1,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 3,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 0
+);
 $config['fields'][1]['payroll_period.include_basic_and_allowances'] = array(
 	'f_id' => 10,
 	'fg_id' => 1,

@@ -27,6 +27,13 @@ $('#payroll_period-include_basic_and_allowances-temp').change(function(){
         $('#payroll_period-include_basic_and_allowances').val('0');
 }); 
 
+$('#payroll_period-annualization-temp').change(function(){
+    if( $(this).is(':checked') )
+        $('#payroll_period-annualization').val('1');
+    else
+        $('#payroll_period-annualization').val('0');
+}); 
+
 $('#payroll_period-include_13th_month_pay-temp').change(function(){
     if( $(this).is(':checked') )
         $('#payroll_period-include_13th_month_pay').val('1');

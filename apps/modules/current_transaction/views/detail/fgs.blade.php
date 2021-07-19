@@ -16,7 +16,7 @@
 								<span class="input-group-addon">
 	                            <i class="fa fa-list-ul"></i>
 	                            </span>
-	                            {{ form_dropdown('payroll_current_transaction[processing_type_id]',$payroll_current_transaction_processing_type_id_options, $record['payroll_current_transaction.processing_type_id'], 'class="form-control select2me" data-placeholder="Select..."') }}
+	                            {{ form_dropdown('payroll_current_transaction[processing_type_id]',$payroll_current_transaction_processing_type_id_options, $record['payroll_current_transaction.processing_type_id'], 'disabled="disabled" class="form-control select2me" data-placeholder="Select..."') }}
 	                        </div> 				</div>	
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>Employee</label>
@@ -41,15 +41,12 @@
 								<span class="input-group-addon">
 	                            <i class="fa fa-list-ul"></i>
 	                            </span>
-	                            {{ form_dropdown('payroll_current_transaction[employee_id]',$payroll_current_transaction_employee_id_options, $record['payroll_current_transaction.employee_id'], 'class="form-control select2me" data-placeholder="Select..."') }}
+	                            {{ form_dropdown('payroll_current_transaction[employee_id]',$payroll_current_transaction_employee_id_options, $record['payroll_current_transaction.employee_id'], 'disabled="disabled" class="form-control select2me" data-placeholder="Select..."') }}
 	                        </div> 				</div>	
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>Payroll Date</label>
-				<div class="col-md-7">							<div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
-								<input type="text" class="form-control" name="payroll_current_transaction[payroll_date]" id="payroll_current_transaction-payroll_date" value="{{ $record['payroll_current_transaction.payroll_date'] }}" placeholder="Enter Payroll Date" readonly>
-								<span class="input-group-btn">
-									<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-								</span>
+				<div class="col-md-7">							<div class="input-group input-medium" data-date-format="MM dd, yyyy">
+								<input type="text" class="form-control" name="payroll_current_transaction[payroll_date]" id="payroll_current_transaction-payroll_date" value="{{ $record['payroll_current_transaction.payroll_date'] }}" placeholder="Enter Payroll Date" disabled="disabled">
 							</div> 				</div>	
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>Transaction</label>
@@ -66,25 +63,25 @@ WHERE a.deleted = 0"));
 								<span class="input-group-addon">
 	                            <i class="fa fa-list-ul"></i>
 	                            </span>
-	                            {{ form_dropdown('payroll_current_transaction[transaction_id]',$payroll_current_transaction_transaction_id_options, $record['payroll_current_transaction.transaction_id'], 'class="form-control select2me" data-placeholder="Select..."') }}
+	                            {{ form_dropdown('payroll_current_transaction[transaction_id]',$payroll_current_transaction_transaction_id_options, $record['payroll_current_transaction.transaction_id'], 'disabled="disabled" class="form-control select2me" data-placeholder="Select..."') }}
 	                        </div> 				</div>	
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>Quantity</label>
-				<div class="col-md-7">							<input type="text" class="form-control" name="payroll_current_transaction[quantity]" id="payroll_current_transaction-quantity" value="{{ $record['payroll_current_transaction.quantity'] }}" placeholder="Enter Quantity" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/> 				</div>	
+				<div class="col-md-7">							<input type="text" class="form-control" name="payroll_current_transaction[quantity]" id="payroll_current_transaction-quantity" value="{{ $record['payroll_current_transaction.quantity'] }}" placeholder="Enter Quantity" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false" readonly/> 				</div>	
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3">Unit Rate</label>
-				<div class="col-md-7">							<input type="text" class="form-control" name="payroll_current_transaction[unit_rate]" id="payroll_current_transaction-unit_rate" value="{{ $record['payroll_current_transaction.unit_rate'] }}" placeholder="Enter Unit Rate" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/> 				</div>	
+				<div class="col-md-7">							<input type="text" class="form-control" name="payroll_current_transaction[unit_rate]" id="payroll_current_transaction-unit_rate" value="{{ $record['payroll_current_transaction.unit_rate'] }}" placeholder="Enter Unit Rate" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false" readonly/> 				</div>	
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>Amount</label>
-				<div class="col-md-7">							<input type="text" class="form-control" name="payroll_current_transaction[amount]" id="payroll_current_transaction-amount" value="{{ $record['payroll_current_transaction.amount'] }}" placeholder="Enter Amount" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/> 				</div>	
+				<div class="col-md-7">							<input type="text" class="form-control" name="payroll_current_transaction[amount]" id="payroll_current_transaction-amount" value="{{ $record['payroll_current_transaction.amount'] }}" placeholder="Enter Amount" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false" readonly/> 				</div>	
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3">On Hold</label>
 				<div class="col-md-7">							<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
-						    	<input type="checkbox" value="1" @if( $record['payroll_current_transaction.on_hold'] ) checked="checked" @endif name="payroll_current_transaction[on_hold][temp]" id="payroll_current_transaction-on_hold-temp" class="dontserializeme toggle"/>
+						    	<input type="checkbox" value="1" @if( $record['payroll_current_transaction.on_hold'] ) checked="checked" @endif name="payroll_current_transaction[on_hold][temp]" id="payroll_current_transaction-on_hold-temp" class="dontserializeme toggle" disabled="disabled"/>
 						    	<input type="hidden" name="payroll_current_transaction[on_hold]" id="payroll_current_transaction-on_hold" value="@if( $record['payroll_current_transaction.on_hold'] ) 1 @else 0 @endif"/>
 							</div> 				</div>	
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3">Remarks</label>
-				<div class="col-md-7">							<textarea class="form-control" name="payroll_current_transaction[remarks]" id="payroll_current_transaction-remarks" placeholder="Enter Remarks" rows="4">{{ $record['payroll_current_transaction.remarks'] }}</textarea> 				</div>	
+				<div class="col-md-7">							<textarea class="form-control" name="payroll_current_transaction[remarks]" id="payroll_current_transaction-remarks" placeholder="Enter Remarks" rows="4" readonly>{{ $record['payroll_current_transaction.remarks'] }}</textarea> 				</div>	
 			</div>	</div>
 </div>

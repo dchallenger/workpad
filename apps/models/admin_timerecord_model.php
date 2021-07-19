@@ -149,14 +149,14 @@ class Admin_timerecord_model extends Record
 
 		$data = array();
 
-		$qry = "SELECT `record_id`,`period_id`,`period_year`,`payroll_date`,`from`,`to` 
+		$qry = "(SELECT `record_id`,`period_id`,`period_year`,`payroll_date`,`from`,`to` 
 				FROM time_period_list  tpl 
 				-- JOIN users_profile up ON up.company_id =  tpl.`company_id`  
-				-- AND up.`user_id` = '".$user_id."' 
+				-- AND up.`user_id` = '".$user_id."'
                 WHERE NOW() BETWEEN `from` AND `to` OR `to` < NOW()
                 GROUP BY `from`,`to`
-                LIMIT 6
-                OFFSET 8";
+                ORDER BY `from` DESC LIMIT 6)
+				ORDER BY `from`";
 
 		$result = $this->db->query( $qry );
 
@@ -212,14 +212,15 @@ class Admin_timerecord_model extends Record
 
 	function _get_user_to_options( $record_id, $mark_selected = false, $user_id = "" )
 	{
-        $qry = "SELECT `record_id`,`period_id`,`period_year`,`payroll_date`,`from`,`to` 
-                FROM time_period_list  tpl 
-                JOIN users_profile up ON up.company_id =  tpl.`company_id`  
-                AND up.`user_id` = '".$user_id."'
+
+		$qry = "(SELECT `record_id`,`period_id`,`period_year`,`payroll_date`,`from`,`to` 
+				FROM time_period_list  tpl 
+				-- JOIN users_profile up ON up.company_id =  tpl.`company_id`  
+				-- AND up.`user_id` = '".$user_id."'
                 WHERE NOW() BETWEEN `from` AND `to` OR `to` < NOW()
-                ORDER BY `from` ASC
-                LIMIT 6
-                OFFSET 8";
+                GROUP BY `from`,`to`
+                ORDER BY `from` DESC LIMIT 6)
+				ORDER BY `from`";
 
 		$lists = $this->db->query( $qry );
 

@@ -9,7 +9,7 @@
 	<ul class="page-breadcrumb breadcrumb">
 		@section('page-breadcrumb-back')
 			<li class="btn-group">
-				<a href="{{ get_mod_route('payroll_period') }}"><button class="btn blue" type="button">
+				<a href="{{ get_mod_route('current_transaction') }}"><button class="btn blue" type="button">
 				<span>Back</span>
 				</button></a>
 			</li>
@@ -20,7 +20,7 @@
 			<i class="fa fa-angle-right"></i>
 		</li>
 		<li>
-			<a href="{{ site_url('payroll/setup') }}">{{ lang('payroll_period.payroll_setup') }}</a>
+			<a href="{{ site_url('payroll/setup') }}">{{ lang('current_transaction.payroll_setup') }}</a>
 			<i class="fa fa-angle-right"></i>
 		</li>
 		<li>
@@ -41,10 +41,10 @@
 
 	<div class="row">
         <div class="col-md-11">
-			<form class="form-horizontal" id="form-sbr">
+			<form class="form-horizontal">
 				<input type="hidden" id="record_id" name="record_id" value="{{ $record_id }}">
-				@include('edit/fgs')
-				@include('buttons/edit')
+				@include('detail/fgs')
+				@include('buttons/detail')
 			</form>
        	</div>  
     		

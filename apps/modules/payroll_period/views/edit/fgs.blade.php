@@ -145,7 +145,16 @@
 	                            </span>
 	                            {{ form_dropdown('payroll_period[period_status_id]',$payroll_period_period_status_id_options, $record['payroll_period.period_status_id'], 'class="form-control select2me" data-placeholder="Select..."') }}
 	                        </div> 				</div>	
-			</div>		 -->	
+			</div>		 -->
+            <div class="form-group">
+                <label class="control-label col-md-3">Annualization</label>
+                <div class="col-md-7">
+                    <div class="make-switch" data-off="danger" data-on="success" data-on-label="&nbsp;Yes&nbsp;&nbsp;" data-off-label="&nbsp;No&nbsp;">
+                        <input type="checkbox" value="0" <?php if( $record['payroll_period.annualization'] ) echo 'checked="checked"'; ?> name="payroll_period[annualization][temp]" id="payroll_period-annualization-temp" class="dontserializeme toggle"/>
+                        <input type="hidden" name="payroll_period[annualization]" id="payroll_period-annualization" value="<?php echo ( $record['payroll_period.annualization'] ) ? 1 : 0 ; ?>"/>
+                    </div> 
+                </div>
+            </div>
 			<div class="form-group">
 				<label class="control-label col-md-3">Remarks</label>
 				<div class="col-md-7">							<textarea class="form-control" name="payroll_period[remarks]" id="payroll_period-remarks" placeholder="Enter Remarks" rows="4">{{ $record['payroll_period.remarks'] }}</textarea> 				</div>	

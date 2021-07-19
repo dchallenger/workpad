@@ -74,3 +74,45 @@ $(document).ready(function(){
         }   
     }); 
 });
+
+
+
+function process_form( record_id )
+{
+    $.ajax({
+        url: base_url + module.get('route') + '/process_form',
+        type:"POST",
+        async: false,
+        data: 'record_id='+record_id,
+        dataType: "json",
+        beforeSend: function(){
+            $('body').modalmanager('loading');
+        },
+        success: function ( response ) {
+            // $("#tran_date").parent().datepicker('setStartDate',  $(this).val())
+            $('.modal-container').attr('data-width', '780');
+            $('.modal-container').html(response.process_form);
+            $('.modal-container').modal();
+        }
+    });
+}
+
+function process_sbr( record_id )
+{
+    $.ajax({
+        url: base_url + module.get('route') + '/process',
+        type:"POST",
+        data: $('#form-sbr').serialize() + '&record_id=' + record_id,
+        dataType: "json",
+        async: false,
+        beforeSend: function(){
+            $('.fa-spin').addClass('fa-spinner');
+        },
+        success: function ( response ) {  
+            $('.fa-spin').removeClass('fa-spinner');
+            $('.modal-container').modal('hide');
+            handle_ajax_message( response.message );  
+        }
+    });
+    $.unblockUI(); 
+}

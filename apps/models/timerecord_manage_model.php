@@ -63,14 +63,14 @@ class timerecord_manage_model extends Record
 
 		$data = array();
 
-		$qry = "SELECT `record_id`,`period_id`,`period_year`,`payroll_date`,`from`,`to` 
+		$qry = "(SELECT `record_id`,`period_id`,`period_year`,`payroll_date`,`from`,`to` 
 				FROM time_period_list  tpl 
 				-- JOIN users_profile up ON up.company_id =  tpl.`company_id`  
 				-- AND up.`user_id` = '".$id."'
                 WHERE NOW() BETWEEN `from` AND `to` OR `to` < NOW()
                 GROUP BY `from`,`to`
-                LIMIT 6
-                OFFSET 8";
+                ORDER BY `from` DESC LIMIT 6)
+				ORDER BY `from`";
 
 		$result = $this->db->query( $qry );
 

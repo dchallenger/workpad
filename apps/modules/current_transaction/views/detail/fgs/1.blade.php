@@ -8,7 +8,7 @@
 				<div class="col-md-7"><?php									                            		$db->select('period_processing_type_id,period_processing_type');
 	                            			                            		$db->order_by('period_processing_type', '0');
 	                            		$db->where('deleted', '0');
-	                            		$options = $db->get('payroll_period_processing_type'); 	                            $payroll_current_transaction_processing_type_id_options = array('' => '');
+	                            		$options = $db->get('payroll_period_processing_type'); 	                            $payroll_current_transaction_processing_type_id_options = array('' => 'Select...');
                         		foreach($options->result() as $option)
                         		{
                         			                        				$payroll_current_transaction_processing_type_id_options[$option->period_processing_type_id] = $option->period_processing_type;
@@ -20,20 +20,10 @@
 	                        </div> 				</div>	
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>Employee</label>
-				<div class="col-md-7"><?php									                            		
-								$qry_category = $mod->get_role_category();	
-								$db->select('users.user_id,users.full_name');
-								$db->from('users');
-								$db->join('partners', 'users.user_id = partners.user_id');
-								$db->join('users_profile', 'users_profile.user_id = partners.user_id');							
-								$db->join('payroll_partners', 'payroll_partners.user_id = users.user_id', 'inner join');
-								$db->order_by('users.full_name', '0');
-						        if ($qry_category != ''){
-						            $db->where($qry_category, '', false);
-						        }							
-						  		$db->where('users.deleted', '0');
-	 					        $options = $db->get();	                            
-	                            $payroll_current_transaction_employee_id_options = array('' => '');
+				<div class="col-md-7"><?php									                            		$db->select('user_id,full_name');
+	                            			                            		$db->order_by('full_name', '0');
+	                            		$db->where('deleted', '0');
+	                            		$options = $db->get('users'); 	                            $payroll_current_transaction_employee_id_options = array('' => 'Select...');
                         		foreach($options->result() as $option)
                         		{
                         			                        				$payroll_current_transaction_employee_id_options[$option->user_id] = $option->full_name;
@@ -56,11 +46,9 @@
 				<div class="col-md-7"><?php									                            		$options = $db->query(str_replace('{dbprefix}', $db->dbprefix, "SELECT a.transaction_code, a.transaction_id, a.transaction_label, b.transaction_class
 FROM {dbprefix}payroll_transaction a
 LEFT JOIN {dbprefix}payroll_transaction_class b ON b.transaction_class_id =  a.transaction_class_id
-WHERE a.deleted = 0")); 	                            
-				$payroll_current_transaction_transaction_id_options = array('' => '');
+WHERE a.deleted = 0")); 	                            $payroll_current_transaction_transaction_id_options = array('' => 'Select...');
                         		foreach($options->result() as $option)
                         		{
-                        			if ($option->transaction_label != '')
                         			                        				$payroll_current_transaction_transaction_id_options[$option->transaction_class][$option->transaction_id] = $option->transaction_label;
                         			                        		} ?>							<div class="input-group">
 								<span class="input-group-addon">
