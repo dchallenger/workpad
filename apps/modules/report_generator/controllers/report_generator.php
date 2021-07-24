@@ -309,6 +309,10 @@ class Report_generator extends MY_PrivateController
                 $button = array('xls' => 1, 'csv' => 1, 'pdf' => 0, 'txt' => 1);
                 $data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);
                 break;
+            case 'Payslip OCLP':
+                $button = array('xls' => 1, 'csv' => 1, 'pdf' => 0, 'txt' => 1);
+                $data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);
+                break;                
             case 'TAX CONTRIBUTION':
                 $button = array('xls' => 1, 'csv' => 1, 'pdf' => 0, 'txt' => 1);
                 $data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);

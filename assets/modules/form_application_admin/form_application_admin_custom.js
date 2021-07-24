@@ -184,6 +184,7 @@ $(document).ready(function(){
 
         var form_id = $(this).data('forms-id');
         var user_id = $(this).data('user-id');
+        var form_owner  = $(this).data('form-owner');
         var decission = $(this).data('decission');
         var comment = '';
 
@@ -198,6 +199,7 @@ $(document).ready(function(){
             formid: form_id,
             userid: user_id,
             decission: decission,
+            formownerid: form_owner,
             comment: comment
         };
 
@@ -209,6 +211,7 @@ $(document).ready(function(){
 
         var form_id = $(this).data('forms-id');
         var user_id = $(this).data('user-id');
+        var form_owner  = $(this).data('form-owner');
         var decission = $(this).data('decission');
         var comment = '';
 
@@ -223,6 +226,7 @@ $(document).ready(function(){
             formid: form_id,
             userid: user_id,
             decission: decission,
+            formownerid: form_owner,
             comment: comment
         };
 

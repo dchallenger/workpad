@@ -248,7 +248,7 @@ function create_list()
     var filter_by = {
         pay_date: $('.filter-paydate.label-success').attr('filter_value'),
         form_id: $('.form-filter.label-success').attr('filter_value'),
-        form_status_id: $('.status-filter.label-success').attr('filter_value'),
+        approver_status_id: $('.status-filter.label-success').attr('filter_value'),
     }
     var filter_value = $('.status-filter.label-success').attr('filter_value');
 

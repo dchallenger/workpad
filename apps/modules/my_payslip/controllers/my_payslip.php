@@ -153,17 +153,24 @@ class My_payslip extends MY_PrivateController
         foreach ($result as $value) {
             $pdata['query'] = $query; 
             $pdata['value'] = $value;
-            $html = $this->load->view("templates/mypayslip_abraham", $pdata, true);
+            $html = $this->load->view("templates/mypayslip_oclp", $pdata, true);
             $pdf->SetMargins(5, 0, 5);
             $pdf->AddPage('L','P5',true);
+
             $this->load->helper('file');
             $path = 'uploads/reports/mypayslip/pdf/';
             $this->check_path( $path );
+
+            $main_path = PPATH . 'uploads/reports/mypayslip/pdf/';
+
             $filename = $path . strtotime(date('Y-m-d H:i:s')) . '-' . $record_id. ".pdf";
-            $pdf->writeHTML($html, true, false, true, false, '');
+        
+            $main_filename = $main_path . strtotime(date('Y-m-d H:i:s')) . '-' . $record_id. ".pdf";
+
+            $pdf->writeHTML($html, true, false, false, false, '');
         }
         
-        $pdf->Output($filename, 'F');
+        $pdf->Output($main_filename, 'F');
         return $filename;
     }
 

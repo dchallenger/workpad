@@ -73,7 +73,7 @@
             @endif
         <?php } ?>
 
-        <?php if( ($time_forms_form_status_id != 1 && $time_forms_form_status_id != 2) || $time_form_form == 'Daily Time Record Updating' ){ ?>
+        <?php if( ($time_forms_form_status_id != 1) || $time_form_form == 'Daily Time Record Updating' ){ ?>
         <div class="btn-group">
             <a href="{{ $detail_url }}" class="btn btn-xs text-muted"><i class="fa fa-search"></i> {{ lang('form_application.view') }}</a>
         </div>

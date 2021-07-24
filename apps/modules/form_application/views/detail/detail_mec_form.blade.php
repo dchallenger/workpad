@@ -187,7 +187,7 @@
 											}
 											elseif ($form_status_id['val'] == 8){
 												$title = lang('form_application.cancel_by');
-												$dis_cancel_by = $value['employee_name'];
+												$dis_cancel_by = $value['approver_name'];
 											}												
 									?>
 	                                <div class="row">

@@ -232,8 +232,7 @@
 										</div>
 									</div>
 
-									<?php if( count($remarks) > 0 ){
-										?>
+									<?php if( count($remarks) > 0 && $record['time_forms_hr_admin_approved_user_id'] == ''){ ?>
 
 									<hr />
 									<div class="row">
@@ -242,7 +241,6 @@
 			                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_manage.approver_remarks') }} :</label>
 			                        <?php
 						                    for($j=0; $j < count($remarks); $j++){
-						                        if(isset($remarks[$j]['comment'])) {
 						                        	if($j > 0){
 			                         ?>
 					                         <label class="control-label col-md-4 col-sm-4 text-right text-muted">&nbsp</label>
@@ -259,9 +257,11 @@
 		                                            echo ($remarks[$j]['comment']=="") ? "&nbsp;" : $remarks[$j]['comment'];
 		                                        ?>
 		                                    </div>
+
+		                                    <?php if ($remarks[$j]['comment']!="") echo "<br/>"; ?>
 										 </div>
 
-									<?php 		}
+									<?php
 											}
 											?>
 
@@ -270,68 +270,47 @@
 									</div>
 									<?php } ?>
 
-									<?php if($form_status_id['val'] == 8){ ?>
-									<hr />
-		                                <?php 
-											foreach ($disapproved_cancelled_remarks as $key => $value) :
-												$dis_cancel_by = '';
-												$title = '';											
-												if ($form_status_id['val'] == 7){
-													$title = lang('form_application_manage.disaproved');
-													$dis_cancel_by = $value['approver_name'];
-												}
-												elseif ($form_status_id['val'] == 8){
-													$title = lang('form_application_manage.cancel_by');
-													$dis_cancel_by = $value['employee_name'];
-												}													
-										?>
-				                                <div class="row">
-													<div class="col-md-12">
-														<div class="form-group">
-															<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ $title }} :</label>
-															<div class="col-md-7 col-sm-7">
-																<span>{{ $dis_cancel_by }}</span>
-																<br />
-																<?php 
-																$date = date("F d, Y H:i:s", strtotime($value['date']));
-															    if(date("H:i:s", strtotime($date)) == "00:00:00"){
-															       $comment_date = 'on '.general_date_time($date);
-															    }else{
-															    	if($value['date'] == '0000-00-00 00:00:00'){
-															    		$comment_date = '';
-															    	} else {
-															    		$comment_date = 'on '.general_date_time($date);
-															    	}
-															    } 
-																?>
-																<span class="help-block small">{{ $value['form_status'] }} {{ $comment_date }}</span>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="row hidden">
-													<div class="col-md-12">
-														<div class="form-group">
-															<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ $value['form_status'] }}date :</label>
-															<div class="col-md-7 col-sm-7">
-																<span>{{ general_date_time($date);($value['date']) }}</span>
-															</div>
-														</div>
-													</div>
-												</div>
-				                                <div class="row">
-													<div class="col-md-12">
-														<div class="form-group">
-															<label class="control-label col-md-4 col-sm-4 text-right text-muted">&nbsp;</label>
-															<div class="col-md-7 col-sm-7">
-																<span>{{ ($value['comment'] == '') ? '' : $value['comment'] }}</span>
-															</div>
-														</div>
-													</div>
-												</div>
 									<?php
-											endforeach;
+									if ($record['time_forms_hr_admin_approved_user_id'] != '') {
+										switch ($record['time_forms_form_status_id']) {
+											case 6:
+												$date_transaction = $record['time_forms_date_approved'];
+												break;
+											case 7:
+												$date_transaction = $record['time_forms_date_declined'];
+												break;
+											case 8:
+												$date_transaction = $record['time_forms_date_cancelled'];
+												break;
+											default:
+												$date_transaction = '';
+												break;																								
+
 										}
+									?>
+										<hr />
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+				                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_manage.hr_approver_remarks') }} :</label>
+							                         <div class="col-md-7 col-sm-7">
+					                                    <span style='display:block; word-wrap:break-word;'>
+					                                        <?php
+					                                            echo "<b>".$record['time_forms_hr_approve_full_name']."</b>:";
+					                                        ?>
+					                                        <span class="text-right text-danger">{{ general_date_time($date_transaction) }}</span>
+					                                    </span>
+					                                    <div style='display:block; word-wrap:break-word;'>
+					                                        <?php
+					                                            echo ($record['time_forms_hr_admin_approved_comment']=="") ? "&nbsp;" : $record['time_forms_hr_admin_approved_comment'];
+					                                        ?>
+					                                    </div> 
+													</div>
+												</div>
+											</div>
+										</div>
+                                   <?php
+									}
 									?>
 
 									<hr />
@@ -352,7 +331,20 @@
 
 									<?php } ?>
 
+	                            	<?php if( $form_approver_details['approver_status_id'] < 8 && in_array($approver_details['form_status_id'], array(2)) && !$form_approver_details['within_cutoff']){ ?>
 
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+				                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_manage.remarks') }}</label>
+				                                    <div class="col-md-5 col-sm-6">
+				                                        <textarea id="comment-{{ $form_approver_details['forms_id'] }}" class="form-control" rows="3"></textarea>
+				                                    </div>
+				                                </div>
+											</div>
+										</div>
+
+									<?php } ?>
 
 	                            </div>
 
@@ -361,15 +353,15 @@
                                         <div class="col-md-12">
                                             <div>
                                             	<?php if( $form_approver_details['approver_status_id'] < 8 && in_array($approver_details['form_status_id'], array(2,4,5)) && $record['time_forms_form_status_id'] != 8 && $record['time_forms_form_status_id'] != 6){ ?>
-                                            		<a href="#" class="approve_view btn btn-default btn-sm btn-success" data-forms-id="{{ $form_approver_details['forms_id'] }}" data-form-owner="{{ $form_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $form_approver_details['approver_id'] }}" data-decission="1" >{{ lang('form_application_manage.approved') }}</a>
+                                            		<a href="#" class="approve_view btn btn-default btn-sm btn-success" data-forms-id="{{ $form_approver_details['forms_id'] }}" data-form-owner="{{ $form_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $form_approver_details['approver_id'] }}" data-decission="6" >{{ lang('form_application_manage.approved') }}</a>
                                             		<?php if($form_approver_details['within_cutoff']){ ?>
-                                            			<a href="#" class="disapprove_view btn btn-sm btn-danger" data-forms-id="{{ $form_approver_details['forms_id'] }}" data-form-owner="{{ $form_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $form_approver_details['approver_id'] }}" data-decission="0" >{{ lang('form_application_manage.disapproved') }}</a>
+                                            			<a href="#" class="disapprove_view btn btn-sm btn-danger" data-forms-id="{{ $form_approver_details['forms_id'] }}" data-form-owner="{{ $form_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $form_approver_details['approver_id'] }}" data-decission="7" >{{ lang('form_application_manage.disapproved') }}</a>
                                             	<?php } }
                                             		else if ($form_approver_details['approver_status_id'] == 6 ){
                                             			if($form_approver_details['within_cutoff']){
                                             		 ?>
 
-                                            		<a href="#" class="disapprove_view btn btn-sm btn-danger" data-forms-id="{{ $form_approver_details['forms_id'] }}" data-form-owner="{{ $form_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $form_approver_details['approver_id'] }}" data-decission="0" >{{ lang('form_application_manage.disapproved') }}</a>
+                                            		<a href="#" class="disapprove_view btn btn-sm btn-danger" data-forms-id="{{ $form_approver_details['forms_id'] }}" data-form-owner="{{ $form_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $form_approver_details['approver_id'] }}" data-decission="8" >{{ lang('form_application_manage.cancel') }}</a>
 
                                             	<?php
                                             			}

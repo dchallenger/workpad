@@ -449,7 +449,7 @@ public function call_sp_time_calendar($date_from='', $date_to='', $user_id=0){
 							LEFT JOIN {$this->db->dbprefix}users_profile users_profile 
 							ON time_forms_approver.user_id = users_profile.user_id
 					        WHERE forms_id= $forms_id
-        					AND (form_status_id = 6 OR form_status_id = 7)
+        					AND (form_status_id IN (6,7,8))
         					AND deleted = 0 
         					ORDER BY time_forms_approver.id ";
 		$comments = $this->db->query($comments_query);

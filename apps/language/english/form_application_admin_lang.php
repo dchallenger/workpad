@@ -136,6 +136,7 @@ $lang['form_application_admin'] = array(
 	'days' => 'Day/s',
 	'hours' => 'Hours',
 	'approver_remarks' => 'Approver Remarks',
+	'hr_approver_remarks' => 'HR Approver Remarks (In behalf of approver/s)',
 	'required_disapp' => 'Required if you choose to disapprove',
 	'selected_dates' => 'Selected Dates',
 	'pay_dates' => 'Pay Dates',

@@ -589,7 +589,21 @@ class Form_application_manage extends MY_PrivateController
             $this->load->model('form_application_manage_model', 'dash_mod');
 
             $approver       = $this->input->post('username');
-            $action         = $this->input->post('decission') == '1' ? ' approved ' : ' disapproved '; 
+
+            switch ($this->input->post('decission')) {
+                case 6:
+                    $action = 'approved';
+                    break;
+                case 7:
+                    $action = 'disapproved';
+                    break;
+                case 8:
+                    $action = 'cancelled';
+                    break;
+                default:
+                    $action = '';
+                    break;
+            }
             $form_name      = $this->dash_mod->get_form_information($this->input->post('formid')); 
             // $form_name       = $this->input->post('formname'); 
             $recipient      = $this->input->post('formownerid');
@@ -615,11 +629,11 @@ class Form_application_manage extends MY_PrivateController
             $this->response->target = $latest;
 
             //Check if filed form is approved and hr validation is enabled
-            if($form_name['form_status_id'] == 6){ //approved already
+            if($form_name['form_status_id'] == 6) { //approved already
                 $this->load->model('form_application_manage_model', 'form_manage');
                 $this->form_manage->transfer_to_validation($form_name);
                 $this->form_manage->notify_accounting($form_name);
-            }elseif($form_name['form_status_id'] == 7){ //disapproved
+            } elseif(in_array($form_name['form_status_id'],array(7,8))) { //disapproved
                 $this->load->model('form_application_manage_model', 'form_manage');
                 $this->form_manage->remove_additiona_leave($form_name);
             }

@@ -822,8 +822,8 @@ public function call_sp_time_calendar($date_from='', $date_to='', $user_id=0){
 					$this->db->insert('system_feeds_recipient', array('id' => $id, 'user_id' => $row->user_id));
 					$notified[] = $row->user_id;
 
-					//$qry = "CALL sp_partners_loan_application_email_to_hr('".$loan_application_id."', '".$row->user_id."')";
-					//$result = $this->db->query( $qry );
+					$qry = "CALL sp_time_forms_email_hr_validation('".$forms_id."', '".$row->user_id."')";
+					$result = $this->db->query( $qry );
 				}
 			}
 		}

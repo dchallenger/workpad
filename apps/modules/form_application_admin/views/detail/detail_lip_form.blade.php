@@ -132,9 +132,9 @@
 											    ?>
 											    <span style="display:block; word-wrap:break-word;" class="<?php if( $countSelectedDates > 4 ) echo 'hidden'; ?> toggle-<?php echo $countSelectedDates; ?>">
 				                                    <?php echo $index; ?> 
-				                                    <span class="small"> - <?php echo $array_keys[0]; ?> -
+				                                    <span class=""> - <?php echo $array_keys[0]; ?> -
 				                                    </span>
-				                                    <span class="small"> (<?php echo number_format($array_values[1], 0, '.', ',') ?> hrs) :
+				                                    <span class=""> (<?php echo number_format($array_values[1], 0, '.', ',') ?> hrs) :
 				                                    </span>						                                    
 				                                    <span class="text-info">
 								                        <?php 
@@ -229,7 +229,7 @@
 										</div>
 									</div>
 
-									<?php if( count($remarks) > 0 ){
+									<?php if( count($remarks) > 0 && $record['time_forms_hr_admin_approved_user_id'] == ''){
 										?>
 
 									<hr />
@@ -239,7 +239,6 @@
 			                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.approver_remarks') }} :</label>
 			                        <?php
 						                    for($j=0; $j < count($remarks); $j++){
-						                        if(isset($remarks[$j]['comment'])) {
 						                        	if($j > 0){
 			                         ?>
 					                         <label class="control-label col-md-4 col-sm-4 text-right text-muted">&nbsp</label>
@@ -261,9 +260,11 @@
 		                                            echo ($remarks[$j]['comment']=="") ? "&nbsp;" : $remarks[$j]['comment'];
 		                                        ?>
 		                                    </div>
+
+		                                    <?php if ($remarks[$j]['comment']!="") echo "<br/>"; ?> 
 										 </div>
 
-									<?php 		}
+									<?php
 											}
 											?>
 
@@ -272,70 +273,49 @@
 									</div>
 									<?php } ?>
 
-									<?php if($form_status_id['val'] == 8){ ?>
-									<hr />
-		                                <?php 
-											foreach ($disapproved_cancelled_remarks as $key => $value) :
-												$dis_cancel_by = '';
-												$title = '';											
-												if ($form_status_id['val'] == 7){
-													$title = lang('form_application_admin.disaproved');
-													$dis_cancel_by = $value['approver_name'];
-												}
-												elseif ($form_status_id['val'] == 8){
-													$title = lang('form_application_admin.cancel_by');
-													$dis_cancel_by = $value['employee_name'];
-												}													
-										?>
-				                                <div class="row">
-													<div class="col-md-12">
-														<div class="form-group">
-															<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.cancel_by') }} :</label>
-															<div class="col-md-7 col-sm-7">
-																<span>{{ $dis_cancel_by }}</span>
-																<br />
-																<?php 
-																$date = date("F d, Y H:i:s", strtotime($value['date']));
-															    if(date("H:i:s", strtotime($date)) == "00:00:00"){
-															       $comment_date = 'on '.date("F d, Y", strtotime($date));
-															    }else{
-															    	if($value['date'] == '0000-00-00 00:00:00'){
-															    		$comment_date = '';
-															    	} else {
-															    		$comment_date = 'on '.date("F d, Y g:ia", strtotime($date));
-															    	}
-															    } 
-																?>
-																<span class="help-block small">{{ $value['form_status'] }} {{ $comment_date }}</span>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="row hidden">
-													<div class="col-md-12">
-														<div class="form-group">
-															<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ $value['form_status'] }}date :</label>
-															<div class="col-md-7 col-sm-7">
-																<span>{{ date('F d, Y g:ia', strtotime($value['date'])) }}</span>
-															</div>
-														</div>
-													</div>
-												</div>
-				                                <div class="row">
-													<div class="col-md-12">
-														<div class="form-group">
-															<label class="control-label col-md-4 col-sm-4 text-right text-muted">&nbsp;</label>
-															<div class="col-md-7 col-sm-7">
-																<span>{{ ($value['comment'] == '') ? '' : $value['comment'] }}</span>
-															</div>
-														</div>
-													</div>
-												</div>
 									<?php
-											endforeach;
+									if ($record['time_forms_hr_admin_approved_user_id'] != '') {
+										switch ($record['time_forms_form_status_id']) {
+											case 6:
+												$date_transaction = $record['time_forms_date_approved'];
+												break;
+											case 7:
+												$date_transaction = $record['time_forms_date_declined'];
+												break;
+											case 8:
+												$date_transaction = $record['time_forms_date_cancelled'];
+												break;
+											default:
+												$date_transaction = '';
+												break;																								
+
 										}
 									?>
-
+										<hr />
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+				                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.hr_approver_remarks') }} :</label>
+							                         <div class="col-md-7 col-sm-7">
+					                                    <span style='display:block; word-wrap:break-word;'>
+					                                        <?php
+					                                            echo "<b>".$record['time_forms_hr_approve_full_name']."</b>:";
+					                                        ?>
+					                                        <span class="text-right text-danger">{{ general_date_time($date_transaction) }}</span>
+					                                    </span>
+					                                    <div style='display:block; word-wrap:break-word;'>
+					                                        <?php
+					                                            echo ($record['time_forms_hr_admin_approved_comment']=="") ? "&nbsp;" : $record['time_forms_hr_admin_approved_comment'];
+					                                        ?>
+					                                    </div> 
+													</div>
+												</div>
+											</div>
+										</div>
+                                   <?php
+									}
+									?>	
+									
 									<hr />
 									
 									<?php if( $form_approver_details['approver_status_id'] < 8 && in_array($approver_details['form_status_id'], array(2,4,5,6)) && $form_approver_details['within_cutoff']){ ?>
@@ -461,14 +441,14 @@
 					<div class="clearfix">
 						<div class="panel panel-success">
 							<div class="panel-heading">
-								<h4 class="panel-title">{{ lang('form_application_admin.approvers') }}</h4>
+								<h4 class="panel-title"><?php echo $approver_title; ?></h4>
 							</div>
 
 							<ul class="list-group">
 								<?php foreach($approver_list as $index => $value){ ?>
 									<li class="list-group-item"><?=$value['lastname'].', '.$value['firstname']?>
 										<br><small class="text-muted"><?=$value['position']?></small>
-									<?php if($record['time_forms_form_status_id'] >= 2 && $record['time_forms_form_status_id'] != 8){ 
+									<?php if($record['time_forms_form_status_id'] >= 2){ 
 								            $form_style = 'info';
 								            switch($value['form_status_id']){
 								                case 8:

@@ -1752,7 +1752,15 @@ class report_generator_model extends Record
                 $result = $this->db->query($query." AND type = 'Netpay' ORDER BY full_name")->result();
                 $html = $this->load->view("templates/payroll_payslip_abraham", array('columns' => $columns,'result' => $result, 'query' => $query), true);
                 $pdf->AddPage('L', 'P5', true);
-                break;                
+                break;
+            case 'Payslip OCLP': //Preliminary Earnings Report for oclp
+                $pdf->SetPrintHeader(false);
+                $pdf->SetPrintFooter(false);
+                $pdf->SetMargins(5, 5, 5);
+                $result = $this->db->query($query." AND type = 'Netpay' ORDER BY full_name")->result();
+                $html = $this->load->view("templates/payroll_payslip_oclp", array('columns' => $columns,'result' => $result, 'query' => $query), true);
+                $pdf->AddPage('L', 'P5', true);
+                break;                  
             case 'Payslip OSI': //Preliminary Earnings Report for bayleaf
                 $pdf->SetPrintHeader(false);
                 $pdf->SetPrintFooter(false);

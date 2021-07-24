@@ -187,6 +187,7 @@
 						<div class="portlet-body">
 							<span class="small text-muted">{{ lang('form_application.select_status') }}</span>
 							<div class="margin-top-15">
+								<span class="status-filter label label-info label-filter pading-3" filter_value=""> {{ lang('form_application_manage.all') }}</span>
 								@foreach ($form_status->result() as $row)
 								<span class="status-filter label label-default label-filter pading-3" filter_value="{{$row->form_status_id}}">{{$row->form_status}}</span>
 								@endforeach

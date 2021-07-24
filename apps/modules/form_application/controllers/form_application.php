@@ -2673,7 +2673,7 @@ class Form_application extends MY_PrivateController
                     $this->response->notified = $this->mod->notify_approvers( $form_id, $form_details );
                     $this->response->notified = $this->mod->notify_filer( $form_id, $form_details );
                 } elseif ($form_details['form_status_id'] == 4) {
-                    $this->response->notified = $this->mod->notify_hr( $form_id, $form_details );
+                    $this->response->notified = $this->mod->notify_hr( $forms_id, $form_details );
                 }
 
                 if($_POST['form_code'] == 'ML' && $this->input->post('return_date') != ''){
@@ -2934,7 +2934,7 @@ class Form_application extends MY_PrivateController
                 $rec['detail_url'] = $this->mod->url . '/detail/' . $record['record_id'];
             }
 
-            if( $record['time_forms_form_status_id'] == 1 || $record['time_forms_form_status_id'] == 2 ){
+            if( $record['time_forms_form_status_id'] == 1 ){
                 $rec['options'] .= '<li><a href="'.$rec['detail_url'].'"><i class="fa fa-info"></i> '.lang('form_application.view').'</a></li>';
             }
         }

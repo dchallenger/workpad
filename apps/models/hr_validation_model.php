@@ -100,7 +100,7 @@ class hr_validation_model extends Record
 		$notified = array();
 
         $this->lang->load( 'form_application' );
-		$form_status = $form['form_status_id'] == 2 ? "approved" : "disapproved";
+		$form_status = $form['form_status_id'] == 2 ? "validated" : "invalidate";
 
         $notif_message  = 'Filed: ' . $form['form'] . ' for ' . date('F j, Y', strtotime($form['date_from'])) . ' has been '.$form_status.'. by HR';
         if(trim($form['hr_remarks']) != ""){

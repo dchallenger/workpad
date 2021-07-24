@@ -1958,8 +1958,14 @@ class Hr_validation extends MY_PrivateController
             $approver_record['form_status_id'] = 2;
             $approver_record['hr_remarks'] = $validate_remarks;        
             $approver_record['date_invalid'] = date('Y-m-d H:i:s');         
+
+            $approver_record['modified_by'] = $this->user->user_id;
+            $approver_record['modified_on'] = date('Y-m-d H:i:s');
+
             $this->db->update('time_forms', $approver_record,array( $this->mod->primary_key => $record_id ) );
 
+            $form_details['form_status_id'] = 2;
+            
             $this->response->notified = $this->fam->notify_approvers( $record_id, $form_details );
             $this->response->notified = $this->mod->notify_filer( $record_id, $form_details );            
 
@@ -1969,6 +1975,10 @@ class Hr_validation extends MY_PrivateController
             $approver_record['form_status_id'] = 9;
             $approver_record['hr_remarks'] = $validate_remarks;   
             $approver_record['date_invalid'] = date('Y-m-d H:i:s');         
+
+            $approver_record['modified_by'] = $this->user->user_id;
+            $approver_record['modified_on'] = date('Y-m-d H:i:s');
+
             $this->db->update('time_forms', $approver_record,array( $this->mod->primary_key => $record_id ));
 
             $this->response->notified = $this->mod->notify_filer( $record_id, $form_details );            
@@ -1976,9 +1986,9 @@ class Hr_validation extends MY_PrivateController
             $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', $this->mod->table, array(), $approver_record,$form_details['user_id']);
         }
 
-        $form_record['modified_by'] = $this->user->user_id;
+/*        $form_record['modified_by'] = $this->user->user_id;
         $form_record['modified_on'] = date('Y-m-d H:i:s');
-        $this->db->update( 'time_forms', $form_record, array( $this->mod->primary_key => $record_id ) );
+        $this->db->update( 'time_forms', $form_record, array( $this->mod->primary_key => $record_id ) );*/
         $this->response->action = 'update';
 
         $this->response->saved = true;

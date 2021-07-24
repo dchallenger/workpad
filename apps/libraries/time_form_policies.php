@@ -1201,10 +1201,12 @@ class time_form_policies {
 
         switch ($decission) {
             case 0:
+            case 7:
             case 8:
                 $type = 'CANCELLATION';
                 break;
             case 1:
+            case 6:
             case 2:
                 $type = 'APPROVAL';
                 break;                

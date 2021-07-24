@@ -538,8 +538,23 @@ class Form_application_admin extends MY_PrivateController
             // 2. build a notification message
             //    designed to determine the type of form
             //    the recipient has submitted.
+
+            switch ($this->input->post('decission')) {
+                case 6:
+                    $action = 'approved';
+                    break;
+                case 7:
+                    $action = 'disapproved';
+                    break;
+                case 8:
+                    $action = 'cancelled';
+                    break;
+                default:
+                    $action = '';
+                    break;
+            }
+
             $approver       = $this->input->post('username');
-            $action         = $this->input->post('decission') == '1' ? ' Approved ' : ' Declined '; 
             $form_name      = $this->input->post('formname'); 
             $recipient      = $this->input->post('formownerid');
             $notif_message  = $approver . $action . ' your ' . $form_name . ' application.';
@@ -588,8 +603,7 @@ class Form_application_admin extends MY_PrivateController
             );
 
             $this->_ajax_return();
-    }
-
+        }
     }
 
      public function get_list()
