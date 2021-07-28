@@ -87,7 +87,10 @@ class training_request_manage_model extends Record
 	{
 		$response = new stdClass();
 		$req = $this->db->get_where('training_application', array('training_application_id' => $record_id))->row();
-		$req_by = $this->db->get_where('users', array('user_id' => $req->user_id))->row();
+
+        $this->db->where('users.user_id',$req->user_id);
+        $this->db->join('users_profile','users.user_id = users_profile.user_id','left');
+        $req_by = $this->db->get('users')->row();		
 
 		//get approvers
 		$where = array(
@@ -132,10 +135,13 @@ class training_request_manage_model extends Record
                             $response->notify[] = $up->approver_id;
 
 	                         // start email to approver
-			                $approvers_user_info = $this->db->get_where('users', array('user_id' => $up->approver_id));
+					        $this->db->where('users.user_id',$up->approver_id);
+					        $this->db->join('users_profile','users.user_id = users_profile.user_id','left');
+					        $approvers_user_info = $this->db->get('users');
+
 			                if ($approvers_user_info && $approvers_user_info->num_rows() > 0){
 			                	$approvers_details = $approvers_user_info->row();
-			                	$approver_fullname = $approvers_details->full_name;
+			                	$approver_fullname = $approvers_details->firstname;
 			                }          
 
 					        $logo  = ''; 
@@ -204,10 +210,12 @@ class training_request_manage_model extends Record
 	                $response->redirect = true;
 
  					// start email to requestor
-	                $approvers_user_info = $this->db->get_where('users', array('user_id' => $this->user->user_id));
+			        $this->db->where('users.user_id',$this->user->user_id);
+			        $this->db->join('users_profile','users.user_id = users_profile.user_id','left');
+			        $approvers_user_info = $this->db->get('users'); 					
 	                if ($approvers_user_info && $approvers_user_info->num_rows() > 0){
 	                	$approvers_details = $approvers_user_info->row();
-	                	$approver_fullname = $approvers_details->full_name;
+	                	$approver_fullname = $approvers_details->firstname;
 	                }          
 
 			        $logo  = ''; 
@@ -311,7 +319,7 @@ class training_request_manage_model extends Record
 		        }
 		
 				$sendtrqdata['system_logo'] = $logo;	                
-                $sendtrqdata['requestor'] = $req_by->full_name;
+                $sendtrqdata['requestor'] = $req_by->firstname;
                 $sendtrqdata['approver'] = 'all approver(s)';
 				$sendtrqdata['status'] = 'Approved';
 

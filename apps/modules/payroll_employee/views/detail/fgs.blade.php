@@ -282,7 +282,7 @@
 				</div> 				
 			</div>	
 		</div>
-		<div class="form-group">
+		<div class="form-group hidden">
 			<label class="control-label col-md-3">Non Swipe</label>
 			<div class="col-md-7">							
 				<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
@@ -367,7 +367,13 @@
 			<div class="col-md-7">							
 				<input type="text" disabled="disabled" class="form-control" name="payroll_partners[hdmf_no]" id="payroll_partners-hdmf_no" value="{{ $record['payroll_partners.hdmf_no'] }}" placeholder="Enter PagIbig No." /> 				
 			</div>	
-		</div>			
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3"><span class="required">* </span>MP2 No.</label>
+			<div class="col-md-7">							
+				<input type="text" disabled="disabled" class="form-control" name="payroll_partners[hdmf_no_mp2]" id="payroll_partners-hdmf_no_mp2" value="{{ $record['payroll_partners.hdmf_no_mp2'] }}" placeholder="Enter MP2 No." /> 				
+			</div>	
+		</div>		
 		<div class="form-group">
 			<label class="control-label col-md-3"><span class="required">* </span>HDMF Transaction Mode</label>
 			<div class="col-md-7">

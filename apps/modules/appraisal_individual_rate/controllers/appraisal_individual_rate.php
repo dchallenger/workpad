@@ -867,13 +867,21 @@ class Appraisal_individual_rate extends MY_PrivateController
 
                 $this->response->notify[] = $this->input->post('user_id');
 
+                // hr admin info
+                $this->db->where('users.user_id',$this->user->user_id);
+                $this->db->join('users_profile','users.user_id = users_profile.user_id','left');
+                $hr_admin_result = $this->db->get('users');
+                $hr_admin_info = $hr_admin_result->row();
+
                 // email to appraisee
-                $this->db->where('user_id',$this->input->post('user_id'));
+                $this->db->where('users.user_id',$this->input->post('user_id'));
+                $this->db->join('users_profile','users.user_id = users_profile.user_id','left');
                 $appraisee_result = $this->db->get('users');
                 $appraisee_info = $appraisee_result->row();
 
                 $appraisee_recepient = $this->input->post('user_id');
                 $sendtargetsettings['recepient'] = $appraisee_info->full_name;
+                $sendtargetsettings['hradmin'] = $hr_admin_info->fullname;
 
                 $target_settings_send_template = $this->db->get_where( 'system_template', array( 'code' => 'PERFORMANCE-APPRAISAL-SEND-COMMITTEE') )->row_array();
                 $msg = $this->parser->parse_string($target_settings_send_template['body'], $sendtargetsettings, TRUE); 

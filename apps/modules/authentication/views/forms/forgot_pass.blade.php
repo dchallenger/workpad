@@ -8,10 +8,10 @@
 		</div>
 	</div>
 	<div class="form-actions">
-		<button type="button" id="back-btn" class="btn btn-lg">
+		<button type="button" id="back-btn" class="btn btn-default green">
 		<!-- i class="m-icon-swapleft"></i --> {{ lang('authentication.back') }}
 		</button>
-		<button type="submit" class="btn btn-lg blue pull-right">
+		<button type="submit" class="btn btn-default bluegreen pull-right">
 		{{ lang('authentication.submit') }} <!-- i class="m-icon-swapright m-icon-white"></i -->
 		</button>            
 	</div>

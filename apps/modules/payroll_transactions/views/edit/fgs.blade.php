@@ -23,7 +23,7 @@
                             		$db->order_by('transaction_class', '0');
                             		$db->where('deleted', '0');
                             		$options = $db->get('payroll_transaction_class');
-									$payroll_transaction_transaction_class_id_options = array('' => 'Select...');
+									$payroll_transaction_transaction_class_id_options = array('' => '');
                             		foreach($options->result() as $option)
                             		{
                             				$payroll_transaction_transaction_class_id_options[$option->transaction_class_id] = $option->transaction_class;
@@ -43,7 +43,7 @@
                             		$db->order_by('transaction_type', '0');
                             		$db->where('deleted', '0');
                             		$options = $db->get('payroll_transaction_type');
-									$payroll_transaction_transaction_type_id_options = array('' => 'Select...');
+									$payroll_transaction_transaction_type_id_options = array('' => '');
                             		foreach($options->result() as $option)
                             		{
                             			$payroll_transaction_transaction_type_id_options[$option->transaction_type_id] = $option->transaction_type;
@@ -63,7 +63,7 @@
 	                        		$db->order_by('account_name', '0');
 	                        		$db->where('deleted', '0');
 	                        		$options = $db->get('payroll_account');
-									$payroll_transaction_debit_account_id_options = array('' => 'Select...');
+									$payroll_transaction_debit_account_id_options = array('' => '');
 	                        		foreach($options->result() as $option)
 	                        		{
 	                        			$payroll_transaction_debit_account_id_options[$option->account_id] = $option->account_name;
@@ -83,7 +83,7 @@
                             		$db->order_by('account_name', '0');
                             		$db->where('deleted', '0');
                             		$options = $db->get('payroll_account');
-									$payroll_transaction_credit_account_id_options = array('' => 'Select...');
+									$payroll_transaction_credit_account_id_options = array('' => '');
                             		foreach($options->result() as $option)
                             		{
                             			$payroll_transaction_credit_account_id_options[$option->account_id] = $option->account_name;
@@ -103,7 +103,7 @@
                             		$db->order_by('priority', '0');
                             		$db->where('deleted', '0');
                             		$options = $db->get('payroll_transaction_priority');
-									$payroll_transaction_priority_id_options = array('' => 'Select...');
+									$payroll_transaction_priority_id_options = array('' => '');
                             		foreach($options->result() as $option)
                             		{
                             			$payroll_transaction_priority_id_options[$option->priority_id] = $option->priority;

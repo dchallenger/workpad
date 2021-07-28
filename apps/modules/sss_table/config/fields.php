@@ -76,3 +76,33 @@ $config['fields'][1]['payroll_sss_table.ec'] = array(
 	'active' => '1',
 	'encrypt' => 0
 );
+$config['fields'][1]['payroll_sss_table.eeshare_provident_fund'] = array(
+	'f_id' => 3,
+	'fg_id' => 1,
+	'label' => 'Employee Share Provident Fund',
+	'description' => '',
+	'table' => 'payroll_sss_table',
+	'column' => 'eeshare_provident_fund',
+	'uitype_id' => 1,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 3,
+	'datatype' => 'required|numeric',
+	'active' => '1',
+	'encrypt' => 0
+);
+$config['fields'][1]['payroll_sss_table.ershare_provident_fund'] = array(
+	'f_id' => 4,
+	'fg_id' => 1,
+	'label' => 'Employer Share Provident Fund',
+	'description' => '',
+	'table' => 'payroll_sss_table',
+	'column' => 'ershare_provident_fund',
+	'uitype_id' => 1,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 4,
+	'datatype' => 'required|numeric',
+	'active' => '1',
+	'encrypt' => 0
+);

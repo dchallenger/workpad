@@ -537,6 +537,7 @@ class Clearance extends MY_PrivateController
 						   -- INNER JOIN ww_partners_clearance_signatories_accountabilities pcsa ON pcs.clearance_signatories_id = pcsa.clearance_signatories_id
 						   LEFT JOIN ww_partners_clearance_signatories_accountabilities pcsa ON pcs.clearance_signatories_id = pcsa.clearance_signatories_id
 						   LEFT JOIN {$this->db->dbprefix}users u ON pcs.user_id = u.user_id
+						   LEFT JOIN {$this->db->dbprefix}users_profile up ON u.user_id = up.user_id
 						   WHERE pcs.deleted = 0
 						   AND clearance_id = {$this->clearance_id}
 						  ";
@@ -572,7 +573,7 @@ class Clearance extends MY_PrivateController
 			
 					$sendclearancedata['system_logo'] = $logo;	                    
                     $sendclearancedata['resign_employee'] = $user_for_clearance;
-                    $sendclearancedata['approver'] = $signatories_user->full_name;
+                    $sendclearancedata['approver'] = $signatories_user->firstname;
 
 
                     $mrf_send_template = $this->db->get_where( 'system_template', array( 'code' => 'CLEARANCE-SEND-APPROVER') )->row_array();

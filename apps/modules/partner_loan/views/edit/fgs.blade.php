@@ -34,7 +34,7 @@
 					  		}
  					        $options = $db->get();
  					        
- 					        $payroll_partners_loan_user_id_options = array('' => 'Select...');
+ 					        $payroll_partners_loan_user_id_options = array('' => '');
                     		foreach($options->result() as $option)
                     		{
 								$payroll_partners_loan_user_id_options[$option->user_id] = $option->full_name;
@@ -54,7 +54,7 @@
 	               		$db->order_by('loan', '0');
 	                    $db->where('deleted', '0');
 	                    $options = $db->get('payroll_loan'); 	                            
-	                    $payroll_partners_loan_loan_id_options = array('' => 'Select...');
+	                    $payroll_partners_loan_loan_id_options = array('' => '');
                     	foreach($options->result() as $option){
 							$payroll_partners_loan_loan_id_options[$option->loan_id] = $option->loan;
 						} 
@@ -70,7 +70,7 @@
 				<div class="col-md-7"><?php									                            		$db->select('loan_status_id,loan_status');
 	                            			                            		$db->order_by('loan_status', '0');
 	                            		$db->where('deleted', '0');
-	                            		$options = $db->get('payroll_loan_status'); 	                            $payroll_partners_loan_loan_status_id_options = array('' => 'Select...');
+	                            		$options = $db->get('payroll_loan_status'); 	                            $payroll_partners_loan_loan_status_id_options = array('' => '');
                         		foreach($options->result() as $option)
                         		{
                         			                        				$payroll_partners_loan_loan_status_id_options[$option->loan_status_id] = $option->loan_status;
@@ -159,7 +159,7 @@
 				<div class="col-md-7"><?php									                            		$db->select('payment_mode_id,payment_mode');
 	                            			                            		$db->order_by('payment_mode', '0');
 	                            		$db->where('deleted', '0');
-	                            		$options = $db->get('payroll_payment_mode'); 	                            $payroll_partners_loan_payment_mode_id_options = array('' => 'Select...');
+	                            		$options = $db->get('payroll_payment_mode'); 	                            $payroll_partners_loan_payment_mode_id_options = array('' => '');
                         		foreach($options->result() as $option)
                         		{
                         			                        				$payroll_partners_loan_payment_mode_id_options[$option->payment_mode_id] = $option->payment_mode;

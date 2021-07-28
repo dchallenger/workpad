@@ -25,7 +25,7 @@
 		</div>
 
 		<div class="form-actions">
-			<a id="request-again" class="btn blue pull-right">
+			<a id="request-again" class="btn bluegreen pull-right">
 			{{ lang('authentication.resetpass') }} <i class="m-icon-swapright m-icon-white"></i>
 			</a>            
 		</div>

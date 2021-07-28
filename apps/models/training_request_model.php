@@ -152,10 +152,14 @@ class training_request_model extends Record
             // email to approver
             $req_by = $this->db->get_where('users', array('user_id' => $user_id))->row();
 
-            $approvers_user_info = $this->db->get_where('users', array('user_id' => $approver->approver_id));
+            
+            $this->db->where('users.user_id',$approver->approver_id);
+            $this->db->join('users_profile','users.user_id = users_profile.user_id','left');
+            $approvers_user_info = $this->db->get('users');
+
             if ($approvers_user_info && $approvers_user_info->num_rows() > 0){
             	$approvers_details = $approvers_user_info->row();
-            	$approver_fullname = $approvers_details->full_name;
+            	$approver_fullname = $approvers_details->firstname;
             }
 
 	        $logo  = ''; 

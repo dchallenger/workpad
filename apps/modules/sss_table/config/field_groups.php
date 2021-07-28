@@ -14,5 +14,7 @@ $config['fieldgroups'][1] = array(
 		'payroll_sss_table.eeshare',
 		'payroll_sss_table.ershare',
 		'payroll_sss_table.ec'
+		'payroll_sss_table.ershare_provident_fund',
+		'payroll_sss_table.eeshare_provident_fund',		
 	)
 );

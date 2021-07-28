@@ -28,19 +28,20 @@ class Overtime_rates extends MY_PrivateController
 	{
 		parent::save( true );
 
-		$overtime_rates = $this->db->get_where('payroll_overtime_rates',array('overtime_rate_id' => $this->response->record_id) );
-		if($overtime_rates->num_rows > 0){
-			$record = $overtime_rates->row();
-			$desc = $this->db->get_where('payroll_overtime',array('overtime_id' => $record->overtime_id) )->row();
-			$this->db->update( 'payroll_overtime_rates', array('overtime_code' => $desc->overtime_code,'overtime' => $desc->overtime), array('overtime_rate_id' => $this->response->record_id));
+		if( $this->response->saved ) {
+			$overtime_rates = $this->db->get_where('payroll_overtime_rates',array('overtime_rate_id' => $this->response->record_id) );
+			if($overtime_rates->num_rows > 0){
+				$record = $overtime_rates->row();
+				$desc = $this->db->get_where('payroll_overtime',array('overtime_id' => $record->overtime_id) )->row();
+				$this->db->update( 'payroll_overtime_rates', array('overtime_code' => $desc->overtime_code,'overtime' => $desc->overtime), array('overtime_rate_id' => $this->response->record_id));
+			}
+
+			$this->response->message[] = array(
+		        'message' => lang('common.save_success'),
+		        'type' => 'success'
+		    );   
 		}
-
-		$this->response->message[] = array(
-	        'message' => lang('common.save_success'),
-	        'type' => 'success'
-	    );
-	        
-
+		
         $this->_ajax_return();
 	}
 

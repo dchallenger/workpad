@@ -26,3 +26,13 @@ $config['field_validations']['payroll_sss_table.ec'][] = array(
 	'label'   => 'EC',
 	'rules'   => 'required|numeric'
 );
+$config['field_validations']['payroll_sss_table.eeshare_provident_fund'][] = array(
+	'field'   => 'payroll_sss_table[eeshare_provident_fund]',
+	'label'   => 'Employee Share Provident Fund',
+	'rules'   => 'required|numeric'
+);
+$config['field_validations']['payroll_sss_table.ershare_provident_fund'][] = array(
+	'field'   => 'payroll_sss_table[ershare_provident_fund]',
+	'label'   => 'Employer Share Provident Fund',
+	'rules'   => 'required|numeric'
+);

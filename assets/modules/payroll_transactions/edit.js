@@ -1,5 +1,10 @@
 $(document).ready(function(){
-    $('#payroll_transaction-transaction_class_id').select2({
+    $('.select2me').select2({
+        placeholder: "Select an option",
+        allowClear: true
+    });
+    
+/*    $('#payroll_transaction-transaction_class_id').select2({
         placeholder: "Select an option",
         allowClear: true
     });
@@ -18,7 +23,7 @@ $(document).ready(function(){
     $('#payroll_transaction-priority_id').select2({
         placeholder: "Select an option",
         allowClear: true
-    });
+    });*/
     $('#payroll_transaction-is_bonus-temp').change(function(){
     if( $(this).is(':checked') )
         $('#payroll_transaction-is_bonus').val('1');

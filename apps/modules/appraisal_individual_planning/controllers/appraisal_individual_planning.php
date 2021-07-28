@@ -660,6 +660,9 @@ class Appraisal_individual_planning extends MY_PrivateController
 
                             $approver_recepient = $approver->approver_id;
                             $sendtargetsettings['approver'] = $approver_info->full_name;
+                            
+                            $sendtargetsettings['appraisee'] = $appraisee->full_name;
+
                             $logo  = ''; 
                             if ($this->config->item('system')['print_logo'] != ''){
                                 if( file_exists( $this->config->item('system')['print_logo'] ) ){

@@ -23,7 +23,7 @@
                             		$db->order_by('account_name', '0');
                             		$db->where('deleted', '0');
                             		$options = $db->get('payroll_account'); 	                            
-                            		$payroll_account_sub_account_id_options = array('' => 'Select...');
+                            		$payroll_account_sub_account_id_options = array('' => '');
                     				foreach($options->result() as $option)
                     				{
                     			        $payroll_account_sub_account_id_options[$option->account_id] = $option->account_name;
@@ -42,7 +42,7 @@
 									$db->select('category_id,category');
                             		$db->order_by('category', '0');
                             		$db->where('deleted', '0');
-                            		$options = $db->get('payroll_account_category'); 	                            $payroll_account_sub_category_id_options = array('' => 'Select...');
+                            		$options = $db->get('payroll_account_category'); 	                            $payroll_account_sub_category_id_options = array('' => '');
                     				foreach($options->result() as $option)
                     				{
                     			        $payroll_account_sub_category_id_options[$option->category_id] = $option->category;

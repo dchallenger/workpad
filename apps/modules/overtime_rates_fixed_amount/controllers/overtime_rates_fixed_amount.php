@@ -164,11 +164,13 @@ class Overtime_rates_fixed_amount extends MY_PrivateController
 
 		parent::save( true );
 
-        $this->response->message[] = array(
-            'message' => lang('common.save_success'),
-            'type' => 'success'
-            );  
-
+		if( $this->response->saved ) {
+	        $this->response->message[] = array(
+	            'message' => lang('common.save_success'),
+	            'type' => 'success'
+	            );  
+       	}
+       	
 		$this->_ajax_return();
 	}	
 }

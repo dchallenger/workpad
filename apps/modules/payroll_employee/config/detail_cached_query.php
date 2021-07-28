@@ -25,6 +25,7 @@ $config["detail_cached_query"] = 'SELECT
 	CAST( AES_DECRYPT( `ww_payroll_partners`.`sss_amount`, encryption_key()) AS CHAR) as "payroll_partners.sss_amount", 
 	`ww_payroll_partners`.`sss_week` as "payroll_partners.sss_week", 
 	`ww_payroll_partners`.`hdmf_no` as "payroll_partners.hdmf_no", 
+	`ww_payroll_partners`.`hdmf_no_mp2` as "payroll_partners.hdmf_no_mp2",
 	`ww_payroll_partners`.`hdmf_mode` as "payroll_partners.hdmf_mode", 
 	CAST( AES_DECRYPT( `ww_payroll_partners`.`hdmf_amount`, encryption_key()) AS CHAR) as "payroll_partners.hdmf_amount", 
 	`ww_payroll_partners`.`hdmf_week` as "payroll_partners.hdmf_week", 

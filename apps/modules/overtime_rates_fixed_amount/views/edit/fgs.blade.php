@@ -11,7 +11,7 @@
                             		$db->order_by('company', '0');
                             		$db->where('deleted', '0');
                             		$options = $db->get('users_company'); 	                            
-                            		$payroll_overtime_rates_company_id_options = array('' => 'Select...');
+                            		$payroll_overtime_rates_company_id_options = array('' => '');
                     				foreach($options->result() as $option)
                     				{
                     			        $payroll_overtime_rates_company_id_options[$option->company_id] = $option->company;
@@ -31,7 +31,7 @@
                             		$db->order_by('employment_type', '0');
                             		$db->where('deleted', '0');
                             		$options = $db->get('partners_employment_type'); 	                            
-                            		$payroll_overtime_rates_amount_employment_type_options = array('' => 'Select...');
+                            		$payroll_overtime_rates_amount_employment_type_options = array('' => '');
                     				foreach($options->result() as $option)
                     				{
                     			        $payroll_overtime_rates_amount_employment_type_options[$option->employment_type_id] = $option->employment_type;
@@ -51,7 +51,7 @@
                             		$db->order_by('location', '0');
                             		$db->where('deleted', '0');
                             		$options = $db->get('users_location'); 	                            
-                            		$payroll_overtime_rates_amount_location_options = array('' => 'Select...');
+                            		$payroll_overtime_rates_amount_location_options = array('' => '');
                     				foreach($options->result() as $option)
                     				{
                     			        $payroll_overtime_rates_amount_location_options[$option->location_id] = $option->location;
@@ -71,7 +71,7 @@
                             		$db->order_by('overtime', '0');
                             		$db->where('deleted', '0');
                             		$options = $db->get('payroll_overtime'); 	                            
-                            		$payroll_overtime_rates_overtime_id_options = array('' => 'Select...');
+                            		$payroll_overtime_rates_overtime_id_options = array('' => '');
                     				foreach($options->result() as $option)
                     				{
                     			        $payroll_overtime_rates_overtime_id_options[$option->overtime_id] = $option->overtime;

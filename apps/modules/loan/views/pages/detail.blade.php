@@ -53,7 +53,7 @@
                     </div>              
                 </div>  
             </div>          
-            <div class="form-group">
+            <div class="form-group hidden">
                 <label class="control-label col-md-3"><span class="required">* </span>Loan Mode</label>
                 <div class="col-md-7">
                         <?php                                                                     
@@ -156,7 +156,7 @@
                 </div>              
             </div>  
         </div>          
-        <div class="form-group">
+        <div class="form-group hidden">
             <label class="control-label col-md-3"><span class="required">* </span>Interest Mode</label>
             <div class="col-md-7">
                 <?php                                                                     
@@ -222,7 +222,7 @@
                     </div>              
                 </div>  
         </div>          
-        <div class="form-group">
+        <div class="form-group hidden">
             <label class="control-label col-md-3">Monthly Interest</label>
             <div class="col-md-7">                          
                 <input type="text" disabled="disabled" class="form-control" name="payroll_loan[interest]" id="payroll_loan-interest" value="{{ $record['payroll_loan.interest'] }}" placeholder="Enter Monthly Interest" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/>                

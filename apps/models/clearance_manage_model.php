@@ -75,8 +75,10 @@ class clearance_manage_model extends Record
 			$this->db->where('partners_clearance_signatories.user_id <>',$personal_user_id);	
 
 		$this->db->where('clearance_id',$clearance_id);
+		$this->db->where('status_id <>',4);
 		$this->db->join('partners_clearance_signatories_accountabilities','partners_clearance_signatories.clearance_signatories_id=partners_clearance_signatories_accountabilities.clearance_signatories_id');
 		$clearance = $this->db->get('partners_clearance_signatories');
+
 		$pending = 0;
 		if($clearance && $clearance->num_rows() > 0){
 			$pending = $clearance->num_rows();

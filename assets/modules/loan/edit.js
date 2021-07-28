@@ -1,5 +1,11 @@
 $(document).ready(function(){
-$('#payroll_loan-loan_type_id').select2({
+
+    $('.select2me').select2({
+        placeholder: "Select an option",
+        allowClear: true
+    });
+
+/*$('#payroll_loan-loan_type_id').select2({
     placeholder: "Select an option",
     allowClear: true
 });
@@ -31,4 +37,4 @@ $('#payroll_loan-debit').select2({
 $('#payroll_loan-credit').select2({
     placeholder: "Select an option",
     allowClear: true
-});});
+});*/});

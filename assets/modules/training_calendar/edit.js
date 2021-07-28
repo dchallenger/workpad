@@ -163,13 +163,13 @@ $(document).ready(function(){
     $('.cost, .pax').live('change',function(){
         var sub_total = '';
 
-        var sub_cost = $(this).parents('div.add_more_training_cost').find('.cost').val();
+        var sub_cost = $(this).parents('div.add_more_training_cost').find('.cost').val().replace(/,/g, '');
         var sub_pax = $(this).parents('div.add_more_training_cost').find('.pax').val();
 
         if (!isNaN(sub_cost) || !isNaN(sub_pax))
             sub_total = ( parseFloat(sub_cost) * parseFloat(sub_pax) ).toFixed(2)
 
-        $(this).parents('div.add_more_training_cost').find('.total').val( sub_total );
+        $(this).parents('div.add_more_training_cost').find('.total').val( parseFloat(sub_total) );
 
         calculate_total_cost_pax();
 
@@ -548,11 +548,11 @@ function calculate_total_cost_pax(){
     var pax = 0;
 
     $('.total').each(function(){
-        total += parseFloat($(this).val());
+        total += parseFloat($(this).val().replace(/,/g, ''));
     });
 
     $('.pax').each(function(){
-        pax += parseFloat($(this).val());
+        pax += parseFloat($(this).val().replace(/,/g, ''));
     });
 
     if (isNaN(total) || isNaN(pax))

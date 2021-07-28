@@ -23,7 +23,7 @@
                             		$db->order_by('account_type', '0');
                             		$db->where('deleted', '0');
                             		$options = $db->get('payroll_account_type'); 	                            
-                            		$payroll_account_account_type_id_options = array('' => 'Select...');
+                            		$payroll_account_account_type_id_options = array('' => '');
                     				foreach($options->result() as $option)
                     				{
                     			        $payroll_account_account_type_id_options[$option->account_type_id] = $option->account_type;

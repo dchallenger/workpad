@@ -209,7 +209,7 @@
 						    	<input type="hidden" name="payroll_partners[on_hold]" id="payroll_partners-on_hold" value="@if( $record['payroll_partners.on_hold'] ) 1 @else 0 @endif"/>
 							</div><span class="help-block small">If set to YES, Make this partner temporarily be excempted from payroll processing.</span> 				</div>	
 			</div>
-			<div class="form-group">
+			<div class="form-group hidden">
 				<label class="control-label col-md-3">Non Swipe</label>
 				<div class="col-md-4">							<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
 						    	<input type="checkbox" value="1" @if( $record['payroll_partners.non_swipe'] ) checked="checked" @endif name="payroll_partners[non_swipe][temp]" id="payroll_partners-non_swipe-temp" class="dontserializeme toggle"/>
@@ -263,10 +263,20 @@
 		<div class="caption">HDMF Setup </div>
 		<div class="tools"><a class="expand" href="javascript:;"></a></div>
 	</div>
-		<div class="portlet-body form" style="display: none;">			<div class="form-group">
+		<div class="portlet-body form" style="display: none;">			
+			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>PagIbig No.</label>
-				<div class="col-md-7">							<input type="text" class="form-control" name="payroll_partners[hdmf_no]" id="payroll_partners-hdmf_no" value="{{ $record['payroll_partners.hdmf_no'] }}" placeholder="Enter PagIbig No." /> 				</div>	
-			</div>			<div class="form-group">
+				<div class="col-md-7">
+					<input type="text" class="form-control" name="payroll_partners[hdmf_no]" id="payroll_partners-hdmf_no" value="{{ $record['payroll_partners.hdmf_no'] }}" placeholder="Enter PagIbig No." />
+				</div>	
+			</div>
+			<div class="form-group">
+				<label class="control-label col-md-3">MP2 No.</label>
+				<div class="col-md-7">
+					<input type="text" class="form-control" name="payroll_partners[hdmf_no_mp2]" id="payroll_partners-hdmf_no_mp2" value="{{ $record['payroll_partners.hdmf_no_mp2'] }}" placeholder="Enter MP2 No." />
+				</div>	
+			</div>			
+			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>HDMF Transaction Mode</label>
 				<div class="col-md-7"><?php									                            		$db->select('payroll_transaction_mode_id,payroll_transaction_mode');
 	                            			                            		$db->order_by('payroll_transaction_mode', '0');

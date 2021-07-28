@@ -11,7 +11,7 @@
 				<div class="col-md-7"><?php									                            		$options = $db->query(str_replace('{dbprefix}', $db->dbprefix, "SELECT a.*, b.transaction_class
 FROM {dbprefix}payroll_transaction a
 LEFT JOIN {dbprefix}payroll_transaction_class b on b.transaction_class_id = a.transaction_class_id
-WHERE a.deleted = 0 and b.is_recurring = 1")); 	                            $payroll_entry_recurring_transaction_id_options = array('' => 'Select...');
+WHERE a.deleted = 0 and b.is_recurring = 1")); 	                            $payroll_entry_recurring_transaction_id_options = array('' => '');
                         		foreach($options->result() as $option)
                         		{
                         			                        				$payroll_entry_recurring_transaction_id_options[$option->transaction_class][$option->transaction_id] = $option->transaction_label;
@@ -34,7 +34,7 @@ WHERE a.deleted = 0 and b.is_recurring = 1")); 	                            $pay
 				<div class="col-md-7"><?php									                            		$db->select('payroll_transaction_method_id,payroll_transaction_method');
 	                            			                            		$db->order_by('payroll_transaction_method', '0');
 	                            		$db->where('deleted', '0');
-	                            		$options = $db->get('payroll_transaction_method'); 	                            $payroll_entry_recurring_transaction_method_id_options = array('' => 'Select...');
+	                            		$options = $db->get('payroll_transaction_method'); 	                            $payroll_entry_recurring_transaction_method_id_options = array('' => '');
                         		foreach($options->result() as $option)
                         		{
                         			                        				$payroll_entry_recurring_transaction_method_id_options[$option->payroll_transaction_method_id] = $option->payroll_transaction_method;

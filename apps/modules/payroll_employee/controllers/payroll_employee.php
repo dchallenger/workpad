@@ -5,6 +5,7 @@ class Payroll_employee extends MY_PrivateController
 	public function __construct()
 	{
 		$this->load->model('payroll_employee_model', 'mod');
+		$this->load->model('my201_model', 'profile_mod');
 		parent::__construct();
 	}
 
@@ -21,6 +22,103 @@ class Payroll_employee extends MY_PrivateController
 		$data['companies'] = $companies->result();
 		$this->load->vars( $data );
 		echo $this->load->blade('pages.listing')->with( $this->load->get_cached_vars() );
+	}
+
+	public function edit( $record_id = "", $child_call = false )
+	{
+		if( !$this->permission['edit'] )
+		{
+			echo $this->load->blade('pages.insufficient_permission')->with( $this->load->get_cached_vars() );
+			die();
+		}
+
+		$this->_edit( $child_call );
+	}
+
+	private function _edit( $child_call, $new = false )
+	{
+		$record_check = false;
+		$this->record_id = $data['record_id'] = '';
+
+		if( !$new ){
+			if( !$this->_set_record_id() )
+			{
+				echo $this->load->blade('pages.insufficient_data')->with( $this->load->get_cached_vars() );
+				die();
+			}
+
+			$this->record_id = $data['record_id'] = $_POST['record_id'];
+		}
+
+		$record_check = $this->mod->_exists( $this->record_id );
+		if( $new || $record_check === true )
+		{
+	        $taxcode = $this->profile_mod->get_partners_personal($this->record_id, 'taxcode');
+	        $taxcode_valu = (count($taxcode) == 0 ? " " : ($taxcode[0]['key_value'] == "" ? "" : $taxcode[0]['key_value']));
+			$tin_number = $this->profile_mod->get_partners_personal($this->record_id, 'tin_number');
+			$tin_number_val = (count($tin_number) == 0 ? " " : ($tin_number[0]['key_value'] == "" ? "" : $tin_number[0]['key_value']));
+			$sss_number = $this->profile_mod->get_partners_personal($this->record_id, 'sss_number');
+			$sss_number_val = (count($sss_number) == 0 ? " " : ($sss_number[0]['key_value'] == "" ? "" : $sss_number[0]['key_value']));			
+			$pagibig_number = $this->profile_mod->get_partners_personal($this->record_id, 'pagibig_number');
+			$pagibig_number_val = (count($pagibig_number) == 0 ? " " : ($pagibig_number[0]['key_value'] == "" ? "" : $pagibig_number[0]['key_value']));
+			$philhealth_number = $this->profile_mod->get_partners_personal($this->record_id, 'philhealth_number');
+			$philhealth_number_val = (count($philhealth_number) == 0 ? " " : ($philhealth_number[0]['key_value'] == "" ? "" : $philhealth_number[0]['key_value']));
+
+			$users_profile_info_arr = $this->profile_mod->get_user_details($this->record_id);
+
+			$result = $this->mod->_get( 'edit', $this->record_id );
+			if( $new )
+			{
+				$field_lists = $result->list_fields();
+				foreach( $field_lists as $field )
+				{
+					$data['record'][$field] = '';
+				}
+			}
+			else{
+				$record = array();
+				if ($result && $result->num_rows() > 0){
+					$record = $result->row_array();
+				}
+				foreach( $record as $index => $value )
+				{
+					$record[$index] = trim( $value );	
+				}
+
+				if ($record['payroll_partners.location_id'] == '')
+					$record['payroll_partners.location_id'] = $users_profile_info_arr['location_id'];
+
+				if ($record['payroll_partners.sss_no'] == '')
+					$record['payroll_partners.sss_no'] = $sss_number_val;
+
+				if ($record['payroll_partners.hdmf_no'] == '')
+					$record['payroll_partners.hdmf_no'] = $pagibig_number_val;
+
+				if ($record['payroll_partners.phic_no'] == '')
+					$record['payroll_partners.phic_no'] = $philhealth_number_val;
+
+				if ($record['payroll_partners.tin'] == '')
+					$record['payroll_partners.tin'] = $tin_number_val;
+					
+				$data['record'] = $record;
+			}
+
+			$this->record = $data['record'];
+			$this->load->vars( $data );
+
+			if( !$child_call ){
+				$this->load->helper('form');
+				$this->load->helper('file');
+				echo $this->load->blade('pages.edit')->with( $this->load->get_cached_vars() );
+			}
+		}
+		else
+		{
+			$this->load->vars( $data );
+			if( !$child_call ){
+				echo $this->load->blade('pages.error', array('error' => $record_check))->with( $this->load->get_cached_vars() );
+			}
+		}
 	}
 
 	function save($child_call = false)

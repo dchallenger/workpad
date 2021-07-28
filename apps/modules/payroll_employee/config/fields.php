@@ -476,6 +476,21 @@ $config['fields'][3]['payroll_partners.hdmf_no'] = array(
 	'active' => '1',
 	'encrypt' => 0
 );
+$config['fields'][3]['payroll_partners.hdmf_no_mp2'] = array(
+	'f_id' => 15,
+	'fg_id' => 3,
+	'label' => 'MP2 No.',
+	'description' => '',
+	'table' => 'payroll_partners',
+	'column' => 'hdmf_no_mp2',
+	'uitype_id' => 1,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 1,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 0
+);
 $config['fields'][3]['payroll_partners.hdmf_mode'] = array(
 	'f_id' => 16,
 	'fg_id' => 3,

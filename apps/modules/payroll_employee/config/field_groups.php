@@ -51,6 +51,7 @@ $config['fieldgroups'][3] = array(
 	'sequence' => 3,
 	'active' => 1,
 	'fields' => array(
+		'payroll_partners.hdmf_no_mp2',
 		'payroll_partners.hdmf_no',
 		'payroll_partners.hdmf_mode',
 		'payroll_partners.hdmf_amount',
