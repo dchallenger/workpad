@@ -151,6 +151,21 @@ $config['fields'][1]['payroll_partners.taxcode_id'] = array(
 		'textual_value_column' => ''
 	)
 );
+$config['fields'][1]['payroll_partners.minimum_wage_earner'] = array(
+	'f_id' => 14,
+	'fg_id' => 1,
+	'label' => 'Minimum Wage Earner',
+	'description' => '',
+	'table' => 'payroll_partners',
+	'column' => 'minimum_wage_earner',
+	'uitype_id' => 3,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 14,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 0
+);
 $config['fields'][1]['payroll_partners.minimum_takehome'] = array(
 	'f_id' => 7,
 	'fg_id' => 1,

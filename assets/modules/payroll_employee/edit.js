@@ -29,6 +29,13 @@ $(document).ready(function(){
             $('#payroll_partners-whole_half').val('1');
     });
 
+    $('#payroll_partners-minimum_wage_earner-temp').change(function(){
+        if( $(this).is(':checked') )
+            $('#payroll_partners-minimum_wage_earner').val('1');
+        else
+            $('#payroll_partners-minimum_wage_earner').val('0');
+    });
+
     $('#payroll_partners-payout_schedule-temp').change(function(){
         if( $(this).is(':checked') )
             $('#payroll_partners-payout_schedule').val('0');

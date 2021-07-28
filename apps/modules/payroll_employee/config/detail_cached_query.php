@@ -13,6 +13,7 @@ $config["detail_cached_query"] = 'SELECT
 	CAST( AES_DECRYPT( `ww_payroll_partners`.`salary`, encryption_key()) AS CHAR) as "payroll_partners.salary", 
 	`ww_payroll_partners`.`payroll_schedule_id` as "payroll_partners.payroll_schedule_id", 
 	`ww_payroll_partners`.`taxcode_id` as "payroll_partners.taxcode_id", 
+	`ww_payroll_partners`.`minimum_wage_earner` as "payroll_partners.minimum_wage_earner", 
 	CAST( AES_DECRYPT( `ww_payroll_partners`.`minimum_takehome`, encryption_key()) AS CHAR) as "payroll_partners.minimum_takehome", 
 	`ww_payroll_partners`.`account_type_id` as "payroll_partners.account_type_id",
 	`ww_payroll_partners`.`bank_id` as "payroll_partners.bank_id", 

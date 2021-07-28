@@ -15,6 +15,7 @@ $config['fieldgroups'][1] = array(
 		'payroll_partners.salary',
 		'payroll_partners.company_id',
 		'payroll_partners.taxcode_id',
+		'payroll_partners.minimum_wage_earner',
 		'payroll_partners.minimum_takehome',
 		'payroll_partners.bank_account',
 		'payroll_partners.payment_type_id',

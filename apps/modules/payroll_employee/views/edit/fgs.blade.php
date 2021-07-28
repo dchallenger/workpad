@@ -64,7 +64,7 @@
                                 {{ form_dropdown('payroll_partners[company_id]',$payroll_partners_company_id_options, $record['payroll_partners.company_id'], 'class="form-control select2me" data-placeholder="Select..."') }}
                             </div>              </div>  
             </div>          
-            <div class="form-group">
+            <div class="form-group hidden">
 				<label class="control-label col-md-3"><span class="required">* </span>Tax Code</label>
 				<div class="col-md-5"><?php									                            		$db->select('taxcode_id,taxcode');
 	                            			                            		$db->order_by('taxcode', '0');
@@ -79,6 +79,15 @@
 	                            </span>
 	                            {{ form_dropdown('payroll_partners[taxcode_id]',$payroll_partners_taxcode_id_options, $record['payroll_partners.taxcode_id'], 'class="form-control select2me" data-placeholder="Select..."') }}
 	                        </div> 				</div>	
+			</div>
+			<div class="form-group">
+				<label class="control-label col-md-3">Minimum Wage Earner</label>
+				<div class="col-md-4">							
+					<div class="make-switch" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
+				    	<input type="checkbox" value="0" @if( $record['payroll_partners.minimum_wage_earner'] == 1 ) checked="checked" @endif name="payroll_partners[minimum_wage_earner][temp]" id="payroll_partners-minimum_wage_earner-temp" class="dontserializeme toggle"/>
+				    	<input type="hidden" name="payroll_partners[minimum_wage_earner]" id="payroll_partners-minimum_wage_earner" value="@if( $record['payroll_partners.minimum_wage_earner'] ) 1 @else 0 @endif"/>
+					</div>
+				</div>	
 			</div>			
 			<div class="form-group">
 				<label class="control-label col-md-3">Minimum Takehome</label>
