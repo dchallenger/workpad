@@ -34,7 +34,8 @@ WHERE a.deleted = 0 AND b.is_bonus = 1")); 	                            $payroll
 								<span class="input-group-addon">to</span>
 								<input type="text" class="form-control" name="payroll_bonus[date_to]" id="payroll_bonus-date_to" value="{{ $record['payroll_bonus.date_to'] }}" />
 							</div> 				</div>	
-			</div>			<div class="form-group">
+			</div>			
+			<div class="form-group hidden">
 				<label class="control-label col-md-3"><span class="required">* </span>No. of Periods</label>
 				<div class="col-md-7">							<input type="text" class="form-control" name="payroll_bonus[period]" id="payroll_bonus-period" value="{{ $record['payroll_bonus.period'] }}" placeholder="Enter No. of Periods" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/> 				</div>	
 			</div>			<div class="form-group">
@@ -65,7 +66,7 @@ WHERE a.deleted = 0 AND b.is_bonus = 1")); 	                            $payroll
 								<span class="input-group-addon">
 	                            <i class="fa fa-list-ul"></i>
 	                            </span>
-	                            {{ form_dropdown('payroll_bonus[transaction_method_id]',$payroll_bonus_transaction_method_id_options, $record['payroll_bonus.transaction_method_id'], 'class="form-control select2me" data-placeholder="Select..."') }}
+	                            {{ form_dropdown('payroll_bonus[transaction_method_id]',$payroll_bonus_transaction_method_id_options, $record['payroll_bonus.transaction_method_id'], 'class="form-control select2me method" data-placeholder="Select..."') }}
 	                        </div> 				</div>	
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>Account</label>
@@ -129,7 +130,7 @@ WHERE a.deleted = 0 AND b.deleted = 0")); 	                            $payroll_
                             <tr>
                             	<th width="1%" class="padding-top-bottom-10"><input type="checkbox" class="group-checkable" data-set=".added-employee" /></th>
                             	<th width="54%" class="padding-top-bottom-10" >Employee</th>
-                            	<th width="40%" class="padding-top-bottom-10">Amount</th>
+                            	<th width="40%" class="padding-top-bottom-10 amount_header">Amount</th>
                                 <th width="5%" class="padding-top-bottom-10" >Action</th>
                             </tr> 
                         </thead>

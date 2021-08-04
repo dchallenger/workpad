@@ -8,8 +8,8 @@
 		<br>
 		<a id="date_name" href="#" class="text-muted small"><?php echo $employee->id_number?></a>
 	</td> 
-	<td>
-		<input type="text" class="form-control text-right" name="payroll_bonus_employee[amount][]" placeholder="Enter Amount.." value="<?php echo $employee->amount?>" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false">
+	<td class="list_amount_container">
+		<input type="text" class="form-control text-right list_amount" name="payroll_bonus_employee[amount][]" placeholder="Enter Amount.." value="<?php echo $employee->amount?>" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false">
 	</td>
 	<td>
 		<div class="btn-group">

@@ -400,7 +400,7 @@ class Performance_appraisal extends MY_PrivateController
 			if ($planning_info_result && $planning_info_result->num_rows() > 0){
 				$planning_info = $planning_info_result->row();
 				$this->db->where('appraisal_id',$this->response->record_id);
-				$this->db->update('performance_appraisal',array('planning_created_by' => $planning_info->created_by));
+				$this->db->update('performance_appraisal',array('planning_created_by' => $planning_info->created_by,'title' => $planning_info->title));
 			}
 
 			if(!empty($child_table_data)){
@@ -496,7 +496,7 @@ class Performance_appraisal extends MY_PrivateController
 	                    'status' => 'info',
 	                    'message_type' => 'Comment',
 	                    'user_id' => $this->user->user_id,
-	                    'feed_content' => "{$planning_year} performance appraisal period for {$performance_type['performance']} $appraisal_status.",
+	                    'feed_content' => "{$planning_year} performance appraisal period for {$planning_info->title} $appraisal_status.",
 	                    'uri' => $this->mod_individual_rate->route. '/edit/'.$this->response->record_id.'/'.$user_id,
 	                    'recipient_id' => $user_id
 	                );
@@ -557,11 +557,11 @@ class Performance_appraisal extends MY_PrivateController
             }
         }
 
-		$this->response->message[] = array(
+/*		$this->response->message[] = array(
 			'message' => 'Successfully Save',
 			'type' => 'success'
 		);
-
+*/
 		$this->_ajax_return();
 	}
 

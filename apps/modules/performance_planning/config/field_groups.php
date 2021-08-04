@@ -12,6 +12,7 @@ $config['fieldgroups'][1] = array(
 		'performance_planning.year',
 		'performance_planning.date_from',
 		'performance_planning.date_to',
+		'performance_planning.title',
 		'performance_planning.performance_type_id',
 		'performance_planning.template_id',
 		'performance_planning.status_id',

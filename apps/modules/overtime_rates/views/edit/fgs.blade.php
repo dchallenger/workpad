@@ -40,7 +40,22 @@
 					<span class="input-group-addon">
                     <i class="fa fa-list-ul"></i>
                     </span>
-                    {{ form_dropdown('payroll_overtime_rates[overtime_id]',$payroll_overtime_rates_overtime_id_options, $record['payroll_overtime_rates.overtime_id'], 'class="form-control select2me" data-placeholder="Select..."') }}
+                    <select data-placeholder="Select..." class="form-control select2me" name="payroll_overtime_rates[overtime_id]" id="payroll_overtime" >
+                    	<?php
+							$db->select('overtime_id,overtime,overtime_rate');
+                    		$db->order_by('overtime', '0');
+                    		$db->where('deleted', '0');
+                    		$options = $db->get('payroll_overtime'); 
+                            echo '<option value=""></option>';
+                            foreach($options->result() as $option)
+                            {
+                                if($record['payroll_overtime_rates.overtime_id'] != $option->overtime_id)
+                                	echo '<option value="'.$option->overtime_id.'" data-rate="'.$option->overtime_rate.'">'. $option->overtime.'</option>';
+                                else
+                                	echo '<option value="'.$option->overtime_id.'" data-rate="'.$option->overtime_rate.'" selected="selected">'. $option->overtime.'</option>';
+                            }
+                        ?>
+                    </select>                    
                 </div> 				
             </div>	
 		</div>		

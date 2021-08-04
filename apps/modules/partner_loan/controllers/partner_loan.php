@@ -137,18 +137,20 @@ class Partner_loan extends MY_PrivateController
 	function save($child_call = false)
 	{
 		parent::save( true );
-		$partner_loan = $this->db->get_where('payroll_partners_loan',array('partner_loan_id' => $this->response->record_id) );
-		if($partner_loan->num_rows > 0){
-			$record = $partner_loan->row();
-			$desc = $this->db->get_where('payroll_loan',array('loan_id' => $record->loan_id) )->row();
-			$this->db->update( 'payroll_partners_loan', array('description' => $desc->loan), array('partner_loan_id' => $this->response->record_id));
-		}
 
-		$this->response->message[] = array(
-	        'message' => lang('common.save_success'),
-	        'type' => 'success'
-	    );
-	        
+		if( $this->response->saved ) {
+			$partner_loan = $this->db->get_where('payroll_partners_loan',array('partner_loan_id' => $this->response->record_id) );
+			if($partner_loan->num_rows > 0){
+				$record = $partner_loan->row();
+				$desc = $this->db->get_where('payroll_loan',array('loan_id' => $record->loan_id) )->row();
+				$this->db->update( 'payroll_partners_loan', array('description' => $desc->loan), array('partner_loan_id' => $this->response->record_id));
+			}
+
+			$this->response->message[] = array(
+		        'message' => lang('common.save_success'),
+		        'type' => 'success'
+		    );
+	    }
 
         $this->_ajax_return();
 	}

@@ -47,7 +47,7 @@ class Appraisal_individual_planning extends MY_PrivateController
 
         $this->load->model('appraisal_template_model', 'template');
         $vars['template'] = $this->template;
-        $vars['templatefile'] = $this->template->get_template( $appraisee->template_id );
+        $vars['templatefile'] = $this->template->get_template( $appraisee->applicable_template_id );
 
         $vars['approversLog'] = array();
         $approvers_log = "SELECT ppar.display_name, ppl.created_on, ppar.approved_date, ppap.user_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id, ppar.edited
@@ -80,13 +80,14 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['balance_score_card'] = $this->mod->get_balance_score_card();
         $vars['template_section_column'] = $this->mod->get_template_section_column();
         $vars['planning_applicable_fields'] = $this->mod->get_planning_applicable_fields($appraisee->planning_id,$appraisee->user_id);
-        $vars['template_section'] = $this->mod->get_template_section($appraisee->template_id);
+        $vars['template_section'] = $this->mod->get_template_section($appraisee->applicable_template_id);
         $vars['library_competencies'] = $this->mod->get_library_competencies();
         $vars['tenure'] = get_tenure($appraisee->effectivity_date);
         $vars['areas_development'] = $this->mod->get_areas_for_development();
         $vars['learning_mode'] = $this->mod->get_learning_mode();
         $vars['competencies'] = $this->mod->get_competencies();
         $vars['target_completion'] = $this->mod->get_target_completion();
+        $vars['template_id'] = $appraisee->applicable_template_id;
 
         $this->load->vars( $vars );
         
@@ -103,7 +104,7 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['current_user_id'] = $this->user->user_id;
         $this->load->model('appraisal_template_model', 'template');
         $vars['template'] = $this->template;
-        $vars['templatefile'] = $this->template->get_template( $appraisee->template_id ); 
+        $vars['templatefile'] = $this->template->get_template( $appraisee->applicable_template_id ); 
         
         $vars['approversLog'] = array();
         $approvers_log = "SELECT ppar.display_name, ppl.created_on, ppap.user_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id  
@@ -128,7 +129,7 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['template_section_column'] = $this->mod->get_template_section_column();
         $vars['planning_applicable_fields'] = $this->mod->get_planning_applicable_fields($appraisee->planning_id,$appraisee->user_id);
         $vars['employee_appraisal_planning'] = $this->mod->get_employee_appraisal_planning($user_id,$this->record_id);
-        $vars['template_section'] = $this->mod->get_template_section($appraisee->template_id);
+        $vars['template_section'] = $this->mod->get_template_section($appraisee->applicable_template_id);
         $vars['library_competencies'] = $this->mod->get_library_competencies();
         $vars['readonly'] = '';
         $vars['tenure'] = get_tenure($appraisee->effectivity_date);
@@ -137,6 +138,7 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['learning_mode'] = $this->mod->get_learning_mode();
         $vars['competencies'] = $this->mod->get_competencies();
         $vars['target_completion'] = $this->mod->get_target_completion();
+        $vars['template_id'] = $appraisee->applicable_template_id;
 
         $this->load->vars( $vars );
 
@@ -535,7 +537,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                             'status' => 'info',
                             'message_type' => 'Comment',
                             'user_id' => $this->user->user_id,
-                            'feed_content' => 'Please review '.$appraisee->fullname.'\'s performance targets.',
+                            'feed_content' => 'Please review '.$appraisee->fullname.'\'s performance planning.',
                             'uri' => $this->mod->route . '/review_admin/'.$_POST['planning_id'].'/'.$_POST['user_id'],
                             'recipient_id' => $approver->approver_id
                         );
@@ -1397,7 +1399,7 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['back_url_admin'] = get_mod_route('performance_planning_admin').'/index/'.$this->record_id;
         $this->load->model('appraisal_template_model', 'template');
         $vars['template'] = $this->template;
-        $vars['templatefile'] = $this->template->get_template( $appraisee->template_id );
+        $vars['templatefile'] = $this->template->get_template( $appraisee->applicable_template_id );
 
         $vars['approversLog'] = array();
         $approvers_log = "SELECT ppar.display_name, ppl.created_on, ppar.approved_date, ppap.user_id, ppar.performance_status_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id,ppar.edited  
@@ -1429,13 +1431,14 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['balance_score_card'] = $this->mod->get_balance_score_card();
         $vars['template_section_column'] = $this->mod->get_template_section_column();
         $vars['planning_applicable_fields'] = $this->mod->get_planning_applicable_fields($appraisee->planning_id,$appraisee->user_id);
-        $vars['template_section'] = $this->mod->get_template_section($appraisee->template_id);
+        $vars['template_section'] = $this->mod->get_template_section($appraisee->applicable_template_id);
         $vars['library_competencies'] = $this->mod->get_library_competencies();
         $vars['tenure'] = get_tenure($appraisee->effectivity_date);
         $vars['areas_development'] = $this->mod->get_areas_for_development();
         $vars['learning_mode'] = $this->mod->get_learning_mode();
         $vars['competencies'] = $this->mod->get_competencies();
         $vars['target_completion'] = $this->mod->get_target_completion();
+        $vars['template_id'] = $appraisee->applicable_template_id;
 
         $this->load->vars( $vars );
 
@@ -1478,7 +1481,7 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['back_url_admin'] = get_mod_route('performance_planning_admin').'/index/'.$this->record_id;
         $this->load->model('appraisal_template_model', 'template');
         $vars['template'] = $this->template;
-        $vars['templatefile'] = $this->template->get_template( $appraisee->template_id );
+        $vars['templatefile'] = $this->template->get_template( $appraisee->applicable_template_id );
 
         $vars['approversLog'] = array();
         $approvers_log = "SELECT ppar.display_name, ppl.created_on, ppar.approved_date, ppap.user_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id,ppar.edited  
@@ -1503,10 +1506,11 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['balance_score_card'] = $this->mod->get_balance_score_card();
         $vars['template_section_column'] = $this->mod->get_template_section_column();
         $vars['planning_applicable_fields'] = $this->mod->get_planning_applicable_fields($appraisee->planning_id,$appraisee->user_id);
-        $vars['template_section'] = $this->mod->get_template_section($appraisee->template_id);
+        $vars['template_section'] = $this->mod->get_template_section($appraisee->applicable_template_id);
         $vars['library_competencies'] = $this->mod->get_library_competencies();
         $vars['tenure'] = get_tenure($appraisee->effectivity_date);
-
+        $vars['template_id'] = $appraisee->applicable_template_id;
+        
         $this->load->vars( $vars );
 
         $this->load->helper('form');
@@ -1934,7 +1938,7 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['balance_score_card'] = $this->mod->get_balance_score_card();
         $vars['template_section_column'] = $this->mod->get_template_section_column();
         $vars['planning_applicable_fields'] = $this->mod->get_planning_applicable_fields($appraisee->planning_id,$appraisee->user_id);
-        $vars['template_section'] = $this->mod->get_template_section($appraisee->template_id);
+        $vars['template_section'] = $this->mod->get_template_section($appraisee->applicable_template_id);
         $vars['library_competencies'] = $this->mod->get_library_competencies();
         $vars['tenure'] = get_tenure($appraisee->effectivity_date);
         $vars['areas_development'] = $this->mod->get_areas_for_development();

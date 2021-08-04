@@ -8,13 +8,13 @@
 		{{ $performance_planning_year }}
 	</td>
 	<td class="hidden-xs">
-		<a class="text-success" href="{{ $edit_url }}/{{ $user_id }}">{{ $performance_type }}</a>
+		<a class="text-info" href="{{ $edit_url }}/{{ $user_id }}">{{ $performance_planning_title }}</a>
 		<br>
 		<span class="small" id="date_set">{{ date('M d, Y', strtotime( $performance_planning_date_from ) ) }} to {{ date('M d, Y', strtotime( $performance_planning_date_to ) ) }}</span>
 	</td>
-    <td class="text-muted">
+<!--     <td class="text-muted">
         {{ $performance_planning_notes }}
-    </td>
+    </td> -->
 	<td class="hidden-xs">
 		@if($status_id == 1)
 			<span class="badge badge-info">Open</span>

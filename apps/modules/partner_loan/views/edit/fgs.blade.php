@@ -167,7 +167,13 @@
 								<span class="input-group-addon">
 	                            <i class="fa fa-list-ul"></i>
 	                            </span>
-	                            {{ form_dropdown('payroll_partners_loan[payment_mode_id]',$payroll_partners_loan_payment_mode_id_options, $record['payroll_partners_loan.payment_mode_id'], 'class="form-control select2me" data-placeholder="Select..."') }}
+	                            <?php
+	                            	if ($record['payroll_partners_loan.payment_mode_id'] != '')
+	                            		$payment_mode_id = $record['payroll_partners_loan.payment_mode_id'];
+	                            	else
+	                            		$payment_mode_id = 1;
+	                            ?>
+	                            {{ form_dropdown('payroll_partners_loan[payment_mode_id]',$payroll_partners_loan_payment_mode_id_options, $payment_mode_id, 'class="form-control select2me payment_mode" data-placeholder="Select..."') }}
 	                        </div> 				</div>	
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3"><span class="required">* </span>Payments Remaining</label>
@@ -175,16 +181,20 @@
 			</div>			<div class="form-group">
 				<label class="control-label col-md-3">Running Balance</label>
 				<div class="col-md-7">							<input type="text" class="form-control" name="payroll_partners_loan[running_balance]" id="payroll_partners_loan-running_balance" value="{{ $record['payroll_partners_loan.running_balance'] }}" placeholder="Enter Running Balance" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/> 				</div>	
-			</div>			<div class="form-group">
+			</div>			
+			<div class="form-group system_amor">
 				<label class="control-label col-md-3">System Amortization</label>
 				<div class="col-md-7">							<input type="text" class="form-control" name="payroll_partners_loan[system_amortization]" id="payroll_partners_loan-system_amortization" value="{{ $record['payroll_partners_loan.system_amortization'] }}" placeholder="Enter System Amortization" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/> 				</div>	
-			</div>			<div class="form-group">
+			</div>			
+			<div class="form-group system_amor">
 				<label class="control-label col-md-3">System Interest</label>
 				<div class="col-md-7">							<input type="text" class="form-control" name="payroll_partners_loan[system_interest]" id="payroll_partners_loan-system_interest" value="{{ $record['payroll_partners_loan.system_interest'] }}" placeholder="Enter System Interest" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/> 				</div>	
-			</div>			<div class="form-group">
+			</div>			
+			<div class="form-group user_amor">
 				<label class="control-label col-md-3">User Amortization</label>
 				<div class="col-md-7">							<input type="text" class="form-control" name="payroll_partners_loan[user_amortization]" id="payroll_partners_loan-user_amortization" value="{{ $record['payroll_partners_loan.user_amortization'] }}" placeholder="Enter User Amortization" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/> 				</div>	
-			</div>			<div class="form-group">
+			</div>			
+			<div class="form-group user_amor">
 				<label class="control-label col-md-3">User Interest</label>
 				<div class="col-md-7">							<input type="text" class="form-control" name="payroll_partners_loan[user_interest]" id="payroll_partners_loan-user_interest" value="{{ $record['payroll_partners_loan.user_interest'] }}" placeholder="Enter User Interest" data-inputmask="'alias': 'decimal', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false"/> 				</div>	
 			</div>	</div>

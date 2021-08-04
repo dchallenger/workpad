@@ -4,11 +4,11 @@
 	</td>
 	<td>
 		@if( in_array($applicable_status_id, array(8,9,10) ) )
-			<a class="text-success" href="{{ $mod->url }}/crowdsource/{{ $record_id }}/{{ $user_id }}">{{ $performance_type }}</a>
+			<a class="text-success" href="{{ $mod->url }}/crowdsource/{{ $record_id }}/{{ $user_id }}">{{ $performance_appraisal_title }}</a>
         @elseif( $applicable_status_id > 1 )
-        	<a class="text-success" href="{{ $mod->url }}/review/{{ $record_id }}/{{ $user_id }}">{{ $performance_type }}</a>
+        	<a class="text-success" href="{{ $mod->url }}/review/{{ $record_id }}/{{ $user_id }}">{{ $performance_appraisal_title }}</a>
         @else
-        	<a class="text-success" href="{{ $edit_url }}/{{ $user_id }}">{{ $performance_type }}</a>
+        	<a class="text-success" href="{{ $edit_url }}/{{ $user_id }}">{{ $performance_appraisal_title }}</a>
     	@endif
 		<br>
 		<span class="small" id="date_set">{{ date('M d, Y', strtotime( $performance_appraisal_date_from ) ) }} to {{ date('M d, Y', strtotime( $performance_appraisal_date_to ) ) }}</span>

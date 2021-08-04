@@ -532,7 +532,11 @@ class Report_generator extends MY_PrivateController
             case 'LEAVE_BALANCE_REPORT':
                 $button = array('xls' => 0, 'csv' => 1, 'pdf' => 1, 'txt' => 0);
                 $data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);
-                break;                
+                break;
+            case 'APPRAISAL_SUMMARY':
+                $button = array('xls' => 0, 'csv' => 1, 'pdf' => 1, 'txt' => 1);
+                $data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);
+                break;                                 
 			default;                
                 $button = array('xls' => 0, 'csv' => 0, 'pdf' => 0, 'txt' => 0);
 				$data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);

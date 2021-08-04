@@ -11,25 +11,27 @@ $(document).ready(function(){
         }
     });
 
-    if ($('#performance_planning-template_id').val() != '') {
+/*    if ($('#performance_planning-template_id').val() != '') {
         get_selection_filters( $('#performance_planning-template_id').val() );
+    }*/
+
+    //function get_selection_filters(template_id, filter_by, filter_id, planning_id, employment_status_id){
+
+    if ($('#performance_planning-filter_by').val() != '') {
+        get_selection_filters('', $('#performance_planning-filter_by').val(), $('#performance_planning-filter_id').val(), $('#record_id').val(), $('#performance_planning-employment_status_id').val());
     }
 
-/*    $('#performance_planning-filter_id').change(function(){
+    $('#performance_planning-filter_id').change(function(){
         if($(this).val()){
             get_selection_filters( $('#performance_planning-template_id').val(), $('#performance_planning-filter_by').val(), $(this).val(), $('#record_id').val(), $('#performance_planning-employment_status_id').val() );
         }else{
-            notify('warning', 'Please Select Filters.');
+            notify('warning', 'Please Select Company Filters.');
         }
     });
 
     $('#performance_planning-employment_status_id').change(function(){
-        if($(this).val()){
-            get_selection_filters( $('#performance_planning-template_id').val(), $('#performance_planning-filter_by').val(), $('#performance_planning-filter_id').val(), $('#record_id').val(), $(this).val() );
-        }else{
-            notify('warning', 'Please Select Status Filters.');
-        }
-    });*/
+        get_selection_filters( $('#performance_planning-template_id').val(), $('#performance_planning-filter_by').val(), $('#performance_planning-filter_id').val(), $('#record_id').val(), $(this).val() );
+    });
 
     $('#performance_planning-template_id').change(function(){
         if($(this).val()){
@@ -63,7 +65,7 @@ $(document).ready(function(){
 
         $('#performance_planning-filter_by').select2().select2('val', $('#performance_planning-filter_by option:eq(1)').val());
         //employees select all
-        $('#performance_planning-filter_id option').attr('selected', 'selected');
+/*        $('#performance_planning-filter_id option').attr('selected', 'selected');
         $('input[name="multiselect_performance_planning-filter_id"]').each( function() {
             $(this).attr('checked',true);
             $(this).attr('aria-selected',true);
@@ -71,10 +73,10 @@ $(document).ready(function(){
         $("#performance_planning-filter_id").multiselect("destroy");
         $('#performance_planning-filter_id').multiselect({
           numberDisplayed: $('input[name="multiselect_performance_planning-filter_id"]').length
-        });
+        });*/
 
         //employees select all
-        $('#performance_planning_applicable-user_id option').attr('selected', 'selected');
+/*        $('#performance_planning_applicable-user_id option').attr('selected', 'selected');
         $('input[name="multiselect_performance_planning_applicable-user_id"]').each( function() {
             $(this).attr('checked',true);
             $(this).attr('aria-selected',true);
@@ -82,7 +84,7 @@ $(document).ready(function(){
         $("#performance_planning_applicable-user_id").multiselect("destroy");
         $('#performance_planning_applicable-user_id').multiselect({
           numberDisplayed: $('input[name="multiselect_performance_planning_applicable-user_id"]').length
-        });
+        });*/
     }
 
     if (jQuery().datepicker) {
@@ -318,18 +320,9 @@ function get_selection_filters(template_id, filter_by, filter_id, planning_id, e
             if( typeof(response.employees) != 'undefined' )
             {   
                 $('#performance_planning_applicable-user_id').html(response.employees);
-                $("#performance_planning_applicable-user_id").multiselect("destroy");
-                $('#performance_planning_applicable-user_id').multiselect({
-                    numberDisplayed: response.count
-                });
-                if(!(response.selected_filter) == 1){
-                    $('input[name="multiselect_performance_planning_applicable-user_id"]').each( function() {
-                        $(this).attr('checked',true);
-                        $(this).attr('aria-selected',true);
-                    });
-                }
             }
 
+            $("#performance_planning_applicable-user_id").multiselect('refresh').multiselectfilter();                                       
         }
     }); 
 }

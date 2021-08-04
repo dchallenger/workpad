@@ -51,7 +51,7 @@ class overtime_rates_model extends Record
 					company like '%{$search}%'
 				)";
 		$qry .= ' '. $filter;
-		$qry .= ' ORDER BY overtime_id';
+		$qry .= ' ORDER BY overtime';
 		$qry .= " LIMIT $limit OFFSET $start";
 		
 		$result = $this->db->query( $qry );

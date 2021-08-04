@@ -8,7 +8,7 @@
         <a id="display_name" href="#" class="text-success">{{ $performance_appraisal_year }}</a>
     </td>
     <td class="hidden-xs">
-        <span class="text-info">{{ $performance_appraisal_performance_type_id}}</span>
+        <span class="text-info">{{ $performance_appraisal_title}}</span>
         <br>
         <span class="text-muted small">{{ $performance_appraisal_date_from }} to {{ $performance_appraisal_date_to }}</span>
     </td>

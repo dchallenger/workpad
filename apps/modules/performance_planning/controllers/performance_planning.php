@@ -364,10 +364,44 @@ class Performance_planning extends MY_PrivateController
 			$this->_ajax_return();
 		}
 
+		if (!isset($_POST['performance_planning_applicable'])) {
+			$this->response->message[] = array(
+				'message' => 'Employees is required',
+				'type' => 'error'
+			);
+
+			$this->_ajax_return();
+		}
+
         $performance_planning_applicable = $_POST['performance_planning_applicable'];
         $appraisal_planning_status_id = $_POST['performance_planning']['status_id'];
 		$performance_type_id = $_POST['performance_planning']['performance_type_id'];
 		$planning_year = $_POST['performance_planning']['year'];
+		$title = $_POST['performance_planning']['title'];
+
+		// checking if there is a template created for the selected employees
+		if ($performance_planning_applicable) {
+			$error = 0;
+			foreach ($performance_planning_applicable as $key => $user_id) {
+				foreach ($user_id as $index => $id){
+					$user_result = $this->db->get_where('users',array('user_id' => $id));
+					$user_info = $user_result->row();
+
+					if ($this->mod->get_template($id)['template_id'] == 0) {
+						$error = 1;
+						$this->response->message[] = array(
+							'message' => $user_info->full_name . 'performance template has not been set',
+							'type' => 'error'
+						);						
+					}
+				}
+			}
+
+			if ($error) {
+				$this->_ajax_return();
+			}
+		}
+		// checking if there is a template created for the selected employees
 
 		unset( $_POST['notification_id'] );
 		unset( $_POST['performance_planning_reminder'] );
@@ -400,7 +434,7 @@ class Performance_planning extends MY_PrivateController
 						$applicable_for_insert['planning_id'] = $this->response->record_id;
 		            	$applicable_for_insert['user_id'] = $id;
 		            	$applicable_for_insert['to_user_id'] = $id;
-		            	$applicable_for_insert['template_id'] =  $_POST['performance_planning']['template_id'];
+		            	$applicable_for_insert['template_id'] =  $this->mod->get_template($id)['template_id'];
 
 						$full_name = $this->db->get_where( 'users' , array( 'user_id' => $id ) )->row_array();
 						$applicable_for_insert['fullname'] = $full_name['full_name'];
@@ -432,11 +466,14 @@ class Performance_planning extends MY_PrivateController
 	                    if( $send_feeds == 1 )
 	                    {
 							$appraisal_status = ($appraisal_planning_status_id == 1) ? 'is now open' : 'was closed';
-	                    	if(isset($performance_type['for_probi'])){
+/*	                    	if(isset($performance_type['for_probi'])){
 	                    		$feed_content = "The performance planning period for your {$performance_type['performance']} $appraisal_status";
 	                    	}else{
 	                    		$feed_content = "The {$planning_year} performance planning period for {$performance_type['performance']} $appraisal_status";
-	                    	}
+	                    	}*/
+
+							$feed_content = "The performance planning period for your {$title} $appraisal_status";
+
 	                        $this->load->model('system_feed');
 	                        $feed = array(
 	                            'status' => 'info',
@@ -555,11 +592,11 @@ class Performance_planning extends MY_PrivateController
             }
         }
 
-		$this->response->message[] = array(
+/*		$this->response->message[] = array(
 			'message' => 'Successfully Save',
 			'type' => 'success'
 		);
-
+*/
 		$this->_ajax_return();
 	}
 
@@ -726,13 +763,22 @@ class Performance_planning extends MY_PrivateController
 
     function get_selection_filters()
     {
+        //due to revision 08/01/2021
+        $company_id = array();
+		$position_classification_id = array();
+		$job_grade_id = array();
+		$employment_status_id = array();
+		$employment_type_id = array();
+
+
         $this->_ajax_only();
         $filter_by = $this->input->post('filter_by'); //no use for oclp
         $filter_id = $this->input->post('filter_id'); //no use for oclp
         $employment_status_id = $this->input->post('employment_status_id'); //no use for oclp
         $template_id = $this->input->post('template_id');
 
-		$template_qry = "SELECT * FROM 
+        //due to revision 08/01/2021
+/*		$template_qry = "SELECT * FROM 
 						{$this->db->dbprefix}performance_template
 						WHERE template_id = {$template_id}";
 		$template = $this->db->query( $template_qry );
@@ -758,8 +804,14 @@ class Performance_planning extends MY_PrivateController
 			$job_grade_id = implode(',', $job_grade_id);
 			$employment_status_id = implode(',', $employment_status_id);
 			$employment_type_id = implode(',', $employment_type_id);
-		}
+		}*/
 
+		//due to revision 08/01/2021
+		if (!empty($filter_id))
+			$company_id = implode(',', $filter_id);
+
+		if (!empty($employment_status_id))
+			$employment_status_id = implode(',', $employment_status_id);
 
 		$qry = "SELECT partners.alias, partners.partner_id, partners.user_id
                 FROM partners
@@ -770,8 +822,7 @@ class Performance_planning extends MY_PrivateController
                 WHERE partners.deleted = 0 AND users.active = 1 
                 ";
 
-
-        if ($company_id)
+        if ($filter_by)
         	$qry .= " AND users_profile.company_id IN ({$company_id})";
 
         if ($position_classification_id)
@@ -795,7 +846,6 @@ class Performance_planning extends MY_PrivateController
 			$where = array('planning_id'=>$this->input->post('planning_id'));
 			$planning_data = $this->db->get_where('performance_planning_applicable', $where)->result_array();
         	
-        	$filter_ids = array();
         	foreach($planning_data as $index => $value){
         		$filter_ids[] = $value['user_id'];
         	}
@@ -808,7 +858,8 @@ class Performance_planning extends MY_PrivateController
         foreach( $employees->result() as $employee )
         {   
         	$selected = '';
-        	if(in_array($employee->user_id, $this->response->filter_id) || !($this->input->post('planning_id') > 0) ){
+        	//if(in_array($employee->user_id, $this->response->filter_id) || !($this->input->post('planning_id') > 0) ){
+        	if(!empty($filter_ids) && in_array($employee->user_id, $filter_ids)){
         		$selected = 'selected="selected"';
             	$this->response->selected_filter = 1;
         	}
@@ -887,7 +938,7 @@ class Performance_planning extends MY_PrivateController
 		$this->db->where_in('status_id',array(1,2,3,6,11,13));
 		$this->db->where_in($this->mod->primary_key, $records);
 		$record = $this->db->get( 'performance_planning_applicable' );
-
+		
 		$this->response->unapproved_forms_count = $record->num_rows();
 		$this->_ajax_return();
 	}
@@ -944,7 +995,7 @@ class Performance_planning extends MY_PrivateController
 	                'status' => 'info',
 	                'message_type' => 'Comment',
 	                'user_id' => $this->user->user_id,
-	                'feed_content' => "{$performance_planning_data['year']} performance planning period for {$performance_type['performance']} $appraisal_status.",
+	                'feed_content' => "{$performance_planning_data['year']} performance planning period for {$performance_planning_data['title']} $appraisal_status.",
 	                // 'uri' => $this->mod->route . '/review/'.$_POST['planning_id'].'/'.$_POST['user_id'].'/'.$approver->approver_id,
 	                'recipient_id' => $applicable['user_id']
 	            );
@@ -970,7 +1021,7 @@ class Performance_planning extends MY_PrivateController
 	                'status' => 'info',
 	                'message_type' => 'Comment',
 	                'user_id' => $this->user->user_id,
-	                'feed_content' => "{$performance_planning_data['year']} performance planning period for {$performance_type['performance']} $appraisal_status.",
+	                'feed_content' => "{$performance_planning_data['year']} performance planning period for {$performance_planning_data['title']} $appraisal_status.",
 	                // 'uri' => $this->mod->route . '/review/'.$_POST['planning_id'].'/'.$_POST['user_id'].'/'.$approver->approver_id,
 	                'recipient_id' => $approver['approver_id']
 	            );
@@ -1039,7 +1090,7 @@ class Performance_planning extends MY_PrivateController
             	$applicable_for_insert['planning_id'] = $this->response->record_id;
             	$applicable_for_insert['user_id'] = $id;
             	$applicable_for_insert['to_user_id'] = $id;
-            	$applicable_for_insert['template_id'] =  $orig_planning['template_id'];
+            	$applicable_for_insert['template_id'] =  $row->template_id;
 
 				$full_name = $this->db->get_where( 'users' , array( 'user_id' => $id ) )->row_array();
 				$applicable_for_insert['fullname'] = $full_name['full_name'];

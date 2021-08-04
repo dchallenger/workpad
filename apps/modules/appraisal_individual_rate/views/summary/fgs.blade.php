@@ -488,7 +488,7 @@
 									</td>
 									<td>
 										<span class="{{ $applog['class'] }}"> {{ $applog['performance_status'] }}</span><br>
-										<span class="small text-muted">@if($applog['edited'] == 1) Edited @endif</span><br />
+										<span class="badge badge-xs badge-info">@if($applog['edited'] == 1) Edited @endif</span><br />
 									@if( $applog['approver_id'] == $applog['to_user_id'] )
 										<span class="small text-danger">Attention to {{ $applog['display_name'] }}</span>
 									@endif

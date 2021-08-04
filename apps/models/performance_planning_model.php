@@ -197,4 +197,35 @@ class performance_planning_model extends Record
 
 		}
 	}
+
+	function get_template($user_id) {
+		$template['info'] = array();
+		$template['template_id'] = 0;
+
+		$this->db->where('users_profile.user_id',$user_id);
+		$this->db->join('partners','users_profile.user_id = partners.user_id');
+		$user_result = $this->db->get('users_profile');
+
+		if ($user_result && $user_result->num_rows() > 0) {
+			$user_info = $user_result->row_array();
+			$company_id = $user_info['company_id'];
+			$employment_type_id = $user_info['employment_type_id'];
+			$employment_status_id = $user_info['status_id'];
+
+	        $qry = "SELECT  *
+	                FROM {$this->db->dbprefix}performance_template pt 
+	                WHERE FIND_IN_SET({$company_id},company_id)
+	                AND FIND_IN_SET({$employment_type_id},employment_type_id)
+	                AND FIND_IN_SET({$employment_status_id},employment_status_id)";
+
+	        $performance_template_result = $this->db->query($qry);
+
+	        if ($performance_template_result && $performance_template_result->num_rows > 0) {
+				$template['info'] = $performance_template_result->row_array();
+				$template['template_id'] = $performance_template_result->row()->template_id;
+	        }
+		}
+
+		return $template;
+	}
 }

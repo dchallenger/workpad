@@ -53,7 +53,7 @@
 				<div class="portlet-title">
 					<div class="caption"><i class="fa {{ $mod->icon}}"></i>List of {{ $mod->short_name }}</div>
 					<div class="caption" id="head-caption">&nbsp;</div>
-					<div class="actions">
+					<div class="actions hidden">
 						@if( isset( $permission['add']) && $permission['add'] )
 							<a id="goadd" href="{{ $mod->url }}/add" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
 						@endif

@@ -3,6 +3,7 @@ $config["list_cached_query"] = 'SELECT
 	`ww_payroll_overtime_rates`.`overtime_rate_id` as record_id, 
 	`ww_payroll_overtime_rates`.`overtime_rate` as "payroll_overtime_rates_overtime_rate", 
 	T2.overtime_code as "payroll_overtime_rates_overtime_code", 
+	T2.overtime as "payroll_overtime_rates_overtime", 
 	T2.overtime_id as "payroll_overtime_rates_overtime_id", 
 	T1.company as "payroll_overtime_rates_company_id", 
 	`ww_payroll_overtime_rates`.`created_on` as "payroll_overtime_rates_created_on", 

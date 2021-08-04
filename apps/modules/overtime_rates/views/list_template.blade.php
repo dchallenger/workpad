@@ -3,7 +3,7 @@
         <a id="company" href="<?php echo $detail_url; ?>">{{ $company }}</a>
     </td>
     <td>
-        {{ $overtime_code }}
+        {{ $overtime }}
     </td>
     <td>
         {{ $overtime_rate }}

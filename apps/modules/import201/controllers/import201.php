@@ -5004,6 +5004,227 @@ class Import201 extends MY_PrivateController
 		return $value;
 	}
 
+	function import_chart_of_account(){
+		$this->load->library('excel');
+
+		$objReader = new PHPExcel_Reader_Excel5;
+
+		if (!$objReader) {
+			show_error('Could not get reader.');
+		}
+
+		$objReader->setReadDataOnly(true);
+		$objPHPExcel = $objReader->load('D:\oclp new version\oclp requirements\HR & IT Headcount vl sl 06302021 .xls');
+		$rowIterator = $objPHPExcel->getActiveSheet()->getRowIterator();
+	
+		$ctr = 0;	
+		$import_data = array();
+
+		foreach($rowIterator as $row){
+			$cellIterator = $row->getCellIterator();
+			$cellIterator->setIterateOnlyExistingCells(false); // Loop all cells, even if it is not set
+			
+			$rowIndex = $row->getRowIndex();
+			
+			// Build the array to insert and check for validation errors as well.
+			foreach ($cellIterator as $cell) {
+				$import_data[$ctr][] = $cell->getCalculatedValue();
+			}
+
+			if ($rowIndex == 1) {
+
+				foreach ($import_data as $row) {
+					foreach ($row as $cell => $value) {
+						switch ($value) {														
+							case 'Account Code':
+								$valid_cells[] = 'account_code';
+								break;
+							case 'Account Name':
+								$valid_cells[] = 'account_name';
+								break;
+							case 'Account Type':
+								$valid_cells[] = 'account_type_id';
+								break;
+							case 'Description':
+								$valid_cells[] = 'description';
+								break;
+							case 'Order':
+								$valid_cells[] = 'arrangement';
+								break;								
+						}
+					}
+				}
+
+				unset($import_data[$ctr]);
+			}
+
+			$ctr++;
+		}
+
+
+		$ctr = 0;
+
+		// Remove non-matching cells.
+		foreach ($import_data as $row) {
+			$form_id = '';
+			$user_id = '';
+			$arr_field_val = array('year' => 2021);
+			foreach ($valid_cells as $key => $value) {
+				switch ($value) {
+					case 'account_type_id':
+						$result = $this->db->get_where('payroll_account_type',array('account_type' => $row[$key]));
+						if ($result && $result->num_rows() > 0){
+							$row_form = $result->row();
+							$row[$key] = $row_form->account_type_id;
+						}
+						else{
+							$this->db->insert('payroll_account_type',array('account_type' => $row[$key]));
+							$row[$key] = $this->db->insert_id();
+						}
+						break;
+				}			
+				$arr_field_val[$value] = $row[$key];
+			}
+
+			$this->db->insert('payroll_account',$arr_field_val);
+
+		}
+
+		echo "Done.";	
+	}
+	/************************************************************************************************/	
+
+	function import_payroll_account(){
+		$this->load->library('excel');
+
+		$objReader = new PHPExcel_Reader_Excel5;
+
+		if (!$objReader) {
+			show_error('Could not get reader.');
+		}
+
+		$objReader->setReadDataOnly(true);
+		$objPHPExcel = $objReader->load('D:\oclp new version\oclp requirements\HR & IT Headcount vl sl 06302021 .xls');
+		$rowIterator = $objPHPExcel->getActiveSheet()->getRowIterator();
+	
+		$ctr = 0;	
+		$import_data = array();
+
+		foreach($rowIterator as $row){
+			$cellIterator = $row->getCellIterator();
+			$cellIterator->setIterateOnlyExistingCells(false); // Loop all cells, even if it is not set
+			
+			$rowIndex = $row->getRowIndex();
+			
+			// Build the array to insert and check for validation errors as well.
+			foreach ($cellIterator as $cell) {
+				$import_data[$ctr][] = $cell->getCalculatedValue();
+			}
+
+			if ($rowIndex == 1) {
+
+				foreach ($import_data as $row) {
+					foreach ($row as $cell => $value) {
+						switch ($value) {														
+							case 'Transaction Code':
+								$valid_cells[] = 'transaction_code';
+								break;
+							case 'Transaction Label':
+								$valid_cells[] = 'transaction_label';
+								break;
+							case 'Transaction Class':
+								$valid_cells[] = 'transaction_class_id';
+								break;
+							case 'Transaction Type':
+								$valid_cells[] = 'transaction_type_id';
+								break;
+							case 'Debit Account':
+								$valid_cells[] = 'debit_account_id';
+								break;
+							case 'Credit Account':
+								$valid_cells[] = 'credit_account_id';
+								break;
+							case 'Is Bonus':
+								$valid_cells[] = 'is_bonus';
+								break;																	
+						}
+					}
+				}
+
+				unset($import_data[$ctr]);
+			}
+
+			$ctr++;
+		}
+
+
+		$ctr = 0;
+
+		// Remove non-matching cells.
+		foreach ($import_data as $row) {
+			$form_id = '';
+			$user_id = '';
+			$arr_field_val = array('year' => 2021);
+			foreach ($valid_cells as $key => $value) {
+				switch ($value) {
+					case 'transaction_class_id':
+						$result = $this->db->get_where('payroll_transaction_class',array('transaction_class' => $row[$key]));
+						if ($result && $result->num_rows() > 0){
+							$row_form = $result->row();
+							$row[$key] = $row_form->transaction_class_id;
+						}
+						else{
+							$this->db->insert('payroll_transaction_class',array('transaction_class' => $row[$key]));
+							$row[$key] = $this->db->insert_id();
+						}
+						break;
+					case 'transaction_type_id':
+						$result = $this->db->get_where('payroll_transaction_type',array('transaction_type' => $row[$key]));
+						if ($result && $result->num_rows() > 0){
+							$row_form = $result->row();
+							$row[$key] = $row_form->transaction_type_id;
+						}
+						else{
+							$this->db->insert('payroll_transaction_type',array('transaction_type' => $row[$key]));
+							$row[$key] = $this->db->insert_id();
+						}
+						break;
+					case 'debit_account_id':
+						$result = $this->db->get_where('payroll_account',array('account_name' => $row[$key]));
+						if ($result && $result->num_rows() > 0){
+							$row_form = $result->row();
+							$row[$key] = $row_form->account_id;
+						}
+						else{
+							$this->db->insert('payroll_transaction_type',array('account_name' => $row[$key]));
+							$row[$key] = $this->db->insert_id();
+						}
+						break;
+					case 'credit_account_id':
+						$result = $this->db->get_where('payroll_account',array('account_name' => $row[$key]));
+						if ($result && $result->num_rows() > 0){
+							$row_form = $result->row();
+							$row[$key] = $row_form->account_id;
+						}
+						else{
+							$this->db->insert('payroll_transaction_type',array('account_name' => $row[$key]));
+							$row[$key] = $this->db->insert_id();
+						}
+						break;
+					case 'is_bonus':
+						$row[$key] = (strtolower($row[$key]) == 'YES' ? 1 : 0);
+				}			
+				$arr_field_val[$value] = $row[$key];
+			}
+
+			$this->db->insert('payroll_transaction',$arr_field_val);
+
+		}
+
+		echo "Done.";	
+	}
+	/************************************************************************************************/	
+
 	public function get_import_form()
 	{
 		$this->_ajax_only();

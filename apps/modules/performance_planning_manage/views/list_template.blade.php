@@ -8,13 +8,13 @@
         <a id="display_name" href="#" class="text-success">{{ $performance_planning_year }}</a>
     </td>
     <td class="hidden-xs">
-        <span class="text-info">{{ $performance_planning_performance_type_id}}</span>
+        <span class="text-info">{{ $performance_planning_title}}</span>
         <br>
         <span class="text-muted small">{{ $performance_planning_date_from }} to {{ $performance_planning_date_to }}</span>
     </td>
-    <td class="hidden-xs" style="color:#666">
+<!--     <td class="hidden-xs" style="color:#666">
     {{ $performance_planning_notes }}
-    </td>
+    </td> -->
     <td class="hidden-xs">
         @if(strtolower($performance_planning_status_id) == 'yes')
         <span class="badge badge-info">{{ lang('performance_planning.open') }}</span>

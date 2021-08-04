@@ -9,7 +9,7 @@
 	<ul class="page-breadcrumb breadcrumb">
 		@section('page-breadcrumb-back')
 			<li class="btn-group">
-				<a href="{{ get_mod_route('partner_loan') }}"><button class="btn blue" type="button">
+				<a href="{{ get_mod_route('bonus') }}"><button class="btn blue" type="button">
 				<span>Back</span>
 				</button></a>
 			</li>
@@ -20,7 +20,7 @@
 			<i class="fa fa-angle-right"></i>
 		</li>
 		<li>
-			<a href="{{ site_url('payroll/setup') }}">{{ lang('partner_loan.payroll_setup') }}</a>
+			<a href="{{ site_url('payroll/setup') }}">{{ lang('bonus.payroll_setup') }}</a>
 			<i class="fa fa-angle-right"></i>
 		</li>
 		<li>
@@ -60,6 +60,7 @@
 	@parent
 	@include('edit/page_scripts')
 	<script type="text/javascript" src="{{ theme_path() }}modules/common/edit.js"></script> 
+	<script type="text/javascript" src="{{ theme_path() }}modules/bonus/detail.js"></script>
 @stop
 
 @section('view_js')

@@ -5,7 +5,7 @@
         </div>
     </td>
     <td class="hidden-xs">{{ $performance_planning_year }}</td>
-    <td class="hidden-xs">{{ $performance_planning_performance_type_id}}</td>
+    <td class="hidden-xs">{{ $performance_planning_title}}</td>
     <td class="hidden-xs">{{ $performance_planning_status_id }}</td> <td>
         <div class="btn-group">
             <a class="btn btn-xs text-muted" href="{{ $edit_url }}"><i class="fa fa-pencil"></i> {{ lang('common.edit') }}</a>

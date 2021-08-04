@@ -166,6 +166,13 @@ class performance_appraisal_model extends Record
 	}
 
 	function getPerformancePlanningApplicable($planning_id = 0) {
+		$this->db->select('
+			performance_planning_applicable.*,
+			performance_planning.planning_id,
+			performance_planning.year,
+			performance_planning.performance_type_id'
+		);
+		$this->db->where('performance_planning_applicable.status_id >',0);
 		$this->db->where('performance_planning.deleted',0);
 		$this->db->where('performance_planning.planning_id',$planning_id);
 		$this->db->join('performance_planning','performance_planning_applicable.planning_id = performance_planning.planning_id');

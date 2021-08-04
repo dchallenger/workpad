@@ -21,11 +21,11 @@ $config['field_validations']['payroll_bonus.date_to'][] = array(
 	'label'   => 'Period to',
 	'rules'   => 'required'
 );
-$config['field_validations']['payroll_bonus.period'][] = array(
+/*$config['field_validations']['payroll_bonus.period'][] = array(
 	'field'   => 'payroll_bonus[period]',
 	'label'   => 'No. of Periods',
 	'rules'   => 'required|numeric'
-);
+);*/
 $config['field_validations']['payroll_bonus.week'][] = array(
 	'field'   => 'payroll_bonus[week]',
 	'label'   => 'Apply Week/s',

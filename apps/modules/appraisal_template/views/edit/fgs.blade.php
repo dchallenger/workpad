@@ -24,7 +24,7 @@
                     $db->order_by('company', '0');
                     $db->where('deleted', '0');
                     $options = $db->get('users_company'); 	                            
-                    $performance_template_company_id_options = array('' => 'Select...');
+                    $performance_template_company_id_options = array();
                     	foreach($options->result() as $option)
                     	{
 							$performance_template_company_id_options[$option->company_id] = $option->company;
@@ -32,7 +32,7 @@
                 ?>							
                 <div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
-                        {{ form_dropdown('performance_template[company_id]',$performance_template_company_id_options, $record['performance_template.company_id'], 'class="form-control select2me" data-placeholder="Select..." id="performance_template-company_id"') }}
+                        {{ form_multiselect('performance_template[company_id][]',$performance_template_company_id_options, explode(',',$record['performance_template.company_id']), 'class="form-control select2me" data-placeholder="Select..." id="performance_template-company_id"') }}
                 </div> 				
             </div>	
 		</div>
@@ -76,7 +76,7 @@
                 </div> 				
             </div>	
 		</div>		
-		<div class="form-group">
+		<div class="form-group hidden">
 			<label class="control-label col-md-3"><span class="required">* </span>Rank</label>
 			<div class="col-md-7">
 				<?php

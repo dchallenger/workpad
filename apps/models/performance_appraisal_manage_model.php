@@ -50,7 +50,8 @@ class performance_appraisal_manage_model extends Record
 			$qry .= " AND {$this->db->dbprefix}{$this->table}.deleted = 0";	
 		}
 		
-		$qry .= " AND ({$this->db->dbprefix}{$this->table}.planning_created_by = {$this->user->user_id} OR T6.approver_id = {$this->user->user_id})";	
+		//$qry .= " AND ({$this->db->dbprefix}{$this->table}.planning_created_by = {$this->user->user_id} OR T6.approver_id = {$this->user->user_id})";	
+		$qry .= " AND T6.approver_id = {$this->user->user_id}";	
 		$qry .= ' '. $filter;
 		$qry .= " GROUP BY {$this->db->dbprefix}{$this->table}.appraisal_id";
 		$qry .= " ORDER BY {$this->db->dbprefix}{$this->table}.{$this->primary_key} DESC ";

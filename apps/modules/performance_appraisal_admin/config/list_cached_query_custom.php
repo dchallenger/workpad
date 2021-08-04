@@ -2,6 +2,7 @@
 $config["list_cached_query_custom"] = 'SELECT 
 `ww_performance_appraisal`.`appraisal_id` AS record_id, 
 `ww_performance_appraisal`.`year` AS "performance_appraisal_year",
+`ww_performance_appraisal`.`title` AS "performance_appraisal_title",
 `ww_performance_setup_performance`.`performance` AS "performance_type",
 `ww_performance_appraisal`.`date_from` AS "performance_appraisal_date_from",
 `ww_performance_appraisal`.`date_to` AS "performance_appraisal_date_to",

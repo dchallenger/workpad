@@ -4,9 +4,13 @@ $(document).ready(function(){
         allowClear: true
     }); 
 
-    $('#performance_planning_applicable-user_id').multiselect();
+    $("#performance_planning_applicable-user_id").multiselect().multiselectfilter(); 
 
-    $('#performance_planning-filter_id').multiselect();
+    // $('#performance_planning-filter_id').multiselect();
+    $('#performance_planning-filter_id').select2({
+        placeholder: "Select Company",
+        allowClear: true
+    });    
 
     $('#performance_planning-status_id-temp').change(function(){
     	if( $(this).is(':checked') )

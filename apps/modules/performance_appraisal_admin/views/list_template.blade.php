@@ -34,7 +34,7 @@
 				@endif
 				<br>
 				<span class="small text-muted" id="date_set">
-					{{ $performance_type }} / {{ date('M d, Y', strtotime( $performance_appraisal_date_from ) ) }} to {{ date('M d, Y', strtotime( $performance_appraisal_date_to ) ) }}
+					{{ $performance_appraisal_title }} / {{ date('M d, Y', strtotime( $performance_appraisal_date_from ) ) }} to {{ date('M d, Y', strtotime( $performance_appraisal_date_to ) ) }}
 				</span>				
 			</span>
 		</a>

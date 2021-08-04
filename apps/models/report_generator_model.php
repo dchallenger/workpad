@@ -680,6 +680,10 @@ class report_generator_model extends Record
 			case 'TRAINING_EVALUATION':
 				$teval_header = 1;
 				$excel = $this->load->view("templates/training_database", array('columns' => $columns, 'result' => $result, 'query' => $query, 'report_name' => $report->report_name,'filter' => $filter, 'filter_var' => $filter_var), true);
+				break;
+			case 'APPRAISAL_SUMMARY':
+				$appraisal_summary_header = 1;
+				$excel = $this->load->view("templates/appraisal_summary_report", array('columns' => $columns, 'result' => $result, 'query' => $query, 'report_name' => $report->report_name,'filter' => $filter, 'filter_var' => $filter_var), true);
 				break;				
 			default:
 				$excel = $this->load->view("templates/excel", array('result' => $result), true);
@@ -902,6 +906,27 @@ class report_generator_model extends Record
 			$content->getActiveSheet()->getStyle("A1:K3")->getFont()->setBold(true);
 
 			$content->getActiveSheet()->getStyle("A3:K".($result->num_rows()+3))->applyFromArray($border_style);
+		}
+
+		if (isset($appraisal_summary_header)) {
+			$letters = $this->createColumnsArray('K');
+			$index = 0;
+
+			for ($index; $index <= count($letters) - 1; $index++) {
+				$row = $letters[$index]."1";
+				
+				$content->getActiveSheet()->getColumnDimension($letters[$index])->setAutoSize(true);
+			}
+
+			$content->getActiveSheet()->getStyle('J2:K'.($result->num_rows()+3))->getNumberFormat()->setFormatCode('#,##0.00');
+/*			$content->getActiveSheet()->getStyle("A1:K2")->applyFromArray($style_center);
+			$content->getActiveSheet()->getStyle("A3:K3")->applyFromArray($style_center);
+			$content->getActiveSheet()->mergeCells('A1:K1');
+			$content->getActiveSheet()->mergeCells('A2:K2');*/
+
+			$content->getActiveSheet()->getStyle("A1:K1")->getFont()->setBold(true);
+
+			$content->getActiveSheet()->getStyle("A2:K".($result->num_rows()+1))->applyFromArray($border_style);
 		}
 
 		if (isset($teval_header)) {

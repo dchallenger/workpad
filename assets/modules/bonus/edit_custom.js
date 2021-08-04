@@ -1,3 +1,27 @@
+$(document).ready(function() {
+    $('.method').change(function() {
+        var method_id = $(this).val();
+        switch (method_id) {
+            case "3":
+                $('.amount_header').text('Amount');
+                $('.list_amount').attr('placeholder','Enter Amount..');
+                $('.list_amount').show();
+            break;
+            case "5":
+                $('.amount_header').text('Percentage');
+                $('.list_amount').attr('placeholder','Enter Percentage..');
+                $('.list_amount').show();
+            break;
+            case "4":
+            case "6":
+                $('.amount_header').text('');
+                //$('.list_amount').val('');
+                $('.list_amount').hide();
+            break;            
+        }
+    });
+});
+
 function add_group()
 {
     var group = $('select[name="default[add-group]"]').val();
@@ -117,6 +141,17 @@ function add_employees()
                     $('#employee-table').append(response.employees);
                     App.initUniform('.added-employee');
                     $(":input").inputmask();
+
+                    var method_id = $('.method').val();
+
+                    switch (method_id) {
+                        case "3":
+                            $('.list_amount').attr('placeholder','Enter Amount..');
+                        break;
+                        case "5":
+                            $('.list_amount').attr('placeholder','Enter Percentage..');
+                        break;
+                    }                    
                 }
             });     
         }

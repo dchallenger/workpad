@@ -41,7 +41,7 @@ $(document).ready(function(){
 	// System Amortization when change on amount
     amount.keyup(function(){
         var sys_amort = isNaN(parseInt(amount.val().replace(",","") / no_payments.val() ) ) ? 0 : ( amount.val().replace(",","") / no_payments.val() );
-        $("#payroll_partners_loan-system_amortization").val(sys_amort.toFixed(2));
+        $("#payroll_partners_loan-system_amortization").val(sys_amort);
     });
 
     // System Interest when change on interest
@@ -50,20 +50,23 @@ $(document).ready(function(){
         $("#payroll_partners_loan-system_interest").val(sys_interest.toFixed(2));
         var amount_w_interest = parseInt(principal.val().replace(",","") * interest.val() / 100) + parseInt(principal.val().replace(",",""));
         var amount_with_interest = isNaN(amount_w_interest) ? 0 : ( amount_w_interest );
-        $(amount).val(amount_with_interest.toFixed(2));
+        $(amount).val(amount_with_interest);
+
+        var sys_amort = (amount_with_interest / no_payments.val());
+        $("#payroll_partners_loan-system_amortization").val(sys_amort);        
     });
 
     // amount when change on loan principals
     principal.keyup(function(){
         var amount_w_interest = parseInt(principal.val().replace(",","") * interest.val() / 100) + parseInt(principal.val().replace(",",""));
         var amount_with_interest = isNaN(amount_w_interest) ? 0 : ( amount_w_interest );
-        $(amount).val(amount_with_interest.toFixed(2));
+        $(amount).val(amount_with_interest);
     });
 
     no_payments.keyup(function(){
     	// System Amortization when change on amount
         var sys_amort = isNaN(parseInt(amount.val().replace(",","") / no_payments.val() ) ) ? 0 : ( amount.val().replace(",","") / no_payments.val() );
-        $("#payroll_partners_loan-system_amortization").val(sys_amort.toFixed(2));
+        $("#payroll_partners_loan-system_amortization").val(sys_amort);
         // System Interest when change on interest
         var sys_interest = isNaN(parseInt(interest.val().replace(",","") / no_payments.val() ) ) ? 0 : ( interest.val().replace(",","") / no_payments.val() );
         $("#payroll_partners_loan-system_interest").val(sys_interest.toFixed(2));

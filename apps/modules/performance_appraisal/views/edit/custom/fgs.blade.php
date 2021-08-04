@@ -11,7 +11,7 @@
 			</label>
 			<div class="col-md-5"><?php									                            		
 				$query = "SELECT planning_id, 
-								CONCAT(year, ' - ', performance, ' (', 
+								CONCAT(year, ' - ', title, ' (', 
 								DATE_FORMAT(date_from, '%d-%b'), ' to ', 
 								DATE_FORMAT(date_to, '%d-%b-%y'), ') ') as planning,
 								CONCAT(' (', 
@@ -21,12 +21,12 @@
 								u.full_name								
 							FROM {$db->dbprefix}performance_planning pp 
 							LEFT JOIN {$db->dbprefix}users u ON pp.created_by = u.user_id
-							INNER JOIN {$db->dbprefix}performance_setup_performance psp 
+							LEFT JOIN {$db->dbprefix}performance_setup_performance psp 
 							ON psp.performance_id = pp.performance_type_id 
 							WHERE pp.deleted = 0 AND pp.status_id = 0 
 							ORDER BY planning_id DESC ";
 				$options = $db->query($query);
-				$performance_appraisal_planning_id_options = array('' => 'Select...');
+				$performance_appraisal_planning_id_options = array('' => '');
 				foreach($options->result() as $option)
 				{
 					$performance_appraisal_planning_id_options[$option->planning_id] = $option->planning;
@@ -228,7 +228,6 @@
 		</div> -->
 		<div class="form-group">
 			<label class="control-label col-md-4">
-				<span class="required">* </span>
 				{{ lang('performance_appraisal.notes') }}
 			</label>
 			<div class="col-md-5">

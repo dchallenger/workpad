@@ -6,11 +6,11 @@ $config['field_validations']['performance_appraisal_applicable.user_id'][] = arr
 	'label'   => 'Applicable For',
 	'rules'   => 'required'
 );
-$config['field_validations']['performance_appraisal.notes'][] = array(
+/*$config['field_validations']['performance_appraisal.notes'][] = array(
 	'field'   => 'performance_appraisal[notes]',
 	'label'   => 'Notes',
 	'rules'   => 'required'
-);
+);*/
 $config['field_validations']['performance_appraisal.template_id'][] = array(
 	'field'   => 'performance_appraisal[template_id]',
 	'label'   => 'Template',

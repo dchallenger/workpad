@@ -2,6 +2,7 @@
 $config["list_cached_query_custom"] = 'SELECT 
 `ww_performance_planning`.`planning_id` as record_id, 
 `ww_performance_planning`.`year` as "performance_planning_year",
+`ww_performance_planning`.`title` as "performance_planning_title",
 ww_performance_planning.notes as "performance_planning_notes", 
 `ww_performance_setup_performance`.`performance` as "performance_type",
 `ww_performance_planning`.`date_from` as "performance_planning_date_from",

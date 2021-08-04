@@ -36,11 +36,11 @@ $config['field_validations']['performance_template.employment_type_id'][] = arra
 	'label'   => 'Employment Type',
 	'rules'   => 'required'
 );
-$config['field_validations']['performance_template.job_grade_id'][] = array(
+/*$config['field_validations']['performance_template.job_grade_id'][] = array(
 	'field'   => 'performance_template[job_grade_id]',
 	'label'   => 'Rank',
 	'rules'   => 'required'
-);
+);*/
 $config['field_validations']['performance_template.employment_status_id'][] = array(
 	'field'   => 'performance_template[employment_status_id]',
 	'label'   => 'Employment Status',

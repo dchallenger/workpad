@@ -19,6 +19,17 @@ class Bonus extends MY_PrivateController
 		echo $this->load->blade('pages.edit')->with( $this->load->get_cached_vars() );
 	}
 
+	function detail($record_id = "", $child_call = false)
+	{
+		parent::edit( '', true );
+
+		$this->_set_employee_lists('detail');
+
+		$this->load->helper('form');
+		$this->load->helper('file');
+		echo $this->load->blade('pages.detail')->with( $this->load->get_cached_vars() );
+	}
+
 	function add($record_id = '', $child_call = false)
 	{
 		parent::add( '', true );
@@ -30,7 +41,7 @@ class Bonus extends MY_PrivateController
 		echo $this->load->blade('pages.edit')->with( $this->load->get_cached_vars() );
 	}
 
-	private function _set_employee_lists()
+	private function _set_employee_lists($type="edit")
 	{
 		$data['employee_table'] = "";
 		
@@ -48,7 +59,11 @@ class Bonus extends MY_PrivateController
 			{
 				$emp->amount = trim( $emp->amount );
 				$emp->amount = number_format( $emp->amount, 2, '.', ',');
-				$data['employee_table'] .= $this->load->view('edit/employee-lists', array( 'employee' => $emp), true);
+
+				if ($type == 'edit')
+					$data['employee_table'] .= $this->load->view('edit/employee-lists', array( 'employee' => $emp), true);
+				else
+					$data['employee_table'] .= $this->load->view('detail/employee-lists', array( 'employee' => $emp), true);
 			}
 		}
 
@@ -334,7 +349,7 @@ class Bonus extends MY_PrivateController
 			$this->_ajax_return();
 		}
 
-		$_POST['payroll_bonus']['taxable_bonus_transaction_id'] = 11;
+		$_POST['payroll_bonus']['taxable_bonus_transaction_id'] = 11; //11 meaning is transaction BONUS_TAXABLE
 
 		$this->db->trans_begin();
 		$this->response = $this->mod->_save( true, false );
@@ -344,7 +359,11 @@ class Bonus extends MY_PrivateController
 			{
 				$bonus_employee = $this->input->post('payroll_bonus_employee');
 				$employee = $bonus_employee['employee_id'];
-				$amount = $bonus_employee['amount'];
+
+				if (in_array($_POST['payroll_bonus']['transaction_method_id'], [4,6]))
+					$amount = 0;
+				else
+					$amount = $bonus_employee['amount'];
 
 				// validation for checking multiple employee with the same payroll date and type of bonus
 				$pbonus = $_POST['payroll_bonus'];

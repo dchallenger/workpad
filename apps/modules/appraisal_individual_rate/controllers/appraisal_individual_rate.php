@@ -320,7 +320,7 @@ class Appraisal_individual_rate extends MY_PrivateController
                             'status' => 'info',
                             'message_type' => 'Comment',
                             'user_id' => $this->user->user_id,
-                            'feed_content' => 'Please review '.$appraisee->fullname.'\'s performance targets.',
+                            'feed_content' => 'Please review '.$appraisee->fullname.'\'s performance appraisal.',
                             'uri' => $this->mod->route . '/review_admin/'.$_POST['appraisal_id'].'/'.$_POST['user_id'],
                             'recipient_id' => $approver->approver_id
                         );
@@ -881,7 +881,7 @@ class Appraisal_individual_rate extends MY_PrivateController
 
                 $appraisee_recepient = $this->input->post('user_id');
                 $sendtargetsettings['recepient'] = $appraisee_info->full_name;
-                $sendtargetsettings['hradmin'] = $hr_admin_info->fullname;
+                $sendtargetsettings['hradmin'] = $hr_admin_info->full_name;
 
                 $target_settings_send_template = $this->db->get_where( 'system_template', array( 'code' => 'PERFORMANCE-APPRAISAL-SEND-COMMITTEE') )->row_array();
                 $msg = $this->parser->parse_string($target_settings_send_template['body'], $sendtargetsettings, TRUE); 

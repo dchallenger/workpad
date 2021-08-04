@@ -38,6 +38,15 @@
 		<div class="form-group">
 			<label class="control-label col-md-4">
 				<span class="required">* </span>
+				{{ lang('performance_planning.title') }}
+			</label>
+			<div class="col-md-5">
+				<textarea class="form-control" name="performance_planning[title]" id="performance_planning-title" placeholder="Enter Title" rows="2">{{ $record['performance_planning.title'] }}</textarea>
+			</div>
+		</div>			
+		<div class="form-group hidden">
+			<label class="control-label col-md-4">
+				<span class="required">* </span>
 				{{ lang('performance_planning.performance_type') }}
 			</label>
 			<div class="col-md-5"><?php									                            		
@@ -103,7 +112,6 @@
 		</div>
 		<div class="form-group">
 			<label class="control-label col-md-4">
-				<span class="required">* </span>
 				{{ lang('performance_planning.notes') }}
 			</label>
 			<div class="col-md-5">
@@ -118,7 +126,7 @@
 
 	</div>
 	<div class="portlet-body form">		
-		<div class="form-group">
+		<div class="form-group hidden">
 			<label class="control-label col-md-4">
 				<span class="required">* </span>
 				{{ lang('performance_planning.template') }}</label>
@@ -127,7 +135,7 @@
 				$db->select('template_id,template');
 				$db->where('deleted', '0');
 				$options = $db->get('performance_template');
-				$performance_planning_template_id_options = array();
+				$performance_planning_template_id_options = array('' => '');
 					foreach($options->result() as $option)
 					{
 						$performance_planning_template_id_options[$option->template_id] = $option->template;
@@ -141,9 +149,31 @@
 				</div>
 			</div>	
 		</div>
-		<div class="form-group hidden">
+		<div class="form-group">
 			<label class="control-label col-md-4">
 				<span class="required">* </span>
+				{{ lang('performance_planning.company') }}
+			</label>
+			<div class="col-md-6">
+				<?php
+				$db->select('company_id,company');
+				$db->where('deleted', '0');
+				$options = $db->get('users_company');
+				$performance_planning_filter_id_options = array();
+				foreach($options->result() as $option)
+				{
+					$performance_planning_filter_id_options[$option->company_id] = $option->company;
+				} ?>
+				<div class="input-group">
+					<span class="input-group-addon">
+						<i class="fa fa-list-ul"></i>
+					</span>
+					{{ form_dropdown('performance_planning[filter_id][]',$performance_planning_filter_id_options, explode(',', $record['performance_planning.filter_id']), 'class="form-control" data-placeholder="Select..." multiple id="performance_planning-filter_id"') }}
+				</div>
+			</div>	
+		</div>			
+		<div class="form-group">
+			<label class="control-label col-md-4">
 				{{ lang('performance_planning.employment_status_filter') }}
 			</label>
 			<div class="col-md-6">
@@ -154,14 +184,14 @@
 				$employment_status_id_options = array();
 					foreach($options->result() as $option)
 					{
-						$employment_status_id_options['Selection'][$option->employment_status_id] = $option->employment_status;
+						$employment_status_id_options[$option->employment_status_id] = $option->employment_status;
 					} 
 				?>
 				<div class="input-group">
 					<span class="input-group-addon">
 						<i class="fa fa-list-ul"></i>
 					</span>
-					{{ form_dropdown('performance_planning[employment_status_id][]',$employment_status_id_options, explode(',', $record['performance_planning.employment_status_id']), 'class="form-control select2" data-placeholder="Select..." multiple id="performance_planning-employment_status_id"') }}
+					{{ form_dropdown('performance_planning[employment_status_id][]',$employment_status_id_options, explode(',', $record['performance_planning.employment_status_id']), 'class="form-control" data-placeholder="Select..." multiple id="performance_planning-employment_status_id"') }}
 				</div>
 			</div>	
 		</div>
@@ -186,26 +216,6 @@
 					{{ form_dropdown('performance_planning[filter_by]',$performance_planning_filter_by_options, $record['performance_planning.filter_by'], 'class="form-control select2me" data-placeholder="Select..." id="performance_planning-filter_by"') }}
 				</div>
 			</div>
-		</div>	
-		<div class="form-group hidden">
-			<label class="control-label col-md-4">{{ lang('performance_planning.selection') }}</label>
-			<div class="col-md-6">
-				<?php
-				$db->select('company_id,company');
-				$db->where('deleted', '0');
-				$options = $db->get('users_company');
-				$performance_planning_filter_id_options = array();
-				foreach($options->result() as $option)
-				{
-					$performance_planning_filter_id_options[$option->company_id] = $option->company;
-				} ?>
-				<div class="input-group">
-					<span class="input-group-addon">
-						<i class="fa fa-list-ul"></i>
-					</span>
-					{{ form_dropdown('performance_planning[filter_id][]',$performance_planning_filter_id_options, explode(',', $record['performance_planning.filter_id']), 'class="form-control" data-placeholder="Select..." multiple="multiple" id="performance_planning-filter_id"') }}
-				</div>
-			</div>	
 		</div>	
 		<div class="form-group">
 			<label class="control-label col-md-4">

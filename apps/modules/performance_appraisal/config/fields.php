@@ -132,7 +132,7 @@ $config['fields'][1]['performance_appraisal.notes'] = array(
 	'display_id' => 3,
 	'quick_edit' => 1,
 	'sequence' => 7,
-	'datatype' => 'required',
+	'datatype' => '',
 	'active' => '1',
 	'encrypt' => 0
 );

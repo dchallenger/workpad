@@ -32,7 +32,7 @@
                 ?>							
                 <div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-list-ul"></i></span>
-                        {{ form_dropdown('performance_template[company_id]',$performance_template_company_id_options, $record['performance_template_company_id'], 'class="form-control select2me" data-placeholder="Select..." id="performance_template-company_id" disabled') }}
+                        {{ form_multiselect('performance_template[company_id]',$performance_template_company_id_options, explode(',',$record['performance_template_company_id']), 'class="form-control select2me" data-placeholder="Select..." id="performance_template-company_id" disabled') }}
                 </div> 				
             </div>	
 		</div>
@@ -76,7 +76,7 @@
                 </div> 				
             </div>	
 		</div>			
-		<div class="form-group">
+		<div class="form-group hidden">
 			<label class="control-label col-md-3"><span class="required">* </span>Rank</label>
 			<div class="col-md-7">
 				<?php

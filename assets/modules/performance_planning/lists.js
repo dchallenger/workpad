@@ -101,7 +101,12 @@ function close_planning(planning_id, callback)
         beforeSend: function(){
         },
         success: function ( response ) {
-            bootbox.confirm("There are "+response.unapproved_forms_count+ " unapproved performance planning.<br> Are you sure you want to continue closing?", function(confirm) {
+            if (response.unapproved_forms_count)
+                var message = "There are "+response.unapproved_forms_count+ " unapproved performance planning.<br> Are you sure you want to continue closing?";
+            else
+                var message = "Are you sure you want to continue closing?";
+
+            bootbox.confirm(message, function(confirm) {
                 if( confirm )
                 {
                     save_planning_status( planning_id, 0 );

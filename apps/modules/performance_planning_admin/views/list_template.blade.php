@@ -6,7 +6,7 @@
 		{{ $fullname }}
 	</td>
 	<td class="hidden-xs">
-		<span class="text-success">{{ $performance_type }}</span>
+		<span class="text-info">{{ $performance_planning_title }}</span>
 		<br>
 		<span class="small" id="date_set">{{ date('M d, Y', strtotime( $performance_planning_date_from ) ) }} to {{ date('M d, Y', strtotime( $performance_planning_date_to ) ) }}</span>
 	</td>
