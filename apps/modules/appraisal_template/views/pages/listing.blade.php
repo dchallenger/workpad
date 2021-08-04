@@ -65,7 +65,6 @@
 	@parent
 	<script type="text/javascript" src="{{ theme_path() }}plugins/jquery.infiniteScroll.js"></script>
 	<script type="text/javascript" src="{{ theme_path() }}modules/common/lists.js"></script>
-	<script type="text/javascript" src="{{ theme_path() }}modules/partners/lists_custom.js"></script>
 @stop
 
 @section('view_js')
