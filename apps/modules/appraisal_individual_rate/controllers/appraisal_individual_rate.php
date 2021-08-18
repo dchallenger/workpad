@@ -148,7 +148,7 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['templatefile'] = $this->template->get_template( $appraisee->template_id ); 
 
         $vars['approversLog'] = array();
-        $approvers_log = "SELECT IF(ppar.display_name='', CONCAT(usp.lastname,' ',usp.firstname), ppar.display_name) AS display_name, 
+        $approvers_log = "SELECT IF(ppar.display_name='', CONCAT(usp.lastname,' ',usp.firstname), ppar.display_name) AS display_name,ppar.remarks as approver_remarks, 
                         ppl.created_on, ppap.user_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id  
                         FROM {$this->db->dbprefix}performance_appraisal_applicable ppap 
                         INNER JOIN {$this->db->dbprefix}performance_appraisal_approver ppar ON ppap.appraisal_id = ppar.appraisal_id 
@@ -281,6 +281,7 @@ class Appraisal_individual_rate extends MY_PrivateController
         switch( $status_id ) {
             case 1://draft
                 $update['self_rating'] = $this->input->post('self_rating');
+                $update['appraisee_remarks'] = $this->input->post('appraisee_remarks');
 
                 $where = array(
                     'appraisal_id' => $this->input->post('appraisal_id'),
@@ -299,6 +300,7 @@ class Appraisal_individual_rate extends MY_PrivateController
                 break;
             case 2://for approval
                 $update['self_rating'] = $this->input->post('self_rating');
+                $update['appraisee_remarks'] = $this->input->post('appraisee_remarks');
 
                 $where = array(
                     'appraisal_id' => $this->input->post('appraisal_id'),
@@ -362,7 +364,7 @@ class Appraisal_individual_rate extends MY_PrivateController
                 foreach(  $approvers as $index => $approver )
                 {
                     if( $approver->approver_id == $this->user->user_id ){
-                        $update_data = array('performance_status_id' => 4,'approved_date' => date('Y-m-d H:i:s'));
+                        $update_data = array('performance_status_id' => 4,'remarks' => $this->input->post('approver_remarks'),'approved_date' => date('Y-m-d H:i:s'));
                         $where_array = array('id' => $approver->id);
                         //get previous data for audit logs
                         $previous_main_data = $this->db->get_where('performance_appraisal_approver', $where_array)->row_array();
@@ -513,6 +515,36 @@ class Appraisal_individual_rate extends MY_PrivateController
                 //create system logs
                 $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'performance_planning_applicable', $previous_main_data, $update);
 
+                //saving strength and improvement
+                $strength = $this->input->post('strength');
+                $improvement = $this->input->post('improvement');
+
+                $where = array(
+                    'appraisal_id' => $this->input->post('appraisal_id'),
+                    'user_id' => $this->input->post('user_id'),
+                    'created_by' => $this->user->user_id,
+                );
+                
+                $this->db->where($where);
+                $this->db->delete('performance_appraisal_applicable_strength_improvement');
+
+                foreach ($strength as $key => $value) {
+                    $update_strength = array('comment' => $value,'comment_type' => 1);
+                    $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
+                    $update_strength['user_id'] = $this->input->post('user_id');                        
+                    $update_strength['created_by'] = $this->user->user_id;
+                    $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                }
+
+                foreach ($improvement as $key => $value) {
+                    $update_strength = array('comment' => $value,'comment_type' => 2);
+                    $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
+                    $update_strength['user_id'] = $this->input->post('user_id');
+                    $update_strength['created_by'] = $this->user->user_id;
+                    $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                }
+                //saving strength and improvement
+
                 $this->response->redirect = get_mod_route('performance_appraisal_manage');
                 break;
             case 99: // for approver save as draft
@@ -520,6 +552,41 @@ class Appraisal_individual_rate extends MY_PrivateController
                 $update['coach_rating'] = $this->input->post('coach_rating');
                 
                 $this->db->update('performance_appraisal_applicable', $update, $where);
+
+                $update_data = array('remarks' => $this->input->post('approver_remarks'));
+                $where_array = array('appraisal_id' => $this->input->post('appraisal_id'),'appraisee_id' => $appraisee->user_id,'approver_id' => $this->user->user_id);
+                
+                $this->db->update('performance_appraisal_approver', $update_data, $where_array);
+
+                //saving strength and improvement
+                $strength = $this->input->post('strength');
+                $improvement = $this->input->post('improvement');
+
+                $where = array(
+                    'appraisal_id' => $this->input->post('appraisal_id'),
+                    'user_id' => $this->input->post('user_id'),
+                    'created_by' => $this->user->user_id,
+                );
+                
+                $this->db->where($where);
+                $this->db->delete('performance_appraisal_applicable_strength_improvement');
+                
+                foreach ($strength as $key => $value) {
+                    $update_strength = array('comment' => $value,'comment_type' => 1);
+                    $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
+                    $update_strength['user_id'] = $this->input->post('user_id');                     
+                    $update_strength['created_by'] = $this->user->user_id;
+                    $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                }
+
+                foreach ($improvement as $key => $value) {
+                    $update_strength = array('comment' => $value,'comment_type' => 2);
+                    $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
+                    $update_strength['user_id'] = $this->input->post('user_id');                          
+                    $update_strength['created_by'] = $this->user->user_id;
+                    $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                }
+                //saving strength and improvement
 
                 $this->response->redirect = get_mod_route('performance_appraisal_manage');
                 break;
@@ -905,12 +972,70 @@ class Appraisal_individual_rate extends MY_PrivateController
                 //create system logs
                 $this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'update', 'performance_planning_applicable', $previous_main_data, $update);
 
+                //saving strength and improvement
+                $strength = $this->input->post('strength');
+                $improvement = $this->input->post('improvement');
+
+                $where = array(
+                    'appraisal_id' => $this->input->post('appraisal_id'),
+                    'user_id' => $this->input->post('user_id'),
+                );
+                
+                $this->db->where($where);
+                $this->db->delete('performance_appraisal_applicable_strength_improvement');
+
+                foreach ($strength as $key => $value) {
+                    $update_strength = array('comment' => $value,'comment_type' => 1);
+                    $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
+                    $update_strength['user_id'] = $this->input->post('user_id');                        
+                    $update_strength['created_by'] = $this->user->user_id;
+                    $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                }
+
+                foreach ($improvement as $key => $value) {
+                    $update_strength = array('comment' => $value,'comment_type' => 2);
+                    $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
+                    $update_strength['user_id'] = $this->input->post('user_id');
+                    $update_strength['created_by'] = $this->user->user_id;
+                    $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                }
+                //saving strength and improvement
+
                 $this->response->redirect = get_mod_route('performance_appraisal');
                 break;
             case 14:
                 $update['committee_rating'] = $this->input->post('committee_rating');
                 
                 $this->db->update('performance_appraisal_applicable', $update, $where);
+
+                //saving strength and improvement
+                $strength = $this->input->post('strength');
+                $improvement = $this->input->post('improvement');
+
+                $where = array(
+                    'appraisal_id' => $this->input->post('appraisal_id'),
+                    'user_id' => $this->input->post('user_id'),
+                );
+                
+                $this->db->where($where);
+                $this->db->delete('performance_appraisal_applicable_strength_improvement');
+
+                foreach ($strength as $key => $value) {
+                    $update_strength = array('comment' => $value,'comment_type' => 1);
+                    $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
+                    $update_strength['user_id'] = $this->input->post('user_id');                        
+                    $update_strength['created_by'] = $this->user->user_id;
+                    $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                }
+
+                foreach ($improvement as $key => $value) {
+                    $update_strength = array('comment' => $value,'comment_type' => 2);
+                    $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
+                    $update_strength['user_id'] = $this->input->post('user_id');
+                    $update_strength['created_by'] = $this->user->user_id;
+                    $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                }
+                //saving strength and improvement
 
                 $this->response->redirect = get_mod_route('performance_appraisal');
                 break;
@@ -1155,7 +1280,7 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['templatefile'] = $this->template->get_template( $appraisee->template_id ); 
 
         $vars['approversLog'] = array();
-        $approvers_log = "SELECT IF(ppar.display_name='', CONCAT(usp.lastname,' ',usp.firstname), ppar.display_name) AS display_name, 
+        $approvers_log = "SELECT IF(ppar.display_name='', CONCAT(usp.lastname,' ',usp.firstname), ppar.display_name) AS display_name, ppar.remarks as approver_remarks, 
                         ppl.created_on, ppar.approved_date, ppap.user_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id, ppar.edited 
                         FROM {$this->db->dbprefix}performance_appraisal_applicable ppap 
                         INNER JOIN {$this->db->dbprefix}performance_appraisal_approver ppar ON ppap.appraisal_id = ppar.appraisal_id 
@@ -1188,6 +1313,7 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['learning_mode'] = $this->individual_planning_model->get_learning_mode();
         $vars['competencies'] = $this->individual_planning_model->get_competencies();
         $vars['target_completion'] = $this->individual_planning_model->get_target_completion();
+        $vars['strength_improvement'] = $this->mod->get_strength_improvement( $this->record_id, $user_id );
 
         $this->load->vars( $vars );
 
@@ -1253,7 +1379,7 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['templatefile'] = $this->template->get_template( $appraisee->template_id ); 
 
         $vars['approversLog'] = array();
-        $approvers_log = "SELECT IF(ppar.display_name='', CONCAT(usp.lastname,' ',usp.firstname), ppar.display_name) AS display_name, 
+        $approvers_log = "SELECT IF(ppar.display_name='', CONCAT(usp.lastname,' ',usp.firstname), ppar.display_name) AS display_name, ppar.remarks as approver_remarks, 
                         ppl.created_on, ppar.approved_date, ppap.user_id, ppar.performance_status_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id, ppar.edited  
                         FROM {$this->db->dbprefix}performance_appraisal_applicable ppap 
                         INNER JOIN {$this->db->dbprefix}performance_appraisal_approver ppar ON ppap.appraisal_id = ppar.appraisal_id 
@@ -1292,6 +1418,7 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['learning_mode'] = $this->individual_planning_model->get_learning_mode();
         $vars['competencies'] = $this->individual_planning_model->get_competencies();
         $vars['target_completion'] = $this->individual_planning_model->get_target_completion();
+        $vars['strength_improvement'] = $this->mod->get_strength_improvement( $this->record_id, $user_id );
 
         $this->load->vars( $vars );
 
@@ -1360,7 +1487,7 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['templatefile'] = $this->template->get_template( $appraisee->template_id ); 
 
         $vars['approversLog'] = array();
-        $approvers_log = "SELECT IF(ppar.display_name='', CONCAT(usp.lastname,' ',usp.firstname), ppar.display_name) AS display_name, 
+        $approvers_log = "SELECT IF(ppar.display_name='', CONCAT(usp.lastname,' ',usp.firstname), ppar.display_name) AS display_name, ppar.remarks as approver_remarks, 
                         ppl.created_on, ppar.approved_date, ppap.user_id, ppar.performance_status_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id, ppar.edited  
                         FROM {$this->db->dbprefix}performance_appraisal_applicable ppap 
                         INNER JOIN {$this->db->dbprefix}performance_appraisal_approver ppar ON ppap.appraisal_id = ppar.appraisal_id 
@@ -1398,7 +1525,8 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['learning_mode'] = $this->individual_planning_model->get_learning_mode();
         $vars['competencies'] = $this->individual_planning_model->get_competencies();
         $vars['target_completion'] = $this->individual_planning_model->get_target_completion();
-        
+        $vars['strength_improvement'] = $this->mod->get_strength_improvement( $this->record_id, $user_id );
+
         $vars['status'] = $this->db->get_where('performance_status', array('deleted' => 0,'appraisal' => 1))->result();
 
         $this->load->vars( $vars );
@@ -2039,6 +2167,7 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['learning_mode'] = $this->individual_planning_model->get_learning_mode();
         $vars['competencies'] = $this->individual_planning_model->get_competencies();
         $vars['target_completion'] = $this->individual_planning_model->get_target_completion();
+        $vars['strength_improvement'] = $this->mod->get_strength_improvement( $this->record_id, $user_id );
 
         $record = $this->load->get_cached_vars();
         $vars['record'] = $record['record'];

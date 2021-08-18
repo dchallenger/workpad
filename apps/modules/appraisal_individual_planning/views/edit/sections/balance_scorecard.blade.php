@@ -44,18 +44,34 @@ $show_add = false;
 										$planning_value = $planning_applicable_fields[$val['scorecard_id']][1][$value->section_column_id]['value'];
 									}
 
+									$read_only = '';
+
+									switch ($value->title) {
+										case 'KPI / Measures':
+											if ($value->class == '')
+												$value->class = 'kpi';
+											break;
+										case 'Target':
+											if ($value->class == '')
+												$value->class = 'target';
+											break;
+										case 'Key in Weight':
+											$read_only = 'readonly';
+											break;
+									}
+
 									switch( $value->uitype_id ) {
 										case 2:
 						?>
 											<td width="{{ $value->width }}">
-												<input type="text" question="{{ $val['scorecard_id'] }}" value="{{ $planning_value }}" class="form-control {{ $value->class }}" name="field[{{ $val['scorecard_id'] }}][{{ $value->section_column_id }}][]" data-inputmask="'alias': '{{ $value->data_type }}', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false">
+												<input type="text" {{ $read_only }} question="{{ $val['scorecard_id'] }}" value="{{ $planning_value }}" class="form-control {{ $value->class }}" name="field[{{ $val['scorecard_id'] }}][{{ $value->section_column_id }}][]" data-score-card="{{ $val['scorecard'] }}" data-inputmask="'alias': '{{ $value->data_type }}', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false">
 											</td>
 						<?php
 										break;
 										case 3:
 						?>
 											<td width="{{ $value->width }}" rowspan="">
-												<textarea class="form-control {{ $value->class }}" rows="4" name="field[{{ $val['scorecard_id'] }}][{{ $value->section_column_id }}][]">{{ $planning_value }}</textarea>
+												<textarea class="form-control {{ $value->class }}" rows="4" name="field[{{ $val['scorecard_id'] }}][{{ $value->section_column_id }}][]" data-score-card="{{ $val['scorecard'] }}">{{ $planning_value }}</textarea>
 											</td>										
 						<?php											
 										break;
@@ -83,12 +99,28 @@ $show_add = false;
 													$column_sequence = $planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id]['column_sequence'];
 												}
 
+												$read_only = '';
+
+												switch ($value->title) {
+													case 'KPI / Measures':
+														if ($value->class == '')
+															$value->class = 'kpi';
+														break;
+													case 'Target':
+														if ($value->class == '')
+															$value->class = 'target';
+														break;
+													case 'Key in Weight':
+														$read_only = 'readonly';
+														break;														
+												}
+
 												switch( $value->uitype_id ) {
 													case 2:
 														if ($can_add_row) {
 									?>
 															<td width="{{ $value->width }}">
-																<input type="text" question="{{ $val['scorecard_id'] }}" value="{{ $planning_value }}" class="form-control {{ $value->class }}" name="field[{{ $val['scorecard_id'] }}][{{ $value->section_column_id }}][]" data-inputmask="'alias': '{{ $value->data_type }}', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false">
+																<input type="text" {{ $read_only }} question="{{ $val['scorecard_id'] }}" value="{{ $planning_value }}" class="form-control {{ $value->class }}" name="field[{{ $val['scorecard_id'] }}][{{ $value->section_column_id }}][]" data-score-card="{{ $val['scorecard'] }}" data-inputmask="'alias': '{{ $value->data_type }}', 'autoGroup': true, 'groupSize': 3, 'repeat': 13, 'greedy' : false">
 															</td>
 									<?php
 														} else {
@@ -107,7 +139,7 @@ $show_add = false;
 														if ($can_add_row) {
 									?>
 															<td width="{{ $value->width }}" rowspan="">
-																<textarea class="form-control {{ $value->class }}" rows="4" name="field[{{ $val['scorecard_id'] }}][{{ $value->section_column_id }}][]">{{ $planning_value }}</textarea>
+																<textarea class="form-control {{ $value->class }}" rows="4" name="field[{{ $val['scorecard_id'] }}][{{ $value->section_column_id }}][]" data-score-card="{{ $val['scorecard'] }}">{{ $planning_value }}</textarea>
 															</td>										
 									<?php					
 														} else {

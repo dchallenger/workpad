@@ -10,21 +10,23 @@
 				{{ lang('performance_appraisal.goal_setting') }}
 			</label>
 			<div class="col-md-5"><?php									                            		
-				$query = "SELECT planning_id, 
-								CONCAT(year, ' - ', title, ' (', 
-								DATE_FORMAT(date_from, '%d-%b'), ' to ', 
-								DATE_FORMAT(date_to, '%d-%b-%y'), ') ') as planning,
+				$query = "SELECT pp.planning_id, 
+								CONCAT(pp.year, ' - ', pp.title, ' (', 
+								DATE_FORMAT(pp.date_from, '%d-%b'), ' to ', 
+								DATE_FORMAT(pp.date_to, '%d-%b-%y'), ') ') as planning,
 								CONCAT(' (', 
-								DATE_FORMAT(date_from, '%d-%b'), ' to ', 
-								DATE_FORMAT(date_to, '%d-%b-%y'), ')') as planning_date, 
-								notes,
+								DATE_FORMAT(pp.date_from, '%d-%b'), ' to ', 
+								DATE_FORMAT(pp.date_to, '%d-%b-%y'), ')') as planning_date, 
+								pp.notes,
 								u.full_name								
 							FROM {$db->dbprefix}performance_planning pp 
 							LEFT JOIN {$db->dbprefix}users u ON pp.created_by = u.user_id
-							LEFT JOIN {$db->dbprefix}performance_setup_performance psp 
-							ON psp.performance_id = pp.performance_type_id 
+							LEFT JOIN {$db->dbprefix}performance_setup_performance psp ON psp.performance_id = pp.performance_type_id 
+							LEFT JOIN {$db->dbprefix}performance_appraisal pa ON pp.planning_id = pa.planning_id
 							WHERE pp.deleted = 0 AND pp.status_id = 0 
+							AND pa.title IS NULL
 							ORDER BY planning_id DESC ";
+
 				$options = $db->query($query);
 				$performance_appraisal_planning_id_options = array('' => '');
 				foreach($options->result() as $option)

@@ -10,7 +10,7 @@
 
 	<div class="row">
         <div class="col-md-12">
-			<form class="form-horizontal" id="planning-form">
+			<form class="form-horizontal" id="planning-form" autocomplete="off">
 				<input type="hidden" id="record_id" name="record_id" value="{{ $record_id }}">
 				@include('summary/fgs')
 			</form>

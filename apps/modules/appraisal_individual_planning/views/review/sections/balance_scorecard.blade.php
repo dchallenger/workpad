@@ -33,7 +33,7 @@ $show_add = false;
 					<tr class="q{{ $key+1 }}">
 						<td>
 							{{ $key+1 . ". " . $val['scorecard'] }}&nbsp;
-							@if(!isset($planning_admin) || $planning_admin == 0)
+							@if((!isset($planning_admin) || $planning_admin == 0) && $appraisee->planning_status_id == 1)
 						    	<a href="javasript:void(0)" class="btn-success add_row" style="padding:1px 2px" data-section_id="{{ $section_id }}" data-scorecard_id="{{ $val['scorecard_id'] }}" data-num_question="q{{ $key+2 }}"><i class="fa fa-plus"></i></a>
 						    @endif
 						</td>
@@ -44,6 +44,17 @@ $show_add = false;
 									$planning_value = '';
 									if (isset($planning_applicable_fields[$val['scorecard_id']][1][$value->section_column_id])) {
 										$planning_value = $planning_applicable_fields[$val['scorecard_id']][1][$value->section_column_id]['value'];
+									}
+
+									switch ($value->title) {
+										case 'KPI / Measures':
+											if ($value->class == '')
+												$value->class = 'kpi';
+											break;
+										case 'Target':
+											if ($value->class == '')
+												$value->class = 'target';
+											break;											
 									}
 
 									switch( $value->uitype_id ) {
@@ -83,6 +94,17 @@ $show_add = false;
 													$planning_value = $planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id]['value'];
 													$can_add_row = $planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id]['can_add_row'];
 													$column_sequence = $planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id]['column_sequence'];
+												}
+
+												switch ($value->title) {
+													case 'KPI / Measures':
+														if ($value->class == '')
+															$value->class = 'kpi';
+														break;
+													case 'Target':
+														if ($value->class == '')
+															$value->class = 'target';
+														break;											
 												}
 
 												switch( $value->uitype_id ) {

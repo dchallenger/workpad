@@ -43,6 +43,11 @@ class Appraisal_individual_planning extends MY_PrivateController
             $vars['disabled'] = 'disabled';
         }
 
+        if ($appraisee->planning_status_id == 0) {
+            $vars['readonly'] = "readonly='readonly'";
+            $vars['disabled'] = 'disabled';            
+        }
+
         $vars['manager_id'] = $manager_id; 
 
         $this->load->model('appraisal_template_model', 'template');
@@ -537,7 +542,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                             'status' => 'info',
                             'message_type' => 'Comment',
                             'user_id' => $this->user->user_id,
-                            'feed_content' => 'Please review '.$appraisee->fullname.'\'s performance planning.',
+                            'feed_content' => 'Please review performance planning.',
                             'uri' => $this->mod->route . '/review_admin/'.$_POST['planning_id'].'/'.$_POST['user_id'],
                             'recipient_id' => $approver->approver_id
                         );
@@ -597,7 +602,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                                 'status' => 'info',
                                 'message_type' => 'Comment',
                                 'user_id' => $this->user->user_id,
-                                'feed_content' => 'Your performance targets have been approved.',
+                                'feed_content' => 'Your performance planning have been approved.',
                                 'uri' => $this->mod->route . '/review/'.$_POST['planning_id'].'/'.$_POST['user_id'],
                                 'recipient_id' => $update['to_user_id']
                             );
@@ -638,7 +643,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                                 'status' => 'info',
                                 'message_type' => 'Comment',
                                 'user_id' => $this->user->user_id,
-                                'feed_content' => 'Please review '.$appraisee->fullname.'\'s performance targets.',
+                                'feed_content' => 'Please review performance planning.',
                                 'uri' => $this->mod->route . '/review_admin/'.$_POST['planning_id'].'/'.$_POST['user_id'].'/'.$update['to_user_id'],
                                 'recipient_id' => $update['to_user_id']
                             );
@@ -766,7 +771,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                 $previous_main_data = $this->db->get_where('performance_planning_applicable', $where)->row_array();
 
                 // set to_user_id to first approver
-                $update['to_user_id'] = $fst_approver->approver_id;
+                $update['to_user_id'] = $appraisee->user_id;//$fst_approver->approver_id;
                 $this->db->update('performance_planning_applicable', $update, $where);                
 
                 //reset status of approver to new since back to employee for review
@@ -779,7 +784,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                         'status' => 'info',
                         'message_type' => 'Comment',
                         'user_id' => $this->user->user_id,
-                        'feed_content' => 'Please review performance targets.',
+                        'feed_content' => 'Please review performance planning.',
                         'uri' => $this->mod->route . '/review/'.$_POST['planning_id'].'/'.$_POST['user_id'],
                         'recipient_id' => $this->input->post('user_id')
                     );
@@ -956,7 +961,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                             'status' => 'info',
                             'message_type' => 'Comment',
                             'user_id' => $this->user->user_id,
-                            'feed_content' => 'Please review '.$appraisee->fullname.'\'s performance targets.',
+                            'feed_content' => 'Please review performance planning.',
                             'uri' => $this->mod->route . '/review_admin/'.$_POST['planning_id'].'/'.$_POST['user_id'],
                             'recipient_id' => $approver->approver_id
                         );
@@ -1110,7 +1115,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                                 'status' => 'info',
                                 'message_type' => 'Comment',
                                 'user_id' => $this->user->user_id,
-                                'feed_content' => 'Please review '.$appraisee->fullname.'\'s performance targets.',
+                                'feed_content' => 'Please review performance planning.',
                                 'uri' => $this->mod->route . '/review/'.$_POST['planning_id'].'/'.$_POST['user_id'].'/'.$down->approver_id,
                                 'recipient_id' => $down->approver_id
                             );
@@ -1165,7 +1170,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                                 'status' => 'info',
                                 'message_type' => 'Comment',
                                 'user_id' => $this->user->user_id,
-                                'feed_content' => 'Your performance targets have been approved.',
+                                'feed_content' => 'Your performance planning have been approved.',
                                 'uri' => $this->mod->route . '/review/'.$_POST['planning_id'].'/'.$_POST['user_id'],
                                 'recipient_id' => $update['to_user_id']
                             );
@@ -1826,6 +1831,7 @@ class Appraisal_individual_planning extends MY_PrivateController
         $this->_ajax_only();
 
         $vars['template_section_column'] = $this->mod->get_template_section_column();
+        $vars['score_card'] = $this->mod->get_balance_score_card($this->input->post('scorecard_id'))->row()->scorecard;
 
         $this->load->vars( $vars );
 

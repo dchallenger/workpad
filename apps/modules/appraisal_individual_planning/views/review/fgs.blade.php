@@ -221,7 +221,7 @@
 			<!-- BEGIN OF FORM-->
 			<div class="portlet"><?php
 				//get the template
-				$sections = $template->build_sections( $appraisee->template_id );
+				$sections = $template->build_sections( $appraisee->applicable_template_id );
 				foreach( $sections as $section ):?>
 						<div class="portlet-title">
 							<div class="caption">{{ $section->template_section }} {{ ($section->weight > 0 ? '(' + $section->weight + ')' : '') }}</div>

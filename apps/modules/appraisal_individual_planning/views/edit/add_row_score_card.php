@@ -9,6 +9,18 @@
 	<?php
 			foreach ($template_section_column[$section_id] as $key => $value)
 			{
+
+				switch ($value->title) {
+					case 'KPI / Measures':
+						if ($value->class == '')
+							$value->class = 'kpi';
+						break;
+					case 'Target':
+						if ($value->class == '')
+							$value->class = 'target';
+						break;
+				}
+
 				switch( $value->uitype_id )
 				{
 					case 2:
@@ -16,7 +28,7 @@
 						{
 	?>
 							<td width="<?php echo $value->width ?>">
-								<input question="<?php echo $scorecard_id ?>" type="text" class="form-control <?php echo $value->class ?>" name="field[<?php echo $scorecard_id ?>][<?php echo $value->section_column_id ?>][]" data-inputmask="'alias': '<?php echo $value->data_type ?>', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false">
+								<input question="<?php echo $scorecard_id ?>" type="text" class="form-control <?php echo $value->class ?>" data-score-card="<?php echo $score_card ?>" name="field[<?php echo $scorecard_id ?>][<?php echo $value->section_column_id ?>][]" data-inputmask="'alias': '<?php echo $value->data_type ?>', 'autoGroup': true, 'groupSeparator': ',', 'groupSize': 3, 'repeat': 13, 'greedy' : false">
 							</td>
 	<?php
 						}
@@ -47,7 +59,7 @@
 						{
 	?>
 							<td width="<?php echo $value->width ?>" rowspan="">
-								<textarea class="form-control <?php echo $value->class ?>" rows="4" name="field[<?php echo $scorecard_id ?>][<?php echo $value->section_column_id ?>][]"></textarea>
+								<textarea class="form-control <?php echo $value->class ?>" rows="4" data-score-card="<?php echo $score_card ?>" name="field[<?php echo $scorecard_id ?>][<?php echo $value->section_column_id ?>][]"></textarea>
 							</td>										
 	<?php				
 						}

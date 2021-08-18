@@ -1,9 +1,10 @@
 <?php
-$qry = "select a.*, b.uitype
+$qry = "select a.*, b.uitype, IF(a.title = 'Self Rating',1,a.required) AS required
 FROM {$db->dbprefix}performance_template_section_column a
 LEFT JOIN {$db->dbprefix}performance_template_section_column_uitype b on b.uitype_id = a.uitype_id
 WHERE a.deleted = 0 AND a.template_section_id = {$section_id}
 ORDER BY a.sequence";
+
 $columns = $db->query( $qry );
 
 $qry1 = "select *
@@ -77,7 +78,7 @@ $show_add = false;
 										case 9:
 						?>
 											<td width="{{ $value->width }}" rowspan="">
-												<select class="form-control core_self_rating" ratio-weight="{{ $section_info->weight }}" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $library_id }}][{{ $val['library_value_id'] }}][]" section-id="{{ $section_info->template_section_id }}" question="{{ $val['library_value_id'] }}">
+												<select class="form-control core_self_rating" ratio-weight="{{ $section_info->weight }}" data-library-value="{{$val['library_value']}}" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $library_id }}][{{ $val['library_value_id'] }}][]" section-id="{{ $section_info->template_section_id }}" question="{{ $val['library_value_id'] }}">
 													<option value="0">Select</option>													
 													@for($i=1;$i<6;$i++)
 														<?php 

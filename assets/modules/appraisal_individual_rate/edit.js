@@ -335,6 +335,22 @@ function change_status_self(form, status_id)
             handle_ajax_message( validation );
             return false;
         }
+
+        $('.core_self_rating').each(function (index, element){
+            var fieldval = parseFloat($(this).val());
+            var library_value = $(this).data('library-value');
+
+            if(fieldval == 0){
+                validation[index] = {};
+                validation[index]['type'] = "error";
+                validation[index]['message'] = 'Under "'+library_value+'" has empty field';
+            }
+        });
+
+        if (!$.isEmptyObject(validation)) {
+            handle_ajax_message( validation );
+            return false;
+        }        
     }
 
     $.blockUI({ message: '<div>Saving, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />',

@@ -57,4 +57,5 @@ $lang['appraisal_individual_planning'] = array(
 	'committee_rating' => 'Committee Rating',
 	'level' => 'Level',
 	'status' => 'Status',
+	'rattes_comment' => 'Ratee\'s Comment',
 );

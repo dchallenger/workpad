@@ -44,13 +44,13 @@ $show_add = false;
 				@endforeach
 				@if(!$self_rating && $list_approver && $list_approver->num_rows() > 0)
 					@foreach($list_approver->result() as $row)
-						<th class="bold">Coach Rating</th>
+						<th class="bold"><label class="control-label"><span class="required">* </span></label> Coach Rating</th>
 						<th class="bold">Coach Comment</th>
 					@endforeach
 				@else
 					@if($self_rating && $performance_status_id == 4)				
 						@foreach($list_approver->result() as $row)
-							<th class="bold">Coach Rating</th>
+							<th class="bold"><label class="control-label"><span class="required">* </span></label> Coach Rating</th>
 							<th class="bold">Coach Comment</th>
 						@endforeach					
 					@endif
@@ -95,7 +95,7 @@ $show_add = false;
 										case 9:
 						?>
 											<td width="{{ $value->width }}" rowspan="">
-												<select class="form-control core_self_rating" ratio-weight="{{ $section_info->weight }}" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $library_id }}][{{ $val['library_value_id'] }}][]" section-id="{{ $section_info->template_section_id }}" question="{{ $val['library_value_id'] }}" disabled>
+												<select class="form-control core_self_rating" ratio-weight="{{ $section_info->weight }}" data-library-value="{{$val['library_value']}}" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $library_id }}][{{ $val['library_value_id'] }}][]" section-id="{{ $section_info->template_section_id }}" question="{{ $val['library_value_id'] }}" disabled>
 													<option value="0">Select</option>													
 													@for($i=1;$i<6;$i++)
 														<?php 
@@ -146,7 +146,7 @@ $show_add = false;
 												case 9:
 						?>
 													<td width="{{ $value->width }}" rowspan="">
-														<select {{ $disabled }} class="form-control core_coach_rating" ratio-weight="{{ $section_info->weight }}" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $library_id }}][{{ $val['library_value_id'] }}][]" section-id="{{ $section_info->template_section_id }}" question="{{ $val['library_value_id'] }}">
+														<select {{ $disabled }} class="form-control core_coach_rating" ratio-weight="{{ $section_info->weight }}" data-library-value="{{$val['library_value']}}" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $library_id }}][{{ $val['library_value_id'] }}][]" section-id="{{ $section_info->template_section_id }}" question="{{ $val['library_value_id'] }}">
 															<option value="0">Select</option>													
 															@for($i=1;$i<6;$i++)
 																<?php 
@@ -199,7 +199,7 @@ $show_add = false;
 													case 9:
 							?>
 														<td width="{{ $value->width }}" rowspan="">
-															<select {{ $disabled }} class="form-control core_coach_rating" ratio-weight="{{ $section_info->weight }}" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $library_id }}][{{ $val['library_value_id'] }}][]" section-id="{{ $section_info->template_section_id }}" question="{{ $val['library_value_id'] }}">
+															<select {{ $disabled }} class="form-control core_coach_rating" ratio-weight="{{ $section_info->weight }}" data-library-value="{{$val['library_value']}}" name="field_appraisal[{{ $login_user_id }}][{{ $section_id }}][{{ $library_id }}][{{ $val['library_value_id'] }}][]" section-id="{{ $section_info->template_section_id }}" question="{{ $val['library_value_id'] }}">
 																<option value="0">Select</option>													
 																@for($i=1;$i<6;$i++)
 																	<?php 

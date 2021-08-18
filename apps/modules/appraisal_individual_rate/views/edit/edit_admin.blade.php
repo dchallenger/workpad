@@ -153,6 +153,16 @@
 							</td>
 							<td>
 								<div class="form-group">
+									<label class="control-label col-md-4 bold">{{ lang('appraisal_individual_planning.rattes_comment') }}</label>
+									<div class="col-md-8">
+										<textarea name="appraisee_remarks" class="form-control" readonly>{{ $appraisee->appraisee_remarks }}</textarea>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr class="success">
+							<td>
+								<div class="form-group">
 									<label class="control-label col-md-4 bold">{{ lang('appraisal_individual_planning.committee_rating') }}</label>
 									<div class="col-md-8">
 										<!-- <input type="text" name="committee_rating" class="form-control" value="{{ $appraisee->committee_rating }}"> -->
@@ -160,7 +170,10 @@
 									</div>
 								</div>
 							</td>
-						</tr>					
+							<td>
+								&nbsp;
+							</td>							
+						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -265,6 +278,74 @@
 									default:
 								}
 							endforeach;	?>
+
+							<!-- areas for development section-->
+							<div class="panel panel-success">
+								<div class="panel-heading">
+									<h3 class="panel-title">Strengths and Areas For Improvement</h3>
+								</div>
+								<div class="">
+									<table class="table">
+										<thead>
+											<tr>
+												<th width="96%"><b>Specifying strengths and areas for improvement will not only guide you and your employee in clarifying steps for development of skills, but will also be a valuable input to various HRD programs. ( This also includes a feedback to Coach's own strengths and areas for improvements )</b></th>
+												<th width="4%">&nbsp;</th>
+											</tr>
+										</thead>
+										<tbody class="strength_container">
+											<tr>
+												<td>
+													<span><b>What are the employees strengths?</b></span>
+													<span><a href="javascript:void(0)" class="btn-success" style="padding:1px 4px"><i class="fa fa-plus add_strength"></i></a></span>
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											@foreach($strength_improvement->result() as $row)
+												@if ($row->comment_type == 1)
+													<tr>
+														<td>
+															<input class="form-control" name="strength[]" value="{{ $row->comment }}">
+														</td>
+														<td>
+															<div class="btn-group">
+												                <a href="javascript:void(0)" class="btn-danger btn-sm delete_row_strength" style="padding:1px 4px">
+												                  	<i class="fa fa-trash-o"></i>
+												                </a>
+												            </div>												            
+														</td>
+													</tr>
+												@endif
+											@endforeach
+										</tbody>
+										<tbody class="improvement_container">
+											<tr>
+												<td>
+													<span><b>What areas of performance needs enhancement or improvement?</b></span>
+													<span><a href="javascript:void(0)" class="btn-success" style="padding:1px 4px"><i class="fa fa-plus add_improvement"></i></a></span>
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											@foreach($strength_improvement->result() as $row)
+												@if ($row->comment_type == 2)
+													<tr>
+														<td>
+															<input class="form-control" name="improvement[]" value="{{ $row->comment }}">
+														</td>
+														<td>
+															<div class="btn-group">
+												                <a href="javascript:void(0)" class="btn-danger btn-sm delete_row_strength" style="padding:1px 4px">
+												                  	<i class="fa fa-trash-o"></i>
+												                </a>
+												            </div>
+														</td>
+													</tr>
+												@endif
+											@endforeach											
+										</tbody>										
+									</table>
+								</div>
+							</div>							
+							<!-- areas for development section-->
 
 							<!-- overall rating -->
 							<div class="panel panel-success">
@@ -463,6 +544,7 @@
 							<thead>
 								<tr>
 									<th>APPROVER</th>
+									<th>COMMENTS</th>
 									<th>DATE/TIME</th>
 									<th>STATUS</th>
 								</tr>
@@ -472,6 +554,7 @@
 								@foreach($approversLog as $applog)
 								<tr>
 									<td>{{ $applog['display_name'] }} <br><small class="text-muted">{{ $applog['position'] }}</small></td>
+									<td>{{ $applog['approver_remarks'] }}</td>
 									<td>
 									@if( strtotime($applog['approved_date']) && $applog['approved_date'] != '1970-01-01' )
 										<span class="text-success">{{ date('M d, Y', strtotime($applog['approved_date'])) }}</span>

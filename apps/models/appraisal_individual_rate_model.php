@@ -107,6 +107,17 @@ class appraisal_individual_rate_model extends Record
 		return $appraisee->row();
 	}
 
+	function get_strength_improvement( $appraisal_id, $user_id )
+	{
+		$qry = "select *
+		FROM {$this->db->dbprefix}performance_appraisal_applicable_strength_improvement si
+		WHERE si.appraisal_id = {$appraisal_id} AND si.user_id = {$user_id}";
+
+		$appraisee = $this->db->query( $qry );
+
+		return $appraisee;
+	}
+	
 // original 2019-08-12
 /*	function get_appraisee( $appraisal_id, $user_id )
 	{

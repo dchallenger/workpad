@@ -5005,6 +5005,8 @@ class Import201 extends MY_PrivateController
 	}
 
 	function import_chart_of_account(){
+		$this->db->truncate('payroll_account');
+
 		$this->load->library('excel');
 
 		$objReader = new PHPExcel_Reader_Excel5;
@@ -5014,7 +5016,7 @@ class Import201 extends MY_PrivateController
 		}
 
 		$objReader->setReadDataOnly(true);
-		$objPHPExcel = $objReader->load('D:\oclp new version\oclp requirements\HR & IT Headcount vl sl 06302021 .xls');
+		$objPHPExcel = $objReader->load($this->filename);
 		$rowIterator = $objPHPExcel->getActiveSheet()->getRowIterator();
 	
 		$ctr = 0;	
@@ -5035,7 +5037,7 @@ class Import201 extends MY_PrivateController
 
 				foreach ($import_data as $row) {
 					foreach ($row as $cell => $value) {
-						switch ($value) {														
+						switch ($value) {
 							case 'Account Code':
 								$valid_cells[] = 'account_code';
 								break;
@@ -5044,7 +5046,7 @@ class Import201 extends MY_PrivateController
 								break;
 							case 'Account Type':
 								$valid_cells[] = 'account_type_id';
-								break;
+								break;								
 							case 'Description':
 								$valid_cells[] = 'description';
 								break;
@@ -5065,36 +5067,34 @@ class Import201 extends MY_PrivateController
 		$ctr = 0;
 
 		// Remove non-matching cells.
-		foreach ($import_data as $row) {
-			$form_id = '';
-			$user_id = '';
-			$arr_field_val = array('year' => 2021);
+		foreach ($import_data as $row) {		
+			$arr_field_val = array();
 			foreach ($valid_cells as $key => $value) {
 				switch ($value) {
 					case 'account_type_id':
 						$result = $this->db->get_where('payroll_account_type',array('account_type' => $row[$key]));
 						if ($result && $result->num_rows() > 0){
-							$row_form = $result->row();
-							$row[$key] = $row_form->account_type_id;
+							$account_type = $result->row();
+							$row[$key] = $account_type->account_type_id;						
 						}
 						else{
-							$this->db->insert('payroll_account_type',array('account_type' => $row[$key]));
-							$row[$key] = $this->db->insert_id();
-						}
-						break;
-				}			
+							$row[$key] = '';
+						}						
+						break;				
+				}	
+				
 				$arr_field_val[$value] = $row[$key];
 			}
 
 			$this->db->insert('payroll_account',$arr_field_val);
-
 		}
 
 		echo "Done.";	
 	}
+
 	/************************************************************************************************/	
 
-	function import_payroll_account(){
+	function import_payroll_transaction(){
 		$this->load->library('excel');
 
 		$objReader = new PHPExcel_Reader_Excel5;
@@ -5104,7 +5104,7 @@ class Import201 extends MY_PrivateController
 		}
 
 		$objReader->setReadDataOnly(true);
-		$objPHPExcel = $objReader->load('D:\oclp new version\oclp requirements\HR & IT Headcount vl sl 06302021 .xls');
+		$objPHPExcel = $objReader->load('D:\oclp new version\carry over template for import.xls');
 		$rowIterator = $objPHPExcel->getActiveSheet()->getRowIterator();
 	
 		$ctr = 0;	

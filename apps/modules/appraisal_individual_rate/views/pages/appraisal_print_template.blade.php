@@ -75,11 +75,17 @@
                     <td style="<?php echo $bltr ?>"><?php echo $appraisee->employment_type ?></td>                         
                 </tr>
                 <tr>
-                    <td align="left" style="<?php echo $bltb ?>">Coach Rating</td>
-                    <td style="<?php echo $bltb ?>"><?php echo $appraisee->coach_rating ?></td>
-                    <td align="left" style="<?php echo $bltb ?>">Committee Rating</td>
-                    <td style="<?php echo $bltrb ?>"><?php echo $appraisee->committee_rating ?></td>                         
+                    <td align="left" style="<?php echo $blt ?>">Coach Rating</td>
+                    <td style="<?php echo $blt ?>"><?php echo $appraisee->coach_rating ?></td>
+                    <td align="left" style="<?php echo $blt ?>">Ratee's Comment</td>
+                    <td style="<?php echo $bltr ?>"><?php echo $appraisee->appraisee_remarks ?></td>                         
                 </tr>
+                <tr>
+                    <td align="left" style="<?php echo $bltb ?>">Committee Rating</td>
+                    <td style="<?php echo $bltb ?>"><?php echo $appraisee->committee_rating ?></td>                         
+                    <td align="left" style="<?php echo $bltb ?>">&nbsp;</td>
+                    <td style="<?php echo $bltrb ?>">&nbsp;</td>                    
+                </tr>                
 			</tbody>
 		</table>
         <br>
@@ -717,6 +723,51 @@
                         </div>
                     </div><?php
             endforeach; ?>
+
+            <br>
+            <!-- areas for development section-->
+            <table align='center' cellpadding="2px" cellspacing="0" style='width: 100%; height: auto; background: #fff'>
+                <thead>
+                    <tr>
+                        <th align="left" style="<?php echo $bltr ?>">Strengths and Areas For Improvement</th>
+                    </tr>
+                    <tr>
+                        <th align="left" style="<?php echo $bltr ?>"><b>Specifying strengths and areas for improvement will not only guide you and your employee in clarifying steps for development of skills, but will also be a valuable input to various HRD programs. ( This also includes a feedback to Coach's own strengths and areas for improvements )</b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td align="left" style="<?php echo $bltr ?>">
+                            <span><b>What are the employees strengths?</b></span>
+                        </td>
+                    </tr>
+                    <?php foreach($strength_improvement->result() as $row) { ?>
+                        <tr>
+                            <td align="left" style="<?php echo $bltr ?>">
+                                <?php echo $row->comment ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td align="left" style="<?php echo $bltr ?>">
+                            <span><b>What areas of performance needs enhancement or improvement?</b></span>
+                        </td>
+                    </tr>
+                    <?php foreach($strength_improvement->result() as $row) { ?>
+                        <tr>
+                            <td align="left" style="<?php echo $bltr ?>">
+                                <?php echo $row->comment ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    <tr>
+                        <td align="left" style="<?php echo $bltrb ?>">&nbsp;</td>
+                    </tr>
+                </tbody>                                        
+            </table>                    
+            <!-- areas for development section-->            
         </div>
         <br>
         <table align='center' cellpadding="2px" cellspacing="0" style='width: 100%; height: auto; background: #fff'>

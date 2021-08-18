@@ -4,9 +4,49 @@ $(document).ready(function(){
     		$('#individual_appraisal_appraisee_acceptance').val('1');
     	else
     		$('#individual_appraisal_appraisee_acceptance').val('0');
-    });		
+    });
     // no use for oclp
 	//get_section_items();
+});
+
+$(document).on('click', '.add_strength', function (e) {
+	e.preventDefault();
+
+	var html = '<tr>\
+					<td>\
+						<input class="form-control" name="strength[]">\
+					</td>\
+					<td>\
+						<div class="btn-group">\
+			                <a href="javascript:void(0)" class="btn-danger btn-sm delete_row_strength" style="padding:1px 4px">\
+			                  	<i class="fa fa-trash-o"></i>\
+			                </a>\
+			            </div>\
+					</td>\
+				</tr>';
+	$('.strength_container').append(html);
+});
+
+$(document).on('click', '.add_improvement', function (e) {
+	e.preventDefault();
+
+	var html = '<tr>\
+					<td>\
+						<input class="form-control" name="improvement[]">\
+					</td>\
+					<td>\
+						<div class="btn-group">\
+			                <a href="javascript:void(0)" class="btn-danger btn-sm delete_row_strength" style="padding:1px 4px">\
+			                  	<i class="fa fa-trash-o"></i>\
+			                </a>\
+			            </div>\
+					</td>\
+				</tr>';
+	$('.improvement_container').append(html);
+});
+
+$(document).on('click','.delete_row_strength', function (e) {
+	$(this).closest('tr').remove();
 });
 
 function view_transaction_logs( appraisal_id, user_id )
@@ -203,6 +243,22 @@ function change_status(form, status_id)
             handle_ajax_message( validation );
             return false;
         }
+
+        $('.core_coach_rating').each(function (index, element){
+            var fieldval = parseFloat($(this).val());
+            var library_value = $(this).data('library-value');
+            
+            if(fieldval == 0){
+                validation[index] = {};
+                validation[index]['type'] = "error";
+                validation[index]['message'] = 'Under "'+library_value+'" has empty field';
+            }
+        });
+
+        if (!$.isEmptyObject(validation)) {
+            handle_ajax_message( validation );
+            return false;
+        }         
     }
 
 	$.blockUI({ message: '<div>Saving, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />',

@@ -152,13 +152,26 @@
 							</td>
 							<td>
 								<div class="form-group">
+									<label class="control-label col-md-4 bold">{{ lang('appraisal_individual_planning.rattes_comment') }}</label>
+									<div class="col-md-8">
+										<textarea name="appraisee_remarks" class="form-control">{{ $appraisee->appraisee_remarks }}</textarea>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr class="success">
+							<td>
+								<div class="form-group">
 									<label class="control-label col-md-4 bold">{{ lang('appraisal_individual_planning.committee_rating') }}</label>
 									<div class="col-md-8">
 										<input type="text" name="committee_rating" class="form-control" value="" readonly>
 									</div>
 								</div>
 							</td>
-						</tr>
+							<td>
+								&nbsp;
+							</td>							
+						</tr>						
 					</tbody>
 				</table>
 			</div>
@@ -459,6 +472,7 @@
 							<thead>
 								<tr>
 									<th>APPROVER</th>
+									<th>COMMENTS</th>
 									<th>DATE/TIME</th>
 									<th>STATUS</th>
 								</tr>
@@ -468,6 +482,7 @@
 								@foreach($approversLog as $applog)
 								<tr>
 									<td>{{ $applog['display_name'] }} <br><small class="text-muted">{{ $applog['position'] }}</small></td>
+									<td>{{ $applog['approver_remarks'] }}</td>
 									<td>
 									@if( strtotime($applog['created_on']) && $applog['created_on'] != '1970-01-01' )
 										<span class="text-success">{{ date('M d, Y', strtotime($applog['created_on'])) }}</span>

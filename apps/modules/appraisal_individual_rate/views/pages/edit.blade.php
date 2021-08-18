@@ -9,7 +9,7 @@
 	@parent
 	<div class="row">
         <div class="col-md-12">
-			<form class="form-horizontal" id="self-review">
+			<form class="form-horizontal" id="self-review" autocomplete="off">
 				<input type="hidden" id="record_id" name="record_id" value="{{ $record_id }}">
 				@if(empty($planning_applicable_fields))
 					@include('pages/no_performance_planning')

@@ -10,9 +10,9 @@
 	<td class="hidden-xs">
 		{{ $performance_template_employment_type }}
 	</td>
-	<td class="hidden-xs">
+<!-- 	<td class="hidden-xs">
 		{{ $performance_template_job_level }}
-	</td>
+	</td> -->
 <!-- 	<td class="hidden-xs">
 		<?php
 			if( !empty( $performance_template_applicable_to ) )

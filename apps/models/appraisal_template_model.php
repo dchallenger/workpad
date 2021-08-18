@@ -145,7 +145,7 @@ class appraisal_template_model extends Record
 		}
 		
 		$qry .= ' '. $filter;
-		$qry .= " LIMIT $limit OFFSET $start";
+		$qry .= " GROUP BY pt.template_id LIMIT $limit OFFSET $start";
 
 		$this->load->library('parser');
 		$this->parser->set_delimiters('{$', '}');
