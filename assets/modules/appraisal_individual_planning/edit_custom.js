@@ -250,6 +250,42 @@ function change_status(form, status_id)
 {
 	if (validate()) {
 
+	    if (status_id == 2) {
+	    	var validation = {};
+	    	var ctr = 1;
+
+	    	$('.kpi').each(function (index, element) {
+	    		var kpi_val = $(this).val();
+	    		var score_card = $(this).data('score-card');
+				var weight_val = $(this).closest('tr').find('.weight').val();
+
+	    		if (kpi_val == "" && (weight_val > 0 && weight_val != '')) {
+	                validation[ctr] = {};
+	                validation[ctr]['type'] = "error";
+	                validation[ctr]['message'] = 'Under "'+score_card+'" KPI should not blank';
+	                ctr++;
+	    		}
+	    	});
+
+	    	$('.target').each(function (index, element) {
+	    		var target_val = $(this).val();
+	    		var score_card = $(this).data('score-card');
+	    		var weight_val = $(this).closest('tr').find('.weight').val();
+
+	    		if (target_val == "" && (weight_val > 0 && weight_val != '')) {
+	                validation[ctr] = {};
+	                validation[ctr]['type'] = "error";
+	                validation[ctr]['message'] = 'Under "'+score_card+'" Target should not blank';
+	                ctr++
+	    		}
+	    	});
+
+	        if (!$.isEmptyObject(validation)) {
+	            handle_ajax_message( validation );
+	            return false;
+	        }	    	
+	    }
+
 		validation = 1;
 		$.blockUI({ message: '<div>Saving, please wait...</div><img src="'+root_url+'assets/img/ajax-loading.gif" />',
 			onBlock: function(){
