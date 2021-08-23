@@ -215,6 +215,7 @@ class performance_planning_model extends Record
 	        $qry = "SELECT  *
 	                FROM {$this->db->dbprefix}performance_template pt 
 	                WHERE FIND_IN_SET({$company_id},company_id)
+	                AND pt.deleted = 0
 	                AND FIND_IN_SET({$employment_type_id},employment_type_id)
 	                AND FIND_IN_SET({$employment_status_id},employment_status_id)";
 
