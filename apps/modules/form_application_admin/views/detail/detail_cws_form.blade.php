@@ -322,14 +322,14 @@
                                             		<a href="#" class="approve_view btn btn-default btn-sm btn-success" data-forms-id="{{ $form_approver_details['forms_id'] }}" data-form-owner="{{ $form_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $form_approver_details['approver_id'] }}" data-decission="1" >{{ lang('form_application_admin.approved') }}</a>
                                             		<?php if($form_approver_details['within_cutoff']){ ?>
                                             			@if ($time_forms_user_id != 0)
-                                            				<a href="#" class="disapprove_view btn btn-sm btn-danger" data-forms-id="{{ $form_approver_details['forms_id'] }}" data-form-owner="{{ $form_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $form_approver_details['approver_id'] }}" data-decission="0" >{{ lang('form_application_admin.disapproved') }}</a>
+                                            				<a href="#" class="disapprove_view btn btn-sm btn-danger" data-forms-id="{{ $form_approver_details['forms_id'] }}" data-form-owner="{{ $form_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $form_approver_details['approver_id'] }}" data-decission="7" >{{ lang('form_application_admin.disapproved') }}</a>
                                             			@endif
                                             	<?php } }
                                             		else if ($form_approver_details['approver_status_id'] == 6 ){
                                             			if($form_approver_details['within_cutoff']){
                                             	?>
                                             		@if ($time_forms_user_id != 0)
-                                            			<a href="#" class="disapprove_view btn btn-sm btn-danger" data-forms-id="{{ $form_approver_details['forms_id'] }}" data-form-owner="{{ $form_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $form_approver_details['approver_id'] }}" data-decission="0" >{{ lang('form_application_admin.disapproved') }}</a>
+                                            			<a href="#" class="disapprove_view btn btn-sm btn-danger" data-forms-id="{{ $form_approver_details['forms_id'] }}" data-form-owner="{{ $form_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $form_approver_details['approver_id'] }}" data-decission="8" >{{ lang('form_application_admin.cancel') }}</a>
                                             		@endif
                                             	<?php
                                             			}
