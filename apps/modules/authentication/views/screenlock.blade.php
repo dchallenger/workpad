@@ -72,7 +72,7 @@
 	</script>
 
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-	<!-- BEGIN CORE PLUGINS -->   
+	<!-- BEGIN CORE PLUGINS -->  
 	<!--[if lt IE 9]>
 	<script src="{{ theme_path() }}plugins/respond.min.js"></script>
 	<script src="{{ theme_path() }}plugins/excanvas.min.js"></script> 

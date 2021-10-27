@@ -103,7 +103,7 @@
 						</li>
 						
 					</ul>
-				</li>
+				</li> 
 				<!-- BEGIN USER LOGIN DROPDOWN -->
 				<li class="dropdown user"> 
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
