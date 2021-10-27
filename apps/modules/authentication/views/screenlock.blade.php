@@ -60,7 +60,7 @@
 				</form>
 			</div>
 		</div>
-		<div class="page-footer">
+		<div class="page-footer hidden">
 			<span style="color:#fff">{{ date('Y') }} {{ $system['copyright_details'] }}</span> by <a class="text-muted" href="http://www.hdisystech.com" target="_blank">{{ $system['author'] }}</a>
 		</div>
 	</div>

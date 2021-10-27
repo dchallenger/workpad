@@ -113,7 +113,7 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="{{ site_url('account/profile') }}"><i class="fa fa-user"></i> My Profile</a></li>
-						<li><a href="{{ site_url('account/calendar') }}"><i class="fa fa-calendar"></i> My Calendar</a></li>
+						<li class="hidden"><a href="{{ site_url('account/calendar') }}"><i class="fa fa-calendar"></i> My Calendar</a></li>
 						<!-- 
 						<li><a href="account/inbox"><i class="fa fa-envelope"></i> My Inbox <span class="badge badge-danger">3</span></a></li>
 						<li><a href="#"><i class="fa fa-tasks"></i> My Tasks <span class="badge badge-success">7</span></a></li>
