@@ -553,7 +553,10 @@ $(document).on('click', '.add_row', function (e) {
         success: function ( response ) {
             handle_ajax_message( response.message );
 
-            $('.'+question+'').before(response.items);
+            if ($('.'+question+'').length > 0)
+            	$('.'+question+'').before(response.items);
+            else
+            	$(elem).closest('tr').after(response.items);
 
             $(":input").inputmask();
             // calc_weight();
