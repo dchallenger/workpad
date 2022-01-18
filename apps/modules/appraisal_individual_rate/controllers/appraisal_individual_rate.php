@@ -154,7 +154,7 @@ class Appraisal_individual_rate extends MY_PrivateController
                         INNER JOIN {$this->db->dbprefix}performance_appraisal_approver ppar ON ppap.appraisal_id = ppar.appraisal_id 
                         AND ppap.user_id = ppar.user_id 
                         INNER JOIN {$this->db->dbprefix}users_profile usp ON ppar.approver_id = usp.user_id
-                        INNER JOIN {$this->db->dbprefix}users_position pos ON usp.position_id = pos.position_id
+                        LEFT JOIN {$this->db->dbprefix}users_position pos ON usp.position_id = pos.position_id
                         INNER JOIN {$this->db->dbprefix}performance_status pstat ON ppar.performance_status_id = pstat.performance_status_id 
                         LEFT JOIN {$this->db->dbprefix}performance_appraisal_logs ppl ON ppap.appraisal_id = ppl.appraisal_id 
                         AND ppap.user_id = ppl.user_id AND ppar.approver_id = ppl.to_user_id 
@@ -472,7 +472,7 @@ class Appraisal_individual_rate extends MY_PrivateController
                             }
                         }
                         if($all_approved)
-                        {
+                        { 
                             $status_id = 14;
                         }
                         else{
@@ -1385,7 +1385,7 @@ class Appraisal_individual_rate extends MY_PrivateController
                         INNER JOIN {$this->db->dbprefix}performance_appraisal_approver ppar ON ppap.appraisal_id = ppar.appraisal_id 
                         AND ppap.user_id = ppar.user_id
                         INNER JOIN {$this->db->dbprefix}users_profile usp ON ppar.approver_id = usp.user_id
-                        INNER JOIN {$this->db->dbprefix}users_position pos ON usp.position_id = pos.position_id
+                        LEFT JOIN {$this->db->dbprefix}users_position pos ON usp.position_id = pos.position_id
                         INNER JOIN {$this->db->dbprefix}performance_status pstat ON ppar.performance_status_id = pstat.performance_status_id 
                         LEFT JOIN {$this->db->dbprefix}performance_appraisal_logs ppl ON ppap.appraisal_id = ppl.appraisal_id 
                         AND ppap.user_id = ppl.user_id AND ppar.approver_id = ppl.to_user_id 
@@ -1493,7 +1493,7 @@ class Appraisal_individual_rate extends MY_PrivateController
                         INNER JOIN {$this->db->dbprefix}performance_appraisal_approver ppar ON ppap.appraisal_id = ppar.appraisal_id 
                         AND ppap.user_id = ppar.user_id
                         INNER JOIN {$this->db->dbprefix}users_profile usp ON ppar.approver_id = usp.user_id
-                        INNER JOIN {$this->db->dbprefix}users_position pos ON usp.position_id = pos.position_id
+                        LEFT JOIN {$this->db->dbprefix}users_position pos ON usp.position_id = pos.position_id
                         INNER JOIN {$this->db->dbprefix}performance_status pstat ON ppar.performance_status_id = pstat.performance_status_id 
                         LEFT JOIN {$this->db->dbprefix}performance_appraisal_logs ppl ON ppap.appraisal_id = ppl.appraisal_id 
                         AND ppap.user_id = ppl.user_id AND ppar.approver_id = ppl.to_user_id 
@@ -2169,6 +2169,24 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['target_completion'] = $this->individual_planning_model->get_target_completion();
         $vars['strength_improvement'] = $this->mod->get_strength_improvement( $this->record_id, $user_id );
 
+        $vars['approversLog'] = array();
+        $approvers_log = "SELECT IF(ppar.display_name='', CONCAT(usp.lastname,' ',usp.firstname), ppar.display_name) AS display_name, ppar.remarks as approver_remarks, 
+                        ppl.created_on, ppar.approved_date, ppap.user_id, ppar.performance_status_id, pstat.performance_status, REPLACE(pstat.class, 'btn', 'badge') as class, pos.position, ppap.to_user_id, ppar.approver_id, ppar.edited  
+                        FROM {$this->db->dbprefix}performance_appraisal_applicable ppap 
+                        INNER JOIN {$this->db->dbprefix}performance_appraisal_approver ppar ON ppap.appraisal_id = ppar.appraisal_id 
+                        AND ppap.user_id = ppar.user_id
+                        INNER JOIN {$this->db->dbprefix}users_profile usp ON ppar.approver_id = usp.user_id
+                        LEFT JOIN {$this->db->dbprefix}users_position pos ON usp.position_id = pos.position_id
+                        INNER JOIN {$this->db->dbprefix}performance_status pstat ON ppar.performance_status_id = pstat.performance_status_id 
+                        LEFT JOIN {$this->db->dbprefix}performance_appraisal_logs ppl ON ppap.appraisal_id = ppl.appraisal_id 
+                        AND ppap.user_id = ppl.user_id AND ppar.approver_id = ppl.to_user_id 
+                        WHERE ppap.appraisal_id = {$appraisee->appraisal_id} AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppar.sequence ";
+                        
+        $approversLog = $this->db->query($approvers_log);
+        if( $approversLog->num_rows() > 0 ){
+            $vars['approversLog'] = $approversLog->result_array();
+        }
+        
         $record = $this->load->get_cached_vars();
         $vars['record'] = $record['record'];
 
