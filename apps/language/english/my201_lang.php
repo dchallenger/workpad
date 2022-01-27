@@ -222,5 +222,6 @@ $lang['my201'] = array(
     'latest_salary' => 'Latest Salary',
     'name_immediate_superior' => 'Name of Immediate Superior',	
     'training_provider' => 'Training Provider',
-    'training_cost' => 'Training Cost',    
+    'training_cost' => 'Training Cost',
+    'no_info_affiliation' => 'No available information about affiliation',
 );
