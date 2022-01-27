@@ -20,9 +20,9 @@
                             	<div class="note note-default">
 
 				                    <h3 class="page-title">
-				                    {{ lang('resources.ref') }}:<small>  Manage and Listing</small>
+				                    {{ lang('resources.ref') }}:<small>  Manage and Listing</small> 
 				                    </h3>
-				                    <p class="small">This section manages and listings of employees' HR requests and company related documents.</p>
+				                    <p class="small">This section manages the listings of employees' HR requests and company related documents.</p>
 
 				                    <hr/>
 
