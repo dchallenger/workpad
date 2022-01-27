@@ -2187,7 +2187,7 @@ class Form_application extends MY_PrivateController
                 }
                 if($leavebal > 0) {
                     $this->response->message[] = array(
-                        'message' => 'LWOP can not file, Vacation Leave has remaining balance.',
+                        'message' => 'Vacation Leave balance is still available, LWOP cannot be filed.',
                         'type' => 'error'
                     );  
                     $this->_ajax_return();                    

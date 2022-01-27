@@ -208,9 +208,9 @@ class time_form_policies {
                     $min_file_month = $this->_check_min_minutes_file($form_policy['class_value'], $date_time_from, $date_time_to, $date_time, $form_id, $forms_id, $user_id);
     				if($min_file_month == 'error'){
                         if($form_policy['severity'] == 'Warning'){
-                            $form_policy_error['warning'][] = "Minimum minutes to apply should be ".$form_policy['class_value']." minutes"; 
+                            $form_policy_error['warning'][] = "The minimum required minutes to apply is ".$form_policy['class_value']." minutes"; 
                         }else{
-                            $form_policy_error['error'][] = "Minimum minutes to apply should be ".$form_policy['class_value']." minutes"; 
+                            $form_policy_error['error'][] = "The minimum required minutes to apply is ".$form_policy['class_value']." minutes"; 
                         }
     				}
                 }
@@ -226,9 +226,9 @@ class time_form_policies {
                     $min_file_month = $this->_check_min_minutes_file($form_policy['class_value'], $date_time_from, $date_time_to, $date_time, $form_id, $forms_id, $user_id, $rest_day, $holiday);
                     if($min_file_month == 'error'){
                         if($form_policy['severity'] == 'Warning'){
-                            $form_policy_error['warning'][] = "Minimum minutes to apply for regular day should be ".$form_policy['class_value']." minutes"; 
+                            $form_policy_error['warning'][] = "The minimum required minutes to apply is ".$form_policy['class_value']." minutes on a regular day"; 
                         }else{
-                            $form_policy_error['error'][] = "Minimum minutes to apply for regular day should be ".$form_policy['class_value']." minutes"; 
+                            $form_policy_error['error'][] = "The minimum required minutes to apply is ".$form_policy['class_value']." minutes on a regular day"; 
                         }
                     }
                 }
@@ -244,9 +244,9 @@ class time_form_policies {
                     $min_file_month = $this->_check_min_minutes_file_rest_hol($form_policy['class_value'], $date_time_from, $date_time_to, $date_time, $form_id, $forms_id, $user_id, $rest_day, $holiday);
                     if($min_file_month == 'error'){
                         if($form_policy['severity'] == 'Warning'){
-                            $form_policy_error['warning'][] = "Minimum minutes to apply for rest day and holiday should be ".$form_policy['class_value']." minutes"; 
+                            $form_policy_error['warning'][] = "The minimum required minutes to apply is ".$form_policy['class_value']." minutes on a rest day and holiday"; 
                         }else{
-                            $form_policy_error['error'][] = "Minimum minutes to apply for rest day and holiday should be ".$form_policy['class_value']." minutes"; 
+                            $form_policy_error['error'][] = "The minimum required minutes to apply is ".$form_policy['class_value']." minutes on a rest day and holiday"; 
                         }
                     }
                 }
@@ -255,9 +255,9 @@ class time_form_policies {
 				$max_file_month = $this->_check_max_minutes_file($form_policy['class_value'], $date_time_from, $date_time_to, $date_time, $form_id, $forms_id, $user_id);
 				if($max_file_month == 'error'){
                     if($form_policy['severity'] == 'Warning'){
-                        $form_policy_error['warning'][] = "Maximum minutes to apply should be ".$form_policy['class_value']." minutes"; 
+                        $form_policy_error['warning'][] = "The maximum required minutes to apply is ".$form_policy['class_value']." minutes"; 
                     }else{
-                        $form_policy_error['error'][] = "Maximum minutes to apply should be ".$form_policy['class_value']." minutes"; 
+                        $form_policy_error['error'][] = "The maximum required minutes to apply is ".$form_policy['class_value']." minutes"; 
                     }
 				}
 				break;

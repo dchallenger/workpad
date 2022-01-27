@@ -1237,7 +1237,7 @@
 						<tr>
 							<!-- <th width="1%"><input type="checkbox" class="group-checkable" data-set=".record-checker" /></th> -->
 							<th width="30%">Type of Offense</th>
-							<th width="25%">No of Offense</th>
+							<th width="25%">No. of Offense</th>
 							<th width="25%">Level</th>
 							<th width="25%">Penalty</th>
 							<th width="20%">Date</th>
