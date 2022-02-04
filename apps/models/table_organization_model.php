@@ -40,6 +40,7 @@ class table_organization_model extends Record
 		if ($position != '')
 			$this->db->where('v_position',$position);
 
+		$this->db->where('users.active',1);
 		$this->db->join('partners','users.user_id = partners.user_id');
 		$this->db->join('users_profile','users.user_id = users_profile.user_id');
 		$result = $this->db->get('users');
@@ -58,6 +59,7 @@ class table_organization_model extends Record
 			$this->db->where_in('users_division.division_id',$division_ids);
 		}
 
+		$this->db->where('users.active',1);
 		$this->db->join('users','users.user_id = users_division.immediate_id');
 		$this->db->join('partners','users.user_id = partners.user_id');
 		$this->db->join('users_profile','users.user_id = users_profile.user_id');
@@ -75,6 +77,7 @@ class table_organization_model extends Record
 		if ($department_id != '')
 			$this->db->where('users_department.department_id',$department_id);
 		
+		$this->db->where('users.active',1);
 		$this->db->join('users','users.user_id = users_department.immediate_id');
 		$this->db->join('partners','users.user_id = partners.user_id');
 		$this->db->join('users_profile','users.user_id = users_profile.user_id');
@@ -96,6 +99,7 @@ class table_organization_model extends Record
 
 			$user_id = $value['user_id'];
 			$this->db->select("{$user_id} as parent_id,v_position,users.display_name,users.user_id",false);
+			$this->db->where('users.active',1);
 			$this->db->where('reports_to_id',$user_id);
 			$this->db->where_in('v_job_grade',$rank);
 			$this->db->join('partners','users.user_id = partners.user_id');
@@ -123,6 +127,7 @@ class table_organization_model extends Record
 		$content = '';
 
 		$this->db->select("{$user_id} as parent_id,v_position,users.display_name,users.user_id",false);
+		$this->db->where('users.active',1);
 		$this->db->where('users.user_id <>',222);
 		$this->db->where('reports_to_id',$user_id);
 		$this->db->where_in('v_job_grade',$rank);
@@ -146,6 +151,7 @@ class table_organization_model extends Record
 	public function get_reports_to_2nd($user_id = 0,$rank = 0) {
 		$content = '';
 		$this->db->select("{$user_id} as parent_id,v_position,users.display_name,users.user_id",false);
+		$this->db->where('users.active',1);
 		$this->db->where('users.user_id <>',222);
 		$this->db->where('reports_to_id',$user_id);
 		$this->db->where_in('v_job_grade',$rank);
@@ -169,6 +175,7 @@ class table_organization_model extends Record
 	public function get_reports_to_3rd($user_id = 0,$rank = 0) {
 		$content = '';
 		$this->db->select("{$user_id} as parent_id,v_position,users.display_name,users.user_id",false);
+		$this->db->where('users.active',1);
 		$this->db->where('users.user_id <>',222);
 		$this->db->where('reports_to_id',$user_id);
 		$this->db->where_in('v_job_grade',$rank);
@@ -192,6 +199,7 @@ class table_organization_model extends Record
 	public function get_reports_to_4th($user_id = 0,$rank = 0) {
 		$content = '';
 		$this->db->select("{$user_id} as parent_id,v_position,users.display_name,users.user_id",false);
+		$this->db->where('users.active',1);
 		$this->db->where('users.user_id <>',222);
 		$this->db->where('reports_to_id',$user_id);
 		$this->db->where_in('v_job_grade',$rank);

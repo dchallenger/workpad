@@ -84,11 +84,11 @@ class My201 extends MY_PrivateController
 			$data['reports_to'] = $reports_to;
 		}
 		else{
-			if(!empty($reports_to)) {
+			if(!empty($reports_to) && $reports_to['active'] == 1) {
 				$reports_to_MI = empty($reports_to['middlename']) ? " " : " ".ucfirst(substr($reports_to['middlename'],0,1)).". ";
 				$data['reports_to'] = $reports_to['firstname'].$reports_to_MI.$reports_to['lastname'];
 			}else{
-				$data['reports_to'] = '';
+				$data['reports_to'] = 'n/a';
 			}
 		}
 		$organization = $this->mod->get_partners_personal($this->user->user_id, 'organization');

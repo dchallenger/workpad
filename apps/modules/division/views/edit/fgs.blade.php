@@ -42,6 +42,7 @@
 				<div class="col-md-7"><?php	                            	                            		
 										$db->select('user_id,display_name');
 	                            		$db->where('deleted', '0');
+	                            		$db->where('active', '1');
 	                            		$options = $db->get('users');
 										$users_division_immediate_id_options = array('' => lang('users.select'));
 	                            		foreach($options->result() as $option)

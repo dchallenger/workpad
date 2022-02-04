@@ -1,6 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 $config["list_cached_query"] = 'SELECT 
 `ww_users_division`.`division_id` as record_id, 
+ww_users.active as "users_active",
 ww_users_division.company as "users_division_company", 
 ww_users_division.company_id as "users_division_company_id", 
 ww_users_division.division as "users_division_division", 

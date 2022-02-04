@@ -23,9 +23,11 @@
         <span id="users_division_division_code" class="small"><?php echo $users_division_division_code; ?></span>
     </td>
     <td class="hidden-xs">
-        <span id="users_division_immediate_id;"><?php echo $users_division_immediate_id; ?></span>
-        <br>
-        <span class="small" id="users_division_position"><?php echo $users_division_position; ?></span>
+        @if($users_active)
+            <span id="users_division_immediate_id;"><?php echo $users_division_immediate_id; ?></span>
+            <br>
+            <span class="small" id="users_division_position"><?php echo $users_division_position; ?></span>
+        @endif
     </td>
     <td class="hidden-xs">
         <span id="users_job_title_status_id" <?php echo $users_division_status_id == 'Active' ? 'class="badge badge-success"' : 'class="badge badge-error"' ; ?> ><?php echo $users_division_status_id; ?></span>

@@ -80,13 +80,15 @@ class signatories_model extends Record
 	function get_user_signatories( $class_id, $user_id, $position_id, $department_id, $company_id )
 	{
 		$where = array(
-			'class_id' => $class_id, 
-			'user_id' => $user_id,
+			'approver_class_user.class_id' => $class_id, 
+			'approver_class_user.user_id' => $user_id,
 /*			'position_id' => $position_id,
 			'department_id' => $department_id,
-			'company_id' => $company_id,*/ 
-			'deleted' => 0
+			'company_id' => $company_id,*/
+			'users.active' => 1,
+			'approver_class_user.deleted' => 0
 		);
+		$this->db->join('users','approver_class_user.approver_id = users.user_id');
 		$signatories = $this->db->get_where('approver_class_user', $where);
 		if( $signatories->num_rows() > 0 )
 		{
@@ -99,12 +101,14 @@ class signatories_model extends Record
 	function get_users_signatories( $user_id, $position_id, $department_id, $company_id )
 	{
 		$where = array(
-			'user_id' => $user_id,
-			'position_id' => $position_id,
-			'department_id' => $department_id,
-			'company_id' => $company_id, 
-			'deleted' => 0
+			'approver_class_users.user_id' => $user_id,
+			'approver_class_users.position_id' => $position_id,
+			'approver_class_users.department_id' => $department_id,
+			'approver_class_users.company_id' => $company_id,
+			'users.active' => 1,
+			'approver_class_users.deleted' => 0
 		);
+		$this->db->join('users','approver_class_users.approver_id = users.user_id');
 		$signatories = $this->db->get_where('approver_class_users', $where);
 		if( $signatories->num_rows() > 0 )
 		{
