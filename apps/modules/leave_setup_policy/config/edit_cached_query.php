@@ -17,6 +17,6 @@ ww_time_form_balance_setup_policy.credit as "time_form_balance_setup_policy.cred
 ww_time_form_balance_setup_policy.max_credit as "time_form_balance_setup_policy.max_credit", 
 ww_time_form_balance_setup_policy.prorated as "time_form_balance_setup_policy.prorated",
 ww_time_form_balance_setup_policy.tenure as "time_form_balance_setup_policy.tenure",
-ww_time_form_balance_setup_policy.leave_reset_date as "time_form_balance_setup_policy.leave_reset_date"
+DATE_FORMAT(ww_time_form_balance_setup_policy.leave_reset_date, \'%M %d, %Y\') as "time_form_balance_setup_policy.leave_reset_date"
 FROM (`ww_time_form_balance_setup_policy`)
 WHERE `ww_time_form_balance_setup_policy`.`policy_id` = "{$record_id}"';
