@@ -88,6 +88,7 @@ class Dtr_processing extends MY_PrivateController
 				'message' => lang('common.insufficient_permission'),
 				'type' => 'warning'
 			);
+			
 			$this->_ajax_return();
 		}
 		
