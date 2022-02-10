@@ -114,15 +114,16 @@ class Dtr_processing extends MY_PrivateController
 
 		$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', $this->mod->table, array(), $main_record,$user_id);
 
-		$this->db->where('period_id',$period_id);
-		$this->db->update('time_period',array('processed_admin' => 1));
-		
 		$this->db->query('CALL sp_time_period_process('.$period_id.','.$user_id.');');
-
+        mysqli_next_result($this->db->conn_id);
+        
 		$this->response->message[] = array(
 			'message' => 'Period successfully processed, please confirm by creating neccesary reports.',
 			'type' => 'success'
 		);
+
+		$this->db->where('period_id',$period_id);
+		$this->db->update('time_period',array('processed_admin' => 1));
 
 		$this->_ajax_return();
 	}
