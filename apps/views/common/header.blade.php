@@ -123,7 +123,7 @@
 							<li><a href="javascript:reset_all_config()"><i class="fa fa-undo"></i> Reset Configs</a></li>
 						@endif
 						<li><a href="javascript:change_password()"><i class="fa fa-key"></i> Change Password</a></li>
-						<li><a href="javascript:support_box()"><i class="fa fa-dropbox"></i> Support Box</a></li>
+						<li class="hidden"><a href="javascript:support_box()"><i class="fa fa-dropbox"></i> Support Box</a></li>
 						<li><a href="javascript:;" id="trigger_fullscreen"><i class="fa fa-move"></i> Full Screen</a></li>
 						<li><a href="{{site_url('screenlock')}}"><i class="fa fa-lock"></i> Lock Screen</a></li>
 						<li><a href="{{site_url('logout')}}"><i class="fa fa-power-off"></i> Log Out</a></li>
