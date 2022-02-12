@@ -49,7 +49,7 @@
 		<?php	} else {
 
 			if($transfer_field['table_name'] == 'ww_users'){
-				$qry = "SELECT * FROM {$transfer_field['table_name']} WHERE deleted = 0 ORDER BY display_name"; 
+				$qry = "SELECT * FROM {$transfer_field['table_name']} WHERE deleted = 0 AND active = 1 ORDER BY display_name"; 
 			}else{
 				$qry = "SELECT * FROM {$transfer_field['table_name']} WHERE deleted = 0 ORDER BY {$transfer_field['field_name']}"; 
 			}
