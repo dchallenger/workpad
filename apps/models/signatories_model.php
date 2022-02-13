@@ -102,9 +102,9 @@ class signatories_model extends Record
 	{
 		$where = array(
 			'approver_class_users.user_id' => $user_id,
-			'approver_class_users.position_id' => $position_id,
+/*			'approver_class_users.position_id' => $position_id,
 			'approver_class_users.department_id' => $department_id,
-			'approver_class_users.company_id' => $company_id,
+			'approver_class_users.company_id' => $company_id,*/
 			'users.active' => 1,
 			'approver_class_users.deleted' => 0
 		);

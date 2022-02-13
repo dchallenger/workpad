@@ -251,8 +251,9 @@ class my201_model extends Record
 	function get_user_details($user_id=0){
 
 		$this->db->select('*')
+		->join('users','users.user_id = users_profile.user_id')
 	    ->from('users_profile ')
-	    ->where('user_id', $user_id);
+	    ->where('users_profile.user_id', $user_id);
 
 	    $user_details = $this->db->get('');	
 		return $user_details->row_array();

@@ -2401,11 +2401,11 @@ class Partners extends MY_PrivateController
 			case 15:
 			//ID numbers
 			$validation_rules[] = 
-			array(
+/*			array(
 				'field' => 'partners_personal[taxcode]',
 				'label' => 'Tax Code',
 				'rules' => 'required'
-				);			
+				);*/			
 			$partners_personal_table = "partners_personal";
 			$partners_personal = $post['partners_personal'];
 			$partners_personal_key = array(

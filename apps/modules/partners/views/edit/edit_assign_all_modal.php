@@ -82,7 +82,7 @@
                             <div class="col-md-7">
                                     <div class="make-switch switch-sm" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
                                         <input type="checkbox" id="approver-temp" name="approver" class="toggle" value="1" <?php if( $signatory->approver ) echo 'checked="checked"; '?>/>
-                                        <input id="approver" type="hidden" name="approver" value="">
+                                        <input id="approver" type="hidden" name="approver" value="<?php echo $signatory->email ?>">
                                     </div>
                                 <div class="help-block small">
                                     Enable to allow permission to approve.
@@ -94,7 +94,7 @@
                             <div class="col-md-7">
                                     <div class="make-switch switch-sm" data-on-label="&nbsp;Yes&nbsp;" data-off-label="&nbsp;No&nbsp;">
                                         <input type="checkbox" id="email-temp" name="email" class="toggle" value="1" <?php if( $signatory->email ) echo 'checked="checked"; '?>/>
-                                        <input id="email-val" type="hidden" name="email" value="">
+                                        <input id="email-val" type="hidden" name="email" value="<?php echo $signatory->email ?>">
                                     </div>
                                 <div class="help-block small">
                                     Enable to notify via email.

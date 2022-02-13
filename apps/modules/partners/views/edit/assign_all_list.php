@@ -4,7 +4,7 @@
             <tr rel="0">
                 <td width="1%" class="hidden"><input type="text" class="hidden" value="<?php echo $signatory->id?>" /></td>
                 <td width="40%">
-                    <a id="date_name" href="#" class="text-success"><?php echo $signatory->alias?></a>
+                    <a id="date_name" href="#" class="text-success"><?php echo ($signatory->alias != '' ? $signatory->alias : $signatory->full_name )?></a>
                 </td>
                 <td width="18%" class="hidden-xs" style="text-align: center;">
                     <?php echo $signatory->condition ?>
