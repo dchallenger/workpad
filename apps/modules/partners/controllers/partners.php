@@ -2381,115 +2381,117 @@ class Partners extends MY_PrivateController
 			$partners_personal = (isset($post['partners_personal_history']) ? $post['partners_personal_history'] : array());
 			break;
 			case 14:
-			//Family tab
-			$validation_rules[] = 
-			array(
-				'field' => 'partners_personal_history[family-name]',
-				'label' => 'Name',
-				'rules' => 'required'
-				);
-			$validation_rules[] = 
-			array(
-				'field' => 'partners_personal_history[family-birthdate]',
-				'label' => 'Birthday',
-				'rules' => 'required'
-				);
-			$partners_personal_table = "partners_personal_history";
-			$partners_personal_key = array('family-relationship', 'family-name', 'family-birthdate', 'family-dependent', 'family-dependent-hmo', 'family-dependent-insurance');
-			$partners_personal = (isset($post['partners_personal_history'])) ? $post['partners_personal_history'] : '';
+				//Family tab
+				$partners_personal_table = "partners_personal_history";
+				$partners_personal_key = array('family-relationship', 'family-name', 'family-birthdate', 'family-dependent', 'family-dependent-hmo', 'family-dependent-insurance');
+				$partners_personal = (isset($post['partners_personal_history'])) ? $post['partners_personal_history'] : '';
+				if (!empty($partners_personal)) {
+					$validation_rules[] = 
+					array(
+						'field' => 'partners_personal_history[family-name]',
+						'label' => 'Name',
+						'rules' => 'required'
+						);
+					$validation_rules[] = 
+					array(
+						'field' => 'partners_personal_history[family-birthdate]',
+						'label' => 'Birthday',
+						'rules' => 'required'
+						);
+				}
 			break;
 			case 15:
-			//ID numbers
-			$validation_rules[] = 
-/*			array(
-				'field' => 'partners_personal[taxcode]',
-				'label' => 'Tax Code',
-				'rules' => 'required'
-				);*/			
-			$partners_personal_table = "partners_personal";
-			$partners_personal = $post['partners_personal'];
-			$partners_personal_key = array(
-                                    'taxcode_id'    => $partners_personal['taxcode'], 
-									'sss_no' 	=> $partners_personal['sss_number'], 
-									'hdmf_no' 	=> $partners_personal['pagibig_number'], 
-									'phic_no' 	=> $partners_personal['philhealth_number'], 
-									'tin' 		=> $partners_personal['tin_number']);
+				//ID numbers
+				$validation_rules[] = 
+	/*			array(
+					'field' => 'partners_personal[taxcode]',
+					'label' => 'Tax Code',
+					'rules' => 'required'
+					);*/			
+				$partners_personal_table = "partners_personal";
+				$partners_personal = $post['partners_personal'];
+				$partners_personal_key = array(
+	                                    'taxcode_id'    => $partners_personal['taxcode'], 
+										'sss_no' 	=> $partners_personal['sss_number'], 
+										'hdmf_no' 	=> $partners_personal['pagibig_number'], 
+										'phic_no' 	=> $partners_personal['philhealth_number'], 
+										'tin' 		=> $partners_personal['tin_number']);
 
-			$payroll_partners = $this->db->query("SELECT * FROM ww_payroll_partners WHERE user_id = {$this->record_id}");
-			$payroll_partners_result = $payroll_partners->row_array();
+				$payroll_partners = $this->db->query("SELECT * FROM ww_payroll_partners WHERE user_id = {$this->record_id}");
+				$payroll_partners_result = $payroll_partners->row_array();
 
-			if($payroll_partners_result['account_type_id'] == 1){
+				if($payroll_partners_result['account_type_id'] == 1){
 
-				$partners_personal_key['bank_account'] = $partners_personal['bank_account_number_current'];
-			}
-			elseif($payroll_partners_result['account_type_id'] == 2){
+					$partners_personal_key['bank_account'] = $partners_personal['bank_account_number_current'];
+				}
+				elseif($payroll_partners_result['account_type_id'] == 2){
 
-				$partners_personal_key['bank_account'] = $partners_personal['bank_account_number_savings'] ?? '';
-			}
+					$partners_personal_key['bank_account'] = $partners_personal['bank_account_number_savings'] ?? '';
+				}
 
-			$other_tables['payroll_partners'] = $partners_personal_key;
-			$partners_personal_key = array('taxcode', 'sss_number', 'pagibig_number', 'philhealth_number', 'tin_number', 'bank_account_number_savings', 'bank_account_number_current', 'payroll_bank_account_number', 'payroll_bank_name', 'bank_account_name', 'health_care', 'drivers_license_no', 'passport_no');
+				$other_tables['payroll_partners'] = $partners_personal_key;
+				$partners_personal_key = array('taxcode', 'sss_number', 'pagibig_number', 'philhealth_number', 'tin_number', 'bank_account_number_savings', 'bank_account_number_current', 'payroll_bank_account_number', 'payroll_bank_name', 'bank_account_name', 'health_care', 'drivers_license_no', 'passport_no');
 
-			if(!empty($partners_personal['sss_number'])){
-				$mobile = $this->mod->check_id_number('sss_number',$partners_personal['sss_number'],$this->record_id);
-				if($mobile){
-					$this->response->invalid=true;
-					$this->response->invalid_message='SSS Number already Exists...';
-					$this->response->message[] = array(
-				    	'message' => 'SSS Number already Exists...',
-				    	'type' => 'error'
-					);
-	        		$this->_ajax_return();
-	        	}
-			}
-			if(!empty($partners_personal['pagibig_number'])){
-				$mobile = $this->mod->check_id_number('pagibig_number',$partners_personal['pagibig_number'],$this->record_id);
-				if($mobile){
-					$this->response->invalid=true;
-					$this->response->invalid_message='Pagibig Number already Exists...';
-					$this->response->message[] = array(
-				    	'message' => 'Pagibig Number already Exists...',
-				    	'type' => 'error'
-					);
-	        		$this->_ajax_return();
-	        	}
-			}
-			if(!empty($partners_personal['philhealth_number'])){
-				$mobile = $this->mod->check_id_number('philhealth_number',$partners_personal['philhealth_number'],$this->record_id);
-				if($mobile){
-					$this->response->invalid=true;
-					$this->response->invalid_message='Philhealth Number already Exists...';
-					$this->response->message[] = array(
-				    	'message' => 'Philhealth Number already Exists...',
-				    	'type' => 'error'
-					);
-	        		$this->_ajax_return();
-	        	}
-			}
-			if(!empty($partners_personal['tin_number'])){
-				$mobile = $this->mod->check_id_number('tin_number',$partners_personal['tin_number'],$this->record_id);
-				if($mobile){
-					$this->response->invalid=true;
-					$this->response->invalid_message='TIN already Exists...';
-					$this->response->message[] = array(
-				    	'message' => 'TIN already Exists...',
-				    	'type' => 'error'
-					);
-	        		$this->_ajax_return();
-	        	}
-			}
-			if(!empty($partners_personal['payroll_bank_account_number'])){
-				$mobile = $this->mod->check_id_number('payroll_bank_account_number',$partners_personal['payroll_bank_account_number'],$this->record_id);
-				if($mobile){
-					$this->response->invalid=true;
-					$this->response->invalid_message='Payroll Bank Account Number already Exists...';
-					$this->response->message[] = array(
-				    	'message' => 'Payroll Bank Account Number already Exists...',
-				    	'type' => 'error'
-					);
-	        		$this->_ajax_return();
-	        	}
-			}
+				if(!empty($partners_personal['sss_number'])){
+					$mobile = $this->mod->check_id_number('sss_number',$partners_personal['sss_number'],$this->record_id);
+					if($mobile){
+						$this->response->invalid=true;
+						$this->response->invalid_message='SSS Number already Exists...';
+						$this->response->message[] = array(
+					    	'message' => 'SSS Number already Exists...',
+					    	'type' => 'error'
+						);
+		        		$this->_ajax_return();
+		        	}
+				}
+				if(!empty($partners_personal['pagibig_number'])){
+					$mobile = $this->mod->check_id_number('pagibig_number',$partners_personal['pagibig_number'],$this->record_id);
+					if($mobile){
+						$this->response->invalid=true;
+						$this->response->invalid_message='Pagibig Number already Exists...';
+						$this->response->message[] = array(
+					    	'message' => 'Pagibig Number already Exists...',
+					    	'type' => 'error'
+						);
+		        		$this->_ajax_return();
+		        	}
+				}
+				if(!empty($partners_personal['philhealth_number'])){
+					$mobile = $this->mod->check_id_number('philhealth_number',$partners_personal['philhealth_number'],$this->record_id);
+					if($mobile){
+						$this->response->invalid=true;
+						$this->response->invalid_message='Philhealth Number already Exists...';
+						$this->response->message[] = array(
+					    	'message' => 'Philhealth Number already Exists...',
+					    	'type' => 'error'
+						);
+		        		$this->_ajax_return();
+		        	}
+				}
+				if(!empty($partners_personal['tin_number'])){
+					$mobile = $this->mod->check_id_number('tin_number',$partners_personal['tin_number'],$this->record_id);
+					if($mobile){
+						$this->response->invalid=true;
+						$this->response->invalid_message='TIN already Exists...';
+						$this->response->message[] = array(
+					    	'message' => 'TIN already Exists...',
+					    	'type' => 'error'
+						);
+		        		$this->_ajax_return();
+		        	}
+				}
+				if(!empty($partners_personal['payroll_bank_account_number'])){
+					$mobile = $this->mod->check_id_number('payroll_bank_account_number',$partners_personal['payroll_bank_account_number'],$this->record_id);
+					if($mobile){
+						$this->response->invalid=true;
+						$this->response->invalid_message='Payroll Bank Account Number already Exists...';
+						$this->response->message[] = array(
+					    	'message' => 'Payroll Bank Account Number already Exists...',
+					    	'type' => 'error'
+						);
+		        		$this->_ajax_return();
+		        	}
+				}
 			break;
 			case 16:
 			//Test Profile tab
