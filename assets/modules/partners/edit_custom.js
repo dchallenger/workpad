@@ -1146,6 +1146,9 @@ function save_signatory()
 				}else if(response.cpla == 1){
 					var affected_count = response.pending_cpla_count;
 					var affected = 'car plan loan application';
+				}else {
+					var affected_count = 0;
+					var affected = '';
 				}
 
 				if(affected_count == 0){
