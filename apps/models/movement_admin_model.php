@@ -67,7 +67,9 @@ class movement_admin_model extends Record
 	        }			
 		}*/
 
-		$qry .= " AND ((ww_partners_movement.status_id >= 6 OR (ww_partners_movement.status_id > 6 AND ".$this->user->user_id." IN (SELECT user_id FROM ww_partners_movement_approver_hr WHERE movement_id = ww_partners_movement.`movement_id`))) OR (ww_partners_movement.status_id IN (1,6) AND ww_partners_movement.`created_by` = ".$this->user->user_id."))";
+		if ($this->user->user_id > 1) {
+			$qry .= " AND ((ww_partners_movement.status_id >= 6 OR (ww_partners_movement.status_id > 6 AND ".$this->user->user_id." IN (SELECT user_id FROM ww_partners_movement_approver_hr WHERE movement_id = ww_partners_movement.`movement_id`))) OR (ww_partners_movement.status_id IN (1,6) AND ww_partners_movement.`created_by` = ".$this->user->user_id."))";
+		}
 
         $qry_category = $this->mod->get_role_category();
 
