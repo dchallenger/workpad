@@ -71,8 +71,8 @@
     </div>
     <hr class='margin-top-10 margin-bottom-10'>
     <div>
-        <button type='button' class='btn btn-success btn-xs approve-pop-loan small text-success margin-right-10 margin-left-10' data-loan-application-id='{{ $loan_application_id }}' data-loan-application-owner='{{ $user_id }}' data-user-name='' data-user-id='{{ $approver_id }}' data-decission='1'><i class='fa fa-thumbs-o-up'></i> {{ lang('loan_application.approve') }}</button>
-        <button type='button' class='btn btn-danger btn-xs decline-pop-loan small text-danger margin-right-10' data-loan-application-id='{{ $loan_application_id }}' data-loan-application-owner='{{ $user_id }}' data-user-name='' data-user-id='{{ $approver_id }}' data-decission='0'><i class='fa fa-thumbs-o-down' ></i> {{ lang('loan_application.decline') }}</button>
+        <button type='button' class='btn btn-success btn-xs approve-pop-loan small text-success margin-right-10 margin-left-10' data-loan-application-id='{{ $loan_application_id }}' data-loan-application-owner='{{ $user_id }}' data-user-name='' data-user-id='{{ $approver_id }}' data-decission='6'><i class='fa fa-thumbs-o-up'></i> {{ lang('loan_application.approve') }}</button>
+        <button type='button' class='btn btn-danger btn-xs decline-pop-loan small text-danger margin-right-10' data-loan-application-id='{{ $loan_application_id }}' data-loan-application-owner='{{ $user_id }}' data-user-name='' data-user-id='{{ $approver_id }}' data-decission='7'><i class='fa fa-thumbs-o-down' ></i> {{ lang('loan_application.decline') }}</button>
         <button type='button' class='btn btn-default btn-xs close-pop small text-muted pull-right'><i class='fa fa-times'></i> {{ lang('loan_application.close') }}</button>
     </div>
 </div>

@@ -65,8 +65,8 @@
     </div>
     <hr class='margin-top-10 margin-bottom-10'>
     <div>
-        <button type='button' class='btn btn-success btn-sm approve-pop small text-success margin-right-5' data-forms-id='{{ $forms_id }}' data-form-owner='{{ $user_id }}' data-user-name='' data-user-id='{{ $approver_id }}' data-decission='1'><i class='fa fa-thumbs-o-up'></i> {{ lang('form_application_manage.approve') }}</button>
-        <button type='button' class='btn btn-danger btn-sm decline-pop small text-danger' data-forms-id='{{ $forms_id }}' data-form-owner='{{ $user_id }}' data-user-name='' data-user-id='{{ $approver_id }}' data-decission='0'><i class='fa fa-thumbs-o-down' ></i> {{ lang('form_application_manage.decline') }}</button>
+        <button type='button' class='btn btn-success btn-sm approve-pop small text-success margin-right-5' data-forms-id='{{ $forms_id }}' data-form-owner='{{ $user_id }}' data-user-name='' data-user-id='{{ $approver_id }}' data-decission='6'><i class='fa fa-thumbs-o-up'></i> {{ lang('form_application_manage.approve') }}</button>
+        <button type='button' class='btn btn-danger btn-sm decline-pop small text-danger' data-forms-id='{{ $forms_id }}' data-form-owner='{{ $user_id }}' data-user-name='' data-user-id='{{ $approver_id }}' data-decission='7'><i class='fa fa-thumbs-o-down' ></i> {{ lang('form_application_manage.decline') }}</button>
         <button type='button' class='btn btn-default btn-sm close-pop small text-muted'><i class='fa fa-long-arrow-right'></i> {{ lang('form_application_manage.close') }}</button>
     </div>
 </div>
