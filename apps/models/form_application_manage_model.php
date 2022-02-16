@@ -590,7 +590,9 @@ public function call_sp_time_calendar($date_from='', $date_to='', $user_id=0){
 								FROM ww_time_forms_approver tfa
 								INNER JOIN users_profile up ON tfa.`user_id` = up.user_id
 								LEFT JOIN ww_users_position usp ON up.position_id = usp.position_id
-								WHERE forms_id = {$forms_id} 
+								LEFT JOIN ww_users u ON u.user_id = up.user_id
+								WHERE forms_id = {$forms_id}
+								AND u.active = 1
 								ORDER BY tfa.sequence";
         					
 		$form_approver_sql = $this->db->query($form_approver_qry);

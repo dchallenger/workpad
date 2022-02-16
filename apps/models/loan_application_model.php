@@ -103,8 +103,10 @@ class loan_application_model extends Record
 							`position`, plaa.loan_application_status, plaa.loan_application_status_id 
 							FROM ww_partners_loan_application_approver plaa
 							JOIN ww_users_profile up ON plaa.user_id = up.user_id 
-							LEFT JOIN ww_users_position upos ON up.position_id = upos.position_id 
-							WHERE plaa.loan_application_id = {$loan_application_id}");
+							LEFT JOIN ww_users_position upos ON up.position_id = upos.position_id
+							LEFT JOIN ww_users u ON u.user_id = up.user_id
+							WHERE plaa.loan_application_id = {$loan_application_id}"
+							AND u.active = 1);
 
 		if ($partners_loan_approvers && $partners_loan_approvers->num_rows() > 0)
 			return $partners_loan_approvers->result_array();
