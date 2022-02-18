@@ -60,11 +60,12 @@ class Appraisal_individual_planning extends MY_PrivateController
                         INNER JOIN {$this->db->dbprefix}performance_planning_approver ppar ON ppap.planning_id = ppar.planning_id 
                         AND ppap.user_id = ppar.appraisee_id 
                         INNER JOIN {$this->db->dbprefix}users_profile usp ON ppar.approver_id = usp.user_id
+                        INNER JOIN {$this->db->dbprefix}users u ON u.user_id = usp.user_id
                         INNER JOIN {$this->db->dbprefix}users_position pos ON usp.position_id = pos.position_id
                         INNER JOIN {$this->db->dbprefix}performance_status pstat ON ppar.performance_status_id = pstat.performance_status_id 
                         LEFT JOIN {$this->db->dbprefix}performance_planning_logs ppl ON ppap.planning_id = ppl.planning_id 
                         AND ppap.user_id = ppl.user_id AND ppar.approver_id = ppl.to_user_id 
-                        WHERE ppap.planning_id = {$appraisee->planning_id} AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppar.sequence ";
+                        WHERE ppap.planning_id = {$appraisee->planning_id} AND u.active = 1 AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppar.sequence ";
 
         $approversLog = $this->db->query($approvers_log);
         if( $approversLog->num_rows() > 0 ){
@@ -117,11 +118,12 @@ class Appraisal_individual_planning extends MY_PrivateController
                         INNER JOIN {$this->db->dbprefix}performance_planning_approver ppar ON ppap.planning_id = ppar.planning_id 
                         AND ppap.user_id = ppar.appraisee_id 
                         INNER JOIN {$this->db->dbprefix}users_profile usp ON ppar.approver_id = usp.user_id
+                        INNER JOIN {$this->db->dbprefix}users u ON u.user_id = usp.user_id
                         INNER JOIN {$this->db->dbprefix}users_position pos ON usp.position_id = pos.position_id
                         INNER JOIN {$this->db->dbprefix}performance_status pstat ON ppar.performance_status_id = pstat.performance_status_id 
                         LEFT JOIN {$this->db->dbprefix}performance_planning_logs ppl ON ppap.planning_id = ppl.planning_id 
                         AND ppap.user_id = ppl.user_id AND ppar.approver_id = ppl.to_user_id 
-                        WHERE ppap.planning_id = {$appraisee->planning_id} AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppl.id ";
+                        WHERE ppap.planning_id = {$appraisee->planning_id} AND u.active = 1 AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppl.id ";
 
         $approversLog = $this->db->query($approvers_log);
         if( $approversLog->num_rows() > 0 ){
@@ -1411,11 +1413,12 @@ class Appraisal_individual_planning extends MY_PrivateController
                         FROM {$this->db->dbprefix}performance_planning_applicable ppap 
                         INNER JOIN {$this->db->dbprefix}performance_planning_approver ppar ON ppap.planning_id = ppar.planning_id AND ppap.user_id = ppar.appraisee_id 
                         INNER JOIN {$this->db->dbprefix}users_profile usp ON ppar.approver_id = usp.user_id
+                        INNER JOIN {$this->db->dbprefix}users u ON u.user_id = usp.user_id
                         INNER JOIN {$this->db->dbprefix}users_position pos ON usp.position_id = pos.position_id
                         INNER JOIN {$this->db->dbprefix}performance_status pstat ON ppar.performance_status_id = pstat.performance_status_id 
                         LEFT JOIN {$this->db->dbprefix}performance_planning_logs ppl ON ppap.planning_id = ppl.planning_id 
                         AND ppap.user_id = ppl.user_id AND ppar.approver_id = ppl.to_user_id 
-                        WHERE ppap.planning_id = {$appraisee->planning_id} AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppar.sequence ";
+                        WHERE ppap.planning_id = {$appraisee->planning_id} AND u.active = 1 AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppar.sequence ";
 
         $approversLog = $this->db->query($approvers_log);
 
@@ -1493,11 +1496,12 @@ class Appraisal_individual_planning extends MY_PrivateController
                         FROM {$this->db->dbprefix}performance_planning_applicable ppap 
                         INNER JOIN {$this->db->dbprefix}performance_planning_approver ppar ON ppap.planning_id = ppar.planning_id AND ppap.user_id = ppar.appraisee_id 
                         INNER JOIN {$this->db->dbprefix}users_profile usp ON ppar.approver_id = usp.user_id
+                        INNER JOIN {$this->db->dbprefix}users u ON u.user_id = usp.user_id
                         INNER JOIN {$this->db->dbprefix}users_position pos ON usp.position_id = pos.position_id
                         INNER JOIN {$this->db->dbprefix}performance_status pstat ON ppar.performance_status_id = pstat.performance_status_id 
                         LEFT JOIN {$this->db->dbprefix}performance_planning_logs ppl ON ppap.planning_id = ppl.planning_id 
                         AND ppap.user_id = ppl.user_id AND ppar.approver_id = ppl.to_user_id 
-                        WHERE ppap.planning_id = {$appraisee->planning_id} AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppar.sequence ";
+                        WHERE ppap.planning_id = {$appraisee->planning_id} AND u.active = 1 AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppar.sequence ";
 
         $approversLog = $this->db->query($approvers_log);
 
