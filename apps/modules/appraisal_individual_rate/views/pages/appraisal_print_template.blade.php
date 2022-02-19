@@ -738,7 +738,7 @@
                 <tbody>
                     <tr>
                         <td align="left" style="<?php echo $bltr ?>">
-                            <span><b>What are the employees strengths?</b></span>
+                            <span><b>What are the employees strength's?</b></span>
                         </td>
                     </tr>
                     <?php foreach($strength_improvement->result() as $row) { ?>
@@ -752,7 +752,7 @@
                 <tbody>
                     <tr>
                         <td align="left" style="<?php echo $bltr ?>">
-                            <span><b>What areas of performance needs enhancement or improvement?</b></span>
+                            <span><b>What area of performance needs enhancement or improvement?</b></span>
                         </td>
                     </tr>
                     <?php foreach($strength_improvement->result() as $row) { ?>
@@ -892,7 +892,7 @@
                         <td style="<?php echo $blt ?>"></td>
                         <td style="<?php echo $blt ?>"></td>
                         <td style="<?php echo $blt ?>"></td>
-                        <td class="bold" style="<?php echo $blt ?>"><b>Selft Rating</b></td>
+                        <td class="bold" style="<?php echo $blt ?>"><b>Self Rating</b></td>
                         <td class="self_rating" style="<?php echo $bltr ?>"><?php echo $appraisee->self_rating ?></td>
                     </tr>
                     <tr>
@@ -909,6 +909,46 @@
                 <?php } ?>
             </tbody>                                
         </table>
+        <?php if (!empty($approversLog)) { ?>
+            <br>
+            <table align='center' cellpadding="2px" cellspacing="0" style='width: 100%; height: auto; background: #fff'>
+                <thead>
+                    <tr>
+                        <th style="<?php echo $blt ?>">APPROVER</th>
+                        <th style="<?php echo $blt ?>">COMMENTS</th>
+                        <th style="<?php echo $blt ?>">DATE/TIME</th>
+                        <th style="<?php echo $bltr ?>">STATUS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($approversLog as $applog) { ?>
+                        <tr>
+                            <td style="<?php echo $blt ?>"><?php echo $applog['display_name'] ?> <br><small class="text-muted"><?php echo $applog['position'] ?></small></td>
+                            <td style="<?php echo $blt ?>"><?php echo $applog['approver_remarks'] ?></td>
+                            <td style="<?php echo $blt ?>">
+                            <?php if( strtotime($applog['approved_date']) && $applog['approved_date'] != '1970-01-01' ) { ?>
+                                <span class="text-success"><?php echo date('M d, Y', strtotime($applog['approved_date'])) ?></span>
+                                <br />
+                                <span id="date_set" class="small text-muted"><?php echo date('h:i a', strtotime($applog['approved_date'])) ?></span>
+                            <?php } ?>
+                            </td>
+                            <td style="<?php echo $bltr ?>">
+                                <span class="<?php echo $applog['class'] ?>"> <?php echo $applog['performance_status'] ?></span><br>
+                            <?php if( $applog['approver_id'] == $applog['to_user_id'] ) { ?>
+                                <span class="small text-danger">Attention to <?php echo $applog['display_name'] ?></span>
+                            <?php } ?>
+                            </td>
+                        </tr>                        
+                    <?php } ?>
+                    <tr>
+                        <th style="<?php echo $bt ?>">&nbsp;</th>
+                        <th style="<?php echo $bt ?>">&nbsp;</th>
+                        <th style="<?php echo $bt ?>">&nbsp;</th>
+                        <th style="<?php echo $bt ?>">&nbsp;</th>
+                    </tr>
+                </tbody>             
+            </table>
+        <?php } ?>
     </table>        
     </body>
 <!-- BEGIN BODY -->

@@ -295,7 +295,7 @@
 										<tbody class="strength_container">
 											<tr>
 												<td>
-													<span><b>What are the employees strengths?</b></span>
+													<span><b>What are the employees strength's?</b></span>
 													<span><a href="javascript:void(0)" class="btn-success" style="padding:1px 4px"><i class="fa fa-plus add_strength"></i></a></span>
 												</td>
 												<td>&nbsp;</td>
@@ -320,7 +320,7 @@
 										<tbody class="improvement_container">
 											<tr>
 												<td>
-													<span><b>What areas of performance needs enhancement or improvement?</b></span>
+													<span><b>What area of performance needs enhancement or improvement?</b></span>
 													<span><a href="javascript:void(0)" class="btn-success" style="padding:1px 4px"><i class="fa fa-plus add_improvement"></i></a></span>
 												</td>
 												<td>&nbsp;</td>
@@ -500,7 +500,7 @@
 													<td></td>
 													<td></td>
 													<td></td>
-													<td class="bold">Selft Rating</td>
+													<td class="bold">Self Rating</td>
 													<td class="self_rating">{{$appraisee->self_rating}}</td>															
 												</tr>
 												<tr>

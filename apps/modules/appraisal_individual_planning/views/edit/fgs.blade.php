@@ -313,13 +313,13 @@
 										<table class="table table-bordered">
 											<thead>
 												<tr>
-													<th>GENERAL CRITERIA</th>
-													<th>KEY IN WEIGHT (%)</th>
-													<th>SELF RATING</th>
-													<th>COACH'S RATING</th>
-													<th>SECTION RATING</th>
-													<th>WEIGH IN (%)</th>
-													<th>TOTAL WEIGHTED SCORE</th>
+													<th class="text-center">GENERAL CRITERIA</th>
+													<th class="text-center">KEY IN WEIGHT (%)</th>
+													<th class="text-center">SELF RATING</th>
+													<th class="text-center">COACH'S RATING</th>
+													<th class="text-center">SECTION RATING</th>
+													<th class="text-center">WEIGH IN (%)</th>
+													<th class="text-center">TOTAL WEIGHTED SCORE</th>
 												</tr>
 											</thead>
 											<tbody>

@@ -516,7 +516,7 @@
 													<td></td>
 													<td></td>
 													<td></td>
-													<td class="bold">Selft Rating</td>
+													<td class="bold">Self Rating</td>
 													<td class="self_rating">{{$appraisee->self_rating}}</td>															
 												</tr>
 												<tr>

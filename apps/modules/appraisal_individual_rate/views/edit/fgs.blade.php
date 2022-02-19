@@ -428,7 +428,7 @@
 													<td></td>
 													<td></td>
 													<td></td>
-													<td class="bold">Selft Rating</td>
+													<td class="bold">Self Rating</td>
 													<td class="self_rating">{{$appraisee->self_rating}}</td>															
 												</tr>
 												<tr>
@@ -500,7 +500,7 @@
 								@endforeach
 							@else
 								<tr>
-									<td colspan="3" align="center">
+									<td colspan="4" align="center">
 										No Approver/s Setup
 									</td>
 								</tr>

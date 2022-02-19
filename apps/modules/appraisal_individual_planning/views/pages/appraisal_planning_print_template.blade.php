@@ -425,15 +425,15 @@
                     <th colspan="9" align="left" style="<?php echo $bltr ?>">OVERALL RATING</th>
                 </tr>
                 <tr>
-                    <th style="<?php echo $blt ?>">GENERAL CRITERIA</th>
-                    <th style="<?php echo $blt ?>">KEY IN WEIGHT (%)</th>
-                    <th style="<?php echo $blt ?>">SELF RATING</th>
-                    <th style="<?php echo $blt ?>">COACH'S RATING</th>
-                    <th style="<?php echo $blt ?>">TOTAL WEIGHTED / AVERAGE</th>
-                    <th style="<?php echo $blt ?>">COACH'S SECTION RATING</th>
-                    <th style="<?php echo $blt ?>">WEIGH IN (%)</th>
-                    <th style="<?php echo $blt ?>">TOTAL WEIGHTED SCORE</th>
-                    <th style="<?php echo $bltr ?>">COACH'S TOTAL WEIGHTED SCORE</th>
+                    <th style="<?php echo $blt ?>" class="text-center">GENERAL CRITERIA</th>
+                    <th style="<?php echo $blt ?>" class="text-center">KEY IN WEIGHT (%)</th>
+                    <th style="<?php echo $blt ?>" class="text-center">SELF RATING</th>
+                    <th style="<?php echo $blt ?>" class="text-center">COACH'S RATING</th>
+                    <th style="<?php echo $blt ?>" class="text-center">TOTAL WEIGHTED / AVERAGE</th>
+                    <th style="<?php echo $blt ?>" class="text-center">COACH'S SECTION RATING</th>
+                    <th style="<?php echo $blt ?>" class="text-center">WEIGH IN (%)</th>
+                    <th style="<?php echo $blt ?>" class="text-center">TOTAL WEIGHTED SCORE</th>
+                    <th style="<?php echo $bltr ?>" class="text-center">COACH'S TOTAL WEIGHTED SCORE</th>
                 </tr>
             </thead>
             <tbody>
