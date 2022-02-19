@@ -48,6 +48,7 @@ class dashboard_model extends Record
 				LEFT JOIN {$this->db->dbprefix}users_company c on c.company_id = b.company_id
 				LEFT JOIN {$this->db->dbprefix}business_group d on d.group_id = c.business_group_id
 				WHERE recipient_id = '$userID' AND message_type IN ('Announcement','Birthday','Company News')
+				ORDER BY createdon_datetime DESC
 				LIMIT $limit OFFSET $start;";
 
 		$result = $this->db->query($qry);

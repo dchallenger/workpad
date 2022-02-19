@@ -341,7 +341,7 @@ class Mrf extends MY_PrivateController
 			$this->db->order_by('sequence');
 			$this->db->select('recruitment_request_approver.*,users.display_name');
 			$this->db->join('users','users.user_id=recruitment_request_approver.approver_id','left');
-			$check = $this->db->get_where('recruitment_request_approver', array('request_id' => $this->record_id));
+			$check = $this->db->get_where('recruitment_request_approver', array('request_id' => $this->record_id,'users.active' => 1));
 
 			/*if( $check->num_rows() == 0 )
 			{
@@ -538,10 +538,12 @@ class Mrf extends MY_PrivateController
 				$req_by = $this->db->get_where('users', array('user_id' => $req->user_id))->row();
 				//get approvers
 		        $where = array(
-		            'request_id' => $this->record_id,
-		            'user_id' => $req->user_id,
+		            'recruitment_request_approver.request_id' => $this->record_id,
+		            'recruitment_request_approver.user_id' => $req->user_id,
+		            'users.active' => 1
 		        );
 		        $this->db->order_by('sequence');
+		        $this->db->join('users','users.user_id = recruitment_request_approver.approver_id');
 		        $approvers = $this->db->get_where('recruitment_request_approver', $where)->result();
 
 		        $no_approvers = sizeof($approvers);

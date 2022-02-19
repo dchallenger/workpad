@@ -341,7 +341,7 @@ class Mrf_admin extends MY_PrivateController
 			$this->db->order_by('sequence');
 			$this->db->select('recruitment_request_approver.*,users.display_name');
 			$this->db->join('users','users.user_id=recruitment_request_approver.approver_id','left');
-			$check = $this->db->get_where('recruitment_request_approver', array('request_id' => $this->record_id));
+			$check = $this->db->get_where('recruitment_request_approver', array('request_id' => $this->record_id, 'users.active' => 1));
 			$user_id = $this->user->user_id;
 			$data['user_id'] = $user_id;
 			$data['approver'] = $check->result_array();

@@ -64,7 +64,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                         INNER JOIN {$this->db->dbprefix}users_position pos ON usp.position_id = pos.position_id
                         INNER JOIN {$this->db->dbprefix}performance_status pstat ON ppar.performance_status_id = pstat.performance_status_id 
                         LEFT JOIN {$this->db->dbprefix}performance_planning_logs ppl ON ppap.planning_id = ppl.planning_id 
-                        AND ppap.user_id = ppl.user_id AND ppar.approver_id = ppl.to_user_id 
+                        AND ppap.user_id = ppl.user_id AND ppar.approver_id = ppl.to_user_id
                         WHERE ppap.planning_id = {$appraisee->planning_id} AND u.active = 1 AND ppap.user_id = {$appraisee->user_id} GROUP BY ppar.approver_id ORDER BY ppar.sequence ";
 
         $approversLog = $this->db->query($approvers_log);
