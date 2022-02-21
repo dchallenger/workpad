@@ -1787,7 +1787,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                         INNER JOIN {$this->db->dbprefix}users u
                         ON u.user_id = up.user_id 
                         WHERE ppa.planning_id = {$_POST['planning_id']} AND u.active = 1 AND ppa.user_id = {$_POST['user_id']}
-                    ";
+                    "; 
         $app_sql = $this->db->query($approvers);
         if($app_sql->num_rows() > 0){
             $approvers_list = $app_sql->result_array();
