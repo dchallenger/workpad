@@ -113,12 +113,12 @@
 					<!--Signatories Remarks-->
                     <div class="portlet margin-top-25">
 						<div class="portlet-title">
-							<div class="caption">Questionaire</div>
+							<div class="caption">Questionnaire</div>
 							<div class="tools">
 								<a class="collapse" href="javascript:;"></a>
 							</div>
 						</div>
-						<p class="margin-bottom-25 small">This section manage to add and edit items in exit interview questionnaire.</p>
+						<p class="margin-bottom-25 small">To what degree has the following items affected your decision to leave?</p>
 
 						<div class="portlet-body">
 							<div class="clearfix hidden">

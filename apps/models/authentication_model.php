@@ -246,7 +246,7 @@ class Authentication_model extends Record
 			$this->db->where('active', 1);
 			$this->db->where( "(login = '{$username}' OR email = '{$username}')" );
 			$user = $this->db->get('users');
-			if( $user->num_rows() == 1 ) return true;
+			if( $user->num_rows() >= 1 ) return true;
 		}
 
 		$multidb = $this->load->config('multidb', true, true);

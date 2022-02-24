@@ -895,12 +895,18 @@ function currency_format($number,$remove_decimal = 1) {
 
 
 function get_tenure($employment_date) {
-	$current_date = new DateTime(date('Y-m-d'));
-	$employed_date = new DateTime(date('Y-m-d',strtotime( $employment_date ) ));
+	$invalid_date = ['1970-01-01',"",'0000-00-00'];
 
-	$diff = $employed_date->diff($current_date);
+	if (in_array($employment_date, $invalid_date)) {
+		return '';
+	} else {
+		$current_date = new DateTime(date('Y-m-d'));
+		$employed_date = new DateTime(date('Y-m-d',strtotime( $employment_date ) ));
 
-	return $diff->y;
+		$diff = $employed_date->diff($current_date);
+
+		return $diff->y;
+	}
 }
 
 function valid_date($date_val) {
