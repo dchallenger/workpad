@@ -462,8 +462,23 @@ class Dashboard extends MY_PrivateController{
 			// 	  the recipient has submitted.
 			$this->load->model('form_application_manage_model', 'dash_mod');
 
+            switch ($this->input->post('decission')) {
+                case 6:
+                    $action = 'approved';
+                    break;
+                case 7:
+                    $action = 'disapproved';
+                    break;
+                case 8:
+                    $action = 'cancelled';
+                    break;
+                default:
+                    $action = '';
+                    break;
+            }
+
 			$approver 		= $this->input->post('username');
-			$action 		= $this->input->post('decission') == '1' ? ' approved ' : ' disapproved '; 
+			//$action 		= $this->input->post('decission') == '6' ? ' approved ' : ' disapproved '; 
             $form_name      = $this->dash_mod->get_form_information($this->input->post('formid')); 
 			// $form_name 		= $this->input->post('formname'); 
 			$recipient 		= $this->input->post('formownerid');
@@ -527,13 +542,28 @@ class Dashboard extends MY_PrivateController{
             // 1. set forms approver decision
             $result = $this->loan_app_manage->setDecission($this->input->post());
 
+            switch ($this->input->post('decission')) {
+                case 6:
+                    $action = 'approved';
+                    break;
+                case 7:
+                    $action = 'disapproved';
+                    break;
+                case 8:
+                    $action = 'cancelled';
+                    break;
+                default:
+                    $action = '';
+                    break;
+            }
+
             // 2. build a notification message
             //    designed to determine the type of form
             //    the recipient has submitted.
             $this->load->model('form_application_manage_model', 'dash_mod');
 
             $approver       = $this->input->post('username');
-            $action         = $this->input->post('decission') == '1' ? ' approved ' : ' disapproved '; 
+            //$action         = $this->input->post('decission') == '6' ? ' approved ' : ' disapproved '; 
             $loan_application_info      = $this->loan_app_manage->get_loan_application_details($this->input->post('loan_application_id')); 
             // $loan_application_info       = $this->input->post('formname'); 
             $recipient      = $this->input->post('loan_application_owner_id');
