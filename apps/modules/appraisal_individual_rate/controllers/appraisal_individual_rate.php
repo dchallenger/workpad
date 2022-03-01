@@ -336,7 +336,7 @@ class Appraisal_individual_rate extends MY_PrivateController
                         $approver_result = $this->db->get('users');
                         $approver_info = $approver_result->row();
 
-                        $approver_recepient = $approver->approver_id;
+                        $approver_recepient = $approver_info->email;
                         $sendtargetsettings['approver'] = $approver_info->full_name;
 
                         $sendtargetsettings['appraisee'] = $appraisee->fullname;
@@ -393,7 +393,7 @@ class Appraisal_individual_rate extends MY_PrivateController
                             $appraisee_result = $this->db->get('users');
                             $appraisee_info = $appraisee_result->row();
 
-                            $appraisee_recepient = $this->input->post('user_id');
+                            $appraisee_recepient = $appraisee_info->email;
                             $sendtargetsettings['recepient'] = $appraisee_info->full_name;
 
                             $target_settings_send_template = $this->db->get_where( 'system_template', array( 'code' => 'PERFORMANCE-APPRAISAL-SEND-APPROVED') )->row_array();
@@ -434,7 +434,7 @@ class Appraisal_individual_rate extends MY_PrivateController
                             $approver_result = $this->db->get('users');
                             $approver_info = $approver_result->row();
 
-                            $approver_recepient = $approver->approver_id;
+                            $approver_recepient = $approver_info->email;
                             $sendtargetsettings['approver'] = $approver_info->full_name;
 
                             $target_settings_send_template = $this->db->get_where( 'system_template', array( 'code' => 'PERFORMANCE-APPRAISAL-SEND-APPROVER') )->row_array();
@@ -895,7 +895,7 @@ class Appraisal_individual_rate extends MY_PrivateController
                         $approver_result = $this->db->get('users');
                         $approver_info = $approver_result->row();
 
-                        $approver_recepient = $approver->approver_id;
+                        $approver_recepient = $approver_info->email;
                         $sendtargetsettings['approver'] = $approver_info->full_name;
 
                         $sendtargetsettings['appraisee'] = $appraisee->fullname;
@@ -947,7 +947,7 @@ class Appraisal_individual_rate extends MY_PrivateController
                 $appraisee_result = $this->db->get('users');
                 $appraisee_info = $appraisee_result->row();
 
-                $appraisee_recepient = $this->input->post('user_id');
+                $appraisee_recepient = $appraisee_info->email;
                 $sendtargetsettings['recepient'] = $appraisee_info->full_name;
                 $sendtargetsettings['hradmin'] = $hr_admin_info->full_name;
 

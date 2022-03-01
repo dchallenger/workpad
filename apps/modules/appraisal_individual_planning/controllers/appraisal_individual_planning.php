@@ -976,7 +976,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                         $approver_result = $this->db->get('users');
                         $approver_info = $approver_result->row();
 
-                        $approver_recepient = $approver->approver_id;
+                        $approver_recepient = $approver_info->email;
                         $sendtargetsettings['approver'] = $approver_info->full_name;
 
                         $logo  = ''; 
