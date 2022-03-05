@@ -61,6 +61,8 @@ class performance_planning_admin_model extends Record
 			$qry .= " AND ww_performance_planning_applicable.status_id IS NOT NULL ";
 		}
 
+		$qry .= " AND ww_users.active = 1 ";
+
 		// $qry .= " AND {$this->db->dbprefix}{$this->table}.planning_id = {$this->user->user_id}";	
 		$qry .= ' '. $filter;
 		$qry .= " GROUP BY ww_performance_planning_applicable.user_id LIMIT $limit OFFSET $start";
