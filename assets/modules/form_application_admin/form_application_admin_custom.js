@@ -280,6 +280,7 @@ function create_list()
             {
                 $("#no_record").show();
             }
+            initPopup();
         },
         onDataError: function(){ 
             return;
