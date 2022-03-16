@@ -254,6 +254,13 @@ $(document).ready(function(){
         $(this).removeClass('label-default');
         $(this).addClass('label-success')
         create_list();
+    });
+    $('.filing_type-filter').click(function(){
+        $('.filing_type-filter').removeClass('label-success');
+        $('.filing_type-filter').addClass('label-default');
+        $(this).removeClass('label-default');
+        $(this).addClass('label-success')
+        create_list();
     }); 
 });
 
@@ -264,6 +271,7 @@ function create_list()
         pay_date: $('.filter-paydate.label-success').attr('filter_value'),
         form_id: $('.form-filter.label-success').attr('filter_value'),
         form_status_id: $('.status-filter.label-success').attr('filter_value'),
+        filing_type: $('.filing_type-filter.label-success').attr('filter_value'),
     }
     var filter_value = $('.status-filter.label-success').attr('filter_value');
 
