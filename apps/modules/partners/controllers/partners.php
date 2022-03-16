@@ -2402,8 +2402,8 @@ class Partners extends MY_PrivateController
 			break;
 			case 15:
 				//ID numbers
-				$validation_rules[] = 
-	/*			array(
+	/*			$validation_rules[] = 
+				array(
 					'field' => 'partners_personal[taxcode]',
 					'label' => 'Tax Code',
 					'rules' => 'required'
