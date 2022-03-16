@@ -176,6 +176,17 @@
 								@endforeach
 							</div>
 		                </div>
+					</div>
+					<div class="portlet">
+						<div style="margin-bottom:3px;" class="portlet-title">
+							<div class="caption">Filing Type</div>
+						</div>
+						<div class="portlet-body">
+							<div class="margin-top-15">
+								<span class="filing_type-filter label label-default label-filter pading-3" filter_value="Blanket">Blanket</span>
+								<span class="filing_type-filter label label-default label-filter pading-3" filter_value="Application">Form Application</span>
+							</div>
+		                </div>
 					</div>						
 					<div class="portlet">
 						<div style="margin-bottom:3px;" class="portlet-title">

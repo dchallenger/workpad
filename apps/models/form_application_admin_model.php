@@ -88,7 +88,7 @@ function setDecission($decission){
 
 		$data = array();
 		$decission['userid'] = $this->user->user_id;
-		$qry = "CALL sp_time_forms_approval_admin('".$decission['formid']."', '".$decission['userid']."', '".$decission['decission']."', '".$decission['comment']."')";
+		$qry = "CALL sp_time_forms_approval_admin('".$decission['formid']."', '".$decission['userid']."', '".$decission['decission']."', '".(isset($decission['comment']) ? $decission['comment'] : '')."')";
 		$result = $this->db->query( $qry );
 
 		if($result->num_rows() > 0)
@@ -191,9 +191,43 @@ public function call_sp_time_calendar($date_from='', $date_to='', $user_id=0){
 		return $leave_form_type->result_array();		 
 	}
 
-	public function get_forms_details($forms_id=0){		
-		$where = array('deleted' => 0);
-		if($forms_id != 0) {$where= array('deleted' => 0, 'forms_id' => $forms_id);}
+	public function get_forms_details($forms_id=0){
+		$where = array('time_forms.deleted' => 0);
+
+		if($forms_id != 0) 
+			$where = array('time_forms.deleted' => 0, 'time_forms.forms_id' => $forms_id);
+
+		$this->db->select(
+			'time_forms.forms_id,
+			time_forms.form_status_id,
+			time_forms.form_id,
+			time_forms.form_code,
+			IF(ww_time_forms.display_name = "Blanket",time_forms_blanket.user_id,time_forms.user_id) AS user_id,
+			IF(ww_time_forms.display_name = "Blanket",users.full_name,time_forms.display_name) AS display_name,
+			time_forms.day,
+			time_forms.hrs,
+			time_forms.ot_break,
+			time_forms.focus_date,
+			time_forms.date_from,
+			time_forms.date_to,
+			time_forms.date_approved,
+			time_forms.date_declined,
+			time_forms.date_cancelled,
+			time_forms.date_invalid,
+			time_forms.reason,
+			time_forms.scheduled,
+			time_forms.type,
+			time_forms.hr_remarks,
+			time_forms.hr_admin_approved_user_id,
+			time_forms.hr_admin_approved_comment,
+			time_forms.created_on,
+			time_forms.created_by,
+			time_forms.modified_on,
+			time_forms.modified_by,
+			time_forms.deleted', false
+		);
+		$this->db->join('time_forms_blanket','time_forms.forms_id = time_forms_blanket.forms_id','left');
+		$this->db->join('users','time_forms_blanket.user_id = users.user_id','left');
 		$forms_details = $this->db->get_where('time_forms', $where);
 		
 		return $forms_details->row_array();

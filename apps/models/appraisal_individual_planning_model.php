@@ -105,7 +105,7 @@ class appraisal_individual_planning_model extends Record
 
 	function get_appraisee( $planning_id, $user_id )
 	{
-		$qry = "select a.*, a.status_id as planning_status_id, a.created_on as planning_created_on, b.*, b.template_id as applicable_template_id, b.status_id as performance_status_id,IFNULL(ppah.employment_type,c.employment_type) AS employment_type,IFNULL(ppah.job_level,c.v_job_grade) as v_job_grade, c.alias, c.effectivity_date, IFNULL(ppah.company,d.company) AS company, IFNULL(ppah.position,d.v_position) as position, i.full_name as immediate, h.position as immediate_position,uc.print_logo,
+		$qry = "select a.*, a_info.email, a.status_id as planning_status_id, a.created_on as planning_created_on, b.*, b.template_id as applicable_template_id, b.status_id as performance_status_id,IFNULL(ppah.employment_type,c.employment_type) AS employment_type,IFNULL(ppah.job_level,c.v_job_grade) as v_job_grade, c.alias, c.effectivity_date, IFNULL(ppah.company,d.company) AS company, IFNULL(ppah.position,d.v_position) as position, i.full_name as immediate, h.position as immediate_position,uc.print_logo,
 		IFNULL(ppah.reports_to,d.v_reports_to) as v_reports_to, IFNULL(ppah.department,d.v_department) as v_department, IFNULL(ppah.dept_head,j.immediate) as dept_head, IFNULL(ppah.division,d.v_division) as v_division, IFNULL(ppah.div_head,k.immediate) as div_head, c.position_classification
 		FROM {$this->db->dbprefix}performance_planning a
 		LEFT JOIN {$this->db->dbprefix}performance_planning_applicable b ON b.planning_id = a.planning_id
@@ -115,6 +115,7 @@ class appraisal_individual_planning_model extends Record
 		LEFT JOIN {$this->db->dbprefix}users_profile g ON g.user_id = d.reports_to_id
 		LEFT JOIN {$this->db->dbprefix}users_position h ON h.position_id = g.position_id
 		LEFT JOIN {$this->db->dbprefix}users i ON i.user_id = d.reports_to_id
+		LEFT JOIN {$this->db->dbprefix}users a_info ON a_info.user_id = b.user_id
 		LEFT JOIN {$this->db->dbprefix}users_department j ON j.department_id = d.department_id
 		LEFT JOIN {$this->db->dbprefix}users_division k ON k.division_id = d.division_id
 		LEFT JOIN {$this->db->dbprefix}users_position_classification l ON c.position_classification_id = l.position_classification_id

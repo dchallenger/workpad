@@ -557,7 +557,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                         $approver_result = $this->db->get('users');
                         $approver_info = $approver_result->row();
 
-                        $approver_recepient = $approver->approver_id;
+                        $approver_recepient = $approver_info->email;
                         $sendtargetsettings['approver'] = $approver_info->full_name;
 
                         $logo  = ''; 
@@ -619,7 +619,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                             $appraisee_result = $this->db->get('users');
                             $appraisee_info = $appraisee_result->row();
 
-                            $appraisee_recepient = $this->input->post('user_id');
+                            $appraisee_recepient = $appraisee_info->email;
                             $sendtargetsettings['recepient'] = $appraisee_info->full_name;
                             $logo  = ''; 
                             if ($this->config->item('system')['print_logo'] != ''){
@@ -667,7 +667,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                             $approver_result = $this->db->get('users');
                             $approver_info = $approver_result->row();
 
-                            $approver_recepient = $approver->approver_id;
+                            $approver_recepient = $approver_info->email;
                             $sendtargetsettings['approver'] = $approver_info->full_name;
                             
                             $sendtargetsettings['appraisee'] = $appraisee->full_name;
@@ -797,7 +797,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                     $this->response->notify[] = $this->input->post('user_id');    
 
                     // email to employee or appraisee            
-                    $employee = $this->input->post('user_id');
+                    $employee = $appraisee->email;
                     $sendtargetsettings['appraisee'] = $appraisee->alias;
                     
                     $logo  = ''; 

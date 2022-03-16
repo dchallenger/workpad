@@ -1,6 +1,11 @@
 <tr class="record" rel="1">
     <td class="text-success">
-        {{ $display_name }}
+        <span class="text-info">{{ $display_name }}</span><br>
+        <span class="text-muted small">
+            @if ($filing_type == 'blanket')
+                {{ $filing_type }}
+            @endif
+        </span>
     </td>
     <td>
         <span class="text-info">{{ $form }}</span><br>

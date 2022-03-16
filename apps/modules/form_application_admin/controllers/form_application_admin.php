@@ -24,6 +24,7 @@ class Form_application_admin extends MY_PrivateController
         }
         $this->load->model('form_application_manage_model', 'app_manage');
         $this->load->model('form_application_model', 'app_personal');
+        $this->load->model('form_application_blanket_model', 'app_blanket');
         $user_setting = APPPATH . 'config/users/'. $this->user->user_id .'.php';
         $user_id = $this->user->user_id;
         $this->load->config( "users/{$user_id}.php", false, true );
@@ -41,6 +42,7 @@ class Form_application_admin extends MY_PrivateController
         $data['permission_app_request'] = isset($permission[$this->forms_req->mod_code]['list']) ? $permission[$this->forms_req->mod_code]['list'] : 0;
         $this->load->model('hr_validation_model', 'hr_valid');
         $data['permission_validation'] = isset($permission[$this->hr_valid->mod_code]['list']) ? $permission[$this->hr_valid->mod_code]['list'] : 0;
+        $data['permission_app_blanket'] = isset($permission[$this->app_blanket->mod_code]['list']) ? $permission[$this->app_blanket->mod_code]['list'] : 0;
 
         $leave_qry = "SELECT * FROM {$this->db->dbprefix}time_form WHERE is_leave = 1 AND deleted = 0";
         $data['leaves_data'] = $this->db->query($leave_qry)->result_array();
@@ -92,6 +94,7 @@ class Form_application_admin extends MY_PrivateController
         $forms_info = $this->mod->get_forms_details($this->record_id);
         $form_info = $this->mod->get_form_info($forms_info['form_id']);
 
+        //debug($forms_info);die();
         
         $upload_forms = $this->mod->get_forms_upload($this->record_id);
         $all_uploaded = array();
@@ -652,6 +655,11 @@ class Form_application_admin extends MY_PrivateController
                             $filter .= " AND ( (date_from BETWEEN '{$fresult['from']}' AND '{$fresult['to']}')";
                             $filter .= " OR ( date_to BETWEEN '{$fresult['from']}' AND '{$fresult['to']}') )";
                         }
+                    }elseif ($filter_by_key == "filing_type"){
+                        if ($filter_value == 'Blanket')
+                            $filter .= " AND ". $filter_by_key .' = "'.$filter_value.'"'; 
+                        else
+                            $filter .= " AND ". $filter_by_key .' <> "'.$filter_value.'"'; 
                     }else{
                         $filter .= " AND ". $filter_by_key .' = "'.$filter_value.'"';      
                     }
@@ -2107,6 +2115,7 @@ class Form_application_admin extends MY_PrivateController
         {
             case $record->num_rows() == 0:
                 //add mandatory fields
+                $main_record[$this->mod->table]['date_approved'] = date('Y-m-d H:i:s');
                 $main_record[$this->mod->table]['created_on'] = date('Y-m-d H:i:s');
                 $main_record[$this->mod->table]['created_by'] = $this->user->user_id;
 
@@ -2124,6 +2133,7 @@ class Form_application_admin extends MY_PrivateController
                 break;
             case $record->num_rows() == 1:
                 // $main_record['modified_by'] = $this->user->user_id;
+                $main_record[$this->mod->table]['date_approved'] = date('Y-m-d H:i:s');
                 $main_record[$this->mod->table]['modified_on'] = date('Y-m-d H:i:s');
                 $main_record[$this->mod->table]['modified_by'] = $this->user->user_id;
 

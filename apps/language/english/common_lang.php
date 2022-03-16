@@ -69,6 +69,7 @@ $lang['common'] = array(
 	'admin' => 'Admin',
 	'manage' => 'Manage',
 	'personal' => 'Personal',
+	'blanket' => 'Blanket',
 	'infor' => 'information',
 	'remarks' => 'Remark/s',
 	'cancel_req' => 'Cancel this request',
