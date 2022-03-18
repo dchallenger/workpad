@@ -544,7 +544,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                             'status' => 'info',
                             'message_type' => 'Comment',
                             'user_id' => $this->user->user_id,
-                            'feed_content' => 'Please review performance planning.',
+                            'feed_content' => 'Please review '.$appraisee->fullname.'\'s performance planning.',
                             'uri' => $this->mod->route . '/review_admin/'.$_POST['planning_id'].'/'.$_POST['user_id'],
                             'recipient_id' => $approver->approver_id
                         );
@@ -560,13 +560,21 @@ class Appraisal_individual_planning extends MY_PrivateController
                         $approver_recepient = $approver_info->email;
                         $sendtargetsettings['approver'] = $approver_info->full_name;
 
+                        $sendtargetsettings['appraisee'] = $appraisee->fullname;
+
                         $logo  = ''; 
                         if ($this->config->item('system')['print_logo'] != ''){
                             if( file_exists( $this->config->item('system')['print_logo'] ) ){
                                 $logo = base_url().$this->config->item('system')['print_logo'];
                             }
+                        } else {
+                            if ($appraisee->print_logo != ''){
+                                if( file_exists( $appraisee->print_logo ) ){
+                                    $logo = base_url().$appraisee->print_logo;
+                                }
+                            }
                         }
-                
+
                         $sendtargetsettings['system_logo'] = $logo;                           
 
                         $target_settings_send_template = $this->db->get_where( 'system_template', array( 'code' => 'PERFORMANCE-TARGET-SETTINGS-SEND-APPROVER') )->row_array();
@@ -621,10 +629,17 @@ class Appraisal_individual_planning extends MY_PrivateController
 
                             $appraisee_recepient = $appraisee_info->email;
                             $sendtargetsettings['recepient'] = $appraisee_info->full_name;
+
                             $logo  = ''; 
                             if ($this->config->item('system')['print_logo'] != ''){
                                 if( file_exists( $this->config->item('system')['print_logo'] ) ){
                                     $logo = base_url().$this->config->item('system')['print_logo'];
+                                }
+                            } else {
+                                if ($appraisee->print_logo != ''){
+                                    if( file_exists( $appraisee->print_logo ) ){
+                                        $logo = base_url().$appraisee->print_logo;
+                                    }
                                 }
                             }
                     
@@ -676,6 +691,12 @@ class Appraisal_individual_planning extends MY_PrivateController
                             if ($this->config->item('system')['print_logo'] != ''){
                                 if( file_exists( $this->config->item('system')['print_logo'] ) ){
                                     $logo = base_url().$this->config->item('system')['print_logo'];
+                                }
+                            } else {
+                                if ($appraisee->print_logo != ''){
+                                    if( file_exists( $appraisee->print_logo ) ){
+                                        $logo = base_url().$appraisee->print_logo;
+                                    }
                                 }
                             }
                     
@@ -805,6 +826,12 @@ class Appraisal_individual_planning extends MY_PrivateController
                     if ($this->config->item('system')['print_logo'] != ''){
                         if( file_exists( $this->config->item('system')['print_logo'] ) ){
                             $logo = base_url().$this->config->item('system')['print_logo'];
+                        }
+                    } else {
+                        if ($appraisee->print_logo != ''){
+                            if( file_exists( $appraisee->print_logo ) ){
+                                $logo = base_url().$appraisee->print_logo;
+                            }
                         }
                     }
             
@@ -979,11 +1006,19 @@ class Appraisal_individual_planning extends MY_PrivateController
                         $approver_recepient = $approver_info->email;
                         $sendtargetsettings['approver'] = $approver_info->full_name;
 
+                        $sendtargetsettings['appraisee'] = $appraisee->fullname;
+
                         $logo  = ''; 
 
                         if ($this->config->item('system')['print_logo'] != ''){
                             if( file_exists( $this->config->item('system')['print_logo'] ) ){
                                 $logo = base_url().$this->config->item('system')['print_logo'];
+                            }
+                        } else {
+                            if ($appraisee->print_logo != ''){
+                                if( file_exists( $appraisee->print_logo ) ){
+                                    $logo = base_url().$appraisee->print_logo;
+                                }
                             }
                         }
                 

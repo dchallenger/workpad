@@ -341,6 +341,21 @@ class Appraisal_individual_rate extends MY_PrivateController
 
                         $sendtargetsettings['appraisee'] = $appraisee->fullname;
 
+                        $logo  = ''; 
+                        if ($this->config->item('system')['print_logo'] != ''){
+                            if( file_exists( $this->config->item('system')['print_logo'] ) ){
+                                $logo = base_url().$this->config->item('system')['print_logo'];
+                            }
+                        } else {
+                            if ($appraisee->print_logo != ''){
+                                if( file_exists( $appraisee->print_logo ) ){
+                                    $logo = base_url().$appraisee->print_logo;
+                                }
+                            }
+                        }
+
+                        $sendtargetsettings['system_logo'] = $logo;  
+
                         $target_settings_send_template = $this->db->get_where( 'system_template', array( 'code' => 'PERFORMANCE-APPRAISAL-SEND-APPROVER') )->row_array();
                         $msg = $this->parser->parse_string($target_settings_send_template['body'], $sendtargetsettings, TRUE); 
                         $subject = $this->parser->parse_string($target_settings_send_template['subject'], $sendtargetsettings, TRUE); 
@@ -396,6 +411,19 @@ class Appraisal_individual_rate extends MY_PrivateController
                             $appraisee_recepient = $appraisee_info->email;
                             $sendtargetsettings['recepient'] = $appraisee_info->full_name;
 
+                            $logo  = ''; 
+                            if ($this->config->item('system')['print_logo'] != ''){
+                                if( file_exists( $this->config->item('system')['print_logo'] ) ){
+                                    $logo = base_url().$this->config->item('system')['print_logo'];
+                                }
+                            } else {
+                                if ($appraisee->print_logo != ''){
+                                    if( file_exists( $appraisee->print_logo ) ){
+                                        $logo = base_url().$appraisee->print_logo;
+                                    }
+                                }
+                            }
+
                             $target_settings_send_template = $this->db->get_where( 'system_template', array( 'code' => 'PERFORMANCE-APPRAISAL-SEND-APPROVED') )->row_array();
                             $msg = $this->parser->parse_string($target_settings_send_template['body'], $sendtargetsettings, TRUE); 
                             $subject = $this->parser->parse_string($target_settings_send_template['subject'], $sendtargetsettings, TRUE); 
@@ -437,6 +465,23 @@ class Appraisal_individual_rate extends MY_PrivateController
                             $approver_recepient = $approver_info->email;
                             $sendtargetsettings['approver'] = $approver_info->full_name;
 
+                            $sendtargetsettings['appraisee'] = $appraisee->full_name;
+
+                            $logo  = ''; 
+                            if ($this->config->item('system')['print_logo'] != ''){
+                                if( file_exists( $this->config->item('system')['print_logo'] ) ){
+                                    $logo = base_url().$this->config->item('system')['print_logo'];
+                                }
+                            } else {
+                                if ($appraisee->print_logo != ''){
+                                    if( file_exists( $appraisee->print_logo ) ){
+                                        $logo = base_url().$appraisee->print_logo;
+                                    }
+                                }
+                            }
+                    
+                            $sendtargetsettings['system_logo'] = $logo; 
+                            
                             $target_settings_send_template = $this->db->get_where( 'system_template', array( 'code' => 'PERFORMANCE-APPRAISAL-SEND-APPROVER') )->row_array();
                             $msg = $this->parser->parse_string($target_settings_send_template['body'], $sendtargetsettings, TRUE); 
                             $subject = $this->parser->parse_string($target_settings_send_template['subject'], $sendtargetsettings, TRUE); 
