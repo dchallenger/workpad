@@ -1306,8 +1306,11 @@ class Report_generator extends MY_PrivateController
             if(!empty($post_date)){
                 $posting_date = $post_date[0];
             } 
+        } else {
+            $post['filter'] = array();
         }
         
+
         if( $result && $result->num_rows() > 0 )
         {
             if ($this->input->post('custom') != 1){

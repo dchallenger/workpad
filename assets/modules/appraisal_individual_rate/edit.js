@@ -273,7 +273,7 @@ function view_discussion( form, status_id )
 function get_in_range(val) {
     var rate = 0;
 
-    if (val < 65)
+    if (val > 0 && val < 65)
         rate = 1;
     else if (val >= 65 && val < 80) 
         rate = 2;

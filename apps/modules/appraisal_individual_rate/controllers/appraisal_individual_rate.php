@@ -1467,7 +1467,7 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['competencies'] = $this->individual_planning_model->get_competencies();
         $vars['target_completion'] = $this->individual_planning_model->get_target_completion();
         $vars['strength_improvement'] = $this->mod->get_strength_improvement( $this->record_id, $user_id );
-
+        
         $this->load->vars( $vars );
 
         $this->load->helper('form');

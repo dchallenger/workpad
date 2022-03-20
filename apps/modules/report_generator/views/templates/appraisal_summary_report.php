@@ -41,6 +41,8 @@
 			$summary_arr[$row_array['id_number']] = $row_array;
 		}
 	}
+
+	$rate_columns = array(); // temporary disable
 ?>
 <table cellspacing="0" cellpadding="1" border="1">
 	<tr> 
