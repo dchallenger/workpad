@@ -574,7 +574,8 @@ class Clearance extends MY_PrivateController
 					$sendclearancedata['system_logo'] = $logo;	                    
                     $sendclearancedata['resign_employee'] = $user_for_clearance;
                     $sendclearancedata['approver'] = $signatories_user->firstname;
-
+                    $sendclearancedata['system_route'] = $this->manage_mod->url;
+                    //$sendclearancedata['system_route'] = base_url().$this->manage_mod->url.'/edit/'.$this->clearance_id;
 
                     $mrf_send_template = $this->db->get_where( 'system_template', array( 'code' => 'CLEARANCE-SEND-APPROVER') )->row_array();
                     $msg = $this->parser->parse_string($mrf_send_template['body'], $sendclearancedata, TRUE); 
