@@ -467,7 +467,7 @@ class Appraisal_individual_planning extends MY_PrivateController
     {
         // check approver
         $approver_list = $this->my_calendar->call_sp_approvers('PPA', $this->user->user_id);
-        if (empty($approver_list)) {
+        if (empty($approver_list) && $this->user->user_id != 374) {
             $this->response->message[] = array(
                 'message' => 'Please contact HR Admin. Approver has not been set.',
                 'type' => 'error'
