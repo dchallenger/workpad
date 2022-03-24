@@ -3,8 +3,10 @@ $(document).ready(function(){
 
     var appraisal_object = {
         none_core_no_question: 0,
-        total_weight_average: {},
-        grand_total_weight_average: 0,
+        total_weight_average_none_core_self_rating: {},
+        total_weight_average_none_core_coach_rating: {},
+        grand_total_weight_average_none_core_self_rating: 0,
+        grand_total_weight_average_none_core_coach_rating: 0,
         total_weighted_score: 0,
         total_self_weighted_score: {},
         grand_total_self_weighted_score: 0,
@@ -56,18 +58,18 @@ $(document).ready(function(){
         $(parent).find('.self_achieved').val(!isNaN(achieved) ? parseInt(achieved) : '');
         $(parent).find('.self_weight_average').val(!isNaN(weight_average) ? weight_average : '');
 
-        var total_weight_average = 0;
+        var total_weight_average_none_core_self_rating = 0;
         $('.self_weight_average[question='+question+']').each(function (index, element) {
             if ($(element).val() != '' && !isNaN($(element).val())) {
-                total_weight_average += parseFloat($(element).val());
+                total_weight_average_none_core_self_rating += parseFloat($(element).val());
             }
         })
 
-        appraisal_object.total_weight_average['q'+question] = total_weight_average;
+        appraisal_object.total_weight_average_none_core_self_rating['q'+question] = total_weight_average_none_core_self_rating;
 
-        appraisal_object.grand_total_weight_average = sum_object(appraisal_object.total_weight_average).toFixed(2);
+        appraisal_object.grand_total_weight_average_none_core_self_rating = sum_object(appraisal_object.total_weight_average_none_core_self_rating).toFixed(2);
 
-        var section_rate = get_in_range(parseFloat(appraisal_object.grand_total_weight_average));
+        var section_rate = get_in_range(parseFloat(appraisal_object.grand_total_weight_average_none_core_self_rating));
         
         var total_self_weighted_score = (section_rate * ratio_weigth) / 100;
 
@@ -76,14 +78,14 @@ $(document).ready(function(){
         appraisal_object.grand_total_self_weighted_score = sum_object(appraisal_object.total_self_weighted_score);
 
         setTimeout(function(){
-            $('.self_section_rating_'+section_id+'').html(appraisal_object.grand_total_weight_average);
-            $('.non_core_self_rating_'+question).html((total_weight_average).toFixed(2));
+            $('.self_section_rating_'+section_id+'').html(appraisal_object.grand_total_weight_average_none_core_self_rating);
+            $('.non_core_self_rating_'+question).html((total_weight_average_none_core_self_rating).toFixed(2));
             $('.self_total_weighted_'+section_id+'').html(total_self_weighted_score.toFixed(2));
 
             $('.self_rating').html(parseFloat(appraisal_object.grand_total_self_weighted_score).toFixed(2));
             $('.self_rating').val(parseFloat(appraisal_object.grand_total_self_weighted_score).toFixed(2));
 
-            $('.none_core_score_car_library_self_rating_'+question+'').val((total_weight_average).toFixed(2));
+            $('.none_core_score_car_library_self_rating_'+question+'').val((total_weight_average_none_core_self_rating).toFixed(2));
             $('.section_total_weight_ave_'+section_id+'').val(appraisal_object.grand_total_weight_average);
             $('.section_total_weighted_score_'+section_id+'').val(total_self_weighted_score.toFixed(2));
         }, 3000);
@@ -117,18 +119,18 @@ $(document).ready(function(){
         $(parent).find('.coach_achieved').val(!isNaN(achieved) ? parseInt(achieved) : '');
         $(parent).find('.coach_weight_average').val(!isNaN(weight_average) ? weight_average : '');
 
-        var total_weight_average = 0;
+        var total_weight_average_none_core_coach_rating = 0;
         $('.coach_weight_average[question='+question+']').each(function (index, element) {
             if ($(element).val() != '' && !isNaN($(element).val())) {
-                total_weight_average += parseFloat($(element).val());
+                total_weight_average_none_core_coach_rating += parseFloat($(element).val());
             }
         });
 
-        appraisal_object.total_weight_average['q'+question] = total_weight_average;            
+        appraisal_object.total_weight_average_none_core_coach_rating['q'+question] = total_weight_average_none_core_coach_rating;            
 
-        appraisal_object.grand_total_weight_average = sum_object(appraisal_object.total_weight_average).toFixed(2);
+        appraisal_object.grand_total_weight_average_none_core_coach_rating = sum_object(appraisal_object.total_weight_average_none_core_coach_rating).toFixed(2);
 
-        var section_rate = get_in_range(parseFloat(appraisal_object.grand_total_weight_average));
+        var section_rate = get_in_range(parseFloat(appraisal_object.grand_total_weight_average_none_core_coach_rating));
         
         var total_coach_weighted_score = (section_rate * ratio_weigth) / 100;
 
@@ -137,14 +139,14 @@ $(document).ready(function(){
         appraisal_object.grand_total_coach_weighted_score = sum_object(appraisal_object.total_coach_weighted_score);
 
         setTimeout(function(){
-            $('.coach_section_rating_'+section_id+'').html(appraisal_object.grand_total_weight_average);
-            $('.non_core_coach_rating_'+question).html((appraisal_object.total_weight_average['q'+question]).toFixed(2));
+            $('.coach_section_rating_'+section_id+'').html(appraisal_object.grand_total_weight_average_none_core_coach_rating);
+            $('.non_core_coach_rating_'+question).html((appraisal_object.total_weight_average_none_core_coach_rating['q'+question]).toFixed(2));
             $('.coach_total_weighted_'+section_id+'').html(total_coach_weighted_score.toFixed(2));
 
             $('.coach_rating').html(parseFloat(appraisal_object.grand_total_coach_weighted_score).toFixed(2));
             $('.coach_rating').val(parseFloat(appraisal_object.grand_total_coach_weighted_score).toFixed(2));
 
-            $('.none_core_score_car_library_coach_rating_'+question+'').val((total_weight_average).toFixed(2));
+            $('.none_core_score_car_library_coach_rating_'+question+'').val((total_weight_average_none_core_coach_rating).toFixed(2));
             $('.section_coach_section_rating_'+section_id+'').val(appraisal_object.grand_total_weight_average);
             $('.section_coach_total_weighted_score_'+section_id+'').val(total_coach_weighted_score.toFixed(2));
         }, 3000);
