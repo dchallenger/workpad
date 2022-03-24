@@ -24,6 +24,7 @@ class Performance_appraisal extends MY_PrivateController
         $permission = parent::_check_permission('appraisal_individual_rate');
         $data['allow_personal'] = $permission['list'];
 
+        $this->db->group_by('year');
 		$performance_appraisal_year = $this->db->get_where('performance_appraisal', array('deleted' => 0));
 		$data['performance_appraisal_year'] = $performance_appraisal_year->result();
 

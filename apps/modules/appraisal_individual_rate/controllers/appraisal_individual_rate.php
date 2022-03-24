@@ -1319,6 +1319,7 @@ class Appraisal_individual_rate extends MY_PrivateController
         if ($appraisee->user_id == $this->user->user_id)
             $vars['self_rating'] = 1;
 
+        $vars['current_user_id'] = $this->user->user_id;
         $vars['self_review'] = $this->pam->get_self_review( $this->record_id, $user_id );
 
         $this->load->model('appraisal_template_model', 'template');
