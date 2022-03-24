@@ -7,7 +7,7 @@ $(document).ready(function(){
         total_weight_average_none_core_coach_rating: {},
         grand_total_weight_average_none_core_self_rating: 0,
         grand_total_weight_average_none_core_coach_rating: 0,
-        total_weighted_score: 0,
+        total_weighted_score: 0, 
         total_self_weighted_score: {},
         grand_total_self_weighted_score: 0,
         total_coach_weighted_score: {},
