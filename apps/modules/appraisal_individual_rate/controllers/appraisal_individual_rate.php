@@ -258,7 +258,7 @@ class Appraisal_individual_rate extends MY_PrivateController
         $this->db->trans_begin();
         $error = false;
 
-        $appraisee = $this->mod->get_appraisee( $_POST['appraisal_id'], $_POST['user_id'] );      
+        $appraisee = $this->mod->get_appraisee( $_POST['appraisal_id'], $_POST['user_id'] ); 
         $status_id = $this->input->post('status_id');
         
         //get approvers
@@ -465,7 +465,7 @@ class Appraisal_individual_rate extends MY_PrivateController
                             $approver_recepient = $approver_info->email;
                             $sendtargetsettings['approver'] = $approver_info->full_name;
 
-                            $sendtargetsettings['appraisee'] = $appraisee->full_name;
+                            $sendtargetsettings['appraisee'] = $appraisee->fullname;
 
                             $logo  = ''; 
                             if ($this->config->item('system')['print_logo'] != ''){
