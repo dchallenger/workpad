@@ -574,20 +574,24 @@ class Appraisal_individual_rate extends MY_PrivateController
                 $this->db->where($where);
                 $this->db->delete('performance_appraisal_applicable_strength_improvement');
 
-                foreach ($strength as $key => $value) {
-                    $update_strength = array('comment' => $value,'comment_type' => 1);
-                    $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
-                    $update_strength['user_id'] = $this->input->post('user_id');                        
-                    $update_strength['created_by'] = $this->user->user_id;
-                    $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                if (!empty($strength)) {
+                    foreach ($strength as $key => $value) {
+                        $update_strength = array('comment' => $value,'comment_type' => 1);
+                        $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
+                        $update_strength['user_id'] = $this->input->post('user_id');                        
+                        $update_strength['created_by'] = $this->user->user_id;
+                        $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                    }
                 }
 
-                foreach ($improvement as $key => $value) {
-                    $update_strength = array('comment' => $value,'comment_type' => 2);
-                    $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
-                    $update_strength['user_id'] = $this->input->post('user_id');
-                    $update_strength['created_by'] = $this->user->user_id;
-                    $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                if (!empty($improvement)) {
+                    foreach ($improvement as $key => $value) {
+                        $update_strength = array('comment' => $value,'comment_type' => 2);
+                        $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
+                        $update_strength['user_id'] = $this->input->post('user_id');
+                        $update_strength['created_by'] = $this->user->user_id;
+                        $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                    }
                 }
                 //saving strength and improvement
 
