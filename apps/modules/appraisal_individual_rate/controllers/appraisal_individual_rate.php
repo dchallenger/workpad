@@ -571,7 +571,7 @@ class Appraisal_individual_rate extends MY_PrivateController
                     'created_by' => $this->user->user_id,
                 );
                 
-                $this->db->where($where);
+                $this->db->where($where); 
                 $this->db->delete('performance_appraisal_applicable_strength_improvement');
 
                 if (!empty($strength)) {
