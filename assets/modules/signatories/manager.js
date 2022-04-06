@@ -398,7 +398,20 @@ function delete_signatory( sig_id )
 				}else if(response.amp == 1){
 					var affected_count = response.pending_amp_count;
 					var affected = 'Manpower Planning';
-				}				
+				}else if(response.map == 1){
+					var affected_count = response.pending_map_count;
+					var affected = 'Mobile Application Plan';
+				}else if(response.ola == 1){
+					var affected_count = response.pending_ola_count;
+					var affected = 'Omnibus Loan Application';
+				}else if(response.cpla == 1){
+					var affected_count = response.pending_cpla_count;
+					var affected = 'Car Plan Loan Application';
+				}else if(response.idp == 1){
+					var affected_count = response.pending_idp_count;
+					var affected = 'IDP';
+				}
+				
 				if(affected_count == 0){
 					_delete_signatory( sig_id );
 				}else{
@@ -545,7 +558,20 @@ function save_signatory()
 				}else if(response.idp == 1){
 					var affected_count = response.pending_idp_count;
 					var affected = 'Individual Development Plan';
+				}else if(response.map == 1){
+					var affected_count = response.pending_map_count;
+					var affected = 'Mobile Application Plan';
+				}else if(response.ola == 1){
+					var affected_count = response.pending_ola_count;
+					var affected = 'Omnibus Loan Application';
+				}else if(response.cpla == 1){
+					var affected_count = response.pending_cpla_count;
+					var affected = 'Car Plan Loan Application';
+				}else if(response.idp == 1){
+					var affected_count = response.pending_idp_count;
+					var affected = 'IDP';
 				}
+
 
 				if(affected_count == 0){
 					_save_signatory( $('form#edit_signatory').serialize() );
