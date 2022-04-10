@@ -530,6 +530,7 @@ class Report_generator extends MY_PrivateController
             case 'Time Record Schedule History':
             case 'LEAVE_REPORT':
             case 'LEAVE_BALANCE_REPORT':
+            case 'OT_TRANSACTION_DETAILS':
                 $button = array('xls' => 0, 'csv' => 1, 'pdf' => 1, 'txt' => 0);
                 $data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);
                 break;
