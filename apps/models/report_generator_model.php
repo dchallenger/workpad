@@ -684,7 +684,11 @@ class report_generator_model extends Record
 			case 'APPRAISAL_SUMMARY':
 				$appraisal_summary_header = 1;
 				$excel = $this->load->view("templates/appraisal_summary_report", array('columns' => $columns, 'result' => $result, 'query' => $query, 'report_name' => $report->report_name,'filter' => $filter, 'filter_var' => $filter_var), true);
-				break;				
+				break;
+            case 'OT_TRANSACTION_DETAILS':
+				$OTD_header = 1;
+        		$excel = $this->load->view("templates/ot_transaction_details", array('result' => $result,'filter' => $filter), true);
+                break;			
 			default:
 				$excel = $this->load->view("templates/excel", array('result' => $result), true);
 				break;
@@ -856,6 +860,27 @@ class report_generator_model extends Record
 			$content->getActiveSheet()->getStyle("A3:N".($result->num_rows()+3))->applyFromArray($border_style);
 
 			$content->getActiveSheet()->getStyle("A".($result->num_rows()+4).":N".($result->num_rows()+4))->getFont()->setBold(true);
+		}
+
+		if (isset($OTD_header)) {
+			$content->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
+
+			$content->getActiveSheet()->getStyle("A1:K1")->applyFromArray($style_center);
+			$content->getActiveSheet()->mergeCells('A1:K1');
+
+			$content->getActiveSheet()->getStyle("A1:K1")->getFont()->setBold(true);
+
+			$content->getActiveSheet()->getStyle("A2:K".($result->num_rows()+2))->applyFromArray($border_style);
 		}
 
 		if (isset($em_header)) {
