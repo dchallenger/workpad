@@ -1729,6 +1729,8 @@ class Form_application extends MY_PrivateController
         //     }
         // }
         
+        //debug($period);
+
         $days = 0;
         foreach($period as $dt) {
 
@@ -1736,11 +1738,11 @@ class Form_application extends MY_PrivateController
             $forms_rest_day_count = $this->mod->check_rest_day($this->user->user_id, $dt->format('Y-m-d'));
             $form_holiday = $this->mod->check_if_holiday($dt->format('Y-m-d'), $this->user->user_id);
 
-            if( count($form_holiday) > 0 || ($forms_rest_day_count > 0) ){   
+            if( count($form_holiday) > 0 || $forms_rest_day_count > 0){   
                 if($form_id != 8){
-                    $days--;
+                    $days =  $days;
                 }    
-            }else{
+            } else {
                 switch($form_id){
                     case get_time_form_id('SL'):
                     case get_time_form_id('VL'):
@@ -1825,57 +1827,237 @@ class Form_application extends MY_PrivateController
                 $selected_date_count++;
             }
 
+            switch($form_id){
+                case get_time_form_id('OBT'): //OBT
+                if($this->input->post('form_status_id') != 8){
+                    if($this->input->post('bt_type') == 1){
+                        $time_forms_date_table[] = array(
+                            'forms_id' => $forms_id,
+                            'date' => $this->input->post('focus_date'),
+                            'day' => 1,
+                            'time_from' => $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_from'), -8))),
+                            'time_to' => $date_to." ".date("H:i",strtotime(substr($this->input->post('date_to'), -8)))
+                            );
+                    $main_record[$this->mod->table]['date_from'] = $this->input->post('focus_date');
+                    $main_record[$this->mod->table]['date_to'] = $this->input->post('focus_date');
+                        $breakout = true;
+                    }else{
+                        $time_forms_date_table[] = array(
+                            'forms_id' => $forms_id,
+                            'date' => $dt->format('Y-m-d'),
+                            'day' => 1,
+                            'time_from' => $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_from'), -8))),
+                            'time_to' => $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_to'), -8)))
+                            );
+                    }
+                }else{
+                    if($this->input->post('bt_type') == 1){
+                        $time_forms_date_table[] = array(
+                            'forms_id' => $forms_id,
+                            'date' => $this->input->post('focus_date'),
+                            'day' => 1,
+                            'time_from' => $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_from'), -8))),
+                            'time_to' => $date_to." ".date("H:i",strtotime(substr($this->input->post('date_to'), -8))),
+                            'cancelled_comment' => $this->input->post('cancelled_comment') 
+                            );
+                    $main_record[$this->mod->table]['date_from'] = $this->input->post('focus_date');
+                    $main_record[$this->mod->table]['date_to'] = $this->input->post('focus_date');
+                        $breakout = true;
+                    }else{
+                        $time_forms_date_table[] = array(
+                            'forms_id' => $forms_id,
+                            'date' => $dt->format('Y-m-d'),
+                            'day' => 1,
+                            'time_from' => $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_from'), -8))),
+                            'time_to' => $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_to'), -8))),
+                            'cancelled_comment' => $this->input->post('cancelled_comment') 
+                            );
+                    }
+                }
 
-                switch($form_id){
-                    case get_time_form_id('OBT'): //OBT
+                break;
+                case get_time_form_id('OT'): //OT
+                $time_from = $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_from'), -8)));    
+                $time_to = $date_to." ".date("H:i",strtotime(substr($this->input->post('date_to'), -8)));  
+                $hrs = ((strtotime($time_to) - strtotime($time_from))/60)/60;    
+                if($this->input->post('form_status_id') != 8){
+                    $time_forms_date_table[] = array(
+                        'forms_id' => $forms_id,
+                        'date' => $this->input->post('focus_date'),
+                        'day' => 1,
+                        'hrs' => $hrs,
+                        'time_from' => $time_from,
+                        'time_to' => $time_to
+                        );
+                }else{
+                    $time_forms_date_table[] = array(
+                        'forms_id' => $forms_id,
+                        'date' => $this->input->post('focus_date'),
+                        'day' => 1,
+                        'hrs' => $hrs,
+                        'time_from' => $time_from,
+                        'time_to' => $time_to,
+                        'cancelled_comment' => $this->input->post('cancelled_comment') 
+                        );
+                }
+                $days = 1;
+                    $main_record[$this->mod->table]['date_from'] = $date_from;
+                    $main_record[$this->mod->table]['date_to'] = $date_to;
+                $breakout = true;
+                    break;
+                case get_time_form_id('UT'): //UT
+                $date_time = date('Y-m-d H:i:s', strtotime(str_replace(" - "," ",$this->input->post('ut_time_in_out')))); 
+
+                if($this->input->post('form_status_id') != 8){
+                    if($this->input->post('ut_type') == 1){ 
+                        $time_forms_date_table[] = array(
+                            'forms_id' => $forms_id,
+                            'date' => $this->input->post('focus_date'),
+                            'day' => 1,
+                            'duration_id' => 1,
+                            'time_from' => $date_time
+                            );
+                    }else{
+                        $time_forms_date_table[] = array(
+                            'forms_id' => $forms_id,
+                            'date' => $this->input->post('focus_date'),
+                            'day' => 1,
+                            'duration_id' => 2,
+                            'time_to' => $date_time
+                            );
+                    }
+                }else{
+                   $time_forms_date_table[] = array(
+                    'forms_id' => $forms_id,
+                    'date' => $this->input->post('focus_date'),
+                    'day' => 1,
+                    'time_to' => $date_time,
+                    'cancelled_comment' => $this->input->post('cancelled_comment') 
+                    );
+                }
+                $days = 1;   
+                    $main_record[$this->mod->table]['date_from'] = $date_to;
+                    $main_record[$this->mod->table]['date_to'] = $date_to;
+                $breakout = true;
+                break;
+                case get_time_form_id('ET'): //ET
+                $date_time = $dt->format('Y-m-d')." ".date("H:i",strtotime($this->input->post('ut_time_in_out')));  
+
+                if($this->input->post('form_status_id') != 8){
+                    $time_forms_date_table[] = array(
+                        'forms_id' => $forms_id,
+                        'date' => $this->input->post('focus_date'),
+                        'day' => 1,
+                        'time_from' => $date_time
+                        );
+                }else{
+                    $time_forms_date_table[] = array(
+                        'forms_id' => $forms_id,
+                        'date' => $this->input->post('focus_date'),
+                        'day' => 1,
+                        'time_from' => $date_time,
+                        'cancelled_comment' => $this->input->post('cancelled_comment') 
+                        );
+                }
+                $days = 1;
+                    $main_record[$this->mod->table]['date_from'] = $this->input->post('focus_date');
+                    $main_record[$this->mod->table]['date_to'] = $this->input->post('focus_date');
+                $breakout = true;
+                    break;
+                case get_time_form_id('DTRP'): //DTRP
+                    $time_from = $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_from'), -8)));    
+                    $time_to = $date_to." ".date("H:i",strtotime(substr($this->input->post('date_to'), -8)));  
+                    // $hrs = ((strtotime($time_to) - strtotime($time_from))/60)/60;   
                     if($this->input->post('form_status_id') != 8){
-                        if($this->input->post('bt_type') == 1){
+                        if($this->input->post('dtrp_type') == 1){ 
                             $time_forms_date_table[] = array(
                                 'forms_id' => $forms_id,
                                 'date' => $this->input->post('focus_date'),
                                 'day' => 1,
-                                'time_from' => $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_from'), -8))),
-                                'time_to' => $date_to." ".date("H:i",strtotime(substr($this->input->post('date_to'), -8)))
+                                'time_from' => $time_from
                                 );
-                        $main_record[$this->mod->table]['date_from'] = $this->input->post('focus_date');
-                        $main_record[$this->mod->table]['date_to'] = $this->input->post('focus_date');
-                            $breakout = true;
-                        }else{
+                            $main_record[$this->mod->table]['date_from'] = $date_from;
+                            $main_record[$this->mod->table]['date_to'] = $date_from;                                    
+                        }elseif($this->input->post('dtrp_type') == 2){ 
                             $time_forms_date_table[] = array(
                                 'forms_id' => $forms_id,
-                                'date' => $dt->format('Y-m-d'),
+                                'date' => $this->input->post('focus_date'),
                                 'day' => 1,
-                                'time_from' => $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_from'), -8))),
-                                'time_to' => $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_to'), -8)))
+                                'time_to' => $time_to
                                 );
+                            $main_record[$this->mod->table]['date_from'] = $date_to;
+                            $main_record[$this->mod->table]['date_to'] = $date_to;                                   
+                        }else{    
+                            $time_forms_date_table[] = array(
+                                'forms_id' => $forms_id,
+                                'date' => $this->input->post('focus_date'),
+                                'day' => 1,
+                                'time_from' => $time_from,
+                                'time_to' => $time_to
+                                );
+                            $main_record[$this->mod->table]['date_from'] = $date_from;
+                            $main_record[$this->mod->table]['date_to'] = $date_to;                                
                         }
                     }else{
-                        if($this->input->post('bt_type') == 1){
+                        if($this->input->post('dtrp_type') == 1){ 
                             $time_forms_date_table[] = array(
                                 'forms_id' => $forms_id,
                                 'date' => $this->input->post('focus_date'),
                                 'day' => 1,
-                                'time_from' => $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_from'), -8))),
-                                'time_to' => $date_to." ".date("H:i",strtotime(substr($this->input->post('date_to'), -8))),
+                                'time_from' => $time_from,
                                 'cancelled_comment' => $this->input->post('cancelled_comment') 
                                 );
-                        $main_record[$this->mod->table]['date_from'] = $this->input->post('focus_date');
-                        $main_record[$this->mod->table]['date_to'] = $this->input->post('focus_date');
-                            $breakout = true;
-                        }else{
+                            $main_record[$this->mod->table]['date_from'] = $date_from;
+                            $main_record[$this->mod->table]['date_to'] = $date_from;                                  
+                        }elseif($this->input->post('dtrp_type') == 2){ 
                             $time_forms_date_table[] = array(
                                 'forms_id' => $forms_id,
-                                'date' => $dt->format('Y-m-d'),
+                                'date' => $this->input->post('focus_date'),
                                 'day' => 1,
-                                'time_from' => $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_from'), -8))),
-                                'time_to' => $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_to'), -8))),
+                                'time_to' => $time_to,
                                 'cancelled_comment' => $this->input->post('cancelled_comment') 
                                 );
+                            $main_record[$this->mod->table]['date_from'] = $date_to;
+                            $main_record[$this->mod->table]['date_to'] = $date_to;                                   
+                        }else{    
+                            $time_forms_date_table[] = array(
+                                'forms_id' => $forms_id,
+                                'date' => $this->input->post('focus_date'),
+                                'day' => 1,
+                                'time_from' => $time_from,
+                                'time_to' => $time_to,
+                                'cancelled_comment' => $this->input->post('cancelled_comment') 
+                                );
+                            $main_record[$this->mod->table]['date_from'] = $date_from;
+                            $main_record[$this->mod->table]['date_to'] = $date_to;                                   
                         }
                     }
-
+                    $days = 1;
+                    $breakout = true;
                     break;
-                    case get_time_form_id('OT'): //OT
+                case get_time_form_id('CWS'): // CWS 
+                    if($this->input->post('form_status_id') != 8){
+                        $time_forms_date_table[] = array(
+                            'forms_id' => $forms_id,
+                            'date' => $dt->format('Y-m-d'),
+                            'day' => 1,
+                            'shift_id' => $curr_shift,
+                            'shift_to' => $shift_to
+                            );
+                    }else{
+                        $time_forms_date_table[] = array(
+                            'forms_id' => $forms_id,
+                            'date' => $dt->format('Y-m-d'),
+                            'day' => 1,
+                            'shift_id' => $curr_shift,
+                            'shift_to' => $shift_to,
+                            'cancelled_comment' => $this->input->post('cancelled_comment') 
+                            );
+                    }
+                    $days = 1;
+                break;
+                case get_time_form_id('ADDL'): //ADDL
+                if( $this->input->post('addl_type') == 'File' ){
                     $time_from = $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_from'), -8)));    
                     $time_to = $date_to." ".date("H:i",strtotime(substr($this->input->post('date_to'), -8)));  
                     $hrs = ((strtotime($time_to) - strtotime($time_from))/60)/60;    
@@ -1900,31 +2082,22 @@ class Form_application extends MY_PrivateController
                             );
                     }
                     $days = 1;
-                        $main_record[$this->mod->table]['date_from'] = $date_from;
-                        $main_record[$this->mod->table]['date_to'] = $date_to;
+                        $main_record[$this->mod->table]['date_from'] = $this->input->post('focus_date');
+                        $main_record[$this->mod->table]['date_to'] = $this->input->post('focus_date');
                     $breakout = true;
-                        break;
-                    case get_time_form_id('UT'): //UT
-                    $date_time = date('Y-m-d H:i:s', strtotime(str_replace(" - "," ",$this->input->post('ut_time_in_out')))); 
+                }
+                break;
+                case get_time_form_id('RES'): //RES
+                if( $this->input->post('res_type') == 0 ){
+                     $date_time = $dt->format('Y-m-d')." ".date("H:i",strtotime($this->input->post('ut_time_in_out')));  
  
                     if($this->input->post('form_status_id') != 8){
-                        if($this->input->post('ut_type') == 1){ 
-                            $time_forms_date_table[] = array(
-                                'forms_id' => $forms_id,
-                                'date' => $this->input->post('focus_date'),
-                                'day' => 1,
-                                'duration_id' => 1,
-                                'time_from' => $date_time
-                                );
-                        }else{
-                            $time_forms_date_table[] = array(
-                                'forms_id' => $forms_id,
-                                'date' => $this->input->post('focus_date'),
-                                'day' => 1,
-                                'duration_id' => 2,
-                                'time_to' => $date_time
-                                );
-                        }
+                        $time_forms_date_table[] = array(
+                            'forms_id' => $forms_id,
+                            'date' => $this->input->post('focus_date'),
+                            'day' => 1,
+                            'time_to' => $date_time
+                            );
                     }else{
                        $time_forms_date_table[] = array(
                         'forms_id' => $forms_id,
@@ -1935,11 +2108,10 @@ class Form_application extends MY_PrivateController
                         );
                     }
                     $days = 1;   
-                        $main_record[$this->mod->table]['date_from'] = $date_to;
-                        $main_record[$this->mod->table]['date_to'] = $date_to;
+                        $main_record[$this->mod->table]['date_from'] = $this->input->post('focus_date');
+                        $main_record[$this->mod->table]['date_to'] = $this->input->post('focus_date');
                     $breakout = true;
-                    break;
-                    case get_time_form_id('ET'): //ET
+                }else if( $this->input->post('res_type') == 1 ){
                     $date_time = $dt->format('Y-m-d')." ".date("H:i",strtotime($this->input->post('ut_time_in_out')));  
 
                     if($this->input->post('form_status_id') != 8){
@@ -1962,210 +2134,39 @@ class Form_application extends MY_PrivateController
                         $main_record[$this->mod->table]['date_from'] = $this->input->post('focus_date');
                         $main_record[$this->mod->table]['date_to'] = $this->input->post('focus_date');
                     $breakout = true;
-                        break;
-                    case get_time_form_id('DTRP'): //DTRP
-                        $time_from = $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_from'), -8)));    
-                        $time_to = $date_to." ".date("H:i",strtotime(substr($this->input->post('date_to'), -8)));  
-                        // $hrs = ((strtotime($time_to) - strtotime($time_from))/60)/60;   
-                        if($this->input->post('form_status_id') != 8){
-                            if($this->input->post('dtrp_type') == 1){ 
-                                $time_forms_date_table[] = array(
-                                    'forms_id' => $forms_id,
-                                    'date' => $this->input->post('focus_date'),
-                                    'day' => 1,
-                                    'time_from' => $time_from
-                                    );
-                                $main_record[$this->mod->table]['date_from'] = $date_from;
-                                $main_record[$this->mod->table]['date_to'] = $date_from;                                    
-                            }elseif($this->input->post('dtrp_type') == 2){ 
-                                $time_forms_date_table[] = array(
-                                    'forms_id' => $forms_id,
-                                    'date' => $this->input->post('focus_date'),
-                                    'day' => 1,
-                                    'time_to' => $time_to
-                                    );
-                                $main_record[$this->mod->table]['date_from'] = $date_to;
-                                $main_record[$this->mod->table]['date_to'] = $date_to;                                   
-                            }else{    
-                                $time_forms_date_table[] = array(
-                                    'forms_id' => $forms_id,
-                                    'date' => $this->input->post('focus_date'),
-                                    'day' => 1,
-                                    'time_from' => $time_from,
-                                    'time_to' => $time_to
-                                    );
-                                $main_record[$this->mod->table]['date_from'] = $date_from;
-                                $main_record[$this->mod->table]['date_to'] = $date_to;                                
-                            }
-                        }else{
-                            if($this->input->post('dtrp_type') == 1){ 
-                                $time_forms_date_table[] = array(
-                                    'forms_id' => $forms_id,
-                                    'date' => $this->input->post('focus_date'),
-                                    'day' => 1,
-                                    'time_from' => $time_from,
-                                    'cancelled_comment' => $this->input->post('cancelled_comment') 
-                                    );
-                                $main_record[$this->mod->table]['date_from'] = $date_from;
-                                $main_record[$this->mod->table]['date_to'] = $date_from;                                  
-                            }elseif($this->input->post('dtrp_type') == 2){ 
-                                $time_forms_date_table[] = array(
-                                    'forms_id' => $forms_id,
-                                    'date' => $this->input->post('focus_date'),
-                                    'day' => 1,
-                                    'time_to' => $time_to,
-                                    'cancelled_comment' => $this->input->post('cancelled_comment') 
-                                    );
-                                $main_record[$this->mod->table]['date_from'] = $date_to;
-                                $main_record[$this->mod->table]['date_to'] = $date_to;                                   
-                            }else{    
-                                $time_forms_date_table[] = array(
-                                    'forms_id' => $forms_id,
-                                    'date' => $this->input->post('focus_date'),
-                                    'day' => 1,
-                                    'time_from' => $time_from,
-                                    'time_to' => $time_to,
-                                    'cancelled_comment' => $this->input->post('cancelled_comment') 
-                                    );
-                                $main_record[$this->mod->table]['date_from'] = $date_from;
-                                $main_record[$this->mod->table]['date_to'] = $date_to;                                   
-                            }
-                        }
-                        $days = 1;
-                        $breakout = true;
-                        break;
-                    case get_time_form_id('CWS'): // CWS 
-                        if($this->input->post('form_status_id') != 8){
-                            $time_forms_date_table[] = array(
-                                'forms_id' => $forms_id,
-                                'date' => $dt->format('Y-m-d'),
-                                'day' => 1,
-                                'shift_id' => $curr_shift,
-                                'shift_to' => $shift_to
-                                );
-                        }else{
-                            $time_forms_date_table[] = array(
-                                'forms_id' => $forms_id,
-                                'date' => $dt->format('Y-m-d'),
-                                'day' => 1,
-                                'shift_id' => $curr_shift,
-                                'shift_to' => $shift_to,
-                                'cancelled_comment' => $this->input->post('cancelled_comment') 
-                                );
-                        }
-                        $days = 1;
-                    break;
-                    case get_time_form_id('ADDL'): //ADDL
-                    if( $this->input->post('addl_type') == 'File' ){
-                        $time_from = $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_from'), -8)));    
-                        $time_to = $date_to." ".date("H:i",strtotime(substr($this->input->post('date_to'), -8)));  
-                        $hrs = ((strtotime($time_to) - strtotime($time_from))/60)/60;    
-                        if($this->input->post('form_status_id') != 8){
-                            $time_forms_date_table[] = array(
-                                'forms_id' => $forms_id,
-                                'date' => $this->input->post('focus_date'),
-                                'day' => 1,
-                                'hrs' => $hrs,
-                                'time_from' => $time_from,
-                                'time_to' => $time_to
-                                );
-                        }else{
-                            $time_forms_date_table[] = array(
-                                'forms_id' => $forms_id,
-                                'date' => $this->input->post('focus_date'),
-                                'day' => 1,
-                                'hrs' => $hrs,
-                                'time_from' => $time_from,
-                                'time_to' => $time_to,
-                                'cancelled_comment' => $this->input->post('cancelled_comment') 
-                                );
-                        }
-                        $days = 1;
-                            $main_record[$this->mod->table]['date_from'] = $this->input->post('focus_date');
-                            $main_record[$this->mod->table]['date_to'] = $this->input->post('focus_date');
-                        $breakout = true;
-                    }
-                    break;
-                    case get_time_form_id('RES'): //RES
-                    if( $this->input->post('res_type') == 0 ){
-                         $date_time = $dt->format('Y-m-d')." ".date("H:i",strtotime($this->input->post('ut_time_in_out')));  
-     
-                        if($this->input->post('form_status_id') != 8){
-                            $time_forms_date_table[] = array(
-                                'forms_id' => $forms_id,
-                                'date' => $this->input->post('focus_date'),
-                                'day' => 1,
-                                'time_to' => $date_time
-                                );
-                        }else{
-                           $time_forms_date_table[] = array(
-                            'forms_id' => $forms_id,
-                            'date' => $this->input->post('focus_date'),
-                            'day' => 1,
-                            'time_to' => $date_time,
-                            'cancelled_comment' => $this->input->post('cancelled_comment') 
-                            );
-                        }
-                        $days = 1;   
-                            $main_record[$this->mod->table]['date_from'] = $this->input->post('focus_date');
-                            $main_record[$this->mod->table]['date_to'] = $this->input->post('focus_date');
-                        $breakout = true;
-                    }else if( $this->input->post('res_type') == 1 ){
-                        $date_time = $dt->format('Y-m-d')." ".date("H:i",strtotime($this->input->post('ut_time_in_out')));  
-
-                        if($this->input->post('form_status_id') != 8){
-                            $time_forms_date_table[] = array(
-                                'forms_id' => $forms_id,
-                                'date' => $this->input->post('focus_date'),
-                                'day' => 1,
-                                'time_from' => $date_time
-                                );
-                        }else{
-                            $time_forms_date_table[] = array(
-                                'forms_id' => $forms_id,
-                                'date' => $this->input->post('focus_date'),
-                                'day' => 1,
-                                'time_from' => $date_time,
-                                'cancelled_comment' => $this->input->post('cancelled_comment') 
-                                );
-                        }
-                        $days = 1;
-                            $main_record[$this->mod->table]['date_from'] = $this->input->post('focus_date');
-                            $main_record[$this->mod->table]['date_to'] = $this->input->post('focus_date');
-                        $breakout = true;
-                    }else if( $this->input->post('res_type') == 2 ){
-                    $time_from = $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_from'), -8)));    
-                    $time_to = $date_to." ".date("H:i",strtotime(substr($this->input->post('date_to'), -8)));  
-                    $hrs = ((strtotime($time_to) - strtotime($time_from))/60)/60;    
-                    if($this->input->post('form_status_id') != 8){
-                        $time_forms_date_table[] = array(
-                            'forms_id' => $forms_id,
-                            'date' => $this->input->post('focus_date'),
-                            'day' => 1,
-                            'hrs' => $hrs,
-                            'time_from' => $time_from,
-                            'time_to' => $time_to
-                            );
-                    }else{
-                        $time_forms_date_table[] = array(
-                            'forms_id' => $forms_id,
-                            'date' => $this->input->post('focus_date'),
-                            'day' => 1,
-                            'hrs' => $hrs,
-                            'time_from' => $time_from,
-                            'time_to' => $time_to,
-                            'cancelled_comment' => $this->input->post('cancelled_comment') 
-                            );
-                    }
-                    $days = 1;
-                        $main_record[$this->mod->table]['date_from'] = $this->input->post('focus_date');
-                        $main_record[$this->mod->table]['date_to'] = $this->input->post('focus_date');
-                    $breakout = true;
-                    }
-                    break;
-
+                }else if( $this->input->post('res_type') == 2 ){
+                $time_from = $dt->format('Y-m-d')." ".date("H:i",strtotime(substr($this->input->post('date_from'), -8)));    
+                $time_to = $date_to." ".date("H:i",strtotime(substr($this->input->post('date_to'), -8)));  
+                $hrs = ((strtotime($time_to) - strtotime($time_from))/60)/60;    
+                if($this->input->post('form_status_id') != 8){
+                    $time_forms_date_table[] = array(
+                        'forms_id' => $forms_id,
+                        'date' => $this->input->post('focus_date'),
+                        'day' => 1,
+                        'hrs' => $hrs,
+                        'time_from' => $time_from,
+                        'time_to' => $time_to
+                        );
+                }else{
+                    $time_forms_date_table[] = array(
+                        'forms_id' => $forms_id,
+                        'date' => $this->input->post('focus_date'),
+                        'day' => 1,
+                        'hrs' => $hrs,
+                        'time_from' => $time_from,
+                        'time_to' => $time_to,
+                        'cancelled_comment' => $this->input->post('cancelled_comment') 
+                        );
                 }
-                if($breakout === true) break;    
+                $days = 1;
+                    $main_record[$this->mod->table]['date_from'] = $this->input->post('focus_date');
+                    $main_record[$this->mod->table]['date_to'] = $this->input->post('focus_date');
+                $breakout = true;
+                }
+                break;
+
+            }
+            if($breakout === true) break;    
             
         }
         
