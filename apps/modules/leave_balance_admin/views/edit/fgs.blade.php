@@ -38,7 +38,8 @@
 								$db->order_by('users.display_name', '0');
 						        if ($qry_category != ''){
 						            $db->where($qry_category, '', false);
-						        }							
+						        }
+						        $db->where('users.active', 1);				
 						  		$db->where('users.deleted', '0');
 	 					        $options = $db->get();	 	                            
 	                            $time_form_balance_user_id_options = array('' => 'Select...');
