@@ -48,7 +48,7 @@
 								<?php if ($movement_info['type_id'] == 6) {?>
 								<div class="form-group">
 									<label class="col-md-4 text-muted text-right">
-										Rreason for Leaving:
+										Reason for Leaving:
 									</label>
 									<div class="col-md-7">							
 										<?php echo $movement_info['reason_leaving'] ?>				
