@@ -1524,7 +1524,13 @@ class Form_application_admin extends MY_PrivateController
             $form_holiday = $this->mod->check_if_holiday($dt->format('Y-m-d'), $this->user->user_id);
 
             if(count($form_holiday) > 0 ){
-                $days--;
+                if($this->input->post('form_code') != 'OT'){
+                    $this->response->message[] = array(
+                        'message' => 'You are not allowed to file the selected form on holiday',
+                        'type' => 'warning'
+                        );  
+                    $this->_ajax_return();
+                }
             }else{
                 if(in_array($form_id, $with_date_range) && $form_id <> 8){
                     $days = 0;
@@ -1957,15 +1963,16 @@ class Form_application_admin extends MY_PrivateController
 
         }
 
-        if($days <= 0){
-            if($this->input->post('form_code') != 'OT'){
-                $this->response->message[] = array(
-                    'message' => 'You are not allowed to file the selected form on holiday',
-                    'type' => 'warning'
-                    );  
-                $this->_ajax_return();
-            }
-        }
+        //modify 08242022:tirso
+        // if(count($form_holiday) > 0){
+        //     if($this->input->post('form_code') != 'OT'){
+        //         $this->response->message[] = array(
+        //             'message' => 'You are not allowed to file the selected form on holiday',
+        //             'type' => 'warning'
+        //             );  
+        //         $this->_ajax_return();
+        //     }
+        // }
 
         //validation of leave
         $form_type = $this->mod->get_form_type($form_id);

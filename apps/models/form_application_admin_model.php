@@ -399,14 +399,29 @@ public function call_sp_time_calendar($date_from='', $date_to='', $user_id=0){
 		return $check_if_rest_day->result_array();		
 	}
 
+	//modify 08242022:tirso
+	// public function check_if_holiday($date='', $user_id=0){
+	// 	$check_if_holiday = "SELECT * FROM time_holiday WHERE holiday_date = '$date'";
+	// 	$check_if_holiday = $this->db->query($check_if_holiday);
+
+	// 	return $check_if_holiday->result_array();		
+	// }
 
 	public function check_if_holiday($date='', $user_id=0){
-		$check_if_holiday = "SELECT * FROM time_holiday WHERE holiday_date = '$date'";
-		$check_if_holiday = $this->db->query($check_if_holiday);
+		$check_if_holiday_qry = "SELECT * FROM time_holiday th 
+							LEFT JOIN {$this->db->dbprefix}time_holiday_location thl 
+							ON th.holiday_id = thl.holiday_id
+							WHERE th.holiday_date = '{$date}'
+							AND thl.user_id = {$user_id}";
+		
+		$check_if_holiday = $this->db->query($check_if_holiday_qry);
 
-		return $check_if_holiday->result_array();		
+		if($check_if_holiday){
+			return $check_if_holiday->result_array();	
+		}
+		return false;
 	}
-	
+
 	public function edit_cached_query( $record_id )
 	{
 		//check for cached query
