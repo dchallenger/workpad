@@ -1315,7 +1315,7 @@ class Clearance extends MY_PrivateController
         $this->load->library('PDFm');
         $mpdf = new PDFm();
 
-        $mpdf->SetTitle( 'Clearance Form' );
+        $mpdf->SetTitle( 'Exit Questionnaire' );
         $mpdf->SetAutoPageBreak(true, 5);
         $mpdf->SetAuthor( $user['lastname'] .', '. $user['firstname'] . ' ' .$user['middlename'] );  
         $mpdf->SetDisplayMode('real', 'default');
