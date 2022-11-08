@@ -100,6 +100,7 @@ class clearance_manage_model extends Record
 			$role_id = $roles_result->row()->role_id;
 
 			$this->db->where('role_id',$role_id);
+			$this->db->where('active',1);
 			$users = $this->db->get('users');
 
 			if ($users && $users->num_rows() > 0) {
