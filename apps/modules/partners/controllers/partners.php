@@ -2031,7 +2031,7 @@ class Partners extends MY_PrivateController
 				$emergency_phone = $_POST['partners_personal']['emergency_phone'];
 				$emergency_mobile = $_POST['partners_personal']['emergency_mobile'];
 				
-				if(!empty($partners_personal['profile_mobiles'])){
+				/*if(!empty($partners_personal['profile_mobiles'])){
 					$mobile = $this->check_mobile($_POST['partners_personal']['profile_mobiles'], $this->record_id);
 					if(!($mobile)){
 						$this->response->invalid=true;
@@ -2111,7 +2111,7 @@ class Partners extends MY_PrivateController
 		        	}else{
 		        		$partners_personal['emergency_phone'] = $mobile;
 		        	}
-				}
+				}*/
 				break;
 			case 4:
 				//Personal Tab
