@@ -1078,7 +1078,8 @@ class time_form_policies {
         $year = date('Y');
         $credits = array();
         $date = date('Y-m-d');
-        $credits = $this->CI->formapp->get_leave_balance($user_id, date('Y-m-d'), $form_id); 
+        //$credits = $this->CI->formapp->get_leave_balance($user_id, date('Y-m-d'), $form_id);
+        $credits = $this->CI->formapp->get_leave_balance($user_id, $date_to, $form_id); 
 
         if(strtolower($value) == 'no' ){
             if(count($credits) > 0){
