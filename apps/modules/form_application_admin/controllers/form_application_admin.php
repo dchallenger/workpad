@@ -2468,20 +2468,17 @@ class Form_application_admin extends MY_PrivateController
                     $duration_id = 1;
                     $curr = $dt->format('D');
                     
-                    // if($selected_dates_count < count($selected_dates)){
-                        foreach($selected_dates as $selected_date){
-                            if($selected_date['date'] == $dt->format('Y-m-d')){
-                                $duration_id = $selected_date['duration_id'];
-                                $hours = $selected_date['hrs'];
-                                $day_count += $selected_date['day'];
-                            }
+                    foreach($selected_dates as $selected_date){
+                        if($selected_date['date'] == $dt->format('Y-m-d')){
+                            $duration_id = $selected_date['duration_id'];
+                            $hours = $selected_date['hrs'];
+                            $day_count += $selected_date['day'];
+
+                            $dates[$dt->format('F d, Y')][$curr] = $duration_id;
+                            $dates[$dt->format('F d, Y')]['hrs'] = $hours;
+                            $selected_dates_count++;
                         }
-                    // }else{
-                    //     $duration_id = 1;
-                    // }
-                    $dates[$dt->format('F d, Y')][$curr] = $duration_id;
-                    $dates[$dt->format('F d, Y')]['hrs'] = $hours;
-                    $selected_dates_count++;
+                    }
                 }
             }
         
