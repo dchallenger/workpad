@@ -13,5 +13,5 @@ ww_performance_financial_metric_planning.remarks as "performance_financial_metri
 `ww_performance_financial_metric_planning`.`modified_by` as "performance_financial_metric_planning_modified_by"
 FROM (`ww_performance_financial_metric_planning`)
 LEFT JOIN `ww_performance_planning` ON `ww_performance_planning`.`planning_id` = `ww_performance_financial_metric_planning`.`planning_id`
-LEFT JOIN `ww_users_sbu_unit` T1 ON `ww_performance_financial_metric_planning`.`sbu_unit_id` = `T1`.`sbu_unit_id`
+LEFT JOIN `ww_users_sbu_unit` t1 ON `ww_performance_financial_metric_planning`.`sbu_unit_id` = `t1`.`sbu_unit_id`
 WHERE `ww_performance_financial_metric_planning`.`financial_metric_planning_id` = "{$record_id}"';
