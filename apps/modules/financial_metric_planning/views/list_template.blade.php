@@ -4,7 +4,7 @@
             <input type="checkbox" class="record-checker checkboxes" value="<?php echo $record_id; ?>" />
         </div>
     </td>
-    <td class="hidden-xs">{{ $performance_financial_metric_planning_title}}</td>
+    <td class="hidden-xs">{{ $performance_financial_metric_planning_sbu_unit}}</td>
     <td class="hidden-xs">{{ $performance_financial_metric_planning_kpi }}</td> 
     <td class="hidden-xs">{{ $performance_financial_metric_planning_key_in_weight }}</td> 
     <td>

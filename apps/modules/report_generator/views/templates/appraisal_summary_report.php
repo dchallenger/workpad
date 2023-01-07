@@ -42,7 +42,11 @@
 		}
 	}
 
-	$rate_columns = array(); // temporary disable
+	// debug($summary_arr);
+	// debug($rate_columns);
+	// die();
+
+	//$rate_columns = array(); // temporary disable
 ?>
 <table cellspacing="0" cellpadding="1" border="1">
 	<tr> 
@@ -59,7 +63,7 @@
 	</tr><?php
 	
 	$result = $result->result();
-	$id_number = "Id Number";
+	$id_number = "Employee No";
 
 	foreach( $result as $row ) : ?>
 		<tr>

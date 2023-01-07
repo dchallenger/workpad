@@ -8,6 +8,7 @@ class Appraisal_individual_rate extends MY_PrivateController
 	{
         $this->load->config('other_settings');
         $this->load->model('appraisal_individual_planning_model','individual_planning_model');
+        $this->load->model('financial_metric_planning_model','fmpd');
 		$this->load->model('appraisal_individual_rate_model', 'mod');
         $this->load->model('performance_appraisal_admin_model', 'mod_admin');
         $this->lang->load('appraisal_individual_planning');
@@ -174,6 +175,9 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['balance_score_card'] = $this->individual_planning_model->get_balance_score_card();
         $vars['template_section_column'] = $this->individual_planning_model->get_template_section_column();
         $vars['planning_applicable_fields'] = $this->individual_planning_model->get_planning_applicable_fields($appraisee->planning_id,$appraisee->user_id);
+        $vars['financial_metric_planning_applicable'] = $this->fmpd->get_financial_metric_planning_w_allocation($this->record_id,$appraisee->user_id);
+        $vars['financial_metric_planning_weight'] = $this->fmpd->get_financial_metric_planning_array($appraisee->user_id);
+        $vars['appraisal_applicable_financial_fields'] = $this->mod->get_appraisal_applicable_financial($this->record_id,$appraisee->user_id);
         $vars['appraisal_applicable_fields'] = $this->mod->get_appraisal_applicable_fields($this->record_id,$appraisee->user_id);
         $vars['template_section'] = $this->individual_planning_model->get_template_section($appraisee->template_id);
         $vars['library_competencies'] = $this->individual_planning_model->get_library_competencies();
@@ -186,6 +190,7 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['learning_mode'] = $this->individual_planning_model->get_learning_mode();
         $vars['competencies'] = $this->individual_planning_model->get_competencies();
         $vars['target_completion'] = $this->individual_planning_model->get_target_completion();
+        $vars['self_rating'] = 1;
 
         $this->load->vars( $vars );
 
@@ -621,20 +626,24 @@ class Appraisal_individual_rate extends MY_PrivateController
                 $this->db->where($where);
                 $this->db->delete('performance_appraisal_applicable_strength_improvement');
                 
-                foreach ($strength as $key => $value) {
-                    $update_strength = array('comment' => $value,'comment_type' => 1);
-                    $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
-                    $update_strength['user_id'] = $this->input->post('user_id');                     
-                    $update_strength['created_by'] = $this->user->user_id;
-                    $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                if ($strength) {
+                    foreach ($strength as $key => $value) {
+                        $update_strength = array('comment' => $value,'comment_type' => 1);
+                        $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
+                        $update_strength['user_id'] = $this->input->post('user_id');                     
+                        $update_strength['created_by'] = $this->user->user_id;
+                        $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                    }
                 }
 
-                foreach ($improvement as $key => $value) {
-                    $update_strength = array('comment' => $value,'comment_type' => 2);
-                    $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
-                    $update_strength['user_id'] = $this->input->post('user_id');                          
-                    $update_strength['created_by'] = $this->user->user_id;
-                    $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                if ($improvement) {
+                    foreach ($improvement as $key => $value) {
+                        $update_strength = array('comment' => $value,'comment_type' => 2);
+                        $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
+                        $update_strength['user_id'] = $this->input->post('user_id');                          
+                        $update_strength['created_by'] = $this->user->user_id;
+                        $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                    }
                 }
                 //saving strength and improvement
 
@@ -803,40 +812,91 @@ class Appraisal_individual_rate extends MY_PrivateController
                 }
             }
 
-            $core_score_car_library_key_weight = $_POST['core_score_car_library_key_weight'];
-            $core_score_car_library_self_rating = $_POST['core_score_car_library_self_rating'];
-            $core_score_car_library_coach_rating = $_POST['core_score_car_library_coach_rating'];
-            $core_score_car_library_total_weight_ave = $_POST['core_score_car_library_total_weight_ave'];
-            $core_score_car_library_section_rating = $_POST['core_score_car_library_section_rating'];
-            $core_score_car_library_weight = $_POST['core_score_car_library_weight'];
-            $core_score_car_library_total_weighted_score = $_POST['core_score_car_library_total_weighted_score'];
-            $core_score_car_library_coach_total_weighted_score = $_POST['core_score_car_library_coach_total_weighted_score'];        
+            //remove none core as per enhancement
+            // $core_score_car_library_key_weight = $_POST['core_score_car_library_key_weight'];
+            // $core_score_car_library_self_rating = $_POST['core_score_car_library_self_rating'];
+            // $core_score_car_library_coach_rating = $_POST['core_score_car_library_coach_rating'];
+            // $core_score_car_library_total_weight_ave = $_POST['core_score_car_library_total_weight_ave'];
+            // $core_score_car_library_section_rating = $_POST['core_score_car_library_section_rating'];
+            // $core_score_car_library_weight = $_POST['core_score_car_library_weight'];
+            // $core_score_car_library_total_weighted_score = $_POST['core_score_car_library_total_weighted_score'];
+            // $core_score_car_library_coach_total_weighted_score = $_POST['core_score_car_library_coach_total_weighted_score'];        
 
-            $score_library_rating_info = array();
-            foreach ($core_score_car_library_self_rating as $template_section_id => $template_section) {
-                foreach ($template_section as $score_library_value_id => $value) {
-                    foreach ($value as $key => $val) {
-                        $score_library_rating_info = array(
-                                                        'appraisal_id' => $this->input->post('record_id'),
-                                                        'template_section_id' => $template_section_id,
-                                                        'score_library_id' => $score_library_value_id,
-                                                        'user_id' => $this->input->post('user_id'),
-                                                        'key_weight' => $core_score_car_library_key_weight[$template_section_id][$score_library_value_id][$key],
-                                                        'self_rating' => $val,
-                                                        'coach_rating' => $core_score_car_library_coach_rating[$template_section_id][$score_library_value_id][$key],
-                                                        'total_weight_average' => $core_score_car_library_total_weight_ave[$template_section_id][$score_library_value_id][$key],
-                                                        'coach_section_rating' => $core_score_car_library_section_rating[$template_section_id][$score_library_value_id][$key],
-                                                        'weight' => $core_score_car_library_weight[$template_section_id][$score_library_value_id][$key],
-                                                        'total_weighted_score' => $core_score_car_library_total_weighted_score[$template_section_id][$score_library_value_id][$key],
-                                                        'coach_total_weighted_score' => $core_score_car_library_coach_total_weighted_score[$template_section_id][$score_library_value_id][$key]
-                                                    );
+            // $score_library_rating_info = array();
+            // foreach ($core_score_car_library_self_rating as $template_section_id => $template_section) {
+            //     foreach ($template_section as $score_library_value_id => $value) {
+            //         foreach ($value as $key => $val) {
+            //             $score_library_rating_info = array(
+            //                                             'appraisal_id' => $this->input->post('record_id'),
+            //                                             'template_section_id' => $template_section_id,
+            //                                             'score_library_id' => $score_library_value_id,
+            //                                             'user_id' => $this->input->post('user_id'),
+            //                                             'key_weight' => $core_score_car_library_key_weight[$template_section_id][$score_library_value_id][$key],
+            //                                             'self_rating' => $val,
+            //                                             'coach_rating' => $core_score_car_library_coach_rating[$template_section_id][$score_library_value_id][$key],
+            //                                             'total_weight_average' => $core_score_car_library_total_weight_ave[$template_section_id][$score_library_value_id][$key],
+            //                                             'coach_section_rating' => $core_score_car_library_section_rating[$template_section_id][$score_library_value_id][$key],
+            //                                             'weight' => $core_score_car_library_weight[$template_section_id][$score_library_value_id][$key],
+            //                                             'total_weighted_score' => $core_score_car_library_total_weighted_score[$template_section_id][$score_library_value_id][$key],
+            //                                             'coach_total_weighted_score' => $core_score_car_library_coach_total_weighted_score[$template_section_id][$score_library_value_id][$key]
+            //                                         );
 
-                        $this->db->insert('performance_appraisal_applicable_score_library_ratings',$score_library_rating_info);
-                    }
-                }
-            }    
+            //             $this->db->insert('performance_appraisal_applicable_score_library_ratings',$score_library_rating_info);
+            //         }
+            //     }
+            // }    
         }    
         // saving of score or library ratings
+
+        $financial = $this->input->post('field_appraisal_financial');
+        if ($financial && count($financial) > 0) {
+            $user_id   = key($financial);
+            $details = reset($financial);
+
+            $sbu_unit = $details['sbu_unit'];
+            $financial_metric_kpi = $details['financial_metric_kpi'];
+            $weight = $details['weight'];
+            $target = $details['target'];
+            $rating_comp = $details['rating_comp'];
+            $actual = $details['actual'];
+            $rating = $details['rating'];
+            $allocation = $details['allocation'];
+            $weighted_rating = $details['weighted_rating'];
+
+            $this->db->where('user_id',$user_id);
+            $this->db->where('appraisal_id',$this->input->post('record_id'));
+            $this->db->delete('performance_appraisal_applicable_financial');
+
+            if ($actual && count($actual) > 0) {
+                foreach ($actual as $key => $actual_val) {
+                    $sbu_unit_val = $sbu_unit[$key];
+                    $financial_metric_kpi_val = $financial_metric_kpi[$key];
+                    $weight_val = $weight[$key];
+                    $target_val = $target[$key];
+                    $rating_comp_val = $rating_comp[$key];
+                    $actual_val = $actual[$key];
+                    $rating_val = $rating[$key];
+                    $allocation_val = $allocation[$key];
+                    $weighted_rating_val = $weighted_rating[$key];
+
+                    $financial_metric_info = [
+                        'appraisal_id' => $this->input->post('record_id'),
+                        'user_id' => $user_id,
+                        'sbu_unit' => $sbu_unit_val,
+                        'financial_metric_kpi' => $financial_metric_kpi_val,
+                        'weight' => $weight_val,
+                        'target' => $target_val,
+                        'rating_comp' => $rating_comp_val,
+                        'actual' => $actual_val,
+                        'rating' => $rating_val,
+                        'allocation' => $allocation_val,
+                        'weighted_rating' => $weighted_rating_val
+                    ];
+
+                    $this->db->insert('performance_appraisal_applicable_financial',$financial_metric_info);
+                }
+            }
+        }
 
         if( $this->db->_error_message() != "" )
         {
@@ -1034,60 +1094,41 @@ class Appraisal_individual_rate extends MY_PrivateController
                 $this->db->where($where);
                 $this->db->delete('performance_appraisal_applicable_strength_improvement');
 
-                foreach ($strength as $key => $value) {
-                    $update_strength = array('comment' => $value,'comment_type' => 1);
-                    $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
-                    $update_strength['user_id'] = $this->input->post('user_id');                        
-                    $update_strength['created_by'] = $this->user->user_id;
-                    $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                if (!empty($strength)) {
+                    foreach ($strength as $key => $value) {
+                        $update_strength = array('comment' => $value,'comment_type' => 1);
+                        $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
+                        $update_strength['user_id'] = $this->input->post('user_id');                        
+                        $update_strength['created_by'] = $this->user->user_id;
+                        $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                    }
                 }
 
-                foreach ($improvement as $key => $value) {
-                    $update_strength = array('comment' => $value,'comment_type' => 2);
-                    $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
-                    $update_strength['user_id'] = $this->input->post('user_id');
-                    $update_strength['created_by'] = $this->user->user_id;
-                    $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                if (!empty($improvement)) {
+                    foreach ($improvement as $key => $value) {
+                        $update_strength = array('comment' => $value,'comment_type' => 2);
+                        $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
+                        $update_strength['user_id'] = $this->input->post('user_id');
+                        $update_strength['created_by'] = $this->user->user_id;
+                        $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
+                    }
                 }
                 //saving strength and improvement
 
                 $this->response->redirect = get_mod_route('performance_appraisal');
                 break;
-            case 14:
-                $update['committee_rating'] = $this->input->post('committee_rating');
-                
-                $this->db->update('performance_appraisal_applicable', $update, $where);
-
-                //saving strength and improvement
-                $strength = $this->input->post('strength');
-                $improvement = $this->input->post('improvement');
-
+            case 88:
                 $where = array(
                     'appraisal_id' => $this->input->post('appraisal_id'),
                     'user_id' => $this->input->post('user_id'),
                 );
+
+                $update['finance_rating_done'] = 1;
                 
-                $this->db->where($where);
-                $this->db->delete('performance_appraisal_applicable_strength_improvement');
+                $this->db->update('performance_appraisal_applicable', $update, $where);
 
-                foreach ($strength as $key => $value) {
-                    $update_strength = array('comment' => $value,'comment_type' => 1);
-                    $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
-                    $update_strength['user_id'] = $this->input->post('user_id');                        
-                    $update_strength['created_by'] = $this->user->user_id;
-                    $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
-                }
+                $this->response->redirect = get_mod_route('performance_appraisal');                
 
-                foreach ($improvement as $key => $value) {
-                    $update_strength = array('comment' => $value,'comment_type' => 2);
-                    $update_strength['appraisal_id'] = $this->input->post('appraisal_id');
-                    $update_strength['user_id'] = $this->input->post('user_id');
-                    $update_strength['created_by'] = $this->user->user_id;
-                    $this->db->insert('performance_appraisal_applicable_strength_improvement',$update_strength);
-                }
-                //saving strength and improvement
-
-                $this->response->redirect = get_mod_route('performance_appraisal');
                 break;
         }
 
@@ -1220,38 +1261,89 @@ class Appraisal_individual_rate extends MY_PrivateController
             }
         }
 
-        $core_score_car_library_key_weight = $_POST['core_score_car_library_key_weight'];
-        $core_score_car_library_self_rating = $_POST['core_score_car_library_self_rating'];
-        $core_score_car_library_coach_rating = $_POST['core_score_car_library_coach_rating'];
-        $core_score_car_library_total_weight_ave = $_POST['core_score_car_library_total_weight_ave'];
-        $core_score_car_library_section_rating = $_POST['core_score_car_library_section_rating'];
-        $core_score_car_library_weight = $_POST['core_score_car_library_weight'];
-        $core_score_car_library_total_weighted_score = $_POST['core_score_car_library_total_weighted_score'];
-        $core_score_car_library_coach_total_weighted_score = $_POST['core_score_car_library_coach_total_weighted_score'];        
+        //remove this as enhancement request
+        // $core_score_car_library_key_weight = $_POST['core_score_car_library_key_weight'];
+        // $core_score_car_library_self_rating = $_POST['core_score_car_library_self_rating'];
+        // $core_score_car_library_coach_rating = $_POST['core_score_car_library_coach_rating'];
+        // $core_score_car_library_total_weight_ave = $_POST['core_score_car_library_total_weight_ave'];
+        // $core_score_car_library_section_rating = $_POST['core_score_car_library_section_rating'];
+        // $core_score_car_library_weight = $_POST['core_score_car_library_weight'];
+        // $core_score_car_library_total_weighted_score = $_POST['core_score_car_library_total_weighted_score'];
+        // $core_score_car_library_coach_total_weighted_score = $_POST['core_score_car_library_coach_total_weighted_score'];        
 
-        $score_library_rating_info = array();
-        foreach ($core_score_car_library_self_rating as $template_section_id => $template_section) {
-            foreach ($template_section as $score_library_value_id => $value) {
-                foreach ($value as $key => $val) {
-                    $score_library_rating_info = array(
-                                                    'appraisal_id' => $this->input->post('record_id'),
-                                                    'template_section_id' => $template_section_id,
-                                                    'score_library_id' => $score_library_value_id,
-                                                    'user_id' => $this->input->post('user_id'),
-                                                    'key_weight' => $core_score_car_library_key_weight[$template_section_id][$score_library_value_id][$key],
-                                                    'self_rating' => $val,
-                                                    'coach_rating' => $core_score_car_library_coach_rating[$template_section_id][$score_library_value_id][$key],
-                                                    'total_weight_average' => $core_score_car_library_total_weight_ave[$template_section_id][$score_library_value_id][$key],
-                                                    'coach_section_rating' => $core_score_car_library_section_rating[$template_section_id][$score_library_value_id][$key],
-                                                    'weight' => $core_score_car_library_weight[$template_section_id][$score_library_value_id][$key],
-                                                    'total_weighted_score' => $core_score_car_library_total_weighted_score[$template_section_id][$score_library_value_id][$key],
-                                                    'coach_total_weighted_score' => $core_score_car_library_coach_total_weighted_score[$template_section_id][$score_library_value_id][$key]
-                                                );
+        // $score_library_rating_info = array();
+        // foreach ($core_score_car_library_self_rating as $template_section_id => $template_section) {
+        //     foreach ($template_section as $score_library_value_id => $value) {
+        //         foreach ($value as $key => $val) {
+        //             $score_library_rating_info = array(
+        //                                             'appraisal_id' => $this->input->post('record_id'),
+        //                                             'template_section_id' => $template_section_id,
+        //                                             'score_library_id' => $score_library_value_id,
+        //                                             'user_id' => $this->input->post('user_id'),
+        //                                             'key_weight' => $core_score_car_library_key_weight[$template_section_id][$score_library_value_id][$key],
+        //                                             'self_rating' => $val,
+        //                                             'coach_rating' => $core_score_car_library_coach_rating[$template_section_id][$score_library_value_id][$key],
+        //                                             'total_weight_average' => $core_score_car_library_total_weight_ave[$template_section_id][$score_library_value_id][$key],
+        //                                             'coach_section_rating' => $core_score_car_library_section_rating[$template_section_id][$score_library_value_id][$key],
+        //                                             'weight' => $core_score_car_library_weight[$template_section_id][$score_library_value_id][$key],
+        //                                             'total_weighted_score' => $core_score_car_library_total_weighted_score[$template_section_id][$score_library_value_id][$key],
+        //                                             'coach_total_weighted_score' => $core_score_car_library_coach_total_weighted_score[$template_section_id][$score_library_value_id][$key]
+        //                                         );
 
-                    $this->db->insert('performance_appraisal_applicable_score_library_ratings',$score_library_rating_info);
-                }
-            }
-        }    
+        //             $this->db->insert('performance_appraisal_applicable_score_library_ratings',$score_library_rating_info);
+        //         }
+        //     }
+        // }
+
+        // $financial = $this->input->post('field_appraisal_financial');
+        // if ($financial && count($financial) > 0) {
+        //     $user_id   = key($financial);
+        //     $details = reset($financial);
+
+        //     $sbu_unit = $details['sbu_unit'];
+        //     $financial_metric_kpi = $details['financial_metric_kpi'];
+        //     $weight = $details['weight'];
+        //     $target = $details['target'];
+        //     $rating_comp = $details['rating_comp'];
+        //     $actual = $details['actual'];
+        //     $rating = $details['rating'];
+        //     $allocation = $details['allocation'];
+        //     $weighted_rating = $details['weighted_rating'];
+
+        //     $this->db->where('user_id',$user_id);
+        //     $this->db->where('appraisal_id',$this->input->post('record_id'));
+        //     $this->db->delete('performance_appraisal_applicable_financial');
+
+        //     if ($actual && count($actual) > 0) {
+        //         foreach ($actual as $key => $actual_val) {
+        //             $sbu_unit_val = $sbu_unit[$key];
+        //             $financial_metric_kpi_val = $financial_metric_kpi[$key];
+        //             $weight_val = $weight[$key];
+        //             $target_val = $target[$key];
+        //             $rating_comp_val = $rating_comp[$key];
+        //             $actual_val = $actual[$key];
+        //             $rating_val = $rating[$key];
+        //             $allocation_val = $allocation[$key];
+        //             $weighted_rating_val = $weighted_rating[$key];
+
+        //             $financial_metric_info = [
+        //                 'appraisal_id' => $this->input->post('record_id'),
+        //                 'user_id' => $user_id,
+        //                 'sbu_unit' => $sbu_unit_val,
+        //                 'financial_metric_kpi' => $financial_metric_kpi_val,
+        //                 'weight' => $weight_val,
+        //                 'target' => $target_val,
+        //                 'rating_comp' => $rating_comp_val,
+        //                 'actual' => $actual_val,
+        //                 'rating' => $rating_val,
+        //                 'allocation' => $allocation_val,
+        //                 'weighted_rating' => $weighted_rating_val
+        //             ];
+
+        //             $this->db->insert('performance_appraisal_applicable_financial',$financial_metric_info);
+        //         }
+        //     }
+        // }
         // saving of score or library ratings
 
         if( $this->db->_error_message() != "" )
@@ -1354,6 +1446,9 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['balance_score_card'] = $this->individual_planning_model->get_balance_score_card();
         $vars['template_section_column'] = $this->individual_planning_model->get_template_section_column();
         $vars['planning_applicable_fields'] = $this->individual_planning_model->get_planning_applicable_fields($appraisee->planning_id,$appraisee->user_id);
+        $vars['financial_metric_planning_applicable'] = $this->fmpd->get_financial_metric_planning_w_allocation($this->record_id,$appraisee->user_id);
+        $vars['financial_metric_planning_weight'] = $this->fmpd->get_financial_metric_planning_array($appraisee->user_id);
+        $vars['appraisal_applicable_financial_fields'] = $this->mod->get_appraisal_applicable_financial($this->record_id,$appraisee->user_id);
         $vars['appraisal_applicable_fields'] = $this->mod->get_appraisal_applicable_fields($this->record_id,$appraisee->user_id);
         $vars['template_section'] = $this->individual_planning_model->get_template_section($appraisee->template_id);
         $vars['library_competencies'] = $this->individual_planning_model->get_library_competencies();
@@ -1460,6 +1555,9 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['balance_score_card'] = $this->individual_planning_model->get_balance_score_card();
         $vars['template_section_column'] = $this->individual_planning_model->get_template_section_column();
         $vars['planning_applicable_fields'] = $this->individual_planning_model->get_planning_applicable_fields($appraisee->planning_id,$appraisee->user_id);
+        $vars['financial_metric_planning_applicable'] = $this->fmpd->get_financial_metric_planning_w_allocation($this->record_id,$appraisee->user_id);
+        $vars['financial_metric_planning_weight'] = $this->fmpd->get_financial_metric_planning_array($appraisee->user_id);
+        $vars['appraisal_applicable_financial_fields'] = $this->mod->get_appraisal_applicable_financial($this->record_id,$appraisee->user_id);
         $vars['appraisal_applicable_fields'] = $this->mod->get_appraisal_applicable_fields($this->record_id,$appraisee->user_id);
         $vars['template_section'] = $this->individual_planning_model->get_template_section($appraisee->template_id);
         $vars['library_competencies'] = $this->individual_planning_model->get_library_competencies();
@@ -1525,12 +1623,18 @@ class Appraisal_individual_rate extends MY_PrivateController
             }
         }
 
+        if ($this->user->user_id == 1)
+            $vars['appraisal_admin'] = 1;
+
         if (($vars['hr_appraisal_admin'] || $vars['appraisal_admin']) && $appraisee->performance_status_id == 2)
             $vars['readonly'] = "readonly='readonly'";
 
         $vars['self_rating'] = 0;
         if ($appraisee->user_id == $this->user->user_id)
             $vars['self_rating'] = 1;
+
+        // to encode financial metrics actual
+        $vars['is_finance'] = 0;
 
         $vars['manager_id'] = '';
         $vars['current_user_id'] = $this->user->user_id;
@@ -1569,6 +1673,11 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['balance_score_card'] = $this->individual_planning_model->get_balance_score_card();
         $vars['template_section_column'] = $this->individual_planning_model->get_template_section_column();
         $vars['planning_applicable_fields'] = $this->individual_planning_model->get_planning_applicable_fields($appraisee->planning_id,$appraisee->user_id);
+        $vars['financial_metric_planning_applicable'] = $this->fmpd->get_financial_metric_planning_w_allocation($this->record_id,$appraisee->user_id);
+        $vars['financial_metric_allocation'] = $this->fmpd->get_financial_metric_allocation($appraisee->user_id);
+        $vars['financial_metric_planning'] = $this->fmpd->get_financial_metric_planning_array($appraisee->user_id);
+        $vars['financial_metric_planning_weight'] = $this->fmpd->get_financial_metric_planning_array($appraisee->user_id);
+        $vars['appraisal_applicable_financial_fields'] = $this->mod->get_appraisal_applicable_financial($this->record_id,$appraisee->user_id);
         $vars['appraisal_applicable_fields'] = $this->mod->get_appraisal_applicable_fields($this->record_id,$appraisee->user_id);
         $vars['template_section'] = $this->individual_planning_model->get_template_section($appraisee->template_id);
         $vars['library_competencies'] = $this->individual_planning_model->get_library_competencies();
@@ -2191,7 +2300,7 @@ class Appraisal_individual_rate extends MY_PrivateController
         $login_user_id = $first_approver->row()->approver_id;
 
         // for oclp it was specific approver only, if hr appraisal admin then get first approver since it was specific
-        if ($this->permission['process']) {
+        if ($this->permission['process'] || $this->user->user_id == 1) {
             $vars['list_approver'] = $approver_info = $this->mod->get_approver( $record_id, $user_id, $login_user_id);
             $vars['hr_appraisal_admin'] = 1;
         } else
@@ -2213,6 +2322,9 @@ class Appraisal_individual_rate extends MY_PrivateController
         $vars['balance_score_card'] = $this->individual_planning_model->get_balance_score_card();
         $vars['template_section_column'] = $this->individual_planning_model->get_template_section_column();
         $vars['planning_applicable_fields'] = $this->individual_planning_model->get_planning_applicable_fields($appraisee->planning_id,$appraisee->user_id);
+        $vars['financial_metric_planning_applicable'] = $this->fmpd->get_financial_metric_planning_w_allocation($this->record_id,$appraisee->user_id);
+        $vars['financial_metric_planning_weight'] = $this->fmpd->get_financial_metric_planning_array($appraisee->user_id);
+        $vars['appraisal_applicable_financial_fields'] = $this->mod->get_appraisal_applicable_financial($this->record_id,$appraisee->user_id);
         $vars['appraisal_applicable_fields'] = $this->mod->get_appraisal_applicable_fields($record_id,$appraisee->user_id);
         $vars['template_section'] = $this->individual_planning_model->get_template_section($appraisee->template_id);
         $vars['library_competencies'] = $this->individual_planning_model->get_library_competencies();

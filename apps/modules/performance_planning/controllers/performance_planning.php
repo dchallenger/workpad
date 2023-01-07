@@ -1123,9 +1123,9 @@ class Performance_planning extends MY_PrivateController
                 {
 					$appraisal_status = 'is now open';
                 	if(isset($performance_type['for_probi'])){
-                		$feed_content = "The performance planning period for your {$performance_type['performance']} $appraisal_status";
+                		$feed_content = "The performance planning period for your {$orig_planning['title']} $appraisal_status";
                 	}else{
-                		$feed_content = "The {$orig_planning['year']} performance planning period for {$performance_type['performance']} $appraisal_status";
+                		$feed_content = "The {$orig_planning['year']} performance planning period for {{$orig_planning['title']}} $appraisal_status";
                 	}
                     $this->load->model('system_feed');
                     $feed = array(

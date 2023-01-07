@@ -242,7 +242,7 @@
 															{{ $child->template_section }} ({{ $child->weight }}%)
 														</h3>
 													</div>
-													@include('review/sections/balance_scorecard', array('section_id' => $child->template_section_id, 'header' => $child->header, 'footer' => $child->footer))
+													@include('review/sections/balance_scorecard', array('financial_metric_planning_finance' => $financial_metric_planning_finance, 'financial_metric_planning' => $financial_metric_planning, 'section_id' => $child->template_section_id, 'header' => $child->header, 'footer' => $child->footer))
 												</div> <?php 
 												break;
 											case 3: //core competencies?>

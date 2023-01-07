@@ -81,7 +81,8 @@
 		<!-- </a> -->
 	</td>
 	<td>
-        @if(in_array($performance_appraisal_performance_status_id,array(2,14)) && $hr_appraisal_admin && $status_id == 1)
+        @if((in_array($performance_appraisal_performance_status_id,array(2,14)) && $hr_appraisal_admin && $status_id == 1) 
+        	|| $performance_appraisal_performance_status_id < 4 && $is_finance)
 	        <div class="btn-group">
 	        	<?php
 					$href = get_mod_route('appraisal_individual_rate') . '/edit_admin/'.$record_id.'/'.$user_id;

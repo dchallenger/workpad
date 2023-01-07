@@ -272,4 +272,19 @@ class appraisal_individual_rate_model extends Record
 
 		return $appraisal_applicable_score_library_ratings_array;
 	}
+
+	function get_appraisal_applicable_financial($appraisal_id = 0,$appraisee_id = 0)
+	{
+		$this->db->select('*');
+		$this->db->from('performance_appraisal_applicable_financial paaf');
+		$this->db->where('paaf.appraisal_id',$appraisal_id);
+		$this->db->where('paaf.user_id',$appraisee_id);
+		$result = $this->db->get();
+
+		$appraisal_applicable_financial = array();
+		if ($result && $result->num_rows() > 0)
+		{
+			return $appraisal_applicable_financial;
+		}
+	}
 }

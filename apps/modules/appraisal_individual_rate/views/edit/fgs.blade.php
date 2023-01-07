@@ -13,6 +13,7 @@
 				<input type="hidden" name="template_id" value="{{ $appraisee->template_id }}" />
 				<input type="hidden" name="appraisal_id" value="{{ $appraisee->appraisal_id }}" />
 				<input type="hidden" name="planning_id" value="{{ $appraisee->planning_id }}" />
+				<input type="hidden" name="self_rating" id="self_rating_tagging" value="{{ $self_rating }}" />
 				<table class="table table-bordered table-striped">
 					<tbody>
 						<tr class="success">
@@ -294,7 +295,7 @@
 												<th>COACH'S RATING</th>
 												<th>TOTAL WEIGHTED / AVERAGE</th>
 												<th>COACH'S SECTION RATING</th>
-												<th>WEIGH IN (%)</th>
+												<th>WEIGHT IN (%)</th>
 												<th>TOTAL WEIGHTED SCORE</th>
 												<th>COACH'S TOTAL WEIGHTED SCORE</th>
 											</tr>

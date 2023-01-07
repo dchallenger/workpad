@@ -218,6 +218,19 @@ function change_status(form, status_id)
     var validation = {};
 
     if (status_id == 4) {
+        $('.actual').each(function (index, element){
+            if( $(this).val() == ''){
+                validation[index] = {};
+                validation[index]['type'] = "error";
+                validation[index]['message'] = 'Financial Targets (Actual column) should not be empty';
+            }
+        });
+
+        if (!$.isEmptyObject(validation)) {
+            handle_ajax_message( validation );
+            return false;
+        }
+
         $('.none_core_coach_rating').each(function (index, element){
             var fieldval = parseFloat($(this).val());
             var weight_val = $(this).closest('tr').find('.weight').val();

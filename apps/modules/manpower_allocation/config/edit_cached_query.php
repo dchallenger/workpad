@@ -1,0 +1,4 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+$config["edit_cached_query"] = 'SELECT `ww_performance_manpower_allocation`.`manpower_allocation_id` as record_id, `ww_performance_manpower_allocation`.`created_on` as "performance_manpower_allocation.created_on", `ww_performance_manpower_allocation`.`created_by` as "performance_manpower_allocation.created_by", `ww_performance_manpower_allocation`.`modified_on` as "performance_manpower_allocation.modified_on", `ww_performance_manpower_allocation`.`modified_by` as "performance_manpower_allocation.modified_by"
+FROM (`ww_performance_manpower_allocation`)
+WHERE `ww_performance_manpower_allocation`.`manpower_allocation_id` = "{$record_id}"';

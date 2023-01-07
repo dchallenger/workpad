@@ -244,10 +244,10 @@
 													</div>
 													@if($employee_appraisal_planning && $employee_appraisal_planning->num_rows() > 0)
 														<br>
-														<div class="col-md-6">
+														<div class="col-md-12">
 															<div class="form-group">
-																<label class="control-label col-md-5 bold" style="text-align:left">Previous Appraisal Planning</label>
-																<div class="col-md-7">
+																<label class="control-label col-md-2 bold" style="text-align:left">Previous Appraisal Planning</label>
+																<div class="col-md-2">
 																	<select class="form-control upload_appraisal_planning" data-section_id="{{$child->template_section_id}}">
 																		<option value="">Select Appraisal Planning</option>
 																		@foreach($employee_appraisal_planning->result() as $row)
@@ -258,23 +258,8 @@
 															</div>
 														</div>
 													@endif
-													<br>
-													<div class="col-md-6">
-														<div class="form-group">
-															<label class="control-label col-md-5 bold" style="text-align:left">Financial Metric Title</label>
-															<div class="col-md-7">
-														    	<select class="financial_metric form-control input-sm" name="financial_metric[]" data-section_id="{{$child->template_section_id}}" multiple>
-														    		<option value=""></option>
-														    		@if ($financial_metric_title && $financial_metric_title->num_rows() > 0)
-														    			@foreach($financial_metric_title->result() as $row)
-														    				<option value="{{$row->financial_metric_planning_id}}">{{$row->title}}</option>
-														    			@endforeach
-														    		@endif
-														    	</select>	
-															</div>
-														</div>
-													</div>												
-													@include('edit/sections/balance_scorecard', array('section_id' => $child->template_section_id, 'header' => $child->header, 'footer' => $child->footer))
+																								
+													@include('edit/sections/balance_scorecard', array('financial_metric_planning' => $financial_metric_planning, 'financial_metric_planning_finance' => $financial_metric_planning_finance, 'section_id' => $child->template_section_id, 'header' => $child->header, 'footer' => $child->footer))
 												</div> <?php 
 												break;
 											case 3: //core competencies?>

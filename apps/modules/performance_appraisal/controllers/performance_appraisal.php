@@ -1406,7 +1406,7 @@ class Performance_appraisal extends MY_PrivateController
 	                'status' => 'info',
 	                'message_type' => 'Comment',
 	                'user_id' => $this->user->user_id,
-	                'feed_content' => "{$performance_appraisal_data['year']} performance appraisal period for {$performance_type['performance']} $appraisal_status.",
+	                'feed_content' => "{$performance_appraisal_data['year']} performance appraisal period for {$performance_appraisal_data['title']} $appraisal_status.",
 	                // 'uri' => $this->mod->route . '/review/'.$_POST['appraisal_id'].'/'.$_POST['user_id'].'/'.$approver->approver_id,
 	                'recipient_id' => $applicable['user_id']
 	            );
@@ -1432,7 +1432,7 @@ class Performance_appraisal extends MY_PrivateController
 	                'status' => 'info',
 	                'message_type' => 'Comment',
 	                'user_id' => $this->user->user_id,
-	                'feed_content' => "{$performance_appraisal_data['year']} performance appraisal period for {$performance_type['performance']} $appraisal_status.",
+	                'feed_content' => "{$performance_appraisal_data['year']} performance appraisal period for {$performance_appraisal_data['title']} $appraisal_status.",
 	                // 'uri' => $this->mod->route . '/review/'.$_POST['planning_id'].'/'.$_POST['user_id'].'/'.$approver->approver_id,
 	                'recipient_id' => $approver['approver_id']
 	            );

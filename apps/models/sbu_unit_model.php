@@ -69,4 +69,31 @@ class sbu_unit_model extends Record
 		}
 		return $data;
 	}	
+
+	function get_sbu_unit($manpower_allocation_column_name = false,$sbu_unit = false)
+	{
+		if ($manpower_allocation_column_name) {
+			$this->db->where('manpower_allocation_column_name',$manpower_allocation_column_name);
+		}
+
+		if ($sbu_unit) {
+			$this->db->where('sbu_unit',$sbu_unit);
+		}
+
+		$sbu_unit = $this->db->get_where('users_sbu_unit');
+
+		return $sbu_unit;
+	}
+
+	function gen_sbu_unit_arr()
+	{
+		$sbu_uni_arr = array();
+		$sbu_unit = $this->get_sbu_unit();
+		if ($sbu_unit && $sbu_unit->num_rows() > 0) {
+			foreach ($sbu_unit->result() as $row) {
+				array_push($sbu_uni_arr,$row->sbu_unit);
+			}
+		}
+		return $sbu_uni_arr;
+	}
 }

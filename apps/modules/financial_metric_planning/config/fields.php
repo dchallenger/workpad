@@ -88,6 +88,30 @@ $config['fields'][3]['performance_financial_metric_planning.planning_id'] = arra
 		'textual_value_column' => ''
 	)
 );
+$config['fields'][3]['performance_financial_metric_planning.sbu_unit_id'] = array(
+	'f_id' => 1,
+	'fg_id' => 3,
+	'label' => 'Performance Planning Title',
+	'description' => '',
+	'table' => 'performance_financial_metric_planning',
+	'column' => 'sbu_unit_id',
+	'uitype_id' => 4,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 1,
+	'datatype' => 'required',
+	'active' => '1',
+	'encrypt' => 0,
+	'searchable' => array(
+		'type_id' => '1',
+		'table' => 'users_sbu_unit',
+		'multiple' => 0,
+		'group_by' => '',
+		'label' => 'sbu_unit',
+		'value' => 'sbu_unit_id',
+		'textual_value_column' => ''
+	)
+);
 $config['fields'][3]['performance_financial_metric_planning.title'] = array(
 	'f_id' => 7,
 	'fg_id' => 3,

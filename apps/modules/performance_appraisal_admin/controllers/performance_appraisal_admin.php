@@ -136,6 +136,8 @@ class Performance_appraisal_admin extends MY_PrivateController
 	            $rec['hr_appraisal_admin'] = 1;
 	        }
 
+	        $rec['is_finance'] = 0;
+
 			$record = array_merge($record, $rec);
 
 			$this->response->list .= $this->load->blade('list_template', $record, true)->with( $this->load->get_cached_vars() );

@@ -6,6 +6,7 @@ class Appraisal_individual_planning extends MY_PrivateController
 	{
         $this->load->model('my_calendar_model', 'my_calendar');        
 		$this->load->model('appraisal_individual_planning_model', 'mod');
+        $this->load->model('financial_metric_planning_model', 'fmp_mod');
 		parent::__construct();
         $this->lang->load('appraisal_individual_planning');
 
@@ -94,7 +95,8 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['competencies'] = $this->mod->get_competencies();
         $vars['target_completion'] = $this->mod->get_target_completion();
         $vars['template_id'] = $appraisee->applicable_template_id;
-
+        $vars['financial_metric_planning'] = $this->fmp_mod->get_all_financial_metric_planning_array($this->user->user_id);
+        $vars['financial_metric_planning_finance'] = ['fmpi_details_arr' => [], 'fmpd_details_arr' => []];
         $this->load->vars( $vars );
         
         $this->load->helper('form');
@@ -146,6 +148,8 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['competencies'] = $this->mod->get_competencies();
         $vars['target_completion'] = $this->mod->get_target_completion();
         $vars['template_id'] = $appraisee->applicable_template_id;
+        $vars['financial_metric_planning'] = $this->fmp_mod->get_all_financial_metric_planning_array($this->user->user_id);
+        $vars['financial_metric_planning_finance'] = $this->fmp_mod->get_financial_metric_planning_finance_array($user_id);
 
         $this->load->vars( $vars );
 
@@ -685,7 +689,7 @@ class Appraisal_individual_planning extends MY_PrivateController
                             $approver_recepient = $approver_info->email;
                             $sendtargetsettings['approver'] = $approver_info->full_name;
                             
-                            $sendtargetsettings['appraisee'] = $appraisee->full_name;
+                            $sendtargetsettings['appraisee'] = $appraisee->fullname;
 
                             $logo  = ''; 
                             if ($this->config->item('system')['print_logo'] != ''){
@@ -914,7 +918,62 @@ class Appraisal_individual_planning extends MY_PrivateController
                         }
                     }
                 }
-            }   
+            }
+
+            $financial_employee_kpi = $this->input->post('financial_employee_kpi');
+            if ($financial_employee_kpi && count($financial_employee_kpi) > 0) {
+                $this->db->where('user_id',$this->input->post('user_id'));
+                $this->db->where('planning_id',$this->input->post('record_id'));
+                $this->db->delete('performance_planning_applicable_financial_employee');
+
+                foreach ($financial_employee_kpi as $financial_metric_planning_details_id => $sbu) {
+                    $kpi = '';
+                    $this->db->where('financial_metric_planning_details_id',$financial_metric_planning_details_id);
+                    $financial_metric_planning_details_result = $this->db->get('performance_financial_metric_planning_details');
+                    if ($financial_metric_planning_details_result && $financial_metric_planning_details_result->num_rows() > 0) {
+                        $kpi = $financial_metric_planning_details_result->row()->financial_metric_kpi;
+                    }
+
+                    foreach ($sbu as $key => $val) {
+                        $info = array(
+                            'planning_id' => $this->input->post('record_id'),
+                            'user_id' => $this->input->post('user_id'),
+                            'kpi' => $kpi,
+                            'sbu' => $key,
+                            'target' => $val['target'],
+                            'weight' => $val['weight']
+                        );
+
+                        $this->db->insert('performance_planning_applicable_financial_employee',$info);
+                        $planning_applicable_financial_employee_id = $this->db->insert_id();
+                    }
+                }
+            }
+
+            $financial_metric_planning_finance = $this->fmp_mod->get_financial_metric_planning_finance_array($this->input->post('user_id'));
+            if ($financial_metric_planning_finance && count($financial_metric_planning_finance['fmpi_details_arr']) > 0) {
+                $this->db->where('user_id',$this->input->post('user_id'));
+                $this->db->where('planning_id',$this->input->post('record_id'));
+                $this->db->delete('performance_planning_applicable_financial_finance');
+
+                foreach ($financial_metric_planning_finance['fmpi_details_arr'] as $sbu => $details) {
+                    foreach ($details as $key => $val) {
+                        $info = array(
+                            'planning_id' => $this->input->post('record_id'),
+                            'user_id' => $this->input->post('user_id'),
+                            'sbu' => $sbu,
+                            'item' => $val['financial_metric_kpi'],
+                            'weight' => $val['weight'],
+                            'target' => $val['value'],
+                            'rating_comp' => $val['rating_comp']
+
+                        );
+
+                        $this->db->insert('performance_planning_applicable_financial_finance',$info);
+                        $planning_applicable_financial_finance_id = $this->db->insert_id();
+                    }
+                }
+            }
         }
 
         $this->db->trans_commit();
@@ -1482,6 +1541,10 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['competencies'] = $this->mod->get_competencies();
         $vars['target_completion'] = $this->mod->get_target_completion();
         $vars['template_id'] = $appraisee->applicable_template_id;
+        $vars['financial_metric_planning'] = $this->fmp_mod->get_all_financial_metric_planning_array($user_id);
+        $vars['financial_metric_planning_finance'] = ['fmpi_details_arr' => [], 'fmpd_details_arr' => []];
+        // $vars['financial_metric_planning_finance'] = $this->fmp_mod->get_financial_metric_planning_finance_array($user_id);
+        // $vars['financial_metric_planning'] = ['fmp_details_arr' => [], 'columns_arr' => [], 'fmpi_arr' => []];
 
         $this->load->vars( $vars );
 

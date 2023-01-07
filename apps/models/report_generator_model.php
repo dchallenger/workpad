@@ -934,7 +934,7 @@ class report_generator_model extends Record
 		}
 
 		if (isset($appraisal_summary_header)) {
-			$letters = $this->createColumnsArray('T');
+			$letters = $this->createColumnsArray('L');
 			$index = 0;
 
 			for ($index; $index <= count($letters) - 1; $index++) {
@@ -943,15 +943,11 @@ class report_generator_model extends Record
 				$content->getActiveSheet()->getColumnDimension($letters[$index])->setAutoSize(true);
 			}
 
-			$content->getActiveSheet()->getStyle('J2:K'.($result->num_rows()+3))->getNumberFormat()->setFormatCode('#,##0.00');
-/*			$content->getActiveSheet()->getStyle("A1:K2")->applyFromArray($style_center);
-			$content->getActiveSheet()->getStyle("A3:K3")->applyFromArray($style_center);
-			$content->getActiveSheet()->mergeCells('A1:K1');
-			$content->getActiveSheet()->mergeCells('A2:K2');*/
+			//$content->getActiveSheet()->getStyle('J2:K'.($result->num_rows()+3))->getNumberFormat()->setFormatCode('#,##0.00');
 
-			$content->getActiveSheet()->getStyle("A1:T1")->getFont()->setBold(true);
+			$content->getActiveSheet()->getStyle("A1:L1")->getFont()->setBold(true);
 
-			$content->getActiveSheet()->getStyle("A2:T".($result->num_rows()+1))->applyFromArray($border_style);
+			$content->getActiveSheet()->getStyle("A2:L".($result->num_rows()+1))->applyFromArray($border_style);
 		}
 
 		if (isset($teval_header)) {

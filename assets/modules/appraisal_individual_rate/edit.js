@@ -11,7 +11,7 @@ $(document).ready(function(){
         total_self_weighted_score: {},
         grand_total_self_weighted_score: 0,
         total_coach_weighted_score: {},
-        grand_total_coach_weighted_score: 0        
+        grand_total_coach_weighted_score: 0
     };
 
     var total_weighted_score = 0;
@@ -29,6 +29,33 @@ $(document).ready(function(){
     appraisal_object.total_weighted_score = total_weighted_score;
 
     $('.total_weighted_score').html(appraisal_object.total_weighted_score+'%');
+
+    //for financial metrics
+    if ($('.self_weight_average[question=1]').val() != '' && !isNaN($('.self_weight_average[question=1]').val())) {
+        var financial_metric = parseFloat($('.self_weight_average[question=1]').val());
+        var ratio_weigth = parseFloat($('.self_weight_average[question=1]').attr('ratio-weight'));
+        var section_id = $('.self_weight_average[question=1]').attr('section-id');
+        appraisal_object.total_weight_average_none_core_self_rating['q1'] = financial_metric;
+
+        appraisal_object.grand_total_weight_average_none_core_self_rating = sum_object(appraisal_object.total_weight_average_none_core_self_rating).toFixed(2);
+        var section_rate = get_in_range(parseFloat(appraisal_object.grand_total_weight_average_none_core_self_rating));
+        var total_self_weighted_score = (section_rate * ratio_weigth) / 100;
+        appraisal_object.total_self_weighted_score['sec'+section_id] = parseFloat(total_self_weighted_score.toFixed(2));
+        appraisal_object.grand_total_self_weighted_score = sum_object(appraisal_object.total_self_weighted_score);
+        $('.non_core_self_rating_1').html((financial_metric).toFixed(2));
+        $('.none_core_score_car_library_self_rating_1').val(financial_metric);
+
+
+        appraisal_object.total_weight_average_none_core_coach_rating['q1'] = financial_metric;
+        appraisal_object.grand_total_weight_average_none_core_coach_rating = sum_object(appraisal_object.total_weight_average_none_core_coach_rating).toFixed(2);
+        var total_coach_weighted_score = (section_rate * ratio_weigth) / 100;
+        appraisal_object.total_coach_weighted_score['sec'+section_id] = parseFloat(total_coach_weighted_score.toFixed(2));
+        appraisal_object.grand_total_coach_weighted_score = sum_object(appraisal_object.total_coach_weighted_score);
+        appraisal_object.total_coach_weighted_score['sec'+section_id] = parseFloat(total_coach_weighted_score.toFixed(2));
+        appraisal_object.grand_total_coach_weighted_score = sum_object(appraisal_object.total_coach_weighted_score);
+        $('.non_core_coach_rating_1').html((financial_metric).toFixed(2));
+    }
+    //for financial metrics
 
     $('.none_core_self_rating').live('keyup',function(){
         var question = $(this).attr('question');
@@ -68,7 +95,7 @@ $(document).ready(function(){
         appraisal_object.total_weight_average_none_core_self_rating['q'+question] = total_weight_average_none_core_self_rating;
 
         appraisal_object.grand_total_weight_average_none_core_self_rating = sum_object(appraisal_object.total_weight_average_none_core_self_rating).toFixed(2);
-
+        
         var section_rate = get_in_range(parseFloat(appraisal_object.grand_total_weight_average_none_core_self_rating));
         
         var total_self_weighted_score = (section_rate * ratio_weigth) / 100;
@@ -86,7 +113,7 @@ $(document).ready(function(){
             $('.self_rating').val(parseFloat(appraisal_object.grand_total_self_weighted_score).toFixed(2));
 
             $('.none_core_score_car_library_self_rating_'+question+'').val((total_weight_average_none_core_self_rating).toFixed(2));
-            $('.section_total_weight_ave_'+section_id+'').val(appraisal_object.grand_total_weight_average);
+            $('.section_total_weight_ave_'+section_id+'').val(appraisal_object.grand_total_weight_average_none_core_self_rating);
             $('.section_total_weighted_score_'+section_id+'').val(total_self_weighted_score.toFixed(2));
         }, 3000);
     });
@@ -147,7 +174,7 @@ $(document).ready(function(){
             $('.coach_rating').val(parseFloat(appraisal_object.grand_total_coach_weighted_score).toFixed(2));
 
             $('.none_core_score_car_library_coach_rating_'+question+'').val((total_weight_average_none_core_coach_rating).toFixed(2));
-            $('.section_coach_section_rating_'+section_id+'').val(appraisal_object.grand_total_weight_average);
+            $('.section_coach_section_rating_'+section_id+'').val(appraisal_object.grand_total_weight_average_none_core_coach_rating);
             $('.section_coach_total_weighted_score_'+section_id+'').val(total_coach_weighted_score.toFixed(2));
         }, 3000);
     });
@@ -224,6 +251,38 @@ $(document).ready(function(){
         $('.section_coach_total_weighted_score_'+section_id).val(total_coach_weighted_score);
     });
 
+    $('.fm_actual').live('keyup',function(){
+        var parent = $(this).closest('tr');
+        var weight = parseFloat($(parent).find('.fm_weigth').val().replace(/,/g, ''));
+        var actual = parseFloat($(this).val().replace(/,/g, ''));
+        var rating_comp = $(this).attr('rating-val');
+        var target = parseFloat($(parent).find('.fm_target').val().replace(/,/g, ''));
+        var allocation = parseFloat($(parent).find('.fm_allocation').val().replace(/,/g, ''));
+        var sbu = $(this).attr('sbu');
+
+        var rating = '';
+        if (rating_comp == 1)
+            rating = Math.round(actual / target * 100);
+        else
+            rating = Math.round(target / actual * 100);
+
+        var weighted_rating_finance = rating * weight / 100;
+        var weighted_rating_employee = (rating * weight / 100) * allocation / 100;
+
+        $(parent).find('.fm_rating').val(rating);
+        $(parent).find('.fm_weighted_rating_finance_'+sbu+'').val(weighted_rating_finance.toFixed(4));
+        $(parent).find('.fm_weighted_rating_employee').val(weighted_rating_employee.toFixed(4));
+
+        var total_weighted_rating_finance = 0;
+        $('.fm_weighted_rating_finance_'+sbu+'').each(function (index, element) {
+            if ($(element).val() != '' && !isNaN($(element).val())) {
+                total_weighted_rating_finance += parseFloat($(element).val());
+            }
+        });
+
+        $('.total_weighted_rating_finance_'+sbu+'').html(total_weighted_rating_finance.toFixed(4));
+    });
+
     $('.none_core_coach_rating').each(function(){
         $(this).trigger('keyup');
     });
@@ -238,7 +297,12 @@ $(document).ready(function(){
 
     $('.core_coach_rating').each(function(){
         $(this).trigger('change');
-    });        
+    });
+
+    $('.fm_actual').each(function(){
+        $(this).trigger('keyup');
+    });
+    
 });        
 
 function view_discussion( form, status_id )

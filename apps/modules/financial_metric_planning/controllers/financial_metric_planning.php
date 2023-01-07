@@ -64,6 +64,10 @@ class Financial_metric_planning extends MY_PrivateController
 			$kpi_arr = $_POST['performance_financial_metric_planning']['kpi'];
 			$weight_arr = $_POST['performance_financial_metric_planning']['weight'];
 			$target_arr = $_POST['performance_financial_metric_planning']['target'];
+			$rating_com_arr = $_POST['performance_financial_metric_planning']['rating_comp'];
+			$actual_arr = $_POST['performance_financial_metric_planning']['actual'];
+			$rating_arr = $_POST['performance_financial_metric_planning']['rating'];
+			$weighted_rating_arr = $_POST['performance_financial_metric_planning']['weighted_rating'];
 			$financial_metric_planning_details_id_arr = (isset($_POST['performance_financial_metric_planning']['financial_metric_planning_details_id']) ? $_POST['performance_financial_metric_planning']['financial_metric_planning_details_id'] : []);
 
 			if ($kpi_arr) {
@@ -71,9 +75,13 @@ class Financial_metric_planning extends MY_PrivateController
 				{
 					$insert = array(
 						'financial_metric_planning_id' => $financial_metric_planning_id,
-						'financial_metric_kpi_id' => $kpi_arr[$index],
+						'financial_metric_kpi' => $kpi_arr[$index],
 						'weight' => $weight_arr[$index],
 						'value' => $target_arr[$index],
+						'rating_comp' => $rating_com_arr[$index],
+						'actual' => $actual_arr[$index],
+						'rating' => $rating_arr[$index],
+						'weighted_rating' => $weighted_rating_arr[$index],
 						'created_by' => $this->user->user_id
 					);
 

@@ -5,10 +5,18 @@
     $br = "border-right: 1px solid #000";
     $bt = "border-top: 1px solid #000";
     $bb = "border-bottom: 1px solid #000";
+    $blr = "border-left: 1px solid #000;border-right: 1px solid #000";
     $blt = "border-left: 1px solid #000;border-top: 1px solid #000";
     $bltb = "border-left: 1px solid #000;border-top: 1px solid #000;border-bottom: 1px solid #000";
     $bltr = "border-left: 1px solid #000;border-top: 1px solid #000;border-right: 1px solid #000";
     $bltrb = "border-left: 1px solid #000;border-top: 1px solid #000;border-right: 1px solid #000;border-bottom: 1px solid #000";
+
+    $key_in_weight_ave = '';
+    if (isset($financial_metric_planning_weight) && count($financial_metric_planning_weight['fmpi_arr']) > 0) {
+        $count = count($financial_metric_planning_weight['fmpi_arr']);
+        $total_key_weight = array_sum($financial_metric_planning_weight['fmpi_arr']);
+        $key_in_weight_ave = $total_key_weight / $count;
+    }
 ?>
 <html lang="en">
     <!-- BEGIN HEAD-->
@@ -163,8 +171,82 @@
                                         <table align='center' cellpadding="2px" cellspacing="0" style='width: 100%; height: auto; background: #fff'>
                                             <thead>
                                                 <tr>
-                                                    <th colspan="12" align="left" style="<?php echo $bltr ?>"><?php echo $child->template_section ?> (<?php echo $child->weight ?>%)</th>
+                                                    <th colspan="12" align="left" style="<?php echo $bltrb ?>"><?php echo $child->template_section ?> (<?php echo $child->weight ?>%)</th>
                                                 </tr>
+                                            </thead>
+                                        </table>
+                                        <?php if(isset($balance_score_card) && $balance_score_card->num_rows() > 0) { ?>
+                                            <?php $key_weight_arr = array(); ?>
+                                            <?php foreach($balance_score_card->result_array() as $key => $val) { ?>
+                                                <?php 
+                                                    $end_of_line_bot = 0;
+                                                    if (end(array_keys($balance_score_card->result_array())) == $key)
+                                                        $end_of_line_bot = 1;
+
+                                                    if($val['scorecard_id'] == 1) {
+                                                        $key_weight_arr[$val['scorecard_id']] = $key_in_weight_ave;
+                                                ?>
+                                                    <table align='center' cellpadding="2px" cellspacing="0" style='width: 100%; height: auto; background: #fff'>
+                                                        <thead>
+                                                            <tr>
+                                                                <th colspan="2" style="text-align: left;font-weight: normal;<?php echo $blr ?>"><?php echo 1 . ". " . $val['scorecard'] ?></th>
+                                                                <th colspan="7" style="text-align: left;font-weight: normal;<?php echo $br ?>">Key in Weight&nbsp;<?php echo $key_in_weight_ave ?></th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th colspan="9" class="bold" style="<?php echo $bltr ?>">FINANCIAL TARGETS</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="text-center" width="10%" style="<?php echo $blt ?>">SBU</th>
+                                                                <th class="text-center" width="10%" style="<?php echo $blt ?>">Item</th>
+                                                                <th class="text-center" width="10%" style="<?php echo $blt ?>">%</th>
+                                                                <th class="text-center" width="10%" style="<?php echo $blt ?>">Target</th>
+                                                                <th class="text-center" width="20%" style="<?php echo $blt ?>">Rating Comp</th>
+                                                                <th class="text-center" width="10%" style="<?php echo $blt ?>">Actual</th>
+                                                                <th class="text-center" width="10%" style="<?php echo $blt ?>">Rating (%)</th>
+                                                                <th class="text-center" width="10%" style="<?php echo $blt ?>">Allocation (%)</th>
+                                                                <th class="text-center" width="15%" style="<?php echo $bltr ?>">Weighted  Rating (%)</th>
+                                                            </tr>
+                                                        </thead>
+                                                            <tbody>
+                                                                <?php 
+                                                                    if(count($financial_metric_planning_applicable) > 0) {
+                                                                        $total_weighted_rating_employee = 0;
+                                                                        foreach($financial_metric_planning_applicable as $sbu => $financial) {
+                                                                            $total_weighted_rating_employee += $financial->weighted_rating;
+
+                                                                    ?>
+                                                                            <tr>
+                                                                                <td style="<?php echo $blt ?>"><?php echo $financial->sbu_unit ?></td>
+                                                                                <td style="<?php echo $blt ?>"><?php echo $financial->financial_metric_kpi ?></td>
+                                                                                <td style="text-align: right;<?php echo $blt ?>"><?php echo $financial->weight ?></td>
+                                                                                <td style="text-align: right;<?php echo $blt ?>"><?php echo $financial->value ?></td>
+                                                                                <td style="<?php echo $blt ?>"><?php echo ($financial->rating_comp == 1 ? 'Actual/Target' : 'Target/Actual') ?></td>
+                                                                                <td style="text-align: right;<?php echo $blt ?>"><?php echo $financial->actual ?></td>
+                                                                                <td style="text-align: right;<?php echo $blt ?>"><?php echo $financial->rating ?></td>
+                                                                                <td style="text-align: right;<?php echo $blt ?>"><?php echo $financial->allocation ?></td>
+                                                                                <td style="text-align: right;<?php echo $bltr ?>"><?php echo $financial->weighted_rating ?></td>
+                                                                            </tr>
+                                                                <?php
+                                                                        }
+                                                                ?>
+                                                                        <tr>
+                                                                            <td colspan="8" style="<?php echo $blt ?>" class="bold">Total</td>
+                                                                            <td classs="bold" style="text-align: right;<?php echo $bltr ?>"><?php echo number_format($total_weighted_rating_employee, 4, '.', ',') ?></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="8" class="bold" style="<?php echo $blt ?>">Weighted Rating</td>
+                                                                            <td classs="bold" style="text-align: right;<?php echo $bltr ?>"><?php echo number_format(($total_weighted_rating_employee * $key_in_weight_ave / 100), 4, '.', ',') ?></td>
+                                                                        </tr>
+                                                                <?php 
+                                                                    } 
+                                                                ?>
+                                                            </tbody>
+                                                    </table>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        <?php } ?>
+                                        <table align='center' cellpadding="2px" cellspacing="0" style='width: 100%; height: auto; background: #fff'>
+                                            <thead>
                                                 <tr>
                                                     <?php foreach($columns->result_array() as $key => $val) { ?>
                                                         <th width="" class="bold" align="left" style="<?php echo $blt ?>">
@@ -193,192 +275,194 @@
                                             </thead>
                                             <tbody>
                                                 <?php if(isset($balance_score_card) && $balance_score_card->num_rows() > 0) { ?>
-                                                    <?php $key_weight_arr = array(); ?>
                                                     <?php foreach($balance_score_card->result_array() as $key => $val) { ?>
                                                         <?php 
                                                             $end_of_line_bot = 0;
                                                             if (end(array_keys($balance_score_card->result_array())) == $key)
                                                                 $end_of_line_bot = 1;
+
+                                                            if($val['scorecard_id'] > 1) {
                                                         ?>
-                                                        <tr>
-                                                            <td style="<?php echo ($end_of_line_bot ? $bltb : $blt) ?>">
-                                                                <?php echo $key+1 . ". " . $val['scorecard'] ?>&nbsp;
-                                                            </td>
-                                                            <?php
-                                                                if (isset($template_section_column) && !empty($template_section_column))
-                                                                {
-                                                                    foreach ($template_section_column[$section_id] as $key => $value) {
-                                                                        $planning_value = '';
-                                                                        if (isset($planning_applicable_fields[$val['scorecard_id']][1][$value->section_column_id])) {
-                                                                            $planning_value = $planning_applicable_fields[$val['scorecard_id']][1][$value->section_column_id]['value'];
+                                                            <tr>
+                                                                <td style="<?php echo ($end_of_line_bot ? $bltb : $blt) ?>">
+                                                                    <?php echo $key+1 . ". " . $val['scorecard'] ?>&nbsp;
+                                                                </td>
+                                                                <?php
+                                                                    if (isset($template_section_column) && !empty($template_section_column))
+                                                                    {
+                                                                        foreach ($template_section_column[$section_id] as $key => $value) {
+                                                                            $planning_value = '';
+                                                                            if (isset($planning_applicable_fields[$val['scorecard_id']][1][$value->section_column_id])) {
+                                                                                $planning_value = $planning_applicable_fields[$val['scorecard_id']][1][$value->section_column_id]['value'];
 
-                                                                            if ($planning_applicable_fields[$val['scorecard_id']][1][$value->section_column_id]['class'] == 'key_weight')
-                                                                                $key_weight_arr[$val['scorecard_id']] = $planning_value;
+                                                                                if ($planning_applicable_fields[$val['scorecard_id']][1][$value->section_column_id]['class'] == 'key_weight')
+                                                                                    $key_weight_arr[$val['scorecard_id']] = $planning_value;
+                                                                            }
+
+                                                                            $end_of_line = 0;
+                                                                            if (end(array_keys($template_section_column[$section_id])) == $key)
+                                                                                $end_of_line = 1;
+
+                                                                            $bl_tmp = $blt;
+                                                                            if ($end_of_line_bot && !$end_of_line)
+                                                                                $bl_tmp = $bltb;
+                                                                            else if ($end_of_line_bot && $end_of_line)
+                                                                                $bl_tmp = $bltb;
+                                                                            else if (!$end_of_line_bot && $end_of_line)
+                                                                                $bl_tmp = $blt;    
+
+                                                                            switch( $value->uitype_id ) {
+                                                                                case 2:
+                                                                ?>
+                                                                                    <td width="" style="text-align: right;<?php echo $bl_tmp ?>">
+                                                                                        <?php echo $planning_value ?>
+                                                                                    </td>
+                                                                <?php
+                                                                                break;
+                                                                                case 3:
+                                                                ?>
+                                                                                    <td width="" rowspan="" style="<?php echo $bl_tmp ?>">
+                                                                                        <?php echo $planning_value ?>
+                                                                                    </td>                                       
+                                                                <?php                                           
+                                                                                break;
+                                                                            }
                                                                         }
+                                                                ?>
+                                            <!--                                Fixed the section column id for appraisal 
+                                                                        100 = self rating, 101 = self achieved, 102 = self weight average
+                                                                        103 = coach rating, 104 = coach achieved, 105 = coach weight average -->
+                                                                        <?php
+                                                                            $self_rate_val = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][100][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][100][1] : '';
+                                                                            $self_achieve_val = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][101][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][101][1] : '';
+                                                                            $self_weight_ave_val = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][102][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][102][1] : '';
+                                                                            $coach_rate_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][103][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][103][1] : '';
+                                                                            $coach_achieve_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][104][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][104][1] : '';
+                                                                            $coach_weight_ave_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][105][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][105][1] : '';                                  
 
-                                                                        $end_of_line = 0;
-                                                                        if (end(array_keys($template_section_column[$section_id])) == $key)
-                                                                            $end_of_line = 1;
+                                                                            $disabled = '';
+                                                                            if ($performance_status_id >= 4 || (isset($approver_approved) && $approver_approved) || $hr_appraisal_admin)
+                                                                                $disabled = 'disabled';
 
-                                                                        $bl_tmp = $blt;
-                                                                        if ($end_of_line_bot && !$end_of_line)
-                                                                            $bl_tmp = $bltb;
-                                                                        else if ($end_of_line_bot && $end_of_line)
-                                                                            $bl_tmp = $bltb;
-                                                                        else if (!$end_of_line_bot && $end_of_line)
-                                                                            $bl_tmp = $blt;    
-
-                                                                        switch( $value->uitype_id ) {
-                                                                            case 2:
-                                                            ?>
-                                                                                <td width="" style="<?php echo $bl_tmp ?>">
-                                                                                    <?php echo $planning_value ?>
-                                                                                </td>
-                                                            <?php
-                                                                            break;
-                                                                            case 3:
-                                                            ?>
-                                                                                <td width="" rowspan="" style="<?php echo $bl_tmp ?>">
-                                                                                    <?php echo $planning_value ?>
-                                                                                </td>                                       
-                                                            <?php                                           
-                                                                            break;
-                                                                        }
-                                                                    }
-                                                            ?>
-                                        <!--                                Fixed the section column id for appraisal 
-                                                                    100 = self rating, 101 = self achieved, 102 = self weight average
-                                                                    103 = coach rating, 104 = coach achieved, 105 = coach weight average -->
-                                                                    <?php
-                                                                        $self_rate_val = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][100][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][100][1] : '';
-                                                                        $self_achieve_val = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][101][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][101][1] : '';
-                                                                        $self_weight_ave_val = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][102][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][102][1] : '';
-                                                                        $coach_rate_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][103][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][103][1] : '';
-                                                                        $coach_achieve_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][104][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][104][1] : '';
-                                                                        $coach_weight_ave_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][105][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][105][1] : '';                                  
-
-                                                                        $disabled = '';
-                                                                        if ($performance_status_id >= 4 || (isset($approver_approved) && $approver_approved) || $hr_appraisal_admin)
-                                                                            $disabled = 'disabled';
-
-                                                                        $blt_tmp = $blt;
-                                                                        $bltr_tmp = $bltr;
-                                                                        if ($end_of_line_bot) {
-                                                                            $blt_tmp = $bltb;
-                                                                            $bltr_tmp = $bltrb;
-                                                                        }
-                                                                    ?>
-                                                                    <td style="<?php echo ($end_of_line_bot ? $bltb : $blt) ?>"><?php echo $self_rate_val ?></td>
-                                                                    <td style="<?php echo ($end_of_line_bot ? $bltb : $blt) ?>"><?php echo $self_weight_ave_val ?></td>
-                                                                    <td style="<?php echo ($no_approver ? $blt_tmp : $bltr_tmp) ?>"><?php echo $self_weight_ave_val ?></td>
-                                                                    <?php if(!$self_rating && $list_approver && $list_approver->num_rows() > 0) { ?>
-                                                                        <?php foreach($list_approver->result() as $row) { ?>
-                                                                            <td style="<?php echo ($end_of_line_bot ? $bltb : $blt) ?>"><?php echo $coach_rate_val ?></td>
-                                                                            <td style="<?php echo ($end_of_line_bot ? $bltb : $blt) ?>"><?php echo $coach_achieve_val ?></td>
-                                                                            <td style="<?php echo ($end_of_line_bot ? $bltrb : $bltr) ?>"><?php echo $coach_weight_ave_val ?></td>
-                                                                        <?php } ?>
-                                                                    <?php } else { ?>
-                                                                        <?php if($self_rating && $performance_status_id == 4) { ?>
+                                                                            $blt_tmp = $blt;
+                                                                            $bltr_tmp = $bltr;
+                                                                            if ($end_of_line_bot) {
+                                                                                $blt_tmp = $bltb;
+                                                                                $bltr_tmp = $bltrb;
+                                                                            }
+                                                                        ?>
+                                                                        <td style="text-align: right;<?php echo ($end_of_line_bot ? $bltb : $blt) ?>"><?php echo $self_rate_val ?></td>
+                                                                        <td style="text-align: right;<?php echo ($end_of_line_bot ? $bltb : $blt) ?>"><?php echo $self_weight_ave_val ?></td>
+                                                                        <td style="text-align: right;<?php echo ($no_approver ? $blt_tmp : $bltr_tmp) ?>"><?php echo $self_weight_ave_val ?></td>
+                                                                        <?php if(!$self_rating && $list_approver && $list_approver->num_rows() > 0) { ?>
                                                                             <?php foreach($list_approver->result() as $row) { ?>
                                                                                 <td style="<?php echo ($end_of_line_bot ? $bltb : $blt) ?>"><?php echo $coach_rate_val ?></td>
                                                                                 <td style="<?php echo ($end_of_line_bot ? $bltb : $blt) ?>"><?php echo $coach_achieve_val ?></td>
                                                                                 <td style="<?php echo ($end_of_line_bot ? $bltrb : $bltr) ?>"><?php echo $coach_weight_ave_val ?></td>
                                                                             <?php } ?>
-                                                                        <?php } ?>
-                                                                    <?php } ?>
-                                                            <?php
-                                                                }
-                                                            ?>
-                                                        </tr>
-                                                        <?php foreach($planning_applicable_fields[$val['scorecard_id']] as $key1 => $val1) { ?>
-                                                            <?php if($key1 > 1) { ?>
-                                                                <tr>
-                                                                    <td style="<?php echo $blt ?>">&nbsp;</td>
-                                                                    <?php
-                                                                        if (isset($template_section_column) && !empty($template_section_column))
-                                                                        {
-                                                                            foreach ($template_section_column[$section_id] as $key => $value) {
-                                                                                $planning_value = '';
-                                                                                $can_add_row = 0;
-                                                                                $column_sequence = 0;
-
-                                                                                if (isset($planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id])) {
-                                                                                    $planning_value = $planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id]['value'];
-                                                                                    $can_add_row = $planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id]['can_add_row'];
-                                                                                    $column_sequence = $planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id]['column_sequence'];
-                                                                                }
-
-                                                                                switch( $value->uitype_id ) {
-                                                                                    case 2:
-                                                                                        if ($can_add_row) {
-                                                                    ?>
-                                                                                            <td width="" style="<?php echo ($end_of_line ? $bltb : $blt) ?>">
-                                                                                                <?php echo $planning_value ?>
-                                                                                            </td>
-                                                                    <?php
-                                                                                        } else {
-                                                                    ?>
-                                                                                            <td width="" style="<?php echo ($end_of_line ? $bltb : $blt) ?>;vertical-align:middle;text-align:center">
-                                                                                                &nbsp;
-                                                                                            </td>
-                                                                    <?php                                                           
-                                                                                        }
-                                                                                    break;
-                                                                                    case 3:
-                                                                                        if ($can_add_row) {
-                                                                    ?>
-                                                                                            <td width="" rowspan="" style="<?php echo ($end_of_line ? $bltb : $blt) ?>">
-                                                                                                <?php echo $planning_value ?>
-                                                                                            </td>                                       
-                                                                    <?php                   
-                                                                                        } else {
-                                                                    ?>
-                                                                                            <td style="<?php echo ($end_of_line ? $bltb : $blt) ?>">
-                                                                                                &nbsp;
-                                                                                            </td>               
-                                                                    <?php                                                                                               
-                                                                                        }                       
-                                                                                    break;
-                                                                                }
-                                                                            }
-                                                                    ?>
-                                            <!--                                Fixed the section column id for appraisal 
-                                                                            100 = self rating, 101 = self achieved, 102 = self weight average
-                                                                            103 = coach rating, 104 = coach achieved, 105 = coach weight average -->                                
-                                                                            <?php
-                                                                                $self_rate_val = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][100][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][100][$key1] : '';
-                                                                                $self_achieve_val = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][101][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][101][$key1] : '';
-                                                                                $self_weight_ave_val = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][102][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][102][$key1] : '';
-                                                                                $coach_rate_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][103][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][103][$key1] : '';
-                                                                                $coach_achieve_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][104][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][104][$key1] : '';
-                                                                                $coach_weight_ave_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][105][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][105][$key1] : '';                                  
-
-                                                                                $disabled = '';
-                                                                                if ($performance_status_id >= 4 || (isset($approver_approved) && $approver_approved) || $hr_appraisal_admin)
-                                                                                    $disabled = 'disabled';                                         
-                                                                            ?>  
-                                                                            <td style="<?php echo ($end_of_line ? $bltb : $blt) ?>"><?php echo $self_rate_val ?></td>
-                                                                            <td style="<?php echo ($end_of_line ? $bltb : $blt) ?>"><?php echo $self_achieve_val ?></td>
-                                                                            <td style="<?php echo ($no_approver ? $blt : $bltr) ?>"><?php echo $self_weight_ave_val ?></td>
-                                                                            <?php if(!$self_rating && $list_approver && $list_approver->num_rows() > 0) { ?>
+                                                                        <?php } else { ?>
+                                                                            <?php if($self_rating && $performance_status_id == 4) { ?>
                                                                                 <?php foreach($list_approver->result() as $row) { ?>
-                                                                                    <td style="<?php echo $blt ?>"><?php echo $coach_rate_val ?></td>
-                                                                                    <td style="<?php echo $blt ?>"><?php echo $coach_achieve_val ?></td>
-                                                                                    <td style="<?php echo $bltr ?>"><?php echo $coach_weight_ave_val ?></td>
-                                                                                <?php } ?>
-                                                                            <?php } else { ?>
-                                                                                <?php if($self_rating && $performance_status_id == 4) { ?>
-                                                                                    <?php foreach($list_approver->result() as $row) { ?>
-                                                                                        <td style="<?php echo $blt ?>"><?php echo $coach_rate_val ?></td>
-                                                                                        <td style="<?php echo $blt ?>"><?php echo $coach_achieve_val ?></td>
-                                                                                        <td style="<?php echo $bltr ?>"><?php echo $coach_weight_ave_val ?></td>
-                                                                                    <?php } ?>
+                                                                                    <td style="<?php echo ($end_of_line_bot ? $bltb : $blt) ?>"><?php echo $coach_rate_val ?></td>
+                                                                                    <td style="<?php echo ($end_of_line_bot ? $bltb : $blt) ?>"><?php echo $coach_achieve_val ?></td>
+                                                                                    <td style="<?php echo ($end_of_line_bot ? $bltrb : $bltr) ?>"><?php echo $coach_weight_ave_val ?></td>
                                                                                 <?php } ?>
                                                                             <?php } ?>
-                                                                    <?php                                       
-                                                                        }
-                                                                    ?>
-                                                                </tr>
+                                                                        <?php } ?>
+                                                                <?php
+                                                                    }
+                                                                ?>
+                                                            </tr>
+                                                            <?php foreach($planning_applicable_fields[$val['scorecard_id']] as $key1 => $val1) { ?>
+                                                                <?php if($key1 > 1) { ?>
+                                                                    <tr>
+                                                                        <td style="<?php echo ($end_of_line ? $bltb : $bl) ?>">&nbsp;</td>
+                                                                        <?php
+                                                                            if (isset($template_section_column) && !empty($template_section_column))
+                                                                            {
+                                                                                foreach ($template_section_column[$section_id] as $key => $value) {
+                                                                                    $planning_value = '';
+                                                                                    $can_add_row = 0;
+                                                                                    $column_sequence = 0;
+
+                                                                                    if (isset($planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id])) {
+                                                                                        $planning_value = $planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id]['value'];
+                                                                                        $can_add_row = $planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id]['can_add_row'];
+                                                                                        $column_sequence = $planning_applicable_fields[$val['scorecard_id']][$key1][$value->section_column_id]['column_sequence'];
+                                                                                    }
+
+                                                                                    switch( $value->uitype_id ) {
+                                                                                        case 2:
+                                                                                            if ($can_add_row) {
+                                                                        ?>
+                                                                                                <td width="" style="<?php echo ($end_of_line ? $bltb : $blt) ?>">
+                                                                                                    <?php echo $planning_value ?>
+                                                                                                </td>
+                                                                        <?php
+                                                                                            } else {
+                                                                        ?>
+                                                                                                <td width="" style="<?php echo ($end_of_line ? $bltb : $blt) ?>;vertical-align:middle;text-align:center">
+                                                                                                    &nbsp;
+                                                                                                </td>
+                                                                        <?php                                                           
+                                                                                            }
+                                                                                        break;
+                                                                                        case 3:
+                                                                                            if ($can_add_row) {
+                                                                        ?>
+                                                                                                <td width="" rowspan="" style="<?php echo ($end_of_line ? $bltb : $blt) ?>">
+                                                                                                    <?php echo $planning_value ?>
+                                                                                                </td>                                       
+                                                                        <?php                   
+                                                                                            } else {
+                                                                        ?>
+                                                                                                <td style="<?php echo ($end_of_line ? $bltb : $blt) ?>">
+                                                                                                    &nbsp;
+                                                                                                </td>               
+                                                                        <?php                                                                                               
+                                                                                            }                       
+                                                                                        break;
+                                                                                    }
+                                                                                }
+                                                                        ?>
+                                                <!--                                Fixed the section column id for appraisal 
+                                                                                100 = self rating, 101 = self achieved, 102 = self weight average
+                                                                                103 = coach rating, 104 = coach achieved, 105 = coach weight average -->                                
+                                                                                <?php
+                                                                                    $self_rate_val = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][100][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][100][$key1] : '';
+                                                                                    $self_achieve_val = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][101][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][101][$key1] : '';
+                                                                                    $self_weight_ave_val = isset($appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][102][1]) ? $appraisal_applicable_fields[$appraisee_user_id][$section_id][$val['scorecard_id']][102][$key1] : '';
+                                                                                    $coach_rate_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][103][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][103][$key1] : '';
+                                                                                    $coach_achieve_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][104][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][104][$key1] : '';
+                                                                                    $coach_weight_ave_val = isset($appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][105][1]) ? $appraisal_applicable_fields[$login_user_id][$section_id][$val['scorecard_id']][105][$key1] : '';                                  
+
+                                                                                    $disabled = '';
+                                                                                    if ($performance_status_id >= 4 || (isset($approver_approved) && $approver_approved) || $hr_appraisal_admin)
+                                                                                        $disabled = 'disabled';                                         
+                                                                                ?>  
+                                                                                <td style="text-align: right;<?php echo ($end_of_line ? $bltb : $blt) ?>"><?php echo $self_rate_val ?></td>
+                                                                                <td style="text-align: right;<?php echo ($end_of_line ? $bltb : $blt) ?>"><?php echo $self_achieve_val ?></td>
+                                                                                <td style="text-align: right;<?php echo ($no_approver ? $bltb : $bltr) ?>"><?php echo $self_weight_ave_val ?></td>
+                                                                                <?php if(!$self_rating && $list_approver && $list_approver->num_rows() > 0) { ?>
+                                                                                    <?php foreach($list_approver->result() as $row) { ?>
+                                                                                        <td style="<?php echo ($end_of_line ? $bltb : $bl) ?>"><?php echo $coach_rate_val ?></td>
+                                                                                        <td style="<?php echo ($end_of_line ? $bltb : $blt) ?>"><?php echo $coach_achieve_val ?></td>
+                                                                                        <td style="<?php echo ($end_of_line ? $bltrb : $blt) ?>"><?php echo $coach_weight_ave_val ?></td>
+                                                                                    <?php } ?>
+                                                                                <?php } else { ?>
+                                                                                    <?php if($self_rating && $performance_status_id == 4) { ?>
+                                                                                        <?php foreach($list_approver->result() as $row) { ?>
+                                                                                            <td style="<?php echo $blt ?>"><?php echo $coach_rate_val ?></td>
+                                                                                            <td style="<?php echo $blt ?>"><?php echo $coach_achieve_val ?></td>
+                                                                                            <td style="<?php echo $bltr ?>"><?php echo $coach_weight_ave_val ?></td>
+                                                                                        <?php } ?>
+                                                                                    <?php } ?>
+                                                                                <?php } ?>
+                                                                        <?php                                       
+                                                                            }
+                                                                        ?>
+                                                                    </tr>
+                                                                <?php } ?>
                                                             <?php } ?>
                                                         <?php } ?>
                                                     <?php } ?>
@@ -802,19 +886,19 @@
                                     <td colspan="4" class="bold" style="<?php echo $blt ?>" width="20%">
                                         <b><?php echo $val1['template_section'] ?></b>
                                     </td>
-                                    <td style="<?php echo $blt ?>">
+                                    <td style="text-align: right;<?php echo $blt ?>">
                                         <?php echo ($total_weighted_average != '' ? $total_weighted_average : '&nbsp;') ?>
                                     </td>
-                                    <td style="<?php echo $blt ?>">
+                                    <td style="text-align: right;<?php echo $blt ?>">
                                         <?php echo ($coach_total_weighted_average != '' ? $coach_total_weighted_average : '&nbsp;') ?>
                                     </td>
-                                    <td style="<?php echo $blt ?>">
+                                    <td style="text-align: right;<?php echo $blt ?>">
                                         <?php echo $val1['weight'] ?>
                                     </td>
-                                    <td style="<?php echo $blt ?>">
+                                    <td style="text-align: right;<?php echo $blt ?>">
                                         <?php echo ($total_weighted_score != '' ? $total_weighted_score : '&nbsp;') ?>
                                     </td>
-                                    <td style="<?php echo $bltr ?>">
+                                    <td style="text-align: right;<?php echo $bltr ?>">
                                         <?php echo ($coach_total_weighted_score != '' ? $coach_total_weighted_score : '&nbsp;') ?>
                                     </td>
                                 </tr>                                                   
@@ -823,14 +907,17 @@
                                         <?php
                                             $none_core_score_car_library_self_rating = (isset($appraisal_applicable_score_library_ratings[$val1['template_section_id']][$val['scorecard_id']]) ? $appraisal_applicable_score_library_ratings[$val1['template_section_id']][$val['scorecard_id']]['self_rating'] : '');
                                             $none_core_score_car_library_coach_rating = (isset($appraisal_applicable_score_library_ratings[$val1['template_section_id']][$val['scorecard_id']]) ? $appraisal_applicable_score_library_ratings[$val1['template_section_id']][$val['scorecard_id']]['coach_rating'] : '');
+
+                                            if($val['scorecard_id'] == 1)
+                                                $none_core_score_car_library_coach_rating = $none_core_score_car_library_self_rating;
                                         ?>                                                              
                                         <tr>
                                             <td style="<?php echo $blt ?>">
                                                 <div class="padding-left-10"><?php echo $val['scorecard'] ?></div>
                                             </td>
-                                            <td style="<?php echo $blt ?>"><?php echo $key_weight_arr[$val['scorecard_id']] ?></td>
-                                            <td style="<?php echo $blt ?>"><?php echo $none_core_score_car_library_self_rating ?></td>
-                                            <td style="<?php echo $blt ?>"><?php echo $none_core_score_car_library_coach_rating ?></td>
+                                            <td style="text-align: right;<?php echo $blt ?>"><?php echo $key_weight_arr[$val['scorecard_id']] ?></td>
+                                            <td style="text-align: right;<?php echo $blt ?>"><?php echo $none_core_score_car_library_self_rating ?></td>
+                                            <td style="text-align: right;<?php echo $blt ?>"><?php echo $none_core_score_car_library_coach_rating ?></td>
                                             <td style="<?php echo $blt ?>"></td>
                                             <td style="<?php echo $blt ?>"></td>
                                             <td style="<?php echo $blt ?>"></td>
@@ -844,19 +931,19 @@
                                     <td colspan="4" class="bold" style="<?php echo $blt ?>" width="20%">
                                         <b><?php echo $val1['template_section'] ?></b>
                                     </td>
-                                    <td style="<?php echo $blt ?>">
+                                    <td style="text-align: right;<?php echo $blt ?>">
                                         <?php echo ($total_weighted_average != '' ? $total_weighted_average : '&nbsp;') ?>
                                     </td>
-                                    <td style="<?php echo $blt ?>">
+                                    <td style="text-align: right;<?php echo $blt ?>">
                                         <?php echo ($coach_total_weighted_average != '' ? $coach_total_weighted_average : '&nbsp;') ?>
                                     </td>                                                               
-                                    <td style="<?php echo $blt ?>">
+                                    <td style="text-align: right;<?php echo $blt ?>">
                                         <?php echo $val1['weight'] ?>
                                     </td>
-                                    <td style="<?php echo $blt ?>">
+                                    <td style="text-align: right;<?php echo $blt ?>">
                                         <?php echo ($total_weighted_score != '' ? $total_weighted_score : '&nbsp;') ?>
                                     </td>
-                                    <td style="<?php echo $bltr ?>">
+                                    <td style="text-align: right;<?php echo $bltr ?>">
                                         <?php echo ($coach_total_weighted_score != '' ? $coach_total_weighted_score : '&nbsp;') ?>
                                     </td>
                                 </tr>
@@ -871,8 +958,8 @@
                                                 <div class="padding-left-10"><?php echo ucwords(strtolower($val2->library_value)) ?></div>
                                             </td>
                                             <td style="<?php echo $blt ?>"></td>
-                                            <td style="<?php echo $blt ?>"><?php echo $core_score_car_library_self_rating ?></td>
-                                            <td style="<?php echo $blt ?>"><?php echo $core_score_car_library_coach_rating ?></td>
+                                            <td style="text-align: right;<?php echo $blt ?>"><?php echo $core_score_car_library_self_rating ?></td>
+                                            <td style="text-align: right;<?php echo $blt ?>"><?php echo $core_score_car_library_coach_rating ?></td>
                                             <td style="<?php echo $blt ?>"></td>
                                             <td style="<?php echo $blt ?>"></td>
                                             <td style="<?php echo $blt ?>"></td>
@@ -886,14 +973,14 @@
                     <?php } ?>
                     <tr>
                         <td class="bold" style="<?php echo $blt ?>"><b>Total Weighted Score</b></td>
-                        <td class="total_weighted_score" style="<?php echo $blt ?>"><?php echo array_sum($key_weight_arr) ?>%</td>
+                        <td class="total_weighted_score" style="text-align: right;<?php echo $blt ?>"><?php echo array_sum($key_weight_arr) ?>%</td>
                         <td style="<?php echo $blt ?>"></td>
                         <td style="<?php echo $blt ?>"></td>
                         <td style="<?php echo $blt ?>"></td>
                         <td style="<?php echo $blt ?>"></td>
                         <td style="<?php echo $blt ?>"></td>
                         <td class="bold" style="<?php echo $blt ?>"><b>Self Rating</b></td>
-                        <td class="self_rating" style="<?php echo $bltr ?>"><?php echo $appraisee->self_rating ?></td>
+                        <td class="self_rating" style="text-align: right;<?php echo $bltr ?>"><?php echo $appraisee->self_rating ?></td>
                     </tr>
                     <tr>
                         <td style="<?php echo $bltb ?>"></td>
@@ -904,7 +991,7 @@
                         <td style="<?php echo $bltb ?>"></td>
                         <td style="<?php echo $bltb ?>"></td>
                         <td class="bold" style="<?php echo $bltb ?>"><b>Coach Rating</b></td>
-                        <td class="coach_rating" style="<?php echo $bltrb ?>"><?php echo $appraisee->coach_rating ?></td>                                                           
+                        <td class="coach_rating" style="text-align: right;<?php echo $bltrb ?>"><?php echo $appraisee->coach_rating ?></td>                                                           
                     </tr>
                 <?php } ?>
             </tbody>                                

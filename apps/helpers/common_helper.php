@@ -893,6 +893,10 @@ function currency_format($number,$remove_decimal = 1) {
 	return $amount;
 }
 
+function remove_comma($number) {
+	$amount = str_replace(',', '', $number);
+	return $amount;
+}
 
 function get_tenure($employment_date) {
 	$invalid_date = ['1970-01-01',"",'0000-00-00'];

@@ -622,11 +622,13 @@
 		<div class="form-actions fluid">
             <div class="row" align="center">
                 <div class="col-md-12">
-		            <div>   
+		            <div>
+		            	<?php $admin = 0; ?>
 						@if((!isset($appraisal_admin) || $appraisal_admin == 0) && !$hr_appraisal_admin)
 							@if(isset($approver_info['performance_status_id']) &&  $approver_info['performance_status_id'] == 2) <!-- current status is for approval which is 2 -->
 								<button type="button" class="btn blue btn-sm" onclick="change_status_admin( $(this).closest('form'), 99)"><i class="fa fa-check"></i> Save as Draft</button>
 								<button type="button" class="btn green btn-sm" onclick="change_status_admin( $(this).closest('form'), 4)"><i class="fa fa-check"></i> Approved</button>
+								<?php $admin = 1; ?>
 							@endif
 						@else
 							@if($appraisee->performance_status_id == 14) <!-- current status is committee rating which is 14 -->
@@ -637,6 +639,11 @@
 							@if($appraisee->performance_status_id == 2) <!-- if for approval and need to overrride status by hr admin like moved to committee rating-->
 								<button type="button" class="btn yellow btn-sm" onclick="change_status_admin( $(this).closest('form'), 14)"><i class="fa fa-check"></i> For Committee Rating</button>
 							@endif
+							<?php $admin = 1; ?>
+		                @endif
+		                @if($is_finance && !$admin)
+		                	<button type="button" class="btn blue btn-sm" onclick="change_status_admin( $(this).closest('form'), 77)"><i class="fa fa-check"></i> Save as Draft</button>
+		                	<button type="button" class="btn green btn-sm" onclick="change_status_admin( $(this).closest('form'), 88)"><i class="fa fa-check"></i> Save & Submit</button>
 		                @endif
 				        <a class="btn default btn-sm" href="{{ $mod->url }}">Back</a>		                
 		            </div>

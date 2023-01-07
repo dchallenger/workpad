@@ -11,9 +11,9 @@ $config['field_validations']['performance_financial_metric_planning.key_in_weigh
 	'label'   => 'Employees',
 	'rules'   => 'required'
 );*/
-$config['field_validations']['performance_financial_metric_planning.financial_metric_kpi_ids'][] = array(
-	'field'   => 'performance_financial_metric_planning[financial_metric_kpi_ids]',
-	'label'   => 'Financial Metrics KPI',
+$config['field_validations']['performance_financial_metric_planning.sbu_unit_id'][] = array(
+	'field'   => 'performance_financial_metric_planning[sbu_unit_id]',
+	'label'   => 'Financial Metrics Title',
 	'rules'   => 'required'
 );
 $config['field_validations']['performance_financial_metric_planning.title'][] = array(
