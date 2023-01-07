@@ -156,7 +156,7 @@ class Manpower_allocation extends MY_PrivateController
 	}
 
 	function get_date_processed() {
-		$this->response->date_processed = '';
+		$this->response->date_processed = ''; 
 
 		$this->db->where('archive',0);
 		$result = $this->db->get('performance_manpower_allocation_fix_column');
