@@ -14,57 +14,41 @@
                 <th class="text-center">Target</th>
                 <th class="text-center">Rating Comp</th>
                 <th class="text-center">Actual</th>
-                <th class="text-center">Rating</th>
-                <th class="text-center">Weighted  Rating</th>
+                <th class="text-center">Rating (%)</th>
+                <th class="text-center">Allocation (%)</th>
+                <th class="text-center">Weighted  Rating (%)</th>
             </tr>
         </thead>
         <tbody>
             @if(count($financial_metric_planning_applicable) > 0)
                 <?php $total_weighted_rating_employee = 0; ?>
-                @foreach($financial_metric_planning_applicable as $sbu => $financial)
+                @foreach($financial_metric_planning_applicable as $financial)
                     <?php
-                        $total_weighted_rating_finance = 0;
+                        $total_weighted_rating_employee += $financial->weighted_rating;
                     ?>
-                    @foreach($financial as $key => $val)
-                        <?php
-                            $actual = '';
-                            $rating = '';
-                            $weighted_rating_finance = '';
-                            $allocation = '';
-                            $weighted_rating_employee = '';
-                            if (isset($appraisal_applicable_financial_fields[$val['planning_applicable_financial_finance_id']])) {
-                                $actual = $appraisal_applicable_financial_fields[$val['planning_applicable_financial_finance_id']]['actual'];
-                                $rating = $appraisal_applicable_financial_fields[$val['planning_applicable_financial_finance_id']]['rating'];
-                                $weighted_rating_finance = $appraisal_applicable_financial_fields[$val['planning_applicable_financial_finance_id']]['weighted_rating_finance'];
-                                $allocation = $appraisal_applicable_financial_fields[$val['planning_applicable_financial_finance_id']]['allocation'];
-                                $weighted_rating_employee = $appraisal_applicable_financial_fields[$val['planning_applicable_financial_finance_id']]['weighted_rating_employee'];
-                                $total_weighted_rating_finance += currency_format($weighted_rating_finance);
-                                $total_weighted_rating_employee += $weighted_rating_employee;
-                            }
-                        ?>
-                        <tr>
-                            <td>{{$sbu}}</td>
-                            <td>{{$val['item']}}</td>
-                            <td><input class="form-control" type="text" readonly name="" value="{{$val['weight']}}"></td>
-                            <td><input class="form-control" type="text" readonly name="" value="{{$val['target']}}"></td>
-                            <td><input class="form-control" type="text" readonly name="" value="{{($val['rating_comp'] == 1 ? 'Actual/Target' : 'Target/Actual')}}"></td>
-                            <td><input class="form-control" type="text" readonly name="" value="{{$actual}}"></td>
-                            <td><input class="form-control" type="text" readonly name="" value="{{$rating}}"></td>
-                            <td><input class="form-control" type="text" readonly name="" value="{{$weighted_rating_finance}}"></td>
-                        </tr>
-                    @endforeach
                     <tr>
-                        <td class="bold">{{$sbu}}</td>
-                        <td>&nbsp;</td>
-                        <td class="bold" align="right">100</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td class="bold total_weighted_rating_finance" align="right">{{number_format($total_weighted_rating_finance, 4, '.', ',')}}</td>
+                        <td><input class="form-control text-right" type="hidden" name="field_appraisal_financial[{{ $appraisee_user_id }}][sbu_unit][]" value="{{$financial->sbu_unit}}">{{$financial->sbu_unit}}</td>
+                        <td><input class="form-control text-right" type="hidden" name="field_appraisal_financial[{{ $appraisee_user_id }}][financial_metric_kpi][]" value="{{$financial->financial_metric_kpi}}">{{$financial->financial_metric_kpi}}</td>
+                        <td><input class="form-control text-right" type="text" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][weight][]" value="{{$financial->weight}}"></td>
+                        <td><input class="form-control text-right" type="text" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][target][]" value="{{$financial->value}}"></td>
+                        <td>
+                            <input class="form-control" type="hidden" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][rating_comp][]" value="{{$financial->rating_comp}}">
+                            <input class="form-control" type="text" readonly name="" value="{{($financial->rating_comp == 1 ? 'Actual/Target' : 'Target/Actual')}}">
+                        </td>
+                        <td><input class="form-control text-right actual" type="text" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][actual][]" value="{{$financial->actual}}"></td>
+                        <td><input class="form-control text-right" type="text" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][rating][]" value="{{$financial->rating}}"></td>
+                        <td><input class="form-control text-right" type="text" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][allocation][]" value="{{$financial->allocation}}"></td>
+                        <td><input class="form-control text-right" type="text" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][weighted_rating][]" value="{{$financial->weighted_rating}}"></td>
                     </tr>
                 @endforeach
-                <input class="form-control text-right self_weight_average" ratio-weight="{{ $section_info->weight }}" section-id="{{ $section_info->template_section_id }}" question="1" type="hidden" readonly name="" value="{{number_format(($total_weighted_rating_employee * $key_in_weight_ave / 100), 4, '.', ',')}}">
+                <tr>
+                    <td colspan="8" class="bold">Total</td>
+                    <td classs="bold"><input class="form-control text-right" type="text" readonly name="" value="{{number_format($total_weighted_rating_employee, 4, '.', ',')}}"></td>
+                </tr>
+                <tr>
+                    <td colspan="8" class="bold">Weighted Rating</td>
+                    <td classs="bold"><input class="form-control text-right self_weight_average" ratio-weight="{{ $section_info->weight }}" section-id="{{ $section_info->template_section_id }}" question="1" type="text" readonly name="" value="{{number_format(($total_weighted_rating_employee * $key_in_weight_ave / 100), 4, '.', ',')}}"></td>
+                </tr>
             @endif
         </tbody>
     </table>

@@ -48,7 +48,11 @@ $show_add = false;
                     </div>
                 </div>
 
-                @include('summary/sections/edit_financial_target', array('financial_metric_planning_applicable' => $financial_metric_planning_applicable))
+                @if($performance_status_id > 3)
+                	@include('summary/sections/financial_target_self_rating', array('financial_metric_planning_applicable' => $financial_metric_planning_applicable))
+                @else
+                	@include('summary/sections/edit_financial_target', array('financial_metric_planning_applicable' => $financial_metric_planning_applicable))
+                @endif
 			@endif
 		@endforeach
 	@endif

@@ -24,7 +24,8 @@
                 <?php $total_weighted_rating_employee = 0; ?>
                 @foreach($financial_metric_planning_applicable as $financial)
                     <?php
-                        $total_weighted_rating_employee += $financial->weighted_rating;
+                        $weighted_rating = $financial->weighted_rating * $financial->allocation / 100;
+                        $total_weighted_rating_employee += $weighted_rating;
                     ?>
                     <tr>
                         <td><input class="form-control text-right" type="hidden" name="field_appraisal_financial[{{ $appraisee_user_id }}][sbu_unit][]" value="{{$financial->sbu_unit}}">{{$financial->sbu_unit}}</td>
@@ -38,7 +39,7 @@
                         <td><input class="form-control text-right actual" type="text" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][actual][]" value="{{$financial->actual}}"></td>
                         <td><input class="form-control text-right" type="text" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][rating][]" value="{{$financial->rating}}"></td>
                         <td><input class="form-control text-right" type="text" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][allocation][]" value="{{$financial->allocation}}"></td>
-                        <td><input class="form-control text-right" type="text" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][weighted_rating][]" value="{{$financial->weighted_rating}}"></td>
+                        <td><input class="form-control text-right" type="text" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][weighted_rating][]" value="{{number_format($weighted_rating, 4, '.', ',')}}"></td>
                     </tr>
                 @endforeach
                 <tr>
