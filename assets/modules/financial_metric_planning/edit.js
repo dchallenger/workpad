@@ -118,13 +118,18 @@ $(document).ready(function(){
 
         var rating = '';
         var rating_whole = '';
-        if (rating_comp == 1) {
-            rating = Math.round(actual / target * 100);
-        	rating_whole = actual / target * 100
-        } else {
-            rating = Math.round(target / actual * 100);
-        	rating_whole = target / actual * 100;
-        }
+        if (target !== 0) {
+	        if (rating_comp == 1) {
+	            rating = Math.round(actual / target * 100);
+	        	rating_whole = actual / target * 100
+	        } else {
+	            rating = Math.round(target / actual * 100);
+	        	rating_whole = target / actual * 100;
+	        }
+	    } else {
+	    	var rating = 0;
+        	var rating_whole = 0;
+	    }
 
         var weighted_rating = rating_whole * weight / 100;
 
@@ -143,13 +148,18 @@ $(document).ready(function(){
 
         var rating = '';
         var rating_whole = '';
-        if (rating_comp == 1) {
-            rating = Math.round(actual / target * 100);
-        	rating_whole = actual / target * 100
-        } else {
-            rating = Math.round(target / actual * 100);
-        	rating_whole = target / actual * 100;
-        }
+        if (target !== 0) {
+	        if (rating_comp == 1) {
+	            rating = Math.round(actual / target * 100);
+	        	rating_whole = actual / target * 100
+	        } else {
+	            rating = Math.round(target / actual * 100);
+	        	rating_whole = target / actual * 100;
+	        }
+	    } else {
+	    	var rating = 0;
+        	var rating_whole = 0;
+	    }
 
         var weighted_rating = rating_whole * weight / 100;
 
@@ -168,13 +178,18 @@ $(document).ready(function(){
 
         var rating = '';
         var rating_whole = '';
-        if (rating_comp == 1) {
-            rating = Math.round(actual / target * 100);
-        	rating_whole = actual / target * 100
-        } else {
-            rating = Math.round(target / actual * 100);
-        	rating_whole = target / actual * 100;
-        }
+        if (target !== 0) {
+	        if (rating_comp == 1) {
+	            rating = Math.round(actual / target * 100);
+	        	rating_whole = actual / target * 100
+	        } else {
+	            rating = Math.round(target / actual * 100);
+	        	rating_whole = target / actual * 100;
+	        }
+	    } else {
+	    	var rating = 0;
+        	var rating_whole = 0;
+	    }
 
         var weighted_rating = rating_whole * weight / 100;
 
@@ -193,13 +208,18 @@ $(document).ready(function(){
 
         var rating = '';
         var rating_whole = '';
-        if (rating_comp == 1) {
-            rating = Math.round(actual / target * 100);
-        	rating_whole = actual / target * 100
-        } else {
-            rating = Math.round(target / actual * 100);
-        	rating_whole = target / actual * 100;
-        }
+        if (target !== 0) {
+	        if (rating_comp == 1) {
+	            rating = Math.round(actual / target * 100);
+	        	rating_whole = actual / target * 100
+	        } else {
+	            rating = Math.round(target / actual * 100);
+	        	rating_whole = target / actual * 100;
+	        }
+	    } else {
+	    	var rating = 0;
+        	var rating_whole = 0;
+	    }
 
         var weighted_rating = rating_whole * weight / 100;
 
