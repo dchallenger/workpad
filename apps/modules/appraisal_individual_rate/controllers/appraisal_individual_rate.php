@@ -844,7 +844,19 @@ class Appraisal_individual_rate extends MY_PrivateController
             //             $this->db->insert('performance_appraisal_applicable_score_library_ratings',$score_library_rating_info);
             //         }
             //     }
-            // }    
+            // }
+
+            //no bearing just to update table to take effect trigger of the coach rating computation.
+            $update_tmp['email_sent'] = 1;
+
+            $where = array(
+                'appraisal_id' => $this->input->post('appraisal_id'),
+                'template_id' => $this->input->post('template_id'),
+                'user_id' => $this->input->post('user_id'),
+            );
+            
+            $this->db->update('performance_appraisal_applicable', $update_tmp, $where);
+            //no bearing just to update table to take effect trigger of the coach rating computation.
         }    
         // saving of score or library ratings
 
