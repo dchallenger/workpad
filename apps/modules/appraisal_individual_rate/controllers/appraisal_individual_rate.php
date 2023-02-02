@@ -739,7 +739,7 @@ class Appraisal_individual_rate extends MY_PrivateController
         }
 
         // saving of section ratings
-        if ($status_id != 14) { // not committee rating
+        if ($this->input->post('status_id') != 14) { // not committee rating
             $section_key_weight = $_POST['section_key_weight'];
             $section_self_rating = $_POST['section_self_rating'];
             $section_coach_rating = $_POST['section_coach_rating'];
