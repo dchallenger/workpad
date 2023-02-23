@@ -274,7 +274,7 @@ class Clearance_manage extends MY_PrivateController
 
 				if($pending == 0){
 					$this->db->where('clearance_id', $record->row()->clearance_id);
-					$this->db->update('partners_clearance', array('status_id' => 3, 'date_cleared' => date('Y-m-d')));
+					$this->db->update('partners_clearance', array('status_id' => 4, 'date_cleared' => date('Y-m-d')));
 					$to_email = 1;
 
 					if( $this->db->_error_message() != "" ){
