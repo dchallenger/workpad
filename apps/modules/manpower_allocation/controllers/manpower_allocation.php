@@ -37,7 +37,7 @@ class Manpower_allocation extends MY_PrivateController
 
 		// to reset values of all sbu to 0 to update if no value from API
         $column_list = $this->mod->get_dynamic_column();
-		$column_list = array_fill_keys(array_values($column_list), '');
+		$column_list = array_fill_keys(array_keys($column_list), '');
 		$this->db->where('archive',0);
 		$this->db->update('performance_manpower_allocation_fix_column',$column_list);
 		// to reset values of all sbu to 0 to update if no value from API
