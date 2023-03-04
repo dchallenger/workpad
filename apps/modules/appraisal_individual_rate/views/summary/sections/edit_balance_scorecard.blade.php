@@ -69,7 +69,7 @@ $show_add = false;
 						<span>{{ $val['title'] }}</span>
 					</th>
 				@endforeach
-				<th class="bold">Self Rating</th>
+				<th class="bold">&nbsp;Actual&nbsp;</th>
 				<th class="bold">% Achieved</th>
 				<th class="bold">% Weight Average</th>
 				<th class="bold hidden">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Remarks &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>

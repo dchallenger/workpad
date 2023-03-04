@@ -253,7 +253,7 @@
                                                             <span><?php echo $val['title'] ?></span>
                                                         </th>
                                                     <?php } ?>
-                                                    <th class="bold" style="<?php echo $blt ?>">Self Rating</th>
+                                                    <th class="bold" style="<?php echo $blt ?>">Actual</th>
                                                     <th class="bold" style="<?php echo $blt ?>">% Achieved</th>
                                                     <th class="bold" style="<?php echo ($no_approver ? $blt : $bltr) ?>">% Weight Average</th>
                                                     <?php if(!$self_rating && $list_approver && $list_approver->num_rows() > 0) {?>

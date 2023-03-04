@@ -35,6 +35,13 @@ class Manpower_allocation extends MY_PrivateController
             'type' => 'success'
         );
 
+		// to reset values of all sbu to 0 to update if no value from API
+        $column_list = $this->mod->get_dynamic_column();
+		$column_list = array_fill_keys(array_values($column_list), '');
+		$this->db->where('archive',0);
+		$this->db->update('performance_manpower_allocation_fix_column',$column_list);
+		// to reset values of all sbu to 0 to update if no value from API
+
 		if (count($arr_allocation) > 0 ) {
 			$arr_checking = [];
 			foreach ($arr_allocation as $key => $arr_val) {
@@ -58,7 +65,7 @@ class Manpower_allocation extends MY_PrivateController
 		$result = $this->db->get('performance_manpower_allocation_fix_column');
 		if ($result && $result->num_rows() > 0) {
 			$date = $result->row()->date_processed;
-			$this->response->date_processed = 'As of ' . date('M d, Y',strtotime($date));
+			$this->response->date_processed = 'As of ' . date('M d, Y - g:i a',strtotime($date));
 		}
 
 		$this->_ajax_return();
@@ -156,7 +163,7 @@ class Manpower_allocation extends MY_PrivateController
 	}
 
 	function get_date_processed() {
-		$this->response->date_processed = ''; 
+		$this->response->date_processed = '';
 
 		$this->db->where('archive',0);
 		$result = $this->db->get('performance_manpower_allocation_fix_column');

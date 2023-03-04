@@ -27,15 +27,18 @@
                         $total_weighted_rating_employee += $financial->weighted_rating;
                     ?>
                     <tr>
-                        <td>{{$financial->sbu_unit}}</td>
-                        <td>{{$financial->financial_metric_kpi}}</td>
-                        <td><input class="form-control text-right" type="text" readonly name="" value="{{$financial->weight}}"></td>
-                        <td><input class="form-control text-right" type="text" readonly name="" value="{{$financial->value}}"></td>
-                        <td><input class="form-control" type="text" readonly name="" value="{{($financial->rating_comp == 1 ? 'Actual/Target' : 'Target/Actual')}}"></td>
-                        <td><input class="form-control text-right" type="text" readonly name="" value="{{$financial->actual}}"></td>
-                        <td><input class="form-control text-right" type="text" readonly name="" value="{{$financial->rating}}"></td>
-                        <td><input class="form-control text-right" type="text" readonly name="" value="{{$financial->allocation}}"></td>
-                        <td><input class="form-control text-right" type="text" readonly name="" value="{{$financial->weighted_rating}}"></td>
+                        <td><input class="form-control text-right" type="hidden" name="field_appraisal_financial[{{ $appraisee_user_id }}][sbu_unit][]" value="{{$financial->sbu_unit}}">{{$financial->sbu_unit}}</td>
+                        <td><input class="form-control text-right" type="hidden" name="field_appraisal_financial[{{ $appraisee_user_id }}][financial_metric_kpi][]" value="{{$financial->financial_metric_kpi}}">{{$financial->financial_metric_kpi}}</td>
+                        <td><input class="form-control text-right" type="text" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][weight][]" value="{{$financial->weight}}"></td>
+                        <td><input class="form-control text-right" type="text" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][target][]" value="{{$financial->value}}"></td>
+                        <td>
+                            <input class="form-control" type="hidden" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][rating_comp][]" value="{{$financial->rating_comp}}">
+                            <input class="form-control" type="text" readonly name="" value="{{($financial->rating_comp == 1 ? 'Actual/Target' : 'Target/Actual')}}">
+                        </td>
+                        <td><input class="form-control text-right actual" type="text" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][actual][]" value="{{$financial->actual}}"></td>
+                        <td><input class="form-control text-right" type="text" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][rating][]" value="{{$financial->rating}}"></td>
+                        <td><input class="form-control text-right" type="text" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][allocation][]" value="{{$financial->allocation}}"></td>
+                        <td><input class="form-control text-right" type="text" readonly name="field_appraisal_financial[{{ $appraisee_user_id }}][weighted_rating][]" value="{{$financial->weighted_rating}}"></td>
                     </tr>
                 @endforeach
                 <tr>

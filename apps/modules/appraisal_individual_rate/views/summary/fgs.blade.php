@@ -531,7 +531,7 @@
 													<td class="coach_rating">
 														@if ($self_rating)
 															@if($appraisee->status_id == 4)
-																{{ $appraisee->coach_rating }}	
+																{{ $appraisee->coach_rating }}
 															@endif
 														@else
 															{{ $appraisee->coach_rating }}
