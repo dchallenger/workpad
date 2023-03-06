@@ -696,15 +696,15 @@ class Appraisal_individual_rate extends MY_PrivateController
                                         'sequence' => $key + 1
                                     );
 
-                                if ($status_id == 4 || $status_id == 99)
+                                if ($this->input->post('status_id') == 4 || $status_id == 99)
                                     $item_info['rate_user_id'] = $fst_approver->approver_id; // for rater
                                 else
                                     $item_info['rate_user_id'] = $this->user->user_id; // for ratee
 
-                                if ($status_id == 4 || $status_id == 99)
-                                    $where['rate_user_id'] = $fst_approver->approver_id; // for rater
-                                else
-                                    $where['rate_user_id'] = $this->user->user_id; // for ratee
+                                // if ($status_id == 4 || $status_id == 99)
+                                //     $where['rate_user_id'] = $fst_approver->approver_id; // for rater
+                                // else
+                                //     $where['rate_user_id'] = $this->user->user_id; // for ratee
 
                                 $this->db->where($where);
                                 $result = $this->db->get('performance_appraisal_applicable_fields');
