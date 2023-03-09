@@ -793,6 +793,7 @@ class Form_application_admin extends MY_PrivateController
             break;
             case get_time_form_id('UT')://ut
                 $form_details = $this->mod->get_ot_ut_dtrp_details($forms_id, $this->user->user_id);
+                $form_details['within_cutoff'] = $this->mod->check_within_cutoff('', $form_details['date_from'], $form_details['date_to'], $form_details['company_id']);
                 $remarks['remarks'] = array();
                 $comments = $this->mod->get_approver_remarks($forms_id);
                 foreach ($comments as $comment){
