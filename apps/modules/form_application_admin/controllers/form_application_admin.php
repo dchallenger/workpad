@@ -2277,6 +2277,7 @@ class Form_application_admin extends MY_PrivateController
                     $error = true;
                     goto stop;
                 }
+                $this->db->update( $this->mod->table, array( 'modified_on' => date('Y-m-d H:i:s') ), array( 'forms_id' => $this->record_id ) );
             }
         }else{
             $selected_partners = $this->mod->get_partners();
