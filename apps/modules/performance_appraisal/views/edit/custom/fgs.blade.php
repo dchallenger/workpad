@@ -24,7 +24,7 @@
 							LEFT JOIN {$db->dbprefix}performance_setup_performance psp ON psp.performance_id = pp.performance_type_id 
 							LEFT JOIN {$db->dbprefix}performance_appraisal pa ON pp.planning_id = pa.planning_id
 							WHERE pp.deleted = 0 AND pp.status_id = 0 
-							AND pa.title IS NULL
+							-- AND pa.title IS NULL
 							ORDER BY planning_id DESC ";
 
 				$options = $db->query($query);
