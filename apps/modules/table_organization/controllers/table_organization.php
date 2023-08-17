@@ -43,7 +43,7 @@ class Table_organization extends MY_PrivateController
 		switch ($filter) {
 			case 1:
 				$parent_info = $this->mod->get_user_by_position('President and Chief Executive Officer');
-				$child_org = $this->mod->get_reports_to($parent_info,[12,11]);
+				$child_org = $this->mod->get_reports_to($parent_info,[12,11,10]);
 				break;
 			case 2:
 				$parent_info = $this->mod->get_user_by_position('President and Chief Executive Officer');

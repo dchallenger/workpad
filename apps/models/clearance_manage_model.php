@@ -112,7 +112,7 @@ class clearance_manage_model extends Record
 						'status' => 'info',
 						'message_type' => 'Clearance',
 						'user_id' => $clearance_record->user_id,
-						'feed_content' => 'Submitted Exit Interview for Validation',//.'.<br><br>Reason: '.$form['reason'],
+						'feed_content' => 'Submitted Clearance for Validation',//.'.<br><br>Reason: '.$form['reason'],
 						'recipient_id' => $row->user_id,
 						'uri' => str_replace(base_url(), '', $this->clearance_mod->url).'/view_signatories/'.$clearance_id
 					);
@@ -139,7 +139,7 @@ class clearance_manage_model extends Record
 			'status' => 'info',
 			'message_type' => 'Clearance',
 			'user_id' => $clearance_record->user_id,
-			'feed_content' => 'Submitted Exit Interview for Validation',//.'.<br><br>Reason: '.$form['reason'],
+			'feed_content' => 'Submitted Clearance for Validation',//.'.<br><br>Reason: '.$form['reason'],
 			'recipient_id' => $clearance_record->user_id,
 			'uri' => str_replace(base_url(), '', $this->clearance_mod->url).'/view_exit_interview/'.$clearance_id
 		);
