@@ -17,6 +17,7 @@
                 $class = 'badge badge-success';
                 break;
             case 4:
+            case 12:
                 $class = 'badge badge-danger';   
                 break;                                                                                   
             default:

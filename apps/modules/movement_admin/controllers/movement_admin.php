@@ -1148,7 +1148,10 @@ class Movement_admin extends MY_PrivateController
 						// insert into clearance
 						$movement_action_id = 0;
 						$movement_action_info = array();
-						$movement_action = $this->db->get_where('partners_movement_action',array('movement_id' => $this->record_id));
+						$this->db->where('partners_movement.movement_id',$this->record_id);
+						$this->db->where('partners_movement.deleted',0);
+						$this->db->join('partners_movement','partners_movement_action.movement_id = partners_movement.movement_id');
+						$movement_action = $this->db->get_where('partners_movement_action');
 						if ($movement_action && $movement_action->num_rows() > 0){
 							$movement_action_info = $movement_action->row_array();
 							$movement_action_id = $movement_action_info['action_id'];
@@ -1221,8 +1224,12 @@ class Movement_admin extends MY_PrivateController
 			}
 			else if($post['save_from'] == 12){
 				$this->db->update('partners_movement_approver_hr', array('movement_status_id' => 12, 'comment_date' => $now), array( 'movement_id' => $this->record_id, 'user_id' => $this->user->user_id, 'movement_status_id' => 9 ) );
-				$movement_info  = $this->mod->get_movement_header($this->input->post('record_id'));
-				$this->mod->transfer_to_validation($movement_info);
+
+					$data = array( 'status_id' => 12 ); // set status to 'For HR Declined'
+					$this->db->update( 'partners_movement', $data, array('movement_id' => $this->record_id) );
+
+				//$movement_info  = $this->mod->get_movement_header($this->input->post('record_id'));
+				//$this->mod->transfer_to_validation($movement_info);
 
 	            //email approver
 /*				$sp_partners_movements = $this->db->query('Call `sp_partners_movement_email_hr_approved`('.$this->record_id.',"disapproved")');	            
