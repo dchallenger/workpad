@@ -42,328 +42,271 @@
 
 	<div class="row">
         <div class="col-md-9">
-        		<input type="hidden" name="view" id="view" value="detail" >
-        		<input type="hidden" name="record_id" id="record_id" value="<?php echo $forms_id; ?>" >
-				<div id="vl_container" class="portlet">
-						<div class="portlet-title">
-							<div class="caption">{{ $form_title }} <small class="text-muted">{{ lang('common.view') }}</small></div>
-						</div>
-	                    <div class="portlet-body form" id="main_form">
-	                        <!-- BEGIN FORM-->
-	                            <div class="form-body">
-	                            	<div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.employee') }} :</label>
-												<div class="col-md-7 col-sm-7">
-													<span>{{ $record['display_name'] }}</span>
-												</div>
-											</div>
+    		<input type="hidden" name="view" id="view" value="detail" >
+    		<input type="hidden" name="record_id" id="record_id" value="<?php echo $forms_id; ?>" >
+			<div id="vl_container" class="portlet">
+				<div class="portlet-title">
+					<div class="caption">{{ $form_title }} <small class="text-muted">{{ lang('common.view') }}</small></div>
+				</div>
+                <div class="portlet-body form" id="main_form">
+                    <!-- BEGIN FORM-->
+                        <div class="form-body">
+                        	<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.employee') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span>{{ $record['display_name'] }}</span>
 										</div>
 									</div>
-									<?php if( $record['time_forms_form_status_id'] >= 6 ){ ?>
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ $label_adc }} :</label>
-												<div class="col-md-7 col-sm-7">
-													<span><?php echo general_date_time($date_adc) ?></span>
-												</div>
-											</div>
+								</div>
+							</div>
+							<?php if( $record['time_forms_form_status_id'] >= 6 ){ ?>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ $label_adc }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span><?php echo general_date_time($date_adc) ?></span>
 										</div>
 									</div>
-									<?php } ?>									
-									<?php if( $record['time_forms_form_status_id'] != 1 ){ ?>
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.date_filed') }} :</label>
-												<div class="col-md-7 col-sm-7">
-													<span><?php echo general_date_time($record['time_forms_date_sent']) ?></span>
-												</div>
-											</div>
+								</div>
+							</div>
+							<?php } ?>									
+							<?php if( $record['time_forms_form_status_id'] != 1 ){ ?>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.date_filed') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span><?php echo general_date_time($record['time_forms_date_sent']) ?></span>
 										</div>
 									</div>
-									<?php } ?>
-	                                <div class="row hidden">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.schedule') }} :</label>
-												<div class="col-md-7 col-sm-7">
-													<span><?php echo $scheduled == 'NO' ? "Unscheduled" : "Scheduled"; ?></span>
-												</div>
-											</div>
+								</div>
+							</div>
+							<?php } ?>
+                            <div class="row hidden">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.schedule') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span><?php echo $scheduled == 'NO' ? "Unscheduled" : "Scheduled"; ?></span>
 										</div>
 									</div>
-	                                <div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.from') }} :</label>
-												<div class="col-md-7 col-sm-7">
-													<span>{{ general_date_w_day($record['time_forms_date_from']) }}</span>
-												</div>
-											</div>
+								</div>
+							</div>
+                            <div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.from') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span>{{ general_date_w_day($record['time_forms_date_from']) }}</span>
 										</div>
 									</div>
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.to') }} :</label>
-												<div class="col-md-7 col-sm-7">
-													<span>{{ general_date_w_day($record['time_forms_date_to']) }}</span>
-												</div>
-											</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.to') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span>{{ general_date_w_day($record['time_forms_date_to']) }}</span>
 										</div>
 									</div>
-									
-									<div class="row">
-										<div class="col-md-12">
-			                                <div class="form-group">
-			                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.selected_dates') }} :</label>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-md-12">
+	                                <div class="form-group">
+	                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.selected_dates') }} :</label>
+	                                    <div class="col-md-6">
+	                                    	@if ($form_approver_details['approver_status_id'] == 6)
+	                                    		@include('detail/detail_for_cancellation')
+	                                    	@else
+	                                    		@include('detail/details')
+	                                    	@endif
+	                                	</div>
+	                                </div>
+	                            </div>
+							</div>
 
-			                                    <div class="col-md-6">
-											    <?php 
-											    if(count($selected_dates['dates']) > 0 ){
-											    $countSelectedDates = 0;
-											    	foreach ($selected_dates['dates'] as $index => $value){
+                            <div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.reason') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span>{{ $record['time_forms_reason'] }}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+	                                <div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.file_upload') }} :</label>
+										<div class="controls col-md-6">
+											<ul class="padding-none">
 
-											        $array_keys = array_keys($value);
-											        $array_values = array_values($value);
-											    ?>
-											    <span style="display:block; word-wrap:break-word;" class="<?php if( $countSelectedDates > 4 ) echo 'hidden'; ?> toggle-<?php echo $countSelectedDates; ?>">
-				                                    <?php echo $index; ?> 
-				                                    <span class=""> - <?php echo $array_keys[0]; ?> :
-				                                    </span>
-				                                    <span class="text-info">
-								                        <?php 
-								                            foreach( $selected_dates['duration'] as $duration_info ){
-								                                if( $duration_info['duration_id'] == $array_values[0] ){
-								                                    echo $duration_info['duration'];
-								                                }
-								                            }
-								                        ?>
-								                    </span>
-								                </span>
-							                	<?php if( ($countSelectedDates+1) % 5 == 0 && $countSelectedDates > 1 && (($countSelectedDates+1) < count($selected_dates['dates'])) ){ ?>
-							            			<span class="<?php if( $countSelectedDates != 4 ) echo 'hidden'; ?> toggler-<?php echo $countSelectedDates; ?>" style="display:block; word-wrap:break-word;">
-								            			<span class="btn btn-xs blue btn-border-radius" onclick="selectedDates_showmore(<?php echo $countSelectedDates; ?>)"> see more <i class="fa fa-arrow-circle-o-right"></i> 
-								            			</span>
-							            			</span>						            		
-												<?php 
-													}
-													$countSelectedDates++;
+                                            <?php 
+											implode($uploads);
+												if( count($uploads) > 0 ) {
+
+													foreach( $uploads as $upload_id_val )
+													{
+														$upload = $db->get_where('system_uploads', array('upload_id' => $upload_id_val))->row();
+														$file = FCPATH . urldecode( $upload->upload_path );
+														if( file_exists( $file ) )
+														{
+															$f_info = get_file_info( $file );
+															$f_type = filetype( $file );
+
+															$finfo = finfo_open(FILEINFO_MIME_TYPE);
+															$f_type = finfo_file($finfo, $file);
+
+															switch( $f_type )
+															{
+																case 'image/jpeg':
+																	$icon = 'fa-picture-o';
+																	break;
+																case 'video/mp4':
+																	$icon = 'fa-film';
+																	break;
+																case 'audio/mpeg':
+																	$icon = 'fa-volume-up';
+																	break;
+																default:
+																	$icon = 'fa-file-text-o';
+															}
+															$filepath = base_url()."time/applicationadmin/download_file/".$upload_id_val;
+															echo '<li class="padding-3 fileupload-delete-'.$upload_id_val.'" style="list-style:none;">
+													            <a href="'.$filepath.'">
+																<span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
+													            <span>'. basename($f_info['name']) .'</span>
+													            <span class="padding-left-10"></span>
+													        </a></li>';
+														}
 													}
 												}
-												?>
-			                                	</div>
-
-			                                </div>
-			                            </div>
-									</div>
-
-	                                <div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.reason') }} :</label>
-												<div class="col-md-7 col-sm-7">
-													<span>{{ $record['time_forms_reason'] }}</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-12">
-			                                <div class="form-group">
-												<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.file_upload') }} :</label>
-												<div class="controls col-md-6">
-													<ul class="padding-none">
-
-                                                    <?php 
-													implode($uploads);
-														if( count($uploads) > 0 ) {
-
-															foreach( $uploads as $upload_id_val )
-															{
-																$upload = $db->get_where('system_uploads', array('upload_id' => $upload_id_val))->row();
-																$file = FCPATH . urldecode( $upload->upload_path );
-																if( file_exists( $file ) )
-																{
-																	$f_info = get_file_info( $file );
-																	$f_type = filetype( $file );
-
-																	$finfo = finfo_open(FILEINFO_MIME_TYPE);
-																	$f_type = finfo_file($finfo, $file);
-
-																	switch( $f_type )
-																	{
-																		case 'image/jpeg':
-																			$icon = 'fa-picture-o';
-																			break;
-																		case 'video/mp4':
-																			$icon = 'fa-film';
-																			break;
-																		case 'audio/mpeg':
-																			$icon = 'fa-volume-up';
-																			break;
-																		default:
-																			$icon = 'fa-file-text-o';
-																	}
-																	$filepath = base_url()."time/applicationadmin/download_file/".$upload_id_val;
-																	echo '<li class="padding-3 fileupload-delete-'.$upload_id_val.'" style="list-style:none;">
-															            <a href="'.$filepath.'">
-																		<span class="padding-right-5"><i class="fa '. $icon .' text-muted padding-right-5"></i></span>
-															            <span>'. basename($f_info['name']) .'</span>
-															            <span class="padding-left-10"></span>
-															        </a></li>';
-																}
-															}
-														}
-													?>
-
-
-                                                </ul>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<?php if( count($remarks) > 0 && $record['time_forms_hr_admin_approved_user_id'] == ''){
-										?>
-
-									<hr />
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-			                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.approver_remarks') }} :</label>
-			                        <?php
-						                    for($j=0; $j < count($remarks); $j++){
-						                        	if($j > 0){
-			                         ?>
-					                         <label class="control-label col-md-4 col-sm-4 text-right text-muted">&nbsp</label>
-					                         <?php } ?>
-				                         <div class="col-md-7 col-sm-7">
-		                                    <span style='display:block; word-wrap:break-word;'>
-		                                        <?php
-		                                            echo "<b>".$remarks[$j]['display_name']."</b>:";
-		                                        ?>
-		                                        <span class="text-right text-danger">{{ general_date_time($remarks[$j]['comment_date']) }}</span>
-		                                    </span>
-		                                    <div style='display:block; word-wrap:break-word;'>
-		                                        <?php
-		                                            echo ($remarks[$j]['comment']=="") ? "&nbsp;" : $remarks[$j]['comment'];
-		                                        ?>
-		                                    </div>
-											
-											<!-- edited 20210723 -->
-		                                    <?php if ($remarks[$j]['comment']!="") echo "<br/>"; ?> 
-										 </div>
-
-									<?php
-											}
 											?>
 
-			                                </div>
+
+                                        </ul>
 										</div>
 									</div>
-									<?php } ?>
+								</div>
+							</div>
 
-									<?php
-									if ($record['time_forms_hr_admin_approved_user_id'] != '') {
-										switch ($record['time_forms_form_status_id']) {
-											case 6:
-												$date_transaction = $record['time_forms_date_approved'];
-												break;
-											case 7:
-												$date_transaction = $record['time_forms_date_declined'];
-												break;
-											case 8:
-												$date_transaction = $record['time_forms_date_cancelled'];
-												break;
-											default:
-												$date_transaction = '';
-												break;																								
+							<?php if( count($remarks) > 0 && $record['time_forms_hr_admin_approved_user_id'] == ''){
+								?>
 
-										}
-									?>
-										<hr />
-										<div class="row">
-											<div class="col-md-12">
-												<div class="form-group">
-				                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.hr_approver_remarks') }} :</label>
-							                         <div class="col-md-7 col-sm-7">
-					                                    <span style='display:block; word-wrap:break-word;'>
-					                                        <?php
-					                                            echo "<b>".$record['time_forms_hr_approve_full_name']."</b>:";
-					                                        ?>
-					                                        <span class="text-right text-danger">{{ general_date_time($date_transaction) }}</span>
-					                                    </span>
-					                                    <div style='display:block; word-wrap:break-word;'>
-					                                        <?php
-					                                            echo ($record['time_forms_hr_admin_approved_comment']=="") ? "&nbsp;" : $record['time_forms_hr_admin_approved_comment'];
-					                                        ?>
-					                                    </div> 
-													</div>
-												</div>
-											</div>
-										</div>
-                                   <?php
-									}
-									?>									
-									
-									<hr />
-
-	                           	 	<?php if( $form_approver_details['approver_status_id'] < 8 && in_array($approver_details['form_status_id'], array(2,4,5,6)) && $form_approver_details['within_cutoff']){ ?>
-
-										<div class="row">
-											<div class="col-md-12">
-												<div class="form-group">
-				                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('common.remarks') }} :</label>
-				                                    <div class="col-md-5 col-sm-6">
-				                                        <textarea id="comment-{{ $form_approver_details['forms_id'] }}" class="form-control" rows="3"></textarea>
-				                                    </div>
-				                                </div>
-											</div>
-										</div>
-
-									<?php } ?>
-
-
-
-	                            </div>
-
-	                            <div class="form-actions fluid" align="center">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div>
-                                            	<?php if( $form_approver_details['approver_status_id'] < 8 && in_array($approver_details['form_status_id'], array(2,4,5)) && $record['time_forms_form_status_id'] != 8 && $record['time_forms_form_status_id'] != 6){ ?>
-                                            		<a href="#" class="approve_view btn btn-default btn-sm btn-success" data-forms-id="{{ $form_approver_details['forms_id'] }}" data-form-owner="{{ $form_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $form_approver_details['approver_id'] }}" data-decission="6" >{{ lang('form_application_admin.approved') }}</a>
-                                            		<?php if($form_approver_details['within_cutoff']){ ?>
-                                            			<a href="#" class="disapprove_view btn btn-sm btn-danger" data-forms-id="{{ $form_approver_details['forms_id'] }}" data-form-owner="{{ $form_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $form_approver_details['approver_id'] }}" data-decission="7" >{{ lang('form_application_admin.disapproved') }}</a>
-                                            	<?php } }
-                                            		else if ($form_approver_details['approver_status_id'] == 6 ){
-                                            			if($form_approver_details['within_cutoff']){
-                                            		 ?>
-
-                                            		<a href="#" class="disapprove_view btn btn-sm btn-danger" data-forms-id="{{ $form_approver_details['forms_id'] }}" data-form-owner="{{ $form_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $form_approver_details['approver_id'] }}" data-decission="8" >{{ lang('form_application_admin.cancel') }}</a>
-
-                                            	<?php
-                                            			}
-                                            		}
-                                            	?>
-	                                        	<a href="{{ $mod->url }}" class="btn btn-default btn-sm">{{ lang('common.back_to_list') }}</a>
-	                                        </div>
-                                        </div>
+							<hr />
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+	                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.approver_remarks') }} :</label>
+	                        <?php
+				                    for($j=0; $j < count($remarks); $j++){
+				                        	if($j > 0){
+	                         ?>
+			                         <label class="control-label col-md-4 col-sm-4 text-right text-muted">&nbsp</label>
+			                         <?php } ?>
+		                         <div class="col-md-7 col-sm-7">
+                                    <span style='display:block; word-wrap:break-word;'>
+                                        <?php
+                                            echo "<b>".$remarks[$j]['display_name']."</b>:";
+                                        ?>
+                                        <span class="text-right text-danger">{{ general_date_time($remarks[$j]['comment_date']) }}</span>
+                                    </span>
+                                    <div style='display:block; word-wrap:break-word;'>
+                                        <?php
+                                            echo ($remarks[$j]['comment']=="") ? "&nbsp;" : $remarks[$j]['comment'];
+                                        ?>
                                     </div>
-                                </div>
-	                        <!-- END FORM--> 
-	                    </div>
-	            	</div>
+									
+									<!-- edited 20210723 -->
+                                    <?php if ($remarks[$j]['comment']!="") echo "<br/>"; ?> 
+								 </div>
 
-	            	<div name="change_options" id="change_options">
+							<?php
+									}
+									?>
+
+	                                </div>
+								</div>
+							</div>
+							<?php } ?>
+
+							<?php
+							if ($record['time_forms_hr_admin_approved_user_id'] != '') {
+								switch ($record['time_forms_form_status_id']) {
+									case 6:
+										$date_transaction = $record['time_forms_date_approved'];
+										break;
+									case 7:
+										$date_transaction = $record['time_forms_date_declined'];
+										break;
+									case 8:
+										$date_transaction = $record['time_forms_date_cancelled'];
+										break;
+									default:
+										$date_transaction = '';
+										break;																								
+
+								}
+							?>
+								<hr />
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+		                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.hr_approver_remarks') }} :</label>
+					                         <div class="col-md-7 col-sm-7">
+			                                    <span style='display:block; word-wrap:break-word;'>
+			                                        <?php
+			                                            echo "<b>".$record['time_forms_hr_approve_full_name']."</b>:";
+			                                        ?>
+			                                        <span class="text-right text-danger">{{ general_date_time($date_transaction) }}</span>
+			                                    </span>
+			                                    <div style='display:block; word-wrap:break-word;'>
+			                                        <?php
+			                                            echo ($record['time_forms_hr_admin_approved_comment']=="") ? "&nbsp;" : $record['time_forms_hr_admin_approved_comment'];
+			                                        ?>
+			                                    </div> 
+											</div>
+										</div>
+									</div>
+								</div>
+                           <?php
+							}
+							?>									
+							
+							<hr />
+
+                       	 	<?php if( $form_approver_details['approver_status_id'] < 8 && in_array($approver_details['form_status_id'], array(2,4,5,6)) && $form_approver_details['within_cutoff']){ ?>
+
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+		                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('common.remarks') }} :</label>
+		                                    <div class="col-md-5 col-sm-6">
+		                                        <textarea id="comment-{{ $form_approver_details['forms_id'] }}" class="form-control" rows="3"></textarea>
+		                                    </div>
+		                                </div>
+									</div>
 								</div>
 
+							<?php } ?>
 
 
+
+                        </div>
+
+                        @include('button/detail');
+                    <!-- END FORM--> 
+                </div>
+        	</div>
+
+        	<div name="change_options" id="change_options"></div>
        	</div>  
     	<div class="col-md-3 visible-lg visible-md">
 			<div class="portlet">

@@ -81,14 +81,13 @@
 									</div> 				
 								</div>	
 							</div>	
-
 							<div class="form-group">
 								<label class="control-label col-md-4">{{ lang('form_application.date_time') }}<span class="required">* </span></label>
 								<div class="col-md-6">							
 									<div class="input-group date date-picker" data-date-format="MM dd, yyyy - HH:ii p">
 										<input type="text" class="form-control" name="ut_time_in_out" id="ut_time_in_out" value="<?php echo $ut_time_in_out; ?>" placeholder="">
 										<span class="input-group-btn">
-											<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+											<button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
 										</span>
 									</div> 				
 									<div class="help-block small">
@@ -96,15 +95,10 @@
 									</div>
 								</div>	
 							</div>			
-
-
 							<div class="form-group">
 								<label class="control-label col-md-4">{{ lang('form_application.reason') }}<span class="required">* </span></label>
 								<div class="col-md-6">							<textarea class="form-control" name="time_forms[reason]" id="time_forms-reason" placeholder="" rows="4">{{ $record['time_forms.reason'] }}</textarea> 				</div>	
 							</div>			
-
-
-
 							<div class="form-group">
 								<label class="control-label col-md-4">{{ lang('form_application.file_upload') }}</label>
 								<div class="col-md-6">							<div data-provides="fileupload" class="fileupload fileupload-new" id="time_forms_upload-upload_id-container">

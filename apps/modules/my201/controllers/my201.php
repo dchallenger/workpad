@@ -5,6 +5,7 @@ class My201 extends MY_PrivateController
 	public function __construct()
 	{
 		$this->load->model('my201_model', 'mod');
+		$this->load->model('partners_model', 'partner');
 		parent::__construct();
         $this->lang->load( 'my201' );
         $this->lang->load( 'partners' );
@@ -40,6 +41,11 @@ class My201 extends MY_PrivateController
 		$profile_header_details = $this->mod->get_profile_header_details($this->user->user_id);
 		$middle_initial = empty($profile_header_details['middlename']) ? " " : " ".ucfirst(substr($profile_header_details['middlename'],0,1)).". ";
 		$data['profile_name'] = $profile_header_details['firstname'].$middle_initial.$profile_header_details['lastname'].'&nbsp;'.$profile_header_details['suffix'];
+
+		//employee benefit
+		$employee_benefit = $this->partner->get_employee_benefit($this->user->user_id);
+		$data['benefit_type'] = (count($employee_benefit) == 0 ? "n/a" :  $employee_benefit['benefit_type']);
+		$data['benefit'] = (count($employee_benefit) == 0 ? "n/a" :  $employee_benefit['benefit']);
 
 		// $department = empty($profile_header_details['department']) ? "" : " on ".ucwords(strtolower($profile_header_details['department']));
 		// $data['profile_position'] = ucwords(strtolower($profile_header_details['position']));
@@ -557,8 +563,6 @@ class My201 extends MY_PrivateController
 
 	function get_sbu_unit_percentage()
 	{
-		$this->load->model('partners_model', 'partner');
-		
 		$this->_ajax_only();
 
         $sbu_unit_ids = $this->input->post('sbu_unit_ids');
@@ -1525,7 +1529,6 @@ class My201 extends MY_PrivateController
         $transactions = true;
 		$error = false;
 		$post = $_POST;
-		$this->load->model('partners_model', 'partner');
 
 		$this->partner_id = $this->partner->get_partner_id($this->user->user_id);
 		$this->response->record_id = $this->record_id = $post['record_id'];

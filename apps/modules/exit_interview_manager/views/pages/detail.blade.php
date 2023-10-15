@@ -32,7 +32,7 @@
                                     <input type="text" disabled="disabled" class="form-control" name="partners_clearance_exit_interview_layout[layout_name]" id="partners_clearance_exit_interview_layout-layout_name" value="{{ $record['layout_name'] }}" placeholder="Enter Layout Name" />  
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group hidden">
                                 <label class="control-label col-md-4">{{ lang('exit_interview.company') }}
                                     <span class="required">*</span>
                                 </label>
@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group hidden">
                                 <label class="control-label col-md-4">{{ lang('exit_interview.department') }}
                                     <span class="required">*</span>
                                 </label>
@@ -80,7 +80,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group hidden">
                                 <label class="control-label col-md-4">{{ lang('exit_interview.is_default') }}
                                 </label>
                                 <div class="col-md-5">

@@ -660,6 +660,8 @@ class Form_application extends MY_PrivateController
         $data['forms_id'] = $this->record_id;
         $data['url'] = $this->mod->url;
         $data['form_status_id']["val"] = $forms_info['form_status_id'];
+        $data['cancelled_by_user'] = $forms_info['cancelled_by_user'];
+        $data['cancelled_remarks_by_user'] = $forms_info['cancelled_remarks_by_user'];
         $data['form_id'] = $form_info['form_id'];
         $data['form_code'] = $form_info['form_code'];
         $data['form_title'] = $form_info['form'].' '.lang('form_application.form');
@@ -974,21 +976,21 @@ class Form_application extends MY_PrivateController
             $this->_ajax_return();            
         }
 
-        // Not allow application on the selected date for SL VL
-        $date_replace = str_replace(' - ', ' ', $this->input->post('date_from'));
-        $date = date('Y-m-d', strtotime($date_replace));
-        $get_application = $this->mod->time_forms_get_application($this->user->user_id, $date);
-
+        // Not allow application on the selected date for SL VL - transfer this validation on line 1314
         $form_status = $this->input->post('form_status_id');
         $form_status_id = array( 1, 7, 8);
+        // $date_replace = str_replace(' - ', ' ', $this->input->post('date_from'));
+        // $date = date('Y-m-d', strtotime($date_replace));
+        // $get_application = $this->mod->time_forms_get_application($this->user->user_id, $date);
 
-        if($get_application == true && !in_array($form_status, $form_status_id)) {
-            $this->response->message[] = array(
-                'message' => lang('form_application.cannot_file_within_date'),
-                'type' => 'warning'
-            );
-            $this->_ajax_return();
-        } 
+        // if($get_application == true && !in_array($form_status, $form_status_id)) {
+        //     $this->response->message[] = array(
+        //         'message' => lang('form_application.cannot_file_within_date'),
+        //         'type' => 'warning'
+        //     );
+        //     $this->_ajax_return();
+        // }
+        // Not allow application on the selected date for SL VL - transfer this validation on line 1314
 
         $date = substr($this->input->post('date_from'), 0, -11);
 
@@ -1181,8 +1183,8 @@ class Form_application extends MY_PrivateController
         $rest_day_not_allowed = 0;
         $holiday_not_allowed = 0;
         $total_duration=0;
+        $overlapping = 0;
         if($this->input->post('form_status_id') != 8){
-
             foreach($period as $dt) {
                 if(in_array($form_id, $leaves_ids)){
                     $already_exist = $this->mod->get_approved_forms($dt->format('Y-m-d'), $this->user->user_id);
@@ -1307,6 +1309,24 @@ class Form_application extends MY_PrivateController
                     }
                 }
                 //END restday/holiday checking ET and UT
+
+                // checking application overlapped with other forms
+                $date = $dt->format('Y-m-d') .' '. date('H:i:s',strtotime($date_time_from));
+                $get_application = $this->mod->time_forms_get_application($this->user->user_id, $date);
+                $form_status = $this->input->post('form_status_id');
+                $form_status_id = array( 1, 7, 8);
+
+                if($get_application && !in_array($form_status, $form_status_id))
+                    $overlapping = 1;
+            }
+
+            // checking application overlapped with other forms
+            if ($overlapping) {
+                $this->response->message[] = array(
+                    'message' => lang('form_application.cannot_file_within_date'),
+                    'type' => 'warning'
+                );
+                $this->_ajax_return();
             }
 
             if($counter_duration != 0){
@@ -1769,6 +1789,20 @@ class Form_application extends MY_PrivateController
                     case get_time_form_id('FLV'):
                     $duration_details = $this->mod->get_duration($duration[$selected_date_count]);
                     $leave_durations = $this->mod->get_leave_duration($leave_duration[$selected_date_count]); // it will use if many hours options like abraham 4 6 8 10 12
+                    $shift_details = $this->mod->get_shift_details($dt->format('Y-m-d'), $this->user->user_id);
+                    $time_from = $dt->format('Y-m-d')." ".$shift_details['shift_time_start'];
+                    $time_to = $dt->format('Y-m-d')." ".$shift_details['shift_time_end'];
+                    $credit = (int)$duration_details[0]['credit'];
+
+                    // first half
+                    if ($duration[$selected_date_count] == 2) {
+                        $time_from = $dt->format('Y-m-d')." ".$shift_details['shift_time_start'];
+                        $time_to = date('Y-m-d H:i:s', strtotime($dt->format('Y-m-d')." ".$shift_details['shift_time_start']. " + {$credit} hours"));
+                    } elseif ($duration[$selected_date_count] == 3) { // second half
+                        $time_from = date('Y-m-d H:i:s', strtotime($dt->format('Y-m-d')." ".$shift_details['shift_time_end']. " - {$credit} hours"));
+                        $time_to = $dt->format('Y-m-d')." ".$shift_details['shift_time_end'];
+                    }
+
                     if($this->input->post('form_status_id') != 8){
                         $time_forms_date_table[] = array(
                             'forms_id' => $forms_id,
@@ -1776,8 +1810,10 @@ class Form_application extends MY_PrivateController
                             'day' => $duration_details[0]['credit'] * 0.125,//$leave_durations[0]['leave_duration'] - for abraham //$duration[$selected_date_count] == 1 ? 1 : 0.5 - default if 8 and 4 hours only,
                             'duration_id' => $duration[$selected_date_count],
                             'credit' => $duration_details[0]['credit'], //$leave_durations[0]['leave_duration'] for abraham,//$duration_details[0]['credit']
-                            'hrs' => $duration_details[0]['credit']
-                            );
+                            'hrs' => $duration_details[0]['credit'],
+                            'time_from' => $time_from,
+                            'time_to' => $time_to
+                        );
                     }else{
                         $time_forms_date_table[] = array(
                             'forms_id' => $forms_id,
@@ -1787,7 +1823,9 @@ class Form_application extends MY_PrivateController
                             'credit' => $duration_details[0]['credit'],//$duration_details[0]['credit'],
                             'cancelled_comment' => $this->input->post('cancelled_comment') ,
                             'hrs' => $duration_details[0]['credit'],
-                            );
+                            'time_from' => $time_from,
+                            'time_to' => $time_to
+                        );
                     }
 /*                    if($duration[$selected_date_count] != 1){
                         $days -= 0.5;
@@ -2703,7 +2741,7 @@ class Form_application extends MY_PrivateController
 
         $this->_ajax_only();
         
-        if( !$this->input->post('records') )
+        if( !$this->input->post('record_id') )
         {
             $this->response->message[] = array(
                 'message' => lang('common.insufficient_data'),
@@ -2713,13 +2751,12 @@ class Form_application extends MY_PrivateController
         }
 
         
-        $forms_info = $this->mod->get_forms_details($this->input->post('records'));
+        $forms_info = $this->mod->get_forms_details($this->input->post('record_id'));
         $form_info = $this->mod->get_form_info($forms_info['form_id']);
 
-        $this->response = $this->mod->_cancel_record( $this->input->post('records'), $form_info['form'] );
+        $this->response = $this->mod->_cancel_record( $this->input->post('record_id'), $form_info['form'], $this->input->post('remarks') );
 
         $this->_ajax_return();
-
 
     }
 

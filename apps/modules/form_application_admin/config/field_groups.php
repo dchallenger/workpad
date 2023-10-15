@@ -1,6 +1,24 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 $config['fieldgroups'] = array();
+if(get_time_form_id('LWP') != false){
+	$config['fieldgroups'][get_time_form_id('LWP')] = array(
+		'fg_id' => get_time_form_id('LWP'),
+		'label' => 'Leave With Pay',
+		'description' => 'Leave With Pay',
+		'display_id' => 4,
+		'sequence' => 2,
+		'active' => 1,
+		'fields' => array(
+			'time_forms.date_from',
+			'time_forms.date_to',
+			'time_forms.reason',
+			'time_forms_upload.upload_id',
+			'time_forms.form_status_id'
+		)
+	);
+}
+
 if(get_time_form_id('SL') != false){
 	$config['fieldgroups'][get_time_form_id('SL')] = array(
 		'fg_id' => get_time_form_id('SL'),

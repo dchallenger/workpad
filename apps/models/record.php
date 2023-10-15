@@ -1310,6 +1310,56 @@ class Record extends MY_Model
 		    		return true;
 		    	}
 		    	else{
+					if ($date_from >= date('Y-01-01') && $date_from <= date('Y-12-31')){
+						return true;
+					}
+					else {
+						return false;
+					}
+		      	}
+		    }
+		}
+		else{
+			if ($date_from >= date('Y-01-01') && $date_from <= date('Y-12-31')) {
+				return true;
+			}
+			else{
+				return false;
+			}
+		}	
+    }
+
+    //original before enhancement 06282023
+	function check_within_cutoff_org($value='', $date_from='', $date_to='', $company_id=''){
+
+    	$current_day = date('Y-m-d');
+    	$this->db->where('deleted',0);
+
+    	if ($company_id != ''){
+    		$this->db->where("company_id IN ($company_id)", '', false);    		
+    	}
+
+        $this->db->where('(\'' . date('Y-m-d',strtotime($current_day)) . '\' BETWEEN date_from AND cutoff)', '', false);
+        $result_timekeeping_period = $this->db->get('time_period');  
+
+
+        if ($result_timekeeping_period && $result_timekeeping_period->num_rows() > 0){
+		    $row_period = $result_timekeeping_period->row();
+		    //return $row_period->cutoff;
+		    $date_from = date('Y-m-d', strtotime($date_from));
+		    $date_to = date('Y-m-d', strtotime($date_to));
+
+		    if  ($date_from >= $row_period->date_from)
+		    {
+		    	return true;
+		    }
+		    else
+		    {
+		    	if ($date_from >= $current_day){
+		    		return true;
+		    	}
+		    	else{
+		    		
 		      		return false;  
 		      	}
 		    }

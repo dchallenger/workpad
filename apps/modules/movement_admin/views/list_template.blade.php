@@ -38,7 +38,7 @@
     <td>{{ $partners_movement_action_user_id }}</td>
     <td><span class="<?php echo $class ?>">{{ $partners_movement_status }}</span></td>
     <td>
-        @if ($hr_admin_movement == 1 && in_array($partners_movement_status_id,array(1,6)) || in_array($hr_approver_movement_status_id,array(9,10)))
+        @if ($hr_admin_movement == 1 && in_array($partners_movement_status_id,array(1,6,11)) || in_array($hr_approver_movement_status_id,array(9,10)))
             <div class="btn-group">
                 <a class="btn btn-xs text-muted" href="{{ $edit_url }}"><i class="fa fa-pencil"></i> Edit</a>
             </div>

@@ -517,6 +517,7 @@ class Report_generator extends MY_PrivateController
             case 'EMPLOYEE_MOVEMENT':
             case 'TRAINING_DATABASE':
             case 'TRAINING_EVALUATION':
+            case 'partners_clearance':
                 $button = array('xls' => 0, 'csv' => 1, 'pdf' => 1, 'txt' => 1);
                 $data['content'] = $this->load->blade('pages.param_form_custom')->with( $this->load->get_cached_vars() )->with('button', $button);
                 break;
@@ -531,6 +532,7 @@ class Report_generator extends MY_PrivateController
             case 'LEAVE_REPORT':
             case 'LEAVE_BALANCE_REPORT':
             case 'OT_TRANSACTION_DETAILS':
+            case 'EMPLOYEE_APPROVERS':
                 $button = array('xls' => 0, 'csv' => 1, 'pdf' => 1, 'txt' => 0);
                 $data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);
                 break;

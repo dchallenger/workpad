@@ -121,6 +121,12 @@
 								</div> 				
 							</div>	
 						</div>
+						<div class="form-group">
+							<label class="control-label col-md-4">{{ lang('loan_application.reason') }}</label>
+							<div class="col-md-6">							
+								<textarea class="form-control" name="loan_application[remarks]" id="loan_application_remarks" placeholder="" rows="4">{{ $record['partners_loan_application_mobile.remarks'] }}</textarea>
+							</div>	
+						</div>
 					</div>
 				</div>
 

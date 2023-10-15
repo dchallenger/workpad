@@ -352,7 +352,7 @@ public function call_sp_time_calendar($date_from='', $date_to='', $user_id=0){
 								FROM time_record WHERE `date` = '{$date}'
 								AND user_id = {$user_id}
 								HAVING restday = 1";
-								
+		
 		$check_if_rest_day = $this->db->query($check_if_rest_day_qry);
 		return $check_if_rest_day->num_rows();	
 	}
@@ -411,8 +411,10 @@ public function call_sp_time_calendar($date_from='', $date_to='', $user_id=0){
 		$check_if_holiday_qry = "SELECT * FROM time_holiday th 
 							LEFT JOIN {$this->db->dbprefix}time_holiday_location thl 
 							ON th.holiday_id = thl.holiday_id
-							WHERE th.holiday_date = '{$date}'
-							AND thl.user_id = {$user_id}";
+							WHERE th.holiday_date = '{$date}'";
+
+		if ($user_id) 
+			$check_if_holiday_qry .= " AND thl.user_id = {$user_id}";
 		
 		$check_if_holiday = $this->db->query($check_if_holiday_qry);
 

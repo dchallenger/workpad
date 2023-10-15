@@ -2766,3 +2766,81 @@ if(get_time_form_id('SIL') != false){
 		'encrypt' => 0
 	);
 }
+
+if(get_time_form_id('LWP') != false){
+	$config['fields'][get_time_form_id('LWP')]['time_forms.date_from'] = array(
+		'f_id' => 5,
+		'fg_id' => 2,
+		'label' => 'From',
+		'description' => 'Date From',
+		'table' => 'time_forms',
+		'column' => 'date_from',
+		'uitype_id' => 6,
+		'display_id' => 3,
+		'quick_edit' => 1,
+		'sequence' => 1,
+		'datatype' => 'required',
+		'active' => '1',
+		'encrypt' => 0
+	);
+	$config['fields'][get_time_form_id('LWP')]['time_forms.date_to'] = array(
+		'f_id' => 6,
+		'fg_id' => 2,
+		'label' => 'To',
+		'description' => 'Date To',
+		'table' => 'time_forms',
+		'column' => 'date_to',
+		'uitype_id' => 6,
+		'display_id' => 3,
+		'quick_edit' => 1,
+		'sequence' => 1,
+		'datatype' => 'required',
+		'active' => '1',
+		'encrypt' => 0
+	);
+	$config['fields'][get_time_form_id('LWP')]['time_forms.reason'] = array(
+		'f_id' => 7,
+		'fg_id' => 2,
+		'label' => 'Reason',
+		'description' => 'Reason',
+		'table' => 'time_forms',
+		'column' => 'reason',
+		'uitype_id' => 2,
+		'display_id' => 3,
+		'quick_edit' => 1,
+		'sequence' => 4,
+		'datatype' => 'required',
+		'active' => '1',
+		'encrypt' => 0
+	);
+	$config['fields'][get_time_form_id('LWP')]['time_forms_upload.upload_id'] = array(
+		'f_id' => 8,
+		'fg_id' => 2,
+		'label' => 'File Upload',
+		'description' => 'File Upload',
+		'table' => 'time_forms_upload',
+		'column' => 'upload_id',
+		'uitype_id' => 9,
+		'display_id' => 3,
+		'quick_edit' => 1,
+		'sequence' => 5,
+		'datatype' => 'V',
+		'active' => '1',
+		'encrypt' => 0
+	);
+	$config['fields'][get_time_form_id('LWP')]['time_forms.form_status_id'] = array(
+		'f_id' => 68,
+		'fg_id' => 2,
+		'label' => 'Status',
+		'description' => 'Form Status',
+		'table' => 'time_forms',
+		'column' => 'form_status_id',
+		'uitype_id' => 1,
+		'display_id' => 3,
+		'quick_edit' => 1,
+		'sequence' => 1,
+		'datatype' => 'V',
+		'active' => '1',
+		'encrypt' => 0
+	);
+}

@@ -661,6 +661,7 @@ class report_generator_model extends Record
             case 'ESHR_AFFILIATION':
             case 'ESHR_MEDICAL':
             case 'ESHR_ACCOUNTABLITIES':
+            case 'partners_clearance':
 				$auto_size = 1;
 				$w_border = 1;
         		$excel = $this->load->view("templates/excel", array('result' => $result), true);
@@ -688,7 +689,12 @@ class report_generator_model extends Record
             case 'OT_TRANSACTION_DETAILS':
 				$OTD_header = 1;
         		$excel = $this->load->view("templates/ot_transaction_details", array('result' => $result,'filter' => $filter), true);
-                break;			
+                break;
+            case 'EMPLOYEE_APPROVERS':
+				$auto_size = 1;
+				$w_border = 1;
+				$excel = $this->load->view("templates/excel", array('result' => $result), true);
+                break;		
 			default:
 				$excel = $this->load->view("templates/excel", array('result' => $result), true);
 				break;
@@ -744,6 +750,12 @@ class report_generator_model extends Record
 	        )
 	    );
 
+		$style_left = array(
+	        'alignment' => array(
+	            'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
+	        )
+	    );
+
 		if ($auto_size) {
             $excelcolumn = ($excelcolumn == '') ? 'BZ' : $excelcolumn;
 			$letters = $this->createColumnsArray($excelcolumn);
@@ -766,6 +778,16 @@ class report_generator_model extends Record
 				
 				$content->getActiveSheet()->getStyle("$letters[$index]"."1".":".$letters[$index].($result->num_rows()+1))->applyFromArray($border_style);
 			}
+		}
+
+		if (isset($EA_header)) {
+			$content->getActiveSheet()->mergeCells('A1:G1');
+			$content->getActiveSheet()->getStyle("A1:G2")->applyFromArray($style_center);
+			$content->getActiveSheet()->getStyle("A1:G2")->getFont()->setBold(true);
+
+			$no_records = $result->num_rows();
+			$content->getActiveSheet()->getStyle("G3:G".$no_records."")->applyFromArray($style_left);
+			$content->getActiveSheet()->getStyle("A2:G".($result->num_rows()+3))->applyFromArray($border_style);
 		}
 
 		if (isset($tardy_header)) {
@@ -1000,15 +1022,16 @@ class report_generator_model extends Record
 			$content->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
 			$content->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
 			$content->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
 
 			$content->getActiveSheet()->getStyle("A1:A2")->applyFromArray($style_center);
 			$content->getActiveSheet()->getStyle("A1:A2")->getFont()->setBold(true);			
-			$content->getActiveSheet()->mergeCells('A1:G1');
-			$content->getActiveSheet()->mergeCells('A2:G2');
+			$content->getActiveSheet()->mergeCells('A1:H1');
+			$content->getActiveSheet()->mergeCells('A2:H2');
 
-			$content->getActiveSheet()->getStyle("A2:G2")->getFont()->setBold(true);
+			$content->getActiveSheet()->getStyle("A2:H2")->getFont()->setBold(true);
 
-			$content->getActiveSheet()->getStyle("A3:G".($result->num_rows()+3))->applyFromArray($border_style);			
+			$content->getActiveSheet()->getStyle("A3:H".($result->num_rows()+3))->applyFromArray($border_style);			
 		}
 
 		if (isset($total_hours_work_per_location_header)) {

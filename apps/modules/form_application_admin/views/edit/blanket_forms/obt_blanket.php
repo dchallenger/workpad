@@ -1,5 +1,5 @@
 <input type="hidden" name="form_code" id="form_code" value="OBT">
-<div class="form-group">
+<div class="form-group hidden">
 	<label class="control-label col-md-4">Type<span class="required">* </span></label>
 	<div class="col-md-6">
 		<?php	                        
@@ -13,9 +13,10 @@
 			<span class="input-group-addon">
 				<i class="fa fa-list-ul"></i>
 			</span>
-			<?php echo form_dropdown('time_forms[bt_type]',$business_trip_type_options, $bt_type, ' id="obt_select" class="form-control select2me" data-placeholder="Select..."') ?>
+			<?php echo form_dropdown('time_forms[bt_type]',$business_trip_type_options, $bt_type, ' id="obt_select" class="form-control select2me" data-placeholder="Select..." disabled') ?>
 		</div> 				
-	</div>	
+	</div>
+	<input type="hidden" name="time_forms[bt_type]" value="2">
 </div>
 
 <div class="form-group">

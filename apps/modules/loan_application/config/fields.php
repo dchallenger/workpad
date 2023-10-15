@@ -343,6 +343,21 @@ $config['fields'][2]['partners_loan_application_omnibus.loan_amount'] = array(
 	'active' => '1',
 	'encrypt' => 1
 );
+$config['fields'][1]['partners_loan_application_mobile.remarks'] = array(
+	'f_id' => 17,
+	'fg_id' => 3,
+	'label' => 'Remarks',
+	'description' => 'Remarks',
+	'table' => 'partners_loan_application_mobile',
+	'column' => 'remarks',
+	'uitype_id' => 2,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 1,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 0
+);
 $config['fields'][1]['partners_loan_application_mobile.loan_application_mobile_special_feature_id'] = array(
 	'f_id' => 3,
 	'fg_id' => 1,

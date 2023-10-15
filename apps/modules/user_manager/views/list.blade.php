@@ -178,6 +178,17 @@
 
 									<div>
 										<div class="col-md-9 margin-bottom-10">
+											<h4>{{ lang('user_manager.benefit_type')}}</h4>
+											<div class="text-muted small">{{ lang('user_manager.p_benefit_type')}}</div>
+										</div>
+										<div class="col-md-3 margin-bottom-25">
+											<a class="btn btn-default" type="button" rel="{{ get_mod_route('benefit') }}" href="{{ get_mod_route('benefit') }}">{{ lang('user_manager.view_list_button') }}</a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+
+									<div>
+										<div class="col-md-9 margin-bottom-10">
 											<h4>{{ lang('user_manager.emp_level')}}</h4>
 											<div class="text-muted small">{{ lang('user_manager.p_emp_level')}}</div>
 										</div>

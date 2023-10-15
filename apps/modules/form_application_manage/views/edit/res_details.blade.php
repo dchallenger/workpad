@@ -79,7 +79,7 @@
     <hr class='margin-top-10 margin-bottom-10'>
     <div align='center'>
         <button type='button' class='btn btn-success btn-xs approve-pop small text-success margin-right-10 margin-left-10' data-forms-id='{{ $forms_id }}' data-form-owner='{{ $user_id }}' data-user-name='' data-user-id='{{ $approver_id }}' data-decission='6'><i class='fa fa-check'></i> {{ lang('form_application_manage.approve') }}</button>
-        <button type='button' class='btn btn-danger btn-xs decline-pop small text-danger margin-right-10' data-forms-id='{{ $forms_id }}' data-form-owner='{{ $user_id }}' data-user-name='' data-user-id='{{ $approver_id }}' data-decission='7'><i class='fa fa-pencil' ></i> {{ lang('form_application_manage.decline') }}</button>
+        <button type='button' class='btn btn-danger btn-xs decline-pop small text-danger margin-right-10' data-forms-id='{{ $forms_id }}' data-form-owner='{{ $user_id }}' data-user-name='' data-user-id='{{ $approver_id }}' data-decission='7'><i class='fa fa-pencil' ></i> {{ lang('form_application_manage.disapproved') }}</button>
         <button type='button' class='btn btn-default btn-xs close-pop small text-muted'><i class='fa fa-times'></i> {{ lang('form_application_manage.close') }}</button>
     </div>
 </div>

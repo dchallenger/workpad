@@ -63,4 +63,5 @@ $lang['loan_application'] = array(
 	'with_outstanding_balance' => 'With Outstanding Balance',
 	'amount_balance' => 'Amount Balance',
 	'amount_loanable' => 'Amount Loanable',
+	'reason' => 'Reason',
 );

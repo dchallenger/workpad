@@ -289,6 +289,11 @@
                 company_id: $('#company_id').val()
             }
 
+            if (request_data.company_id == '') {
+                notify('error', 'Please select company...');
+                return false;
+            }
+
             $.ajax({
                 url: base_url + module.get('route') + '/get_available_schedules',
                 type: "POST",

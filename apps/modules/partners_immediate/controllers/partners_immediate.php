@@ -5,6 +5,7 @@ class Partners_immediate extends MY_PrivateController
 	public function __construct()
 	{
 		$this->load->model('partners_immediate_model', 'mod');
+		$this->load->model('partners_model', 'partner');
 		parent::__construct();
 		$this->lang->load( 'partners' );
 	}
@@ -165,7 +166,12 @@ class Partners_immediate extends MY_PrivateController
 		$this->load->model('profile_model', 'profile_mod');
 		$profile_header_details = $this->profile_mod->get_profile_header_details($user_id);
 		$middle_initial = empty($profile_header_details['middlename']) ? " " : " ".ucfirst(substr($profile_header_details['middlename'],0,1)).". ";
-		$data['profile_name'] = $profile_header_details['firstname'].$middle_initial.$profile_header_details['lastname'].'&nbsp;'.$profile_header_details['suffix'];;
+		$data['profile_name'] = $profile_header_details['firstname'].$middle_initial.$profile_header_details['lastname'].'&nbsp;'.$profile_header_details['suffix'];
+		
+		//employee benefit
+		$employee_benefit = $this->partner->get_employee_benefit($user_id);
+		$data['benefit_type'] = (count($employee_benefit) == 0 ? "n/a" :  $employee_benefit['benefit_type']);
+		$data['benefit'] = (count($employee_benefit) == 0 ? "n/a" :  $employee_benefit['benefit']);
 
 		// $department = empty($profile_header_details['department']) ? "" : " on ".ucwords(strtolower($profile_header_details['department']));
 		$department = empty($profile_header_details['department']) ? "" : " on ".$profile_header_details['department'];
@@ -647,9 +653,6 @@ class Partners_immediate extends MY_PrivateController
 	function get_sbu_unit_percentage()
 	{
 		$this->_ajax_only();
-
-		$this->load->model('partners_model', 'partner');
-
         $sbu_unit_ids = $this->input->post('sbu_unit_ids');
         $total_percentage = $this->partner->get_sum_sbu_percentage($sbu_unit_ids);
 

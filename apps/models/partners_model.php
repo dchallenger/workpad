@@ -201,6 +201,18 @@ class partners_model extends Record
 	    	return array();
 	}
 
+	function get_employee_benefit($user_id=0){
+		$qry = "SELECT * FROM partners_benefit
+				WHERE user_id = {$user_id}";
+
+		$result = $this->db->query( $qry );		
+	    
+		if( $result->num_rows() > 0 )
+	    	return $result->row_array();
+	    else
+	    	return array();
+	}
+
 	function create_movement($partner, $movement_type_code)
 	{
 		$movement_type = $this->db->get_where('partners_movement_type', array('type_code' => $movement_type_code))->row_array();

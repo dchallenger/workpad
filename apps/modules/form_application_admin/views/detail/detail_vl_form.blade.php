@@ -115,52 +115,22 @@
 											</div>
 										</div>
 									</div>
-									
 									<div class="row">
 										<div class="col-md-12">
 			                                <div class="form-group">
-			                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application_admin.selected_dates') }} :</label>
-
+			                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">
+			                                    	{{ lang('form_application_admin.selected_dates') }} :
+			                                    </label>
 			                                    <div class="col-md-6">
-											    <?php 
-											    if(count($selected_dates['dates']) > 0 ){
-											    $countSelectedDates = 0;
-											    	foreach ($selected_dates['dates'] as $index => $value){
-
-											        $array_keys = array_keys($value);
-											        $array_values = array_values($value);
-											    ?>
-											    <span style="display:block; word-wrap:break-word;" class="<?php if( $countSelectedDates > 4 ) echo 'hidden'; ?> toggle-<?php echo $countSelectedDates; ?>">
-				                                    <?php echo $index; ?> 
-				                                    <span class=""> - <?php echo $array_keys[0]; ?> :
-				                                    </span>
-				                                    <span class="text-info">
-								                        <?php 
-								                            foreach( $selected_dates['duration'] as $duration_info ){
-								                                if( $duration_info['duration_id'] == $array_values[0] ){
-								                                    echo $duration_info['duration'];
-								                                }
-								                            }
-								                        ?>
-								                    </span>
-								                </span>
-							                	<?php if( ($countSelectedDates+1) % 5 == 0 && $countSelectedDates > 1 && (($countSelectedDates+1) < count($selected_dates['dates'])) ){ ?>
-							            			<span class="<?php if( $countSelectedDates != 4 ) echo 'hidden'; ?> toggler-<?php echo $countSelectedDates; ?>" style="display:block; word-wrap:break-word;">
-								            			<span class="btn btn-xs blue btn-border-radius" onclick="selectedDates_showmore(<?php echo $countSelectedDates; ?>)"> see more <i class="fa fa-arrow-circle-o-right"></i> 
-								            			</span>
-							            			</span>						            		
-												<?php 
-													}
-													$countSelectedDates++;
-													}
-												}
-												?>
+			                                    	@if ($form_approver_details['approver_status_id'] == 6)
+			                                    		@include('detail/detail_for_cancellation')
+			                                    	@else
+			                                    		@include('detail/details')
+			                                    	@endif
 			                                	</div>
-
 			                                </div>
 			                            </div>
 									</div>
-
 	                                <div class="row">
 										<div class="col-md-12">
 											<div class="form-group">
@@ -330,30 +300,7 @@
 
 	                            </div>
 
-	                            <div class="form-actions fluid" align="center">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div>
-                                            	<?php if( $form_approver_details['approver_status_id'] < 8 && in_array($approver_details['form_status_id'], array(2,4,5)) && $record['time_forms_form_status_id'] != 8 && $record['time_forms_form_status_id'] != 6){ ?>
-                                            		<a href="#" class="approve_view btn btn-default btn-sm btn-success" data-forms-id="{{ $form_approver_details['forms_id'] }}" data-form-owner="{{ $form_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $form_approver_details['approver_id'] }}" data-decission="6" >{{ lang('form_application_admin.approved') }}</a>
-                                            		<?php if($form_approver_details['within_cutoff']){ ?>
-                                            			<a href="#" class="disapprove_view btn btn-sm btn-danger" data-forms-id="{{ $form_approver_details['forms_id'] }}" data-form-owner="{{ $form_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $form_approver_details['approver_id'] }}" data-decission="7" >{{ lang('form_application_admin.disapproved') }}</a>
-                                            	<?php } }
-                                            		else if ($form_approver_details['approver_status_id'] == 6 ){
-                                            			if($form_approver_details['within_cutoff']){
-                                            		 ?>
-
-                                            		<a href="#" class="disapprove_view btn btn-sm btn-danger" data-forms-id="{{ $form_approver_details['forms_id'] }}" data-form-owner="{{ $form_approver_details['user_id'] }}" data-user-name="" data-user-id="{{ $form_approver_details['approver_id'] }}" data-decission="8" >{{ lang('form_application_admin.cancel') }}</a>
-
-                                            	<?php
-                                            			}
-                                            		}
-                                            	?>
-	                                        	<a href="{{ $mod->url }}" class="btn btn-default btn-sm">{{ lang('common.back_to_list') }}</a>
-	                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
+	                            @include('button/detail');
 	                        <!-- END FORM--> 
 	                    </div>
 	            	</div>

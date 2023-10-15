@@ -94,8 +94,10 @@ function dateDiff(date1,date2,interval) {
     }
 }
 
-function get_service(dateString) {
-    var today = new Date();
+function get_service(dateString,endDate = 0) {
+	var today = new Date();
+	if (endDate)
+		today = new Date(endDate);
     var birthDate = new Date(dateString);
     var age = today.getFullYear() - birthDate.getFullYear();
 

@@ -17,6 +17,12 @@
             <span> {{ $loan_application_mobile_special_feature }}</span>
         </div>
     </div>
+    <div class='clearfix'>
+        <label class='control-label col-md-4 text-muted text-left small'>{{ lang('loan_application.reason') }}:</label>
+        <div class='col-md-8'>
+            <span> {{ $loan_application_mobile_plan_remarks }}</span>
+        </div>
+    </div>
     <?php if(count($remarks)): 
     ?>
     <div class='clearfix'>

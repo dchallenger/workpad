@@ -389,6 +389,7 @@ class Form_application_admin extends MY_PrivateController
 
         $this->_ajax_only();
 
+        $user_id = ($this->input->post('user_ids') != '' ? $this->input->post('user_ids') : $this->user->user_id);
         $selected_dates = array();
         if($this->input->post('forms_id') > 0){
             $selected_dates = $this->mod->get_selected_dates($this->input->post('forms_id'));
@@ -425,6 +426,7 @@ class Form_application_admin extends MY_PrivateController
         $holidays = array();
         $dates = array();
         $selected_dates_count = 0;
+        $date_label = array();
 
         if( $date_from != "" || $date_to != "" ){
 
@@ -439,7 +441,7 @@ class Form_application_admin extends MY_PrivateController
             foreach($period as $dt) {
                 $form_holiday = array();
                 $form_holiday = $this->mod->check_if_holiday($dt->format('Y-m-d'));
-                $forms_rest_day_count = $this->mod->check_rest_day($this->user->user_id, $dt->format('Y-m-d'));
+                $forms_rest_day_count = $this->mod->check_rest_day($user_id, $dt->format('Y-m-d'));
 
                 if(count($form_holiday) > 0 || $forms_rest_day_count > 0){           
                     $days--;
@@ -458,6 +460,7 @@ class Form_application_admin extends MY_PrivateController
                     //     $duration_id = 1;
                     // }
                     $dates[$dt->format('F d, Y')][$curr] = $duration_id;
+                    $date_label[$dt->format('F d, Y')] = $dt->format('Y-m-d');
                     $selected_dates_count++;
                 }
             }
@@ -466,6 +469,7 @@ class Form_application_admin extends MY_PrivateController
 
         $data['days'] = $days;
         $data['dates'] = $dates;
+        $data['date_label'] = $date_label;
         $data['duration'] = $this->mod->get_duration();
         $data['disabled'] = $this->input->post('form_status_id')> 2 ? "disabled" : "";
 
@@ -501,7 +505,6 @@ class Form_application_admin extends MY_PrivateController
 
 
     public function forms_decission(){
-
         $this->current_user = $this->config->item('user');
 
         $this->_ajax_only();
@@ -535,6 +538,97 @@ class Form_application_admin extends MY_PrivateController
         if(count($forms_validation['error']) > 0 ){  
             $this->_ajax_return();  
         }else{
+            $total_no_of_days_filed = 0;
+            $total_no_of_days_cancelled = 0;
+            $forms_id = $this->input->post('formid');
+            $form_details = $this->mod->get_forms_details($forms_id);
+            $form_id = $form_details['form_id'];
+            $form_valid_to_cancel = [1,2,3,7];
+            if ($this->input->post('decission') == 8 && in_array($form_id,$form_valid_to_cancel)) {
+                $duration_arr = $this->input->post('duration');
+                $cancel_arr = $this->input->post('cancel');
+
+                if (!empty($form_details)) {
+                    $total_no_of_days_filed = $form_details['day'];
+                }
+
+                foreach($duration_arr as $date => &$duration_id){
+                    $shift_details = $this->mod->get_shift_details($date, $this->input->post('formownerid'));
+                    $time_from = $date." ".$shift_details['shift_time_start'];
+                    $time_to = $date." ".$shift_details['shift_time_end'];
+
+                    if (!isset($cancel_arr[$date]))
+                        unset($duration_arr[$date]);
+                    else {
+                        $duration_details = $this->mod->get_duration($duration_id);
+                        $credit = (int)$duration_details[0]['credit'];
+                        $new_duration_id = 1;
+                        // first half
+                        if ($duration_id == 2) {
+                            $time_from = date('Y-m-d H:i:s', strtotime($date." ".$shift_details['shift_time_end']. " - {$credit} hours"));
+                            $time_to = $date." ".$shift_details['shift_time_end'];
+                            $new_duration_id = 3;
+                        } elseif ($duration_id == 3) { // second half
+                            $time_from = $date." ".$shift_details['shift_time_start'];
+                            $time_to = date('Y-m-d H:i:s', strtotime($date." ".$shift_details['shift_time_start']. " + {$credit} hours"));
+                            $new_duration_id = 2;
+                        }
+
+                        $time_forms_date_table[$date]['day'] = $duration_details[0]['credit'] * 0.125;
+                        $time_forms_date_table[$date]['duration_id'] = $new_duration_id;
+                        $time_forms_date_table[$date]['credit'] = $duration_details[0]['credit'];
+                        $time_forms_date_table[$date]['hrs'] = $duration_details[0]['credit'];
+                        $time_forms_date_table[$date]['time_from'] = $time_from;
+                        $time_forms_date_table[$date]['time_to'] = $time_to;
+                        $duration_id = $duration_details[0]['credit'] * 0.125; // to update credit value of array itself
+                    }
+                }
+
+                $total_no_of_days_cancelled = array_sum($duration_arr);
+            }
+
+
+            if ($total_no_of_days_filed != $total_no_of_days_cancelled) {
+                $forms_date_qry = $this->mod->get_selected_dates($forms_id);
+                $main_record['day'] = $total_no_of_days_cancelled;
+                $main_record['hrs'] = 0;
+                $main_record['date_from'] = array_key_first($duration_arr);
+                $main_record['date_to'] = array_key_last($duration_arr);
+                $main_record['hr_remarks'] = $this->input->post('comment');
+                $main_record['date_cancelled'] = date('Y-m-d H:i:s');
+                $main_record['hr_admin_approved_user_id'] = $this->user->user_id;
+
+                $this->db->update( $this->mod->table, $main_record, array( $this->mod->primary_key => $forms_id) );
+
+                if (!empty($forms_date_qry)) {
+                    foreach($forms_date_qry as $key => $existing_form_details) {
+                        if (!array_key_exists($existing_form_details['date'],$time_forms_date_table))
+                            $this->db->delete('time_forms_date', array('id' => $existing_form_details['id'])); 
+                        else {
+                            $form_details_to_update = $time_forms_date_table[$existing_form_details['date']];
+                            $this->db->update('time_forms_date', $form_details_to_update, array('id' => $existing_form_details['id']));
+
+                            if( $this->db->_error_message() != "" ){
+                                $this->response->message[] = array(
+                                    'message' => $this->db->_error_message(),
+                                    'type' => 'error'
+                                );
+                            }
+
+                            $qry = "CALL sp_time_forms_aux_shift_for_cancelled('".$form_details['form_code']."', ".$this->input->post('formownerid').", ".$forms_id.")";
+                            $result = $this->db->query( $qry );
+                        }
+                    }
+                }
+
+                $this->response->message[]  = array(
+                    'message'   => lang('common.save_successful'),
+                    'type'      => 'success'
+                );
+
+                $this->_ajax_return();                
+            }
+
             // 1. set forms approver decision
             $result = $this->mod->setDecission($this->input->post());
 
@@ -609,7 +703,7 @@ class Form_application_admin extends MY_PrivateController
         }
     }
 
-     public function get_list()
+    public function get_list()
     {
         $this->_ajax_only();
         if( !$this->permission['list'] )
@@ -1004,6 +1098,11 @@ class Form_application_admin extends MY_PrivateController
             $data['form_title'] = 'Emergency Leave Blanket';
             $blanket_file_name = 'el_blanket.php';
             break;  
+            case 24: //Victim of Violence Leave
+            $data['form_code'] = 'LWP';
+            $data['form_title'] = 'Emergency Leave Blanket';
+            $blanket_file_name = 'el_blanket.php';
+            break; 
             case 8: //Business Trip
             $data['bt_type'] = 1;
             $data['request_status_id'] = 1;
@@ -1162,7 +1261,7 @@ class Form_application_admin extends MY_PrivateController
         $data['record']['partners.partner_id'] = '';
         $form_type = $this->input->post('form_type');
 
-        $forms = ['1','2','3','4','5','6','7','8','14','15','16','19','20'];
+        $forms = ['1','2','3','4','5','6','7','8','14','15','16','19','20','24'];
         $multiple = 0;
         if (in_array($form_type, $forms))
             $multiple = 0;
@@ -1365,7 +1464,7 @@ class Form_application_admin extends MY_PrivateController
         }
 
         /** START Validate Date From - Date To **/
-        $with_date_range = array(1, 2, 3, 4, 5, 6, 7, 8, 14, 16, 19, 20, 21, 22, 23); //Emergency leave, undertime
+        $with_date_range = array(1, 2, 3, 4, 5, 6, 7, 8, 14, 16, 19, 20, 21, 22, 23, 24); //Emergency leave, undertime
 
         if(in_array($form_id, $with_date_range) && $form_id <> 8){
             if(strtotime($_POST['date_from']) > strtotime($_POST['date_to'])){
@@ -1535,9 +1634,23 @@ class Form_application_admin extends MY_PrivateController
             }else{
                 if(in_array($form_id, $with_date_range) && $form_id <> 8){
                     $days = 0;
-
+                    $user_id = $_POST['partners']['partner_id'][0];
                     $duration_details = $this->mod->get_duration($duration[$selected_date_count]);
                     $leave_durations = $this->mod->get_leave_duration($leave_duration[$selected_date_count]);
+                    $shift_details = $this->mod->get_shift_details($dt->format('Y-m-d'), $user_id);
+                    $time_from = $dt->format('Y-m-d')." ".$shift_details['shift_time_start'];
+                    $time_to = $dt->format('Y-m-d')." ".$shift_details['shift_time_end'];
+                    $credit = (int)$duration_details[0]['credit'];
+
+                    // first half
+                    if ($duration[$selected_date_count] == 2) {
+                        $time_from = $dt->format('Y-m-d')." ".$shift_details['shift_time_start'];
+                        $time_to = date('Y-m-d H:i:s', strtotime($dt->format('Y-m-d')." ".$shift_details['shift_time_start']. " + {$credit} hours"));
+                    } elseif ($duration[$selected_date_count] == 3) { // second half
+                        $time_from = date('Y-m-d H:i:s', strtotime($dt->format('Y-m-d')." ".$shift_details['shift_time_end']. " - {$credit} hours"));
+                        $time_to = $dt->format('Y-m-d')." ".$shift_details['shift_time_end'];
+                    }
+
                     if($this->input->post('form_status_id') != 8){
                         $time_forms_date_table[] = array(
                             'forms_id' => $forms_id,
@@ -1545,8 +1658,10 @@ class Form_application_admin extends MY_PrivateController
                             'day' => $duration_details[0]['credit'] * 0.125,//$leave_durations[0]['leave_duration'] - for abraham //$duration[$selected_date_count] == 1 ? 1 : 0.5 - default if 8 and 4 hours only,
                             'duration_id' => $duration[$selected_date_count],
                             'credit' => $duration_details[0]['credit'], //$leave_durations[0]['leave_duration'] for abraham,//$duration_details[0]['credit']
-                            'hrs' => $duration_details[0]['credit']
-                            );
+                            'hrs' => $duration_details[0]['credit'],
+                            'time_from' => $time_from,
+                            'time_to' => $time_to
+                        );
                     }else{
                         $time_forms_date_table[] = array(
                             'forms_id' => $forms_id,
@@ -1556,7 +1671,9 @@ class Form_application_admin extends MY_PrivateController
                             'credit' => $duration_details[0]['credit'],//$duration_details[0]['credit'],
                             'cancelled_comment' => $this->input->post('cancelled_comment'),
                             'hrs' => $duration_details[0]['credit'],
-                            );
+                            'time_from' => $time_from,
+                            'time_to' => $time_to
+                        );
                     }                    
                     $hrs = $duration_details[0]['credit']; 
                     $days += $duration_details[0]['credit'] * 0.125;
@@ -2447,6 +2564,7 @@ class Form_application_admin extends MY_PrivateController
         // best stored as array, so you can add more than one
         $holidays = array();
         $dates = array();
+        $date_label =  array();
         $selected_dates_count = 0;
 
         if( $date_from != "" || $date_to != "" ){
@@ -2478,6 +2596,7 @@ class Form_application_admin extends MY_PrivateController
 
                             $dates[$dt->format('F d, Y')][$curr] = $duration_id;
                             $dates[$dt->format('F d, Y')]['hrs'] = $hours;
+                            $date_label[$dt->format('F d, Y')] = $dt->format('Y-m-d');
                             $selected_dates_count++;
                         }
                     }
@@ -2488,6 +2607,7 @@ class Form_application_admin extends MY_PrivateController
 
         $data['days'] = $days;
         $data['dates'] = $dates;
+        $data['date_label'] = $date_label;
         $data['duration'] = $this->mod->get_duration();
         $data['disabled'] = $this->input->post('form_status_id')> 2 ? "disabled" : "";
 

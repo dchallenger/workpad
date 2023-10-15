@@ -106,7 +106,8 @@ class loan_application_model extends Record
 							LEFT JOIN ww_users_position upos ON up.position_id = upos.position_id
 							LEFT JOIN ww_users u ON u.user_id = up.user_id
 							WHERE plaa.loan_application_id = {$loan_application_id}
-							AND u.active = 1");
+							AND u.active = 1
+							ORDER BY plaa.sequence");
 
 		if ($partners_loan_approvers && $partners_loan_approvers->num_rows() > 0)
 			return $partners_loan_approvers->result_array();
@@ -249,6 +250,7 @@ class loan_application_model extends Record
 			$role_id = $roles_result->row()->role_id;
 
 			$this->db->where('role_id',$role_id);
+			$this->db->where('active',1);
 			$users = $this->db->get('users');
 
 			if ($users && $users->num_rows() > 0) {

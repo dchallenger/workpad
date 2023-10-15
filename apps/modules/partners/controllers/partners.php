@@ -575,6 +575,11 @@ class Partners extends MY_PrivateController
 		$middle_initial = empty($profile_header_details['middlename']) ? " " : " ".ucfirst(substr($profile_header_details['middlename'],0,1)).". ";
 		$data['profile_name'] = $profile_header_details['firstname'].$middle_initial.$profile_header_details['lastname'].'&nbsp;'.$profile_header_details['suffix'];
 
+		//employee benefit
+		$employee_benefit = $this->mod->get_employee_benefit($user_id);
+		$data['benefit_type'] = (count($employee_benefit) == 0 ? "n/a" :  $employee_benefit['benefit_type']);
+		$data['benefit'] = (count($employee_benefit) == 0 ? "n/a" :  $employee_benefit['benefit']);
+			
 		// $department = empty($profile_header_details['department']) ? "" : " on ".ucwords(strtolower($profile_header_details['department']));
 		$department = empty($profile_header_details['department']) ? "" : " on ".$profile_header_details['department'];
 		// $data['profile_position'] = ucwords(strtolower($profile_header_details['position']));
@@ -1209,6 +1214,10 @@ class Partners extends MY_PrivateController
 				}
 			}
 			$data['personal_mobiles'] = $personal_mobiles;*/
+			$employee_benefit = $this->mod->get_employee_benefit($user_id);
+
+			$data['benefit_type'] = (count($employee_benefit) == 0 ? "" :  $employee_benefit['benefit_type']);
+			$data['benefit'] = (count($employee_benefit) == 0 ? "" :  $employee_benefit['benefit']);
 
 			$phone_numbers = $this->profile_mod->get_partners_personal($user_id, 'phone');
 			$data['profile_telephones'] = $phone_numbers = (count($phone_numbers) == 0 ? " " : ($phone_numbers[0]['key_value'] == "" ? "" : $phone_numbers[0]['key_value']));
@@ -1894,6 +1903,7 @@ class Partners extends MY_PrivateController
 				$other_tables['partners'] = $post['partners'];
 				$other_tables['partners']['effectivity_date'] = date('Y-m-d', strtotime($post['partners']['effectivity_date']));
 				$other_tables['partners']['regularization_date'] = !empty($post['partners']['regularization_date']) ? date('Y-m-d', strtotime($post['partners']['regularization_date'])) : "";
+				$other_tables['partners']['last_promotion_date'] = !empty($post['partners']['last_promotion_date']) ? date('Y-m-d', strtotime($post['partners']['last_promotion_date'])) : "";
 				$other_tables['partners']['original_hired_date'] = date('Y-m-d', strtotime($post['partners']['original_hired_date']));
 				$other_tables['partners']['employment_end_date'] = date('Y-m-d', strtotime($post['partners']['employment_end_date']));
 

@@ -191,7 +191,8 @@ class loan_application_manage_model extends Record
 		$this->db->select('
 							pla.user_id AS user_id,plaa.user_id AS approver_id,
 							pla.loan_application_id,pla.created_on,plame.loan_application_mobile_enrollment_type,
-							plampl.loan_application_mobile_plan_limit,plamsf.loan_application_mobile_special_feature
+							plampl.loan_application_mobile_plan_limit,plamsf.loan_application_mobile_special_feature,
+							plam.remarks AS loan_application_mobile_plan_remarks
 						');
 		$this->db->from('partners_loan_application pla');
 		$this->db->join('partners_loan_application_mobile plam','pla.loan_application_id = plam.loan_application_id');

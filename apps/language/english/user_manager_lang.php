@@ -42,5 +42,8 @@ $lang['user_manager'] = array(
 	'school' => 'School',
 	'p_school' => 'Manage and list school.',
 	'degree' => 'Degree',
-	'p_degree' => 'Manage and list degree.',		
+	'p_degree' => 'Manage and list degree.',
+	'benefit_type' => 'Employee Benefit',
+	'p_benefit_type' => 'Manage and list Employee Benefit.',
+
 );

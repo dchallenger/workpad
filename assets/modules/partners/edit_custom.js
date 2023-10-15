@@ -1,6 +1,6 @@
 
 $(document).ready(function(){
-    var service = get_service(  $('#partners-effectivity_date').val() );
+    var service = get_service(  $('#partners-effectivity_date').val(),$('#partners-employment_date').val() );
     if (service != '' && !isNaN(service))
     	$('span.calculatedservice').html(service+"&nbsp;&nbsp;years of service")  	
 

@@ -9,7 +9,30 @@ $(document).ready(function(){
         $('#main_form').hide();
         $('.form-actions').hide();
         $('#change_options').show();
-    });    
+    });
+
+    $('.cancelled').click(function () {
+        var record_id = $(this).data('record-id');
+        var remarks = $('#remarks').val();
+
+        if (!remarks) {
+            $('#remarks').focus();
+            notify('error', 'The Remarks field is required' );
+            return false;
+        } else {
+            var data = {
+                record_id: record_id,
+                remarks: remarks
+            };
+
+            bootbox.confirm(lang.form_app.you_sure_cancel, function(confirm) {
+                if( confirm )
+                {
+                    _cancel_record( data );
+                } 
+            });
+        }
+    });   
 });
 
 function get_selected_dates(forms_id, form_status_id, date_from, date_to, view){
@@ -41,6 +64,71 @@ function get_selected_dates(forms_id, form_status_id, date_from, date_to, view){
             }
         });
     }
+}
+
+function _cancel_record( records, callback )
+{
+    if( mobileapp )
+    {
+        var params = {
+            records: records
+        };
+        ajax( base_url + module.get('route') + '/cancel_record', params, function(response){
+            $('body').modalmanager('removeLoading');
+            handle_ajax_message( response.message );
+
+            if (typeof(callback) == typeof(Function))
+                callback();
+            else
+                $('#form-list').infiniteScroll('search');
+        });
+    }
+    else{
+        $.ajax({
+            url: base_url + module.get('route') + '/cancel_record',
+            type:"POST",
+            async: false,
+            data: records,
+            dataType: "json",
+            beforeSend: function(){
+                $('.popover-content').block();
+            },
+            success: function ( response ) {
+                for (var i in response.message) {
+                    notify(response.message[i].type, response.message[i].message);
+                }
+                
+                if( view == 'index' ){
+
+                    $('.custom_popover').popover('hide');
+
+                    $('#form-list').empty();
+
+                    $('#form-list').infiniteScroll({
+                        dataPath: base_url + module.get('route') + '/get_list',
+                        itemSelector: 'tr.record',
+                        onDataLoading: function(){ 
+                            $("#loader").show();
+                        },
+                        onDataLoaded: function(x, y, z){ 
+                            $("#loader").hide();
+
+                            initPopup();
+
+                        },
+                        onDataError: function(){ 
+                            return;
+                        },
+                        search: $('input[name="list-search"]').val()
+                    });
+                }
+                else{
+                    setTimeout(function(){window.location.replace(base_url + module.get('route'))},2000);
+                }
+            }
+        });    
+    }
+    
 }
 
 function back_to_mainform(cancel){

@@ -102,6 +102,16 @@
 									</div>
 								</div>
 							</div>
+                            <div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('loan_application.reason') }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span>{{ $record['partners_loan_application_mobile_loan_application_mobile_remarks'] }}</span>
+										</div>
+									</div>
+								</div>
+							</div>
 	                        <div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
@@ -111,7 +121,7 @@
 										</div>
 									</div>
 								</div>
-							</div>							
+							</div>						
 							<?php if( count($remarks) > 0){
 								?>
 

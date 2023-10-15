@@ -512,12 +512,14 @@
 										                </select>
 													</td>
 												</tr>
-												<tr>
-													<td class="active"><span class="bold">Date Approved</span></td>
-													<td>
-														{{ general_date($signatories[$value['clearance_layout_sign_id']]['date_cleared']) }}
-													</td>
-												</tr>													
+												@if (isset($signatories[$value['clearance_layout_sign_id']]['date_cleared']))
+													<tr>
+														<td class="active"><span class="bold">Date Approved</span></td>
+														<td>
+															{{ general_date($signatories[$value['clearance_layout_sign_id']]['date_cleared']) }}
+														</td>
+													</tr>													
+												@endif												
 											</table>
 										</div>
 									<?php 

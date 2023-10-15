@@ -56,7 +56,7 @@
 				</div>
 				<div class="portlet-body form" id="main_form">			
 
-					<div class="form-group">
+					<div class="form-group hidden">
 						<label class="control-label col-md-4">{{ lang('form_application.type') }}<span class="required">* </span></label>
 						<div class="col-md-6">
 							<?php	                        
@@ -70,9 +70,10 @@
 								<span class="input-group-addon">
 									<i class="fa fa-list-ul"></i>
 								</span>
-								{{ form_dropdown('time_forms[bt_type]',$business_trip_type_options, $bt_type, ' id="obt_select" class="form-control select2me" data-placeholder="Select..."') }}
+								{{ form_dropdown('time_forms[bt_type]',$business_trip_type_options, $bt_type, ' id="obt_select" class="form-control select2me" data-placeholder="Select..." disabled') }}
 							</div> 				
-						</div>	
+						</div>
+						<input type="hidden" name="time_forms[bt_type]" value="2">	
 					</div>
 
 					<div class="form-group">

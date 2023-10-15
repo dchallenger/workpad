@@ -1,0 +1,109 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+$config['fields'] = array();
+$config['fields'][3]['users_benefit.old_new'] = array(
+	'f_id' => 7,
+	'fg_id' => 2,
+	'label' => 'Benefit Package',
+	'description' => '',
+	'table' => 'users_benefit',
+	'column' => 'old_new',
+	'uitype_id' => 3,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 3,
+	'datatype' => 'required',
+	'active' => '1',
+	'encrypt' => 0
+);
+$config['fields'][3]['users_benefit.job_grade_id'] = array(
+	'f_id' => 6,
+	'fg_id' => 1,
+	'label' => 'Rank',
+	'description' => '',
+	'table' => 'users_benefit',
+	'column' => 'job_grade_id',
+	'uitype_id' => 4,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 5,
+	'datatype' => 'required',
+	'active' => '1',
+	'encrypt' => 0,
+	'searchable' => array(
+		'type_id' => 1,
+		'table' => 'users_job_grade_level',
+		'multiple' => 0,
+		'group_by' => '',
+		'label' => 'job_level',
+		'value' => 'job_grade_id'
+	)
+);
+$config['fields'][3]['users_benefit.company_id'] = array(
+	'f_id' => 5,
+	'fg_id' => 1,
+	'label' => 'Company',
+	'description' => '',
+	'table' => 'users_benefit',
+	'column' => 'company_id',
+	'uitype_id' => 4,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 5,
+	'datatype' => 'required',
+	'active' => '1',
+	'encrypt' => 0,
+	'searchable' => array(
+		'type_id' => 1,
+		'table' => 'users_company',
+		'multiple' => 0,
+		'group_by' => '',
+		'label' => 'company',
+		'value' => 'company_id'
+	)
+);
+$config['fields'][3]['users_benefit.status_id'] = array(
+	'f_id' => 4,
+	'fg_id' => 2,
+	'label' => 'Active',
+	'description' => '',
+	'table' => 'users_benefit',
+	'column' => 'status_id',
+	'uitype_id' => 3,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 3,
+	'datatype' => 'V',
+	'active' => '1',
+	'encrypt' => 0
+);
+$config['fields'][3]['users_benefit.description'] = array(
+	'f_id' => 2,
+	'fg_id' => 3,
+	'label' => 'Description',
+	'description' => '',
+	'table' => 'users_benefit',
+	'column' => 'description',
+	'uitype_id' => 2,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 2,
+	'datatype' => '',
+	'active' => '1',
+	'encrypt' => 0
+);
+$config['fields'][3]['users_benefit.benefit_type'] = array(
+	'f_id' => 1,
+	'fg_id' => 3,
+	'label' => 'Benefit Type',
+	'description' => '',
+	'table' => 'users_benefit',
+	'column' => 'benefit_type',
+	'uitype_id' => 1,
+	'display_id' => 3,
+	'quick_edit' => 1,
+	'sequence' => 1,
+	'datatype' => 'required',
+	'active' => '1',
+	'encrypt' => 0
+);

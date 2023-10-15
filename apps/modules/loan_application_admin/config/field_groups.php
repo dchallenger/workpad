@@ -11,7 +11,8 @@ $config['fieldgroups'][1] = array(
 	'fields' => array( 
 		'partners_loan_application_mobile.loan_application_mobile_special_feature_id',
 		'partners_loan_application_mobile.loan_application_mobile_plan_limit_id',
-		'partners_loan_application_mobile.loan_application_mobile_enrollment_type_id'
+		'partners_loan_application_mobile.loan_application_mobile_enrollment_type_id',
+		'partners_loan_application_mobile.remarks'
 	)
 );
 $config['fieldgroups'][2] = array(

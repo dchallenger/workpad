@@ -169,6 +169,7 @@ $(document).ready(function(){
 
         if (!$("#comment-" + form_id).val()) {
             $("#comment-" + form_id).focus();
+            notify('error', 'The Remarks field is required' );
             return false;
         } else {
             comment = $("#comment-" + form_id).val();

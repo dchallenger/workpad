@@ -36,13 +36,15 @@ class form_application_model extends Record
 		parent::__construct();		
 	}
 
-function _cancel_record( $records, $form_type )
+function _cancel_record( $records, $form_type, $remarks = '' )
 {
 
 	$this->response = new stdClass();
 
 	$data['modified_on'] = date('Y-m-d H:i:s');
 	$data['modified_by'] = $this->user->user_id;
+	$data['cancelled_by_user'] = 1;
+	$data['cancelled_remarks_by_user'] = $remarks;
 	$data['form_status_id'] = '8';
 
 	$this->db->where_in($this->primary_key, $records);
@@ -981,7 +983,8 @@ public function call_sp_time_calendar($date_from='', $date_to='', $user_id=0){
         return $data;   
     }
 
-    public function time_forms_get_application($user_id=0, $date=''){	
+    // old function to check overalapping application using date from and to
+/*    public function time_forms_get_application($user_id=0, $date=''){	
 		if($date == ''){
 			$date = date('Y-m-d');
 		}
@@ -994,6 +997,24 @@ public function call_sp_time_calendar($date_from='', $date_to='', $user_id=0){
         } else {
         	return false;
         }
+	}*/
+
+    public function time_forms_get_application($user_id=0, $date_time=''){	
+        $qry = "SELECT *
+        FROM time_forms_date tfd
+        JOIN time_forms tf ON tfd.forms_id = tf.forms_id
+        	WHERE tfd.deleted = 0 
+        	AND tf.deleted = 0 
+        	AND tf.form_status_id IN (2,3,4,5,6)
+        	AND '{$date_time}' between time_from and time_to
+       		AND tf.user_id = '{$user_id }'";
+
+		$existing_form = $this->db->query($qry);
+		
+		if ($existing_form && $existing_form->num_rows() > 0)
+			return true;
+		else
+			return false;
 	}
 
 	public function get_form_statuses(){

@@ -75,7 +75,7 @@ $(document).ready(function(){
 	if( $('#goto_vl_co').length > 0 && $('#view').val() != 'edit_blanket' ){
 		$('#change_options').hide();
         get_selected_dates($('#record_id').val(), $('#form_status_id').val(), '', '');
-   }
+    }
 
    // $('.form-filter').click(function(){
 
@@ -186,24 +186,60 @@ $(document).ready(function(){
         var user_id = $(this).data('user-id');
         var form_owner  = $(this).data('form-owner');
         var decission = $(this).data('decission');
+        var serialize_data = $('form#cancel_form').serialize();
         var comment = '';
 
         if (!$("#comment-" + form_id).val()) {
             $("#comment-" + form_id).focus();
+            notify('error', 'The Remarks field is required' );
             return false;
         } else {
             comment = $("#comment-" + form_id).val();
         }
 
-        var data = {
-            formid: form_id,
-            userid: user_id,
-            decission: decission,
-            formownerid: form_owner,
-            comment: comment
-        };
+        // var data = {
+        //     formid: form_id,
+        //     userid: user_id,
+        //     decission: decission,
+        //     formownerid: form_owner,
+        //     comment: comment,
+        //     serialize_data: serialize_data
+        // };
 
-        submitDecission(data,'detail');
+        // submitDecission(data,'detail');
+
+        //due to the modification for the cancellation of selected date or whole shift
+        $.blockUI({ message: saving_message(),
+            onBlock: function(){
+                $.ajax({
+                    url: base_url + module.get('route') + '/forms_decission',
+                    type: "POST",
+                    async: false,
+                    data: $('form#cancel_form').serialize() + '&formid=' + form_id+ '&userid=' + user_id+ '&decission=' + decission+ '&formownerid=' + form_owner+ '&comment=' + comment,
+                    dataType: "json",
+                    beforeSend: function () {
+
+                        $('.popover-content').block();
+                    },
+                    success: function (response) {
+
+                        $('.popover-content').unblock();
+
+                        for (var i in response.message) {
+                            notify(response.message[i].type, response.message[i].message);
+                        }
+
+                        if (response.action == 'insert') {
+                            after_save(response);
+                        }
+
+                        setTimeout(function(){window.location.replace(base_url + module.get('route'))},2000);
+                    }
+                });
+            },
+            baseZ: 300000000
+        });
+        setTimeout(function(){$.unblockUI()},2000);
 
    });
 
@@ -261,7 +297,11 @@ $(document).ready(function(){
         $(this).removeClass('label-default');
         $(this).addClass('label-success')
         create_list();
-    }); 
+    });
+
+    $('.employees_list').live('change', function() {
+        get_selected_dates($('#record_id').val(), $('#form_status_id').val(), $('#time_forms-date_from').val(), $('#time_forms-date_to').val(),$(this).val()); 
+    })
 });
 
 function create_list()
@@ -464,12 +504,12 @@ function back_to_mainform(cancel){
         $('.form-actions').show();
     }
 
-function get_selected_dates(forms_id, form_status_id, date_from, date_to){
+function get_selected_dates(forms_id, form_status_id, date_from, date_to, user_ids = []){
         $.ajax({
             url: base_url + module.get('route') + '/get_selected_dates',
             type:"POST",
             async: false,
-            data: 'forms_id='+forms_id+'&form_status_id='+form_status_id+'&date_from='+date_from+'&date_to='+date_to+'&view='+$('#view').val(),
+            data: 'forms_id='+forms_id+'&form_status_id='+form_status_id+'&date_from='+date_from+'&date_to='+date_to+'&view='+$('#view').val()+'&user_ids='+user_ids,
             dataType: "json",
             success: function ( response ) {
                 $('#change_options').html(response.selected_dates);
@@ -638,4 +678,16 @@ function selectedDates_showmore( nxt, button )
     $('span.toggler-'+(i-1)).removeClass('hidden');
     $('span.toggler-'+(nxt)).remove();
 }
+
+function selectedDates_showmore_div( nxt, button )
+{
+    for( var i = nxt; i <= (nxt + 5); i++ )
+    {
+        $('.toggle-'+i).removeClass('hidden');
+    }
+    
+    $('.toggler-'+(i-1)).removeClass('hidden');
+    $('.toggler-'+(nxt)).remove();
+}
+
 

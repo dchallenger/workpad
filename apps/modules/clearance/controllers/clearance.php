@@ -1473,7 +1473,7 @@ class Clearance extends MY_PrivateController
         $template_data['reason'] = $partner_record['reason'];
 		$template_data['logo'] = base_url().$partner_record['print_logo'];
 
-        $this->db->select('partners_clearance_layout_sign.clearance_layout_id,partners_clearance_signatories.panel_title,partners_clearance_signatories.remarks,users.full_name,partners_clearance_status.status,GROUP_CONCAT(accountability SEPARATOR "<br> ") AS accountabilities');
+        $this->db->select('partners_clearance_layout_sign.clearance_layout_id,partners_clearance_signatories.panel_title,partners_clearance_signatories.remarks,users.full_name,partners_clearance_status.status,partners_clearance_signatories.date_cleared,GROUP_CONCAT(accountability SEPARATOR "<br> ") AS accountabilities');
         $this->db->where('partners_clearance_layout_sign.clearance_layout_id',$clearance_record['clearance_layout_id']);
         $this->db->where('properties_tagging',0);
         $this->db->where('partners_clearance_signatories.clearance_id',$record_id);
@@ -1485,7 +1485,7 @@ class Clearance extends MY_PrivateController
         $this->db->order_by('partners_clearance_layout_sign.clearance_layout_sign_id');
         $result_op = $this->db->get('partners_clearance_layout_sign');
 
-        $this->db->select('partners_clearance_layout_sign.clearance_layout_id,partners_clearance_signatories.panel_title,partners_clearance_signatories.remarks,users.full_name,partners_clearance_status.status,GROUP_CONCAT(accountability SEPARATOR "<br> ") AS accountabilities');
+        $this->db->select('partners_clearance_layout_sign.clearance_layout_id,partners_clearance_signatories.panel_title,partners_clearance_signatories.remarks,users.full_name,partners_clearance_status.status,partners_clearance_signatories.date_cleared,GROUP_CONCAT(accountability SEPARATOR "<br> ") AS accountabilities');
         $this->db->where('partners_clearance_layout_sign.clearance_layout_id',$clearance_record['clearance_layout_id']);
         $this->db->where('properties_tagging',1);
         $this->db->where('partners_clearance_signatories.clearance_id',$record_id);
@@ -1518,20 +1518,22 @@ class Clearance extends MY_PrivateController
 			$html .= '<table width="100%" border="1" cellspacing="0" style="border-collapse: collapse;border-spacing: 0; font-size: 10px;">
 				<thead>
 					<tr>
-						<td width="20%"><center>OFFICE</center></td>
-						<td width="20%"><center>ACCOUNTABILITY</center></td>
-						<td width="30%"><center>REMARKS</center></td>
-						<td width="10%"><center>STATUS</center></td>
+						<td width="15%"><center>OFFICE</center></td>
+						<td width="15%"><center>ACCOUNTABILITY</center></td>
+						<td width="20%"><center>REMARKS</center></td>
+						<td width="20%"><center>STATUS</center></td>
+						<td width="10%"><center>DATE APPROVED</center></td>
 						<td width="20%"><center>NAME & SIGNATURE</center></td>
 					</tr>			
 				</thead>';
 
         	foreach ($result_op->result() as $row) {
 				$html .= '<tr>
-							<td width="20%"><center>'.$row->panel_title.'</center></td>
-							<td width="20%"><center>'.$row->accountabilities.'</center></td>
-							<td width="30%"><center>'.$row->remarks.'</center></td>
+							<td width="15%"><center>'.$row->panel_title.'</center></td>
+							<td width="15%"><center>'.$row->accountabilities.'</center></td>
+							<td width="20%"><center>'.$row->remarks.'</center></td>
 							<td width="10%"><center>'.($row->status == 'Open' ? " " : $row->status).'</center></td>
+							<td width="20%"><center>'.$row->date_cleared.'</center></td>
 							<td width="20%"><center>'.ucwords($row->full_name).'</center></td>
 						</tr>';
 			}
@@ -1554,21 +1556,23 @@ class Clearance extends MY_PrivateController
 			$html .= '<table width="100%" border="1" cellspacing="0" style="border-collapse: collapse;border-spacing: 0; font-size: 10px;">
 				<thead>
 					<tr>
-						<td width="20%"><center>DEPARTMENT</center></td>
-						<td width="20%"><center>ACCOUNTABILITY</center></td>
-						<td width="30%"><center>REMARKS</center></td>
-						<td width="10%"><center>STATUS</center></td>
-						<td width="20%"><center>NAME/SIGNATURE</center></td>
+						<td width="15%"><center>OFFICE</center></td>
+						<td width="15%"><center>ACCOUNTABILITY</center></td>
+						<td width="20%"><center>REMARKS</center></td>
+						<td width="20%"><center>STATUS</center></td>
+						<td width="10%"><center>DATE APPROVED</center></td>
+						<td width="20%"><center>NAME & SIGNATURE</center></td>
 					</tr>			
 				</thead>';
 
         	foreach ($result_p->result() as $row) {
 				$html .= '<tr>
-							<td width="20%" style="padding-top:10px"><center>'.$row->panel_title.'</center></td>
-							<td width="20%" style="padding-top:10px"><center>'.$row->accountabilities.'</center></td>
-							<td width="30%" style="padding-top:10px"><center>'.$row->remarks.'</center></td>
-							<td width="10%" style="padding-top:10px"><center>'.($row->status == 'Open' ? " " : $row->status).'</center></td>
-							<td width="20%" style="padding-top:10px"><center>'.ucwords($row->full_name).'</center></td>
+							<td width="15%"><center>'.$row->panel_title.'</center></td>
+							<td width="15%"><center>'.$row->accountabilities.'</center></td>
+							<td width="20%"><center>'.$row->remarks.'</center></td>
+							<td width="10%"><center>'.($row->status == 'Open' ? " " : $row->status).'</center></td>
+							<td width="20%"><center>'.$row->date_cleared.'</center></td>
+							<td width="20%"><center>'.ucwords($row->full_name).'</center></td>
 						</tr>';
 			}
 

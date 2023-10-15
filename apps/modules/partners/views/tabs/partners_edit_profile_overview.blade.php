@@ -6,6 +6,7 @@
 				<span class="after"></span>
 			</li>
 			<li><a data-toggle="tab" href="#overview_tab2"><i class="fa fa-gear"></i>{{ lang('partners.employment') }}</a></li>
+			<li><a data-toggle="tab" href="#overview_tab16"><i class="fa fa-dollar"></i>{{ lang('partners.benefits') }}</a></li>
 			<li class="hidden"><a data-toggle="tab" href="#overview_tab17"><i class="fa fa-money"></i>{{ lang('partners.cost_center') }}</a></li>
 			<li><a data-toggle="tab" href="#overview_tab3"><i class="fa fa-phone"></i>{{ lang('partners.contacts') }}</a></li>
 			<li><a data-toggle="tab" href="#overview_tab15"><i class="fa fa-list"></i>{{ lang('partners.id_nos') }}</a></li>
@@ -63,6 +64,12 @@
         <form class="form-horizontal" id="form-14" partner_id="14" method="POST">
 			<!-- Personal Information -->
 			@include('edit/custom_fgs/family_info')
+		</form>
+		</div>
+		<div class="tab-pane" id="overview_tab16">
+        <form class="form-horizontal" id="form-14" partner_id="16" method="POST">
+			<!-- Personal Information -->
+			@include('edit/custom_fgs/benefit_info')
 		</form>
 		</div>
 	</div>

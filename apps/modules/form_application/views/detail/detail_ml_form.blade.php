@@ -256,7 +256,10 @@
 										</div>
 									</div>
 
-									<?php if( count($remarks) > 0 && in_array($form_status_id['val'],array(6,7,8)) && $record['time_forms_hr_admin_approved_user_id'] == ''){ ?>
+									<?php if($cancelled_by_user == 0 &&
+											  count($remarks) > 0 && 
+											  in_array($form_status_id['val'],array(6,7,8)) && 
+											  $record['time_forms_hr_admin_approved_user_id'] == ''){ ?>
 
 									<hr />
 									<div class="row">
@@ -295,7 +298,7 @@
 									<?php } ?>
 
 									<?php
-									if ($record['time_forms_hr_admin_approved_user_id'] != '') {
+									if ($cancelled_by_user == 0 && $record['time_forms_hr_admin_approved_user_id'] != '') {
 										switch ($record['time_forms_form_status_id']) {
 											case 6:
 												$date_transaction = $record['time_forms_date_approved'];
@@ -337,15 +340,22 @@
 									}
 									?>
 	                            </div>
-	                            <div class="form-actions fluid">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="col-md-offset-4 col-md-8">
-	                                        	<a href="{{ $mod->url }}" class="btn btn-default btn-sm">{{ lang('form_application.back_tolist') }}</a>
-	                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
+	                            @if (in_array($form_status_id['val'],[2,8]))
+		                            <hr />
+	                        		<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+			                                    <label class="control-label col-md-4 col-sm-4 text-right text-muted">{{ lang('form_application.remarks') }}<span class="required">* </span></label>
+			                                    <div class="col-md-5 col-sm-6">
+			                                        <textarea id="remarks" class="form-control" rows="3" @if($form_status_id['val'] != 2) readonly="readonly" @endif>{{ $cancelled_remarks_by_user }}</textarea>
+			                                        <label class="control-label col-md-7 text-muted small"> {{ lang('form_application.required_cancel') }}</label>
+			                                    </div>
+			                                </div>
+										</div>
+									</div>
+								@endif
+
+								@include('buttons/details',array('params' => 'value'))
 	                        <!-- END FORM--> 
 	                    </div>
 	            	</div>

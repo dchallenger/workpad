@@ -117,9 +117,9 @@ class holiday_model extends Record
 			return (Integer)$record_id;
 	}
 
-	function remove_holiday_locations($location_id){
+	function remove_holiday_locations($holiday_id){
 
-		$qry = "DELETE FROM ww_time_holiday_location WHERE holiday_id = '".$location_id."'";
+		$qry = "DELETE FROM ww_time_holiday_location WHERE holiday_id = '".$holiday_id."'";
 		$this->db->query( $qry );
 	}
 
@@ -211,7 +211,6 @@ class holiday_model extends Record
 				LEFT JOIN `ww_users_location` ul ON ul.`location_id`=up.`location_id`
 				ORDER BY 2,5";
 		$result = $this->db->query( $qry );
-
 		/*
 		$qry = "INSERT INTO ww_time_holiday_location (holiday_id, location_id, location, user_id, user) 
 				VALUES ('" . $holiday_data['holiday_id'] . "'

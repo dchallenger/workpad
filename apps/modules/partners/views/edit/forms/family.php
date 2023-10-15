@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Birthday<span class="required">*</span></label>
+                        <label class="control-label col-md-3">Date of Birth<span class="required">*</span></label>
                         <div class="col-md-9">
                             <div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
                                 <input type="text" class="form-control" onchange="_calculateAge(this, <?php echo $count ?>);"

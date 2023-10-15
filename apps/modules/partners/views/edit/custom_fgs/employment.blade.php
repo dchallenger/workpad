@@ -297,6 +297,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.last_promotion_date') }}</label>
+                    <div class="col-md-5">
+                        <div class="input-group input-medium date date-picker" data-date-format="MM dd, yyyy">
+                            <?php if($record['partners.last_promotion_date'] == 'January 01, 1970') { ?>
+                                <input type="text" class="form-control" name="partners[last_promotion_date]" id="partners-last_promotion_date" value="" placeholder="{{ lang('common.enter') }} {{ lang('partners.last_promotion_date') }}" >
+                            <?php } else { ?>
+                                <input type="text" class="form-control" name="partners[last_promotion_date]" id="partners-last_promotion_date" value="{{ $record['partners.last_promotion_date'] }}" placeholder="{{ lang('common.enter') }} {{ lang('partners.last_promotion_date') }}" >
+                            <?php } ?>
+                            <span class="input-group-btn">
+                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
                 @if(in_array('probationary_date', $partners_keys))
                 <div class="form-group">
                     <label class="control-label col-md-3">{{ $partners_labels['probationary_date'] }}</label>

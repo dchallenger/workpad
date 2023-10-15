@@ -5,6 +5,7 @@
 					<a data-toggle="tab" href="#overview_tab1"><i class="fa fa-gear"></i>{{ lang('partners_immediate.employment') }}</a>
 					<span class="after"></span>
 				</li>
+				<li><a data-toggle="tab" href="#overview_tab16"><i class="fa fa-list"></i>{{ lang('partners.benefits') }}</a></li>
 				<li><a data-toggle="tab" href="#overview_tab2"><i class="fa fa-phone"></i>{{ lang('partners_immediate.contacts') }}</a></li>
 				<li class="hidden"><a data-toggle="tab" href="#overview_tab17"><i class="fa fa-money"></i>{{ lang('partners.cost_center') }}</a></li>				
 				<li class="hidden"><a data-toggle="tab" href="#overview_tab15"><i class="fa fa-list"></i>{{ lang('partners.id_nos') }}</a></li>
@@ -526,6 +527,39 @@
 					</div>
 				</div>				
 			</div>
+			<div class="tab-pane" id="overview_tab16">
+				<!-- Benefit Information -->
+				<div class="portlet">
+					<div class="portlet-title">
+						<div class="caption">{{ lang('partners.benefits') }}</div>
+						<div class="tools">
+							<a class="collapse" href="javascript:;"></a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.benefit_type') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="lastname">{{$benefit_type}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.benefits') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="lastname">{{$benefit}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+		            </div>
+		        </div>
+		    </div>
 			<div class="tab-pane" id="overview_tab17">
 				<!-- Cost Center Information -->
 				<?php

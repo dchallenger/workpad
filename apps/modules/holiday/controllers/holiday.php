@@ -232,14 +232,39 @@ class Holiday extends MY_PrivateController
 				$to_do = 1;
 			}
 
-			$query = "INSERT INTO ".$this->db->dbprefix."time_holiday (holiday, holiday_date, legal)
-					  SELECT holiday, ".($to_do == 1 ? 'DATE_ADD' : 'DATE_SUB')."(holiday_date, INTERVAL ".$year." YEAR), legal
+			$this->db->select('GROUP_CONCAT(location_id) AS location_list'); 
+            $this->db->where('deleted', '0'); 
+            $location_result = $this->db->get('users_location'); 
+
+            $locations_list = '';
+            $location_count = 0;
+
+            if ($location_result && $location_result->num_rows() > 0) {
+            	$locations_list = $location_result->row()->location_list;
+				$location_count	= count(explode(',',$locations_list));
+            }
+
+            $query = "SELECT holiday, ".($to_do == 1 ? 'DATE_ADD' : 'DATE_SUB')."(holiday_date, INTERVAL ".$year." YEAR) AS date, legal, '".$locations_list."' AS location_list
 					  FROM ".$this->db->dbprefix."time_holiday
 					  WHERE deleted = 0
 					  AND legal = 1
 					  AND holiday_date LIKE '%".$year_query."%'";
 
-			$this->db->query($query);	
+			$holiday_result = $this->db->query($query);
+
+			if ($holiday_result && $holiday_result->num_rows() > 0) {
+				foreach ($holiday_result->result() as $row) {
+					$query_insert = "INSERT INTO ".$this->db->dbprefix."time_holiday (holiday, holiday_date, legal, locations, location_count) VALUES
+									('".$row->holiday."', '".$row->date."', $row->legal, '".$locations_list."', $location_count)";
+
+					$this->db->query($query_insert);
+					$holiday_id = $this->db->insert_id();
+					
+					// save affected partners 
+					$this->mod->remove_holiday_locations($holiday_id);
+					$this->mod->add_to_holiday_location($holiday_id);
+				}
+			}
 		}
 
 		$this->response->message[] = array(

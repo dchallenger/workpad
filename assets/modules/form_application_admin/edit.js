@@ -188,7 +188,7 @@ $(document).ready(function(){
 
     $('#filter_employees').click(function () {
         var form_type = $('#form_type').val();
-        var forms = ['1','2','3','4','5','6','7','8','14','15','16','19','20'];
+        var forms = ['1','2','3','4','5','6','7','8','14','15','16','19','20','24'];
         $('#partners-partner_id').find("option:selected").removeAttr("selected");
 
 /*        if ($('#partners-partner_id').length > 0){
@@ -227,7 +227,7 @@ function load_form(form_type){
                 },
                 success: function ( response ) {
                     $('#blanket_details').html(response.blanket_form);
-                    if(form_type == 1 || form_type == 2 || form_type == 3 || form_type == 4 || form_type == 5 || form_type == 6 || form_type == 7 || form_type == 8 || form_type == 14 || form_type == 16 || form_type == 19 || form_type == 20){
+                    if(form_type == 1 || form_type == 2 || form_type == 3 || form_type == 4 || form_type == 5 || form_type == 6 || form_type == 7 || form_type == 8 || form_type == 14 || form_type == 16 || form_type == 19 || form_type == 20 || form_type == 24){
                         get_selected_dates($('#record_id').val(), $('#form_status_id').val(), $('#time_forms-date_from').val(), $('#time_forms-date_to').val());   
                         $('#change_options').hide();
                     }
@@ -281,7 +281,7 @@ function update_employees( location_id, company_id, division_id, department_id, 
                     $('#change_employees').html(response.filtered_employees);
                     $('#partners-partner_id').html(response.employees);
                     // $("#partners-partner_id").multiselect("destroy");
-                    var forms = ['1','2','3','4','5','6','7','8','14','15','16','19','20'];
+                    var forms = ['1','2','3','4','5','6','7','8','14','15','16','19','20','24'];
 
                     if ($.inArray($('#form_type').val(),forms) >= 0){
                         $("#partners-partner_id").multiselect({
