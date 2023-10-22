@@ -91,12 +91,6 @@ class Form_application_admin extends MY_PrivateController
 
         parent::detail($record_id,true);
 
-        debug($this->record_id);
-        die();
-        
-        if ($this->record_id == '')
-            $this->record_id = $record_id;
-
         $forms_info = $this->mod->get_forms_details($this->record_id);
         $form_info = $this->mod->get_form_info($forms_info['form_id']);
 
@@ -593,12 +587,13 @@ class Form_application_admin extends MY_PrivateController
                 $total_no_of_days_cancelled = array_sum($duration_arr);
             }
 
+
             if ($total_no_of_days_filed != $total_no_of_days_cancelled) {
                 $forms_date_qry = $this->mod->get_selected_dates($forms_id);
                 $main_record['day'] = $total_no_of_days_cancelled;
                 $main_record['hrs'] = 0;
-                $main_record['date_from'] = array_key_first($duration_arr);
-                $main_record['date_to'] = array_key_last($duration_arr);
+                $main_record['date_from'] = key($duration_arr);
+                $main_record['date_to'] = key(array_slice($duration_arr, -1, 1, true));
                 $main_record['hr_remarks'] = $this->input->post('comment');
                 $main_record['date_cancelled'] = date('Y-m-d H:i:s');
                 $main_record['hr_admin_approved_user_id'] = $this->user->user_id;
