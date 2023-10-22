@@ -91,9 +91,12 @@ class Form_application_admin extends MY_PrivateController
 
         parent::detail($record_id,true);
 
+        debug($this->record_id);
+        die();
+        
         if ($this->record_id == '')
             $this->record_id = $record_id;
-        
+
         $forms_info = $this->mod->get_forms_details($this->record_id);
         $form_info = $this->mod->get_form_info($forms_info['form_id']);
 
