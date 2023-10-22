@@ -197,14 +197,14 @@ $(document).ready(function(){
             comment = $("#comment-" + form_id).val();
         }
 
-        // var data = {
-        //     formid: form_id,
-        //     userid: user_id,
-        //     decission: decission,
-        //     formownerid: form_owner,
-        //     comment: comment,
-        //     serialize_data: serialize_data
-        // };
+        var data = {
+            formid: form_id,
+            userid: user_id,
+            decission: decission,
+            formownerid: form_owner,
+            comment: comment,
+            serialize_data: serialize_data
+        };
 
         // submitDecission(data,'detail');
 
@@ -215,7 +215,7 @@ $(document).ready(function(){
                     url: base_url + module.get('route') + '/forms_decission',
                     type: "POST",
                     async: false,
-                    data: $('form#cancel_form').serialize() + '&formid=' + form_id+ '&userid=' + user_id+ '&decission=' + decission+ '&formownerid=' + form_owner+ '&comment=' + comment,
+                    data: data,
                     dataType: "json",
                     beforeSend: function () {
 
