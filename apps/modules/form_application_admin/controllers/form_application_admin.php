@@ -538,6 +538,7 @@ class Form_application_admin extends MY_PrivateController
         if(count($forms_validation['error']) > 0 ){  
             $this->_ajax_return();  
         }else{
+            $time_forms_date_table = [];
             $total_no_of_days_filed = 0;
             $total_no_of_days_cancelled = 0;
             $forms_id = $this->input->post('formid');
@@ -557,7 +558,7 @@ class Form_application_admin extends MY_PrivateController
                     $time_from = $date." ".$shift_details['shift_time_start'];
                     $time_to = $date." ".$shift_details['shift_time_end'];
 
-                    if (isset($cancel_arr[$date]))
+                    if (isset($cancel_arr[$date]) && $duration_id == 1)
                         unset($duration_arr[$date]);
                     else {
                         $duration_details = $this->mod->get_duration($duration_id);
@@ -600,7 +601,7 @@ class Form_application_admin extends MY_PrivateController
 
                 $this->db->update( $this->mod->table, $main_record, array( $this->mod->primary_key => $forms_id) );
 
-                if (!empty($forms_date_qry)) {
+                if (!empty($forms_date_qry) && !empty($time_forms_date_table)) {
                     foreach($forms_date_qry as $key => $existing_form_details) {
                         if (!array_key_exists($existing_form_details['date'],$time_forms_date_table))
                             $this->db->delete('time_forms_date', array('id' => $existing_form_details['id'])); 
