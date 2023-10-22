@@ -300,7 +300,7 @@
 
 	                            </div>
 
-	                            @include('button/detail');
+	                            @include('button/detail')
 	                        <!-- END FORM--> 
 	                    </div>
 	            	</div>
