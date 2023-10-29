@@ -64,7 +64,7 @@
 		$total_late += $row->$late;
 		$total_ut += $row->$ut;
 		$total_ot += $row->$ot;
-		$total_reg_nd += $row->$reg_nd
+		$total_reg_nd += $row->$reg_nd;
 	endforeach; ?>
 	<tr>
 		<td>Total Number of Employee(s)</td>
