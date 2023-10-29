@@ -38,6 +38,7 @@
 	$late = "Late";
 	$ut = "Ut";
 	$ot = "Ot";
+	$reg_nd = "Reg Nd";
 
 	$total_hrs_rendered = 0;
 	$total_hrs_work = 0;
@@ -45,6 +46,7 @@
 	$total_late = 0;
 	$total_ut = 0;
 	$total_ot = 0;
+	$total_reg_nd = 0;
 
 	foreach( $result as $row ) : ?>
 		<tr><?php
@@ -61,7 +63,8 @@
 		$total_absent += $row->$absent;
 		$total_late += $row->$late;
 		$total_ut += $row->$ut;
-		$total_ot += $row->$ot;		
+		$total_ot += $row->$ot;
+		$total_reg_nd += $row->$reg_nd
 	endforeach; ?>
 	<tr>
 		<td>Total Number of Employee(s)</td>
@@ -71,6 +74,7 @@
 		<td>Total</td>
 		<td><?php echo $total_hrs_rendered ?></td>
 		<td><?php echo $total_hrs_work ?></td>
+		<td><?php echo $total_reg_nd ?></td>
 		<td><?php echo $total_absent ?></td>
 		<td><?php echo $total_late ?></td>
 		<td><?php echo $total_ut ?></td>
