@@ -62,6 +62,7 @@
                             $qry_category = $mod->get_role_category();
                             $db->where('users.deleted',0);
                             $db->where('users.active',1);
+                            $db->where('users.user_id >',1);
                             if ($qry_category != ''){
                                 $db->where($qry_category, '', false);
                             }                               

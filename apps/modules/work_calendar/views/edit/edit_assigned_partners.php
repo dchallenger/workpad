@@ -196,7 +196,11 @@
 
         if(gsd_is_processing) return;
 
-        var data = {keyword: keyword,current_date: $("#current_date").val(),current_date_shift: $('#current_date_shift').val()};
+        var data = {
+                        keyword: keyword,
+                        current_date: $("#current_date").val(),
+                        current_date_shift: $('#current_date_shift').val()
+                    };
 
         $.ajax({
             url: base_url + module.get('route') + '/get_search_data',

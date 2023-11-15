@@ -407,6 +407,7 @@ class Work_calendar extends MY_PrivateController
         }
 
         $search_keyword = $this->input->post('keyword');
+        $company_id = $this->input->post('company_id');
         $manager_id = $this->user->user_id;
 
         $user = $this->config->item('user'); 
@@ -431,7 +432,7 @@ class Work_calendar extends MY_PrivateController
 
             $data['currentday_schedules'] = $this->mod->get_work_calendar_details($date_from,$date_to,$this->session->userdata('user')->user_id);
 
-            $data['partners']= $manager_id !== '0' ? $this->mod->get_searched_partner($manager_id, $search_keyword, $role_id, $this->input->post('current_date_shift'), '', $date_from, $date_to) : array(); 
+            $data['partners']= $manager_id !== '0' ? $this->mod->get_searched_partner($manager_id, $search_keyword, $role_id, $this->input->post('current_date_shift'), '', $date_from, $date_to, $company_id) : array(); 
 
             if ($this->input->post('type') == 'shift'){
                 $view['content'] = $this->load->view('edit/search_result', $data, true);

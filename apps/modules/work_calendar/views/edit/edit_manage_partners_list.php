@@ -204,10 +204,18 @@
         var date_from = $('input[name="date[start]"]').val();
         var date_to = $('input[name="date[end]"]').val();
         var current_date = $('#current_date').val();
+        var company_id = $('#company_id').val();
 
         if(gsd_is_processing) return;
 
-        var data = {keyword:keyword, date_from:date_from, date_to:date_to, current_date_shift:shift_id_selected, current_date:current_date};
+        var data = {
+                        keyword:keyword,
+                        date_from:date_from,
+                        date_to:date_to,
+                        current_date_shift:shift_id_selected,
+                        current_date:current_date,
+                        company_id:company_id
+                    };
 
         $.ajax({
             url: base_url + module.get('route') + '/get_search_data',

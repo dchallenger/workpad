@@ -112,7 +112,7 @@ class work_calendar_model extends Record
 		return $data;		
 	}
 
-	public function get_searched_partner($manager_id, $keyword, $role_id, $shift_id = '', $date = '', $date_from = '', $date_to = ''){ 
+	public function get_searched_partner($manager_id, $keyword, $role_id, $shift_id = '', $date = '', $date_from = '', $date_to = '', $company_id = ''){ 
 
 		$data = array();
 		$admin_list = array("2", "6");
@@ -168,6 +168,11 @@ class work_calendar_model extends Record
 
 		if ($date_from != '' && $date_to != '')
 			$qry .= " AND tr.`date` BETWEEN '".$date_from."' AND '".$date_to."'";
+
+		$qry .= " AND up.active = 1";
+
+		if ($company_id != '')
+			$qry .= " AND p.company_id= '".$company_id."'";
 
 		$qry .= " GROUP BY p.user_id ORDER BY display_name ASC";  
 

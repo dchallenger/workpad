@@ -193,8 +193,7 @@ class Admin_timerecord extends MY_PrivateController
 		// Pay period filter
 		// limited to 5 paydates
 		$ppfs = $this->mod->get_period_list( $this->input->post('user_id') );
-
-
+		
 		if( in_array($type, array('by_date')) ){			
 			$dateSelected 	= $this->input->post('value');
 			$dept_id 	= $this->input->post('dept_id');
