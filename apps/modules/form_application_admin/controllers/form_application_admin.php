@@ -588,8 +588,7 @@ class Form_application_admin extends MY_PrivateController
                 $total_no_of_days_cancelled = array_sum($duration_arr);
             }
 
-
-            if ($total_no_of_days_filed != $total_no_of_days_cancelled) {
+            if ($total_no_of_days_filed != $total_no_of_days_cancelled && $total_no_of_days_cancelled > 0) {
                 $forms_date_qry = $this->mod->get_selected_dates($forms_id);
                 $main_record['day'] = $total_no_of_days_cancelled;
                 $main_record['hrs'] = 0;

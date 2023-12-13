@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-3">{{ lang('partners.benefits') }}</label>
                     <div class="col-md-5">
-                        <div contentEditable="true">{{ $benefit }}</div>
+                        <div contentEditable="false">{{ $benefit }}</div>
                     </div>
                 </div>
             </div>     

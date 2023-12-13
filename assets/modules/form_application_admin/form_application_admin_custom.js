@@ -300,7 +300,8 @@ $(document).ready(function(){
     });
 
     $('.employees_list').live('change', function() {
-        get_selected_dates($('#record_id').val(), $('#form_status_id').val(), $('#time_forms-date_from').val(), $('#time_forms-date_to').val(),$(this).val()); 
+        if ($('#form_type').val() != 11)
+            get_selected_dates($('#record_id').val(), $('#form_status_id').val(), $('#time_forms-date_from').val(), $('#time_forms-date_to').val(),$(this).val()); 
     })
 });
 

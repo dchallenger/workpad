@@ -22,12 +22,16 @@
             			foreach($options->result() as $option)
             			{
             				$users_profile_company_options[$option->company_id] = $option->company;
-            			} ?>
+            			}
+                        $company_ids_val = '';
+                        if (!empty($record['users_benefit.company_id']))
+                            $company_ids_val = explode(',', $record['users_benefit.company_id']);
+                ?>
             	<div class="input-group">
 					<span class="input-group-addon">
                     	<i class="fa fa-list-ul"></i>
                     </span>
-                {{ form_dropdown('users_benefit[company_id]',$users_profile_company_options, $record['users_benefit.company_id'], 'class="form-control select2me" data-placeholder="Select..." disabled="disabled"') }}
+                {{ form_multiselect('users_benefit[company_id][]',$users_profile_company_options, $company_ids_val, 'class="form-control select2me" data-placeholder="Select..." id="benefit-company_id" disabled') }}
                 </div>
             </div>
         </div>

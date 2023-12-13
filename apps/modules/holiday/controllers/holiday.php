@@ -137,9 +137,7 @@ class Holiday extends MY_PrivateController
 			);
 			$this->response->record_id = $this->record_id = false;
 			$this->_ajax_return();	
-		}
-
-		$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $action, $this->mod->table, $previous_main_data, $holiday_info);				
+		}		
 
 		if( empty($record_id) ){
 			$this->response->record_id = $this->record_id = $this->db->insert_id();
@@ -151,7 +149,8 @@ class Holiday extends MY_PrivateController
 		$this->mod->remove_holiday_locations($this->record_id);
 		$this->mod->add_to_holiday_location($this->record_id);
 
-
+		$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $action, $this->mod->table, $previous_main_data, $holiday_info);		
+		
 		$this->response->message[] = array(
 			'message' => 'Record/s successfully saved/updated.',
 			'type' => 'success'

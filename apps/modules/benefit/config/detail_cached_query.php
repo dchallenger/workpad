@@ -10,6 +10,7 @@ $config["detail_cached_query"] = 'SELECT
 	ww_users_benefit.description as "users_benefit_description", 
 	ww_users_benefit.benefit_type as "users_benefit_benefit_type", 
 	ww_users_benefit.status_id  as "users_benefit_status_id",
+	ww_users_benefit.company as "users_benefit.company",
 	ww_users_benefit.company_id as "users_benefit.company_id",
 	ww_users_benefit.job_grade_id as "users_benefit.job_grade_id",
 	ww_users_benefit.old_new as "users_benefit.old_new"
