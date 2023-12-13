@@ -291,6 +291,15 @@ class Form_application_manage extends MY_PrivateController
         }
         $data['selected_dates'] = $this->selected_dates($data['forms_id']);
 
+        $data['prev_approver_status_id'] = 0;
+        if (count($data['approver_list']) > 1) {
+            foreach($data['approver_list'] as $key => $val) {
+                if ($val['approver_id'] == $this->user->user_id) {
+                    $data['prev_approver_status_id'] = $data['approver_list'][$key - 1]['form_status_id'];
+                }
+            }
+        }
+
         $date_adc = '';
         switch ($data['form_status_id']['val']) {
             case 6:
