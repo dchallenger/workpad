@@ -1104,10 +1104,10 @@ class Report_generator extends MY_PrivateController
         $record_id = $post['record_id'];
         $record_id_filter = 0;
         // this fix looking for report id due to historical employee information such as education,family, etc.... (oclp)
-        if(isset($post['filter']['4800'])) {
+        if(isset($post['filter']['5251'])) {
             $record_id_filter = $post['record_id'];
 
-            switch ($post['filter']['4800']) {
+            switch ($post['filter']['5251']) {
                 case 'education':
                     $record_id = 104;
                     break;
