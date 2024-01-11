@@ -1007,6 +1007,7 @@ public function call_sp_time_calendar($date_from='', $date_to='', $user_id=0){
         	AND tf.deleted = 0 
         	AND tf.form_status_id IN (2,3,4,5,6)
         	AND '{$date_time}' between time_from and time_to
+        	AND tf.form_id != 11
        		AND tf.user_id = '{$user_id }'";
 
 		$existing_form = $this->db->query($qry);
