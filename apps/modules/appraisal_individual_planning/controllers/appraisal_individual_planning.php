@@ -1395,7 +1395,7 @@ class Appraisal_individual_planning extends MY_PrivateController
         if( $this->input->post('manager_id') )
             $this->_change_status_approver(); // no use for oclp
         else {
-            if (isset($this->config_permission['appraisal_individual_planning']['process']))
+            if (isset($this->config_permission['appraisal_individual_planning']['process']) && $this->input->post('user_id') <> 344)
                 $this->_change_status_hr_appraisal_admin();
             else
                 $this->_change_status_partner();
