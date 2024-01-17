@@ -1310,7 +1310,7 @@ class Record extends MY_Model
 		    		return true;
 		    	}
 		    	else{
-					if ($date_from >= date('Y-01-01') && $date_from <= date('Y-12-31')){
+					if ($date_from >= date('Y-12-01',strtotime('-1 year')) && $date_from <= date('Y-12-31')){
 						return true;
 					}
 					else {
