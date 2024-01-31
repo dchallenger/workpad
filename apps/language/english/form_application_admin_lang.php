@@ -147,6 +147,6 @@ $lang['form_application_admin'] = array(
 	'hr_valid' => 'Validated',
 	'valid_remarks' => 'Validation Remarks',
 	'success_save' => 'was successfully saved.',
-	'time_from' => 'Time To',
-	'time_to' => 'Time From',	
+	'time_from' => 'Time From',
+	'time_to' => 'Time To',	
 );
