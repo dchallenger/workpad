@@ -37,6 +37,7 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['planning_admin'] = 0;
         $vars['readonly'] = '';
         $vars['disabled'] = '';
+        $vars['pages_from'] = 1; //from individual_planning/review
 
         if( !in_array($appraisee->status_id,array(0,1,6)) ) {
             $vars['readonly'] = "readonly='readonly'";
@@ -1391,11 +1392,12 @@ class Appraisal_individual_planning extends MY_PrivateController
     function change_status( $return = false )
     {
         $this->_ajax_only();
-        
+
         if( $this->input->post('manager_id') )
             $this->_change_status_approver(); // no use for oclp
         else {
-            if (isset($this->config_permission['appraisal_individual_planning']['process']) && $this->input->post('user_id') <> 344)
+            if (isset($this->config_permission['appraisal_individual_planning']['process']) && 
+                ($this->input->post('review_admin' &&  !in_array($this->input->post('review_admin'),[1,2]))))
                 $this->_change_status_hr_appraisal_admin();
             else
                 $this->_change_status_partner();
@@ -1480,6 +1482,7 @@ class Appraisal_individual_planning extends MY_PrivateController
         $vars['planning_admin'] = 0;
         $vars['readonly'] = '';
         $vars['disabled'] = '';
+        $vars['pages_from'] = 2; //from individual_planning/review_admin
 
         if( !$vars['approver'] ) {
             $vars['planning_admin'] = 1;
@@ -1563,6 +1566,7 @@ class Appraisal_individual_planning extends MY_PrivateController
 
         $vars['planning_admin'] = 0;
         $vars['readonly'] = '';
+        $vars['pages_from'] = 3; //from individual_planning/edit_admin
 
         if( !$vars['approver'] ) {
             $vars['planning_admin'] = 1;

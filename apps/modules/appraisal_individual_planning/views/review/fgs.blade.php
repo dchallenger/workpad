@@ -18,6 +18,7 @@
 						<input type="hidden" name="template_id" value="{{ $appraisee->template_id }}" />
 						<input type="hidden" name="planning_id" value="{{ $appraisee->planning_id }}" />
 						<input type="hidden" name="status_id" value="{{ $appraisee->status_id }}" />
+						<input type="hidden" name="from_pages" value="{{ $pages_from }}" />
 						<tbody>
 							<tr class="success">
 								<td>
