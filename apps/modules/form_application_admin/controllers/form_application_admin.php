@@ -1615,6 +1615,7 @@ class Form_application_admin extends MY_PrivateController
         $time_forms_date_table = array();
         $breakout = false;
         $hrs = 0;
+        $days = 0;
         $duration = $this->input->post('duration');
         $leave_duration = $this->input->post('leave_duration');
         $selected_date_count = 0;
@@ -1633,7 +1634,6 @@ class Form_application_admin extends MY_PrivateController
                 }
             }else{
                 if(in_array($form_id, $with_date_range) && $form_id <> 8){
-                    $days = 0;
                     $user_id = $_POST['partners']['partner_id'][0];
                     $duration_details = $this->mod->get_duration($duration[$selected_date_count]);
                     $leave_durations = $this->mod->get_leave_duration($leave_duration[$selected_date_count]);
