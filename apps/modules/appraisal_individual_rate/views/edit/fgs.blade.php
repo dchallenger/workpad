@@ -83,7 +83,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4 bold">{{ lang('appraisal_individual_planning.tenure') }}</label>
 									<div class="col-md-8">
-										<input type="text" class="form-control" value="{{ $appraisee->immediate }}" readonly>
+										<input type="text" class="form-control" value="{{ $tenure }}" readonly>
 									</div>
 								</div>
 							</td>
