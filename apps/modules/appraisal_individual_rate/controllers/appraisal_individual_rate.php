@@ -1497,7 +1497,13 @@ class Appraisal_individual_rate extends MY_PrivateController
         // for oclp it was specific approver only, if hr appraisal admin then get first approver since it was specific
         if ($this->permission['process']) {
             $vars['list_approver'] = $approver_info = $this->mod->get_approver( $this->record_id, $user_id, $login_user_id);
-            $vars['hr_appraisal_admin'] = 1;
+            foreach ($vars['list_approver']->result_array() as $row) {
+                if ($row['approver_id'] == 344 && $login_user_id == 344 && $row['performance_status_id'] == 2){
+                    $vars['hr_appraisal_admin'] = 0;
+                    break;
+                } else
+                    $vars['hr_appraisal_admin'] = 1;
+            }
         } else
             $vars['list_approver'] = $approver_info = $this->mod->get_approver( $this->record_id, $user_id, $this->user->user_id);
 
