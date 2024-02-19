@@ -11,8 +11,16 @@
 			    CONCAT(
 			      'MAX(CASE WHEN pa.year = ''',
 			      pa.year,
+			      ''' THEN self_rating END) AS ''',
+			      CONCAT(REPLACE(pa.year, ' ', ''),'_self_rating'),'''',',',
+			      'MAX(CASE WHEN pa.year = ''',
+			      pa.year,
+			      ''' THEN coach_rating END) AS ''',
+			      CONCAT(REPLACE(pa.year, ' ', ''),'_coach_rating'),'''',',',
+			      'MAX(CASE WHEN pa.year = ''',
+			      pa.year,
 			      ''' THEN committee_rating END) AS ''',
-			      REPLACE(pa.year, ' ', ''),''''
+			      CONCAT(REPLACE(pa.year, ' ', ''),'_committee_rating'),''''
 			    )
 			  ) AS summary_qry
 			FROM `ww_performance_appraisal` pa
@@ -56,7 +64,7 @@
 			endforeach;
 			if (!empty($rate_columns)) {
 				foreach($rate_columns as $key => $value): ?>
-					<td><?php echo $value?> Results</td> <?php
+					<td><?php echo $value?></td> <?php
 				endforeach;				
 			}
 		?>

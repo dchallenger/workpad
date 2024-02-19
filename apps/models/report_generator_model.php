@@ -956,7 +956,7 @@ class report_generator_model extends Record
 		}
 
 		if (isset($appraisal_summary_header)) {
-			$letters = $this->createColumnsArray('L');
+			$letters = $this->createColumnsArray('O');
 			$index = 0;
 
 			for ($index; $index <= count($letters) - 1; $index++) {
@@ -967,9 +967,9 @@ class report_generator_model extends Record
 
 			//$content->getActiveSheet()->getStyle('J2:K'.($result->num_rows()+3))->getNumberFormat()->setFormatCode('#,##0.00');
 
-			$content->getActiveSheet()->getStyle("A1:K1")->getFont()->setBold(true);
+			$content->getActiveSheet()->getStyle("A1:O1")->getFont()->setBold(true);
 
-			$content->getActiveSheet()->getStyle("A2:K".($result->num_rows()+1))->applyFromArray($border_style);
+			$content->getActiveSheet()->getStyle("A2:O".($result->num_rows()+1))->applyFromArray($border_style);
 		}
 
 		if (isset($teval_header)) {
