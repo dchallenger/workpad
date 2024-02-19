@@ -967,9 +967,9 @@ class report_generator_model extends Record
 
 			//$content->getActiveSheet()->getStyle('J2:K'.($result->num_rows()+3))->getNumberFormat()->setFormatCode('#,##0.00');
 
-			$content->getActiveSheet()->getStyle("A1:L1")->getFont()->setBold(true);
+			$content->getActiveSheet()->getStyle("A1:K1")->getFont()->setBold(true);
 
-			$content->getActiveSheet()->getStyle("A2:L".($result->num_rows()+1))->applyFromArray($border_style);
+			$content->getActiveSheet()->getStyle("A2:K".($result->num_rows()+1))->applyFromArray($border_style);
 		}
 
 		if (isset($teval_header)) {
