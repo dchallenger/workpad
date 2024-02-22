@@ -239,7 +239,7 @@ function change_status(form, status_id)
             var valid = /^[-+]?\d+(\.\d+)?$/.test( fieldval );
 
             if( fieldval.toString() != "" && valid){
-                if( fieldval < 0.1 && weight_val > 0){
+                if( fieldval < 0.01 && weight_val > 0){
                     validation[index] = {};
                     validation[index]['type'] = "error";
                     validation[index]['message'] = 'Under "'+score_card+'" has field 0 value';
