@@ -53,7 +53,12 @@ $(document).ready(function(){
         appraisal_object.grand_total_coach_weighted_score = sum_object(appraisal_object.total_coach_weighted_score);
         appraisal_object.total_coach_weighted_score['sec'+section_id] = parseFloat(total_coach_weighted_score.toFixed(2));
         appraisal_object.grand_total_coach_weighted_score = sum_object(appraisal_object.total_coach_weighted_score);
-        $('.non_core_coach_rating_1').html((financial_metric).toFixed(2));
+
+        if ($('#self_rating_tagging').val() == 1) {
+            if ($('#appraisee_status_id').val() == 4)
+                $('.non_core_coach_rating_1').html((financial_metric).toFixed(2));
+        } else
+            $('.non_core_coach_rating_1').html((financial_metric).toFixed(2));
     }
     //for financial metrics
 

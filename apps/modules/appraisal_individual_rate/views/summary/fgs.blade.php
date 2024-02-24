@@ -13,7 +13,8 @@
 				<input type="hidden" name="template_id" value="{{ $appraisee->template_id }}" />
 				<input type="hidden" name="appraisal_id" value="{{ $appraisee->appraisal_id }}" />
 				<input type="hidden" name="planning_id" value="{{ $appraisee->planning_id }}" />	
-				<input type="hidden" name="status_id" value="{{ $appraisee->status_id }}" />
+				<input type="hidden" id="appraisee_status_id" name="status_id" value="{{ $appraisee->status_id }}" />
+				<input type="hidden" id="self_rating_tagging" name="" value="{{ $self_rating }}">
 				<table class="table table-bordered table-striped">
 					<tbody>
 						<tr class="success">
@@ -412,7 +413,13 @@
 																	<?php echo ($total_weighted_average != '' ? $total_weighted_average : '&nbsp;') ?>
 																</td>
 																<td class="coach_section_rating_{{ $val1['template_section_id'] }}">
-																	<?php echo ($coach_total_weighted_average != '' ? $coach_total_weighted_average : '&nbsp;') ?>
+																	@if ($self_rating)
+																		@if($appraisee->status_id == 4)
+																			{{ ($coach_total_weighted_average != '' ? $coach_total_weighted_average : '&nbsp;') }}
+																		@endif
+																	@else
+																		{{ ($coach_total_weighted_average != '' ? $coach_total_weighted_average : '&nbsp;') }}
+																	@endif
 																</td>
 																<td>
 																	{{ $val1['weight'] }}
@@ -421,7 +428,13 @@
 																	<?php echo ($total_weighted_score != '' ? $total_weighted_score : '&nbsp;') ?>
 																</td>
 																<td class="coach_total_weighted_{{$val1['template_section_id']}}">
-																	<?php echo ($coach_total_weighted_score != '' ? $coach_total_weighted_score : '&nbsp;') ?>
+																	@if ($self_rating)
+																		@if($appraisee->status_id == 4)
+																			{{ ($coach_total_weighted_score != '' ? $coach_total_weighted_score : '&nbsp;') }}
+																		@endif
+																	@else
+																		{{ ($coach_total_weighted_score != '' ? $coach_total_weighted_score : '&nbsp;') }}
+																	@endif
 																</td>
 															</tr>													
 															@if(isset($balance_score_card) && $balance_score_card->num_rows() > 0)
@@ -444,7 +457,15 @@
 																		</td>
 																		<td class="key_weight_total_{{$val['scorecard_id']}}"></td>
 																		<td class="non_core_self_rating_{{$val['scorecard_id']}}">{{ $none_core_score_car_library_self_rating }}</td>
-																		<td class="non_core_coach_rating_{{$val['scorecard_id']}}">{{ $none_core_score_car_library_coach_rating }}</td>
+																		<td class="non_core_coach_rating_{{$val['scorecard_id']}}">
+																			@if ($self_rating)
+																				@if($appraisee->status_id == 4)
+																					{{ ($none_core_score_car_library_coach_rating != '' ? $none_core_score_car_library_coach_rating : '&nbsp;') }}
+																				@endif
+																			@else
+																				{{ ($none_core_score_car_library_coach_rating != '' ? $none_core_score_car_library_coach_rating : '&nbsp;') }}
+																			@endif
+																		</td>
 																		<td></td>
 																		<td></td>
 																		<td></td>
@@ -462,7 +483,13 @@
 																	<?php echo ($total_weighted_average != '' ? $total_weighted_average : '&nbsp;') ?>
 																</td>
 																<td class="coach_section_rating_{{ $val1['template_section_id'] }}">
-																	<?php echo ($coach_total_weighted_average != '' ? $coach_total_weighted_average : '&nbsp;') ?>
+																	@if ($self_rating)
+																		@if($appraisee->status_id == 4)
+																			{{ ($coach_total_weighted_average != '' ? $coach_total_weighted_average : '&nbsp;') }}
+																		@endif
+																	@else
+																		{{ ($coach_total_weighted_average != '' ? $coach_total_weighted_average : '&nbsp;') }}
+																	@endif
 																</td>																
 																<td>
 																	{{ $val1['weight'] }}
@@ -471,7 +498,13 @@
 																	<?php echo ($total_weighted_score != '' ? $total_weighted_score : '&nbsp;') ?>
 																</td>
 																<td class="coach_total_weighted_{{$val1['template_section_id']}}">
-																	<?php echo ($coach_total_weighted_score != '' ? $coach_total_weighted_score : '&nbsp;') ?>
+																	@if ($self_rating)
+																		@if($appraisee->status_id == 4)
+																			{{ ($coach_total_weighted_score != '' ? $coach_total_weighted_score : '&nbsp;') }}
+																		@endif
+																	@else
+																		{{ ($coach_total_weighted_score != '' ? $coach_total_weighted_score : '&nbsp;') }}
+																	@endif
 																</td>
 															</tr>
 															@if(isset($library_competencies) && !empty($library_competencies))
