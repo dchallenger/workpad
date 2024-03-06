@@ -1948,19 +1948,23 @@ class Form_application extends MY_PrivateController
 
                 if($this->input->post('form_status_id') != 8){
                     if($this->input->post('ut_type') == 1){ 
+                        $date_time_to = date('Y-m-d', strtotime(str_replace(" - "," ",$this->input->post('ut_time_in_out')))) . ' 00:00:00';
                         $time_forms_date_table[] = array(
                             'forms_id' => $forms_id,
                             'date' => $this->input->post('focus_date'),
                             'day' => 1,
                             'duration_id' => 1,
-                            'time_from' => $date_time
+                            'time_from' => $date_time,
+                            'time_to' => $date_time_to
                             );
                     }else{
+                        $date_time_from = date('Y-m-d', strtotime(str_replace(" - "," ",$this->input->post('ut_time_in_out')))) . ' 00:00:00';
                         $time_forms_date_table[] = array(
                             'forms_id' => $forms_id,
                             'date' => $this->input->post('focus_date'),
                             'day' => 1,
                             'duration_id' => 2,
+                            'time_from' => $date_time_from,
                             'time_to' => $date_time
                             );
                     }
