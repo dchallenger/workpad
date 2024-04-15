@@ -1046,7 +1046,7 @@ class Appraisal_individual_rate extends MY_PrivateController
                     'status' => 'info',
                     'message_type' => 'Comment',
                     'user_id' => $this->user->user_id,
-                    'feed_content' => 'Your performance appraisal have been inputted committee rate.',
+                    'feed_content' => 'Your committee score is now available for viewing.',
                     'uri' => $this->mod->route . '/review/'.$this->input->post('appraisal_id').'/'.$this->input->post('user_id'),
                     'recipient_id' => $this->input->post('user_id')
                 );
