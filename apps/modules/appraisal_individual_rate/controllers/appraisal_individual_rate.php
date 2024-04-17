@@ -1129,6 +1129,17 @@ class Appraisal_individual_rate extends MY_PrivateController
 
                 $this->response->redirect = get_mod_route('performance_appraisal');
                 break;
+            case 14:
+                $where = array(
+                    'appraisal_id' => $this->input->post('appraisal_id'),
+                    'user_id' => $this->input->post('user_id'),
+                );
+                
+                $this->db->update('performance_appraisal_applicable', $update, $where);
+
+                $this->response->redirect = get_mod_route('performance_appraisal');                
+
+                break;
             case 88:
                 $where = array(
                     'appraisal_id' => $this->input->post('appraisal_id'),
