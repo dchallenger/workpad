@@ -146,7 +146,7 @@ $lang['form_application'] = array(
 	'selected_dates' => 'Selected Dates',
 	'approver_remarks' => 'Approver Remarks',
 	'hr_approver_remarks' => 'HR Approver Remarks (In behalf of approver/s)',
-	'time_from' => 'Time To',
-	'time_to' => 'Time From',
+	'time_from' => 'Time From',
+	'time_to' => 'Time To',
 	'return_work' => 'Return to work',
 );

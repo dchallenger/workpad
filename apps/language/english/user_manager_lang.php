@@ -44,6 +44,8 @@ $lang['user_manager'] = array(
 	'degree' => 'Degree',
 	'p_degree' => 'Manage and list degree.',
 	'benefit_type' => 'Employee Benefit',
-	'p_benefit_type' => 'Manage and list Employee Benefit.',
+	'p_benefit_type' => 'Manage and list employee benefit.',
+	'compensation' => 'Çompensation',
+	'p_compensation' => 'Manage and list compensation'
 
 );

@@ -213,5 +213,9 @@ $lang['partners'] = array(
     'blood_type' => 'Blood Type',
     'benefit_package' => 'Benefit Package',
     'benefits' => 'Benefits',
-    'benefit_type' => 'Benefit Type'
+    'benefit_type' => 'Benefit Type',
+    'compensation' => 'Compensation',
+    'compensation_guaranteed_months' => 'Guranteed Months',
+    'compensation_guaranteed_annual' => 'Guranteed Annual',
+    'compensation_amount' => 'Amount'
 );

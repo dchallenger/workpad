@@ -140,6 +140,6 @@ $lang['form_application_manage'] = array(
 	'selected_dates' => 'Selected Dates',
 	'pay_dates' => 'Pay Dates',
 	'seemore' => 'see more',
-	'time_from' => 'Time To',
-	'time_to' => 'Time From',	
+	'time_from' => 'Time From',
+	'time_to' => 'Time To',	
 );
