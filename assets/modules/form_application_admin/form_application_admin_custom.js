@@ -506,11 +506,12 @@ function back_to_mainform(cancel){
     }
 
 function get_selected_dates(forms_id, form_status_id, date_from, date_to, user_ids = []){
+        var form_id = $('#form_type').val(); 
         $.ajax({
             url: base_url + module.get('route') + '/get_selected_dates',
             type:"POST",
             async: false,
-            data: 'forms_id='+forms_id+'&form_status_id='+form_status_id+'&date_from='+date_from+'&date_to='+date_to+'&view='+$('#view').val()+'&user_ids='+user_ids,
+            data: 'form_id='+form_id+'&forms_id='+forms_id+'&form_status_id='+form_status_id+'&date_from='+date_from+'&date_to='+date_to+'&view='+$('#view').val()+'&user_ids='+user_ids,
             dataType: "json",
             success: function ( response ) {
                 $('#change_options').html(response.selected_dates);

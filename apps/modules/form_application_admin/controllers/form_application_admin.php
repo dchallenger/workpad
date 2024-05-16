@@ -427,6 +427,7 @@ class Form_application_admin extends MY_PrivateController
         $dates = array();
         $selected_dates_count = 0;
         $date_label = array();
+        $form_id = $this->input->post('form_id');
 
         if( $date_from != "" || $date_to != "" ){
 
@@ -443,7 +444,7 @@ class Form_application_admin extends MY_PrivateController
                 $form_holiday = $this->mod->check_if_holiday($dt->format('Y-m-d'));
                 $forms_rest_day_count = $this->mod->check_rest_day($user_id, $dt->format('Y-m-d'));
 
-                if(count($form_holiday) > 0 || $forms_rest_day_count > 0){           
+                if((count($form_holiday) > 0 && $form_id <> 5) || $forms_rest_day_count > 0){           
                     $days--;
                 }else{
                     $duration_id = 1;
@@ -1625,7 +1626,8 @@ class Form_application_admin extends MY_PrivateController
             $form_holiday = $this->mod->check_if_holiday($dt->format('Y-m-d'), $this->user->user_id);
 
             if(count($form_holiday) > 0 ){
-                if($this->input->post('form_code') != 'OT'){
+                //if($this->input->post('form_code') != 'OT'){
+                if(!in_array($this->input->post('form_code'),array('OT','ML'))){
                     $this->response->message[] = array(
                         'message' => 'You are not allowed to file the selected form on holiday',
                         'type' => 'warning'
@@ -1634,51 +1636,53 @@ class Form_application_admin extends MY_PrivateController
                 }
             }else{
                 if(in_array($form_id, $with_date_range) && $form_id <> 8){
-                    $user_id = $_POST['partners']['partner_id'][0];
-                    $duration_details = $this->mod->get_duration($duration[$selected_date_count]);
-                    $leave_durations = $this->mod->get_leave_duration($leave_duration[$selected_date_count]);
-                    $shift_details = $this->mod->get_shift_details($dt->format('Y-m-d'), $user_id);
-                    $time_from = $dt->format('Y-m-d')." ".$shift_details['shift_time_start'];
-                    $time_to = $dt->format('Y-m-d')." ".$shift_details['shift_time_end'];
-                    $credit = (int)$duration_details[0]['credit'];
-
-                    // first half
-                    if ($duration[$selected_date_count] == 2) {
+                    if (isset($duration[$dt->format('Y-m-d')])) {
+                        $user_id = $_POST['partners']['partner_id'][0];
+                        $duration_details = $this->mod->get_duration($duration[$dt->format('Y-m-d')]);
+                        //$leave_durations = $this->mod->get_leave_duration($leave_duration[$dt->format('Y-m-d')]);
+                        $shift_details = $this->mod->get_shift_details($dt->format('Y-m-d'), $user_id);
                         $time_from = $dt->format('Y-m-d')." ".$shift_details['shift_time_start'];
-                        $time_to = date('Y-m-d H:i:s', strtotime($dt->format('Y-m-d')." ".$shift_details['shift_time_start']. " + {$credit} hours"));
-                    } elseif ($duration[$selected_date_count] == 3) { // second half
-                        $time_from = date('Y-m-d H:i:s', strtotime($dt->format('Y-m-d')." ".$shift_details['shift_time_end']. " - {$credit} hours"));
                         $time_to = $dt->format('Y-m-d')." ".$shift_details['shift_time_end'];
-                    }
+                        $credit = (int)$duration_details[0]['credit'];
 
-                    if($this->input->post('form_status_id') != 8){
-                        $time_forms_date_table[] = array(
-                            'forms_id' => $forms_id,
-                            'date' => $dt->format('Y-m-d'),
-                            'day' => $duration_details[0]['credit'] * 0.125,//$leave_durations[0]['leave_duration'] - for abraham //$duration[$selected_date_count] == 1 ? 1 : 0.5 - default if 8 and 4 hours only,
-                            'duration_id' => $duration[$selected_date_count],
-                            'credit' => $duration_details[0]['credit'], //$leave_durations[0]['leave_duration'] for abraham,//$duration_details[0]['credit']
-                            'hrs' => $duration_details[0]['credit'],
-                            'time_from' => $time_from,
-                            'time_to' => $time_to
-                        );
-                    }else{
-                        $time_forms_date_table[] = array(
-                            'forms_id' => $forms_id,
-                            'date' => $dt->format('Y-m-d'),
-                            'day' => $duration_details[0]['credit'] * 0.125,//$duration[$selected_date_count] == 1 ? 1 : 0.5,
-                            'duration_id' => $duration[$selected_date_count],
-                            'credit' => $duration_details[0]['credit'],//$duration_details[0]['credit'],
-                            'cancelled_comment' => $this->input->post('cancelled_comment'),
-                            'hrs' => $duration_details[0]['credit'],
-                            'time_from' => $time_from,
-                            'time_to' => $time_to
-                        );
-                    }                    
-                    $hrs = $duration_details[0]['credit']; 
-                    $days += $duration_details[0]['credit'] * 0.125;
-                    //$days += $leave_durations[0]['leave_duration'] * 0.125; 
-                    $selected_date_count++;               
+                        // first half
+                        if ($duration[$dt->format('Y-m-d')] == 2) {
+                            $time_from = $dt->format('Y-m-d')." ".$shift_details['shift_time_start'];
+                            $time_to = date('Y-m-d H:i:s', strtotime($dt->format('Y-m-d')." ".$shift_details['shift_time_start']. " + {$credit} hours"));
+                        } elseif ($duration[$dt->format('Y-m-d')] == 3) { // second half
+                            $time_from = date('Y-m-d H:i:s', strtotime($dt->format('Y-m-d')." ".$shift_details['shift_time_end']. " - {$credit} hours"));
+                            $time_to = $dt->format('Y-m-d')." ".$shift_details['shift_time_end'];
+                        }
+
+                        if($this->input->post('form_status_id') != 8){
+                            $time_forms_date_table[] = array(
+                                'forms_id' => $forms_id,
+                                'date' => $dt->format('Y-m-d'),
+                                'day' => $duration_details[0]['credit'] * 0.125,//$leave_durations[0]['leave_duration'] - for abraham //$duration[$selected_date_count] == 1 ? 1 : 0.5 - default if 8 and 4 hours only,
+                                'duration_id' => $duration[$dt->format('Y-m-d')],
+                                'credit' => $duration_details[0]['credit'], //$leave_durations[0]['leave_duration'] for abraham,//$duration_details[0]['credit']
+                                'hrs' => $duration_details[0]['credit'],
+                                'time_from' => $time_from,
+                                'time_to' => $time_to
+                            );
+                        }else{
+                            $time_forms_date_table[] = array(
+                                'forms_id' => $forms_id,
+                                'date' => $dt->format('Y-m-d'),
+                                'day' => $duration_details[0]['credit'] * 0.125,//$duration[$selected_date_count] == 1 ? 1 : 0.5,
+                                'duration_id' => $duration[$dt->format('Y-m-d')],
+                                'credit' => $duration_details[0]['credit'],//$duration_details[0]['credit'],
+                                'cancelled_comment' => $this->input->post('cancelled_comment'),
+                                'hrs' => $duration_details[0]['credit'],
+                                'time_from' => $time_from,
+                                'time_to' => $time_to
+                            );
+                        }                    
+                        $hrs = $duration_details[0]['credit']; 
+                        $days += $duration_details[0]['credit'] * 0.125;
+                        //$days += $leave_durations[0]['leave_duration'] * 0.125; 
+                        $selected_date_count++;
+                    }            
                 }
                 else{
                     switch($form_id){

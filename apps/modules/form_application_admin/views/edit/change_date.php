@@ -7,7 +7,7 @@
         <label class="control-label col-md-5"> <?php echo $index; ?> <span class="small text-muted"> - <?php echo key($value); ?> </span></label>
         <div class="col-md-3">
 
-            <select class="duration form-control select2me" data-placeholder="Select..." name="duration[]" id="duration[]" class="duration">
+            <select class="duration form-control select2me" data-placeholder="Select..." name="duration[<?php echo date('Y-m-d',strtotime($index)) ?>]" id="duration[]" class="duration">
                 <?php foreach($duration as $val) {
                     $selected_duration = ($value[key($value)] == $val['duration_id']) ? "selected" : "";
                     ?>
