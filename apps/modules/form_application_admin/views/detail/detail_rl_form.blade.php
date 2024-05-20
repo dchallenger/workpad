@@ -252,7 +252,7 @@
 
 									<?php if($form_id === 21) {
 	                            		
-	                            		if( $form_approver_details['approver_status_id'] < 8 && in_array($approver_details['form_status_id'], array(2,4,5,6)) && $form_approver_details['within_cutoff']){ ?>
+	                            		if( $form_approver_details['approver_status_id'] < 8 && in_array($approver_details['form_status_id'], array(2,3,4,5,6)) && $form_approver_details['within_cutoff']){ ?>
 										
 										<div class="row">
 											<div class="col-md-12">
