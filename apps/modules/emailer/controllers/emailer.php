@@ -45,6 +45,7 @@ class Emailer extends MY_PublicController
 			foreach( $mails->result() as $mail ) 
 			{
 				$this->email->set_newline("\r\n");
+				$this->email->set_crlf( "\r\n" );
 				$this->email->from($mail_config['from_address'], $mail_config['from_name']);
 
 				if( trim($mail->to) == '' )
