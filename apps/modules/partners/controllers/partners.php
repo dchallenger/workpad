@@ -956,7 +956,18 @@ class Partners extends MY_PrivateController
 			} else
 				$medicals_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
 		}
-		$data['medical_tab'] = $medicals_tab;		
+		$data['medical_tab'] = $medicals_tab;	
+		//compensation
+		$compensation_tab = array();
+		$compensations_tab = array();
+		$compensation_tab = $this->profile_mod->get_partners_personal_history($user_id, 'compensation');
+		foreach($compensation_tab as $emp){
+			if ($emp['key'] == 'compensation-category')
+				$compensations_tab[$emp['sequence']][$emp['key']] = $this->profile_mod->get_compensation_category($emp['key_value']);
+			else
+				$compensations_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+		}
+		$data['compensation_tab'] = $compensations_tab;	
 		//Affiliation
 		$affiliation_tab = array();
 		$affiliations_tab = array();
@@ -1162,7 +1173,7 @@ class Partners extends MY_PrivateController
 			// $data['record']['users_profile.photo'] = file_exists($data['record']['users_profile.photo'] ) ? $data['record']['users_profile.photo'] :"assets/img/avatar.png";
 			
 			$middle_initial = empty($result['users_profile.middlename']) ? " " : " ".ucfirst(substr($result['users_profile.middlename'],0,1)).". ";
-			$data['profile_name'] = $result['users_profile.firstname'].$middle_initial.$result['users_profile.lastname'];
+			$data['profile_name'] = $result['users_profile.firstname'].$middle_initial.$result['users_profile.lastname'].'&nbsp;'.$result['users_profile.suffix'];
 			$birthday = new DateTime($result['users_profile.birth_date']);
 			$data['profile_age'] = $birthday->diff(new DateTime)->y;
 
@@ -1428,7 +1439,15 @@ class Partners extends MY_PrivateController
 			foreach($medical_tab as $emp){
 				$medicals_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
 			}
-			$data['medical_tab'] = $medicals_tab;		
+			$data['medical_tab'] = $medicals_tab;	
+		//compensation
+			$compensation_tab = array();
+			$compensations_tab = array();
+			$compensation_tab = $this->profile_mod->get_partners_personal_history($user_id, 'compensation');
+			foreach($compensation_tab as $emp){
+				$compensations_tab[$emp['sequence']][$emp['key']] = $emp['key_value'];
+			}
+			$data['compensation_tab'] = $compensations_tab;
 		//Cost Center
 			$cost_center_tab = array();
 			$cost_centers_tab = array();
@@ -2543,7 +2562,37 @@ class Partners extends MY_PrivateController
 				$partners_personal_table = "partners_personal_history";
 				$partners_personal_key = array('medical-exam-type', 'medical-date-exam', 'medical-clinic-hospital', 'medical-pre-existing', 'medical-findings', 'medical-status', 'medical-cost');
 				$partners_personal = (isset($post['partners_personal_history']) ? $post['partners_personal_history'] : array());
-			break;			
+			break;
+			//compensation records
+			case 19:
+				$validation_rules[] = 
+				array(
+					'field' => 'partners_personal_history[compensation-end-date]',
+					'label' => 'End Date',
+					'rules' => 'required'
+					);
+				$validation_rules[] = 
+				array(
+					'field' => 'partners_personal_history[compensation-start-date]',
+					'label' => 'Start Date',
+					'rules' => 'required'
+					);
+				$validation_rules[] = 
+				array(
+					'field' => 'partners_personal_history[compensation-amount]',
+					'label' => 'Amount',
+					'rules' => 'required'
+					);
+				$validation_rules[] = 
+				array(
+					'field' => 'partners_personal_history[compensation-category]',
+					'label' => 'Compensation Category',
+					'rules' => 'required'
+					);
+				$partners_personal_table = "partners_personal_history";
+				$partners_personal_key = array('compensation-category', 'compensation-start-date', 'compensation-end-date', 'compensation-guaranteed-months', 'compensation-guaranteed-annual', 'compensation-amount');
+				$partners_personal = (isset($post['partners_personal_history']) ? $post['partners_personal_history'] : array());
+			break;		
 		}
 
 		$partner_details = false;
@@ -3112,7 +3161,7 @@ class Partners extends MY_PrivateController
 			// $data['record']['users_profile.photo'] = file_exists($data['record']['users_profile.photo'] ) ? $data['record']['users_profile.photo'] :"assets/img/avatar.png";
 			
 			$middle_initial = empty($result['users_profile.middlename']) ? " " : " ".ucfirst(substr($result['users_profile.middlename'],0,1)).". ";
-			$data['profile_name'] = $result['users_profile.firstname'].$middle_initial.$result['users_profile.lastname'];
+			$data['profile_name'] = $result['users_profile.firstname'].$middle_initial.$result['users_profile.lastname'].'&nbsp;'.$result['users_profile.suffix'];
 			$birthday = new DateTime($result['users_profile.birth_date']);
 			$data['profile_age'] = $birthday->diff(new DateTime)->y;
 
