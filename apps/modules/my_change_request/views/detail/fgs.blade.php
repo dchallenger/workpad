@@ -1,3 +1,7 @@
+<?php
+	$CI =& get_instance();
+	$CI->load->model('change_request_model');
+?>
 <div id="personal_request" class="portlet">
 	<div class="portlet-title">
 		<div class="caption">{{ lang('my_change_request.change_request') }} <small class="text-muted">{{ lang('common.view') }}</small></div>
@@ -158,6 +162,16 @@
 		                                                    }
 		                                                }
 		                                            ?>
+		                                        @elseif ($request['key_id'] == 3)
+		                                        	<?php
+		                                        		$cities = $CI->change_request_model->get_city($request['key_value']);
+		                                        		echo $cities
+		                                        	?>
+		                                        @elseif ($request['key_id'] == 4)
+		                                        	<?php
+		                                        		$cities = $CI->change_request_model->get_country($request['key_value']);
+		                                        		echo $cities
+		                                        	?>
 												@else						
 													{{ $request['key_value'] }}
 												@endif
