@@ -375,9 +375,9 @@
 										                    if ($options && $options->num_rows() > 0){
 										                        foreach($options->result() as $option)
 										                        {
-										                            $accountabilities_id_options[$option->name] = $option->name;
+										                            $accountabilities_id_options[$option->item_name] = $option->item_name;
 										                        } 
-									                        }					
+									                        }				
 													?>					
 													<td class="active"><span class="bold">Accountabilities </span></td>
 													<td>
