@@ -58,6 +58,7 @@ class erequest_model extends Record
 		
 		$qry .= ' '. $filter;
 		$qry .= " GROUP BY {$this->db->dbprefix}{$this->table}.{$this->primary_key} ";
+		$qry .= " ORDER BY {$this->db->dbprefix}{$this->table}.created_on DESC";
 		$qry .= " LIMIT $limit OFFSET $start";
 
 		$this->load->library('parser');

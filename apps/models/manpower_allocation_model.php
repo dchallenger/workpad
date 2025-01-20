@@ -66,6 +66,7 @@ class manpower_allocation_model extends Record
 				$data[] = $row;
 			}
 		}
+
 		return $data;
 	}
 
@@ -129,6 +130,8 @@ class manpower_allocation_model extends Record
 				}
 			}
 		}
+
+		$column['total'] = 'Total';
 
 		return $column;
 	}

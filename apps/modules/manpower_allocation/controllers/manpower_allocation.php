@@ -110,11 +110,17 @@ class Manpower_allocation extends MY_PrivateController
 
 		foreach( $records as $record )
 		{
+			$total = 0;
 			$this->response->list .= '<tr class="record">';
 			$this->response->list .= '<td class="hidden-xs">'.$record['full_name'].'</td>';
 			foreach($column as $key => $val) {
-				$this->response->list .= '<td class="hidden-xs">'.$record[$key].'</td>';
+				if ($key != 'total' && $record[$key] != '')
+					$total += $record[$key];
+
+				if ($key != 'total')
+					$this->response->list .= '<td class="hidden-xs">'.$record[$key].'</td>';
 			}
+			$this->response->list .= '<td class="hidden-xs">'.$total.'</td>';
 			$this->response->list .= '</tr>';
 		}
 	}
