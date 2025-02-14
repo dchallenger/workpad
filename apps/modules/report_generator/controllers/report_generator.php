@@ -537,6 +537,7 @@ class Report_generator extends MY_PrivateController
                 $data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);
                 break;
             case 'APPRAISAL_SUMMARY':
+            case 'MANPOWER_ALLOCATION':
                 $button = array('xls' => 0, 'csv' => 1, 'pdf' => 1, 'txt' => 1);
                 $data['content'] = $this->load->blade('pages.param_form')->with( $this->load->get_cached_vars() )->with('button', $button);
                 break;                                 
