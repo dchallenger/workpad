@@ -691,6 +691,7 @@ class report_generator_model extends Record
         		$excel = $this->load->view("templates/ot_transaction_details", array('result' => $result,'filter' => $filter), true);
                 break;
             case 'EMPLOYEE_APPROVERS':
+            case 'MANPOWER_ALLOCATION':
 				$auto_size = 1;
 				$w_border = 1;
 				$excel = $this->load->view("templates/excel", array('result' => $result), true);
