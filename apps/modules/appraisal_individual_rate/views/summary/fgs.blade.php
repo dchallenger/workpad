@@ -1,3 +1,8 @@
+<?php
+	$to_show = 1;
+	if ($self_rating && $appraisee->status_id <> 4) 
+		$to_show = 0;
+?>
 <div class="portlet">
 	<div class="portlet-title">
 		<div class="caption bold">PERFORMANCE APPRAISAL FORM</div>
@@ -301,63 +306,67 @@
 											<tr>
 												<td>
 													<span><b>What are the employees strengths?</b></span>
-													@if($appraisee->status_id == 2 && !$hr_appraisal_admin)
+													@if($appraisee->status_id == 2 && !$hr_appraisal_admin && !$self_rating)
 														<span><a href="javascript:void(0)" class="btn-success" style="padding:1px 4px"><i class="fa fa-plus add_strength"></i></a></span>
 													@endif
 												</td>
 												<td>&nbsp;</td>
 											</tr>
-											@foreach($strength_improvement->result() as $row)
-												@if ($row->comment_type == 1)
-													<tr>
-														<td>
-															<input class="form-control" name="strength[]" value="{{ $row->comment }}" @if($appraisee->status_id != 2 || $hr_appraisal_admin) readonly @endif>
-														</td>
-														<td>
-															@if($appraisee->status_id == 2 && !$hr_appraisal_admin)
-																<div class="btn-group">
-													                <a href="javascript:void(0)" class="btn-danger btn-sm delete_row_strength" style="padding:1px 4px">
-													                  	<i class="fa fa-trash-o"></i>
-													                </a>
-													            </div>
-												            @else
-												            	&nbsp;
-												            @endif													            
-														</td>
-													</tr>
-												@endif
-											@endforeach
+											@if ($to_show)
+												@foreach($strength_improvement->result() as $row)
+													@if ($row->comment_type == 1)
+														<tr>
+															<td>
+																<input class="form-control" name="strength[]" value="{{ $row->comment }}" @if($appraisee->status_id != 2 || $hr_appraisal_admin) readonly @endif>
+															</td>
+															<td>
+																@if($appraisee->status_id == 2 && !$hr_appraisal_admin && !$self_rating)
+																	<div class="btn-group">
+														                <a href="javascript:void(0)" class="btn-danger btn-sm delete_row_strength" style="padding:1px 4px">
+														                  	<i class="fa fa-trash-o"></i>
+														                </a>
+														            </div>
+													            @else
+													            	&nbsp;
+													            @endif													            
+															</td>
+														</tr>
+													@endif
+												@endforeach
+											@endif
 										</tbody>
 										<tbody class="improvement_container">
 											<tr>
 												<td>
 													<span><b>What areas of performance needs enhancement or improvement?</b></span>
-													@if($appraisee->status_id == 2 && !$hr_appraisal_admin)
+													@if($appraisee->status_id == 2 && !$hr_appraisal_admin && !$self_rating)
 														<span><a href="javascript:void(0)" class="btn-success" style="padding:1px 4px"><i class="fa fa-plus add_improvement"></i></a></span>
 													@endif
 												</td>
 												<td>&nbsp;</td>
 											</tr>
-											@foreach($strength_improvement->result() as $row)
-												@if ($row->comment_type == 2)
-													<tr>
-														<td>
-															<input class="form-control" name="improvement[]" value="{{ $row->comment }}" @if($appraisee->status_id != 2 || $hr_appraisal_admin) readonly @endif>
-														</td>
-														<td>
-															@if($appraisee->status_id == 2 && !$hr_appraisal_admin)
-																<div class="btn-group">
-													                <a href="javascript:void(0)" class="btn-danger btn-sm delete_row_strength" style="padding:1px 4px">
-													                  	<i class="fa fa-trash-o"></i>
-													                </a>
-													            </div>
-												            @else
-												            	&nbsp;
-												            @endif
-														</td>
-													</tr>
-												@endif
-											@endforeach											
+											@if ($to_show)
+												@foreach($strength_improvement->result() as $row)
+													@if ($row->comment_type == 2)
+														<tr>
+															<td>
+																<input class="form-control" name="improvement[]" value="{{ $row->comment }}" @if($appraisee->status_id != 2 || $hr_appraisal_admin) readonly @endif>
+															</td>
+															<td>
+																@if($appraisee->status_id == 2 && !$hr_appraisal_admin && !$self_rating)
+																	<div class="btn-group">
+														                <a href="javascript:void(0)" class="btn-danger btn-sm delete_row_strength" style="padding:1px 4px">
+														                  	<i class="fa fa-trash-o"></i>
+														                </a>
+														            </div>
+													            @else
+													            	&nbsp;
+													            @endif
+															</td>
+														</tr>
+													@endif
+												@endforeach		
+											@endif									
 										</tbody>										
 									</table>
 								</div>
@@ -615,7 +624,9 @@
 										@if($appraisee->performance_status_id == 2 && $current_user_id == $applog['approver_id'])
 											<textarea class="form-control" name="approver_remarks">{{ $applog['approver_remarks'] }}</textarea>
 										@else
-											{{ $applog['approver_remarks'] }}
+											@if ($to_show)
+												{{ $applog['approver_remarks'] }}
+											@endif
 										@endif
 									</td>
 									<td>
