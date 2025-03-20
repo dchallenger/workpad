@@ -12,7 +12,7 @@
  *
  */
 
-class Uploader_portal extends MX_Controller
+class Uploader_portal_new extends MX_Controller
 {
 
 	// ------------------------------------------------------------------------
