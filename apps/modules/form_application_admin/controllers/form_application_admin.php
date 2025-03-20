@@ -1600,6 +1600,11 @@ class Form_application_admin extends MY_PrivateController
         if ($date_to == '' || $date_to == '1970-01-01'){
             $date_to = $date_from;
         }
+
+        if ($date_from == '' || $date_from == '1970-01-01'){
+            $date_from = $date_to;
+        }
+                
         //START get days count
         $start = new DateTime($date_from);
         $end = new DateTime($date_to);      
