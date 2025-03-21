@@ -45,6 +45,9 @@ class Uploader_portal_new extends MX_Controller
 		    die('Something went wrong while connecting to MSSQL');
 		}
 
+		debug($link);
+
+		die();
 
 		// create log
 		$folder = 'logs/biometric_logs_portal';
