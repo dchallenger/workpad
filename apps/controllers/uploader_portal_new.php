@@ -37,6 +37,15 @@ class Uploader_portal_new extends MX_Controller
 		$this->load->helper('file');
 		$this->load->helper('time_upload');
 
+
+		$server = '10.0.0.92';
+		$link = mssql_connect($server, 'user', 'pass');
+
+		if (!$link) {
+		    die('Something went wrong while connecting to MSSQL');
+		}
+
+
 		// create log
 		$folder = 'logs/biometric_logs_portal';
 		$log_file = $folder.'/'.date('Y-m-d').'.txt';
