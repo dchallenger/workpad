@@ -46,7 +46,15 @@ class Uploader_portal_new extends MX_Controller
 		}
 
 		debug($link);
+		debug("test");
 
+        $this->load->database('ms_sql_portal_new', TRUE);
+        if ($this->db->conn_id) {
+            echo "Connected successfully to MS SQL Server!";
+        } else {
+            echo "Failed to connect to database.";
+        }
+        
 		die();
 
 		// create log
