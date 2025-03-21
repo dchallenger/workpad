@@ -37,24 +37,13 @@ class Uploader_portal_new extends MX_Controller
 		$this->load->helper('file');
 		$this->load->helper('time_upload');
 
-
-		$server = '10.0.0.92';
-		$link = mssql_connect($server, 'user', 'pass');
-
-		if (!$link) {
-		    die('Something went wrong while connecting to MSSQL');
-		}
-
-		debug($link);
-		debug("test");
-
         $this->load->database('ms_sql_portal_new', TRUE);
         if ($this->db->conn_id) {
             echo "Connected successfully to MS SQL Server!";
         } else {
             echo "Failed to connect to database.";
         }
-        
+
 		die();
 
 		// create log
