@@ -48,12 +48,7 @@ class Uploader_portal_new extends MX_Controller
 		$log_msg = date('Ymd H:i:s')." START UPLOADING \r\n";
 		write_file($log_file, $log_msg, 'a');
 
-		debug("test");
-
 		$db2 = $this->load->database('ms_sql_portal_new', TRUE);
-
-		debug($db2->error());
-		die();
 
 		$qry = $db2->query('SELECT * FROM VW_OTP_Attendances a WHERE CONVERT(VARCHAR,Date_Stamp,112) BETWEEN CONVERT(VARCHAR,GETDATE()-7,112) AND CONVERT(VARCHAR,GETDATE()+1,112)');
 
