@@ -48,9 +48,9 @@ class Uploader_portal extends MX_Controller
 		$log_msg = date('Ymd H:i:s')." START UPLOADING \r\n";
 		write_file($log_file, $log_msg, 'a');
 
-		$db2 = $this->load->database('ms_sql_portal', TRUE);
+		$db2 = $this->load->database('ms_sql_portal_new', TRUE);
 
-		$qry = $db2->query('SELECT * FROM VW_OTP_Attendances a WHERE CONVERT(VARCHAR,Date_Stamp,112) BETWEEN CONVERT(VARCHAR,GETDATE()-5,112) AND CONVERT(VARCHAR,GETDATE()+1,112)');
+		$qry = $db2->query('SELECT * FROM VW_OTP_Attendances a WHERE CONVERT(VARCHAR,Date_Stamp,112) BETWEEN CONVERT(VARCHAR,GETDATE()-7,112) AND CONVERT(VARCHAR,GETDATE()+1,112)');
 
 		if( $qry->num_rows > 0 ){
 			$msdata = $qry->result();
@@ -79,7 +79,7 @@ class Uploader_portal extends MX_Controller
 
 				//if (in_array($user_id, array(369,536))) {
 
-					$info = "Employee No - " . $row->Employee_Number ." Tiem In - ". $row->Time_In ." Time Out - ". $row->Time_Out ." \r\n";
+					$info = "Employee No - " . $row->Employee_Number ." Tiem In - ". $row->Time_In ." Time Out - ". $row->Time_Out ." Time In Location - ".$row->time_in_location." Time Out Location - ".$row->Time_Out_Work_Location." \r\n";
 					write_file($log_file, $info, 'a');
 
 					$time_in1 = '';
