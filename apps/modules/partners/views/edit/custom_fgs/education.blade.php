@@ -155,7 +155,7 @@
                             </label>
                             <label class="checkbox-inline">
                                 <input type="checkbox" name="partners_personal_history[education-status][]" id="partners_personal_history-education-status-undergraduate-<?php echo $count_education;?>" 
-                                 value="Undergraduate" <?php echo strtolower($education_status) != 'graduate' ? "checked" : "" ?> onclick="check_graduate_status(this, <?php echo $count_education;?>);"> 
+                                 value="Undergraduate" <?php echo strtolower($education_status) == 'undergraduate' ? "checked" : "" ?> onclick="check_graduate_status(this, <?php echo $count_education;?>);"> 
                                  {{ lang('partners.ungrad') }}
                             </label>
                         </div>
