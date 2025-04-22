@@ -26,6 +26,7 @@ WHERE (
 	T9.filter_by like "%{$search}%" OR 
 	ww_performance_appraisal_applicable.user_id like "%{$search}%" OR 
 	ww_performance_appraisal.filter_id like "%{$search}%" OR 
+	ww_performance_appraisal.title like "%{$search}%" OR 
 	ww_performance_appraisal.notes like "%{$search}%" OR 
 	IF(ww_performance_appraisal.status_id = 1, "Yes", "No") like "%{$search}%" OR 
 	ww_performance_appraisal.template_id like "%{$search}%" OR 
