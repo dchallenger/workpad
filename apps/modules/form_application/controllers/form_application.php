@@ -1309,9 +1309,16 @@ class Form_application extends MY_PrivateController
                     }
                 }
                 //END restday/holiday checking ET and UT
+                if ($form_id == 11) {
+                    if ($this->input->post('dtrp_type') == 1)
+                        $date = $dt->format('Y-m-d') .' '. date('H:i:s',strtotime($date_time_from));
+                    else
+                        $date = $dt->format('Y-m-d') .' '. date('H:i:s',strtotime($date_time_to));
+                } else
+                    $date = $dt->format('Y-m-d') .' '. date('H:i:s',strtotime($date_time_from));
 
                 // checking application overlapped with other forms
-                $date = $dt->format('Y-m-d') .' '. date('H:i:s',strtotime($date_time_from));
+                //$date = $dt->format('Y-m-d') .' '. date('H:i:s',strtotime($date_time_from));
                 $get_application = $this->mod->time_forms_get_application($this->user->user_id, $date);
                 $form_status = $this->input->post('form_status_id');
                 $form_status_id = array( 1, 7, 8);
