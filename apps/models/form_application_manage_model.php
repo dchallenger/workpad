@@ -270,7 +270,7 @@ public function call_sp_time_calendar($date_from='', $date_to='', $user_id=0){
 	}
 
 	public function check_ut_type($forms_id=0){			
-		$query_ut = "SELECT IF(time_from = '0000-00-00 00:00:00' , 0, 1) AS ut_type
+		$query_ut = "SELECT IF(time_from = '0000-00-00 00:00:00' OR TIME(time_from) = '00:00:00', 0, 1) AS ut_type
 	    from {$this->db->dbprefix}time_forms_date
 	    where forms_id = $forms_id";
 		$ut_type = $this->db->query($query_ut)->row_array();
