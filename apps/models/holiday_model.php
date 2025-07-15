@@ -233,4 +233,36 @@ class holiday_model extends Record
 
 		return $result;
 	}
+
+	function update_form_application_affected_by_holiday($date) {
+		$qry = "SELECT * FROM time_forms_date tfd
+				LEFT JOIN ww_time_holiday th ON th.holiday_date = tfd.date
+				LEFT JOIN ww_time_holiday_location thl ON thl.user_id = tfd.user_id
+				WHERE tfd.date = '{$date}'
+				AND tfd.form_id IN (1,2)
+				AND tfd.deleted = 0
+				AND th.deleted = 0
+				GROUP BY tfd.date,tfd.user_id";
+
+		$result = $this->db->query( $qry );
+
+		if ($result && $result->num_rows() > 0) {
+			foreach($result->result() as $row) {
+				$qry1 = "UPDATE ww_time_forms 
+						SET day = day -  {$row->day}
+						WHERE forms_id = {$row->forms_id}";
+
+				$result1 = $this->db->query( $qry1 );
+				$result1->free_result();
+
+				$qry2 = "UPDATE ww_time_forms_date 
+						SET deleted = 1
+						WHERE forms_id = {$row->forms_id}
+						AND date = '{$date}'";
+
+				$result2 = $this->db->query( $qry2 );
+				$result2->free_result();
+			}
+		}
+	}
 }

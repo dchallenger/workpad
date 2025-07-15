@@ -1139,6 +1139,11 @@ class Form_application_manage extends MY_PrivateController
             $this->db->update( 'time_forms_approver', $data, array('forms_id' => $forms_id, 'user_id' => $current_approver_id) );
         }
 
+
+        $qry = "CALL sp_time_forms_email(".$forms_id.");";
+        $result = $this->db->query( $qry );
+
+
         $this->response->saved = true; 
         $this->response->message[] = array(
             'message' => 'Approver was successfully updated.',

@@ -1319,7 +1319,7 @@ class Form_application extends MY_PrivateController
 
                 // checking application overlapped with other forms
                 //$date = $dt->format('Y-m-d') .' '. date('H:i:s',strtotime($date_time_from));
-                $get_application = $this->mod->time_forms_get_application($this->user->user_id, $date);
+                $get_application = $this->mod->time_forms_get_application($this->user->user_id, $date, $form_id);
                 $form_status = $this->input->post('form_status_id');
                 $form_status_id = array( 1, 7, 8);
 
@@ -2834,7 +2834,7 @@ class Form_application extends MY_PrivateController
     function get_selected_dates(){
 
         $this->_ajax_only();
-
+        
         $selected_dates = array();
         if($this->input->post('forms_id')){
             $selected_dates = $this->mod->get_selected_dates($this->input->post('forms_id'));

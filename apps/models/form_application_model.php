@@ -999,7 +999,7 @@ public function call_sp_time_calendar($date_from='', $date_to='', $user_id=0){
         }
 	}*/
 
-    public function time_forms_get_application($user_id=0, $date_time=''){	
+    public function time_forms_get_application($user_id=0, $date_time='', $form_id = 0){	
         $qry = "SELECT *
         FROM time_forms_date tfd
         JOIN time_forms tf ON tfd.forms_id = tf.forms_id
@@ -1007,13 +1007,16 @@ public function call_sp_time_calendar($date_from='', $date_to='', $user_id=0){
         	AND tf.deleted = 0 
         	AND tf.form_status_id IN (2,3,4,5,6)
         	AND '{$date_time}' between time_from and time_to
-        	AND tf.form_id NOT IN (9,11)
+        	AND tf.form_id NOT IN (9,11) -- OT,UNDERTIME
        		AND tf.user_id = '{$user_id }'";
 
 		$existing_form = $this->db->query($qry);
-		
+
 		if ($existing_form && $existing_form->num_rows() > 0)
-			return true;
+			if ($form_id > 0 && !in_array($form_id, [9,11]))
+				return true;
+			else
+				return false;
 		else
 			return false;
 	}

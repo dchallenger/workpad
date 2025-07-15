@@ -148,7 +148,8 @@ class Holiday extends MY_PrivateController
 		// save affected partners 
 		$this->mod->remove_holiday_locations($this->record_id);
 		$this->mod->add_to_holiday_location($this->record_id);
-
+		$this->mod->update_form_application_affected_by_holiday(date('Y-m-d', strtotime($holiday_date)));
+		
 		$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, $action, $this->mod->table, $previous_main_data, $holiday_info);		
 		
 		$this->response->message[] = array(
