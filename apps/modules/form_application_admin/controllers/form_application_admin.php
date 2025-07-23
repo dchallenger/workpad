@@ -1781,12 +1781,27 @@ class Form_application_admin extends MY_PrivateController
                         case 10: //UT
                             $date_time = $dt->format('Y-m-d')." ".date("H:i",strtotime($this->input->post('ut_time_in_out')));  
                             if($this->input->post('form_status_id') != 8){
-                                $time_forms_date_table[] = array(
-                                    'forms_id' => $forms_id,
-                                    'date' => $_POST['focus_date'],
-                                    'day' => 1,
-                                    'time_to' => $date_time
-                                    );
+                                if($this->input->post('ut_type') == 1){ 
+                                    $date_time_to = date('Y-m-d', strtotime(str_replace(" - "," ",$this->input->post('ut_time_in_out')))) . ' 00:00:00';
+                                    $time_forms_date_table[] = array(
+                                        'forms_id' => $forms_id,
+                                        'date' => $this->input->post('focus_date'),
+                                        'day' => 1,
+                                        'duration_id' => 1,
+                                        'time_from' => $date_time,
+                                        'time_to' => $date_time_to
+                                        );
+                                }else{
+                                    $date_time_from = date('Y-m-d', strtotime(str_replace(" - "," ",$this->input->post('ut_time_in_out')))) . ' 00:00:00';
+                                    $time_forms_date_table[] = array(
+                                        'forms_id' => $forms_id,
+                                        'date' => $this->input->post('focus_date'),
+                                        'day' => 1,
+                                        'duration_id' => 2,
+                                        'time_from' => $date_time_from,
+                                        'time_to' => $date_time
+                                        );
+                                }
                             }else{
                                $time_forms_date_table[] = array(
                                 'forms_id' => $forms_id,
