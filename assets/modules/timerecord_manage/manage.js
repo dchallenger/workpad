@@ -280,12 +280,12 @@ function get_list_by_date(date_type, date_value, partner_id){
 }
 
 
-function get_form_details(form_id, forms_id, date){
+function get_form_details(form_id, forms_id, date, user_id){
     $.ajax({
         url: base_url + module.get('route') + '/get_form_details',
         type:"POST",
         async: false,
-        data: 'form_id='+form_id+'&forms_id='+forms_id+'&date='+date,
+        data: 'form_id='+form_id+'&forms_id='+forms_id+'&date='+date+'&user_id='+user_id,
         dataType: "json",
 	    beforeSend: function () {
 	    	$("#time_forms_info").hide();

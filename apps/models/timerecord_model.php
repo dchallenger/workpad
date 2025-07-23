@@ -157,7 +157,8 @@ class timerecord_model extends Record
 
 		$qry = "SELECT * FROM time_record_list_forms
 				WHERE forms_id = '{$forms_id}'
-				AND date = '{$date}' 
+				AND date = '{$date}'
+				AND user_id = {$user_id}
 				GROUP BY forms_id 
 				";
 

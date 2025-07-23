@@ -427,12 +427,13 @@ class Timerecord_manage extends MY_PrivateController
         $form_id = $this->input->post('form_id');
         $forms_id = $this->input->post('forms_id');
         $date = $this->input->post('date');
+		$user_id = $this->input->post('user_id');
 
 		$this->load->model('timerecord_model', 'time_model');
 		$this->load->model('form_application_manage_model', 'form_manage');
         $this->response->form_details = '';
 
-        $form_details = $this->time_model->time_record_list_forms_details($forms_id, $this->user->user_id,$date);
+        $form_details = $this->time_model->time_record_list_forms_details($forms_id, $user_id, $date);
         $remarks['remarks'] = array();
         $comments = $this->form_manage->get_approver_remarks($forms_id);
         foreach ($comments as $comment){

@@ -213,7 +213,7 @@
             }
         ?>
         <span class="badge badge-<?php echo $form_style; ?> custom_popover" 
-                onclick="get_form_details(<?php echo $form['form_id'] ?>, <?php echo $form['forms_id'] ?>, '<?php echo $form['date'] ?>',this)"
+                onclick="get_form_details(<?php echo $form['form_id'] ?>, <?php echo $form['forms_id'] ?>, '<?php echo $form['date'] ?>', <?php echo $form['user_id'] ?>,this)"
                 style="cursor: pointer;"
                 data-width="500"
                 data-content="" 

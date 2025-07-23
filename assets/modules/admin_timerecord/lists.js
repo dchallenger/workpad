@@ -442,12 +442,12 @@ function get_list(){
 }
 
 
-function get_form_details(form_id, forms_id, date, elem){
+function get_form_details(form_id, forms_id, date, user_id, elem){
     $.ajax({
         url: base_url + module.get('route') + '/get_form_details',
         type:"POST",
         async: false,
-        data: 'form_id='+form_id+'&forms_id='+forms_id+'&date='+date,
+        data: 'form_id='+form_id+'&forms_id='+forms_id+'&date='+date+'&user_id='+user_id,
         dataType: "json",
 	    beforeSend: function () {
 	    	$("#time_forms_info").hide();
