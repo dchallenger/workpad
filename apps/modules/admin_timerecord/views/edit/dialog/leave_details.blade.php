@@ -60,7 +60,7 @@
     <div class='clearfix'>
         <label class='control-label col-md-3 text-muted text-left small'>{{ $label_adc }}:</label>
         <div class='col-md-9'>
-            <span> <?php echo date("F d, Y - h:ia", strtotime($date_adc)); ?> </span>
+            <span> <?php echo general_date_time($date_adc); ?> </span>
         </div>
     </div>     
     <?php } ?>   
