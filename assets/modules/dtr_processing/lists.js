@@ -69,15 +69,16 @@ function process_period( record_id )
 {
 	var puser_id = $('input[name="user_id"]').val();
 	if( puser_id == "" ) puser_id = 0;
+    $('.fa-spin').addClass('fa-spinner');
 	$.ajax({
 		url: base_url + module.get('route') + '/process',
 		type:"POST",
 		data: {record_id: record_id, user_id:puser_id},
 		dataType: "json",
-		async: false,
-		beforeSend: function(){
-			$('.fa-spin').addClass('fa-spinner');
-		},
+		async: true,
+		// beforeSend: function(){
+		// 	$('.fa-spin').addClass('fa-spinner');
+		// },
 		success: function ( response ) {
 			handle_ajax_message( response.message );	
 			$('.fa-spin').removeClass('fa-spinner');
