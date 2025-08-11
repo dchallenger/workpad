@@ -81,6 +81,7 @@ class Dtr_processing extends MY_PrivateController
 
 	function process()
 	{
+		set_time_limit(1200);
 		$this->_ajax_only();
 		if( !$this->permission['process'] )
 		{
