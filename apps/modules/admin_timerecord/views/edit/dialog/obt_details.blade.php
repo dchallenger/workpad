@@ -64,12 +64,12 @@
             <span> <?php echo date("F d, Y - h:ia", strtotime($time_to)); ?></span>
         </div>
     </div>
-    <div class='clearfix'>
+<!--     <div class='clearfix'>
         <label class='control-label col-md-3 text-muted text-left small'>{{ lang('timerecord.company') }}:</label>
         <div class='col-md-9'>
             <span> {{ $company_to_visit }}</span>
         </div>
-    </div>
+    </div> -->
     <div class='clearfix'>
         <label class='control-label col-md-3 text-muted text-left small'>{{ lang('timerecord.location') }}:</label>
         <div class='col-md-9'>
