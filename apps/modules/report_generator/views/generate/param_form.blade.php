@@ -38,7 +38,7 @@
 							</tr>
 		                @endforeach
 	                @endif
-	                @if( $editable_filters->num_rows() > 0 )
+	                @if( $editable_filters->num_rows() > 0 )                
 		                @foreach( $editable_filters->result() as $filter )
 							<?php 
 								switch( $filter->uitype_id ):
@@ -61,6 +61,11 @@
 				            		case 'Full Name':
 				            			$label = 'Employee';
 				            			break;				            			
+				            	}
+
+				            	if ($filter->report_id == 123) {
+				            		if ($filter->column == 'T0.date')
+				            			$label = 'OT Date';		
 				            	}
 			            	?>
 
