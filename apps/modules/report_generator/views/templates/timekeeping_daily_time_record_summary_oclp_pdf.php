@@ -83,7 +83,7 @@
 		$total_reg_nd += $row->$reg_nd;
 	endforeach; ?>
 </table>
-<table cellspacing="0" cellpadding="1" border="1">
+<table cellspacing="0" cellpadding="1" border="0">
 	<tr style="font-weight: bold;">
 		<td>Total Number of Employee(s)</td>
 		<td style="text-align:center;width: 100;"><?php echo count($id_number_array)?></td>
