@@ -872,15 +872,17 @@ class report_generator_model extends Record
 			$content->getActiveSheet()->getColumnDimension('L')->setAutoSize(true);
 			$content->getActiveSheet()->getColumnDimension('M')->setAutoSize(true);
 			$content->getActiveSheet()->getColumnDimension('N')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('O')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('P')->setAutoSize(true);
 
 			$content->getActiveSheet()->getStyle("A1:A2")->applyFromArray($style_center);
-			$content->getActiveSheet()->getStyle("A3:N3")->applyFromArray($style_center);
+			$content->getActiveSheet()->getStyle("A3:P3")->applyFromArray($style_center);
 			$content->getActiveSheet()->mergeCells('A1:N1');
 			$content->getActiveSheet()->mergeCells('A2:N2');
 
-			$content->getActiveSheet()->getStyle("A1:N3")->getFont()->setBold(true);
+			$content->getActiveSheet()->getStyle("A1:P3")->getFont()->setBold(true);
 
-			$content->getActiveSheet()->getStyle("A3:N".($result->num_rows()+3))->applyFromArray($border_style);
+			$content->getActiveSheet()->getStyle("A3:P".($result->num_rows()+3))->applyFromArray($border_style);
 
 			$content->getActiveSheet()->getStyle("A".($result->num_rows()+4).":N".($result->num_rows()+4))->getFont()->setBold(true);
 		}

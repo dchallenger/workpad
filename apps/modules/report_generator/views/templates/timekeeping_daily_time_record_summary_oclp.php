@@ -32,16 +32,18 @@
 	$id_number_array = array();
 
 	$id_number = "Id Number";
-	$hrs_rendered = "Hours Rendered";
+	$hrs_rendered = "Hrs Rendered";
 	$hrs_work = "Hours Work";
 	$absent = "Absent";
 	$late = "Late";
 	$ut = "Ut";
 	$ot = "Ot";
 	$reg_nd = "Reg Nd";
+	$total_hours = "Total Hours";	
 
 	$total_hrs_rendered = 0;
 	$total_hrs_work = 0;
+	$total_total_hrs_work = 0;	
 	$total_absent = 0;
 	$total_late = 0;
 	$total_ut = 0;
@@ -60,6 +62,7 @@
 		</tr> <?php
 		$total_hrs_rendered += $row->$hrs_rendered;
 		$total_hrs_work += $row->$hrs_work;
+		$total_total_hrs_work += $row->$total_hours;		
 		$total_absent += $row->$absent;
 		$total_late += $row->$late;
 		$total_ut += $row->$ut;
@@ -74,6 +77,7 @@
 		<td>Total</td>
 		<td><?php echo $total_hrs_rendered ?></td>
 		<td><?php echo $total_hrs_work ?></td>
+		<td><?php echo $total_total_hrs_work ?></td>
 		<td><?php echo $total_reg_nd ?></td>
 		<td><?php echo $total_absent ?></td>
 		<td><?php echo $total_late ?></td>
