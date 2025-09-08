@@ -27,7 +27,7 @@
 	<tr> 
 <?php
 		foreach($columns as $column): ?>
-			<td style="font-weight: bold; text-align:center;<?php echo ($column->alias == 'Employee Name' ? 'width:100px' : '') ?>"><?php echo $column->alias?></td> <?php
+			<td style="font-weight: bold; text-align:center;<?php echo ($column->alias == 'Employee Name' ? 'width:80px' : '') ?>"><?php echo $column->alias?></td> <?php
 		endforeach; ?>
 	</tr>
 
@@ -67,7 +67,9 @@
 
 			foreach($columns as $column): 
 				$alias = $column->alias;
-				if (in_array($alias,array('Hrs Rendered','Total Hours', 'Hours Work','Absent','Late','Ut','Ot')))
+				if ($alias == 'Employee Name' )
+					echo '<td style="width: 80">'.$row->$alias.'</td>';
+				else if (in_array($alias,array('Hrs Rendered','Total Hours', 'Hours Work','Absent','Late','Ut','Ot')))
 					echo '<td style="text-align:right">'.$row->$alias.'</td>';
 				else 
 					echo '<td>'.$row->$alias.'</td>';
@@ -86,7 +88,7 @@
 <table cellspacing="0" cellpadding="1" border="0">
 	<tr style="font-weight: bold;">
 		<td>Total Number of Employee(s)</td>
-		<td style="text-align:center;width: 100;"><?php echo count($id_number_array)?></td>
+		<td style="text-align:center;width: 80;"><?php echo count($id_number_array)?></td>
 		<td>&nbsp;</td>
 		<td>&nbsp;</td>
 		<td style="text-align:center;">Total</td>
