@@ -13,6 +13,7 @@
 				<li><a data-toggle="tab" href="#historical_tab6"><i class="fa fa-list"></i>{{ lang('partners.skills') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab7"><i class="fa fa-list"></i>{{ lang('partners.affiliation') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab10"><i class="fa fa-list"></i>{{ lang('partners.medical_records') }}</a></li>
+				<li><a data-toggle="tab" href="#historical_tab20"><i class="fa fa-list"></i>{{ lang('partners.compensation') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab8"><i class="fa fa-list"></i>{{ lang('partners.accountabilities') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab9"><i class="fa fa-files-o"></i>{{ lang('partners.attachment') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab17"><i class="fa fa-list"></i>{{ lang('partners.movement') }}</a></li>
@@ -1249,6 +1250,90 @@
 					</div>
                 </div>
                 <!--end portlet-->
+			</div>
+			<div class="tab-pane" id="historical_tab20">
+				@if(sizeof($compensation_tab) == 0)
+					<div class="portlet">
+						<div class="portlet-title">
+							<div id="employment-company[1]" class="caption">{{ lang('partners.compensation') }}</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse"></a>
+							</div>
+						</div>
+						<div class="portlet-body form">
+							<!-- START FORM -->
+							<div id="no_record" class="well" style="">
+								<p class="bold"><i class="fa fa-exclamation-triangle"></i> {{ lang('common.no_record_found') }} </p>
+								<span><p class="small margin-bottom-0">{{ lang('partners.no_info_medical') }}</p></span>
+							</div>
+						</div>
+					</div>
+				@endif
+				<!-- Previous Trainings : start doing the loop-->
+				<?php foreach($compensation_tab as $index => $compensation){ 
+					?>
+				<div class="portlet">
+					<div class="portlet-title">
+						<div class="caption" id="skill-name[1]"><?php echo (isset($compensation['compensation-category']) ? $compensation['compensation-category'] : ""); ?></div>
+						<div class="tools">
+							<a class="collapse" href="javascript:;"></a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<!-- START FORM -->
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.compensation_amount') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="compensation-date-exam[1]"><?php echo (isset($compensation['compensation-amount']) ? $compensation['compensation-amount'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.start_date') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="compensation-start-date[1]"><?php echo (isset($compensation['compensation-start-date']) ? $compensation['compensation-start-date'] : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.end_date') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="compensation-compensation-end-date[1]"><?php echo (isset($compensation['compensation-end-date']) ? nl2br($compensation['compensation-end-date']) : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.compensation_guaranteed_months') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="compensation-findings[1]"><?php echo (isset($compensation['compensation-guaranteed-months']) ? nl2br($compensation['compensation-guaranteed-months']) : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ lang('partners.compensation_guaranteed_annual') }} :</label>
+									<div class="col-md-7 col-sm-7">
+										<span id="compensation-cost[1]"><?php echo (isset($compensation['compensation-guaranteed-annual']) ? nl2br($compensation['compensation-guaranteed-annual']) : ""); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<?php } ?>
 			</div>			
 		</div>
 	</div>

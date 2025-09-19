@@ -14,6 +14,7 @@
 				<li><a data-toggle="tab" href="#historical_tab6"><i class="fa fa-list"></i>{{ lang('partners.skills') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab7"><i class="fa fa-list"></i>{{ lang('partners.affiliation') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab10"><i class="fa fa-list"></i>{{ lang('partners.medical_records') }}</a></li>
+				<li><a data-toggle="tab" href="#historical_tab19"><i class="fa fa-list"></i>{{ lang('partners.compensation') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab8"><i class="fa fa-list"></i>{{ lang('partners.accountabilities') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab9"><i class="fa fa-files-o"></i>{{ lang('partners.attachment') }}</a></li>
 				<li><a data-toggle="tab" href="#historical_tab17"><i class="fa fa-list"></i>{{ lang('partners.movement') }}</a></li>
@@ -85,13 +86,17 @@
 					@include('edit/custom_fgs/attachments')
 				</form>
 			</div>
-
 			<div class="tab-pane" id="historical_tab17">
 	        	<form class="form-horizontal" id="form-17" partner_id="17" method="POST">
 					<!-- Previous Trainings : start doing the loop-->
 					@include('edit/custom_fgs/movement')
 				</form>
 			</div>
-
+			<div class="tab-pane active" id="historical_tab19">
+	        	<form class="form-horizontal" id="form-19" partner_id="19" method="POST">
+					<!-- Education : start doing the loop-->
+					@include('edit/custom_fgs/compensation')
+				</form>
+			</div>
 		</div>
 	</div>

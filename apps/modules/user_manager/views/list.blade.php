@@ -121,7 +121,7 @@
 										<div class="clearfix"></div>
 									</div>									
 
-<!-- 									<div>
+ 									<div>
 										<div class="col-md-9 margin-bottom-10">
 											<h4>{{ lang('user_manager.project')}}</h4>
 											<div class="text-muted small">{{ lang('user_manager.project')}}</div>
@@ -132,7 +132,7 @@
 										<div class="clearfix"></div>
 									</div>
 
-									<div>
+<!--									<div>
 										<div class="col-md-9 margin-bottom-10">
 											<h4>{{ lang('user_manager.group')}}</h4>
 											<div class="text-muted small">{{ lang('user_manager.p_group')}}</div>
@@ -187,6 +187,17 @@
 										<div class="clearfix"></div>
 									</div>
 
+									<div>
+										<div class="col-md-9 margin-bottom-10">
+											<h4>{{ lang('user_manager.compensation')}}</h4>
+											<div class="text-muted small">{{ lang('user_manager.p_compensation')}}</div>
+										</div>
+										<div class="col-md-3 margin-bottom-25">
+											<a class="btn btn-default" type="button" rel="{{ get_mod_route('compensation') }}" href="{{ get_mod_route('compensation') }}">{{ lang('user_manager.view_list_button') }}</a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									
 									<div>
 										<div class="col-md-9 margin-bottom-10">
 											<h4>{{ lang('user_manager.emp_level')}}</h4>
