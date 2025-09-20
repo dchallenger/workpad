@@ -75,7 +75,7 @@ foreach($options->result() as $option)
                 <div class="form-group">
                     <label class="control-label col-md-3"><?php echo lang('partners.compensation_guaranteed_months') ?></label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="partners_personal_history[compensation-guaranteed-months][]" id="partners_personal_history-compensation-guaranteed-months" 
+                        <input type="text" class="form-control text-right" name="partners_personal_history[compensation-guaranteed-months][]" id="partners_personal_history-compensation-guaranteed-months" 
                         value="" placeholder="<?php echo lang('common.enter') ?> <?php echo lang('partners.compensation_guaranteed_months') ?>"/>
                     </div>
                 </div>
