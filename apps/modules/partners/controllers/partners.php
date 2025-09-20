@@ -2565,33 +2565,35 @@ class Partners extends MY_PrivateController
 			break;
 			//compensation records
 			case 19:
-				$validation_rules[] = 
-				array(
-					'field' => 'partners_personal_history[compensation-end-date]',
-					'label' => 'End Date',
-					'rules' => 'required'
-					);
-				$validation_rules[] = 
-				array(
-					'field' => 'partners_personal_history[compensation-start-date]',
-					'label' => 'Start Date',
-					'rules' => 'required'
-					);
-				$validation_rules[] = 
-				array(
-					'field' => 'partners_personal_history[compensation-amount]',
-					'label' => 'Amount',
-					'rules' => 'required'
-					);
-				$validation_rules[] = 
-				array(
-					'field' => 'partners_personal_history[compensation-category]',
-					'label' => 'Compensation Category',
-					'rules' => 'required'
-					);
-				$partners_personal_table = "partners_personal_history";
-				$partners_personal_key = array('compensation-category', 'compensation-start-date', 'compensation-end-date', 'compensation-guaranteed-months', 'compensation-guaranteed-annual', 'compensation-amount');
-				$partners_personal = (isset($post['partners_personal_history']) ? $post['partners_personal_history'] : array());
+				if (isset($post['partners_personal_history'])) {
+					$validation_rules[] = 
+					array(
+						'field' => 'partners_personal_history[compensation-end-date]',
+						'label' => 'End Date',
+						'rules' => 'required'
+						);
+					$validation_rules[] = 
+					array(
+						'field' => 'partners_personal_history[compensation-start-date]',
+						'label' => 'Start Date',
+						'rules' => 'required'
+						);
+					$validation_rules[] = 
+					array(
+						'field' => 'partners_personal_history[compensation-amount]',
+						'label' => 'Amount',
+						'rules' => 'required'
+						);
+					$validation_rules[] = 
+					array(
+						'field' => 'partners_personal_history[compensation-category]',
+						'label' => 'Compensation Category',
+						'rules' => 'required'
+						);
+					$partners_personal_table = "partners_personal_history";
+					$partners_personal_key = array('compensation-category', 'compensation-start-date', 'compensation-end-date', 'compensation-guaranteed-months', 'compensation-guaranteed-annual', 'compensation-amount');
+					$partners_personal = (isset($post['partners_personal_history']) ? $post['partners_personal_history'] : array());
+				}
 			break;		
 		}
 
@@ -2620,7 +2622,6 @@ class Partners extends MY_PrivateController
 		        					);
 	       	}
         }
-
 
 		if( sizeof( $validation_rules ) > 0 )
 		{
