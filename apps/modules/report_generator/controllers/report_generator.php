@@ -1138,7 +1138,10 @@ class Report_generator extends MY_PrivateController
                     break;
                 case 'accountabilities':
                     $record_id = 113;                 
-                    break;                    
+                    break;     
+                case 'compensation':
+                    $record_id = 127;                 
+                    break;                                   
                 default:
                     $record_id = $post['record_id'];
                     break;

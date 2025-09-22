@@ -662,6 +662,7 @@ class report_generator_model extends Record
             case 'ESHR_MEDICAL':
             case 'ESHR_ACCOUNTABLITIES':
             case 'partners_clearance':
+            case 'ESHR_COMPENSATION':
 				$auto_size = 1;
 				$w_border = 1;
         		$excel = $this->load->view("templates/excel", array('result' => $result), true);
