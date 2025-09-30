@@ -59,7 +59,7 @@
 		                        </div>
 		                    </div>
 
-							<div class="form-group">
+<!-- 							<div class="form-group">
 								<label class="control-label col-md-4">Division</label>
 								<div class="col-md-8">
 									<?php	                            	                            		
@@ -83,7 +83,7 @@
                                         </select>
                                     </div>			
 							    </div>	
-							</div>		                    
+							</div>	 -->	                    
                         </div>
                     </form>
 				</div>
