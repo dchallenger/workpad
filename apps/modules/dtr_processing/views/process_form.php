@@ -1,4 +1,6 @@
+<link href="<?php echo theme_path() ?>plugins/select2/select2_metro.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="<?php echo theme_path() ?>plugins/bootstrap-tagsinput/typeahead.js"></script>
+<script src="<?php echo theme_path() ?>plugins/select2/select2.min.js" type="text/javascript" ></script>
 
 <div class="modal-body">
 	<div class="row">
@@ -56,6 +58,32 @@
 		                            </div>
 		                        </div>
 		                    </div>
+
+							<div class="form-group">
+								<label class="control-label col-md-4">Division</label>
+								<div class="col-md-8">
+									<?php	                            	                            		
+										$db->select('division_id,division');
+						            	$db->where('deleted', '0');
+						            	$db->where('company_id', $record['time_period_company_id']);
+						            	$options = $db->get('users_division');
+							        ?>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                           <i class="fa fa-group"></i>
+                                         </span>
+                                        <select  class="form-control select2me" data-placeholder="Select..." name="division_id[]" id="users_profile-division_id">
+                                            <option value=""></option>
+                                            <?php
+                                                foreach($options->result() as $option)
+                                                {
+                                                    echo '<option value="'.$option->division_id.'">'.$option->division.'</option>';
+                                                } 
+                                            ?>
+                                        </select>
+                                    </div>			
+							    </div>	
+							</div>		                    
                         </div>
                     </form>
 				</div>
@@ -123,6 +151,11 @@
 </div>
 
 <script>
+	$('.select2me').select2({
+	    placeholder: "Select an option",    
+	    allowClear: true        
+	});
+
     $('input[name="partner_name"]').typeahead({
         source: function(query, process) {
             employees = [];
@@ -152,6 +185,7 @@
           this.select();
         }
     });
+
 
     $('input[name="partner_name"]').focus(function(){
         $(this).val('');

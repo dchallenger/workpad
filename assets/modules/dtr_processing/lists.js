@@ -27,10 +27,12 @@ $(document).ready(function(){
 
     $('select[name="time_period[apply_to_id]"]').live('change',function(){
         if( $(this).val() != '' ) {
+            var company_id = $('#time_period-company_id').val();
+            
             $.ajax({
                 url: base_url + module.get('route') + '/get_applied_to_options',
                 type:"POST",
-                data: { apply_to: $('select[name="time_period[apply_to_id]"]').val()},
+                data: { apply_to: $('select[name="time_period[apply_to_id]"]').val(), company_id : company_id},
                 dataType: "json",
                 async: false,
                 success: function ( response ) {
@@ -69,11 +71,12 @@ function process_period( record_id )
 {
 	var puser_id = $('input[name="user_id"]').val();
 	if( puser_id == "" ) puser_id = 0;
+    var division_id = $('#users_profile-division_id').val();
     $('.fa-spin').addClass('fa-spinner');
 	$.ajax({
 		url: base_url + module.get('route') + '/process',
 		type:"POST",
-		data: {record_id: record_id, user_id:puser_id},
+		data: {record_id: record_id, user_id:puser_id, division_id:division_id},
 		dataType: "json",
 		async: true,
 		// beforeSend: function(){

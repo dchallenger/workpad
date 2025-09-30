@@ -75,7 +75,7 @@ class dtr_processing_model extends Record
 		return $data;			
 	}
 
-	function _get_applied_to_options( $record_id, $mark_selected = false, $apply_to = "" )
+	function _get_applied_to_options( $record_id, $mark_selected = false, $apply_to = "", $company_id = "" )
 	{
 		if( $mark_selected )
 		{
@@ -92,6 +92,7 @@ class dtr_processing_model extends Record
 			$result = $this->_get( 'edit', $record_id );
 			$record = $result->row_array();
 			$apply_to = $record['time_period.apply_to_id'];
+			$company_id = $company_id ?: $record['time_period.company_id']; //($company_id != '' ? $company_id : $record['time_period.company_id']);
 		}
 
 		// GET SENSITIVITY
@@ -123,6 +124,7 @@ class dtr_processing_model extends Record
 				$qry = "SELECT division as label, division_id as value
 				FROM {$this->db->dbprefix}users_division
 				WHERE deleted = 0
+				AND company_id = {$company_id}
 				ORDER BY division asc";
 				break;
 			case 4: //department
@@ -368,7 +370,6 @@ class dtr_processing_model extends Record
 			$main_record['company_id'] = $company_id;
 			
 			if($record->num_rows() == 0) {
-
 					//add mandatory fields
 					$period_where = array( 'payroll_date'=> $main_record['payroll_date']
 										,'date_from'=> $main_record['date_from'] 
@@ -383,6 +384,27 @@ class dtr_processing_model extends Record
 						if( $this->db->_error_message() == "" )
 						{
 							$this->response->record_id = $this->record_id = $this->db->insert_id();
+						}
+					} else {
+						$record_check_row = $record_check->row();
+
+						if( isset($_POST['time_period']['applied_to']) )
+						{	
+							$applied_to = $_POST['time_period']['applied_to'];
+							foreach( $applied_to as $apply_to )
+							{
+								$this->db->where('period_id',$record_check_row->period_id);
+								$this->db->where('apply_to_id',$_POST['time_period']['applied_to']);
+								$apply_to_result = $this->db->get('time_period_apply_to_id');
+
+								if ($apply_to_result->num_rows() == 0) {
+									$this->db->insert($this->table, $main_record);
+									if( $this->db->_error_message() == "" )
+									{
+										$this->response->record_id = $this->record_id = $this->db->insert_id();
+									}								
+								}
+							}
 						}
 					}
 					$this->response->action = 'insert';

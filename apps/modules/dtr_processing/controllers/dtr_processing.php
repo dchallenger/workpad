@@ -21,7 +21,11 @@ class Dtr_processing extends MY_PrivateController
 			$this->_ajax_return();
 		}
 
-		$this->response->options = $this->mod->_get_applied_to_options( '', false, $this->input->post('apply_to') );
+		$company_id = '';
+		if ($this->input->post('company_id'))
+			$company_id = $this->input->post('company_id')[0];
+
+		$this->response->options = $this->mod->_get_applied_to_options( '', false, $this->input->post('apply_to'), $company_id );
 
 		$this->response->message[] = array(
 			'message' => '',
@@ -81,6 +85,7 @@ class Dtr_processing extends MY_PrivateController
 
 	function process()
 	{
+		ini_set('max_execution_time', 600);
 		set_time_limit(1200);
 		$this->_ajax_only();
 		if( !$this->permission['process'] )
@@ -94,7 +99,8 @@ class Dtr_processing extends MY_PrivateController
 		
 		$period_id = $this->input->post('record_id');
 		$user_id = $this->input->post('user_id');
-		
+		$division_id = ($this->input->post('division_id') ? $this->input->post('division_id') : 0);
+
 		if( !$period_id )
 		{
 			$this->response->message[] = array(
@@ -115,7 +121,8 @@ class Dtr_processing extends MY_PrivateController
 
 		$this->mod->audit_logs($this->user->user_id, $this->mod->mod_code, 'insert', $this->mod->table, array(), $main_record,$user_id);
 
-		$this->db->query('CALL sp_time_period_process('.$period_id.','.$user_id.');');
+		$this->db->query('CALL sp_time_period_process('.$period_id.','.$user_id.','.$division_id.');');
+
         mysqli_next_result($this->db->conn_id);
         
 		$this->response->message[] = array(
