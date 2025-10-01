@@ -1,4 +1,5 @@
 	<div class="row" id="profile_overview">
+		<input type="text" class="form-control" name="partners[employment_end_date]" id="partners-employment_date" value="{{ $employment_end_date }}">
 		<div class="col-lg-3 col-md-4" style="margin-bottom:50px">
 			<ul class="ver-inline-menu tabbable">
 				<li class="active">
