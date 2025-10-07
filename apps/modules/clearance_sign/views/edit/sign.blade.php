@@ -20,6 +20,7 @@
                                 <?php
                                 $db->select('user_id, full_name');
                                 $db->where('deleted', '0');
+                                $db->where('active', '1');
                                 $options = $db->get('users');
                                 $user_id_options = array('0' => 'Select...');
                                     foreach($options->result() as $option)
