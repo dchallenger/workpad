@@ -691,6 +691,10 @@ class report_generator_model extends Record
 				$OTD_header = 1;
         		$excel = $this->load->view("templates/ot_transaction_details", array('result' => $result,'filter' => $filter), true);
                 break;
+            case 'OT_NOT_PROCESS':
+				$ONP_header = 1;
+        		$excel = $this->load->view("templates/ot_not_process", array('result' => $result,'filter' => $filter), true);
+                break;                
             case 'EMPLOYEE_APPROVERS':
             case 'MANPOWER_ALLOCATION':
 				$auto_size = 1;
@@ -908,6 +912,25 @@ class report_generator_model extends Record
 			$content->getActiveSheet()->getStyle("A1:L2")->getFont()->setBold(true);
 
 			$content->getActiveSheet()->getStyle("A2:L".($result->num_rows()+2))->applyFromArray($border_style);
+		}
+
+		if (isset($ONP_header)) {
+			$content->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
+
+			$content->getActiveSheet()->getStyle("A1:I2")->applyFromArray($style_center);
+			$content->getActiveSheet()->mergeCells('A1:I1');
+
+			$content->getActiveSheet()->getStyle("A1:I2")->getFont()->setBold(true);
+
+			$content->getActiveSheet()->getStyle("A2:I".($result->num_rows()+2))->applyFromArray($border_style);
 		}
 
 		if (isset($em_header)) {
