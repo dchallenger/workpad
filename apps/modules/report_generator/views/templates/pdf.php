@@ -1,9 +1,13 @@
-<?php
-	if( !empty( $header->template ) )
-	{
-		echo $this->parser->parse_string($header->template, $vars, TRUE);
-	}
-?>
+<div align="center">
+	<h3>
+	<?php
+		if( !empty( $header->template ) )
+		{
+			echo $this->parser->parse_string($header->template, $vars, TRUE);
+		}
+	?>	
+	</h3>		
+<div>
 <table cellspacing="0" cellpadding="1" border="1">
 	<tr> <?php
 		foreach($columns as $column): ?>
