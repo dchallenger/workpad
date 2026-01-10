@@ -57,7 +57,7 @@
 
 			foreach($columns as $column): 
 				$alias = $column->alias; ?>
-				<td><?php echo ( $alias == 'Date' ? date('d/m/Y',strtotime($row->$alias)) : $row->$alias )?></td> <?php
+				<td><?php echo ( $alias == 'Date' ? date('m/d/Y',strtotime($row->$alias)) : $row->$alias )?></td> <?php
 			endforeach; ?>
 		</tr> <?php
 		$total_hrs_rendered += $row->$hrs_rendered;
