@@ -694,7 +694,11 @@ class report_generator_model extends Record
             case 'OT_NOT_PROCESS':
 				$ONP_header = 1;
         		$excel = $this->load->view("templates/ot_not_process", array('result' => $result,'filter' => $filter), true);
-                break;                
+                break;
+            case 'REG_NIGHT_DIFF':
+				$RND_header = 1;
+        		$excel = $this->load->view("templates/ot_not_process", array('result' => $result,'filter' => $filter), true);
+                break;                                
             case 'EMPLOYEE_APPROVERS':
             case 'MANPOWER_ALLOCATION':
 				$auto_size = 1;
@@ -924,13 +928,29 @@ class report_generator_model extends Record
 			$content->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
 			$content->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
 			$content->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
+			$content->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
 
-			$content->getActiveSheet()->getStyle("A1:I2")->applyFromArray($style_center);
-			$content->getActiveSheet()->mergeCells('A1:I1');
+			$content->getActiveSheet()->getStyle("A1:J2")->applyFromArray($style_center);
+			$content->getActiveSheet()->mergeCells('A1:J1');
 
-			$content->getActiveSheet()->getStyle("A1:I2")->getFont()->setBold(true);
+			$content->getActiveSheet()->getStyle("A1:J2")->getFont()->setBold(true);
 
-			$content->getActiveSheet()->getStyle("A2:I".($result->num_rows()+2))->applyFromArray($border_style);
+			$content->getActiveSheet()->getStyle("A2:J".($result->num_rows()+2))->applyFromArray($border_style);
+		}
+
+		if (isset($RND_header)) {
+			$sheet = $content->getActiveSheet();
+
+			foreach (range('A', 'K') as $col) {
+			    $sheet->getColumnDimension($col)->setAutoSize(true);
+			}			
+
+			$content->getActiveSheet()->getStyle("A1:K2")->applyFromArray($style_center);
+			$content->getActiveSheet()->mergeCells('A1:K1');
+
+			$content->getActiveSheet()->getStyle("A1:K2")->getFont()->setBold(true);
+
+			$content->getActiveSheet()->getStyle("A2:K".($result->num_rows()+2))->applyFromArray($border_style);
 		}
 
 		if (isset($em_header)) {
