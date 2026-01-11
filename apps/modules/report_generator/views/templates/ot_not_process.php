@@ -27,7 +27,17 @@
 
 			foreach($columns as $column): 
 				$alias = $column->alias; ?>
-				<td><?php echo $row->$alias?></td> <?php
+				<td>
+					<?php 
+						switch ($alias) {
+							case 'Date':
+								echo date('m/d/Y',strtotime($row->$alias));
+							break;
+							default:
+								echo $row->$alias;
+						}
+					?>
+				</td><?php
 			endforeach; ?>
 		</tr> <?php
 	endforeach; ?>
