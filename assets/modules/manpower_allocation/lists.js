@@ -4,7 +4,7 @@ $(document).ready(function()
 
 	$('#reload_api').click(function() {
 		$.ajax({
-		  	url: "https://prod-16.southeastasia.logic.azure.com:443/workflows/8b36a42112dd4eeab5306a62ca79f446/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=F_ybkzDd1txYZ__HtE8xsriAZBskJrCn5zKkAtvJqGk&app-id=0d87e33e-1150-ed11-bba3-000d3a85690c&key=b1998835-4d15-43ec-836a-c6f17841cc85",
+		  	url: "https://defaulteed35a11377543419389f6bc8e2a70.e7.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/8b36a42112dd4eeab5306a62ca79f446/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=owVcmPggHcDdTNWwoSpJJ0iFgk_aw3k8KfLn1ntTwoU&app-id=0d87e33e-1150-ed11-bba3-000d3a85690c&key=b1998835-4d15-43ec-836a-c6f17841cc85",
 		  	type: "get", //send it through get method
 		  	dataType: 'json',
 		    beforeSend: function () {
