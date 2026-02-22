@@ -964,6 +964,18 @@ function delete_signatory( sig_id )
 				}else if(response.ir == 1){
 					var affected_count = response.pending_ir_count;
 					var affected = 'incident reports';
+				}else if(response.ola == 1){
+					var affected_count = response.pending_ola_count;
+					var affected = 'omnibus loan';
+				}else if(response.cpla == 1){
+					var affected_count = response.pending_cpla_count;
+					var affected = 'car plan loan';
+				}else if(response.map == 1){
+					var affected_count = response.pending_map_count;
+					var affected = 'mobile application plan';
+				}else if(response.epa == 1){
+					var affected_count = response.pending_epa_count;
+					var affected = 'epa';
 				}
 				if(affected_count == 0){
 					_delete_signatory( sig_id );

@@ -344,7 +344,15 @@
                         </div> 
                     </div>
                 </div>
-                @endif                                                               
+                @endif
+                @if(in_array('operational-sbu', $partners_keys))
+                <div class="form-group">
+                    <label class="control-label col-md-3">{{ lang('partners.operational_sbu') }}</label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="users_profile[operational_sbu]" id="users_profile-operational_sbu" value="{{ $record['users_profile.operational_sbu'] }}" placeholder="Enter Operational SBU"/>
+                    </div>
+                </div>
+                @endif                                      
             </div>
         </div>
 	</div>

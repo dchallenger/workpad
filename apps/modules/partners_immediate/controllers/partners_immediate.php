@@ -243,6 +243,8 @@ class Partners_immediate extends MY_PrivateController
         $data['sbu_unit'] = ($profile_header_details['sbu_unit'] == "" ? "n/a" : $profile_header_details['sbu_unit']);
         $data['sbu_unit_id'] = ($profile_header_details['sbu_unit_id'] == "" ? "n/a" : $profile_header_details['sbu_unit_id']);
         $data['sbu_unit_details'] = ($profile_header_details['sbu_unit_details'] == "" ? "n/a" : $profile_header_details['sbu_unit_details']);
+        $data['operational_sbu'] = ($profile_header_details['operational_sbu'] == "" ? "" : $profile_header_details['operational_sbu']);
+                
 		/***** CONTACTS TAB *****/
 		//Personal Contact
 		$address_1 = $this->profile_mod->get_partners_personal($user_id, 'address_1');

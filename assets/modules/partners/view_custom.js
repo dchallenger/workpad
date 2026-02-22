@@ -1,6 +1,7 @@
 $(document).ready(function(){
     var service = get_service(  $('#partners-effectivity_date').val(),$('#partners-employment_date').val() );
-    $('span.calculatedservice').html(service+"&nbsp;&nbsp;years of service")
+    if (service != '' && !isNaN(service))
+    	$('span.calculatedservice').html(service+"&nbsp;&nbsp;years of service")  
 
 	var sbu_unit_ids = $('#partners-sbu_unit').val();
 	$.ajax({

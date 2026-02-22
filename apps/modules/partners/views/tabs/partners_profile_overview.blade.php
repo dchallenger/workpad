@@ -427,7 +427,19 @@
 									</div>
 								</div>
 							</div>
-						@endif                                                                                             
+						@endif   
+						@if(in_array('operational-sbu', $partners_keys))
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 text-right text-muted">{{ $partners_labels['operational-sbu'] }} :</label>
+										<div class="col-md-7 col-sm-7">
+											<span id="role-permission">{{ $operational_sbu }}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						@endif					                                                                                          
 					</div>
 				</div>
 				<!-- sbu unit -->

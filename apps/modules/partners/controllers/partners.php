@@ -650,6 +650,7 @@ class Partners extends MY_PrivateController
 		$data['sbu_unit_details'] = ($profile_header_details['sbu_unit_details'] == "" ? "n/a" : $profile_header_details['sbu_unit_details']);
 		$data['sbu_unit_id'] = ($profile_header_details['sbu_unit_id'] == "" ? "n/a" : $profile_header_details['sbu_unit_id']);
 		$data['group'] = ($profile_header_details['group'] == "" ? "n/a" : $profile_header_details['group']);
+		$data['operational_sbu'] = ($profile_header_details['operational_sbu'] == "" ? "" : $profile_header_details['operational_sbu']);
 
 		/***** CONTACTS TAB *****/
 		//Personal Contact
@@ -1919,6 +1920,7 @@ class Partners extends MY_PrivateController
 				$other_tables['users_profile']['sbu_unit_details'] = !empty($post['users_profile']['sbu_unit_details']) ? implode(',', $post['users_profile']['sbu_unit_details']) : "";
 				$other_tables['users_profile']['start_date'] = !empty($post['users_profile']['start_date']) ? date('Y-m-d', strtotime($post['users_profile']['start_date'])) : "";
 				$other_tables['users_profile']['end_date'] = !empty($post['users_profile']['end_date']) ? date('Y-m-d', strtotime($post['users_profile']['end_date'])) : "";
+				$other_tables['users_profile']['operational_sbu'] = !empty($post['users_profile']['operational_sbu']) ? $post['users_profile']['operational_sbu'] : "";
 				$other_tables['partners'] = $post['partners'];
 				$other_tables['partners']['effectivity_date'] = date('Y-m-d', strtotime($post['partners']['effectivity_date']));
 				$other_tables['partners']['regularization_date'] = !empty($post['partners']['regularization_date']) ? date('Y-m-d', strtotime($post['partners']['regularization_date'])) : "";
