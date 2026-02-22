@@ -217,5 +217,6 @@ $lang['partners'] = array(
     'compensation' => 'Compensation',
     'compensation_guaranteed_months' => 'Guranteed Months',
     'compensation_guaranteed_annual' => 'Guranteed Annual',
-    'compensation_amount' => 'Amount'
+    'compensation_amount' => 'Amount',
+    'operational_sbu' => 'Operational SBU'
 );
