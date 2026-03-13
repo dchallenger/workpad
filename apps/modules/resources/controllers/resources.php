@@ -216,6 +216,21 @@ class Resources extends MY_PrivateController
 
 			$pdf->WriteHTML($html, 0, true, false);
 	        
+			$pdf->SetHTMLFooter('
+			<table width="100%" style="font-size:9px;color:green;">
+			    <tr>
+			        <td align="left">
+			            <div>7F West Wing, Estancia Offices, Capitol Commons</div>
+			            <div>Meralco Avenue, Pasig City 1605, Philippines</div>
+			        </td>
+			        <td align="right" valign="top">
+			            <div>+632 8631 1231</div>
+			            <div>ortigas.com.ph</div>
+			        </td>
+			    </tr>
+			</table>
+			');
+
 	        $pdf->Output($main_filename, 'F');
 
 	        $this->response->message[] = array(
