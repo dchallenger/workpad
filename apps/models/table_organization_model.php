@@ -100,6 +100,7 @@ class table_organization_model extends Record
 			$user_id = $value['user_id'];
 			$this->db->select("{$user_id} as parent_id,v_position,users.display_name,users.user_id",false);
 			$this->db->where('users.active',1);
+			$this->db->where('users.deleted',0);
 			$this->db->where('reports_to_id',$user_id);
 			$this->db->where_in('v_job_grade',$rank);
 			$this->db->join('partners','users.user_id = partners.user_id');
@@ -128,6 +129,7 @@ class table_organization_model extends Record
 
 		$this->db->select("{$user_id} as parent_id,v_position,users.display_name,users.user_id",false);
 		$this->db->where('users.active',1);
+		$this->db->where('users.deleted',0);
 		$this->db->where('users.user_id <>',222);
 		$this->db->where('reports_to_id',$user_id);
 		$this->db->where_in('v_job_grade',$rank);
@@ -152,6 +154,7 @@ class table_organization_model extends Record
 		$content = '';
 		$this->db->select("{$user_id} as parent_id,v_position,users.display_name,users.user_id",false);
 		$this->db->where('users.active',1);
+		$this->db->where('users.deleted',0);
 		$this->db->where('users.user_id <>',222);
 		$this->db->where('reports_to_id',$user_id);
 		$this->db->where_in('v_job_grade',$rank);
@@ -176,6 +179,7 @@ class table_organization_model extends Record
 		$content = '';
 		$this->db->select("{$user_id} as parent_id,v_position,users.display_name,users.user_id",false);
 		$this->db->where('users.active',1);
+		$this->db->where('users.deleted',0);
 		$this->db->where('users.user_id <>',222);
 		$this->db->where('reports_to_id',$user_id);
 		$this->db->where_in('v_job_grade',$rank);
@@ -200,6 +204,7 @@ class table_organization_model extends Record
 		$content = '';
 		$this->db->select("{$user_id} as parent_id,v_position,users.display_name,users.user_id",false);
 		$this->db->where('users.active',1);
+		$this->db->where('users.deleted',0);
 		$this->db->where('users.user_id <>',222);
 		$this->db->where('reports_to_id',$user_id);
 		$this->db->where_in('v_job_grade',$rank);
